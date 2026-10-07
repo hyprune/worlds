@@ -3,7 +3,9 @@
 Blender authoring uses Z up; exporter converts to glTF +Y up: (x,z,-y).
 No imported models or fonts. Original imagegen texture masters are recorded in materials/.
 """
-import argparse, hashlib, json, math, os, shutil, socket, subprocess, sys, time
+import argparse, hashlib, json, math, os, shutil, subprocess, sys, time
+if os.environ.get("HYPRUNE_REMOTE_BLENDER") != "1":
+ raise SystemExit("Remote Blender only: use tools/remote-blender.sh; a marked remote launch is required")
 from pathlib import Path
 import bpy, bmesh
 import numpy as np
@@ -380,7 +382,6 @@ def film(preview=False):
 
 if __name__=='__main__':
  p=argparse.ArgumentParser();p.add_argument('--stage',choices=['build','preview','export','stills','film','film-preview'],default='build');p.add_argument('--samples',type=int,default=96);a=p.parse_args(sys.argv[sys.argv.index('--')+1:] if '--' in sys.argv else [])
- if socket.gethostname() in ['rick','rick-laptop']:raise SystemExit('Remote Blender only')
  if a.stage=='preview':
   s=scene();bpy.ops.wm.save_as_mainfile(filepath=str(ART/'switchyard-preview.blend'));stills()
  elif a.stage=='build':
