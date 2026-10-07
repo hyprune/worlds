@@ -1,0 +1,14 @@
+{
+  "id": "com.hyprune.switchyard",
+  "version": "0.1.0",
+  "name": "Switchyard",
+  "description": "A calm transit hall for six permanent project docks. Files arrive as cargo; applications dock as screens. Stable geography, changing signals.",
+  "stations": [
+    {"id":"build","name":"BUILD","number":"01","x":-12,"y":6,"color":"cyan"},
+    {"id":"research","name":"RESEARCH","number":"02","x":0,"y":6,"color":"amber"},
+    {"id":"commons","name":"COMMONS","number":"03","x":12,"y":6,"color":"coral"},
+    {"id":"studio","name":"STUDIO","number":"04","x":-12,"y":20,"color":"cyan"},
+    {"id":"systems","name":"SYSTEMS","number":"05","x":0,"y":20,"color":"amber"},
+    {"id":"archive","name":"ARCHIVE","number":"06","x":12,"y":20,"color":"coral"}
+  ]
+}

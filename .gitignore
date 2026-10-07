@@ -1,0 +1,5 @@
+/dist/
+/artifacts/
+/build/
+__pycache__/
+*.blend1
