@@ -1,0 +1,114 @@
+[
+  {
+    "name": "stone",
+    "prompt": "Use case: stylized-concept. Asset type: seamless tiling base-color material texture for the original Hyprune Switchyard world, CC-BY-4.0. Generate a square 2048x2048 orthographic texture tile of warm pale architectural limestone concrete, fine mineral aggregate, subtle pores, gently clouded warm ivory and gray beige variation, high-end transit concourse surface. Flat diffuse albedo only, perfectly even illumination, no shadows, no shine, no perspective, no object, no border, no text or watermark. All four edges must tile seamlessly, no obvious large distinguishing marks. Elegant restrained hand-authored game material, sharp tiny surface detail.",
+    "author": "Hyprune contributors",
+    "license": "CC-BY-4.0",
+    "provenance": "Generated for Hyprune, CC-BY-4.0",
+    "tool": "built-in image_gen",
+    "path": "source/stone.png",
+    "actualDimensions": [
+      1254,
+      1254
+    ],
+    "masterSHA256": "4db880944dcf482fdfc8ed163ee22af127fe7ea858ec06f39b84358a9af9ccf1"
+  },
+  {
+    "name": "metal",
+    "prompt": "Use case: stylized-concept. Asset type: original seamless 2048x2048 tiling base-color texture for Hyprune, CC-BY-4.0. Close orthographic material swatch of deep petrol navy powder-coated architectural steel. Fine subtly mottled paint orange-peel grain, occasional extremely fine brushed marks, dark blue-green charcoal palette, premium lightly worn transit hardware. Completely flat albedo with no directional lighting, no highlights, no bevels, no edges, no objects, no panel boundaries, no logos or text. Perfect horizontal and vertical seamless repeat. Restrained stylized game surface.",
+    "author": "Hyprune contributors",
+    "license": "CC-BY-4.0",
+    "provenance": "Generated for Hyprune, CC-BY-4.0",
+    "tool": "built-in image_gen",
+    "path": "source/metal.png",
+    "actualDimensions": [
+      1254,
+      1254
+    ],
+    "masterSHA256": "f436bd86352298067dcbf37c8393fbc71363ae417f53e3db84ae5144153374e4"
+  },
+  {
+    "name": "wood",
+    "prompt": "Use case: stylized-concept. Asset type: original seamless 2048x2048 tiling base-color texture for Hyprune, CC-BY-4.0. Warm dark smoked walnut timber grain with refined fine long grain flowing vertically, subtle natural figure, honey bronze dark brown palette, calm high-end joinery. Straight top-down orthographic diffuse albedo, uniform exposure, no directional lighting, no shadows, no planks or seams or perspective or frame or watermark or text. Edges must match perfectly for seamless repeat in both axes, no big knot motif. Crisp original stylized PBR game texture.",
+    "author": "Hyprune contributors",
+    "license": "CC-BY-4.0",
+    "provenance": "Generated for Hyprune, CC-BY-4.0",
+    "tool": "built-in image_gen",
+    "path": "source/wood.png",
+    "actualDimensions": [
+      1254,
+      1254
+    ],
+    "masterSHA256": "9b30bd0bf000af827471a8dcd5b39ee2a57d44a0c4105afa0c38240932f1b99c"
+  },
+  {
+    "name": "rubber",
+    "prompt": "Use case: stylized-concept. Asset type: original seamless 2048x2048 base-color material tile for Hyprune, CC-BY-4.0. Premium charcoal rubber transit flooring, very small repeated parallel anti-slip ribs interspersed with subtle fine granulated speckles, cool near-black graphite, elegant controlled tactile pattern. Flat orthographic diffuse albedo, no perspective, no cast shadows, no baked illumination or specular highlights, no object edges, no text, no logos, no border. Perfectly seamless repeating on all four edges, small-scale original stylized game texture.",
+    "author": "Hyprune contributors",
+    "license": "CC-BY-4.0",
+    "provenance": "Generated for Hyprune, CC-BY-4.0",
+    "tool": "built-in image_gen",
+    "path": "source/rubber.png",
+    "actualDimensions": [
+      1254,
+      1254
+    ],
+    "masterSHA256": "d2ff035b88cb9730be5e09f819f4373ebc8f9670bf672048ea9ee1f94418fb8c"
+  },
+  {
+    "name": "brass",
+    "prompt": "Use case: stylized-concept. Asset type: original seamless 2048x2048 tiling base-color game material for Hyprune Switchyard, generated for Hyprune, CC-BY-4.0. Satin warm aged bronze brushed architectural metal, rich muted copper gold, very fine horizontal hairline abrasion, subtle dark patina flecks, premium grand station ironwork. Orthographic flat albedo only, completely even illumination, no directional gradient, no baked shadows, no shine, no metal panel edge, no fasteners, no perspective. All four edges seamless horizontal and vertical repeat. No text, watermark, frame or logo.",
+    "author": "Hyprune contributors",
+    "license": "CC-BY-4.0",
+    "provenance": "Generated for Hyprune, CC-BY-4.0",
+    "tool": "built-in image_gen",
+    "path": "source/brass.png",
+    "actualDimensions": [
+      1254,
+      1254
+    ],
+    "masterSHA256": "b4da0881137015c4d2958695e23b3691765fc8af2808790b5845a264332e292f"
+  },
+  {
+    "name": "cloth",
+    "prompt": "Use case: stylized-concept. Asset type: original seamless 2048x2048 tileable diffuse albedo fabric game material, generated for Hyprune CC-BY-4.0. Close orthographic swatch of rich desaturated moss sage green woven wool upholstery, fine tactile basket weave, restrained thread color variation, premium lounge bench fabric. Flat completely even lighting, no folds, no seams, no perspective, no cast shadows, no highlights, no object border, no text or logo. Perfect horizontal and vertical seamless repeating textile. Elegant detailed stylized surface.",
+    "author": "Hyprune contributors",
+    "license": "CC-BY-4.0",
+    "provenance": "Generated for Hyprune, CC-BY-4.0",
+    "tool": "built-in image_gen",
+    "path": "source/cloth.png",
+    "actualDimensions": [
+      1254,
+      1254
+    ],
+    "masterSHA256": "3bc00aa34fb161e54559fc0987ff01f4f7b3cd4213a3fa61f6b16d7dea6d5527"
+  },
+  {
+    "name": "glass",
+    "prompt": "Use case: stylized-concept. Asset type: original seamless 2048x2048 tiling flat base-color texture for translucent glazing, generated for Hyprune CC-BY-4.0. Very subtle pale cool teal architectural frosted glass grain, fine almost invisible etched stipple and microscopic scratches, homogeneous pale blue-gray color. No reflections, no environmental content, no shadows, no directional lighting or gradient, no frames, no edges, no borders, no perspective, no text. Perfect seamless repeat in both axes. Texture only, not a photograph of an object.",
+    "author": "Hyprune contributors",
+    "license": "CC-BY-4.0",
+    "provenance": "Generated for Hyprune, CC-BY-4.0",
+    "tool": "built-in image_gen",
+    "path": "source/glass.png",
+    "actualDimensions": [
+      1254,
+      1254
+    ],
+    "masterSHA256": "27dc3454984d3f3c9580fe189e2b30319167fdcea8223a883ba345d0811648b8"
+  },
+  {
+    "name": "panel",
+    "prompt": "Use case: stylized-concept. Asset type: original seamless 2048x2048 tiling texture for emissive transit signal diffuser panels, generated for Hyprune CC-BY-4.0. A precise architectural illuminated micro-lattice of small warm ivory cells on dark petrol blue substrate, horizontal thin copper separator traces and sparse cyan microcells, elegant restrained futuristic station lighting material. Orthographic flat top-down texture only, no bloom or glow spilling onto borders, no perspective, no object, no logos, no letters, no numbers, no screen UI, no shadows. Exactly seamless repeating in horizontal and vertical axes. This is a material pattern, not an information display.",
+    "author": "Hyprune contributors",
+    "license": "CC-BY-4.0",
+    "provenance": "Generated for Hyprune, CC-BY-4.0",
+    "tool": "built-in image_gen",
+    "path": "source/panel.png",
+    "actualDimensions": [
+      1254,
+      1254
+    ],
+    "masterSHA256": "f9ec2756c8e4af596fe15a10b0c64a336b66bc26d918c5d71d0e4516f9ec1bea"
+  }
+]
