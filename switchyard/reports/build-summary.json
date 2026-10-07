@@ -1,0 +1,131 @@
+{
+  "packageId": "com.hyprune.switchyard",
+  "version": "0.1.0",
+  "formatVersion": "0.1",
+  "date": "2026-10-07",
+  "packageBytes": 77288857,
+  "sceneJsonBytes": 536127,
+  "binaryBuffersBytes": 19035556,
+  "visualTriangles": 184684,
+  "surfaceAnchors": 6,
+  "zones": 7,
+  "collisionNodes": 165,
+  "navigationTriangles": 9424,
+  "lightmapAtlases": 9,
+  "lightmapBindings": 123,
+  "textureObjects": 47,
+  "textureMasterInputs": 8,
+  "contentLicense": "CC-BY-4.0",
+  "scriptsLicense": "MIT",
+  "generatedBinariesCommitted": false,
+  "requiredExperimentalExtensions": [],
+  "beautyStills": [
+    {
+      "path": "01-concourse.png",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "bytes": 2867401,
+      "sha256": "bdc8acee94276730e77c954f68f70f574bc4119dfe01e034ab418870acf0f680"
+    },
+    {
+      "path": "02-arrival.png",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "bytes": 2830876,
+      "sha256": "157336406df1b75754f9954ac8cf40ace1978bb70d400a9aed2b53ea1febefc8"
+    },
+    {
+      "path": "03-build.png",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "bytes": 2866844,
+      "sha256": "024edf8ed4f2b169fec4e8ea0220bf732c51f7926aaebad79f7d0a06d7e5cb5d"
+    },
+    {
+      "path": "04-route.png",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "bytes": 2644194,
+      "sha256": "e0487a032686d7cbf2172b494fa79661f8575c8d9bc6003217d9c4d5cb6219c9"
+    },
+    {
+      "path": "05-vault.png",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "bytes": 2954598,
+      "sha256": "63096365a1b6827e97bf1bad48c869b6a517e67ef94d53ef947a08aa47004016"
+    }
+  ],
+  "release": {
+    "path": "artifacts/releases/com.hyprune.switchyard-0.1.0.tar.zst",
+    "bytes": 62014889,
+    "sha256": "fd71c06c9c9591707260f1c5d3e6ed736209165f3ee801f8f7aad8af01c590ac"
+  },
+  "recipeCommit": "3e939b0d6b5f4948cb703d3155e7c952dec20962",
+  "recipeSHA256": {
+    "switchyard/build.py": "f168b43d02f9719bffdbe1db3308ca46bda0add3fcd04da98f6bd78dc0c33c70",
+    "switchyard/architecture.py": "0caabba50050bb00847bdabb7668921d63367d3008d97c7374ae470eafc51a0d",
+    "switchyard/world.spec.json": "6c2fe43d115b9cc87b12c75e478566e7285b6f3afeef98d8892cd1b4a52c01e6",
+    "switchyard/materials/prepare.py": "ebefa7e4cf641790a4125e01fac107fba75fb388e4f9cbbbd79a58fabe056126"
+  },
+  "bakeHost": "10.2.2.2",
+  "blenderVersion": "5.2.0 LTS",
+  "renderer": "Cycles / OptiX, two RTX 3090s",
+  "validation": {
+    "schema": "PASS",
+    "KhronosErrors": 0,
+    "KhronosWarnings": 0,
+    "uv1OverlappingRasterSamples": 0,
+    "coplanarStacks": 0,
+    "capsuleRouteSamples": 1927,
+    "nestedCoreCommit": "4f68365e8408a5b5d64312e55a46712e462c32a0",
+    "nestedStatus": "PASS"
+  },
+  "remoteLaunchGuard": "Verified remote hostname plus HYPRUNE_REMOTE_BLENDER marker; unmarked local Python invocation exits before importing bpy",
+  "remoteGuardCommit": "66b38b8",
+  "video": {
+    "status": "PASS",
+    "codec": "h264",
+    "pixelFormat": "yuv420p",
+    "dimensions": [
+      1920,
+      1080
+    ],
+    "frameRate": "24/1",
+    "frames": 864,
+    "durationSeconds": 36.0,
+    "bytes": 17588237,
+    "faststart": true,
+    "atomOrder": [
+      "ftyp",
+      "moov",
+      "free",
+      "mdat"
+    ],
+    "sha256": "6e536906b56e1d52ef3c728afc34cab913c71c000fdbd14fa2aef75251f490fc",
+    "renderer": "remote Blender Cycles, 24 samples/frame with denoising",
+    "reviewFrameSeconds": [
+      0,
+      8.8,
+      13.5,
+      22,
+      27.5,
+      35
+    ],
+    "galleryPath": "/home/rick/workspace/rick-the-alien/worldshell-gallery/videos/world-switchyard.mp4",
+    "metadataPath": "/home/rick/workspace/rick-the-alien/worldshell-gallery/videos/world-switchyard.json",
+    "visualReview": "PASS: both endpoints of all four shots; six decoded MP4 frames at 0, 8.8, 13.5, 22, 27.5 and 35 seconds"
+  },
+  "finalSourceCommit": "66b38b8062db03792af0dd0458f0615f56d5d78c",
+  "remoteLaunchGuardCheck": "PASS: unmarked Python entry exits before bpy import; localhost wrapper rejected; marked launch confirmed on 10.2.2.2"
+}

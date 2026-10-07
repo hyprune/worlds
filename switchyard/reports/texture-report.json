@@ -1,0 +1,98 @@
+[
+  {
+    "name": "stone",
+    "masterSHA256": "4db880944dcf482fdfc8ed163ee22af127fe7ea858ec06f39b84358a9af9ccf1",
+    "license": "CC-BY-4.0",
+    "provenance": "Generated for Hyprune, CC-BY-4.0",
+    "modifications": "1024px derivative; toroidal Poisson seam healing and periodic edge collar; wrap-safe derived OpenGL normal and ORM maps",
+    "tileMeters": 2,
+    "texelDensityPxPerMeter": 512.0,
+    "edgeMeanErrorBefore": 0.07723906636238098,
+    "edgeMaxErrorAfter": 0,
+    "normalStrength": 0.55
+  },
+  {
+    "name": "metal",
+    "masterSHA256": "f436bd86352298067dcbf37c8393fbc71363ae417f53e3db84ae5144153374e4",
+    "license": "CC-BY-4.0",
+    "provenance": "Generated for Hyprune, CC-BY-4.0",
+    "modifications": "1024px derivative; toroidal Poisson seam healing and periodic edge collar; wrap-safe derived OpenGL normal and ORM maps",
+    "tileMeters": 1,
+    "texelDensityPxPerMeter": 1024.0,
+    "edgeMeanErrorBefore": 0.07141672074794769,
+    "edgeMaxErrorAfter": 0,
+    "normalStrength": 0.25
+  },
+  {
+    "name": "wood",
+    "masterSHA256": "9b30bd0bf000af827471a8dcd5b39ee2a57d44a0c4105afa0c38240932f1b99c",
+    "license": "CC-BY-4.0",
+    "provenance": "Generated for Hyprune, CC-BY-4.0",
+    "modifications": "1024px derivative; toroidal Poisson seam healing and periodic edge collar; wrap-safe derived OpenGL normal and ORM maps",
+    "tileMeters": 1,
+    "texelDensityPxPerMeter": 1024.0,
+    "edgeMeanErrorBefore": 0.034484781324863434,
+    "edgeMaxErrorAfter": 0,
+    "normalStrength": 0.7
+  },
+  {
+    "name": "rubber",
+    "masterSHA256": "d2ff035b88cb9730be5e09f819f4373ebc8f9670bf672048ea9ee1f94418fb8c",
+    "license": "CC-BY-4.0",
+    "provenance": "Generated for Hyprune, CC-BY-4.0",
+    "modifications": "1024px derivative; toroidal Poisson seam healing and periodic edge collar; wrap-safe derived OpenGL normal and ORM maps",
+    "tileMeters": 1,
+    "texelDensityPxPerMeter": 1024.0,
+    "edgeMeanErrorBefore": 0.05732996016740799,
+    "edgeMaxErrorAfter": 0,
+    "normalStrength": 0.65
+  },
+  {
+    "name": "brass",
+    "masterSHA256": "b4da0881137015c4d2958695e23b3691765fc8af2808790b5845a264332e292f",
+    "license": "CC-BY-4.0",
+    "provenance": "Generated for Hyprune, CC-BY-4.0",
+    "modifications": "1024px derivative; toroidal Poisson seam healing and periodic edge collar; wrap-safe derived OpenGL normal and ORM maps",
+    "tileMeters": 1,
+    "texelDensityPxPerMeter": 1024.0,
+    "edgeMeanErrorBefore": 0.07562422752380371,
+    "edgeMaxErrorAfter": 0,
+    "normalStrength": 0.25
+  },
+  {
+    "name": "cloth",
+    "masterSHA256": "3bc00aa34fb161e54559fc0987ff01f4f7b3cd4213a3fa61f6b16d7dea6d5527",
+    "license": "CC-BY-4.0",
+    "provenance": "Generated for Hyprune, CC-BY-4.0",
+    "modifications": "1024px derivative; toroidal Poisson seam healing and periodic edge collar; wrap-safe derived OpenGL normal and ORM maps",
+    "tileMeters": 1,
+    "texelDensityPxPerMeter": 1024.0,
+    "edgeMeanErrorBefore": 0.2183351218700409,
+    "edgeMaxErrorAfter": 0,
+    "normalStrength": 0.55
+  },
+  {
+    "name": "glass",
+    "masterSHA256": "27dc3454984d3f3c9580fe189e2b30319167fdcea8223a883ba345d0811648b8",
+    "license": "CC-BY-4.0",
+    "provenance": "Generated for Hyprune, CC-BY-4.0",
+    "modifications": "1024px derivative; toroidal Poisson seam healing and periodic edge collar; wrap-safe derived OpenGL normal and ORM maps",
+    "tileMeters": 2,
+    "texelDensityPxPerMeter": 512.0,
+    "edgeMeanErrorBefore": 0.10729421675205231,
+    "edgeMaxErrorAfter": 0,
+    "normalStrength": 0.08
+  },
+  {
+    "name": "panel",
+    "masterSHA256": "f9ec2756c8e4af596fe15a10b0c64a336b66bc26d918c5d71d0e4516f9ec1bea",
+    "license": "CC-BY-4.0",
+    "provenance": "Generated for Hyprune, CC-BY-4.0",
+    "modifications": "1024px derivative; toroidal Poisson seam healing and periodic edge collar; wrap-safe derived OpenGL normal and ORM maps",
+    "tileMeters": 1,
+    "texelDensityPxPerMeter": 1024.0,
+    "edgeMeanErrorBefore": 0.12682291865348816,
+    "edgeMaxErrorAfter": 0,
+    "normalStrength": 0.18
+  }
+]

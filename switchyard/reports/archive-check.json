@@ -1,0 +1,14 @@
+{
+  "status": "PASS",
+  "files": 63,
+  "expandedBytes": 77288857,
+  "archiveBytes": 62014889,
+  "archiveSHA256": "fd71c06c9c9591707260f1c5d3e6ed736209165f3ee801f8f7aad8af01c590ac",
+  "checks": [
+    "one root",
+    "no absolute/traversal paths",
+    "no links/devices",
+    "128 MiB per file / 1 GiB expanded limits",
+    "all content hashes match validated package"
+  ]
+}

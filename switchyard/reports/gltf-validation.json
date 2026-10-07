@@ -2,11 +2,11 @@
   "uri": "scene.gltf",
   "mimeType": "model/gltf+json",
   "validatorVersion": "2.0.0-dev.3.10",
-  "validatedAt": "2026-10-07T17:53:19.806Z",
+  "validatedAt": "2026-10-07T18:44:32.156Z",
   "issues": {
     "numErrors": 0,
     "numWarnings": 0,
-    "numInfos": 248,
+    "numInfos": 699,
     "numHints": 0,
     "messages": [],
     "truncated": false
@@ -15,7 +15,8 @@
     "version": "2.0",
     "generator": "Khronos glTF Blender I/O v5.2.39",
     "extensionsUsed": [
-      "KHR_materials_emissive_strength"
+      "KHR_materials_emissive_strength",
+      "KHR_materials_unlit"
     ],
     "resources": [
       {
@@ -23,178 +24,136 @@
         "mimeType": "application/gltf-buffer",
         "storage": "external",
         "uri": "scene.bin",
-        "byteLength": 5496464
+        "byteLength": 19035556
       },
       {
         "pointer": "/images/0",
         "mimeType": "image/png",
         "storage": "external",
-        "uri": "textures/albedo-metal.png",
+        "uri": "textures/metal-normal.png",
         "image": {
-          "width": 256,
-          "height": 256,
+          "width": 1024,
+          "height": 1024,
           "format": "rgb",
           "primaries": "srgb",
           "transfer": "srgb",
-          "bits": 16
+          "bits": 8
         }
       },
       {
         "pointer": "/images/1",
         "mimeType": "image/png",
         "storage": "external",
-        "uri": "textures/albedo-panel.png",
+        "uri": "textures/metal-albedo.png",
         "image": {
-          "width": 256,
-          "height": 256,
+          "width": 1024,
+          "height": 1024,
           "format": "rgb",
           "primaries": "srgb",
           "transfer": "srgb",
-          "bits": 16
+          "bits": 8
         }
       },
       {
         "pointer": "/images/2",
         "mimeType": "image/png",
         "storage": "external",
-        "uri": "textures/albedo-coral-glow.png",
+        "uri": "textures/metal-orm.png",
         "image": {
-          "width": 256,
-          "height": 256,
+          "width": 1024,
+          "height": 1024,
           "format": "rgb",
           "primaries": "srgb",
           "transfer": "srgb",
-          "bits": 16
+          "bits": 8
         }
       },
       {
         "pointer": "/images/3",
         "mimeType": "image/png",
         "storage": "external",
-        "uri": "textures/albedo-letter.png",
+        "uri": "textures/wood-normal.png",
         "image": {
-          "width": 256,
-          "height": 256,
+          "width": 1024,
+          "height": 1024,
           "format": "rgb",
           "primaries": "srgb",
           "transfer": "srgb",
-          "bits": 16
+          "bits": 8
         }
       },
       {
         "pointer": "/images/4",
         "mimeType": "image/png",
         "storage": "external",
-        "uri": "textures/albedo-coral.png",
+        "uri": "textures/wood-albedo.png",
         "image": {
-          "width": 256,
-          "height": 256,
+          "width": 1024,
+          "height": 1024,
           "format": "rgb",
           "primaries": "srgb",
           "transfer": "srgb",
-          "bits": 16
+          "bits": 8
         }
       },
       {
         "pointer": "/images/5",
         "mimeType": "image/png",
         "storage": "external",
-        "uri": "textures/albedo-ivory.png",
+        "uri": "textures/wood-orm.png",
         "image": {
-          "width": 256,
-          "height": 256,
+          "width": 1024,
+          "height": 1024,
           "format": "rgb",
           "primaries": "srgb",
           "transfer": "srgb",
-          "bits": 16
+          "bits": 8
         }
       },
       {
         "pointer": "/images/6",
         "mimeType": "image/png",
         "storage": "external",
-        "uri": "textures/albedo-wood.png",
+        "uri": "textures/stone-normal.png",
         "image": {
-          "width": 256,
-          "height": 256,
+          "width": 1024,
+          "height": 1024,
           "format": "rgb",
           "primaries": "srgb",
           "transfer": "srgb",
-          "bits": 16
+          "bits": 8
         }
       },
       {
         "pointer": "/images/7",
         "mimeType": "image/png",
         "storage": "external",
-        "uri": "textures/albedo-stone.png",
+        "uri": "textures/stone-albedo.png",
         "image": {
-          "width": 256,
-          "height": 256,
+          "width": 1024,
+          "height": 1024,
           "format": "rgb",
           "primaries": "srgb",
           "transfer": "srgb",
-          "bits": 16
+          "bits": 8
         }
       },
       {
         "pointer": "/images/8",
         "mimeType": "image/png",
         "storage": "external",
-        "uri": "textures/albedo-soil.png",
+        "uri": "textures/stone-orm.png",
         "image": {
-          "width": 256,
-          "height": 256,
+          "width": 1024,
+          "height": 1024,
           "format": "rgb",
           "primaries": "srgb",
           "transfer": "srgb",
-          "bits": 16
+          "bits": 8
         }
       },
       {
         "pointer": "/images/9",
-        "mimeType": "image/png",
-        "storage": "external",
-        "uri": "textures/albedo-leaf.png",
-        "image": {
-          "width": 256,
-          "height": 256,
-          "format": "rgb",
-          "primaries": "srgb",
-          "transfer": "srgb",
-          "bits": 16
-        }
-      },
-      {
-        "pointer": "/images/10",
-        "mimeType": "image/png",
-        "storage": "external",
-        "uri": "textures/albedo-cyan-glow.png",
-        "image": {
-          "width": 256,
-          "height": 256,
-          "format": "rgb",
-          "primaries": "srgb",
-          "transfer": "srgb",
-          "bits": 16
-        }
-      },
-      {
-        "pointer": "/images/11",
-        "mimeType": "image/png",
-        "storage": "external",
-        "uri": "textures/albedo-cyan.png",
-        "image": {
-          "width": 256,
-          "height": 256,
-          "format": "rgb",
-          "primaries": "srgb",
-          "transfer": "srgb",
-          "bits": 16
-        }
-      },
-      {
-        "pointer": "/images/12",
         "mimeType": "image/png",
         "storage": "external",
         "uri": "textures/albedo-warm.png",
@@ -208,10 +167,10 @@
         }
       },
       {
-        "pointer": "/images/13",
+        "pointer": "/images/10",
         "mimeType": "image/png",
         "storage": "external",
-        "uri": "textures/albedo-white.png",
+        "uri": "textures/albedo-coral-glow.png",
         "image": {
           "width": 256,
           "height": 256,
@@ -222,7 +181,301 @@
         }
       },
       {
+        "pointer": "/images/11",
+        "mimeType": "image/png",
+        "storage": "external",
+        "uri": "textures/albedo-letter.png",
+        "image": {
+          "width": 256,
+          "height": 256,
+          "format": "rgb",
+          "primaries": "srgb",
+          "transfer": "srgb",
+          "bits": 16
+        }
+      },
+      {
+        "pointer": "/images/12",
+        "mimeType": "image/png",
+        "storage": "external",
+        "uri": "textures/albedo-coral.png",
+        "image": {
+          "width": 256,
+          "height": 256,
+          "format": "rgb",
+          "primaries": "srgb",
+          "transfer": "srgb",
+          "bits": 16
+        }
+      },
+      {
+        "pointer": "/images/13",
+        "mimeType": "image/png",
+        "storage": "external",
+        "uri": "textures/brass-normal.png",
+        "image": {
+          "width": 1024,
+          "height": 1024,
+          "format": "rgb",
+          "primaries": "srgb",
+          "transfer": "srgb",
+          "bits": 8
+        }
+      },
+      {
         "pointer": "/images/14",
+        "mimeType": "image/png",
+        "storage": "external",
+        "uri": "textures/brass-albedo.png",
+        "image": {
+          "width": 1024,
+          "height": 1024,
+          "format": "rgb",
+          "primaries": "srgb",
+          "transfer": "srgb",
+          "bits": 8
+        }
+      },
+      {
+        "pointer": "/images/15",
+        "mimeType": "image/png",
+        "storage": "external",
+        "uri": "textures/brass-orm.png",
+        "image": {
+          "width": 1024,
+          "height": 1024,
+          "format": "rgb",
+          "primaries": "srgb",
+          "transfer": "srgb",
+          "bits": 8
+        }
+      },
+      {
+        "pointer": "/images/16",
+        "mimeType": "image/png",
+        "storage": "external",
+        "uri": "textures/rubber-normal.png",
+        "image": {
+          "width": 1024,
+          "height": 1024,
+          "format": "rgb",
+          "primaries": "srgb",
+          "transfer": "srgb",
+          "bits": 8
+        }
+      },
+      {
+        "pointer": "/images/17",
+        "mimeType": "image/png",
+        "storage": "external",
+        "uri": "textures/rubber-albedo.png",
+        "image": {
+          "width": 1024,
+          "height": 1024,
+          "format": "rgb",
+          "primaries": "srgb",
+          "transfer": "srgb",
+          "bits": 8
+        }
+      },
+      {
+        "pointer": "/images/18",
+        "mimeType": "image/png",
+        "storage": "external",
+        "uri": "textures/rubber-orm.png",
+        "image": {
+          "width": 1024,
+          "height": 1024,
+          "format": "rgb",
+          "primaries": "srgb",
+          "transfer": "srgb",
+          "bits": 8
+        }
+      },
+      {
+        "pointer": "/images/19",
+        "mimeType": "image/png",
+        "storage": "external",
+        "uri": "textures/cloth-normal.png",
+        "image": {
+          "width": 1024,
+          "height": 1024,
+          "format": "rgb",
+          "primaries": "srgb",
+          "transfer": "srgb",
+          "bits": 8
+        }
+      },
+      {
+        "pointer": "/images/20",
+        "mimeType": "image/png",
+        "storage": "external",
+        "uri": "textures/cloth-albedo.png",
+        "image": {
+          "width": 1024,
+          "height": 1024,
+          "format": "rgb",
+          "primaries": "srgb",
+          "transfer": "srgb",
+          "bits": 8
+        }
+      },
+      {
+        "pointer": "/images/21",
+        "mimeType": "image/png",
+        "storage": "external",
+        "uri": "textures/cloth-orm.png",
+        "image": {
+          "width": 1024,
+          "height": 1024,
+          "format": "rgb",
+          "primaries": "srgb",
+          "transfer": "srgb",
+          "bits": 8
+        }
+      },
+      {
+        "pointer": "/images/22",
+        "mimeType": "image/png",
+        "storage": "external",
+        "uri": "textures/albedo-soil.png",
+        "image": {
+          "width": 256,
+          "height": 256,
+          "format": "rgb",
+          "primaries": "srgb",
+          "transfer": "srgb",
+          "bits": 16
+        }
+      },
+      {
+        "pointer": "/images/23",
+        "mimeType": "image/png",
+        "storage": "external",
+        "uri": "textures/albedo-leaf-dark.png",
+        "image": {
+          "width": 256,
+          "height": 256,
+          "format": "rgb",
+          "primaries": "srgb",
+          "transfer": "srgb",
+          "bits": 16
+        }
+      },
+      {
+        "pointer": "/images/24",
+        "mimeType": "image/png",
+        "storage": "external",
+        "uri": "textures/albedo-leaf.png",
+        "image": {
+          "width": 256,
+          "height": 256,
+          "format": "rgb",
+          "primaries": "srgb",
+          "transfer": "srgb",
+          "bits": 16
+        }
+      },
+      {
+        "pointer": "/images/25",
+        "mimeType": "image/png",
+        "storage": "external",
+        "uri": "textures/panel-albedo.png",
+        "image": {
+          "width": 1024,
+          "height": 1024,
+          "format": "rgb",
+          "primaries": "srgb",
+          "transfer": "srgb",
+          "bits": 8
+        }
+      },
+      {
+        "pointer": "/images/26",
+        "mimeType": "image/png",
+        "storage": "external",
+        "uri": "textures/panel-normal.png",
+        "image": {
+          "width": 1024,
+          "height": 1024,
+          "format": "rgb",
+          "primaries": "srgb",
+          "transfer": "srgb",
+          "bits": 8
+        }
+      },
+      {
+        "pointer": "/images/27",
+        "mimeType": "image/png",
+        "storage": "external",
+        "uri": "textures/panel-orm.png",
+        "image": {
+          "width": 1024,
+          "height": 1024,
+          "format": "rgb",
+          "primaries": "srgb",
+          "transfer": "srgb",
+          "bits": 8
+        }
+      },
+      {
+        "pointer": "/images/28",
+        "mimeType": "image/png",
+        "storage": "external",
+        "uri": "textures/albedo-haze.png",
+        "image": {
+          "width": 256,
+          "height": 256,
+          "format": "rgb",
+          "primaries": "srgb",
+          "transfer": "srgb",
+          "bits": 16
+        }
+      },
+      {
+        "pointer": "/images/29",
+        "mimeType": "image/png",
+        "storage": "external",
+        "uri": "textures/albedo-cyan-glow.png",
+        "image": {
+          "width": 256,
+          "height": 256,
+          "format": "rgb",
+          "primaries": "srgb",
+          "transfer": "srgb",
+          "bits": 16
+        }
+      },
+      {
+        "pointer": "/images/30",
+        "mimeType": "image/png",
+        "storage": "external",
+        "uri": "textures/albedo-cyan.png",
+        "image": {
+          "width": 256,
+          "height": 256,
+          "format": "rgb",
+          "primaries": "srgb",
+          "transfer": "srgb",
+          "bits": 16
+        }
+      },
+      {
+        "pointer": "/images/31",
+        "mimeType": "image/png",
+        "storage": "external",
+        "uri": "textures/transit-trim-albedo.png",
+        "image": {
+          "width": 1024,
+          "height": 1024,
+          "format": "rgb",
+          "primaries": "srgb",
+          "transfer": "srgb",
+          "bits": 8
+        }
+      },
+      {
+        "pointer": "/images/32",
         "mimeType": "image/png",
         "storage": "external",
         "uri": "textures/albedo-amber-glow.png",
@@ -236,7 +489,7 @@
         }
       },
       {
-        "pointer": "/images/15",
+        "pointer": "/images/33",
         "mimeType": "image/png",
         "storage": "external",
         "uri": "textures/albedo-amber.png",
@@ -250,7 +503,63 @@
         }
       },
       {
-        "pointer": "/images/16",
+        "pointer": "/images/34",
+        "mimeType": "image/png",
+        "storage": "external",
+        "uri": "textures/glass-normal.png",
+        "image": {
+          "width": 1024,
+          "height": 1024,
+          "format": "rgb",
+          "primaries": "srgb",
+          "transfer": "srgb",
+          "bits": 8
+        }
+      },
+      {
+        "pointer": "/images/35",
+        "mimeType": "image/png",
+        "storage": "external",
+        "uri": "textures/glass-albedo.png",
+        "image": {
+          "width": 1024,
+          "height": 1024,
+          "format": "rgb",
+          "primaries": "srgb",
+          "transfer": "srgb",
+          "bits": 8
+        }
+      },
+      {
+        "pointer": "/images/36",
+        "mimeType": "image/png",
+        "storage": "external",
+        "uri": "textures/glass-orm.png",
+        "image": {
+          "width": 1024,
+          "height": 1024,
+          "format": "rgb",
+          "primaries": "srgb",
+          "transfer": "srgb",
+          "bits": 8
+        }
+      },
+      {
+        "pointer": "/images/37",
+        "mimeType": "image/png",
+        "storage": "external",
+        "uri": "textures/sky-gradient.png",
+        "image": {
+          "width": 1024,
+          "height": 1024,
+          "format": "rgb",
+          "primaries": "srgb",
+          "transfer": "srgb",
+          "bits": 16
+        }
+      },
+      {
+        "pointer": "/images/38",
         "mimeType": "image/png",
         "storage": "external",
         "uri": "textures/lightmap-hall.png",
@@ -264,7 +573,35 @@
         }
       },
       {
-        "pointer": "/images/17",
+        "pointer": "/images/39",
+        "mimeType": "image/png",
+        "storage": "external",
+        "uri": "textures/lightmap-vault.png",
+        "image": {
+          "width": 2048,
+          "height": 2048,
+          "format": "rgb",
+          "primaries": "srgb",
+          "transfer": "srgb",
+          "bits": 8
+        }
+      },
+      {
+        "pointer": "/images/40",
+        "mimeType": "image/png",
+        "storage": "external",
+        "uri": "textures/lightmap-concourse.png",
+        "image": {
+          "width": 2048,
+          "height": 2048,
+          "format": "rgb",
+          "primaries": "srgb",
+          "transfer": "srgb",
+          "bits": 8
+        }
+      },
+      {
+        "pointer": "/images/41",
         "mimeType": "image/png",
         "storage": "external",
         "uri": "textures/lightmap-build.png",
@@ -278,7 +615,7 @@
         }
       },
       {
-        "pointer": "/images/18",
+        "pointer": "/images/42",
         "mimeType": "image/png",
         "storage": "external",
         "uri": "textures/lightmap-research.png",
@@ -292,7 +629,7 @@
         }
       },
       {
-        "pointer": "/images/19",
+        "pointer": "/images/43",
         "mimeType": "image/png",
         "storage": "external",
         "uri": "textures/lightmap-commons.png",
@@ -306,7 +643,7 @@
         }
       },
       {
-        "pointer": "/images/20",
+        "pointer": "/images/44",
         "mimeType": "image/png",
         "storage": "external",
         "uri": "textures/lightmap-studio.png",
@@ -320,7 +657,7 @@
         }
       },
       {
-        "pointer": "/images/21",
+        "pointer": "/images/45",
         "mimeType": "image/png",
         "storage": "external",
         "uri": "textures/lightmap-systems.png",
@@ -334,7 +671,7 @@
         }
       },
       {
-        "pointer": "/images/22",
+        "pointer": "/images/46",
         "mimeType": "image/png",
         "storage": "external",
         "uri": "textures/lightmap-archive.png",
@@ -349,16 +686,16 @@
       }
     ],
     "animationCount": 0,
-    "materialCount": 70,
+    "materialCount": 131,
     "hasMorphTargets": false,
     "hasSkins": false,
     "hasTextures": true,
     "hasDefaultScene": true,
-    "drawCallCount": 156,
-    "totalVertexCount": 137328,
-    "totalTriangleCount": 68384,
+    "drawCallCount": 297,
+    "totalVertexCount": 335179,
+    "totalTriangleCount": 196094,
     "maxUVs": 2,
     "maxInfluences": 0,
-    "maxAttributes": 4
+    "maxAttributes": 5
   }
 }

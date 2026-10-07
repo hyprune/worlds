@@ -1,0 +1,30 @@
+{
+  "status": "PASS",
+  "codec": "h264",
+  "pixelFormat": "yuv420p",
+  "dimensions": [
+    1920,
+    1080
+  ],
+  "frameRate": "24/1",
+  "frames": 864,
+  "durationSeconds": 36.0,
+  "bytes": 17588237,
+  "faststart": true,
+  "atomOrder": [
+    "ftyp",
+    "moov",
+    "free",
+    "mdat"
+  ],
+  "sha256": "6e536906b56e1d52ef3c728afc34cab913c71c000fdbd14fa2aef75251f490fc",
+  "renderer": "remote Blender Cycles, 24 samples/frame with denoising",
+  "reviewFrameSeconds": [
+    0,
+    8.8,
+    13.5,
+    22,
+    27.5,
+    35
+  ]
+}

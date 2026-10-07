@@ -1,51 +1,72 @@
 {
   "status": "PASS",
-  "packageBytes": 39072855,
-  "visualTriangles": 57360,
+  "packageBytes": 77288857,
+  "decodedTextureBytes": 313524224,
+  "conservativeGpuBytes": 351595336,
+  "textureObjects": 47,
+  "visualTriangles": 184684,
   "anchors": 6,
-  "collisionNodes": 85,
-  "lightmapBindings": 70,
+  "collisionNodes": 165,
+  "lightmapBindings": 123,
   "UV1": [
     {
       "node": "Visual-archive",
-      "triangles": 5780,
-      "uv1Area": 0.51759,
+      "triangles": 16592,
+      "uv1Area": 0.07719,
       "overlapSamples": 0
     },
     {
       "node": "Visual-build",
-      "triangles": 5456,
-      "uv1Area": 0.50863,
+      "triangles": 16196,
+      "uv1Area": 0.07977,
       "overlapSamples": 0
     },
     {
       "node": "Visual-commons",
-      "triangles": 5876,
-      "uv1Area": 0.50727,
+      "triangles": 16616,
+      "uv1Area": 0.07919,
+      "overlapSamples": 0
+    },
+    {
+      "node": "Visual-concourse",
+      "triangles": 23588,
+      "uv1Area": 0.13886,
       "overlapSamples": 0
     },
     {
       "node": "Visual-hall",
-      "triangles": 23220,
-      "uv1Area": 0.53308,
+      "triangles": 5986,
+      "uv1Area": 0.3386,
       "overlapSamples": 0
     },
     {
       "node": "Visual-research",
-      "triangles": 5816,
-      "uv1Area": 0.49825,
+      "triangles": 16592,
+      "uv1Area": 0.07752,
       "overlapSamples": 0
     },
     {
       "node": "Visual-studio",
-      "triangles": 5624,
-      "uv1Area": 0.504,
+      "triangles": 16436,
+      "uv1Area": 0.07775,
       "overlapSamples": 0
     },
     {
       "node": "Visual-systems",
-      "triangles": 5588,
-      "uv1Area": 0.5038,
+      "triangles": 16328,
+      "uv1Area": 0.0772,
+      "overlapSamples": 0
+    },
+    {
+      "node": "Visual-vault",
+      "triangles": 38636,
+      "uv1Area": 0.01085,
+      "overlapSamples": 0
+    },
+    {
+      "node": "Visual-vista",
+      "triangles": 17714,
+      "uv1Area": 0.0,
       "overlapSamples": 0
     }
   ]
