@@ -1,0 +1,10 @@
+{
+  "status": "PASS",
+  "routeEdges": 9,
+  "centerlineCapsuleSamples": 1927,
+  "connectedNavCells": 5002,
+  "exportedNavTriangles": 10004,
+  "collisionExportMatchesSource": true,
+  "agentRadius": 0.3,
+  "agentHeight": 1.8
+}

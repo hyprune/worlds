@@ -14,6 +14,6 @@ for arg in "$@"; do ARGS+=" $(printf '%q' "$arg")"; done
 status=0
 ssh -o BatchMode=yes "$HOST" "cd '$REMOTE' && flock .blender.lock blender$ARGS" || status=$?
 mkdir -p "$ROOT/dist" "$ROOT/artifacts"
-rsync -az "$HOST:$REMOTE/dist/" "$ROOT/dist/" || true
+rsync -az --delete "$HOST:$REMOTE/dist/" "$ROOT/dist/" || true
 rsync -az --exclude 'film-frames' "$HOST:$REMOTE/artifacts/" "$ROOT/artifacts/" || true
 exit "$status"

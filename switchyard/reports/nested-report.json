@@ -1,0 +1,69 @@
+{
+  "coreCommit": "6aa79e2b6322705f4fd1dc8599706b0b976ef3f3",
+  "load": {
+    "revision": 2
+  },
+  "snapshot": {
+    "movement": {
+      "modeId": "com.hyprune.walk",
+      "orientation": [
+        0.0,
+        0.0,
+        -0.0,
+        1.0
+      ],
+      "position": [
+        -4.0,
+        1.7000000476837158,
+        6.0
+      ]
+    },
+    "runtime": {
+      "active": true,
+      "outputs": [
+        "output-1"
+      ]
+    },
+    "shell": {
+      "leases": []
+    },
+    "surfaces": [],
+    "world": {
+      "id": "com.hyprune.switchyard",
+      "spawnId": "arrival"
+    }
+  },
+  "camera": {
+    "active": true,
+    "captures": [],
+    "error": "",
+    "frames": 122,
+    "pitch": 0.0,
+    "position": [
+      -4.0,
+      1.7000000476837158,
+      6.0
+    ],
+    "yaw": -0.0
+  },
+  "walk": {
+    "before": [
+      -4.0,
+      1.7000000476837158,
+      6.0
+    ],
+    "after": [
+      -4.0,
+      1.7000000476837158,
+      3.724951982498169
+    ]
+  },
+  "status": "PASS",
+  "checks": [
+    "world.load",
+    "snapshot",
+    "active nested rendering",
+    "walk at spawn",
+    "runtime.exit"
+  ]
+}

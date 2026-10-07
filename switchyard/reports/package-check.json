@@ -1,0 +1,52 @@
+{
+  "status": "PASS",
+  "packageBytes": 39072855,
+  "visualTriangles": 57360,
+  "anchors": 6,
+  "collisionNodes": 85,
+  "lightmapBindings": 70,
+  "UV1": [
+    {
+      "node": "Visual-archive",
+      "triangles": 5780,
+      "uv1Area": 0.51759,
+      "overlapSamples": 0
+    },
+    {
+      "node": "Visual-build",
+      "triangles": 5456,
+      "uv1Area": 0.50863,
+      "overlapSamples": 0
+    },
+    {
+      "node": "Visual-commons",
+      "triangles": 5876,
+      "uv1Area": 0.50727,
+      "overlapSamples": 0
+    },
+    {
+      "node": "Visual-hall",
+      "triangles": 23220,
+      "uv1Area": 0.53308,
+      "overlapSamples": 0
+    },
+    {
+      "node": "Visual-research",
+      "triangles": 5816,
+      "uv1Area": 0.49825,
+      "overlapSamples": 0
+    },
+    {
+      "node": "Visual-studio",
+      "triangles": 5624,
+      "uv1Area": 0.504,
+      "overlapSamples": 0
+    },
+    {
+      "node": "Visual-systems",
+      "triangles": 5588,
+      "uv1Area": 0.5038,
+      "overlapSamples": 0
+    }
+  ]
+}

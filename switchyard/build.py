@@ -3,7 +3,7 @@
 Blender authoring uses Z up; exporter converts to glTF +Y up: (x,z,-y).
 No imported models, fonts, images or other art assets.
 """
-import argparse, json, math, os, socket, subprocess, sys, time
+import argparse, hashlib, json, math, os, shutil, socket, subprocess, sys, time
 from pathlib import Path
 import bpy
 import numpy as np
@@ -106,8 +106,8 @@ def cylinder(name,pos,r,depth,mat='metal',group='hall',vertices=32,collision=Fal
  return add(bpy.context.object,name,mat,group,collision)
 
 def text(word,pos,height,mat='letter',group='hall'):
- pitch=height/7; width=(len(word)*6-1)*pitch
- # Merge consecutive pixels into strokes; front is Blender -Y / glTF +Z.
+ pitch=height/7; width=(len(word)*6-1)*pitch;verts=[];faces=[]
+ # Original geometric lettering, assembled in one mesh without a font asset.
  for j,char in enumerate(word):
   if char==' ':continue
   for row,bits in enumerate(GLYPHS[char]):
@@ -115,12 +115,16 @@ def text(word,pos,height,mat='letter',group='hall'):
    for col,b in enumerate(bits+'0'):
     if b=='1' and start is None:start=col
     if b=='0' and start is not None:
-     count=col-start
-     box('Glyph-'+char,(pos[0]-width/2+(j*6+start+count/2)*pitch,pos[1],pos[2]+(3-row)*pitch),(count*pitch*.89,.012,pitch*.85),mat,group,0)
+     count=col-start;cx=pos[0]-width/2+(j*6+start+count/2)*pitch;cz=pos[2]+(3-row)*pitch
+     sx=count*pitch*.89/2;sz=pitch*.85/2;cy=pos[1];i=len(verts)
+     verts.extend([(cx-sx,cy-.006,cz-sz),(cx+sx,cy-.006,cz-sz),(cx+sx,cy+.006,cz-sz),(cx-sx,cy+.006,cz-sz),(cx-sx,cy-.006,cz+sz),(cx+sx,cy-.006,cz+sz),(cx+sx,cy+.006,cz+sz),(cx-sx,cy+.006,cz+sz)])
+     faces.extend([tuple(i+k for k in f) for f in [(0,3,2,1),(4,5,6,7),(0,1,5,4),(1,2,6,5),(2,3,7,6),(3,0,4,7)]])
      start=None
+ me=bpy.data.meshes.new('Geometric lettering');me.from_pydata(verts,[],faces);me.update();o=bpy.data.objects.new('Sign '+word,me);bpy.context.collection.objects.link(o);add(o,'Sign '+word,mat,group)
 
 def area(name,pos,target,power,color,size):
  d=bpy.data.lights.new(name,'AREA');d.energy=power;d.color=color;d.shape='DISK';d.size=size
+ d.use_shadow=not name.startswith('Dock pool')
  o=bpy.data.objects.new(name,d);bpy.context.collection.objects.link(o);o.location=pos;o.rotation_euler=(Vector(target)-o.location).to_track_quat('-Z','Y').to_euler()
 
 def tree(x,y,group):
@@ -132,6 +136,7 @@ def tree(x,y,group):
 
 def scene():
  bpy.ops.wm.read_factory_settings(use_empty=True)
+ if OUT.exists():shutil.rmtree(OUT)
  OUT.mkdir(parents=True,exist_ok=True);(OUT/'textures').mkdir(exist_ok=True);ART.mkdir(parents=True,exist_ok=True)
  for args in [('stone',(.48,.43,.34),.012),('ivory',(.72,.68,.57),.008),('metal',(.035,.061,.071),.003),('panel',(.018,.032,.04),.001),('wood',(.26,.12,.055),.009),('leaf',(.095,.22,.15),.006),('soil',(.055,.04,.027),.012),('letter',(.8,.84,.76),0),('warm',(.96,.72,.37),0,0,2),('white',(.73,.84,.81),0,0,1.5)]:material(*args)
  for k,c in COLORS.items():material(k,c,.004);material(k+'-glow',c,0,0,2)
@@ -146,17 +151,16 @@ def scene():
  for x in [-20,20]:
   box('Garden wall',(x,10,.75),(.35,40,1.5),'stone','hall',.045,True)
   for y in [-6,4,14,24]:
-   box('Perimeter mast',(x,y,4),(.22,.22,8),'metal','hall',.02)
+   box('Perimeter mast',(x,y,3.9),(.22,.22,8),'metal','hall',.02)
    box('Lantern',(x,y,7.9),(.45,.45,.22),'warm','hall',.02)
- for y in [4,12,20,28]:
-  for x in [-6,6]:box('Canopy column',(x,y,4),(.28,.28,8),'metal','hall',.025,True)
- # Floating folded roofs with gaps for soft afternoon light.
+ # Each canopy is physically supported outside the circulation/cargo lanes.
  for x in [-12,0,12]:
   for y in [7,18,27]:
    box('Canopy',(x,y,8.2),(10.3,7.2,.18),'ivory','hall',.035)
-   for off in [-3.7,3.7]:
-    box('Canopy beam',(x+off,y,8.0),(.12,7.3,.3),'metal','hall',.01)
+   for off in [-4.75,4.75]:
+    box('Canopy beam',(x+off,y,8.0),(.18,7.3,.3),'metal','hall',.01)
     box('Ceiling ribbon',(x+off,y,7.82),(.07,6.6,.05),'warm','hall',.005)
+    for dy in [-2.7,2.7]:box('Canopy column',(x+off,y+dy,3.93),(.20,.20,8.14),'metal','hall',.025,True)
  # Grand entrance portal, open below 5.3m.
  for x in [-18,18]:box('Portal leg',(x,-10,3.4),(.55,.55,6.8),'ivory','hall',.06,True)
  box('Portal header',(0,-10,6.45),(36.5,.6,1.1),'metal','hall',.04)
@@ -171,11 +175,11 @@ def scene():
  text('YOUR PLACE IS WAITING',(0,-8.11,3.5),.14)
  # Broad foreground crossing, three route spines and six named docks.
  for x,color in [(-12,'cyan'),(0,'amber'),(12,'coral')]:
-  for offset in [-2.9,-2.45]:box('Route stripe',(x+offset,12,.012),(.045,34,.014),color+'-glow','hall',.003)
+  for offset in [-2.9,-2.45]:box('Route stripe',(x+offset,12,.030),(.045,34,.014),color+'-glow','hall',.003)
   box('Concourse branch',(x-1.35,-4.5,.013),(2.7,.045,.015),color+'-glow','hall',.003)
   for y in [-1,13,26]:
    for dx in [-.16,.16]:
-    o=box('Route arrow',(x-2.67+dx,y,.031),(.035,.5,.012),color+'-glow','hall',.002);o.rotation_euler.z=math.radians(35 if dx<0 else -35)
+    o=box('Route arrow',(x-2.67+dx,y,.062),(.035,.5,.012),color+'-glow','hall',.002);o.rotation_euler.z=math.radians(35 if dx<0 else -35)
  for st in SPEC['stations']:
   x,y,c=st['x'],st['y'],st['color'];g=st['id']
   # Screen pane at eye level: its front is .12m ahead of the backplate.
@@ -197,7 +201,7 @@ def scene():
    box('Cargo',(x+3.5,cy,.59),(1.35,.78,1.15),'ivory',g,.065,True)
    box('Cargo stripe',(x+3.5,cy-.402,.62),(1.0,.025,.085),c,g,.01)
    box('Cargo grip',(x+3.5,cy-.424,.84),(.26,.035,.055),'metal',g,.01)
-  text('CARGO',(x+3.5,y-3.42,1.55),.17,'letter',g)
+  box('Cargo plaque',(x+3.5,y-3.405,1.34),(1.35,.05,.3),'metal',g,.015);text('CARGO',(x+3.5,y-3.438,1.34),.14,'letter',g)
   # Low warm bench along one side, away from the 2.4m route aisle.
   box('Bench seat',(x+1,y-3,.48),(2.8,.65,.12),'wood',g,.04,True)
   for dx in [-1,1]:box('Bench foot',(x+1+dx,y-3,.22),(.15,.5,.44),'metal',g,.025)
@@ -219,7 +223,6 @@ def scene():
  s.view_settings.view_transform='AgX';s.render.resolution_x=1920;s.render.resolution_y=1080;s.render.resolution_percentage=100
  s.render.image_settings.file_format='PNG'
  s.render.film_transparent=False
- s.use_nodes=True;n=s.node_tree.nodes;n.clear();r=n.new('CompositorNodeRLayers');gl=n.new('CompositorNodeGlare');gl.glare_type='FOG_GLOW';gl.quality='HIGH';gl.threshold=1.8;out=n.new('CompositorNodeComposite');s.node_tree.links.new(r.outputs['Image'],gl.inputs['Image']);s.node_tree.links.new(gl.outputs['Image'],out.inputs['Image'])
  bpy.ops.object.camera_add(location=(35,-39,25));cam=bpy.context.object;cam.name='Beauty camera';cam.data.lens=42;s.camera=cam
  return s
 
@@ -232,7 +235,9 @@ def join_groups():
   # Each group owns its material bindings and its unique atlas.
   for i,m in enumerate(o.data.materials):o.data.materials[i]=m.copy();o.data.materials[i].name=name+'--'+m.name
   select([o]);uv=o.data.uv_layers.new(name='UV1');o.data.uv_layers.active=uv;uv.active_render=True
-  bpy.ops.object.mode_set(mode='EDIT');bpy.ops.mesh.select_all(action='SELECT');bpy.ops.uv.smart_project(angle_limit=math.radians(66),island_margin=.008);bpy.ops.object.mode_set(mode='OBJECT')
+  bpy.ops.object.mode_set(mode='EDIT');bpy.ops.mesh.select_all(action='SELECT');bpy.ops.uv.smart_project(angle_limit=math.radians(66),island_margin=.003,margin_method='FRACTION',scale_to_bounds=True);bpy.ops.uv.pack_islands(rotate=True,scale=True,margin_method='FRACTION',margin=8/(4096 if name=='hall' else 2048));bpy.ops.object.mode_set(mode='OBJECT')
+  uv=o.data.uv_layers['UV1'];log(f'UV1 {name}: {min(c for d in uv.data for c in d.uv):.5f} .. {max(c for d in uv.data for c in d.uv):.5f}');assert all(-1e-6<=c<=1.000001 for d in uv.data for c in d.uv),name
+  o.data.uv_layers['UV0'].active_render=True
   GROUPS[name]=[o]
 
 def save_srgb(name,a):
@@ -242,10 +247,10 @@ def save_srgb(name,a):
  bpy.data.images.remove(im);s.view_settings.view_transform=old
 
 def bake(samples):
- s=bpy.context.scene;s.cycles.samples=samples;s.render.bake.margin=12;s.render.bake.use_clear=True
+ s=bpy.context.scene;s.cycles.samples=samples;s.render.bake.margin=8;s.render.bake.use_clear=True
  rows=[]
  for name,obs in GROUPS.items():
-  t=time.time();o=obs[0];n=2048 if name=='hall' else 1024
+  t=time.time();o=obs[0];n=4096 if name=='hall' else 2048
   im=bpy.data.images.new('Irradiance '+name,width=n,height=n,alpha=False,float_buffer=True)
   for m in o.data.materials:
    node=m.node_tree.nodes.new('ShaderNodeTexImage');node.name='Lighting bake target';node.image=im;m.node_tree.nodes.active=node
@@ -257,11 +262,11 @@ def bake(samples):
   subprocess.run(['oidnDenoise','-v','0','-f','RTLightmap','--hdr',str(src),'-o',str(dst),'--threads','12'],check=True)
   with dst.open('rb') as f:
    assert f.readline().strip()==b'PF';assert f.readline().strip()==f'{n} {n}'.encode();assert float(f.readline())<0;a[:,:,:3]=np.frombuffer(f.read(),dtype='<f4').reshape(n,n,3)
-  src.unlink();dst.unlink();peak=float(np.max(a[:,:,:3]));intensity=max(1,math.ceil(peak*10)/10)
+  src.unlink();dst.unlink();peak=float(np.max(a[:,:,:3]));assert peak>.1,(name,'empty irradiance bake',peak);intensity=max(1,math.ceil(peak*10)/10)
   a[:,:,:3]=np.clip(a[:,:,:3]/intensity,0,1);a[:,:,3]=1
   save_srgb('lightmap-'+name,a);LIGHTMAPS[name]=intensity
   for m in o.data.materials:m.node_tree.nodes.remove(m.node_tree.nodes['Lighting bake target'])
-  bpy.data.images.remove(im);rows.append({'group':name,'resolution':n,'peakLinear':peak,'intensity':intensity,'seconds':round(time.time()-t,2),'samples':samples,'marginPixels':12})
+  bpy.data.images.remove(im);rows.append({'group':name,'resolution':n,'peakLinear':peak,'intensity':intensity,'seconds':round(time.time()-t,2),'samples':samples,'marginPixels':8,'islandSeparationPixels':8,'supportedMipLevels':2})
   log('Baked '+name);(ART/'bake-report.json').write_text(json.dumps(rows,indent=2)+'\n')
 
 
@@ -285,13 +290,13 @@ def metadata():
 
 def export(cols,nav):
  obs=[o for group in GROUPS.values() for o in group]+cols+[nav];select(obs)
- bpy.ops.export_scene.gltf(filepath=str(OUT/'scene.gltf'),export_format='GLTF_SEPARATE',use_selection=True,export_yup=True,export_apply=True,export_animations=False,export_cameras=False,export_lights=False,export_extras=False,export_materials='EXPORT',export_image_format='AUTO')
+ bpy.ops.export_scene.gltf(filepath=str(OUT/'scene.gltf'),export_format='GLTF_SEPARATE',use_selection=True,export_yup=True,export_apply=True,export_animations=False,export_cameras=False,export_lights=False,export_extras=False,export_materials='EXPORT',export_image_format='AUTO',export_texture_dir='textures')
  path=OUT/'scene.gltf';g=json.loads(path.read_text());nodes={n.get('name'):i for i,n in enumerate(g['nodes'])};g['scenes'][g.get('scene',0)]['nodes']=[i for i in g['scenes'][g.get('scene',0)]['nodes'] if not g['nodes'][i].get('name','').startswith(('Collision-','Navigation'))]
  # Lighting is manifest metadata. No fake Khronos extension or occlusion trick.
  lm=[]
  for name,intensity in LIGHTMAPS.items():
   ii=len(g['images']);g['images'].append({'uri':'textures/lightmap-'+name+'.png'})
-  ti=len(g['textures']);g['textures'].append({'source':ii,'sampler':len(g.setdefault('samplers',[]))});g['samplers'].append({'magFilter':9729,'minFilter':9987,'wrapS':33071,'wrapT':33071})
+  ti=len(g['textures']);g['textures'].append({'source':ii,'sampler':len(g.setdefault('samplers',[]))});g['samplers'].append({'magFilter':9729,'minFilter':9729,'wrapS':33071,'wrapT':33071})
   for mi,m in enumerate(g['materials']):
    if m.get('name','').startswith(name+'--'):lm.append({'material':mi,'texture':ti,'texCoord':1,'encoding':'srgb','intensity':intensity})
  # Required base contract uses only core glTF PBR. Our metallics are deliberately matte.
@@ -321,27 +326,32 @@ def export(cols,nav):
  svg.append('<text x="55" y="950" fill="#e7dfca" font-family="sans-serif" font-size="18">CONCOURSE / ARRIVAL</text></svg>');(OUT/'map.svg').write_text('\n'.join(svg))
 
 def stills():
- s=bpy.context.scene;s.render.engine='CYCLES';s.cycles.samples=64
- shots=[('01-concourse',(32,-36,22),(0,9,2),40),('02-arrival',(-11,-17,3.1),(-1,9,3),25),('03-build',(-17,0,3.2),(-10,7,2.3),32),('04-route',(-15,11,2.6),(-10,23,2.6),28)]
+ s=bpy.context.scene;s.render.engine='BLENDER_EEVEE';s.cycles.samples=64
+ shots=[('01-concourse',(36,-45,27),(0,9,2),36),('02-arrival',(-11,-17,3.1),(-1,9,3),25),('03-build',(-17,0,3.2),(-10,7,2.3),32),('04-route',(-15,11,2.6),(-10,23,2.6),28)]
  for name,pos,target,lens in shots:
   camera(pos,target,lens);s.render.filepath=str(ART/(name+'.png'));bpy.ops.render.render(write_still=True)
  import shutil;shutil.copy2(ART/'01-concourse.png',OUT/'preview.png')
 
-def film():
- s=bpy.context.scene;s.render.engine='CYCLES';s.cycles.samples=16;s.render.fps=24
- frames=ART/'film-frames';frames.mkdir(exist_ok=True)
+def film(preview=False):
+ s=bpy.context.scene;s.render.engine='BLENDER_EEVEE';s.render.fps=24
+ frames=ART/'film-frames';stamp=ART/'film-cache.sha256';digest=hashlib.sha256((ART/'switchyard.blend').read_bytes()+Path(__file__).read_bytes()).hexdigest()
+ if not stamp.exists() or stamp.read_text().strip()!=digest:
+  if frames.exists():shutil.rmtree(frames)
+  stamp.write_text(digest+'\n')
+ frames.mkdir(exist_ok=True)
  # Four gentle shots: overview, arrival, along a route, and a dock portrait.
- shots=[((31,-34,21),(24,-27,17),(0,10,2),(0,11,2),40),((-13,-17,3.2),(-11,-9,3.1),(-1,8,3),(-1,11,3),26),((-14.65,-1,2.6),(-14.65,13,2.6),(-10,13,3),(-10,25,3),29),((-5,12,4),(2,12,3.5),(1,20,2.7),(1,20,2.7),32)]
- for i in range(864):
+ shots=[((36,-45,27),(29,-37,23),(0,9,2),(0,11,2),36),((-13,-17,3.2),(-11,-9,3.1),(-1,8,3),(-1,11,3),26),((-14.65,-1,2.6),(-14.65,13,2.6),(-10,13,3),(-10,25,3),29),((-5,12,4),(2,12,3.5),(1,20,2.7),(1,20,2.7),32)]
+ for i in ([0,216,432,648] if preview else range(864)):
   if (frames/f'{i:04d}.png').exists():continue
   shot=i//216;t=(i%216)/215;t=t*t*(3-2*t);a,b,c,d,lens=shots[shot]
   mix=lambda p,q:tuple(v*(1-t)+w*t for v,w in zip(p,q))
   camera(mix(a,b),mix(c,d),lens);s.render.filepath=str(frames/f'{i:04d}.png');bpy.ops.render.render(write_still=True)
+ if preview:return
  subprocess.run(['ffmpeg','-y','-v','warning','-framerate','24','-i',str(frames/'%04d.png'),'-c:v','libx264','-preset','slow','-crf','22','-maxrate','6500k','-bufsize','13000k','-pix_fmt','yuv420p','-movflags','+faststart',str(ART/'world-switchyard.mp4')],check=True)
- (ART/'world-switchyard.json').write_text(json.dumps({'title':'World: Switchyard','tag':'world','notes':'Original procedural flagship world. Six permanent docks, cargo cabinets and a calm concourse. 36-second remote Blender Cycles flythrough; static dock placeholders, no simulated live system state. CC-BY-4.0, Hyprune contributors.'},indent=2)+'\n')
+ (ART/'world-switchyard.json').write_text(json.dumps({'title':'World: Switchyard','tag':'world','notes':'Original procedural flagship world. Six permanent docks, cargo cabinets and a calm concourse. 36-second remote Blender Eevee flythrough; static dock placeholders, no simulated live system state. CC-BY-4.0, Hyprune contributors.'},indent=2)+'\n')
 
 if __name__=='__main__':
- p=argparse.ArgumentParser();p.add_argument('--stage',choices=['build','stills','film'],default='build');p.add_argument('--samples',type=int,default=96);a=p.parse_args(sys.argv[sys.argv.index('--')+1:] if '--' in sys.argv else [])
+ p=argparse.ArgumentParser();p.add_argument('--stage',choices=['build','stills','film','film-preview'],default='build');p.add_argument('--samples',type=int,default=96);a=p.parse_args(sys.argv[sys.argv.index('--')+1:] if '--' in sys.argv else [])
  if socket.gethostname() in ['rick','rick-laptop']:raise SystemExit('Remote Blender only')
  if a.stage=='build':
   s=scene();join_groups();bake(a.samples)
@@ -350,5 +360,5 @@ if __name__=='__main__':
  else:
   bpy.ops.wm.open_mainfile(filepath=str(ART/'switchyard.blend'))
   if a.stage=='stills':stills()
-  else:film()
+  else:film(a.stage=='film-preview')
  log('Complete '+a.stage)

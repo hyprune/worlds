@@ -1,0 +1,79 @@
+[
+  {
+    "group": "hall",
+    "resolution": 4096,
+    "peakLinear": 9.313935279846191,
+    "intensity": 9.4,
+    "seconds": 16.86,
+    "samples": 96,
+    "marginPixels": 8,
+    "islandSeparationPixels": 8,
+    "supportedMipLevels": 2
+  },
+  {
+    "group": "build",
+    "resolution": 2048,
+    "peakLinear": 3.309601306915283,
+    "intensity": 3.4,
+    "seconds": 5.27,
+    "samples": 96,
+    "marginPixels": 8,
+    "islandSeparationPixels": 8,
+    "supportedMipLevels": 2
+  },
+  {
+    "group": "research",
+    "resolution": 2048,
+    "peakLinear": 3.1098227500915527,
+    "intensity": 3.2,
+    "seconds": 5.27,
+    "samples": 96,
+    "marginPixels": 8,
+    "islandSeparationPixels": 8,
+    "supportedMipLevels": 2
+  },
+  {
+    "group": "commons",
+    "resolution": 2048,
+    "peakLinear": 2.865398406982422,
+    "intensity": 2.9,
+    "seconds": 5.29,
+    "samples": 96,
+    "marginPixels": 8,
+    "islandSeparationPixels": 8,
+    "supportedMipLevels": 2
+  },
+  {
+    "group": "studio",
+    "resolution": 2048,
+    "peakLinear": 2.8215630054473877,
+    "intensity": 2.9,
+    "seconds": 5.01,
+    "samples": 96,
+    "marginPixels": 8,
+    "islandSeparationPixels": 8,
+    "supportedMipLevels": 2
+  },
+  {
+    "group": "systems",
+    "resolution": 2048,
+    "peakLinear": 3.051790237426758,
+    "intensity": 3.1,
+    "seconds": 5.38,
+    "samples": 96,
+    "marginPixels": 8,
+    "islandSeparationPixels": 8,
+    "supportedMipLevels": 2
+  },
+  {
+    "group": "archive",
+    "resolution": 2048,
+    "peakLinear": 2.8215880393981934,
+    "intensity": 2.9,
+    "seconds": 5.36,
+    "samples": 96,
+    "marginPixels": 8,
+    "islandSeparationPixels": 8,
+    "supportedMipLevels": 2
+  }
+]

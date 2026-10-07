@@ -8,7 +8,11 @@ Worlds owns official environments, authoring source scenes, glTF exports, manife
 
 A package is a data-only directory containing `world.json`, glTF 2.0 geometry and local assets. Use meters, +Y up, stable spawn/anchor IDs and separate UV1 lightmaps when baking illumination. See [RFC-0004](https://hyprune.com/rfcs/0004-world-format/) before exporting.
 
-The first target is a small original room with one safe spawn and one planar surface anchor. No world assets ship in this initial repository. Schema examples are synthetic manifest fixtures, not complete playable packages.
+The first official world is [Switchyard](switchyard/README.md): an original six-dock transit hall with a shared concourse, cargo cabinets, surface anchors, collision, navigation and separate lighting atlases. Its entire editable scene is generated from procedural source. Schema examples remain synthetic manifest fixtures, not playable packages.
+
+## Build and distribution
+
+Run `make build`, `make validate`, and `make film`. Blender runs only on the remote mains-powered bake host through `tools/remote-blender.sh`; configure `HYPRUNE_BAKE_HOST` as needed. Generated worlds live in `dist/`, beauty stills and films in `artifacts/`. Sources, provenance, build recipes and small validation reports belong in git. Generated glTF/BIN/PNG/BLEND/video files are ignored and produced for directory or `make release` tar.zst distribution; no automatic CI bake is configured yet. See [RFC gaps](NOTES-rfc-gaps.md) for the optional Map and route-graph proposals.
 
 ## Content policy
 
