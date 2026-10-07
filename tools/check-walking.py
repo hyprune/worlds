@@ -6,6 +6,7 @@ from pathlib import Path
 import numpy as np
 from gltf_io import Scene
 root=Path(sys.argv[1]);s=Scene(root);m=s.manifest;route=m['extensions']['com.hyprune.lumen-reach.routes'];nodes={n['id']:np.array(n['position']) for n in route['nodes']};collision={c['node'] for c in m['collision']}
+assert len(nodes)<=64 and len(route['edges'])<=256,'core graph limits exceeded'
 tri=[]
 for i,name,p,pos,indices in s.primitives(visible=False):
  if i in collision:tri.extend(pos[indices])

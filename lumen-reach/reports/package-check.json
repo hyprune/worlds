@@ -1,33 +1,39 @@
 {
   "status": "PASS",
-  "packageBytes": 55445700,
-  "decodedTextureBytes": 223869632,
-  "conservativeGpuBytes": 392626708,
-  "mippedTextureViewsBytes": 378878908,
-  "expandedGeometryBytes": 13747800,
-  "colorTextureViews": 14,
-  "textureObjects": 30,
-  "textureProvenanceEntries": 30,
-  "visualTriangles": 114565,
-  "anchors": 14,
-  "collisionNodes": 228,
-  "lightmapBindings": 24,
+  "packageBytes": 62623091,
+  "decodedTextureBytes": 235666112,
+  "conservativeGpuBytes": 436324156,
+  "mippedTextureViewsBytes": 420122836,
+  "expandedGeometryBytes": 16201320,
+  "colorTextureViews": 18,
+  "textureObjects": 39,
+  "textureProvenanceEntries": 39,
+  "visualTriangles": 135011,
+  "anchors": 19,
+  "collisionNodes": 315,
+  "lightmapBindings": 33,
   "UV1": [
     {
       "node": "Visual-array-hall",
-      "triangles": 23618,
-      "uv1Area": 0.15077,
+      "triangles": 23000,
+      "uv1Area": 0.09965,
+      "overlapSamples": 0
+    },
+    {
+      "node": "Visual-rime-vault",
+      "triangles": 19540,
+      "uv1Area": 0.1103,
       "overlapSamples": 0
     },
     {
       "node": "Visual-sun-court",
-      "triangles": 75760,
-      "uv1Area": 0.1482,
+      "triangles": 74800,
+      "uv1Area": 0.05491,
       "overlapSamples": 0
     },
     {
       "node": "Visual-vista",
-      "triangles": 15187,
+      "triangles": 17671,
       "uv1Area": 0.0,
       "overlapSamples": 0
     }

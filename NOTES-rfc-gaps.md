@@ -76,3 +76,20 @@ contain no work mounts. Core should expose these volumes for user placement,
 then collision-check any requested window pose against actual geometry. Metadata
 reserves useful space; it neither permits intersecting placements nor snaps user
 windows without a requested operation.
+
+Core M2 (world 0.3 / IPC 0.4) now implements the normalized typed contract and
+accepts these optional 0.2 namespaces. The final package deliberately retains
+format 0.2 as requested. `areas.freePlacementZones` contains IDs; the separate
+placement namespace owns the volumes. Core's adapter was coordinated with the
+implementing agent and its real ramp auto-drive acceptance passed.
+
+`com.hyprune.lumen-reach.routes` v1 contains feet-position `nodes` (`id`,
+`position`) and bidirectional `edges` (`from`, `to`, `width`). These are actual
+paving/ramp/landing centerlines, not straight lines through walls. Core expands
+selected destinations along the graph; explicit IPC route positions require the
+1.7 m eye offset. Authoring checks enforce the current 64-node/256-edge limit,
+connectivity, supported floors, slope and capsule clearance. Per-area atmosphere
+is still deferred by core; distinct area lighting is baked into UV1. Day and
+night opaque vistas remain independent architecture/art layers. See core's
+`docs/M2.md` for alpha, fog, bloom and static IBL support; these new facilities
+are not a reason to grade screenshots or hide parity differences.

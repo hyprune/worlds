@@ -1,0 +1,35 @@
+[
+  {
+    "group": "sun-court",
+    "resolution": 3072,
+    "peakLinear": 40.89303970336914,
+    "intensity": 40.9,
+    "seconds": 7.57,
+    "samples": 64,
+    "marginPixels": 8,
+    "islandSeparationPixels": 8,
+    "supportedMipLevels": 2
+  },
+  {
+    "group": "array-hall",
+    "resolution": 2560,
+    "peakLinear": 38.29581069946289,
+    "intensity": 38.3,
+    "seconds": 6.11,
+    "samples": 64,
+    "marginPixels": 8,
+    "islandSeparationPixels": 8,
+    "supportedMipLevels": 2
+  },
+  {
+    "group": "rime-vault",
+    "resolution": 2048,
+    "peakLinear": 11.721945762634277,
+    "intensity": 11.8,
+    "seconds": 4.13,
+    "samples": 64,
+    "marginPixels": 8,
+    "islandSeparationPixels": 8,
+    "supportedMipLevels": 2
+  }
+]

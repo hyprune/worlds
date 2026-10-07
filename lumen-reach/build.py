@@ -77,7 +77,7 @@ def label(word,pos,height=.32,mat='ivory'):
     if b!='1':continue
     x=pos[0]-w/2+(j*6+col+.5)*pitch;z=pos[2]+(3-row)*pitch;y=pos[1];q=len(verts);a=pitch*.42
     verts.extend([(x-a,y,z-a),(x+a,y,z-a),(x+a,y,z+a),(x-a,y,z+a)]);faces.append((q,q+1,q+2,q+3))
- return mesh('Lettering '+word,verts,faces,mat)
+ return mesh('Lettering '+word,verts,faces,mat,group='vista')
 
 def sigil(pos,h=1,mat='ivory'):
  x,y,z=pos
@@ -276,7 +276,7 @@ def court():
 def hall():
  set_area(1,(-13,27,32,62,-.4,23),(8,34,0),(3,12,34,40,.15,4.8))
  slab('Atrium stone floor',-6,24,32,60,0)
- slab('Service threshold',24,30,48,56,0,'metal')
+ slab('Service threshold',24,33,48,52,0,'metal')
  # Tall ribs and a heavy roof ring frame a generous, daylight-filled volume.
  for x in [-6,24]:
   for y in [33,44,58]:
@@ -337,11 +337,85 @@ def hall():
  P.area('Hall warm window',(12,59,14),(8,45,3),8500,(1,.76,.43),9)
  for x in [-4,22]:P.area('Hall service pool',(x,45,8),(x,45,0),650,(1,.40,.13),3)
  label('RIME VAULT',(23.7,49,4),.24)
- point('hall-arrival',(8,33,0),'hall-entry');point('hall-center',(8,46,0),'hall-arrival');point('hall-exit',(20,50,0),'hall-center');point('service-entry',(27,52,0),'hall-exit')
+ point('hall-arrival',(8,33,0),'hall-entry');point('hall-center',(8,46,0),'hall-arrival');point('hall-exit',(20,50,0),'hall-center');point('service-entry',(30,50,0),'hall-exit')
  point('hall-annex-entry',(-10.5,36,0),'hall-arrival');point('hall-ramp-base',(-10.5,40,0),'hall-annex-entry');point('hall-balcony',(-10.5,56,4),'hall-ramp-base');point('hall-balcony-turn',(-10.5,59.2,4),'hall-balcony');point('hall-upper-door',(-3.5,59.2,4),'hall-balcony-turn');point('hall-upper-base',(-3.5,56,4),'hall-upper-door');point('hall-upper',(-3.5,40,8),'hall-upper-base')
  for off in [-.5,.5]:
   pts=[(8+off,32,.015),(8+off,46,.015),(20+off,50,.015),(27+off,52,.015)]
   for a,b in zip(pts,pts[1:]):rod('Hall inset route rail',a,b,.022,'metal')
+
+
+def steam(pos,scale=1):
+ # Opaque pale ribbons: supported now, no alpha blending dependency.
+ x,y,z=pos
+ for j in range(3):
+  verts=[]
+  for i in range(16):
+   t=i/15;a=t*math.tau*1.5+j*2.1;r=(.08+.20*t)*scale;px=x+math.cos(a)*r;py=y+math.sin(a)*r;pz=z+t*1.5*scale;w=(.014+.018*t)*scale;verts.extend([(px-w,py,pz),(px+w,py,pz)])
+  mesh('Vent steam ribbon',verts,[(2*i,2*i+1,2*i+3,2*i+2) for i in range(15)],'ice')
+
+def vault():
+ set_area(2,(26,55,52,103,-6.4,5),(38,79,-6),(36,42,77,83,-5.85,-1.2))
+ ramp('Service descent',27,33,52,74,0,-6,30,'grating')
+ # Enclosed passage is for travel; its lower door opens onto a broad work floor.
+ for x in [26.5,35.1]:box('Descent side',(x,63,-.5),(.5,22,13),'metal',solid=True)
+ mesh('Sloping service roof',[(26.3,52,5),(35.4,52,5),(35.4,74,-1),(26.3,74,-1)],[(0,1,2,3)],'metal',True)
+ for y in range(54,77,4):
+  z=-(y-52)/4
+  box('Descent red edge',(26.85,y,z+1),(.06,.45,.12),'red-light')
+  box('Descent amber edge',(34.8,y,z+.3),(.06,.5,.13),'amber')
+  rod('Service conduit',(34.7,y-1,z+3.7),(34.7,y+1,z+3.2),.09,'frost')
+ P.area('Descent lower pool',(30,72,.7),(30,76,-6),320,(.32,.55,1),3)
+ slab('Vault lower floor',26,50,74,102,-6,'grating')
+ slab('Vault exit sill',50,56,96,103,-6,'grating')
+ box('Lower passage east shell',(56,99.5,-2.5),(.4,7,7),'metal',solid=True)
+ box('Lower passage south shell',(53,96,-2.5),(6,.4,7),'metal',solid=True)
+ box('Lower passage roof',(53,99.5,1.2),(6,7,.3),'metal',solid=True)
+ if BUILD_AREAS<4:box('Next home temporary gate',(53,103,-2.5),(6,.4,7),'metal',solid=True)
+ for x in [26,50]:
+  spans=[(76,102)] if x<30 else [(76,96)]
+  for ya,yb in spans:box('Vault side shell',(x,(ya+yb)/2,-1),(.6,yb-ya,10),'metal',solid=True)
+ box('Vault rear shell',(38,102,-1),(24,.65,10),'metal',solid=True)
+ box('Vault ceiling',(38,89,4.2),(24,26,.45),'metal',solid=True)
+ for x in [26.5,49.5]:
+  for y in [78,87,96,101]:
+   box('Vault frost rib',(x,y,-1),(.55,.4,9.5),'frost',solid=True)
+   box('Vault red practical',(x+( .30 if x<30 else -.30),y,-2.4),(.04,.14,1.4),'red-light')
+ for x in [29,33,43,47]:
+  rod('Ceiling coolant pipe',(x,77,2.8),(x,101,2.8),.19,'frost')
+  for y in [80,86,92,98]:cyl('Coolant flange',(x,y,2.8),.25,.12,'metal').rotation_euler=(math.pi/2,0,0)
+ for y in [80,86,92,98]:
+  rod('Vault cable tray',(27,y,3.55),(49,y,3.55),.055)
+  box('Ceiling amber bar',(38,y,3.9),(5,.12,.05),'amber')
+ # Main console is visibly recessed into a heavy service frame.
+ box('Console backing',(38,100,-.5),(16,1.1,8.7),'frost',solid=True)
+ screen('wall-inset-console',(38,99.37,-.1),(13.8,6.3),'mounted-workspace',style='workspace')
+ label('03 RIME VAULT',(38,99.03,3.45),.32)
+ for x in [30,46]:box('Console amber side',(x,99.20,-.8),(.08,.06,6.9),'amber')
+ for x,y in [(33.6,81),(45,87)]:
+  box('Vault instrument desk',(x,y,-5),(3.8,1.15,.17),'metal',solid=True)
+  for dx in [-1.5,1.5]:box('Vault desk support',(x+dx,y,-5.5),(.16,.85,1),'frost',solid=True)
+  screen('operator-desk',(x,y-.12,-4.02),(2.55,1.4),tilt=.20)
+ screen('wall-inset-console',(49.35,94,-1.4),(3.0,2.0),yaw=-math.pi/2)
+ ramp('Vault maintenance ascent',27,30,76,92,-6,-2,20,'grating')
+ slab('Vault maintenance platform',26.4,30.7,92,98,-2,'grating')
+ rail((30.6,93,-2),(30.6,98,-2));rail((26.5,92,-2),(26.5,98,-2))
+ box('Maintenance terminal plinth',(28.5,96,-1.0),(3.6,1,.16),'metal',solid=True)
+ screen('terminal-bench',(28.5,95.85,-.02),(2.3,1.3),tilt=.22)
+ # Separate sealed continuation hints at a larger settlement.
+ box('Sealed lower gate',(28,100,-3),(3,.65,6),'frost',solid=True)
+ box('Gate center split',(28,99.63,-3),(.06,.06,5.4),'black')
+ label('SEALED',(28,99.58,-1.8),.25);label('CONTINUATION',(28,99.58,-2.3),.16)
+ for x in [26.8,29.2]:box('Gate red edge',(x,99.62,-3),(.04,.045,4),'red-light')
+ for x,y in [(47,80),(47,100),(34,96)]:crate((x,y,-6))
+ box('Steam vent',(47,93,-5.5),(1,.6,.5),'frost',solid=True);steam((47,93,-5.2),1.3)
+ for x in [32.5,43.5]:box('Vault floor strip',(x,88,-5.97),(.08,22,.035),'amber',0)
+ P.area('Vault cold ceiling',(38,83,3.4),(38,88,-5),750,(.18,.38,.7),8)
+ P.area('Vault red service',(27,94,1),(32,93,-4),430,(1,.045,.018),4)
+ P.area('Vault amber console',(38,97,3.4),(38,94,-5),600,(1,.33,.07),7)
+ point('descent-top',(30,52,0),'service-entry');point('descent-bottom',(30,74,-6),'descent-top');point('vault-door',(32,74,-6),'descent-bottom');point('vault-arrival',(38,79,-6),'vault-door');point('vault-center',(38,89,-6),'vault-arrival');point('vault-exit',(48,98,-6),'vault-center');point('rise-entry',(54,100,-6),'vault-exit')
+ point('vault-maintenance-base',(28.5,76,-6),'vault-door');point('vault-maintenance',(28.5,92,-2),'vault-maintenance-base');point('vault-platform',(28.5,94,-2),'vault-maintenance')
+ for off in [-.45,.45]:
+  for a,b in zip([(38+off,78,-5.975),(38+off,89,-5.975),(48+off,98,-5.975)],[(38+off,89,-5.975),(48+off,98,-5.975),(54+off,100,-5.975)]):rod('Vault inset route rail',a,b,.018,'metal')
 
 
 def vista():
@@ -351,7 +425,7 @@ def vista():
  skyline=[(0,113),(100,115),(170,150),(230,172),(310,144),(350,142),(395,126),(425,45),(445,151),(465,32),(478,126),(493,90),(514,141),(557,129),(585,104),(598,127),(609,64),(620,168),(675,154),(706,126),(760,120),(832,107),(871,150),(976,178),(1090,141),(1160,142),(1250,89),(1325,132),(1374,92),(1435,87),(1499,52),(1572,140),(1640,169),(1666,152),(1740,151),(1800,138),(1852,146),(1920,121),(1970,129),(2048,137)]
  verts=[];uvs=[];faces=[]
  for x,y in skyline:
-  u=x/2048;theta=(u-.5)*math.radians(360);px=105*math.sin(theta);py=105*math.cos(theta);z=-9+72*(1-y/683);verts.extend([(px,py,-9),(px,py,z)]);uvs.extend([(u,0),(u,1-y/683)])
+  u=x/2048;theta=(u-.5)*math.radians(360);px=178.5*math.sin(theta);py=178.5*math.cos(theta);z=1.7*(-9+72*(1-y/683));verts.extend([(px,py,-15.3),(px,py,z)]);uvs.extend([(u,0),(u,1-y/683)])
  for i in range(len(skyline)-1):q=i*2;faces.append((q,q+2,q+3,q+1))
  o=mesh('Watershed wrapped silhouette cards',verts,faces,'watershed-vista',group='vista')
  for face in o.data.polygons:
@@ -430,6 +504,7 @@ def stills():
 if __name__=='__main__':
  import argparse
  p=argparse.ArgumentParser();p.add_argument('--areas',type=int,choices=[1,2,3,4],default=1);p.add_argument('--samples',type=int,default=64);p.add_argument('--preview',action='store_true');p.add_argument('--stills',action='store_true');a=p.parse_args(sys.argv[sys.argv.index('--')+1:])
+ BUILD_AREAS=a.areas
  if a.stills:
   bpy.ops.wm.open_mainfile(filepath=str(ART/'lumen-reach.blend'));P.gpu();VIEWS=[v for v in json.loads((HERE/'views.json').read_text())['views'] if v['areaCount']<=a.areas];(ART/'views.json').write_text(json.dumps({'verticalFovDegrees':60,'views':VIEWS},indent=2)+'\n');stills();sys.exit(0)
  init();load_ui();court()
@@ -440,5 +515,5 @@ if __name__=='__main__':
  if a.preview:stills()
  else:
   # Shared pipeline keeps tiling UV0 distinct from atlas UV1 throughout bake/export.
-  for name,n in zip(NAMES[:a.areas],[4096,3072,2048,3072]):P.RESOLUTIONS[name]=n
+  for name,n in zip(NAMES[:a.areas],[3072,2560,2048,2560]):P.RESOLUTIONS[name]=n
   cols,nav=spatial();P.join_groups();P.bake(a.samples);g,lm,nodes=P.export(cols,nav);manifest(g,lm,nodes,cols,a.areas);bpy.ops.wm.save_as_mainfile(filepath=str(ART/'lumen-reach.blend'));stills()

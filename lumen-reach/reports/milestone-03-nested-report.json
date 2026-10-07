@@ -1,0 +1,295 @@
+{
+  "coreCommit": "675e198bb166f5aaccf9d2d3f2e9541b0d614067",
+  "pluginSHA256": "64e9ea4a97ee7f9e907ff8cf23a9db901d70b7388e0c48bec35bfd8c19fdc3fb",
+  "loadedPluginSHA256": "64e9ea4a97ee7f9e907ff8cf23a9db901d70b7388e0c48bec35bfd8c19fdc3fb",
+  "protocol": "0.3",
+  "load": {
+    "revision": 3
+  },
+  "camera": {
+    "active": true,
+    "captures": [],
+    "error": "",
+    "frames": 122,
+    "grabbed": "",
+    "pitch": 0.0,
+    "position": [
+      -8.0,
+      1.7000000476837158,
+      12.0
+    ],
+    "pressedButtons": 0,
+    "yaw": -0.0
+  },
+  "manifestSHA256": "b6dd0b127fd3ce29b9627b9b0c8523ea030c1f20533c987e173f12effbe9356f",
+  "sceneSHA256": "0aee78bf7ad5f2e6acdd39f790730e585ee734bf79b95bfab2151429a9b654c2",
+  "walk": {
+    "before": [
+      -8.0,
+      1.7000000476837158,
+      12.0
+    ],
+    "after": [
+      -8.0,
+      1.7000000476837158,
+      10.308414459228516
+    ]
+  },
+  "views": [
+    {
+      "id": "01-sun-court",
+      "pose": {
+        "orientation": [
+          0.059117864817380905,
+          -0.17116305232048035,
+          0.010289458557963371,
+          0.9834136366844177
+        ],
+        "position": [
+          -9.0,
+          2.0,
+          16.0
+        ]
+      },
+      "verticalFovDegrees": 60,
+      "path": "/home/rick/workspace/hyprune/worlds/artifacts/lumen-reach/engine-01-sun-court.png"
+    },
+    {
+      "id": "01-sun-court-terrace",
+      "pose": {
+        "orientation": [
+          0.030215978622436523,
+          -0.7472701072692871,
+          0.034058671444654465,
+          0.6629588007926941
+        ],
+        "position": [
+          -21.0,
+          5.699999809265137,
+          -15.0
+        ]
+      },
+      "verticalFovDegrees": 60,
+      "path": "/home/rick/workspace/hyprune/worlds/artifacts/lumen-reach/engine-01-sun-court-terrace.png"
+    },
+    {
+      "id": "01-sun-court-tools",
+      "pose": {
+        "orientation": [
+          0.016189953312277794,
+          0.1665656566619873,
+          -0.0027352748438715935,
+          0.9858936667442322
+        ],
+        "position": [
+          -12.0,
+          2.0999999046325684,
+          11.5
+        ]
+      },
+      "verticalFovDegrees": 60,
+      "path": "/home/rick/workspace/hyprune/worlds/artifacts/lumen-reach/engine-01-sun-court-tools.png"
+    },
+    {
+      "id": "02-array-hall",
+      "pose": {
+        "orientation": [
+          0.20474699139595032,
+          0.0,
+          -0.0,
+          0.978814959526062
+        ],
+        "position": [
+          8.0,
+          2.0,
+          -33.0
+        ]
+      },
+      "verticalFovDegrees": 60,
+      "path": "/home/rick/workspace/hyprune/worlds/artifacts/lumen-reach/engine-02-array-hall.png"
+    },
+    {
+      "id": "02-array-hall-balcony",
+      "pose": {
+        "orientation": [
+          -0.09023118019104004,
+          -0.3735569417476654,
+          -0.03653879091143608,
+          0.9224849343299866
+        ],
+        "position": [
+          -3.5,
+          9.699999809265137,
+          -38.0
+        ]
+      },
+      "verticalFovDegrees": 60,
+      "path": "/home/rick/workspace/hyprune/worlds/artifacts/lumen-reach/engine-02-array-hall-balcony.png"
+    },
+    {
+      "id": "02-array-hall-tools",
+      "pose": {
+        "orientation": [
+          0.0022548662964254618,
+          0.9238634705543518,
+          -0.005443728994578123,
+          0.38267678022384644
+        ],
+        "position": [
+          14.0,
+          2.0999999046325684,
+          -58.0
+        ]
+      },
+      "verticalFovDegrees": 60,
+      "path": "/home/rick/workspace/hyprune/worlds/artifacts/lumen-reach/engine-02-array-hall-tools.png"
+    },
+    {
+      "id": "03-rime-vault",
+      "pose": {
+        "orientation": [
+          0.08660862594842911,
+          -0.047279294580221176,
+          0.004114910960197449,
+          0.9951114058494568
+        ],
+        "position": [
+          36.0,
+          -4.300000190734863,
+          -78.0
+        ]
+      },
+      "verticalFovDegrees": 60,
+      "path": "/home/rick/workspace/hyprune/worlds/artifacts/lumen-reach/engine-03-rime-vault.png"
+    },
+    {
+      "id": "03-rime-vault-tools",
+      "pose": {
+        "orientation": [
+          0.024054240435361862,
+          -0.3403138518333435,
+          0.008708837442100048,
+          0.9399638175964355
+        ],
+        "position": [
+          40.0,
+          -3.799999952316284,
+          -82.0
+        ]
+      },
+      "verticalFovDegrees": 60,
+      "path": "/home/rick/workspace/hyprune/worlds/artifacts/lumen-reach/engine-03-rime-vault-tools.png"
+    },
+    {
+      "id": "03-rime-vault-platform",
+      "pose": {
+        "orientation": [
+          0.008080958388745785,
+          -0.5531209707260132,
+          0.005365556571632624,
+          0.8330445289611816
+        ],
+        "position": [
+          28.5,
+          -0.30000001192092896,
+          -93.0
+        ]
+      },
+      "verticalFovDegrees": 60,
+      "path": "/home/rick/workspace/hyprune/worlds/artifacts/lumen-reach/engine-03-rime-vault-platform.png"
+    }
+  ],
+  "nestedDrmClients": [
+    {
+      "drm-driver": "xe",
+      "drm-client-id": "2152",
+      "drm-pdev": "0000:00:02.0",
+      "drm-total-system": "0",
+      "drm-shared-system": "0",
+      "drm-active-system": "0",
+      "drm-resident-system": "0",
+      "drm-purgeable-system": "0",
+      "drm-total-gtt": "0",
+      "drm-shared-gtt": "0",
+      "drm-active-gtt": "0",
+      "drm-resident-gtt": "0",
+      "drm-total-stolen": "0",
+      "drm-shared-stolen": "0",
+      "drm-active-stolen": "0",
+      "drm-resident-stolen": "0",
+      "drm-cycles-rcs": "0",
+      "drm-total-cycles-rcs": "978746832996",
+      "drm-cycles-vcs": "0",
+      "drm-total-cycles-vcs": "978746832996",
+      "drm-cycles-vecs": "0",
+      "drm-total-cycles-vecs": "978746832996",
+      "drm-cycles-bcs": "0",
+      "drm-total-cycles-bcs": "978746832996",
+      "drm-cycles-ccs": "0",
+      "drm-total-cycles-ccs": "978746832996"
+    },
+    {
+      "drm-driver": "xe",
+      "drm-client-id": "2153",
+      "drm-pdev": "0000:00:02.0",
+      "drm-total-system": "0",
+      "drm-shared-system": "0",
+      "drm-active-system": "0",
+      "drm-resident-system": "0",
+      "drm-purgeable-system": "0",
+      "drm-total-gtt": "733368 KiB",
+      "drm-shared-gtt": "42 MiB",
+      "drm-active-gtt": "0",
+      "drm-resident-gtt": "733368 KiB",
+      "drm-total-stolen": "0",
+      "drm-shared-stolen": "0",
+      "drm-active-stolen": "0",
+      "drm-resident-stolen": "0",
+      "drm-cycles-rcs": "72926450",
+      "drm-total-cycles-rcs": "978746835470",
+      "drm-cycles-vcs": "0",
+      "drm-total-cycles-vcs": "978746835470",
+      "drm-cycles-vecs": "0",
+      "drm-total-cycles-vecs": "978746835470",
+      "drm-cycles-bcs": "219",
+      "drm-total-cycles-bcs": "978746835470",
+      "drm-cycles-ccs": "267",
+      "drm-total-cycles-ccs": "978746835470"
+    },
+    {
+      "drm-driver": "xe",
+      "drm-client-id": "2156",
+      "drm-pdev": "0000:00:02.0",
+      "drm-total-system": "0",
+      "drm-shared-system": "0",
+      "drm-active-system": "0",
+      "drm-resident-system": "0",
+      "drm-purgeable-system": "0",
+      "drm-total-gtt": "0",
+      "drm-shared-gtt": "0",
+      "drm-active-gtt": "0",
+      "drm-resident-gtt": "0",
+      "drm-total-stolen": "0",
+      "drm-shared-stolen": "0",
+      "drm-active-stolen": "0",
+      "drm-resident-stolen": "0",
+      "drm-cycles-rcs": "0",
+      "drm-total-cycles-rcs": "978746841104",
+      "drm-cycles-vcs": "0",
+      "drm-total-cycles-vcs": "978746841104",
+      "drm-cycles-vecs": "0",
+      "drm-total-cycles-vecs": "978746841104",
+      "drm-cycles-bcs": "0",
+      "drm-total-cycles-bcs": "978746841104",
+      "drm-cycles-ccs": "0",
+      "drm-total-cycles-ccs": "978746841104"
+    }
+  ],
+  "status": "PASS",
+  "checks": [
+    "package load",
+    "real spawn walking",
+    "matching 60 degree views",
+    "clean nested exit"
+  ]
+}

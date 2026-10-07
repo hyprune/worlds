@@ -84,6 +84,48 @@
         52,
         2.2
       ]
+    },
+    {
+      "id": "03-rime-vault",
+      "areaCount": 3,
+      "position": [
+        36,
+        78,
+        -4.3
+      ],
+      "target": [
+        38,
+        99,
+        -0.6
+      ]
+    },
+    {
+      "id": "03-rime-vault-tools",
+      "areaCount": 3,
+      "position": [
+        40,
+        82,
+        -3.8
+      ],
+      "target": [
+        45,
+        88,
+        -3.4
+      ]
+    },
+    {
+      "id": "03-rime-vault-platform",
+      "areaCount": 3,
+      "position": [
+        28.5,
+        93,
+        -0.3
+      ],
+      "target": [
+        38,
+        97,
+        -0.1
+      ]
     }
   ]
 }

@@ -133,7 +133,9 @@ def export(cols,nav):
  # Convert intentional skyline art to portable standard unlit base color.
  for m in g['materials']:
   if not m.get('name','').startswith('vista--'):continue
-  color=m.pop('emissiveFactor',[0,0,0]);gain=m.get('extensions',{}).pop('KHR_materials_emissive_strength',{}).get('emissiveStrength',1)
+  color=m.pop('emissiveFactor',None)
+  if color is None or not any(color):color=m.get('pbrMetallicRoughness',{}).get('baseColorFactor',[1,1,1,1])[:3]
+  gain=m.get('extensions',{}).pop('KHR_materials_emissive_strength',{}).get('emissiveStrength',1)
   m['pbrMetallicRoughness']={'baseColorFactor':[min(1,c*gain) for c in color]+[1],'metallicFactor':0,'roughnessFactor':1}
   if 'emissiveTexture' in m:m['pbrMetallicRoughness']['baseColorTexture']=m.pop('emissiveTexture')
   m.setdefault('extensions',{})['KHR_materials_unlit']={}

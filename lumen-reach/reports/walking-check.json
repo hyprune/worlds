@@ -1,6 +1,6 @@
 {
   "status": "PASS",
-  "connectedNodes": 36,
+  "connectedNodes": 46,
   "edges": [
     {
       "edge": [
@@ -250,9 +250,9 @@
         "hall-exit",
         "service-entry"
       ],
-      "meters": 7.280109889280518,
+      "meters": 10.0,
       "slope": 0.0,
-      "samples": 30
+      "samples": 40
     },
     {
       "edge": [
@@ -316,6 +316,96 @@
       "meters": 16.492422502470642,
       "slope": 0.25,
       "samples": 66
+    },
+    {
+      "edge": [
+        "service-entry",
+        "descent-top"
+      ],
+      "meters": 2.0,
+      "slope": 0.0,
+      "samples": 8
+    },
+    {
+      "edge": [
+        "descent-top",
+        "descent-bottom"
+      ],
+      "meters": 22.80350850198276,
+      "slope": 0.2727272727272727,
+      "samples": 92
+    },
+    {
+      "edge": [
+        "descent-bottom",
+        "vault-door"
+      ],
+      "meters": 2.0,
+      "slope": 0.0,
+      "samples": 8
+    },
+    {
+      "edge": [
+        "vault-door",
+        "vault-arrival"
+      ],
+      "meters": 7.810249675906654,
+      "slope": 0.0,
+      "samples": 32
+    },
+    {
+      "edge": [
+        "vault-arrival",
+        "vault-center"
+      ],
+      "meters": 10.0,
+      "slope": 0.0,
+      "samples": 40
+    },
+    {
+      "edge": [
+        "vault-center",
+        "vault-exit"
+      ],
+      "meters": 13.45362404707371,
+      "slope": 0.0,
+      "samples": 54
+    },
+    {
+      "edge": [
+        "vault-exit",
+        "rise-entry"
+      ],
+      "meters": 6.324555320336759,
+      "slope": 0.0,
+      "samples": 26
+    },
+    {
+      "edge": [
+        "vault-door",
+        "vault-maintenance-base"
+      ],
+      "meters": 4.031128874149275,
+      "slope": 0.0,
+      "samples": 17
+    },
+    {
+      "edge": [
+        "vault-maintenance-base",
+        "vault-maintenance"
+      ],
+      "meters": 16.492422502470642,
+      "slope": 0.25,
+      "samples": 66
+    },
+    {
+      "edge": [
+        "vault-maintenance",
+        "vault-platform"
+      ],
+      "meters": 2.0,
+      "slope": 0.0,
+      "samples": 8
     }
   ],
   "failures": [],
