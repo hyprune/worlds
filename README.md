@@ -1,0 +1,33 @@
+# Hyprune worlds
+
+Official, original places for your desktop. **Early, building in the open.**
+
+> What if the computer itself were an explorable world?
+
+Worlds owns official environments, authoring source scenes, glTF exports, manifests, attribution and reproducible export recipes. It excludes runtime code, executable world behavior, shell UI and personal-use game assets.
+
+A package is a data-only directory containing `world.json`, glTF 2.0 geometry and local assets. Use meters, +Y up, stable spawn/anchor IDs and separate UV1 lightmaps when baking illumination. See [RFC-0004](https://hyprune.com/rfcs/0004-world-format/) before exporting.
+
+The first target is a small original room with one safe spawn and one planar surface anchor. No world assets ship in this initial repository. Schema examples are synthetic manifest fixtures, not complete playable packages.
+
+## Content policy
+
+Official assets must be original or properly attributed CC0/CC-BY-4.0. No third-party game assets or derivatives, even as temporary tests, screenshots or thumbnails. For every asset record author, source, license and modifications in the manifest/ATTRIBUTION.md. Keep editable sources and document reproducible export steps.
+
+Default original content license: **CC-BY-4.0** (see LICENSE). Scripts and tooling are **MIT** (see LICENSE-MIT); mark each script `SPDX-License-Identifier: MIT`. Original documentation is CC-BY-4.0 here. Third-party assets retain their upstream license; preserve notices and mark exceptions explicitly. Attribute original content to “Hyprune contributors,” link the package source, link the license and indicate modifications.
+
+## Boundaries and contracts
+
+- [RFC-0001: umbrella architecture](https://hyprune.com/rfcs/0001-umbrella/)
+- [RFC-0003: IPC `0.1`](https://hyprune.com/rfcs/0003-ipc/)
+- [RFC-0004: world format `0.1`](https://hyprune.com/rfcs/0004-world-format/)
+- [Machine-readable schemas and fixtures](https://github.com/hyprune/schema)
+- [Roadmap M0–M3](https://hyprune.com/roadmap/)
+
+RFCs are proposed implementation targets pending owner review. Read them now in [the docs source](https://github.com/hyprune/docs/tree/main/src/content/docs/rfcs) if the site is not deployed. Each core release must publish its exact Hyprland compatibility target and supported contract versions. Hyprune is new code; Hypr3D is a lessons-only historical reference.
+
+## Contributing
+
+See the [organization guide](https://github.com/hyprune/.github/blob/main/CONTRIBUTING.md) and [Code of Conduct](https://github.com/hyprune/.github/blob/main/CODE_OF_CONDUCT.md). Contract changes begin with an RFC amendment and schema fixtures. Keep provenance and failure evidence with your PR.
+
+Licenses: [CC-BY-4.0 content](LICENSE), [MIT scripts](LICENSE-MIT).
