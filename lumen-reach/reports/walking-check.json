@@ -1,0 +1,224 @@
+{
+  "status": "PASS",
+  "connectedNodes": 25,
+  "edges": [
+    {
+      "edge": [
+        "arrival",
+        "court-junction"
+      ],
+      "meters": 16.64331697709324,
+      "slope": 0.0,
+      "samples": 67
+    },
+    {
+      "edge": [
+        "court-junction",
+        "court-wall"
+      ],
+      "meters": 12.206555615733702,
+      "slope": 0.0,
+      "samples": 49
+    },
+    {
+      "edge": [
+        "court-wall",
+        "hall-entry"
+      ],
+      "meters": 13.0,
+      "slope": 0.0,
+      "samples": 52
+    },
+    {
+      "edge": [
+        "court-junction",
+        "globe-road"
+      ],
+      "meters": 4.0,
+      "slope": 0.0,
+      "samples": 16
+    },
+    {
+      "edge": [
+        "globe-road",
+        "globe-approach"
+      ],
+      "meters": 7.0,
+      "slope": 0.0,
+      "samples": 28
+    },
+    {
+      "edge": [
+        "globe-approach",
+        "globe-ramp"
+      ],
+      "meters": 2.0,
+      "slope": 0.0,
+      "samples": 8
+    },
+    {
+      "edge": [
+        "globe-ramp",
+        "globe-terrace"
+      ],
+      "meters": 6.118823416311342,
+      "slope": 0.19999999999999998,
+      "samples": 25
+    },
+    {
+      "edge": [
+        "globe-terrace",
+        "globe-platform"
+      ],
+      "meters": 1.0,
+      "slope": 0.0,
+      "samples": 4
+    },
+    {
+      "edge": [
+        "arrival",
+        "lookout-south"
+      ],
+      "meters": 2.5,
+      "slope": 0.0,
+      "samples": 10
+    },
+    {
+      "edge": [
+        "lookout-south",
+        "lookout-west"
+      ],
+      "meters": 13.5,
+      "slope": 0.0,
+      "samples": 54
+    },
+    {
+      "edge": [
+        "lookout-west",
+        "lookout-base"
+      ],
+      "meters": 4.5,
+      "slope": 0.0,
+      "samples": 18
+    },
+    {
+      "edge": [
+        "lookout-base",
+        "lookout"
+      ],
+      "meters": 16.492422502470642,
+      "slope": 0.25,
+      "samples": 66
+    },
+    {
+      "edge": [
+        "lookout",
+        "cascade-turn"
+      ],
+      "meters": 8.0,
+      "slope": 0.0,
+      "samples": 32
+    },
+    {
+      "edge": [
+        "cascade-turn",
+        "cascade-bridge"
+      ],
+      "meters": 9.5,
+      "slope": 0.0,
+      "samples": 38
+    },
+    {
+      "edge": [
+        "lookout",
+        "roof-lower"
+      ],
+      "meters": 18.0,
+      "slope": 0.0,
+      "samples": 72
+    },
+    {
+      "edge": [
+        "roof-lower",
+        "roof-switchback"
+      ],
+      "meters": 16.492422502470642,
+      "slope": 0.25,
+      "samples": 66
+    },
+    {
+      "edge": [
+        "roof-switchback",
+        "roof-turn"
+      ],
+      "meters": 5.385164807134504,
+      "slope": 0.0,
+      "samples": 22
+    },
+    {
+      "edge": [
+        "roof-turn",
+        "roof-return"
+      ],
+      "meters": 2.0,
+      "slope": 0.0,
+      "samples": 8
+    },
+    {
+      "edge": [
+        "roof-return",
+        "roof-upper"
+      ],
+      "meters": 16.492422502470642,
+      "slope": 0.25,
+      "samples": 66
+    },
+    {
+      "edge": [
+        "roof-upper",
+        "roof-start-west"
+      ],
+      "meters": 4.0,
+      "slope": 0.0,
+      "samples": 16
+    },
+    {
+      "edge": [
+        "roof-start-west",
+        "roof-start"
+      ],
+      "meters": 4.0,
+      "slope": 0.0,
+      "samples": 16
+    },
+    {
+      "edge": [
+        "roof-start",
+        "roof-final"
+      ],
+      "meters": 16.492422502470642,
+      "slope": 0.25,
+      "samples": 66
+    },
+    {
+      "edge": [
+        "roof-final",
+        "roof-bridge"
+      ],
+      "meters": 3.5,
+      "slope": 0.0,
+      "samples": 14
+    },
+    {
+      "edge": [
+        "roof-bridge",
+        "rooftop"
+      ],
+      "meters": 12.0,
+      "slope": 0.0,
+      "samples": 48
+    }
+  ],
+  "failures": [],
+  "method": "exported collision triangle floor support and continuous standing capsule clearance sampled at <=0.25m; all graph branches"
+}

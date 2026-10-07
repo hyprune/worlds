@@ -19,3 +19,60 @@ Contract reviewed: RFC-0004 including its **M1 format 0.2 amendment**, RFC-0005,
 14. **Camera/presentation controls are not a package capability.** IPC 0.2 exposes camera pose but no lens/FOV. Core's fixed 60-degree vertical FOV forced shared authoring camera/lens changes for a valid comparison. Propose explicit camera FOV and capture/reticle presentation controls outside the immutable world manifest. The comparison images are unretouched captures, including core's center reticle. A private nested config suppresses the start-hyprland debug banner and hides the idle native pointer; core sources and the owner's session remain untouched.
 
 Current evidence: five identical-pose 1920×1080 comparisons, a 27-second collision-checked core walk, all three-axis coplanar probes, independent exported UV0 density/UV1 overlap checks, v0.2 schema and Khronos validation. GPU accounting now mirrors M1's expanded visible vertices, **all mip levels** and separate linear/sRGB texture views inside 512 MiB; lightmaps retain clamp/linear sampling even though the current core allocates their mip chains. See `switchyard/RENDER-REVIEW.md` and `switchyard/reports/` for measured results.
+
+## Lumen Reach: workspace homes and mount vocabulary (2026-10-07)
+
+Each of the four connected areas is one workspace home, not a selection of
+unrelated workspaces. Sun Court owns slot 01, Array Hall slot 02, Rime Vault slot
+03, Signal Rise slot 04. Each declares exactly one primary workspace anchor and
+its own tool mounts. User configuration binds a slot to a real workspace; this
+package never hardcodes compositor workspace IDs. Future homes instantiate a
+consistent theme kit under new area/slot IDs without changing existing anchors.
+
+Until RFC-0004/0005 standardize typed mounts, the valid format 0.2 package uses
+`extensions.com.hyprune.lumen-reach.mounts` (optional; never required):
+
+```json
+{
+  "version": 1,
+  "areas": [{"id":"sun-court","workspaceSlot":"01","theme":"sun-court",
+    "primaryAnchor":"sun-court-slot-01-facade-wall-01",
+    "toolAnchors":[],"dataAnchors":[]}],
+  "mounts": [{"anchorId":"sun-court-slot-01-facade-wall-01",
+    "areaId":"sun-court","workspaceSlot":"01","mountType":"facade-wall",
+    "role":"mounted-workspace"}],
+  "objects": []
+}
+```
+
+Roles are `mounted-workspace`, `tool`, `data`. Mount types are `facade-wall`,
+`hanging-wall`, `wall-inset-console`, `banner`, `lectern`, `operator-desk`,
+`field-rig`, `kiosk-pillar`, `globe`, `crate`, `blast-door-screen`,
+`terminal-bench`, `radar-dish`. Screen mounts have ordinary RFC anchors with
+`com.hyprune.window`, exact front-facing world pose/size and physical frames.
+Data objects are extension `objects` entries `{id,pose,mountType,areaId,
+workspaceSlot,node?}` and appear in their area's `dataAnchors`; they do not
+pretend a globe or dish is a rectangular window. Stable IDs follow
+`<area-id>-slot-<two-digit-slot>-<mount-kind>-<ordinal>`. Optional node fields
+are re-resolved after every export, never used as persistent identity.
+
+Proposal for core: normalize this declarative extension into typed spatial
+mounts and workspace homes, preserving anchor IDs; publish role, mount type,
+owner area and slot. Primary mounted workspace focus uses its owner's complete
+workspace. Pulled-out tools retain that ownership when placed on its mounts.
+Data objects should expose data bindings separately from window capture. Unknown
+extension metadata remains ignored; the base package stays schema-valid.
+See `lumen-reach/IDENTITY.md`; the reference brief's working titles and lettering
+are not shipped identity. Coordination has been sent to the active core agent.
+
+Lumen Reach also reserves open work space per home. Optional
+`com.hyprune.lumen-reach.placement` version 1 declares `zones` with stable ID,
+world AABB, supported `windowSizes` (1.6×0.9 and 3.2×1.8 m) and clearance.
+Mount metadata records 4 m tool approach depth and 16 m primary wall approach.
+The package clearance audit sweeps both rectangles ahead of every anchor and
+through the reserved volumes against exported visual triangles. A collision-only
+or origin-point check would miss screen/frame intersections. Travel corridors
+contain no work mounts. Core should expose these volumes for user placement,
+then collision-check any requested window pose against actual geometry. Metadata
+reserves useful space; it neither permits intersecting placements nor snaps user
+windows without a requested operation.

@@ -1,0 +1,13 @@
+[
+  {
+    "group": "sun-court",
+    "resolution": 4096,
+    "peakLinear": 51.051856994628906,
+    "intensity": 51.1,
+    "seconds": 14.98,
+    "samples": 64,
+    "marginPixels": 8,
+    "islandSeparationPixels": 8,
+    "supportedMipLevels": 2
+  }
+]

@@ -1,0 +1,97 @@
+{
+  "coreCommit": "6f362bbd17280f26d4e203296df60c021c981178",
+  "pluginSHA256": "c47eb2c2cb2ef6befd8bdca67deaad49a99f989a97c6061dc6f1a3bcee2b3844",
+  "load": {
+    "revision": 3
+  },
+  "camera": {
+    "active": true,
+    "captures": [],
+    "error": "",
+    "frames": 121,
+    "pitch": 0.0,
+    "position": [
+      -8.0,
+      1.7000000476837158,
+      12.0
+    ],
+    "yaw": -0.0
+  },
+  "manifestSHA256": "b9c6b322154ed04369d006cdc6dd5521f78e58e3ffa20fd3f8f4d33825b56cd8",
+  "sceneSHA256": "5b1b7aea68beef815e0dbbd10ed6dafe76ec234f6348b3edcdcc687f845ebbc0",
+  "walk": {
+    "before": [
+      -8.0,
+      1.7000000476837158,
+      12.0
+    ],
+    "after": [
+      -8.0,
+      1.7000000476837158,
+      10.250083923339844
+    ]
+  },
+  "views": [
+    {
+      "id": "01-sun-court",
+      "pose": {
+        "orientation": [
+          0.059117864817380905,
+          -0.17116305232048035,
+          0.010289458557963371,
+          0.9834136366844177
+        ],
+        "position": [
+          -9.0,
+          2.0,
+          16.0
+        ]
+      },
+      "verticalFovDegrees": 60,
+      "path": "/home/rick/workspace/hyprune/worlds/artifacts/lumen-reach/engine-01-sun-court.png"
+    },
+    {
+      "id": "01-sun-court-terrace",
+      "pose": {
+        "orientation": [
+          0.030215978622436523,
+          -0.7472701072692871,
+          0.034058671444654465,
+          0.6629588007926941
+        ],
+        "position": [
+          -21.0,
+          5.699999809265137,
+          -15.0
+        ]
+      },
+      "verticalFovDegrees": 60,
+      "path": "/home/rick/workspace/hyprune/worlds/artifacts/lumen-reach/engine-01-sun-court-terrace.png"
+    },
+    {
+      "id": "01-sun-court-tools",
+      "pose": {
+        "orientation": [
+          0.016189953312277794,
+          0.1665656566619873,
+          -0.0027352748438715935,
+          0.9858936667442322
+        ],
+        "position": [
+          -12.0,
+          2.0999999046325684,
+          11.5
+        ]
+      },
+      "verticalFovDegrees": 60,
+      "path": "/home/rick/workspace/hyprune/worlds/artifacts/lumen-reach/engine-01-sun-court-tools.png"
+    }
+  ],
+  "status": "PASS",
+  "checks": [
+    "package load",
+    "real spawn walking",
+    "matching 60 degree views",
+    "clean nested exit"
+  ]
+}

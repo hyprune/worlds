@@ -1,0 +1,29 @@
+{
+  "status": "PASS",
+  "packageBytes": 45812242,
+  "decodedTextureBytes": 160692928,
+  "conservativeGpuBytes": 282835924,
+  "mippedTextureViewsBytes": 271924204,
+  "expandedGeometryBytes": 10911720,
+  "colorTextureViews": 10,
+  "textureObjects": 23,
+  "textureProvenanceEntries": 23,
+  "visualTriangles": 90931,
+  "anchors": 6,
+  "collisionNodes": 143,
+  "lightmapBindings": 14,
+  "UV1": [
+    {
+      "node": "Visual-sun-court",
+      "triangles": 75760,
+      "uv1Area": 0.1482,
+      "overlapSamples": 0
+    },
+    {
+      "node": "Visual-vista",
+      "triangles": 15171,
+      "uv1Area": 0.0,
+      "overlapSamples": 0
+    }
+  ]
+}

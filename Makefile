@@ -44,3 +44,17 @@ film-status:
 	./tools/remote-film.sh status
 film-fetch:
 	./tools/remote-film.sh fetch
+
+LUMEN_PACKAGE := dist/com.hyprune.lumen-reach
+LUMEN_AREAS ?= 1
+.PHONY: lumen-build lumen-validate lumen-nested
+lumen-build:
+	python3 lumen-reach/materials/prepare.py
+	./tools/remote-lumen.sh --areas $(LUMEN_AREAS) --samples 64
+lumen-validate:
+	node $(SCHEMA_DIR)/bin/validate.mjs world $(LUMEN_PACKAGE)/world.json - 0.2
+	python3 tools/check-package.py $(LUMEN_PACKAGE) > lumen-reach/reports/package-check.json
+	python3 tools/check-placement.py $(LUMEN_PACKAGE) --output lumen-reach/reports/placement-check.json
+	python3 tools/check-walking.py $(LUMEN_PACKAGE) > lumen-reach/reports/walking-check.json
+lumen-nested:
+	python3 tools/check-lumen-session.py

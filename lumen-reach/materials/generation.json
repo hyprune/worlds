@@ -1,0 +1,90 @@
+[
+  {
+    "name": "concrete",
+    "prompt": "Create ONE square original photorealistic seamless physically based material albedo texture tile for Lumen Reach. pale warm architectural board-formed concrete, mineral pores, subtle horizontal formwork, small aggregate, no panel edges. Orthographic flat overhead, uniform diffuse lighting, no cast shadows, highlights, vignette, text, logo, border or objects. Texture fills every pixel edge-to-edge; left/right and top/bottom match seamlessly. 1024x1024 or higher. Restrained realistic detail, avoid strong baked lighting.",
+    "author": "Hyprune contributors",
+    "license": "CC-BY-4.0",
+    "provenance": "Original built-in imagegen generation for Lumen Reach, 2026-10-07",
+    "masterSHA256": "2f0b4ac650422ff327f67dd7061bc94e0010db696ff80c3cc7b610278b5df0d6"
+  },
+  {
+    "name": "metal",
+    "prompt": "Create ONE original photorealistic square seamless material albedo texture tile for Lumen Reach: dark graphite brushed steel, fine linear machining, sparse scuffs, neutral gunmetal. Flat orthographic overhead, uniform diffuse lighting. Fill all pixels edge-to-edge. Opposite edges match. No perspective, cast shadows, strong highlights, vignette, border, text, logos, game symbols or objects. 1024x1024 or higher.",
+    "author": "Hyprune contributors",
+    "license": "CC-BY-4.0",
+    "provenance": "Original built-in imagegen generation for Lumen Reach, 2026-10-07",
+    "masterSHA256": "72063f7c08f13e977d4efbeb37bbce9f6cdf384d085c1634ecd3b42a16d080fa"
+  },
+  {
+    "name": "paving",
+    "prompt": "Create ONE original photorealistic square seamless material albedo texture tile for Lumen Reach: gray wet stone paving in irregular ashlar pattern, fine mineral grains, hairline grout, gentle damp patches without any reflected scene. Flat orthographic overhead, uniform diffuse lighting. Fill all pixels edge-to-edge. Opposite edges match. No perspective, cast shadows, strong highlights, vignette, border, text, logos, game symbols or objects. 1024x1024 or higher.",
+    "author": "Hyprune contributors",
+    "license": "CC-BY-4.0",
+    "provenance": "Original built-in imagegen generation for Lumen Reach, 2026-10-07",
+    "masterSHA256": "6efa934bf770c9635e3ff05ab702765e2813d2eb8749b586e378dca6a793c33b"
+  },
+  {
+    "name": "canvas",
+    "prompt": "Create ONE original photorealistic square seamless material albedo texture tile for Lumen Reach: sand beige woven canvas cloth, close fine weave, mild sun fading, no folds. Flat orthographic overhead, uniform diffuse lighting. Fill all pixels edge-to-edge. Opposite edges match. No perspective, cast shadows, strong highlights, vignette, border, text, logos, game symbols or objects. 1024x1024 or higher.",
+    "author": "Hyprune contributors",
+    "license": "CC-BY-4.0",
+    "provenance": "Original built-in imagegen generation for Lumen Reach, 2026-10-07",
+    "masterSHA256": "8244febc81b548bb0ca89b71140ade429099f842b2bb277bd141fdbf2880c0b1"
+  },
+  {
+    "name": "wood",
+    "prompt": "Create ONE original photorealistic square seamless material albedo texture tile for Lumen Reach: warm aged oak wood, fine long straight grain, no boards or edges. Flat orthographic overhead, uniform diffuse lighting. Fill all pixels edge-to-edge. Opposite edges match. No perspective, cast shadows, strong highlights, vignette, border, text, logos, game symbols or objects. 1024x1024 or higher.",
+    "author": "Hyprune contributors",
+    "license": "CC-BY-4.0",
+    "provenance": "Original built-in imagegen generation for Lumen Reach, 2026-10-07",
+    "masterSHA256": "440aa1ae341032111dbb61862ddff5bdedcd4bbfc6c9791148964415ec21910b"
+  },
+  {
+    "name": "frost",
+    "prompt": "Create ONE original photorealistic square seamless material albedo texture tile for Lumen Reach: frosted dark metal, icy pale speckles and crystalline rime over brushed steel. Flat orthographic overhead, uniform diffuse lighting. Fill all pixels edge-to-edge. Opposite edges match. No perspective, cast shadows, strong highlights, vignette, border, text, logos, game symbols or objects. 1024x1024 or higher.",
+    "author": "Hyprune contributors",
+    "license": "CC-BY-4.0",
+    "provenance": "Original built-in imagegen generation for Lumen Reach, 2026-10-07",
+    "masterSHA256": "79abb429f5b83a988b5eabc1a1bc32966f53c0333925b0b8efbc3296e82f921d"
+  },
+  {
+    "name": "glass",
+    "prompt": "Create ONE original photorealistic square seamless material albedo texture tile for Lumen Reach: smoky blue gray opaque glass surface, subtle fine scratches, softly mottled tint, no reflection of objects. Flat orthographic overhead, uniform diffuse lighting. Fill all pixels edge-to-edge. Opposite edges match. No perspective, cast shadows, strong highlights, vignette, border, text, logos, game symbols or objects. 1024x1024 or higher.",
+    "author": "Hyprune contributors",
+    "license": "CC-BY-4.0",
+    "provenance": "Original built-in imagegen generation for Lumen Reach, 2026-10-07",
+    "masterSHA256": "d50ea1b565ffaf4e95087fb9e744f96ce812a1709bb254d067c9fd8509e08e8a"
+  },
+  {
+    "name": "strips",
+    "prompt": "Create ONE original photorealistic square seamless material albedo texture tile for Lumen Reach: horizontal trim sheet of machined graphite rails and amber frosted luminous diffuser bands with narrow ceramic separators, repeatable left to right, no labels. Flat orthographic overhead, uniform diffuse lighting. Fill all pixels edge-to-edge. Opposite edges match. No perspective, cast shadows, strong highlights, vignette, border, text, logos, game symbols or objects. 1024x1024 or higher.",
+    "author": "Hyprune contributors",
+    "license": "CC-BY-4.0",
+    "provenance": "Original built-in imagegen generation for Lumen Reach, 2026-10-07",
+    "masterSHA256": "1467d387d6ee5d5f3d1b5edacb92274e1f79a5d8f9f6b308e4bf1a456fae06b6"
+  },
+  {
+    "name": "grating",
+    "prompt": "Create ONE original photorealistic square seamless material albedo texture tile for Lumen Reach: dark perforated steel grating with regular rectangular holes and a diagonal ochre and graphite hazard stripe band along lower quarter, flat opaque albedo. Flat orthographic overhead, uniform diffuse lighting. Fill all pixels edge-to-edge. Opposite edges match. No perspective, cast shadows, strong highlights, vignette, border, text, logos, game symbols or objects. 1024x1024 or higher.",
+    "author": "Hyprune contributors",
+    "license": "CC-BY-4.0",
+    "provenance": "Original built-in imagegen generation for Lumen Reach, 2026-10-07",
+    "masterSHA256": "de8950f390a72d90bc5bd3bbe45e00a12c96ec16494bce613df75c03eacc78ab"
+  },
+  {
+    "name": "snow",
+    "prompt": "Create ONE original photorealistic square seamless material albedo texture tile for Lumen Reach: fresh softly packed blue white snow, tiny ice crystals and wind blown micro ridges, restrained low contrast. Flat orthographic overhead, uniform diffuse lighting. Fill all pixels edge-to-edge. Opposite edges match. No perspective, cast shadows, strong highlights, vignette, border, text, logos, game symbols or objects. 1024x1024 or higher.",
+    "author": "Hyprune contributors",
+    "license": "CC-BY-4.0",
+    "provenance": "Original built-in imagegen generation for Lumen Reach, 2026-10-07",
+    "masterSHA256": "1fad28ebafcbdc6c8cc5a21833568087f6ace73c4de5384161bde089751ffa05"
+  },
+  {
+    "name": "vista",
+    "prompt": "Create an original ultra-wide 3:1 landscape matte painting to use as an opaque mountain vista in a 3D world named Lumen Reach. NO foreground structures, people, signage, text, logos, triangles, diamonds or game references. A vast alpine watershed in warm clear morning sunlight: layered granite mountains with snow-capped peaks, deep forest slopes and red autumn foliage, immense waterfalls descending into misty ravines, ancient pale concrete aqueducts crossing the valley, a distant ORIGINAL slender white city with asymmetrical stepped spires and tiny clustered habitation terraces on a distant ridge. One pale moon high in the powder-blue sky, delicate white cloud wisps. Cinematic photorealistic environmental detail, strong atmospheric depth, subdued natural colors, realistic monumental scale. Horizon around upper third, distant spire cluster at left third, waterfalls in middle, lower edge forest and rocky slopes. Uniform sky at outer edges, mountains occupy most of image. Do not include interface screens or anything from a known fictional franchise.",
+    "author": "Hyprune contributors",
+    "license": "CC-BY-4.0",
+    "masterSHA256": "15c8eb9f730dc94bb07156f597c54e9280265cfedbee1867e9f4a9ab0c5d9333",
+    "provenance": "Original built-in imagegen mountain watershed vista, 2026-10-07"
+  }
+]

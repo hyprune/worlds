@@ -1,0 +1,5 @@
+{"verticalFovDegrees":60,"views":[
+ {"id":"01-sun-court","areaCount":1,"position":[-9,-16,2.0],"target":[5,23,7]},
+ {"id":"01-sun-court-terrace","areaCount":1,"position":[-21,15,5.7],"target":[4,12,8]},
+ {"id":"01-sun-court-tools","areaCount":1,"position":[-12,-11.5,2.1],"target":[-16,0,2.5]}
+]}

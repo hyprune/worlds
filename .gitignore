@@ -5,3 +5,5 @@ __pycache__/
 *.blend1
 
 /switchyard/materials/tiles/
+
+/lumen-reach/materials/tiles/
