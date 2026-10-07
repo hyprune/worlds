@@ -1,0 +1,24 @@
+[
+  {
+    "group": "sun-court",
+    "resolution": 4096,
+    "peakLinear": 51.30026626586914,
+    "intensity": 51.4,
+    "seconds": 14.89,
+    "samples": 64,
+    "marginPixels": 8,
+    "islandSeparationPixels": 8,
+    "supportedMipLevels": 2
+  },
+  {
+    "group": "array-hall",
+    "resolution": 3072,
+    "peakLinear": 33.650909423828125,
+    "intensity": 33.7,
+    "seconds": 8.7,
+    "samples": 64,
+    "marginPixels": 8,
+    "islandSeparationPixels": 8,
+    "supportedMipLevels": 2
+  }
+]

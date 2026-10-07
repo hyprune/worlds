@@ -111,16 +111,16 @@ def point(name,pos,previous=None,width=3):
 
 def up(v):return [round(float(v[0]),5),round(float(v[2]),5),round(float(-v[1]),5)]
 def quat(q):
- # Convert author Z-up quaternion to glTF Y-up by conjugation.
+ # Convert the authored local screen axes into glTF world coordinates.
  c=Matrix.Rotation(-math.pi/2,4,'X').to_quaternion();r=c@q;return [r.x,r.y,r.z,r.w]
 
 def owner():return NAMES[AREA],f'{AREA+1:02d}'
 def anchor_id(kind):
  area,slot=owner();key=(area,kind);COUNT[key]=COUNT.get(key,0)+1;return f'{area}-slot-{slot}-{kind}-{COUNT[key]:02d}'
 
-def screen(kind,pos,size,role='tool',tilt=0,style='instrument'):
+def screen(kind,pos,size,role='tool',tilt=0,style='instrument',yaw=0):
  # Screen local X is horizontal, Y is height, Z points into clear floor (-Y).
- ident=anchor_id(kind);w,h=size;q=Matrix.Rotation(math.pi/2-tilt,4,'X').to_quaternion();r=q.to_matrix();center=Vector(pos)
+ ident=anchor_id(kind);w,h=size;q=(Matrix.Rotation(yaw,4,'Z')@Matrix.Rotation(math.pi/2-tilt,4,'X')).to_quaternion();r=q.to_matrix();center=Vector(pos)
  def panel(name,local,size,mat,group=None):
   o=box(name,center+r@Vector(local),size,mat,.025,group=group);o.rotation_mode='QUATERNION';o.rotation_quaternion=q;return o
  panel(ident+' casing',(0,0,-.13),(w+.42,h+.42,.26),'metal')
@@ -271,6 +271,77 @@ def court():
  point('globe-road',(1,-2,0),'court-junction');point('globe-approach',(-6,-2,0),'globe-road');point('globe-ramp',(-6,0,0),'globe-approach');point('globe-terrace',(-6,6,1.2),'globe-ramp');point('globe-platform',(-6,7,1.2),'globe-terrace')
  point('lookout-south',(-8,-14.5,0),'arrival');point('lookout-west',(-21.5,-14.5,0),'lookout-south');point('lookout-base',(-21.5,-10,0),'lookout-west');point('lookout',(-21.5,6,4),'lookout-base');point('cascade-turn',(-21.5,14,4),'lookout');point('cascade-bridge',(-31,14,4),'cascade-turn');point('roof-lower',(-21.5,24,4),'lookout');point('roof-switchback',(-21.5,40,8),'roof-lower');point('roof-turn',(-16.5,42,8),'roof-switchback');point('roof-return',(-16.5,40,8),'roof-turn');point('roof-upper',(-16.5,24,12),'roof-return');point('roof-start-west',(-16.5,20,12),'roof-upper');point('roof-start',(-12.5,20,12),'roof-start-west');point('roof-final',(-12.5,36,16),'roof-start');point('roof-bridge',(-9,36,16),'roof-final');point('rooftop',(-9,24,16),'roof-bridge')
  VIEWS.extend([{'id':'01-sun-court','position':[-13,-13,1.9],'target':[4,23,7]},{'id':'01-sun-court-terrace','position':[-21,15,5.7],'target':[4,12,8]}])
+
+
+def hall():
+ set_area(1,(-13,27,32,62,-.4,23),(8,34,0),(3,12,34,40,.15,4.8))
+ slab('Atrium stone floor',-6,24,32,60,0)
+ slab('Service threshold',24,30,48,56,0,'metal')
+ # Tall ribs and a heavy roof ring frame a generous, daylight-filled volume.
+ for x in [-6,24]:
+  for y in [33,44,58]:
+   box('Atrium column',(x,y,10.5),(1.0,1.15,21),'concrete',.04,solid=True)
+   box('Column inset',(x+( .56 if x<0 else -.56),y,8),(.06,.4,15),'metal')
+   box('Column light',(x+( .60 if x<0 else -.60),y-.24,8),(.055,.10,14),'amber')
+ for y in [32,60]:box('Roof transverse beam',(9,y,21),(31,1.1,1.2),'concrete',solid=True)
+ for x in [-6,24]:box('Roof edge beam',(x,46,21),(1.1,28,1.2),'concrete',solid=True)
+ for x in [-4,4,12,20]:box('Skylight mullion',(x,46,21.35),(.18,28,.18),'metal')
+ torus('Atrium suspended light ring',(8,46,19.8),8.5,.065,'amber')
+ for x in [-3,19]:rod('Light ring hanger',(x,46,20),(x,46,21.4),.025)
+ # Opaque window panes only at the small upper skylight. The rear is an open vista.
+ for x in [-.0,8,16]:box('Skylight pane',(x,46,21.50),(7.7,27,.08),'glass')
+ for x in [-6,24]:
+  spans=[(42,56)] if x<0 else [(32,48),(56,60)]
+  for ya,yb in spans:box('Service wall',(x,(ya+yb)/2,9.5),(.5,yb-ya,19),'concrete',solid=True)
+ # Balcony portal remains open at both ground and first floor.
+ box('West portal sill',(-6,58,1.3),(.4,4,2.6),'concrete',solid=True)
+ box('West portal crown',(-6,58,13),(.4,4,12),'concrete',solid=True)
+ for x in [-6,-2,2,6,10,14,18,22,24]:rod('Panorama mullion',(x,60,0),(x,60,20.6),.06)
+ box('Panorama parapet',(9,60,.5),(30,.35,1),'concrete',solid=True)
+ # The main wall hangs above the travel floor, rather than turning the hall into a corridor.
+ screen('hanging-wall',(8,48,10),(18,8),'mounted-workspace',style='workspace')
+ for x in [-.5,16.5]:rod('Workspace suspension',(x,48.3,14.5),(x,48.3,20.8),.09)
+ label('02 ARRAY HALL',(8,47.67,15.2),.42)
+ sigil((-3,43.65,11),1.4)
+ for x in [-1,18]:
+  cyl('Lectern base',(x,40,.14),.55,.28,'metal')
+  box('Lectern stem',(x,40,.62),(.32,.36,1.2),'metal',solid=True)
+  screen('lectern',(x,39.85,1.95),(1.8,1.1),tilt=.38)
+ screen('banner',(-3,38,6.6),(1.55,4.2),style='banner')
+ screen('banner',(21,44,6.6),(1.55,4.2),style='banner')
+ for x in [-2,8,18]:
+  box('Rear operator bench',(x,52.8,1),(3.8,1.1,.18),'wood',solid=True)
+  for dx in [-1.5,1.5]:box('Rear bench leg',(x+dx,52.8,.5),(.12,.8,1),'metal',solid=True)
+  screen('operator-desk',(x,53,1.95),(2.55,1.4),tilt=.20,yaw=math.pi)
+ # Rack bays are recessed behind the piers, with amber local task pools.
+ for x in [-5.45,23.45]:
+  for y in [44,47,57]:
+   box('Archive rack',(x,y,2.5),(.5,1.7,5),'metal',solid=True)
+   for z in [.7,1.4,2.1,2.8,3.5,4.2]:
+    box('Rack cooling slot',(x+( .28 if x<0 else -.28),y,z),(.03,1.5,.13),'black')
+    box('Rack status strip',(x+( .30 if x<0 else -.30),y-.55,z+.18),(.03,.22,.055),'cyan')
+ for x in [-4,22]:
+  for ya,yb in [(33,46),(49,59)]:box('Floor guide strip',(x,(ya+yb)/2,.025),(.10,yb-ya,.035),'amber',0)
+ for x in [-3,19]:crate((x,59,0))
+ # A proper exterior stair/ramp annex leads into the overlooking balconies.
+ slab('Hall ramp annex',-13,-6,32,60,0,'concrete')
+ ramp('Hall balcony ascent',-12,-9,40,56,0,4,20)
+ slab('Hall balcony landing',-13,-2,56,60,4,'concrete')
+ slab('Hall first balcony',-6,-2,48,60,4,'concrete')
+ ramp('Hall upper ascent',-5,-2,56,40,4,8,20)
+ slab('Hall upper balcony',-6,-2,32,40,8,'concrete')
+ # Upper landing stops at the ramp crest; no slab crosses its rising clearance.
+ rail((-2,32,8),(-2,39,8));rail((-2,57,4),(-2,60,4))
+ for y in [32.5,58]:box('Hall balcony support',(-11,y,1.8),(.8,.8,3.6),'concrete',solid=True)
+ P.area('Hall warm skylight',(4,42,19),(8,46,0),13000,(1,.63,.26),12)
+ P.area('Hall warm window',(12,59,14),(8,45,3),8500,(1,.76,.43),9)
+ for x in [-4,22]:P.area('Hall service pool',(x,45,8),(x,45,0),650,(1,.40,.13),3)
+ label('RIME VAULT',(23.7,49,4),.24)
+ point('hall-arrival',(8,33,0),'hall-entry');point('hall-center',(8,46,0),'hall-arrival');point('hall-exit',(20,50,0),'hall-center');point('service-entry',(27,52,0),'hall-exit')
+ point('hall-annex-entry',(-10.5,36,0),'hall-arrival');point('hall-ramp-base',(-10.5,40,0),'hall-annex-entry');point('hall-balcony',(-10.5,56,4),'hall-ramp-base');point('hall-balcony-turn',(-10.5,59.2,4),'hall-balcony');point('hall-upper-door',(-3.5,59.2,4),'hall-balcony-turn');point('hall-upper-base',(-3.5,56,4),'hall-upper-door');point('hall-upper',(-3.5,40,8),'hall-upper-base')
+ for off in [-.5,.5]:
+  pts=[(8+off,32,.015),(8+off,46,.015),(20+off,50,.015),(27+off,52,.015)]
+  for a,b in zip(pts,pts[1:]):rod('Hall inset route rail',a,b,.022,'metal')
 
 
 def vista():

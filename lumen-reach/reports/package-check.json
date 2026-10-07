@@ -1,18 +1,24 @@
 {
   "status": "PASS",
-  "packageBytes": 45812242,
-  "decodedTextureBytes": 160692928,
-  "conservativeGpuBytes": 282835924,
-  "mippedTextureViewsBytes": 271924204,
-  "expandedGeometryBytes": 10911720,
-  "colorTextureViews": 10,
-  "textureObjects": 23,
-  "textureProvenanceEntries": 23,
-  "visualTriangles": 90931,
-  "anchors": 6,
-  "collisionNodes": 143,
-  "lightmapBindings": 14,
+  "packageBytes": 55445700,
+  "decodedTextureBytes": 223869632,
+  "conservativeGpuBytes": 392626708,
+  "mippedTextureViewsBytes": 378878908,
+  "expandedGeometryBytes": 13747800,
+  "colorTextureViews": 14,
+  "textureObjects": 30,
+  "textureProvenanceEntries": 30,
+  "visualTriangles": 114565,
+  "anchors": 14,
+  "collisionNodes": 228,
+  "lightmapBindings": 24,
   "UV1": [
+    {
+      "node": "Visual-array-hall",
+      "triangles": 23618,
+      "uv1Area": 0.15077,
+      "overlapSamples": 0
+    },
     {
       "node": "Visual-sun-court",
       "triangles": 75760,
@@ -21,7 +27,7 @@
     },
     {
       "node": "Visual-vista",
-      "triangles": 15171,
+      "triangles": 15187,
       "uv1Area": 0.0,
       "overlapSamples": 0
     }

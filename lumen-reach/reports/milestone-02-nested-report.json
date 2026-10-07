@@ -1,0 +1,153 @@
+{
+  "coreCommit": "b861c3f58dfd1a0b97121abf100a257a39c718da",
+  "pluginSHA256": "2f02117b2d3bb65cc81bb0063a432de9a4a5e80f5663089de30646c8cb139883",
+  "load": {
+    "revision": 3
+  },
+  "camera": {
+    "active": true,
+    "captures": [],
+    "error": "",
+    "frames": 122,
+    "grabbed": "",
+    "pitch": 0.0,
+    "position": [
+      -8.0,
+      1.7000000476837158,
+      12.0
+    ],
+    "pressedButtons": 0,
+    "yaw": -0.0
+  },
+  "manifestSHA256": "9e5b2a88fbc41d99b6a4ce466f5ac2e20f183262cd4c1b38c99768096e180934",
+  "sceneSHA256": "5e487971f25c41743913334893f91e7cca4463eac86b1d8864208144adc56829",
+  "walk": {
+    "before": [
+      -8.0,
+      1.7000000476837158,
+      12.0
+    ],
+    "after": [
+      -8.0,
+      1.7000000476837158,
+      10.250083923339844
+    ]
+  },
+  "views": [
+    {
+      "id": "01-sun-court",
+      "pose": {
+        "orientation": [
+          0.059117864817380905,
+          -0.17116305232048035,
+          0.010289458557963371,
+          0.9834136366844177
+        ],
+        "position": [
+          -9.0,
+          2.0,
+          16.0
+        ]
+      },
+      "verticalFovDegrees": 60,
+      "path": "/home/rick/workspace/hyprune/worlds/artifacts/lumen-reach/engine-01-sun-court.png"
+    },
+    {
+      "id": "01-sun-court-terrace",
+      "pose": {
+        "orientation": [
+          0.030215978622436523,
+          -0.7472701072692871,
+          0.034058671444654465,
+          0.6629588007926941
+        ],
+        "position": [
+          -21.0,
+          5.699999809265137,
+          -15.0
+        ]
+      },
+      "verticalFovDegrees": 60,
+      "path": "/home/rick/workspace/hyprune/worlds/artifacts/lumen-reach/engine-01-sun-court-terrace.png"
+    },
+    {
+      "id": "01-sun-court-tools",
+      "pose": {
+        "orientation": [
+          0.016189953312277794,
+          0.1665656566619873,
+          -0.0027352748438715935,
+          0.9858936667442322
+        ],
+        "position": [
+          -12.0,
+          2.0999999046325684,
+          11.5
+        ]
+      },
+      "verticalFovDegrees": 60,
+      "path": "/home/rick/workspace/hyprune/worlds/artifacts/lumen-reach/engine-01-sun-court-tools.png"
+    },
+    {
+      "id": "02-array-hall",
+      "pose": {
+        "orientation": [
+          0.20474699139595032,
+          0.0,
+          -0.0,
+          0.978814959526062
+        ],
+        "position": [
+          8.0,
+          2.0,
+          -33.0
+        ]
+      },
+      "verticalFovDegrees": 60,
+      "path": "/home/rick/workspace/hyprune/worlds/artifacts/lumen-reach/engine-02-array-hall.png"
+    },
+    {
+      "id": "02-array-hall-balcony",
+      "pose": {
+        "orientation": [
+          -0.09023118019104004,
+          -0.3735569417476654,
+          -0.03653879091143608,
+          0.9224849343299866
+        ],
+        "position": [
+          -3.5,
+          9.699999809265137,
+          -38.0
+        ]
+      },
+      "verticalFovDegrees": 60,
+      "path": "/home/rick/workspace/hyprune/worlds/artifacts/lumen-reach/engine-02-array-hall-balcony.png"
+    },
+    {
+      "id": "02-array-hall-tools",
+      "pose": {
+        "orientation": [
+          0.0022548662964254618,
+          0.9238634705543518,
+          -0.005443728994578123,
+          0.38267678022384644
+        ],
+        "position": [
+          14.0,
+          2.0999999046325684,
+          -58.0
+        ]
+      },
+      "verticalFovDegrees": 60,
+      "path": "/home/rick/workspace/hyprune/worlds/artifacts/lumen-reach/engine-02-array-hall-tools.png"
+    }
+  ],
+  "status": "PASS",
+  "checks": [
+    "package load",
+    "real spawn walking",
+    "matching 60 degree views",
+    "clean nested exit"
+  ]
+}

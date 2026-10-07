@@ -1,6 +1,6 @@
 {
   "status": "PASS",
-  "visibleTriangles": 90931,
+  "visibleTriangles": 114565,
   "checks": [
     {
       "anchorId": "sun-court-slot-01-facade-wall-01",
@@ -147,6 +147,198 @@
       "hits": 0
     },
     {
+      "anchorId": "array-hall-slot-02-hanging-wall-01",
+      "windowSize": [
+        1.6,
+        0.9
+      ],
+      "sweepMeters": [
+        0.1,
+        16
+      ],
+      "hits": 0
+    },
+    {
+      "anchorId": "array-hall-slot-02-hanging-wall-01",
+      "windowSize": [
+        3.2,
+        1.8
+      ],
+      "sweepMeters": [
+        0.1,
+        16
+      ],
+      "hits": 0
+    },
+    {
+      "anchorId": "array-hall-slot-02-lectern-01",
+      "windowSize": [
+        1.6,
+        0.9
+      ],
+      "sweepMeters": [
+        0.1,
+        4
+      ],
+      "hits": 0
+    },
+    {
+      "anchorId": "array-hall-slot-02-lectern-01",
+      "windowSize": [
+        3.2,
+        1.8
+      ],
+      "sweepMeters": [
+        0.1,
+        4
+      ],
+      "hits": 0
+    },
+    {
+      "anchorId": "array-hall-slot-02-lectern-02",
+      "windowSize": [
+        1.6,
+        0.9
+      ],
+      "sweepMeters": [
+        0.1,
+        4
+      ],
+      "hits": 0
+    },
+    {
+      "anchorId": "array-hall-slot-02-lectern-02",
+      "windowSize": [
+        3.2,
+        1.8
+      ],
+      "sweepMeters": [
+        0.1,
+        4
+      ],
+      "hits": 0
+    },
+    {
+      "anchorId": "array-hall-slot-02-banner-01",
+      "windowSize": [
+        1.6,
+        0.9
+      ],
+      "sweepMeters": [
+        0.1,
+        4
+      ],
+      "hits": 0
+    },
+    {
+      "anchorId": "array-hall-slot-02-banner-01",
+      "windowSize": [
+        3.2,
+        1.8
+      ],
+      "sweepMeters": [
+        0.1,
+        4
+      ],
+      "hits": 0
+    },
+    {
+      "anchorId": "array-hall-slot-02-banner-02",
+      "windowSize": [
+        1.6,
+        0.9
+      ],
+      "sweepMeters": [
+        0.1,
+        4
+      ],
+      "hits": 0
+    },
+    {
+      "anchorId": "array-hall-slot-02-banner-02",
+      "windowSize": [
+        3.2,
+        1.8
+      ],
+      "sweepMeters": [
+        0.1,
+        4
+      ],
+      "hits": 0
+    },
+    {
+      "anchorId": "array-hall-slot-02-operator-desk-01",
+      "windowSize": [
+        1.6,
+        0.9
+      ],
+      "sweepMeters": [
+        0.1,
+        4
+      ],
+      "hits": 0
+    },
+    {
+      "anchorId": "array-hall-slot-02-operator-desk-01",
+      "windowSize": [
+        3.2,
+        1.8
+      ],
+      "sweepMeters": [
+        0.1,
+        4
+      ],
+      "hits": 0
+    },
+    {
+      "anchorId": "array-hall-slot-02-operator-desk-02",
+      "windowSize": [
+        1.6,
+        0.9
+      ],
+      "sweepMeters": [
+        0.1,
+        4
+      ],
+      "hits": 0
+    },
+    {
+      "anchorId": "array-hall-slot-02-operator-desk-02",
+      "windowSize": [
+        3.2,
+        1.8
+      ],
+      "sweepMeters": [
+        0.1,
+        4
+      ],
+      "hits": 0
+    },
+    {
+      "anchorId": "array-hall-slot-02-operator-desk-03",
+      "windowSize": [
+        1.6,
+        0.9
+      ],
+      "sweepMeters": [
+        0.1,
+        4
+      ],
+      "hits": 0
+    },
+    {
+      "anchorId": "array-hall-slot-02-operator-desk-03",
+      "windowSize": [
+        3.2,
+        1.8
+      ],
+      "sweepMeters": [
+        0.1,
+        4
+      ],
+      "hits": 0
+    },
+    {
       "zoneId": "sun-court-open-work",
       "windowSize": [
         1.6,
@@ -160,6 +352,30 @@
     },
     {
       "zoneId": "sun-court-open-work",
+      "windowSize": [
+        3.2,
+        1.8
+      ],
+      "continuousSweeps": 30,
+      "yawDegrees": [
+        0,
+        90
+      ]
+    },
+    {
+      "zoneId": "array-hall-open-work",
+      "windowSize": [
+        1.6,
+        0.9
+      ],
+      "continuousSweeps": 30,
+      "yawDegrees": [
+        0,
+        90
+      ]
+    },
+    {
+      "zoneId": "array-hall-open-work",
       "windowSize": [
         3.2,
         1.8

@@ -1,5 +1,89 @@
-{"verticalFovDegrees":60,"views":[
- {"id":"01-sun-court","areaCount":1,"position":[-9,-16,2.0],"target":[5,23,7]},
- {"id":"01-sun-court-terrace","areaCount":1,"position":[-21,15,5.7],"target":[4,12,8]},
- {"id":"01-sun-court-tools","areaCount":1,"position":[-12,-11.5,2.1],"target":[-16,0,2.5]}
-]}
+{
+  "verticalFovDegrees": 60,
+  "views": [
+    {
+      "id": "01-sun-court",
+      "areaCount": 1,
+      "position": [
+        -9,
+        -16,
+        2.0
+      ],
+      "target": [
+        5,
+        23,
+        7
+      ]
+    },
+    {
+      "id": "01-sun-court-terrace",
+      "areaCount": 1,
+      "position": [
+        -21,
+        15,
+        5.7
+      ],
+      "target": [
+        4,
+        12,
+        8
+      ]
+    },
+    {
+      "id": "01-sun-court-tools",
+      "areaCount": 1,
+      "position": [
+        -12,
+        -11.5,
+        2.1
+      ],
+      "target": [
+        -16,
+        0,
+        2.5
+      ]
+    },
+    {
+      "id": "02-array-hall",
+      "areaCount": 2,
+      "position": [
+        8,
+        33,
+        2.0
+      ],
+      "target": [
+        8,
+        49,
+        9
+      ]
+    },
+    {
+      "id": "02-array-hall-balcony",
+      "areaCount": 2,
+      "position": [
+        -3.5,
+        38,
+        9.7
+      ],
+      "target": [
+        12,
+        54,
+        5.3
+      ]
+    },
+    {
+      "id": "02-array-hall-tools",
+      "areaCount": 2,
+      "position": [
+        14,
+        58,
+        2.1
+      ],
+      "target": [
+        8,
+        52,
+        2.2
+      ]
+    }
+  ]
+}

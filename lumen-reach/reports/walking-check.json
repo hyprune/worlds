@@ -1,6 +1,6 @@
 {
   "status": "PASS",
-  "connectedNodes": 25,
+  "connectedNodes": 36,
   "edges": [
     {
       "edge": [
@@ -217,6 +217,105 @@
       "meters": 12.0,
       "slope": 0.0,
       "samples": 48
+    },
+    {
+      "edge": [
+        "hall-entry",
+        "hall-arrival"
+      ],
+      "meters": 8.0,
+      "slope": 0.0,
+      "samples": 32
+    },
+    {
+      "edge": [
+        "hall-arrival",
+        "hall-center"
+      ],
+      "meters": 13.0,
+      "slope": 0.0,
+      "samples": 52
+    },
+    {
+      "edge": [
+        "hall-center",
+        "hall-exit"
+      ],
+      "meters": 12.649110640673518,
+      "slope": 0.0,
+      "samples": 51
+    },
+    {
+      "edge": [
+        "hall-exit",
+        "service-entry"
+      ],
+      "meters": 7.280109889280518,
+      "slope": 0.0,
+      "samples": 30
+    },
+    {
+      "edge": [
+        "hall-arrival",
+        "hall-annex-entry"
+      ],
+      "meters": 18.741664813991314,
+      "slope": 0.0,
+      "samples": 75
+    },
+    {
+      "edge": [
+        "hall-annex-entry",
+        "hall-ramp-base"
+      ],
+      "meters": 4.0,
+      "slope": 0.0,
+      "samples": 16
+    },
+    {
+      "edge": [
+        "hall-ramp-base",
+        "hall-balcony"
+      ],
+      "meters": 16.492422502470642,
+      "slope": 0.25,
+      "samples": 66
+    },
+    {
+      "edge": [
+        "hall-balcony",
+        "hall-balcony-turn"
+      ],
+      "meters": 3.200000000000003,
+      "slope": 0.0,
+      "samples": 13
+    },
+    {
+      "edge": [
+        "hall-balcony-turn",
+        "hall-upper-door"
+      ],
+      "meters": 7.0,
+      "slope": 0.0,
+      "samples": 28
+    },
+    {
+      "edge": [
+        "hall-upper-door",
+        "hall-upper-base"
+      ],
+      "meters": 3.200000000000003,
+      "slope": 0.0,
+      "samples": 13
+    },
+    {
+      "edge": [
+        "hall-upper-base",
+        "hall-upper"
+      ],
+      "meters": 16.492422502470642,
+      "slope": 0.25,
+      "samples": 66
     }
   ],
   "failures": [],
