@@ -16,46 +16,9 @@ OUT=ROOT/'dist/com.hyprune.switchyard'; ART=ROOT/'artifacts/switchyard'
 SPEC=json.loads((Path(__file__).parent/'world.spec.json').read_text())
 COLORS={'cyan':(.08,.58,.61),'amber':(.88,.53,.17),'coral':(.73,.25,.17)}
 GROUPS={}; BLOCKS=[]; COLL=[]; MATS={}; LIGHTMAPS={}
-# A small original pixel alphabet, authored here as geometry, not a font file.
-GLYPHS={
-'A':['01110','10001','10001','11111','10001','10001','10001'],
-'B':['11110','10001','10001','11110','10001','10001','11110'],
-'C':['01111','10000','10000','10000','10000','10000','01111'],
-'D':['11110','10001','10001','10001','10001','10001','11110'],
-'E':['11111','10000','10000','11110','10000','10000','11111'],
-'F':['11111','10000','10000','11110','10000','10000','10000'],
-'G':['01111','10000','10000','10111','10001','10001','01111'],
-'H':['10001','10001','10001','11111','10001','10001','10001'],
-'I':['11111','00100','00100','00100','00100','00100','11111'],
-'J':['00111','00010','00010','00010','10010','10010','01100'],
-'K':['10001','10010','10100','11000','10100','10010','10001'],
-'L':['10000','10000','10000','10000','10000','10000','11111'],
-'M':['10001','11011','10101','10101','10001','10001','10001'],
-'N':['10001','11001','10101','10011','10001','10001','10001'],
-'O':['01110','10001','10001','10001','10001','10001','01110'],
-'P':['11110','10001','10001','11110','10000','10000','10000'],
-'Q':['01110','10001','10001','10001','10101','10010','01101'],
-'R':['11110','10001','10001','11110','10100','10010','10001'],
-'S':['01111','10000','10000','01110','00001','00001','11110'],
-'T':['11111','00100','00100','00100','00100','00100','00100'],
-'U':['10001','10001','10001','10001','10001','10001','01110'],
-'V':['10001','10001','10001','10001','10001','01010','00100'],
-'W':['10001','10001','10001','10101','10101','10101','01010'],
-'X':['10001','10001','01010','00100','01010','10001','10001'],
-'Y':['10001','10001','01010','00100','00100','00100','00100'],
-'Z':['11111','00001','00010','00100','01000','10000','11111'],
-'0':['01110','10001','10011','10101','11001','10001','01110'],
-'1':['00100','01100','00100','00100','00100','00100','01110'],
-'2':['01110','10001','00001','00010','00100','01000','11111'],
-'3':['11110','00001','00001','01110','00001','00001','11110'],
-'4':['00010','00110','01010','10010','11111','00010','00010'],
-'5':['11111','10000','10000','11110','00001','00001','11110'],
-'6':['01110','10000','10000','11110','10001','10001','01110'],
-'7':['11111','00001','00010','00100','01000','01000','01000'],
-'8':['01110','10001','10001','01110','10001','10001','01110'],
-'9':['01110','10001','10001','01111','00001','00001','01110'],
-'-':['00000','00000','00000','11111','00000','00000','00000'],
-'/':['00001','00001','00010','00100','01000','10000','10000']}
+sys.path.insert(0,str(Path(__file__).parent))
+from lettering import GLYPHS
+SIGNAGE=set()
 
 def log(s): print('SWITCHYARD | '+s,flush=True)
 def select(obs):
@@ -85,13 +48,33 @@ def material(name,color,noise=.006,metal=0,emit=0,rough=.65,alpha=1):
   im=bpy.data.images.load(str(path),check_existing=True)
  elif name=='trim':im=bpy.data.images.load(str(Path(__file__).parent/'materials/tiles/transit-trim-albedo.png'),check_existing=True)
  else:im=texture('albedo-'+name,color,noise)
- n=tree.nodes.new('ShaderNodeTexImage');n.image=im;tree.links.new(uv.outputs['UV'],n.inputs['Vector']);tree.links.new(n.outputs['Color'],p.inputs['Base Color'])
+ n=tree.nodes.new('ShaderNodeTexImage');n.image=im;
+ if name=='sky':n.extension='EXTEND'
+ tree.links.new(uv.outputs['UV'],n.inputs['Vector']);tree.links.new(n.outputs['Color'],p.inputs['Base Color'])
  if asset:
-  norm=tree.nodes.new('ShaderNodeTexImage');norm.image=bpy.data.images.load(str(Path(__file__).parent/'materials/tiles'/f'{asset}-normal.png'),check_existing=True);norm.image.colorspace_settings.name='Non-Color';tree.links.new(uv.outputs['UV'],norm.inputs['Vector']);nm=tree.nodes.new('ShaderNodeNormalMap');nm.inputs['Strength'].default_value=.40;tree.links.new(norm.outputs['Color'],nm.inputs['Color']);tree.links.new(nm.outputs['Normal'],p.inputs['Normal'])
+  norm=tree.nodes.new('ShaderNodeTexImage');norm.image=bpy.data.images.load(str(Path(__file__).parent/'materials/tiles'/f'{asset}-normal.png'),check_existing=True);norm.image.colorspace_settings.name='Non-Color';tree.links.new(uv.outputs['UV'],norm.inputs['Vector']);nm=tree.nodes.new('ShaderNodeNormalMap');nm.inputs['Strength'].default_value=.22 if name=='cloth' else .32 if name=='metal' else .40;tree.links.new(norm.outputs['Color'],nm.inputs['Color']);tree.links.new(nm.outputs['Normal'],p.inputs['Normal'])
   orm=tree.nodes.new('ShaderNodeTexImage');orm.image=bpy.data.images.load(str(Path(__file__).parent/'materials/tiles'/f'{asset}-orm.png'),check_existing=True);orm.image.colorspace_settings.name='Non-Color';tree.links.new(uv.outputs['UV'],orm.inputs['Vector']);sep=tree.nodes.new('ShaderNodeSeparateColor');sep.mode='RGB';tree.links.new(orm.outputs['Color'],sep.inputs['Color']);tree.links.new(sep.outputs['Green'],p.inputs['Roughness']);tree.links.new(sep.outputs['Blue'],p.inputs['Metallic'])
  if name=='panel':p.inputs['Base Color'].default_value=(.005,.012,.017,1);tree.links.remove(p.inputs['Base Color'].links[0])
  if emit:p.inputs['Emission Color'].default_value=(*color,1);p.inputs['Emission Strength'].default_value=emit
- if name=='diffuser':tree.links.new(n.outputs['Color'],p.inputs['Emission Color']);p.inputs['Emission Strength'].default_value=1.5
+ if name=='diffuser':tree.links.new(n.outputs['Color'],p.inputs['Emission Color']);p.inputs['Emission Strength'].default_value=1
+ # Low-energy view-independent sheen is an explicit emissive fallback,
+ # not a reflection painted into the base-color material or irradiance map.
+ if name in {'panel','trim'}:
+  nsize=256;yy,xx=np.mgrid[:nsize,:nsize];u=(xx+.5)/nsize;v=(yy+.5)/nsize
+  if name=='panel':
+   weight=.008+.065*np.exp(-((u+.55*v-.47)/.28)**2)+.016*np.exp(-((u-.92)/.065)**2)
+   rgb=weight[:,:,None]*np.array([.24,.49,.58])[None,None,:]
+  else:
+   weight=.12*np.exp(-((v-.8125)/.018)**2)*(.74+.26*np.cos(u*math.tau))
+   rgb=weight[:,:,None]*np.array([1,.58,.23])[None,None,:]
+  pixels=np.ones((nsize,nsize,4),np.float32);pixels[:,:,:3]=rgb
+  filename=name+'-sheen';save_srgb(filename,pixels)
+  glow=tree.nodes.new('ShaderNodeTexImage');glow.image=bpy.data.images.load(str(OUT/'textures'/(filename+'.png')),check_existing=True)
+  if name=='panel':
+   glow.extension='EXTEND';mapping=tree.nodes.new('ShaderNodeMapping');mapping.inputs['Location'].default_value=(.5,.5,0);mapping.inputs['Scale'].default_value=(1/4.2,1/2.36,1)
+   tree.links.new(uv.outputs['UV'],mapping.inputs['Vector']);tree.links.new(mapping.outputs['Vector'],glow.inputs['Vector'])
+  else:tree.links.new(uv.outputs['UV'],glow.inputs['Vector'])
+  tree.links.new(glow.outputs['Color'],p.inputs['Emission Color']);p.inputs['Emission Strength'].default_value=1
  if alpha<1:
   p.inputs['Alpha'].default_value=alpha
   if hasattr(m,'surface_render_method'):m.surface_render_method='DITHERED'
@@ -130,6 +113,7 @@ def cylinder(name,pos,r,depth,mat='metal',group='hall',vertices=32,collision=Fal
  return add(bpy.context.object,name,mat,group,collision)
 
 def text(word,pos,height,mat='letter',group='hall'):
+ SIGNAGE.add(word)
  pitch=height/7; width=(len(word)*6-1)*pitch;verts=[];faces=[]
  # Original geometric lettering, assembled in one mesh without a font asset.
  for j,char in enumerate(word):
@@ -163,20 +147,24 @@ def scene():
  if OUT.exists():shutil.rmtree(OUT)
  OUT.mkdir(parents=True,exist_ok=True);(OUT/'textures').mkdir(exist_ok=True);ART.mkdir(parents=True,exist_ok=True)
  for name,color,rough,metal in [('stone',(.40,.37,.30),.82,0),('ivory',(.65,.58,.41),.7,0),('metal',(.025,.048,.062),.48,.45),('panel',(.004,.010,.016),.25,0),('wood',(.24,.11,.044),.48,0),('rubber',(.028,.033,.036),.91,0),('brass',(.42,.25,.08),.29,.78),('trim',(.42,.25,.08),.29,.78),('cloth',(.15,.23,.13),.9,0),('glass',(.1,.22,.27),.2,0),('leaf',(.07,.21,.11),.62,0),('leaf-dark',(.023,.082,.040),.7,0),('soil',(.022,.014,.009),.95,0),('letter',(.78,.82,.72),.6,0)]:material(name,color,.004,metal,0,rough,.22 if name=='glass' else 1)
- for name,color,strength in [('warm',(1,.49,.13),2.3),('white',(.62,.82,.85),2),('diffuser',(.4,.6,.65),1.5),('city',(.018,.045,.065),.5),('city-near',(.024,.058,.077),.6),('distant',(.066,.105,.125),.7),('city-light',(.70,.36,.10),2),('city-cool',(.08,.44,.56),1.4),('moon',(.73,.76,.58),1),('sky',(.014,.04,.073),1),('haze',(.045,.11,.15),.8)]:material(name,color,0,0,strength,alpha=.055 if name=='haze' else 1)
- for key,color in COLORS.items():material(key,color,.004);material(key+'-glow',color,0,0,3)
+ for name,color,strength in [('warm',(1,.49,.13),1),('white',(.62,.82,.85),1),('diffuser',(.4,.6,.65),1),('city',(.018,.045,.065),.5),('city-near',(.024,.058,.077),.6),('distant',(.066,.105,.125),.7),('city-light',(.70,.36,.10),2),('city-cool',(.08,.44,.56),1.4),('moon',(.73,.76,.58),1),('sky',(.014,.04,.073),1),('haze',(.045,.11,.15),.8)]:material(name,color,0,0,strength,alpha=.055 if name=='haze' else 1)
+ for key,color in COLORS.items():material(key,color,.004);material(key+'-glow',color,0,0,1)
+ # Original opaque skyline colors: atmospheric depth is part of the palette.
+ for name,color in [('sky-near',(.024,.056,.075)),('sky-mid',(.044,.078,.103)),('sky-far',(.062,.103,.131)),('sky-crown',(.062,.097,.117)),('sky-window-near',(.47,.27,.11)),('sky-window-far',(.22,.18,.12)),('sky-cyan',(.055,.36,.43)),('sky-amber',(.55,.30,.075)),('sky-red',(.62,.045,.019))]:
+  UNLIT.add(name);material(name,color,0,0,1)
  # Original blue-hour sky gradient, without an external panorama or HDRI.
  n=1024;y,x=np.mgrid[:n,:n];a=np.ones((n,n,4),np.float32)
  t=(y/n)[:,:,None];a[:,:,:3]=np.array([.070,.13,.16])[None,None,:]*(1-t)+np.array([.008,.022,.047])[None,None,:]*t
  sky=bpy.data.images.new('Sky gradient',width=n,height=n,alpha=False,float_buffer=True);sky.pixels.foreach_set(a.ravel());sky.filepath_raw=str(OUT/'textures/sky-gradient.png');sky.file_format='PNG';sky.save();node=next(n for n in MATS['sky'].node_tree.nodes if n.type=='TEX_IMAGE');node.image=sky
  sys.path.insert(0,str(Path(__file__).parent));from architecture import construct;construct(sys.modules[__name__])
+ (ART/'signage-strings.json').write_text(json.dumps(sorted(SIGNAGE),indent=2)+'\n')
  s=bpy.context.scene;s.unit_settings.system='METRIC';s.unit_settings.scale_length=1;s.render.engine='CYCLES';s.cycles.samples=64;s.cycles.use_denoising=True;s.cycles.max_bounces=6;s.cycles.diffuse_bounces=4
  prefs=bpy.context.preferences.addons['cycles'].preferences;prefs.compute_device_type='OPTIX';prefs.get_devices()
  for d in prefs.devices:d.use=d.type=='OPTIX'
  s.cycles.device='GPU';s.world=bpy.data.worlds.new('Blue-hour atmosphere');s.world.use_nodes=True
  s.world.node_tree.nodes['Background'].inputs[0].default_value=(.065,.13,.22,1);s.world.node_tree.nodes['Background'].inputs[1].default_value=.22
  area('Concourse warm key',(-10,-5,9),(0,2,1),1500,(1,.60,.30),9)
- area('Sculpture light',(1,-.7,5.8),(0,-.7,1),700,(.35,.75,1),3)
+ area('Sculpture light',(-4.4,-.7,5.8),(-4.4,-.7,1),700,(.35,.75,1),3)
  area('Blue city rim',(12,28,16),(0,3,4),3800,(.23,.51,1),14)
  area('Vault warm bounce',(-15,7,12),(0,12,9),1200,(1,.55,.25),9)
  area('Open-sky cool fill',(0,12,22),(0,12,0),2600,(.32,.56,.80),22)
@@ -314,7 +302,7 @@ def export(cols,nav):
    if m.get('name','').startswith(name+'--'):lm.append({'material':mi,'texture':ti,'texCoord':1,'encoding':'srgb','intensity':intensity})
  # Required base contract uses only core glTF PBR. Our metallics are deliberately matte.
  path.write_text(json.dumps(g,indent=2)+'\n')
- manifest={k:SPEC[k] for k in ['id','version','name','description']};manifest.update(formatVersion='0.1',license='CC-BY-4.0',scene='scene.gltf',preview='preview.png',defaultSpawn='arrival',spawns=[{'id':'arrival','pose':{'position':[0,0,10],'rotation':[0,0,0,1]}}],attribution=[{'path':'.','author':'Hyprune contributors','license':'CC-BY-4.0','source':'https://github.com/hyprune/worlds/tree/main/switchyard'}],anchors=[],zones=[{'id':'concourse','name':'Concourse','bounds':{'min':[-20,0,2],'max':[20,9,12]}}],navigation={'kind':'mesh','node':nodes['Navigation'],'agentRadius':.3,'agentHeight':1.8},collision=[{'node':nodes[o.name],'shape':'mesh','layer':'static'} for o in cols],lightmaps=lm,audio=[])
+ manifest={k:SPEC[k] for k in ['id','version','name','description']};manifest.update(formatVersion='0.2',license='CC-BY-4.0',scene='scene.gltf',preview='preview.png',defaultSpawn='arrival',spawns=[{'id':'arrival','pose':{'position':[0,0,10],'rotation':[0,0,0,1]}}],attribution=[{'path':'.','author':'Hyprune contributors','license':'CC-BY-4.0','source':'https://github.com/hyprune/worlds/tree/main/switchyard'}],anchors=[],zones=[{'id':'concourse','name':'Concourse','bounds':{'min':[-20,0,2],'max':[20,9,12]}}],navigation={'kind':'mesh','node':nodes['Navigation'],'agentRadius':.3,'agentHeight':1.8},collision=[{'node':nodes[o.name],'shape':'mesh','layer':'static'} for o in cols],lightmaps=lm,audio=[])
  points=[{'id':'concourse','position':[-4,0,4.5]}];edges=[]
  for i,x in enumerate([-12,0,12]):
   p='junction-'+str(i+1);points.append({'id':p,'position':[x-2.67,0,4.5]});edges.append({'from':'concourse','to':p,'width':2.4})
@@ -334,6 +322,20 @@ def export(cols,nav):
    records.append({'path':rel,'author':asset['author'],'license':asset['license'],'provenance':asset['provenance'],'masterSHA256':asset['masterSHA256'],'recipe':'materials/prepare.py: periodic healing, wrap-safe PBR derivation; original masters and complete prompts in materials/generation.json'})
    manifest['attribution'].append({'path':rel,'author':asset['author'],'license':asset['license'],'source':'https://github.com/hyprune/worlds/tree/main/switchyard/materials'})
  records.append({'path':'textures/transit-trim-albedo.png','author':'Hyprune contributors','license':'CC-BY-4.0','provenance':'Generated for Hyprune, CC-BY-4.0','recipe':'eight bands sliced from the original healed albedo tiles; 8px gutters'})
+ for name in ['panel','trim']:
+  rel='textures/'+name+'-sheen.png'
+  records.append({'path':rel,'author':'Hyprune contributors','license':'CC-BY-4.0','provenance':'Generated for Hyprune, CC-BY-4.0','recipe':'build.py: original low-energy Gaussian emissive sheen; independent of albedo/UV1 irradiance; panel uses standard KHR_texture_transform, trim repeats along its atlas strip'})
+  manifest['attribution'].append({'path':rel,'author':'Hyprune contributors','license':'CC-BY-4.0','source':'https://github.com/hyprune/worlds/tree/main/switchyard/build.py'})
+ # Complete per-image provenance includes numerical palettes, sky and bake atlases.
+ known={r['path'] for r in records}
+ for image in sorted((OUT/'textures').glob('*.png')):
+  rel=image.relative_to(OUT).as_posix()
+  if rel in known:continue
+  recipe='build.py: original fixed-seed numerical palette/grain or gradient'
+  if image.name.startswith('lightmap-'):recipe='Cycles DIFFUSE DIRECT+INDIRECT without COLOR; OIDN RTLightmap; peak-normalized sRGB irradiance on UV1; see bake-report.json'
+  if image.name=='sky-gradient.png':recipe='build.py: original linear blue-hour vertical color gradient on a continuous procedural sky sphere'
+  records.append({'path':rel,'author':'Hyprune contributors','license':'CC-BY-4.0','provenance':'Generated for Hyprune, CC-BY-4.0','recipe':recipe})
+  manifest['attribution'].append({'path':rel,'author':'Hyprune contributors','license':'CC-BY-4.0','source':'https://github.com/hyprune/worlds/tree/main/switchyard/build.py'})
  (OUT/'texture-provenance.json').write_text(json.dumps(records,indent=2)+'\n')
  manifest['extensions']['com.hyprune.switchyard.materials']={'version':'0.1','path':'texture-provenance.json','uv0TexelDensityPxPerMeter':[512,1024]}
  manifest['requiredExtensions']=[];(OUT/'world.json').write_text(json.dumps(manifest,indent=2)+'\n')
@@ -356,13 +358,15 @@ def compositor():
 
 def stills():
  s=bpy.context.scene;s.render.engine='CYCLES';s.cycles.samples=32;compositor()
- shots=[('01-concourse',(0,-10,1.7),(0,14,6.5),22),('02-arrival',(-16,-9,3.0),(0,9,5.0),26),('03-build',(-17,0,2.6),(-10.4,7,2.7),28),('04-route',(-14.67,10,2.2),(-10,24,3.8),26),('05-vault',(28,-21,15),(0,10,6),32)]
- for name,pos,target,lens in shots:
-  camera(pos,target,lens);s.render.filepath=str(ART/(name+'.png'));bpy.ops.render.render(write_still=True)
+ views=json.loads((Path(__file__).parent/'views.json').read_text())
+ lens=36/(2*math.tan(math.radians(views['verticalFovDegrees'])/2)*(1920/1080))
+ for v in views['views']:
+  camera(v['position'],v['target'],lens);s.camera.data.sensor_fit='HORIZONTAL';s.camera.data.sensor_width=36
+  s.render.filepath=str(ART/(v['id']+'.png'));bpy.ops.render.render(write_still=True)
  import shutil;shutil.copy2(ART/'01-concourse.png',OUT/'preview.png')
 
 def film(preview=False):
- s=bpy.context.scene;s.render.engine='CYCLES';s.cycles.samples=24;s.cycles.use_denoising=True;s.render.use_persistent_data=True;s.render.fps=24;gpu();compositor()
+ s=bpy.context.scene;s.render.engine='CYCLES';s.cycles.samples=24;s.cycles.use_denoising=True;s.cycles.denoising_use_gpu=True;s.render.use_persistent_data=True;s.render.fps=24;gpu();compositor()
  frames=ART/'film-frames';stamp=ART/'film-cache.sha256';digest=hashlib.sha256((ART/'switchyard.blend').read_bytes()+Path(__file__).read_bytes()).hexdigest()
  if not stamp.exists() or stamp.read_text().strip()!=digest:
   if frames.exists():shutil.rmtree(frames)
@@ -370,7 +374,7 @@ def film(preview=False):
  frames.mkdir(exist_ok=True)
  # Four deliberately composed nine-second shots: arrival, crafted dock,
  # human-scale walking route, then a high view revealing the complete vault.
- shots=[((0,-10,2.2),(-1.2,-8.6,2.4),(0,12,6),(0,14,6.2),22),((-17,-.5,2.6),(-17,1.5,2.5),(-10.4,7,2.7),(-10.4,7,2.7),28),((-14.67,9,2.2),(-14.67,16,2.2),(-10.7,20.8,3.2),(-10.7,20.8,3.2),26),((17,-8,12),(11,-6,9.5),(0,12,4.5),(0,13,4.5),24)]
+ shots=[((0,-10,2.2),(-1.2,-8.6,2.4),(0,12,6),(0,14,6.2),22),((-17,-.5,2.6),(-17,1.5,2.5),(-10.4,7,2.7),(-10.4,7,2.7),28),((-14.67,9,2.2),(-14.67,16,2.2),(-10.7,20.8,3.2),(-10.7,20.8,3.2),26),((28,-21,15),(24,-18,13),(0,16,10),(0,18,10),17.5)]
  for i in ([0,215,216,431,432,647,648,863] if preview else range(864)):
   if (frames/f'{i:04d}.png').exists():continue
   shot=i//216;t=(i%216)/215;t=t*t*(3-2*t);a,b,c,d,lens=shots[shot]

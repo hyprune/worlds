@@ -1,0 +1,12 @@
+{
+  "verticalFovDegrees": 60,
+  "resolution": [1920, 1080],
+  "coordinateSystem": "Blender Z-up; engine conversion [x,z,-y]",
+  "views": [
+    {"id":"01-concourse","position":[0,-10,1.7],"target":[0,14,6.5]},
+    {"id":"02-arrival","position":[-16,-9,3],"target":[0,9,5]},
+    {"id":"03-build","position":[-17,0,2.6],"target":[-10.4,7,2.7]},
+    {"id":"04-route","position":[-14.67,10,2.2],"target":[-10,24,3.8]},
+    {"id":"05-vault","position":[28,-21,15],"target":[0,10,6]}
+  ]
+}

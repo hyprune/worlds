@@ -130,31 +130,32 @@ def construct(k):
   x=20.7*math.cos(a);z=8.6+11.2*math.sin(a)
   pipe('Longitudinal vault purlin',[(x,-10,z),(x,31,z)],.07,'metal','vault')
   if a in [math.pi*3/12,math.pi*6/12,math.pi*9/12]:pipe('Sky vault cool trace',[(x,-9,z-.10),(x,30,z-.10)],.025,'cyan-glow','vault')
- # Faceted blue glazing only on narrow roof strips: keep the main sky aperture.
- for i in range(12):
-  if i in [4,5,6,7]:continue
-  a,b=math.pi*i/12,math.pi*(i+1)/12
-  x1,z1=20.65*math.cos(a),8.57+11.15*math.sin(a);x2,z2=20.65*math.cos(b),8.57+11.15*math.sin(b)
-  mesh('Tinted clerestory strip',[(x1,-9,z1),(x2,-9,z2),(x2,30,z2),(x1,30,z1)],[(0,1,2,3)],'glass','vault')
+ # Open opaque slats: alpha-free clerestory fallback for the M1 profile.
+ # Narrow gaps preserve the sky aperture in both Cycles and the engine.
+ for side in [-1,1]:
+  for t in [i*.015+.35 for i in range(16)]:
+   a=t if side>0 else math.pi-t;b=a+.004
+   x1,z1=20.65*math.cos(a),8.57+11.15*math.sin(a);x2,z2=20.65*math.cos(b),8.57+11.15*math.sin(b)
+   mesh('Open clerestory ceramic slat',[(x1,-9,z1),(x2,-9,z2),(x2,30,z2),(x1,30,z1)],[(0,1,2,3)],'ivory','vault')
  # Large station-name gantry, suspended within the first vault opening.
  for x in [-6.6,6.6]:pipe('Arrival suspension',[(x,4,8.2),(x,4,18)],.038,'brass','concourse')
  box('Grand arrival sign',(0,4,8.2),(14.8,.30,1.65),'metal','concourse',.1)
  for z in [7.41,8.99]:box('Arrival bronze frame',(0,3.80,z),(14.7,.09,.08),'trim','concourse',.015)
  label('SWITCHYARD',(0,3.82,8.51),.68,'letter','concourse')
  label('CONCOURSE / SIX PERMANENT DOCKS',(0,3.82,7.82),.18,'warm','concourse')
- # Physical center exhibit: an intricate static transit map, never fake telemetry.
- cyl('Routing table walnut plinth',(0,-.7,.36),1.62,.72,'wood','concourse',64,True)
- cyl('Routing table bronze rim',(0,-.7,.77),1.64,.10,'brass','concourse',64)
- cyl('Routing table map glass',(0,-.7,.835),1.48,.026,'panel','concourse',64)
- for r in [.55,1.1,1.5]:ring('Map orbit',(0,-.7,.87),r,.014,'cyan-glow','concourse')
- # A floating route interchange sculpture, three graceful orbit ribs.
- for j,(r,z) in enumerate([(1.3,2.4),(1.55,2.6),(1.85,2.8)]):
+ # Offset, smaller exhibit keeps all project headers clear and the route walkable.
+ ex,ey=-4.4,-.7
+ cyl('Routing table walnut plinth',(ex,ey,.36),1.10,.72,'wood','concourse',64,True)
+ cyl('Routing table bronze rim',(ex,ey,.77),1.12,.10,'brass','concourse',64)
+ cyl('Routing table map glass',(ex,ey,.835),1.02,.026,'panel','concourse',64)
+ for r in [.37,.74,1.0]:ring('Map orbit',(ex,ey,.87),r,.014,'cyan-glow','concourse')
+ for j,(r,z) in enumerate([(.91,1.75),(1.085,1.90),(1.295,2.05)]):
   for title,radius,thick,mat in [('Signal armature',r,.04,'brass'),('Signal ribbon',r-.07,.024,['cyan-glow','amber-glow','coral-glow'][j])]:
-   tilt=(j-1)*.42;pts=[(radius*math.cos(a)*math.cos(tilt),-.7+radius*math.cos(a)*math.sin(tilt)-(0.055 if title=='Signal ribbon' else 0),z+radius*math.sin(a)) for a in [i*math.tau/96 for i in range(97)]]
+   tilt=(j-1)*.42;pts=[(ex+radius*math.cos(a)*math.cos(tilt),ey+radius*math.cos(a)*math.sin(tilt)-(0.055 if title=='Signal ribbon' else 0),z+radius*math.sin(a)) for a in [i*math.tau/96 for i in range(97)]]
    pipe(title,pts,thick,mat,'concourse')
  for i in range(6):
-  a=i*math.tau/6;px,py=1.1*math.cos(a),-.7+1.1*math.sin(a)
-  cyl('Map station dot',(px,py,.895),.065,.045,['cyan-glow','amber-glow','coral-glow'][i%3],'concourse',16)
+  a=i*math.tau/6;px,py=ex+.74*math.cos(a),ey+.74*math.sin(a)
+  cyl('Map station dot',(px,py,.895),.045,.045,['cyan-glow','amber-glow','coral-glow'][i%3],'concourse',16)
  for x in [-6.4,6.4]:
   lounge(x,-7.7,'concourse');plant(x+(-2.2 if x<0 else 2.2),-7.4,group='concourse',height=2.65)
   cyl('Lounge table',(x,-5.9,.5),.68,.09,'wood','concourse',48,True)
@@ -223,29 +224,6 @@ def construct(k):
   box('Rear vista pier',(x,29.2,5.2),(.55,.5,10.5),'metal','vault',.05,True)
   for z in [1.0,7.3]:box('Rear pier ring',(x,29.2,z),(.68,.62,.18),'brass','vault',.025)
  rail(-19.7,19.7,29.55,group='hall')
- # Broad unlit sky horizon and a low layered mountain/city silhouette.
- mesh('Blue-hour sky',[(-180,150,-40),(180,150,-40),(180,150,120),(-180,150,120)],[(0,1,2,3)],'sky','vista')
- for layer,(yy,tone) in enumerate([(135,'distant'),(110,'city'),(80,'city-near')]):
-  verts=[]
-  for i in range(41):
-   xx=-150+i*7.5;h=RNG.uniform(7,17)+(8 if i%7==0 else 0);verts.extend([(xx,yy,-9),(xx,yy,h)])
-  faces=[(2*i,2*i+2,2*i+3,2*i+1) for i in range(40)];mesh('Layered atmospheric silhouette',verts,faces,tone,'vista')
- for i in range(42):
-  xx=-100+i*5.0;yy=RNG.uniform(54,96);h=RNG.uniform(11,39);w=RNG.uniform(2.5,4.6);tower_depth=RNG.uniform(3,6)
-  box('Distant rail-city tower',(xx,yy,h/2-6),(w,tower_depth,h),'city','vista',.06)
-  box('Tower stepped crown',(xx,yy,h-5.3),(w*.68,2.4,1.4),'city-near','vista',.05)
-  # Restrained architectural windows, tiny warm/cool occupancy without telemetry.
-  for row in range(int(h/1.8)):
-   for col in range(3):
-    if RNG.random()<.52:box('City window',(xx+(col-1)*w*.25,yy-tower_depth/2-.02,-5+row*1.8),(.22,.024,.30),'city-light' if (row+col)%4 else 'city-cool','vista',0)
- # Elevated rail viaduct leading away from the last terminal arch.
- for x in [-9,9]:
-  box('Vista viaduct',(x,67,-2.0),(4.8,66,.65),'city-near','vista',.08)
-  for dx in [-1.3,1.3]:pipe('Distant rail luminous seam',[(x+dx,34,-1.6),(x+dx,96,-1.6)],.035,'city-cool','vista')
-  for yy in [40,54,68,82]:box('Viaduct pier',(x,yy,-6.6),(.8,.8,9),'city','vista',.05)
- # Moon and halo: a recognizable calm skyline landmark from the spawn.
- sphere('Rail city moon',(12,126,38),(4.0,.3,4.0),'moon','vista')
- # Original translucent haze cards are optional scenery; distant palette works alone.
- for yy,z in [(52,2),(68,5),(92,9)]:
-  mesh('Atmosphere haze card',[(-100,yy,z-4),(100,yy,z-4),(100,yy,z+10),(-100,yy,z+10)],[(0,1,2,3)],'haze','atmosphere')
+ from skyline import construct as skyline
+ skyline(k,mesh,pipe,sphere)
  return {'pipe':pipe,'ring':ring}

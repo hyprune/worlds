@@ -28,6 +28,10 @@ for a in light.values():
  assert a['material']<len(g['materials']) and a['texture']<len(g['textures'])
  assert a['texCoord']==1 and a['intensity']>0
 assert all(c['node']<len(g['nodes']) for c in m['collision'])
+provenance=json.loads((root/'texture-provenance.json').read_text())
+assert len({r['path'] for r in provenance})==len(provenance),'duplicate texture provenance'
+assert {p.relative_to(root).as_posix() for p in (root/'textures').glob('*.png')}=={r['path'] for r in provenance},'incomplete per-texture provenance'
+assert all(r['author'] and r['license']=='CC-BY-4.0' and r['recipe'] for r in provenance),'missing provenance fields'
 rows=[];triangle_total=0
 # Raster interior occupancy independently detects intersecting exported UV1 triangles.
 # Shared triangle edges are excluded, including triangulated quad diagonals.
@@ -58,10 +62,22 @@ for ni,name in [(i,n.get('name','')) for i,n in enumerate(g['nodes']) if i in s.
  assert uvarea<=1.001,(name,uvarea)
  triangle_total+=tris;rows.append({'node':name,'triangles':tris,'uv1Area':round(float(uvarea),5),'overlapSamples':overlap})
 decoded=sum(Image.open(root/g['images'][t['source']]['uri']).width*Image.open(root/g['images'][t['source']]['uri']).height*4 for t in g['textures'])
-# Core uploads texture objects, not unique image URIs. Include a conservative
-# geometry allowance beyond BIN bytes for interleaved runtime vertices.
-buffers=sum(b['byteLength'] for b in g['buffers']);gpu=decoded+buffers*2
-assert gpu<=512*1024**2,('GPU budget',gpu)
+# Match M1 Renderer::prepare: expanded visible vertices (40 bytes each),
+# every mip of a linear view, plus an sRGB view for every color/emissive texture.
+color=set()
+for mat in g['materials']:
+ for slot in [mat.get('pbrMetallicRoughness',{}).get('baseColorTexture'),mat.get('emissiveTexture')]:
+  if slot:color.add(slot['index'])
+mipped=0
+for i,t in enumerate(g['textures']):
+ w,h=Image.open(root/g['images'][t['source']]['uri']).size
+ while True:
+  mipped+=w*h*4*(2 if i in color else 1)
+  if w==1 and h==1:break
+  w=max(1,w//2);h=max(1,h//2)
+geometry=triangle_total*3*40;gpu=mipped+geometry
+buffers=sum(b['byteLength'] for b in g['buffers'])
+assert gpu<=512*1024**2,('M1 GPU budget including mips and color/data views',gpu)
 size=sum(p.stat().st_size for p in root.rglob('*') if p.is_file());assert size<1024**3
-report={'status':'PASS','packageBytes':size,'decodedTextureBytes':decoded,'conservativeGpuBytes':gpu,'textureObjects':len(g['textures']),'visualTriangles':triangle_total,'anchors':len(m['anchors']),'collisionNodes':len(m['collision']),'lightmapBindings':len(light),'UV1':rows}
+report={'status':'PASS','packageBytes':size,'decodedTextureBytes':decoded,'conservativeGpuBytes':gpu,'mippedTextureViewsBytes':mipped,'expandedGeometryBytes':geometry,'colorTextureViews':len(color),'textureObjects':len(g['textures']),'textureProvenanceEntries':len(provenance),'visualTriangles':triangle_total,'anchors':len(m['anchors']),'collisionNodes':len(m['collision']),'lightmapBindings':len(light),'UV1':rows}
 print(json.dumps(report,indent=2))

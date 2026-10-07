@@ -6,7 +6,7 @@ Official, original places for your desktop. **Early, building in the open.**
 
 Worlds owns official environments, authoring source scenes, glTF exports, manifests, attribution and reproducible export recipes. It excludes runtime code, executable world behavior, shell UI and personal-use game assets.
 
-A package is a data-only directory containing `world.json`, glTF 2.0 geometry and local assets. Use meters, +Y up, stable spawn/anchor IDs and separate UV1 lightmaps when baking illumination. See [RFC-0004](https://hyprune.com/rfcs/0004-world-format/) before exporting.
+A package is a data-only directory containing `world.json`, glTF 2.0 geometry and local assets. Use meters, +Y up, stable spawn/anchor IDs and separate UV1 lightmaps when baking illumination. Switchyard 0.1.1 targets the RFC-0004/core M1 world material profile 0.2. See [RFC-0004](https://hyprune.com/rfcs/0004-world-format/) before exporting.
 
 The first official world is [Switchyard](switchyard/README.md): an original blue-hour terminal with a grand bronze vault, six timber-canopied docks, comfortable concourse, labeled cargo, a rail-city vista, surface anchors, collision, navigation and separate lighting atlases. Its editable scene combines procedural geometry with recorded original texture masters. Schema examples remain synthetic manifest fixtures, not playable packages.
 
@@ -23,8 +23,8 @@ Default original content license: **CC-BY-4.0** (see LICENSE). Scripts and tooli
 ## Boundaries and contracts
 
 - [RFC-0001: umbrella architecture](https://hyprune.com/rfcs/0001-umbrella/)
-- [RFC-0003: IPC `0.1`](https://hyprune.com/rfcs/0003-ipc/)
-- [RFC-0004: world format `0.1`](https://hyprune.com/rfcs/0004-world-format/)
+- [RFC-0003: IPC `0.2` (core also accepts `0.1`)](https://hyprune.com/rfcs/0003-ipc/)
+- [RFC-0004: world format `0.2`](https://hyprune.com/rfcs/0004-world-format/)
 - [Machine-readable schemas and fixtures](https://github.com/hyprune/schema)
 - [Roadmap M0–M3](https://hyprune.com/roadmap/)
 
