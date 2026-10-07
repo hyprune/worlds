@@ -8,7 +8,12 @@ Worlds owns official environments, authoring source scenes, glTF exports, manife
 
 A package is a data-only directory containing `world.json`, glTF 2.0 geometry and local assets. Use meters, +Y up, stable spawn/anchor IDs and separate UV1 lightmaps when baking illumination. Switchyard 0.1.1 targets the RFC-0004/core M1 world material profile 0.2. See [RFC-0004](https://hyprune.com/rfcs/0004-world-format/) before exporting.
 
-The first official world is [Switchyard](switchyard/README.md): an original blue-hour terminal with a grand bronze vault, six timber-canopied docks, comfortable concourse, labeled cargo, a rail-city vista, surface anchors, collision, navigation and separate lighting atlases. Its editable scene combines procedural geometry with recorded original texture masters. Schema examples remain synthetic manifest fixtures, not playable packages.
+**Worlds in this repo**
+
+- **Release world** (in progress): built from the owner's concept art in [concept/release-world](concept/release-world/BRIEF.md): four themed areas, each one workspace's home.
+- **[Switchyard](switchyard/README.md)** (test world): Hyprune's first original world, an original blue-hour terminal with a bronze vault, six timber-canopied docks, a concourse, labeled cargo, a rail-city vista, surface anchors, collision, navigation and UV1 lightmaps. Kept as a walkable test map for paths, navigation, docking and renderer parity, and as a record of how the worlds evolved.
+
+Schema examples remain synthetic manifest fixtures, not playable packages.
 
 ## Build and distribution
 
