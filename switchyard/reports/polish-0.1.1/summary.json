@@ -1,0 +1,29 @@
+{
+  "world": "com.hyprune.switchyard",
+  "version": "0.1.1",
+  "manifestFormat": "0.2",
+  "sourceCommit": "679dc1a",
+  "status": "finished polish; owner stopped further work",
+  "releaseWorld": false,
+  "evidence": "Reports copied from completed checks; no new build or tests at closeout. Parent report directory retains historical 0.1.0 evidence.",
+  "validation": {
+    "schema": "PASS",
+    "package": "PASS",
+    "coplanar": "PASS",
+    "routes": "PASS",
+    "texelDensity": "PASS",
+    "lettering": "PASS",
+    "gltf": {
+      "errors": 0,
+      "warnings": 0
+    },
+    "nestedCore": "PASS"
+  },
+  "comparisonSheet": "artifacts/switchyard/engine-blender-contact-sheet.png",
+  "engineStills": "artifacts/switchyard/engine-*.png",
+  "engineFilm": "~/workspace/rick-the-alien/worldshell-gallery/videos/world-switchyard-engine.mp4",
+  "blenderFilm": "Polished endpoint previews reviewed; full rerender canceled at owner request. Previously delivered gallery Blender film remains unchanged.",
+  "distribution": "Generated binaries remain ignored; no new release archive produced.",
+  "rfcFindings": "NOTES-rfc-gaps.md",
+  "ownerReview": "Good rendering and lighting; all grid, no world feeling, lifeless."
+}

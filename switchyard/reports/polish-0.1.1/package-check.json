@@ -1,0 +1,77 @@
+{
+  "status": "PASS",
+  "packageBytes": 75489794,
+  "decodedTextureBytes": 301203456,
+  "conservativeGpuBytes": 480666956,
+  "mippedTextureViewsBytes": 456479996,
+  "expandedGeometryBytes": 24186960,
+  "colorTextureViews": 22,
+  "textureObjects": 45,
+  "textureProvenanceEntries": 63,
+  "visualTriangles": 201558,
+  "anchors": 6,
+  "collisionNodes": 165,
+  "lightmapBindings": 123,
+  "UV1": [
+    {
+      "node": "Visual-archive",
+      "triangles": 16592,
+      "uv1Area": 0.07735,
+      "overlapSamples": 0
+    },
+    {
+      "node": "Visual-build",
+      "triangles": 16196,
+      "uv1Area": 0.0791,
+      "overlapSamples": 0
+    },
+    {
+      "node": "Visual-commons",
+      "triangles": 16616,
+      "uv1Area": 0.07677,
+      "overlapSamples": 0
+    },
+    {
+      "node": "Visual-concourse",
+      "triangles": 23588,
+      "uv1Area": 0.12907,
+      "overlapSamples": 0
+    },
+    {
+      "node": "Visual-hall",
+      "triangles": 5986,
+      "uv1Area": 0.3386,
+      "overlapSamples": 0
+    },
+    {
+      "node": "Visual-research",
+      "triangles": 16592,
+      "uv1Area": 0.07715,
+      "overlapSamples": 0
+    },
+    {
+      "node": "Visual-studio",
+      "triangles": 16436,
+      "uv1Area": 0.07741,
+      "overlapSamples": 0
+    },
+    {
+      "node": "Visual-systems",
+      "triangles": 16328,
+      "uv1Area": 0.07684,
+      "overlapSamples": 0
+    },
+    {
+      "node": "Visual-vault",
+      "triangles": 38684,
+      "uv1Area": 0.00545,
+      "overlapSamples": 0
+    },
+    {
+      "node": "Visual-vista",
+      "triangles": 34540,
+      "uv1Area": 0.0,
+      "overlapSamples": 0
+    }
+  ]
+}

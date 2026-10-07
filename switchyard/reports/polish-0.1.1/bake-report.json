@@ -1,0 +1,101 @@
+[
+  {
+    "group": "hall",
+    "resolution": 4096,
+    "peakLinear": 3.394277811050415,
+    "intensity": 3.4,
+    "seconds": 15.91,
+    "samples": 96,
+    "marginPixels": 8,
+    "islandSeparationPixels": 8,
+    "supportedMipLevels": 2
+  },
+  {
+    "group": "vault",
+    "resolution": 2048,
+    "peakLinear": 8.757601737976074,
+    "intensity": 8.8,
+    "seconds": 3.28,
+    "samples": 96,
+    "marginPixels": 8,
+    "islandSeparationPixels": 8,
+    "supportedMipLevels": 2
+  },
+  {
+    "group": "concourse",
+    "resolution": 2048,
+    "peakLinear": 9.361185073852539,
+    "intensity": 9.4,
+    "seconds": 5.08,
+    "samples": 96,
+    "marginPixels": 8,
+    "islandSeparationPixels": 8,
+    "supportedMipLevels": 2
+  },
+  {
+    "group": "build",
+    "resolution": 2048,
+    "peakLinear": 8.057306289672852,
+    "intensity": 8.1,
+    "seconds": 4.52,
+    "samples": 96,
+    "marginPixels": 8,
+    "islandSeparationPixels": 8,
+    "supportedMipLevels": 2
+  },
+  {
+    "group": "research",
+    "resolution": 2048,
+    "peakLinear": 7.927022457122803,
+    "intensity": 8.0,
+    "seconds": 4.53,
+    "samples": 96,
+    "marginPixels": 8,
+    "islandSeparationPixels": 8,
+    "supportedMipLevels": 2
+  },
+  {
+    "group": "commons",
+    "resolution": 2048,
+    "peakLinear": 7.978331565856934,
+    "intensity": 8.0,
+    "seconds": 4.71,
+    "samples": 96,
+    "marginPixels": 8,
+    "islandSeparationPixels": 8,
+    "supportedMipLevels": 2
+  },
+  {
+    "group": "studio",
+    "resolution": 2048,
+    "peakLinear": 7.557467460632324,
+    "intensity": 7.6,
+    "seconds": 4.65,
+    "samples": 96,
+    "marginPixels": 8,
+    "islandSeparationPixels": 8,
+    "supportedMipLevels": 2
+  },
+  {
+    "group": "systems",
+    "resolution": 2048,
+    "peakLinear": 7.827549457550049,
+    "intensity": 7.9,
+    "seconds": 3.99,
+    "samples": 96,
+    "marginPixels": 8,
+    "islandSeparationPixels": 8,
+    "supportedMipLevels": 2
+  },
+  {
+    "group": "archive",
+    "resolution": 2048,
+    "peakLinear": 7.566836833953857,
+    "intensity": 7.6,
+    "seconds": 4.59,
+    "samples": 96,
+    "marginPixels": 8,
+    "islandSeparationPixels": 8,
+    "supportedMipLevels": 2
+  }
+]

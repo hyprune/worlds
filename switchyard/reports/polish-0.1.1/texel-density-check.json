@@ -1,0 +1,48 @@
+{
+  "status": "PASS",
+  "method": "sqrt(UV0 pixel area / physical triangle area), faces above .02 m2; bevels and unique trim/sheen sheets excluded",
+  "surfaces": [
+    {
+      "asset": "brass",
+      "substantialFaces": 17610,
+      "surfaceAreaSquareMeters": 1027.42,
+      "areaWeightedMedianPxPerMeter": 998.62,
+      "fractionAreaWithin512to1024Tolerance": 0.9973
+    },
+    {
+      "asset": "cloth",
+      "substantialFaces": 2304,
+      "surfaceAreaSquareMeters": 122.45,
+      "areaWeightedMedianPxPerMeter": 1024.0,
+      "fractionAreaWithin512to1024Tolerance": 1.0
+    },
+    {
+      "asset": "metal",
+      "substantialFaces": 5996,
+      "surfaceAreaSquareMeters": 5597.82,
+      "areaWeightedMedianPxPerMeter": 1024.0,
+      "fractionAreaWithin512to1024Tolerance": 1.0
+    },
+    {
+      "asset": "rubber",
+      "substantialFaces": 792,
+      "surfaceAreaSquareMeters": 507.41,
+      "areaWeightedMedianPxPerMeter": 1024.0,
+      "fractionAreaWithin512to1024Tolerance": 1.0
+    },
+    {
+      "asset": "stone",
+      "substantialFaces": 1904,
+      "surfaceAreaSquareMeters": 3856.4,
+      "areaWeightedMedianPxPerMeter": 512.0,
+      "fractionAreaWithin512to1024Tolerance": 0.9772
+    },
+    {
+      "asset": "wood",
+      "substantialFaces": 3476,
+      "surfaceAreaSquareMeters": 729.31,
+      "areaWeightedMedianPxPerMeter": 1024.0,
+      "fractionAreaWithin512to1024Tolerance": 1.0
+    }
+  ]
+}
