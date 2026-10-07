@@ -2,7 +2,7 @@
   "id": "com.hyprune.switchyard",
   "version": "0.1.0",
   "name": "Switchyard",
-  "description": "A calm transit hall for six permanent project docks. Files arrive as cargo; applications dock as screens. Stable geography, changing signals.",
+  "description": "A grand blue-hour transit terminal for six permanent project docks. Files arrive as cargo; applications dock as screens, beneath a bronze vault and an original rail-city vista.",
   "stations": [
     {"id":"build","name":"BUILD","number":"01","x":-12,"y":6,"color":"cyan"},
     {"id":"research","name":"RESEARCH","number":"02","x":0,"y":6,"color":"amber"},

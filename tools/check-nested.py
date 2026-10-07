@@ -34,6 +34,6 @@ session.smoke=smoke
 if hasattr(session,'failures'):session.failures=lambda *unused:None
 with open('/tmp/worldshell-nested.lock','a') as lock:
  fcntl.flock(lock,fcntl.LOCK_EX)
- try:session.run(SimpleNamespace(serve=False,record=False))
+ try:session.run(SimpleNamespace(serve=False,record=False,m1=False))
  except Exception as e:
   report['status']='FAIL';report['error']=str(e);(args.output/'nested-report.json').write_text(json.dumps(report,indent=2)+'\n');raise

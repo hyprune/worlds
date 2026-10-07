@@ -4,6 +4,7 @@
 import json, sys
 from pathlib import Path
 import numpy as np
+from PIL import Image
 from gltf_io import Scene
 root=Path(sys.argv[1]);s=Scene(root);g=s.doc;m=s.manifest
 assert not any(p.is_symlink() for p in root.rglob('*')),'package symlink'
@@ -35,12 +36,16 @@ for ni,name in [(i,n.get('name','')) for i,n in enumerate(g['nodes']) if i in s.
  for i,n,p,pos,indices in s.primitives():
   if i!=ni:continue
   assert p.get('mode',4)==4
+  material=p.get('material');mat=g['materials'][material]
+  if 'KHR_materials_unlit' in mat.get('extensions',{}):
+   assert material not in light,(name,'unlit material must not receive irradiance')
+   tris+=len(indices);continue
   assert 'TEXCOORD_0' in p['attributes']
-  material=p.get('material');assert material in light,(name,'missing lighting binding')
+  assert material in light,(name,'missing lighting binding')
   assert 'TEXCOORD_1' in p['attributes']
   uv=s.accessor(p['attributes']['TEXCOORD_1']);assert np.isfinite(uv).all()
   assert (uv>=-1e-6).all() and (uv<=1.000001).all()
-  assert g['materials'][material]['pbrMetallicRoughness']['baseColorTexture'].get('texCoord',0)==0
+  assert mat.get('pbrMetallicRoughness',{}).get('baseColorTexture',{}).get('texCoord',0)==0
   for tri in uv[indices]:
    a,b,c=tri;u=b-a;v=c-a;den=u[0]*v[1]-v[0]*u[1];uvarea+=abs(den)*.5;tris+=1
    if abs(den)<1e-13:continue
@@ -52,6 +57,11 @@ for ni,name in [(i,n.get('name','')) for i,n in enumerate(g['nodes']) if i in s.
  overlap=int(np.sum(coverage>1));assert overlap==0,(name,'UV1 overlap pixels',overlap)
  assert uvarea<=1.001,(name,uvarea)
  triangle_total+=tris;rows.append({'node':name,'triangles':tris,'uv1Area':round(float(uvarea),5),'overlapSamples':overlap})
+decoded=sum(Image.open(root/g['images'][t['source']]['uri']).width*Image.open(root/g['images'][t['source']]['uri']).height*4 for t in g['textures'])
+# Core uploads texture objects, not unique image URIs. Include a conservative
+# geometry allowance beyond BIN bytes for interleaved runtime vertices.
+buffers=sum(b['byteLength'] for b in g['buffers']);gpu=decoded+buffers*2
+assert gpu<=512*1024**2,('GPU budget',gpu)
 size=sum(p.stat().st_size for p in root.rglob('*') if p.is_file());assert size<1024**3
-report={'status':'PASS','packageBytes':size,'visualTriangles':triangle_total,'anchors':len(m['anchors']),'collisionNodes':len(m['collision']),'lightmapBindings':len(light),'UV1':rows}
+report={'status':'PASS','packageBytes':size,'decodedTextureBytes':decoded,'conservativeGpuBytes':gpu,'textureObjects':len(g['textures']),'visualTriangles':triangle_total,'anchors':len(m['anchors']),'collisionNodes':len(m['collision']),'lightmapBindings':len(light),'UV1':rows}
 print(json.dumps(report,indent=2))

@@ -2,8 +2,12 @@
 SCHEMA_DIR ?= ../schema
 GALLERY_DIR ?= ../../rick-the-alien/worldshell-gallery
 PACKAGE := dist/com.hyprune.switchyard
-.PHONY: build stills film validate gallery release nested gltf-check
-build:
+.PHONY: textures preview build stills film validate gallery release nested gltf-check
+textures:
+	python3 switchyard/materials/prepare.py
+preview: textures
+	./tools/remote-blender.sh -b --python-exit-code 1 -P switchyard/build.py -- --stage preview
+build: textures
 	./tools/remote-blender.sh -b --python-exit-code 1 -P switchyard/build.py -- --stage build
 stills:
 	./tools/remote-blender.sh -b --python-exit-code 1 -P switchyard/build.py -- --stage stills
