@@ -7,7 +7,7 @@ import argparse,fcntl,hashlib,inspect,json,math,os,shutil,signal,subprocess,sys,
 from pathlib import Path
 from types import SimpleNamespace
 ROOT=Path(__file__).resolve().parents[1]
-p=argparse.ArgumentParser();p.add_argument('--core',type=Path,default=ROOT.parent/'core');p.add_argument('--package',type=Path,default=ROOT/'dist/com.hyprune.lumen-reach');p.add_argument('--output',type=Path,default=ROOT/'artifacts/lumen-reach');p.add_argument('--record',action='store_true');p.add_argument('--diagnose',action='store_true');p.add_argument('--routes',action='store_true');p.add_argument('--gallery',action='store_true');a=p.parse_args();
+p=argparse.ArgumentParser();p.add_argument('--core',type=Path,default=ROOT.parent/'core');p.add_argument('--package',type=Path,default=ROOT/'dist/com.hyprune.lumen-reach');p.add_argument('--output',type=Path,default=ROOT/'artifacts/lumen-reach');p.add_argument('--record',action='store_true');p.add_argument('--profile',action='store_true');p.add_argument('--diagnose',action='store_true');p.add_argument('--routes',action='store_true');p.add_argument('--gallery',action='store_true');a=p.parse_args();
 if a.diagnose:a.record=True
 if a.record and a.routes:p.error('Run --routes and --record in separate fresh sessions; shell launch grants expire after 30 seconds.')
 a.output.mkdir(parents=True,exist_ok=True)
@@ -15,7 +15,7 @@ sys.path.insert(0,str(a.core/'dev/nested'));import session
 session.STATE=a.output.resolve()/'.nested-state';os.environ['HYPRUNE_NESTED_STATE_DIR']=str(session.STATE)
 import integration
 from ctl import verified
-report={'coreCommit':subprocess.check_output(['git','-C',str(a.core),'rev-parse','HEAD'],text=True).strip(),'pluginSHA256':hashlib.sha256((a.core/'build/hyprune-core.so').read_bytes()).hexdigest()}
+report={'coreDirty':subprocess.check_output(['git','-C',str(a.core),'status','--short'],text=True).splitlines(),'coreDiffSHA256':hashlib.sha256(subprocess.check_output(['git','-C',str(a.core),'diff','HEAD'])).hexdigest(),'coreCommit':subprocess.check_output(['git','-C',str(a.core),'rev-parse','HEAD'],text=True).strip(),'pluginSHA256':hashlib.sha256((a.core/'build/hyprune-core.so').read_bytes()).hexdigest()}
 
 gpu_next=0
 def gpu_sample():
@@ -52,20 +52,29 @@ def capture(client,children,args,shell_token,socketpath):
   return result
  session.ctl('eval','hl.config({misc={disable_watchdog_warning=true},cursor={inactive_timeout=1}})')
  session.ctl('eval','hl.dispatch(hl.dsp.focus({ monitor = "HEADLESS-1" }))')
+ quality='medium'
+ try:session.ctl('eval','hl.plugin.hyprune.config({graphics={quality="medium",render_scale="auto",target_fps=60}})')
+ except subprocess.CalledProcessError:
+  quality='intel';session.ctl('eval','hl.plugin.hyprune.config({graphics={quality="intel",render_scale="auto",target_fps=60}})')
  session.ctl('eval','hl.plugin.hyprune.toggle("HEADLESS-1")');time.sleep(2)
- assert state()['runtime']['active'];report['camera']=session.camera()
+ assert state()['runtime']['active'];report['camera']=session.camera();report['graphicsRequest']={'quality':quality,'render_scale':'auto','target_fps':60}
  report['manifestSHA256']=hashlib.sha256((a.package/'world.json').read_bytes()).hexdigest();report['sceneSHA256']=hashlib.sha256((a.package/'scene.gltf').read_bytes()).hexdigest()
  # Real walk from default spawn, before any camera positioning.
  before=state()['movement']['position'];integration.keys('-P','w','-s','500','-p','w');time.sleep(.2);after=state()['movement']['position'];assert math.dist(before,after)>.3,(before,after);report['walk']={'before':before,'after':after}
- client.call('movement.set',{'modeId':'com.hyprune.fly'})
+ client.call('movement.set',{'modeId':'com.hyprune.fly'});time.sleep(1)
  report['views']=[];views=json.loads((a.output/'views.json').read_text())['views']
  for v in views:
+  if a.record and v['id'].count('-')>2:continue # shell launch grant has a 30-second lifetime
   requested=pose(v['position'],v['target']);client.call('camera.set',requested);time.sleep(.8);actual=client.call('camera.get',{})
-  assert max(abs(x-y) for x,y in zip(requested['position'],actual['position']))<.001
+  assert max(abs(x-y) for x,y in zip(requested['position'],actual['position']))<.001,(v['id'],requested,actual)
   assert abs(sum(x*y for x,y in zip(requested['orientation'],actual['orientation'])))>.99999
-  path=a.output/('engine-'+v['id']+'.png');subprocess.run([str(session.HERE/'ctl.py'),'shot',str(path)],check=True);report['views'].append({'id':v['id'],'pose':actual,'verticalFovDegrees':60,'path':str(path)})
+  if a.profile and v['id'].count('-')==2:
+   time.sleep(2);samples=[]
+   for _ in range(30):samples.append(session.camera()['timings']);time.sleep(.07)
+   report.setdefault('performanceViews',[]).append({'id':v['id'],'samples':samples})
+  path=a.output/('engine-'+v['id']+'.png');subprocess.run([str(session.HERE/'ctl.py'),'shot',str(path)],check=True);report['views'].append({'renderer':session.camera().get('timings',{}),'id':v['id'],'pose':actual,'verticalFovDegrees':60,'path':str(path)})
  if a.gallery:
-  gallery=Path.home()/'workspace/rick-the-alien/worldshell-gallery/screenshots/release-world';gallery.mkdir(parents=True,exist_ok=True)
+  gallery=Path.home()/'workspace/rick-the-alien/worldshell-gallery/screenshots/release-world-v2';gallery.mkdir(parents=True,exist_ok=True)
   for v in report['views']:shutil.copy2(v['path'],gallery/Path(v['path']).name)
  if a.routes:route_check(client,state,manifest)
  if a.record:record(client,children,state,shell_token,socketpath)
@@ -105,7 +114,9 @@ def route_check(client,state,manifest):
 
 def record(client,children,state,shell_token,socketpath):
  """Real applications and HUD, followed by capsule-checked route traversal."""
- output=a.output/'release-world-tour.mp4';raw=a.output/'release-world-tour.mkv'
+ import tempfile
+ recording_dir=Path(tempfile.mkdtemp(prefix='lumen-tour-v2-',dir='/tmp'))
+ output=recording_dir/'release-world-tour-v2.mp4';raw=recording_dir/'release-world-tour-v2.mkv'
  manifest=json.loads((a.package/'world.json').read_text());areas=manifest['extensions']['com.hyprune.lumen-reach.mounts']['areas']
  mounts=manifest['extensions']['com.hyprune.lumen-reach.mounts']['mounts'];terminals=[]
  def wait(check,timeout=20):return integration.wait_for(check,timeout)
@@ -206,9 +217,10 @@ def record(client,children,state,shell_token,socketpath):
  subprocess.run(['ffmpeg','-y','-loglevel','error','-i',str(raw),'-an','-vf','scale=1920:1080:flags=lanczos:in_range=pc:out_range=tv','-r','30','-c:v','libx264','-preset','medium','-crf','22','-maxrate','6500k','-bufsize','13000k','-pix_fmt','yuv420p','-color_range','tv','-movflags','+faststart',str(output)],check=True)
  probe=json.loads(subprocess.check_output(['ffprobe','-v','error','-show_streams','-show_format','-of','json',str(output)]));assert 60<=float(probe['format']['duration'])<=90
  notes='Real nested Hyprland and Hyprune engine with authenticated IPC 0.4, Quickshell HUD, four mounted workspace homes and four real pulled-out terminal windows on owned physical mounts. Real terminal keyboard input verified before recording and typed visibly at the opening. Collision-checked auto-drive walks the connected roads, interior passage, lower service descent and snowy ascent; view turns occur while stationary. Original procedural world and generated textures, CC-BY-4.0. No owner-session control. GPU/package figures and exact engine hashes are in worlds/lumen-reach/reports.'
- output.with_suffix('.json').write_text(json.dumps({'title':'Lumen Reach — four workspace homes','tag':'world','notes':notes},indent=2)+'\n')
+ output.with_suffix('.json').write_text(json.dumps({'title':'Lumen Reach v2 — four inhabited workspace homes','tag':'world','notes':notes},indent=2)+'\n')
  report['tour']={'duration':probe['format']['duration'],'bytes':output.stat().st_size,'terminals':terminals,'typed':marker.read_text(),'traversals':traversals,'hud':{k:v for k,v in hud().items() if k in ['status','protocol','screen','revision','phase','world','map','places']}};log.close()
- print('PASS recorded tour',output,flush=True)
+ staged=a.output/output.name;shutil.move(str(output),staged);shutil.move(str(output.with_suffix('.json')),staged.with_suffix('.json'));report['tour']['path']=str(staged);report['tour']['encodedIn']=str(recording_dir)
+ print('PASS recorded tour',staged,flush=True)
 
 
 integration.first_session=capture
@@ -230,5 +242,5 @@ exec(compile(source,str(session.HERE/'session.py'),'exec'),session.__dict__)
 with open('/tmp/worldshell-nested.lock','a') as lock:
  fcntl.flock(lock,fcntl.LOCK_EX)
  (session.STATE/'layout.json').unlink(missing_ok=True)
- try:session.run(SimpleNamespace(serve=False,record=False,m1=False,m2=False,integration=True,visible=False))
+ try:session.run(SimpleNamespace(serve=False,record=False,m1=False,m2=False,m3a=False,m3b=False,live=False,integration=True,visible=False))
  except Exception as e:report['status']='FAIL';report['error']=str(e);(a.output/'nested-report.json').write_text(json.dumps(report,indent=2)+'\n');raise
