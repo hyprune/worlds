@@ -9,6 +9,11 @@ import json,sys
 from collections import defaultdict
 import numpy as np
 from gltf_io import Scene
+if '--emissive' in sys.argv:
+ import importlib.util
+ spec=importlib.util.spec_from_file_location('emissive',__file__.replace('check-coplanar.py','check-emissive.py'));module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
+ fixture=sys.argv[sys.argv.index('--fixtures')+1] if '--fixtures' in sys.argv else None
+ report=module.check(sys.argv[1],fixture);print(json.dumps(report,indent=2));sys.exit(0 if report['status']=='PASS' else 1)
 s=Scene(sys.argv[1]);GAP=.004;STEP=.10;hits=[];total=0
 for axis in range(3):
  other=[i for i in range(3) if i!=axis];grid=defaultdict(list);scanned=0

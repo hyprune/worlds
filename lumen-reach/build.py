@@ -68,6 +68,47 @@ def init():
  P.area('Sun Court daylight',(-18,-5,32),(0,7,0),26000,(1,.73,.43),7)
  P.area('Sun Court sky fill',(16,0,28),(0,12,1),4000,(.55,.73,1),26)
 
+def audit_fixtures():
+ # Ray-test every thin emissive object before merging loses authoring names.
+ # Close gaps with a real metal mounting shoe, never move the lens coplanar.
+ from mathutils.bvhtree import BVHTree
+ bpy.context.view_layer.update()
+ emissive={'amber','red-light','cyan','white'}
+ objects=[o for group in P.GROUPS.values() for o in group]
+ verts=[];faces=[];owners=[]
+ for o in objects:
+  if o.data.materials[0].name in emissive or o.name.startswith(('Lettering','Soft vent')):continue
+  # Artwork/vistas cannot be a mechanical support.
+  if o in P.GROUPS.get('vista',[]):continue
+  start=len(verts);verts.extend(o.matrix_world@v.co for v in o.data.vertices)
+  for face in o.data.polygons:faces.append(tuple(start+i for i in face.vertices));owners.append(o.name)
+ tree=BVHTree.FromPolygons(verts,faces);rows=[]
+ for o in objects:
+  if o.data.materials[0].name not in emissive:continue
+  local=[Vector(v) for v in o.bound_box];lo=Vector([min(v[i] for v in local) for i in range(3)]);hi=Vector([max(v[i] for v in local) for i in range(3)]);size=hi-lo
+  # Curved rings, network wires and lamp diffusers are self-contained fixtures.
+  if len(o.data.polygons)>70 or not any(k in o.name.lower() for k in ['light','edge','strip','practical','bar','seam','jamb']):continue
+  center=o.matrix_world@((lo+hi)/2);best=None
+  for axis in range(3):
+   if size[axis]>.20:continue
+   for sign in [-1,1]:
+    direction=o.matrix_world.to_3x3()@Vector([sign if i==axis else 0 for i in range(3)]);direction.normalize()
+    loc,norm,index,distance=tree.ray_cast(center,direction,.7)
+    if loc is not None and (best is None or distance<best[0]):best=(distance,axis,direction,loc,index)
+  if best is None:
+   rows.append({'name':o.name,'status':'UNSUPPORTED','position':up(center)});continue
+  distance,axis,direction,loc,index=best;half=size[axis]/2;gap=distance-half
+  # Geometry penetrates its host, or is already seated; a flush back is safe.
+  if gap>.003:
+   dims=list(size);dims[axis]=gap+.025
+   for i in range(3):
+    if i!=axis:dims[i]+=.045
+   shoe=P.box(o.name+' mounting shoe',center+direction*(half+gap/2-.005),dims,'metal',next(k for k,v in P.GROUPS.items() if o in v),.003)
+   shoe.rotation_mode='QUATERNION';shoe.rotation_quaternion=o.matrix_world.to_quaternion()
+  rows.append({'name':o.name,'status':'SEATED','host':owners[index],'originalBackGapMeters':round(gap,5),'position':up(center)})
+ (ART/'fixture-audit.json').write_text(json.dumps({'status':'FAIL' if any(r['status']!='SEATED' for r in rows) else 'PASS','strips':rows},indent=2)+'\n')
+ if any(r['status']!='SEATED' for r in rows):print('Unseated strips:',[r for r in rows if r['status']!='SEATED'],flush=True)
+
 # Original geometric lettering kit, shared implementation with the test world.
 sys.path.insert(0,str(ROOT/'switchyard'));from lettering import GLYPHS
 
@@ -220,7 +261,11 @@ def court():
  screen('facade-wall',(8,23.17,10.1),(18.8,9.3),'mounted-workspace',style='workspace')
  label('01 SUN COURT',(8,22.92,15.65),.46)
  label('ARRAY HALL',(8,23.12,3.35),.35)
- for x in [2.8,13.2]:box('Entry light',(x,23.07,1.55),(.075,.05,2.7),'amber')
+ for x in [2.8,13.2]:
+  # Supported jamb from paving to canopy, with the lens seated into its backplate.
+  box('Entry fixture jamb',(x,23.25,2.2),(.24,.30,4.4),'metal',.015,solid=True)
+  box('Entry light backplate',(x,23.085,1.55),(.15,.08,2.85),'metal',.008)
+  box('Entry light',(x,23.038,1.55),(.075,.03,2.7),'amber',.004)
  # Layered facade ribs, worn service panels and warm physical entry detailing.
  for x in [-5.6,-3.6,20.8,23.0]:
   for z in [6.5,9.5,12.5]:
@@ -707,4 +752,4 @@ if __name__=='__main__':
   for name,n in zip(NAMES[:a.areas],[1280,1536,1280,1280]):P.RESOLUTIONS[name]=n
   P.RESOLUTIONS['foliage']=1024
   P.MARGINS.update({'sun-court':4,'array-hall':4,'rime-vault':4,'signal-rise':4,'foliage':2})
-  cols,nav=spatial();P.join_groups();P.bake(a.samples);g,lm,nodes=P.export(cols,nav);manifest(g,lm,nodes,cols,a.areas);bpy.ops.wm.save_as_mainfile(filepath=str(ART/'lumen-reach.blend'));stills()
+  audit_fixtures();cols,nav=spatial();P.join_groups();P.bake(a.samples);g,lm,nodes=P.export(cols,nav);manifest(g,lm,nodes,cols,a.areas);bpy.ops.wm.save_as_mainfile(filepath=str(ART/'lumen-reach.blend'));stills()

@@ -10,12 +10,18 @@ REMOTE="${HYPRUNE_BAKE_DIR:-hyprune-bake/worlds-switchyard}"
 BAKE_MACHINE="$(ssh -o BatchMode=yes "$HOST" hostname)"
 [[ "$BAKE_MACHINE" != "$(hostname)" ]] || { echo 'Bake host resolves to this machine; refusing local Blender' >&2; exit 2; }
 ssh -o BatchMode=yes "$HOST" "mkdir -p '$REMOTE'"
-rsync -az --exclude '__pycache__' "$ROOT/switchyard" "$ROOT/tools" "$ROOT/LICENSE" "$HOST:$REMOTE/"
+rsync -az --exclude '__pycache__' "$ROOT/lumen-reach" "$ROOT/switchyard" "$ROOT/tools" "$ROOT/LICENSE" "$HOST:$REMOTE/"
 ARGS=""
 for arg in "$@"; do ARGS+=" $(printf '%q' "$arg")"; done
 status=0
 ssh -o BatchMode=yes "$HOST" "cd '$REMOTE' && HYPRUNE_REMOTE_BLENDER=1 flock .blender.lock blender$ARGS" || status=$?
 mkdir -p "$ROOT/dist" "$ROOT/artifacts"
+if [[ "${HYPRUNE_BAKE_PROJECT:-switchyard}" == lumen-reach ]]; then
+  mkdir -p "$ROOT/dist/com.hyprune.lumen-reach" "$ROOT/artifacts/lumen-reach"
+  if [[ "$status" -eq 0 ]]; then rsync -az --delete "$HOST:$REMOTE/dist/com.hyprune.lumen-reach/" "$ROOT/dist/com.hyprune.lumen-reach/"; fi
+  rsync -az "$HOST:$REMOTE/artifacts/lumen-reach/" "$ROOT/artifacts/lumen-reach/" || true
+  exit "$status"
+fi
 rsync -az --delete "$HOST:$REMOTE/dist/" "$ROOT/dist/" || true
 rsync -az --exclude 'film-frames' "$HOST:$REMOTE/artifacts/" "$ROOT/artifacts/" || true
 exit "$status"
