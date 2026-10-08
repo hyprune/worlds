@@ -127,8 +127,8 @@ def record(client,children,state,shell_token,socketpath):
   while time.monotonic()<end:state();time.sleep(.1)
  # Launch actual authenticated shell child, exactly as core's first-session harness.
  read,write=os.pipe();os.write(write,(shell_token+'\n').encode());os.close(write)
- _,environment=verified();environment.update(HYPRUNE_TOKEN_FD=str(read),HYPRUNE_PROTOCOL='0.4',HYPRUNE_SOCKET=str(socketpath),HYPRUNE_OUTPUT_SCREEN='HEADLESS-1',HYPRUNE_DEV_AUTOMATION='1')
- log=open(a.output/'tour-shell.log','w');shell=subprocess.Popen(['python3',str(a.core.parent/'shell/bridge/launch.py'),'--protocol','0.4'],env=environment,pass_fds=(read,),stdout=log,stderr=subprocess.STDOUT);os.close(read);children.append(shell)
+ _,environment=verified();environment.update(HYPRUNE_TOKEN_FD=str(read),HYPRUNE_PROTOCOL='0.7',HYPRUNE_SOCKET=str(socketpath),HYPRUNE_OUTPUT_SCREEN='HEADLESS-1',HYPRUNE_DEV_AUTOMATION='1')
+ log=open(a.output/'tour-shell.log','w');shell=subprocess.Popen(['python3',str(a.core.parent/'shell/bridge/launch.py'),'--protocol','0.7'],env=environment,pass_fds=(read,),stdout=log,stderr=subprocess.STDOUT);os.close(read);children.append(shell)
  def childpid():
   assert shell.poll() is None,'shell failed; see tour-shell.log'
   return next((int(p) for p in Path(f'/proc/{shell.pid}/task/{shell.pid}/children').read_text().split() if Path(f'/proc/{p}/comm').read_text().strip()=='qs'),None)
@@ -155,7 +155,7 @@ def record(client,children,state,shell_token,socketpath):
    window=next(w for w in json.loads(session.ctl('clients','-j')) if w.get('title')==title)
    monitor=next(m['id'] for m in json.loads(session.ctl('monitors','-j')) if m['name']=='HEADLESS-1')
    assert window['monitor']==monitor and window['workspace']['id']==wid,('application on wrong nested output/workspace',title,window['monitor'],window['workspace'])
-   width,height=(900,600) if kind=='Home' else (700,394)
+   width,height=(1920,1080) if kind=='Home' else (700,394)
    address=window['address'];session.ctl('eval',f'hl.dispatch(hl.dsp.window.float({{window="address:{address}",action="enable"}}))');session.ctl('eval',f'hl.dispatch(hl.dsp.window.resize({{window="address:{address}",x={width},y={height}}}))')
    window=next(w for w in json.loads(session.ctl('clients','-j')) if w.get('title')==title)
    report.setdefault('nativeApplications',[]).append({k:window[k] for k in ['title','address','monitor','workspace','at','size','floating']})
@@ -179,6 +179,7 @@ def record(client,children,state,shell_token,socketpath):
   client.call('camera.set',pose(position,target));pause(.6);subprocess.run([str(session.HERE/'ctl.py'),'shot',str((a.output/('live-'+area+'.png')).resolve())],check=True)
  report['mountedApplicationState']=state()['mounts']
  report['capturesAfterSetup']=session.camera()['captures']
+ assert hud().get('status')=='live','Shell must remain connected after application setup'
  homes=[c for c in report['capturesAfterSetup'] if c['title'].endswith(' / Home')]
  assert len(homes)==4 and all(not c['visible'] for c in homes),'Home applications must remain in workspace composites'
  for v in json.loads((a.output/'views.json').read_text())['views']:
@@ -227,7 +228,8 @@ def record(client,children,state,shell_token,socketpath):
   recorder.send_signal(signal.SIGINT);recorder.wait(timeout=15);rec_log.close()
  subprocess.run(['ffmpeg','-y','-loglevel','error','-i',str(raw),'-an','-vf','scale=1920:1080:flags=lanczos:in_range=pc:out_range=tv','-r','30','-c:v','libx264','-preset','medium','-crf','22','-maxrate','6500k','-bufsize','13000k','-pix_fmt','yuv420p','-color_range','tv','-movflags','+faststart',str(output)],check=True)
  probe=json.loads(subprocess.check_output(['ffprobe','-v','error','-show_streams','-show_format','-of','json',str(output)]));assert 60<=float(probe['format']['duration'])<=90
- notes='Real nested Hyprland and Hyprune engine with authenticated IPC 0.4, Quickshell HUD, four mounted workspace homes and four real pulled-out terminal windows on owned physical mounts. Real terminal keyboard input verified before recording and typed visibly at the opening. Collision-checked auto-drive walks the connected roads, interior passage, lower service descent and snowy ascent; view turns occur while stationary. Original procedural world and generated textures, CC-BY-4.0. No owner-session control. GPU/package figures and exact engine hashes are in worlds/lumen-reach/reports.'
+ assert hud().get('status')=='live','Shell must remain connected throughout recording'
+ notes='Real nested Hyprland and Hyprune engine with authenticated shell IPC 0.7, Quickshell HUD, four mounted workspace homes and four real pulled-out terminal windows on owned physical mounts. Real terminal keyboard input verified before recording and typed visibly at the opening. Collision-checked auto-drive walks the connected roads, interior passage, lower service descent and snowy ascent; view turns occur while stationary. Original procedural world and generated textures, CC-BY-4.0. No owner-session control. GPU/package figures and exact engine hashes are in worlds/lumen-reach/reports.'
  output.with_suffix('.json').write_text(json.dumps({'title':'Lumen Reach v2 — four inhabited workspace homes','tag':'world','notes':notes},indent=2)+'\n')
  report['tour']={'duration':probe['format']['duration'],'bytes':output.stat().st_size,'terminals':terminals,'typed':marker.read_text(),'traversals':traversals,'hud':{k:v for k,v in hud().items() if k in ['status','protocol','screen','revision','phase','world','map','places']}};log.close()
  staged=a.output/output.name;shutil.move(str(output),staged);shutil.move(str(output.with_suffix('.json')),staged.with_suffix('.json'));report['tour']['path']=str(staged);report['tour']['encodedIn']=str(recording_dir)
