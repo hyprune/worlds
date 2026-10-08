@@ -215,14 +215,14 @@
       "id": "04-signal-rise-reflector",
       "areaCount": 4,
       "position": [
-        40.5,
-        145,
-        7.8
+        44,
+        139,
+        9
       ],
       "target": [
         35,
         149,
-        10.2
+        10
       ]
     }
   ]

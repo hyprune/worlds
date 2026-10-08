@@ -50,7 +50,7 @@ accounting. Package figures include every file; conservative GPU figures include
 all mip levels, color/data views and expanded visible geometry. Process DRM
 memory, when exposed by the kernel, is recorded separately from this estimate.
 
-The complete package is version 0.4.0. `make lumen-release` produces its sorted,
+The complete package is version 0.5.0. `make lumen-release` produces its sorted,
 fixed-date tar.zst archive and checksum without a network publication. Core M2
 is required for the transparent steam cards and typed workspace/tool behavior;
 the manifest remains schema-valid world 0.2 through the coordinated adapter.
@@ -76,3 +76,28 @@ figures are indexed in [reports/final-report.md](reports/final-report.md). The
 primary-wall capture requires core commit d20d7fe or later: this corrects sampling
 of client buffers with no mip chain. `--diagnose` is a short real four-wall check;
 run it in a fresh locked session separately from the complete route audit.
+
+
+Visual polish v2 adds seated entry fixtures, textured material aliases, detailed
+service kits, original rock terrain and a ribbed dish/feed assembly. Run the
+complete automated release review in three fresh nested sessions under one
+shared lifetime lock:
+
+```sh
+python3 tools/check-lumen-session.py --release-review
+```
+
+This captures 4K stills and per-home Medium/iGPU timing samples, traverses every
+route and alternate stair, then records a 60–90 second live-app tour at 1080p.
+The script uses core's effective Medium preset when available and records the
+loaded plugin hash. Tour encoding happens in a unique `/tmp/lumen-tour-v2-*`
+directory before moving the finished MP4 and JSON into artifacts. Gallery files
+are copied only after review; its autocommit service is never controlled.
+
+`make lumen-validate` now includes named mechanical fixture checks and thin
+emissive triangle probes. `tests/test_emissive_check.py` covers 2cm-wide lenses
+on all three axes. Source decals have explicit backplates; authoring evidence
+ships as `fixture-audit.json` and `decal-audit.json`. The material-factor audit
+prevents generated textures from losing their authored color tints on export.
+See [materials/README.md](materials/README.md) for texture reuse and provenance,
+and [reports/final-report.md](reports/final-report.md) for the delivery numbers.

@@ -66,7 +66,7 @@ def apply(area,B):
    plate('Instrument tool case',(x,y,1.19),(.45,.48,.18),'strip')
    B.cyl('Calibration spool',(x,y+.29,1.27),.13,.28,'metal',vertices=12)
   # Foreground repair station frames arrival, outside the work and route volumes.
-  for pos,size in [((-12.2,-12,0),(1.6,1.2,1.0)),((-12.2,-12,1.08),(1.35,1.05,.62)),((-11,-10.3,0),(1.5,1.05,.85))]:B.crate(pos,size)
+  for pos,size in [((-12.2,-14,0),(1.6,1.2,1.0)),((-12.2,-14,1.08),(1.35,1.05,.62)),((-11,-8.9,0),(1.5,1.05,.85))]:B.crate(pos,size)
   plate('Repair station foldout',(-12.2,-10.4,1.02),(1.8,.9,.10),'wood')
   cable('Repair station coiled lead',[(-12.2,-10.5,.13),(-11.5,-10,.13),(-11.3,-9.3,.13),(-12,-8.9,.13),(-12.8,-9.4,.13),(-12.2,-10.5,.13)],.022)
   B.tree(13,-8,0,1.0)

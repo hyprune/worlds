@@ -32,6 +32,12 @@ provenance=json.loads((root/'texture-provenance.json').read_text())
 assert len({r['path'] for r in provenance})==len(provenance),'duplicate texture provenance'
 assert {p.relative_to(root).as_posix() for p in (root/'textures').glob('*.png')}=={r['path'] for r in provenance},'incomplete per-texture provenance'
 assert all(r['author'] and r['license']=='CC-BY-4.0' and r['recipe'] for r in provenance),'missing provenance fields'
+factor_path=root/'material-factors.json'
+if factor_path.exists():
+ factors=json.loads(factor_path.read_text())
+ for _,_,p,_,_ in s.primitives():
+  material=g['materials'][p['material']];name=material['name'].split('--')[-1]
+  if name in factors:assert np.allclose(material['pbrMetallicRoughness']['baseColorFactor'],factors[name]+[1]),(name,'lost authored albedo tint')
 rows=[];triangle_total=0
 # Raster interior occupancy independently detects intersecting exported UV1 triangles.
 # Shared triangle edges are excluded, including triangulated quad diagonals.

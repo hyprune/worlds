@@ -52,6 +52,7 @@ def mat(name,color,asset=None,rough=.6,metal=0,emit=False,unlit=False,tint=False
   e=nt.nodes.new('ShaderNodeEmission');e.inputs['Color'].default_value=(*color,1);e.inputs['Strength'].default_value=1
   if asset and p.inputs['Base Color'].is_linked:nt.links.new(p.inputs['Base Color'].links[0].from_socket,e.inputs['Color'])
   nt.links.new(e.outputs[0],nt.nodes.get('Material Output').inputs['Surface']);UNLIT.add(name)
+ if tint:m['lumenAlbedoTint']=list(color)
  P.MATS[name]=m;return m
 
 def init():
@@ -302,9 +303,9 @@ def court():
  # Layered facade ribs, worn service panels and warm physical entry detailing.
  for x in [-5.6,-3.6,20.8,23.0]:
   for z in [6.5,9.5,12.5]:
-   box('Facade maintenance plate',(x,23.08,z),(1.45,.18,2.25),'concrete',.025)
+   box('Facade maintenance plate',(x,23.145,z),(1.45,.22,2.25),'concrete',.025)
    for dx in [-.58,.58]:
-    for dz in [-.9,.9]:box('Plate captive fixing',(x+dx,22.95,z+dz),(.055,.06,.055),'metal',0)
+    for dz in [-.9,.9]:box('Plate captive fixing',(x+dx,23.008,z+dz),(.055,.06,.055),'metal',0)
   box('Facade service drain',(x,22.96,1.0),(.15,.12,1.5),'metal')
 
  for x in [-7,-5,-3,21,24]:

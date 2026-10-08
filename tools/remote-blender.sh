@@ -22,6 +22,9 @@ if [[ "${HYPRUNE_BAKE_PROJECT:-switchyard}" == lumen-reach ]]; then
   rsync -az "$HOST:$REMOTE/artifacts/lumen-reach/" "$ROOT/artifacts/lumen-reach/" || true
   exit "$status"
 fi
-rsync -az --delete "$HOST:$REMOTE/dist/" "$ROOT/dist/" || true
+mkdir -p "$ROOT/dist/com.hyprune.switchyard"
+if [[ "$status" -eq 0 ]]; then
+  rsync -az --delete "$HOST:$REMOTE/dist/com.hyprune.switchyard/" "$ROOT/dist/com.hyprune.switchyard/"
+fi
 rsync -az --exclude 'film-frames' "$HOST:$REMOTE/artifacts/" "$ROOT/artifacts/" || true
 exit "$status"

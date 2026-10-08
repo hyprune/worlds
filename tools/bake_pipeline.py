@@ -145,6 +145,13 @@ def export(cols,nav):
   m.setdefault('extensions',{})['KHR_materials_unlit']={}
   if m.get('name','').startswith('vista--steam-card'):m['alphaMode']='BLEND';m['doubleSided']=True
  if 'KHR_materials_unlit' not in g.setdefault('extensionsUsed',[]):g['extensionsUsed'].append('KHR_materials_unlit')
+ # Blender's exporter drops a constant Multiply tint when sharing image nodes.
+ # Preserve the authored linear factor explicitly in standard glTF PBR/unlit.
+ factors={name:list(m['lumenAlbedoTint']) for name,m in MATS.items() if 'lumenAlbedoTint' in m}
+ for m in g['materials']:
+  name=m.get('name','').split('--')[-1]
+  if name in factors:m.setdefault('pbrMetallicRoughness',{})['baseColorFactor']=factors[name]+[1]
+ (OUT/'material-factors.json').write_text(json.dumps(factors,indent=2)+'\n')
  # At isolated degenerate UV caps MikkTSpace may output zero tangents.
  # Supply a deterministic unit orthogonal fallback, preserving other tangents.
  buffers={i:bytearray((OUT/b['uri']).read_bytes()) for i,b in enumerate(g['buffers'])};repaired=0

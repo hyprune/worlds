@@ -7,7 +7,7 @@ import argparse,fcntl,hashlib,inspect,json,math,os,shutil,signal,subprocess,sys,
 from pathlib import Path
 from types import SimpleNamespace
 ROOT=Path(__file__).resolve().parents[1]
-p=argparse.ArgumentParser();p.add_argument('--core',type=Path,default=ROOT.parent/'core');p.add_argument('--package',type=Path,default=ROOT/'dist/com.hyprune.lumen-reach');p.add_argument('--output',type=Path,default=ROOT/'artifacts/lumen-reach');p.add_argument('--record',action='store_true');p.add_argument('--profile',action='store_true');p.add_argument('--diagnose',action='store_true');p.add_argument('--routes',action='store_true');p.add_argument('--gallery',action='store_true');a=p.parse_args();
+p=argparse.ArgumentParser();p.add_argument('--core',type=Path,default=ROOT.parent/'core');p.add_argument('--package',type=Path,default=ROOT/'dist/com.hyprune.lumen-reach');p.add_argument('--output',type=Path,default=ROOT/'artifacts/lumen-reach');p.add_argument('--record',action='store_true');p.add_argument('--profile',action='store_true');p.add_argument('--release-review',action='store_true');p.add_argument('--diagnose',action='store_true');p.add_argument('--routes',action='store_true');p.add_argument('--gallery',action='store_true');a=p.parse_args();
 if a.diagnose:a.record=True
 if a.record and a.routes:p.error('Run --routes and --record in separate fresh sessions; shell launch grants expire after 30 seconds.')
 a.output.mkdir(parents=True,exist_ok=True)
@@ -237,10 +237,22 @@ assert source.count("STATE=HERE/'.integration-state'")==1
 source=source.replace("STATE=HERE/'.integration-state'",'STATE='+repr(session.STATE))
 # Path repr requires pathlib in the imported harness namespace.
 source=source.replace('STATE=PosixPath(', 'STATE=pathlib.Path(')
-if a.record:source=source.replace('"0.3" if args.integration', '"0.4" if args.integration')
+if a.record or a.release_review:source=source.replace('"0.3" if args.integration', '"0.4" if args.integration')
 exec(compile(source,str(session.HERE/'session.py'),'exec'),session.__dict__)
 with open('/tmp/worldshell-nested.lock','a') as lock:
  fcntl.flock(lock,fcntl.LOCK_EX)
  (session.STATE/'layout.json').unlink(missing_ok=True)
- try:session.run(SimpleNamespace(serve=False,record=False,m1=False,m2=False,m3a=False,m3b=False,live=False,integration=True,visible=False))
+ try:
+  if a.release_review:
+   base=a.output;initial=json.loads(json.dumps(report));views=(base/'views.json').read_text();index=[]
+   for phase in ['v2-4k','v2-routes','v2-tour']:
+    a.output=base/phase;a.output.mkdir(exist_ok=True);(a.output/'views.json').write_text(views)
+    a.record=phase=='v2-tour';a.routes=phase=='v2-routes';a.profile=phase=='v2-4k';report=json.loads(json.dumps(initial))
+    os.environ['HYPRUNE_NESTED_4K']='1' if a.profile else '0'
+    (session.STATE/'layout.json').unlink(missing_ok=True)
+    print('Release verification phase:',phase,flush=True)
+    session.run(SimpleNamespace(serve=False,record=False,m1=False,m2=False,m3a=False,m3b=False,live=False,integration=True,visible=False))
+    index.append({'phase':phase,'report':str(a.output/'nested-report.json'),'status':report['status']})
+    (base/'release-review-index.json').write_text(json.dumps(index,indent=2)+'\n')
+  else:session.run(SimpleNamespace(serve=False,record=False,m1=False,m2=False,m3a=False,m3b=False,live=False,integration=True,visible=False))
  except Exception as e:report['status']='FAIL';report['error']=str(e);(a.output/'nested-report.json').write_text(json.dumps(report,indent=2)+'\n');raise
