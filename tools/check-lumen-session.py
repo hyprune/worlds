@@ -207,7 +207,7 @@ def record(client,children,state,shell_token,socketpath):
  probe=json.loads(subprocess.check_output(['ffprobe','-v','error','-show_streams','-show_format','-of','json',str(output)]));assert 60<=float(probe['format']['duration'])<=90
  notes='Real nested Hyprland and Hyprune engine with authenticated IPC 0.4, Quickshell HUD, four mounted workspace homes and four real pulled-out terminal windows on owned physical mounts. Real terminal keyboard input verified before recording and typed visibly at the opening. Collision-checked auto-drive walks the connected roads, interior passage, lower service descent and snowy ascent; view turns occur while stationary. Original procedural world and generated textures, CC-BY-4.0. No owner-session control. GPU/package figures and exact engine hashes are in worlds/lumen-reach/reports.'
  output.with_suffix('.json').write_text(json.dumps({'title':'Lumen Reach — four workspace homes','tag':'world','notes':notes},indent=2)+'\n')
- report['tour']={'duration':probe['format']['duration'],'bytes':output.stat().st_size,'terminals':terminals,'typed':marker.read_text(),'traversals':traversals,'hud':hud()};log.close()
+ report['tour']={'duration':probe['format']['duration'],'bytes':output.stat().st_size,'terminals':terminals,'typed':marker.read_text(),'traversals':traversals,'hud':{k:v for k,v in hud().items() if k in ['status','protocol','screen','revision','phase','world','map','places']}};log.close()
  print('PASS recorded tour',output,flush=True)
 
 

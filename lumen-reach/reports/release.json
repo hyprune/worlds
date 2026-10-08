@@ -1,0 +1,128 @@
+{
+  "status": "PASS",
+  "worldId": "com.hyprune.lumen-reach",
+  "version": "0.4.0",
+  "formatVersion": "0.2",
+  "milestoneCommits": {
+    "sun-court": "d16f2a0",
+    "array-hall": "0c14cdd",
+    "rime-vault": "190f5ac",
+    "signal-rise": "db28820"
+  },
+  "coreCommit": "d20d7fe0c22466b349606d6f50ce4e41fedf0eea",
+  "pluginSHA256": "ea4ec7ff2fcf18eff12ae7f0744b57bb82f1a4dec4edb810fc630ecb01d95a35",
+  "shellCommit": "ee66bffa5850118d63d18ea32ca5409b64bfb7e4",
+  "manifestSHA256": "e7db7fe048f6094e7677a121b5736b0ea8a593a5dc7a2fd7f064ae9b70867eba",
+  "sceneSHA256": "e3b3dc840e91d06d7274b52fcd71988fe8d54841d576648a29c109280b1fc8e9",
+  "package": {
+    "status": "PASS",
+    "packageBytes": 57805450,
+    "decodedTextureBytes": 130712768,
+    "conservativeGpuBytes": 285688380,
+    "mippedTextureViewsBytes": 260480340,
+    "expandedGeometryBytes": 25208040,
+    "colorTextureViews": 24,
+    "textureObjects": 49,
+    "textureProvenanceEntries": 49,
+    "visualTriangles": 210067,
+    "anchors": 24,
+    "collisionNodes": 194,
+    "lightmapBindings": 47,
+    "UV1": [
+      {
+        "node": "Visual-array-hall",
+        "triangles": 27048,
+        "uv1Area": 0.13616,
+        "overlapSamples": 0
+      },
+      {
+        "node": "Visual-foliage",
+        "triangles": 12096,
+        "uv1Area": 0.2784,
+        "overlapSamples": 0
+      },
+      {
+        "node": "Visual-rime-vault",
+        "triangles": 21874,
+        "uv1Area": 0.19113,
+        "overlapSamples": 0
+      },
+      {
+        "node": "Visual-signal-rise",
+        "triangles": 57534,
+        "uv1Area": 0.03355,
+        "overlapSamples": 0
+      },
+      {
+        "node": "Visual-sun-court",
+        "triangles": 67180,
+        "uv1Area": 0.03559,
+        "overlapSamples": 0
+      },
+      {
+        "node": "Visual-vista",
+        "triangles": 24335,
+        "uv1Area": 0.0,
+        "overlapSamples": 0
+      }
+    ]
+  },
+  "archive": {
+    "path": "/home/rick/workspace/hyprune/worlds/artifacts/releases/com.hyprune.lumen-reach-0.4.0.tar.zst",
+    "bytes": 34537371,
+    "SHA256": "4e6fcabf7c01db1f7a2947cd84092cbb2c0a12bd46be337640505ee73733e6ef"
+  },
+  "gpuSampling": {
+    "method": "unique nested DRM client IDs, fdinfo GTT, at most one sample per second",
+    "samples": 97,
+    "peakTotalGttBytes": 824205312,
+    "peakResidentGttBytes": 824205312
+  },
+  "gpuScope": "Nested compositor, renderer and imported live application buffers; kernel fdinfo GTT, unique DRM client IDs. Sampled peak, not a hard upper bound between samples.",
+  "tour": {
+    "path": "/home/rick/workspace/rick-the-alien/worldshell-gallery/videos/release-world-tour.mp4",
+    "bytes": 43897356,
+    "SHA256": "734e1d298cc4e37c63caa4213d3a7a3c94f7a5a0931dd7992342ded4cd5cb44d",
+    "durationSeconds": 83.133333,
+    "width": 1920,
+    "height": 1080,
+    "codec": "h264",
+    "frameRate": "30/1",
+    "realKeyboardInput": true,
+    "toolsPlaced": 4,
+    "primaryWorkspaces": 4,
+    "hud": "Quickshell authenticated IPC 0.4",
+    "review": "Whole-take contact sheet plus full-resolution opening, atrium, lower room and snow frames; raw gallery captures reviewed against original concepts and matched Cycles views."
+  },
+  "counts": {
+    "workspaceHomes": 4,
+    "primaryMounts": 4,
+    "toolMounts": 20,
+    "dataObjects": 21,
+    "freePlacementVolumes": 4,
+    "navigationNodes": 64,
+    "bidirectionalEdges": 63,
+    "alternateStairFlights": 14
+  },
+  "routes": {
+    "evidence": "milestone-04-route-report.json",
+    "directedTraversals": 126,
+    "stairs": 14,
+    "sameDeliveredScene": true,
+    "coreCommit": "f7fa0da53f85b977b836755e4df704d191093e66",
+    "scope": "Complete route audit under its recorded core revision, followed by main-road tour under the capture-only sampler fix."
+  },
+  "gallery": {
+    "stills": "/home/rick/workspace/rick-the-alien/worldshell-gallery/screenshots/release-world",
+    "automaticPush": "autocommit service stopped; gallery server available; final tour kept local"
+  },
+  "limits": [
+    "World-wide atmosphere and static environment reflections",
+    "Static alpha steam cards",
+    "Stylized procedural geometry, harder engine contrast than Cycles",
+    "Opaque night-card seams may appear from unusual high viewpoints"
+  ],
+  "remoteBakeHost": "10.2.2.2",
+  "ownerSessionTouched": false,
+  "worldsPushed": false
+}

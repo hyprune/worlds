@@ -70,3 +70,9 @@ samplers clamp and filter linearly at the base level. Generated PBR tiles use
 640px periodic derivatives, verified matching edge pixels, to leave headroom
 for captured applications. See the final render review and reports for the
 measured differences between Cycles, the engine and the owner's concepts.
+
+The delivered tour, local archive, all four milestone commits and exact measured
+figures are indexed in [reports/final-report.md](reports/final-report.md). The
+primary-wall capture requires core commit d20d7fe or later: this corrects sampling
+of client buffers with no mip chain. `--diagnose` is a short real four-wall check;
+run it in a fresh locked session separately from the complete route audit.

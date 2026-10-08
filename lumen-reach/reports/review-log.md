@@ -50,8 +50,8 @@ Texture view accounting showed that full-resolution tiles, large irradiance
 atlases and eight captured applications exceeded the total nested-process GPU
 budget. Periodic 640px PBR derivatives, separate bounded irradiance atlases,
 1536px workspace previews and a 1600px night panorama leave application
-headroom without replacing the original masters. Live terminal captures use
-800x450 buffers, with font sizes preserving readable character density.
+headroom without replacing the original masters. Initial live terminal captures used 800×450 buffers; the final application
+buffer and capture correction is recorded below.
 
 The stock integration harness reset its state directory after our earlier
 assignment, retaining old workspace bindings and covering the static previews
@@ -72,3 +72,30 @@ before creating applications. Successful route coverage is preserved separately
 with scene/plugin hashes; the tour must match that scene. The failed combined
 bootstrap report remains in artifacts for diagnosis. Core's coordinated shell
 commit ee66bff changes the visible navigation panel terminology to Overview.
+
+The live-wall check found two independent problems. A small btop terminal
+reported fewer than its required 24 rows; primary applications now use 900×600
+buffers while pulled terminals use 700×394 buffers. With adequate rows, the
+same healthy btop source rendered on a tool but remained black in its workspace
+compositor, despite advancing commit counts. The coordinated core fix d20d7fe
+binds an owned LINEAR/clamp sampler in Capture.compose, without altering native
+texture parameters; its regression covers root textures with no mip chain.
+The release scenario subsequently captured useful live application content on
+all four primary walls and verified real input to a placed terminal. Evidence
+is in live-workspace-check.json and the ungraded live-workspace gallery stills.
+
+The gallery autocommit service was found running again after the core agent's
+earlier pause. It is stopped before the final video delivery to prevent further
+automatic publication. The gallery server stays running; release files and
+commits remain local. No worlds repository push is performed.
+
+The reviewed final take runs 83.13s at 1080p/30 fps.
+All four walls contain useful live btop content, four tools are placed, real
+terminal input passes, and actual capsule-checked road/descent/ascent travel
+reaches every home. The whole-take contact sheet and full-resolution opening,
+Array Hall, Rime Vault and Signal Rise frames were inspected. The lower travel
+passage is intentionally dark; static steam and the stylized snow geometry
+remain visible. The sampled combined process peak is
+786.02 MiB across 97 samples. The reviewed MP4
+and JSON are delivered locally to the gallery; tour-nested-report.json and
+release.json preserve exact assets, engine and delivery hashes.

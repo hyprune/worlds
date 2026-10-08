@@ -58,3 +58,12 @@ Exact package, GPU and engine evidence is in `reports/package-check.json`,
 `reports/release.json`. GPU texture estimates and kernel process residency are
 separate measurements; the latter includes the nested compositor, renderer and
 imported application buffers. The tour's exact scene/plugin hashes are recorded.
+
+The reviewed delivery runs 83.13 seconds at 1920×1080/30 fps. Live application
+content is visible on all four primary walls; four real terminals are placed
+on owned mounts, and the opening includes actual terminal typing. The full
+recording contact sheet and selected full-resolution frames were inspected.
+Core d20d7fe corrects the incomplete-mipmap client sampling found during this
+review. The final nested process peak is 786.02 MiB across 97 kernel samples;
+the 55.13 MiB package has a conservative 272.45 MiB world GPU estimate.
+See reports/final-report.md for the local gallery and installable archive.
