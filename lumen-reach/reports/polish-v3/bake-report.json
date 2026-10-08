@@ -1,0 +1,79 @@
+[
+  {
+    "group": "sun-court",
+    "resolution": 1280,
+    "peakLinear": 18.049409866333008,
+    "intensity": 18.1,
+    "seconds": 2.19,
+    "samples": 64,
+    "marginPixels": 4,
+    "islandSeparationPixels": 4,
+    "supportedMipLevels": 2
+  },
+  {
+    "group": "foliage",
+    "resolution": 1024,
+    "peakLinear": 0.6843281984329224,
+    "intensity": 1,
+    "seconds": 2.07,
+    "samples": 64,
+    "marginPixels": 2,
+    "islandSeparationPixels": 2,
+    "supportedMipLevels": 0
+  },
+  {
+    "group": "array-hall",
+    "resolution": 1536,
+    "peakLinear": 31.133411407470703,
+    "intensity": 31.2,
+    "seconds": 2.84,
+    "samples": 64,
+    "marginPixels": 4,
+    "islandSeparationPixels": 4,
+    "supportedMipLevels": 2
+  },
+  {
+    "group": "rime-vault",
+    "resolution": 2048,
+    "peakLinear": 22.512786865234375,
+    "intensity": 22.6,
+    "seconds": 4.55,
+    "samples": 64,
+    "marginPixels": 4,
+    "islandSeparationPixels": 4,
+    "supportedMipLevels": 2
+  },
+  {
+    "group": "signal-rise",
+    "resolution": 1280,
+    "peakLinear": 3.427128553390503,
+    "intensity": 3.5,
+    "seconds": 2.05,
+    "samples": 64,
+    "marginPixels": 4,
+    "islandSeparationPixels": 4,
+    "supportedMipLevels": 2
+  },
+  {
+    "group": "connector-descent",
+    "resolution": 768,
+    "peakLinear": 11.79150676727295,
+    "intensity": 11.8,
+    "seconds": 1.75,
+    "samples": 64,
+    "marginPixels": 4,
+    "islandSeparationPixels": 4,
+    "supportedMipLevels": 2
+  },
+  {
+    "group": "connector-ascent",
+    "resolution": 768,
+    "peakLinear": 1.7032215595245361,
+    "intensity": 1.8,
+    "seconds": 1.83,
+    "samples": 64,
+    "marginPixels": 4,
+    "islandSeparationPixels": 4,
+    "supportedMipLevels": 2
+  }
+]

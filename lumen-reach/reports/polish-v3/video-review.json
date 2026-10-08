@@ -1,0 +1,13 @@
+{
+  "status": "REVIEWED",
+  "durationSeconds": 42,
+  "resolution": [
+    1920,
+    1080
+  ],
+  "fps": 30,
+  "metadataAllValuesStrings": true,
+  "sha256": "44ef46a189b6a59d2661d749b9f5e9f6f277607d6693f4daa14e98d417a92ecc",
+  "review": "Inspected sampled frames across all six before/after segments. Matching arrival, frozen services and maintenance deck paths; clear labels; no grading. Directional walls replace camouflage; new console banks, racks and grates visible. Same broad clearances retained.",
+  "contactSheet": "/tmp/rime-v3-video-review.png"
+}

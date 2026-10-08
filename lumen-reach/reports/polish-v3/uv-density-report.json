@@ -1,0 +1,44 @@
+[
+  {
+    "group": "sun-court",
+    "uv1Area": 0.02709945354754281,
+    "triangles": 45672,
+    "resolution": 1280
+  },
+  {
+    "group": "foliage",
+    "uv1Area": 0.21319959671265348,
+    "triangles": 20736,
+    "resolution": 1024
+  },
+  {
+    "group": "array-hall",
+    "uv1Area": 0.1169398751466203,
+    "triangles": 28040,
+    "resolution": 1536
+  },
+  {
+    "group": "rime-vault",
+    "uv1Area": 0.19209744672680198,
+    "triangles": 44700,
+    "resolution": 2048
+  },
+  {
+    "group": "signal-rise",
+    "uv1Area": 0.006164411611056325,
+    "triangles": 58940,
+    "resolution": 1280
+  },
+  {
+    "group": "connector-descent",
+    "uv1Area": 0.471073251145402,
+    "triangles": 2754,
+    "resolution": 768
+  },
+  {
+    "group": "connector-ascent",
+    "uv1Area": 0.5147783488895041,
+    "triangles": 2490,
+    "resolution": 768
+  }
+]

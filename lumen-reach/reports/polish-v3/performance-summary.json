@@ -1,0 +1,44 @@
+{
+  "nativeOutput": [
+    3840,
+    2160
+  ],
+  "preset": "Medium",
+  "scope": "Thirty IPC samples per stationary home, not a sustained route FPS guarantee",
+  "views": [
+    {
+      "view": "01-sun-court",
+      "framesPerSecond": 59.95,
+      "medianGpuPassMs": 4.73,
+      "renderScales": [
+        0.5
+      ]
+    },
+    {
+      "view": "02-array-hall",
+      "framesPerSecond": 60.01,
+      "medianGpuPassMs": 9.0,
+      "renderScales": [
+        0.5625
+      ]
+    },
+    {
+      "view": "03-rime-vault",
+      "framesPerSecond": 59.98,
+      "medianGpuPassMs": 4.54,
+      "renderScales": [
+        0.375,
+        0.4375
+      ]
+    },
+    {
+      "view": "04-signal-rise",
+      "framesPerSecond": 59.87,
+      "medianGpuPassMs": 3.692,
+      "renderScales": [
+        0.375,
+        0.4375
+      ]
+    }
+  ]
+}

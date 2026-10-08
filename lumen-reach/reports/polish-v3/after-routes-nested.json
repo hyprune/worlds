@@ -1,0 +1,2086 @@
+{
+  "coreDirty": [
+    " M CMakeLists.txt",
+    " M src/daemon/Main.cpp",
+    " M src/interaction/Config.cpp",
+    " M src/ipc/Bridge.cpp",
+    " M src/ipc/Bridge.hpp",
+    " M src/ipc/Protocol.hpp",
+    " M src/platform/hyprland/Plugin.cpp",
+    " M src/render/Graphics.hpp",
+    " M src/render/Renderer.cpp",
+    " M src/render/Renderer.hpp",
+    " M src/render/Resolution.hpp",
+    " M tests/render.cpp",
+    "?? dev/nested/offload-power.py",
+    "?? dev/nested/offload_acceptance.py",
+    "?? src/offload/",
+    "?? tests/offload.cpp"
+  ],
+  "coreDiffSHA256": "3ae0da731f80b00c32ded03b2f0d3787f5b56a076cca145bb5d63c38bbc8e2c5",
+  "coreCommit": "c34aaa717128e03b8db70784f48958948f669d08",
+  "pluginSHA256": "f1f7cd037512d3417cecd939276587ddea15f203a129de315a62f6a041b67bf6",
+  "loadedPluginSHA256": "f1f7cd037512d3417cecd939276587ddea15f203a129de315a62f6a041b67bf6",
+  "protocol": "0.3",
+  "load": {
+    "revision": 4
+  },
+  "camera": {
+    "active": true,
+    "activeHandle": -1,
+    "aim": "",
+    "captureDirectory": "/home/rick/workspace/hyprune/worlds/artifacts/lumen-reach-v3/after-routes/.nested-state/statehome/hyprune/captures",
+    "captures": [],
+    "childSurfaces": [],
+    "children": 0,
+    "config": {
+      "graphics": {
+        "alpha_haze": null,
+        "ambient_occlusion": null,
+        "anisotropy": null,
+        "bloom": null,
+        "bloom_strength": 0.15,
+        "dynamic_resolution": true,
+        "exposure": 1.0,
+        "fog": null,
+        "fov": 60.0,
+        "msaa": null,
+        "normal_maps": null,
+        "offload": "off",
+        "offload_power_cap_w": 80,
+        "quality": "medium",
+        "reduced_motion": false,
+        "reflections": null,
+        "render_scale": "auto",
+        "scale_max": 1.0,
+        "scale_min": 0.375,
+        "sharpen": 0.35,
+        "sky": null,
+        "specular": null,
+        "target_fps": 60
+      },
+      "input": {
+        "bindings": {
+          "back": "s",
+          "down": "Control_L",
+          "fly": "F4",
+          "focus": "f",
+          "forward": "w",
+          "jump": "space",
+          "left": "a",
+          "noclip": "v",
+          "right": "d",
+          "zoom": "c"
+        },
+        "carry_button": 272,
+        "resize_button": 273,
+        "roll_button": 274,
+        "typing_button": 275,
+        "typing_cursor": true
+      },
+      "player": {
+        "fly_speed": 5.0,
+        "jump_speed": 5.0,
+        "look_inertia": 0.03,
+        "look_sensitivity": 0.0025,
+        "move_inertia": 0.05,
+        "respawn_below": 30.0,
+        "run_multiplier": 1.8,
+        "step_height": 0.35,
+        "walk_speed": 3.5
+      },
+      "tools": {
+        "enabled": true,
+        "slots": [
+          "pointer",
+          "mount",
+          "path",
+          "path",
+          "path"
+        ]
+      },
+      "windows": {
+        "scale": 0.002,
+        "spawn_distance": 5.0,
+        "transition_seconds": 0.35,
+        "wheel_factor": 1.06,
+        "world_workspace": 8
+      }
+    },
+    "cursor": "reticle",
+    "debug": false,
+    "error": "",
+    "eyeHeight": 1.7000000476837158,
+    "frames": 122,
+    "fullscreen": 0,
+    "fullscreenId": "",
+    "gesture": 0,
+    "gestureId": "",
+    "grabbed": "",
+    "handover": 0,
+    "instances": [],
+    "keyboardFocus": false,
+    "layerCursor": false,
+    "mode": "movement",
+    "nativeCursorVisible": false,
+    "nativePointerFocused": false,
+    "noclip": false,
+    "overlayStyle": {
+      "fontFamily": "monospace",
+      "iconAtlas": null,
+      "labelColor": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "promptColor": [
+        0.7,
+        0.9,
+        1.0
+      ],
+      "routeColor": [
+        0.25,
+        1.0,
+        0.65
+      ],
+      "waypointColor": [
+        0.25,
+        1.0,
+        0.65
+      ]
+    },
+    "overlays": {
+      "areaMarkers": false,
+      "frame": 122,
+      "heading": 0.0,
+      "labels": [],
+      "pitch": 0.0,
+      "routeSegments": 0
+    },
+    "ownsInput": true,
+    "pitch": 0.0,
+    "pointer": [
+      0.5,
+      0.5
+    ],
+    "position": [
+      -8.0,
+      1.7000000476837158,
+      12.0
+    ],
+    "positionMode": 0,
+    "pressedButtons": 0,
+    "previousWorkspace": 2,
+    "savedCursorHidden": true,
+    "seatGrab": false,
+    "selectedScale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "superHeld": false,
+    "timings": {
+      "captureMs": 0.025818,
+      "collisionTriangles": 4114,
+      "cpuPassMs": [
+        0.337296,
+        0.01526,
+        0.01837,
+        0.008523
+      ],
+      "cpuRenderMs": 0.381113,
+      "cpuUpdateMs": 0.192553,
+      "debug": false,
+      "deliveredFPS": 59.998657290048506,
+      "frameMs": 16.609047,
+      "gpuCaptureMs": 0.0,
+      "gpuEffectsMs": {
+        "bloom": 0.123072,
+        "msaa_resolve": 0.0,
+        "native_surfaces_geometry": 1.103177,
+        "output_markers": 0.128697,
+        "sky": 0.174739,
+        "upscale_sharpen": 0.34927,
+        "world_shading_shared": 3.875208
+      },
+      "gpuPassMs": [
+        4.049947,
+        1.103177,
+        0.47234200000000004,
+        0.128697
+      ],
+      "graphics": {
+        "alpha_haze": true,
+        "ambient_occlusion": true,
+        "anisotropy": 2,
+        "bloom": "low",
+        "bloom_strength": 0.12,
+        "dynamic_resolution": true,
+        "exposure": 1,
+        "fog": "height",
+        "fov": 60.0,
+        "msaa": 1,
+        "normal_maps": true,
+        "offload": "off",
+        "offload_power_cap_w": 80,
+        "quality": "medium",
+        "reduced_motion": false,
+        "reflections": true,
+        "render_scale": "auto",
+        "scale_max": 1.0,
+        "scale_min": 0.375,
+        "sharpen": 0.35,
+        "sky": "environment",
+        "specular": true,
+        "target_fps": 60
+      },
+      "inFlight": 1,
+      "internalSize": [
+        1920,
+        1080
+      ],
+      "ipcMs": 0.200017,
+      "msaaSamples": 1,
+      "nativeSize": [
+        1920,
+        1080
+      ],
+      "offload": {
+        "activeRenderer": "in-process",
+        "capW": 50.0,
+        "controls": {
+          "alpha_haze": {
+            "effective": true,
+            "gpuMs": null,
+            "passGpuMs": 1.125364,
+            "requested": null,
+            "sharedPass": "native_surfaces_geometry"
+          },
+          "ambient_occlusion": {
+            "effective": true,
+            "gpuMs": null,
+            "passGpuMs": 3.874479,
+            "requested": null,
+            "sharedPass": "world_shading_shared"
+          },
+          "anisotropy": {
+            "effective": 2,
+            "gpuMs": null,
+            "passGpuMs": 3.874479,
+            "requested": null,
+            "sharedPass": "world_shading_shared"
+          },
+          "bloom": {
+            "effective": "low",
+            "gpuMs": 0.125208,
+            "passGpuMs": 0.125208,
+            "requested": null,
+            "sharedPass": "bloom"
+          },
+          "bloom_strength": {
+            "effective": 0.12,
+            "gpuMs": 0.125208,
+            "passGpuMs": 0.125208,
+            "requested": 0.15,
+            "sharedPass": "bloom"
+          },
+          "dynamic_resolution": {
+            "effective": true,
+            "gpuMs": null,
+            "passGpuMs": null,
+            "requested": true,
+            "sharedPass": null
+          },
+          "exposure": {
+            "effective": 1,
+            "gpuMs": null,
+            "passGpuMs": null,
+            "requested": 1.0,
+            "sharedPass": null
+          },
+          "fog": {
+            "effective": "height",
+            "gpuMs": null,
+            "passGpuMs": 3.874479,
+            "requested": null,
+            "sharedPass": "world_shading_shared"
+          },
+          "fov": {
+            "effective": 60.0,
+            "gpuMs": null,
+            "passGpuMs": null,
+            "requested": 60.0,
+            "sharedPass": null
+          },
+          "msaa": {
+            "effective": 1,
+            "gpuMs": null,
+            "passGpuMs": 0.0,
+            "requested": null,
+            "sharedPass": "msaa_resolve"
+          },
+          "normal_maps": {
+            "effective": true,
+            "gpuMs": null,
+            "passGpuMs": 3.874479,
+            "requested": null,
+            "sharedPass": "world_shading_shared"
+          },
+          "offload": {
+            "effective": "off",
+            "gpuMs": null,
+            "passGpuMs": null,
+            "requested": "off",
+            "sharedPass": null
+          },
+          "offload_power_cap_w": {
+            "effective": 80,
+            "gpuMs": null,
+            "passGpuMs": null,
+            "requested": 80,
+            "sharedPass": null
+          },
+          "quality": {
+            "effective": "medium",
+            "gpuMs": null,
+            "passGpuMs": null,
+            "requested": "medium",
+            "sharedPass": null
+          },
+          "reduced_motion": {
+            "effective": false,
+            "gpuMs": null,
+            "passGpuMs": null,
+            "requested": false,
+            "sharedPass": null
+          },
+          "reflections": {
+            "effective": true,
+            "gpuMs": null,
+            "passGpuMs": 3.874479,
+            "requested": null,
+            "sharedPass": "world_shading_shared"
+          },
+          "render_scale": {
+            "effective": "auto",
+            "gpuMs": null,
+            "passGpuMs": null,
+            "requested": "auto",
+            "sharedPass": null
+          },
+          "scale_max": {
+            "effective": 1.0,
+            "gpuMs": null,
+            "passGpuMs": null,
+            "requested": 1.0,
+            "sharedPass": null
+          },
+          "scale_min": {
+            "effective": 0.375,
+            "gpuMs": null,
+            "passGpuMs": null,
+            "requested": 0.375,
+            "sharedPass": null
+          },
+          "sharpen": {
+            "effective": 0.35,
+            "gpuMs": null,
+            "passGpuMs": 0.34526,
+            "requested": 0.35,
+            "sharedPass": "upscale_sharpen"
+          },
+          "sky": {
+            "effective": "environment",
+            "gpuMs": 0.174947,
+            "passGpuMs": 0.174947,
+            "requested": null,
+            "sharedPass": "sky"
+          },
+          "specular": {
+            "effective": true,
+            "gpuMs": null,
+            "passGpuMs": 3.874479,
+            "requested": null,
+            "sharedPass": "world_shading_shared"
+          },
+          "target_fps": {
+            "effective": 60,
+            "gpuMs": null,
+            "passGpuMs": null,
+            "requested": 60,
+            "sharedPass": null
+          }
+        },
+        "costsMs": {
+          "bloom": 0.125208,
+          "msaa_resolve": 0.0,
+          "native_surfaces_geometry": 1.125364,
+          "output_markers": 0.130052,
+          "sky": 0.174947,
+          "upscale_sharpen": 0.34526,
+          "world_shading_shared": 3.874479
+        },
+        "effective": {
+          "alpha_haze": true,
+          "ambient_occlusion": true,
+          "anisotropy": 2,
+          "bloom": "low",
+          "bloom_strength": 0.12,
+          "dynamic_resolution": true,
+          "exposure": 1,
+          "fog": "height",
+          "fov": 60.0,
+          "msaa": 1,
+          "normal_maps": true,
+          "offload": "off",
+          "offload_power_cap_w": 80,
+          "quality": "medium",
+          "reduced_motion": false,
+          "reflections": true,
+          "render_scale": "auto",
+          "scale_max": 1.0,
+          "scale_min": 0.375,
+          "sharpen": 0.35,
+          "sky": "environment",
+          "specular": true,
+          "target_fps": 60
+        },
+        "generation": 4,
+        "mode": "off",
+        "pid": null,
+        "powerW": null,
+        "preset": "medium",
+        "profile": "usb-c",
+        "reason": "inactive",
+        "requested": {
+          "alpha_haze": null,
+          "ambient_occlusion": null,
+          "anisotropy": null,
+          "bloom": null,
+          "bloom_strength": 0.15,
+          "dynamic_resolution": true,
+          "exposure": 1.0,
+          "fog": null,
+          "fov": 60.0,
+          "msaa": null,
+          "normal_maps": null,
+          "offload": "off",
+          "offload_power_cap_w": 80,
+          "quality": "medium",
+          "reduced_motion": false,
+          "reflections": null,
+          "render_scale": "auto",
+          "scale_max": 1.0,
+          "scale_min": 0.375,
+          "sharpen": 0.35,
+          "sky": null,
+          "specular": null,
+          "target_fps": 60
+        },
+        "status": "local",
+        "targetFPS": 45,
+        "workerTimings": null
+      },
+      "quality": "high",
+      "renderScale": 1.0,
+      "renderedFrames": 122,
+      "renderer": "Mesa Intel(R) Graphics (PTL)",
+      "reusedFrames": 0,
+      "targetFPS": 60,
+      "upload": {
+        "bytes": 263734472,
+        "completedJobs": 0,
+        "cpuMs": 124.33555400000009,
+        "jobs": 0,
+        "maxJobMs": 37.118679,
+        "maxStepMs": 37.122894,
+        "pending": false,
+        "slowestJob": "shader scene_ #0",
+        "steps": 141
+      }
+    },
+    "tool": 1,
+    "worldWorkspace": 8,
+    "yaw": 0.0
+  },
+  "graphicsRequest": {
+    "quality": "medium",
+    "render_scale": "auto",
+    "target_fps": 60
+  },
+  "manifestSHA256": "baa1ab3986efcaa817835388e155456bd49b5b000707cbd4a5f52e7f51b8c6fd",
+  "sceneSHA256": "0f2ccff23da219f64f83169416005adc404a295726f4334394373f7f1fbc03bc",
+  "walk": {
+    "before": [
+      -8.0,
+      1.7000000476837158,
+      12.0
+    ],
+    "after": [
+      -8.0,
+      1.7000000476837158,
+      10.237672805786133
+    ]
+  },
+  "views": [
+    {
+      "renderer": {
+        "captureMs": 0.012187,
+        "collisionTriangles": 4114,
+        "cpuPassMs": [
+          0.342938,
+          0.016199,
+          0.018598,
+          0.011348
+        ],
+        "cpuRenderMs": 0.391358,
+        "cpuUpdateMs": 0.204026,
+        "debug": false,
+        "deliveredFPS": 59.999416325677984,
+        "frameMs": 16.643845,
+        "gpuCaptureMs": 0.0,
+        "gpuEffectsMs": {
+          "bloom": 0.122291,
+          "msaa_resolve": 5.2e-05,
+          "native_surfaces_geometry": 0.01401,
+          "output_markers": 0.115104,
+          "sky": 0.173333,
+          "upscale_sharpen": 0.357187,
+          "world_shading_shared": 5.586458
+        },
+        "gpuPassMs": [
+          5.759791000000001,
+          0.01401,
+          0.47952999999999996,
+          0.115104
+        ],
+        "graphics": {
+          "alpha_haze": true,
+          "ambient_occlusion": true,
+          "anisotropy": 2,
+          "bloom": "low",
+          "bloom_strength": 0.12,
+          "dynamic_resolution": true,
+          "exposure": 1,
+          "fog": "height",
+          "fov": 60.0,
+          "msaa": 1,
+          "normal_maps": true,
+          "offload": "off",
+          "offload_power_cap_w": 80,
+          "quality": "medium",
+          "reduced_motion": false,
+          "reflections": true,
+          "render_scale": "auto",
+          "scale_max": 1.0,
+          "scale_min": 0.375,
+          "sharpen": 0.35,
+          "sky": "environment",
+          "specular": true,
+          "target_fps": 60
+        },
+        "inFlight": 1,
+        "internalSize": [
+          1920,
+          1080
+        ],
+        "ipcMs": 0.209024,
+        "msaaSamples": 1,
+        "nativeSize": [
+          1920,
+          1080
+        ],
+        "offload": {
+          "activeRenderer": "in-process",
+          "capW": 50.0,
+          "controls": {
+            "alpha_haze": {
+              "effective": true,
+              "gpuMs": null,
+              "passGpuMs": 0.01401,
+              "requested": null,
+              "sharedPass": "native_surfaces_geometry"
+            },
+            "ambient_occlusion": {
+              "effective": true,
+              "gpuMs": null,
+              "passGpuMs": 5.586458,
+              "requested": null,
+              "sharedPass": "world_shading_shared"
+            },
+            "anisotropy": {
+              "effective": 2,
+              "gpuMs": null,
+              "passGpuMs": 5.586458,
+              "requested": null,
+              "sharedPass": "world_shading_shared"
+            },
+            "bloom": {
+              "effective": "low",
+              "gpuMs": 0.122291,
+              "passGpuMs": 0.122291,
+              "requested": null,
+              "sharedPass": "bloom"
+            },
+            "bloom_strength": {
+              "effective": 0.12,
+              "gpuMs": 0.122291,
+              "passGpuMs": 0.122291,
+              "requested": 0.15,
+              "sharedPass": "bloom"
+            },
+            "dynamic_resolution": {
+              "effective": true,
+              "gpuMs": null,
+              "passGpuMs": null,
+              "requested": true,
+              "sharedPass": null
+            },
+            "exposure": {
+              "effective": 1,
+              "gpuMs": null,
+              "passGpuMs": null,
+              "requested": 1.0,
+              "sharedPass": null
+            },
+            "fog": {
+              "effective": "height",
+              "gpuMs": null,
+              "passGpuMs": 5.586458,
+              "requested": null,
+              "sharedPass": "world_shading_shared"
+            },
+            "fov": {
+              "effective": 60.0,
+              "gpuMs": null,
+              "passGpuMs": null,
+              "requested": 60.0,
+              "sharedPass": null
+            },
+            "msaa": {
+              "effective": 1,
+              "gpuMs": null,
+              "passGpuMs": 5.2e-05,
+              "requested": null,
+              "sharedPass": "msaa_resolve"
+            },
+            "normal_maps": {
+              "effective": true,
+              "gpuMs": null,
+              "passGpuMs": 5.586458,
+              "requested": null,
+              "sharedPass": "world_shading_shared"
+            },
+            "offload": {
+              "effective": "off",
+              "gpuMs": null,
+              "passGpuMs": null,
+              "requested": "off",
+              "sharedPass": null
+            },
+            "offload_power_cap_w": {
+              "effective": 80,
+              "gpuMs": null,
+              "passGpuMs": null,
+              "requested": 80,
+              "sharedPass": null
+            },
+            "quality": {
+              "effective": "medium",
+              "gpuMs": null,
+              "passGpuMs": null,
+              "requested": "medium",
+              "sharedPass": null
+            },
+            "reduced_motion": {
+              "effective": false,
+              "gpuMs": null,
+              "passGpuMs": null,
+              "requested": false,
+              "sharedPass": null
+            },
+            "reflections": {
+              "effective": true,
+              "gpuMs": null,
+              "passGpuMs": 5.586458,
+              "requested": null,
+              "sharedPass": "world_shading_shared"
+            },
+            "render_scale": {
+              "effective": "auto",
+              "gpuMs": null,
+              "passGpuMs": null,
+              "requested": "auto",
+              "sharedPass": null
+            },
+            "scale_max": {
+              "effective": 1.0,
+              "gpuMs": null,
+              "passGpuMs": null,
+              "requested": 1.0,
+              "sharedPass": null
+            },
+            "scale_min": {
+              "effective": 0.375,
+              "gpuMs": null,
+              "passGpuMs": null,
+              "requested": 0.375,
+              "sharedPass": null
+            },
+            "sharpen": {
+              "effective": 0.35,
+              "gpuMs": null,
+              "passGpuMs": 0.357187,
+              "requested": 0.35,
+              "sharedPass": "upscale_sharpen"
+            },
+            "sky": {
+              "effective": "environment",
+              "gpuMs": 0.173333,
+              "passGpuMs": 0.173333,
+              "requested": null,
+              "sharedPass": "sky"
+            },
+            "specular": {
+              "effective": true,
+              "gpuMs": null,
+              "passGpuMs": 5.586458,
+              "requested": null,
+              "sharedPass": "world_shading_shared"
+            },
+            "target_fps": {
+              "effective": 60,
+              "gpuMs": null,
+              "passGpuMs": null,
+              "requested": 60,
+              "sharedPass": null
+            }
+          },
+          "costsMs": {
+            "bloom": 0.122291,
+            "msaa_resolve": 5.2e-05,
+            "native_surfaces_geometry": 0.01401,
+            "output_markers": 0.115104,
+            "sky": 0.173333,
+            "upscale_sharpen": 0.357187,
+            "world_shading_shared": 5.586458
+          },
+          "effective": {
+            "alpha_haze": true,
+            "ambient_occlusion": true,
+            "anisotropy": 2,
+            "bloom": "low",
+            "bloom_strength": 0.12,
+            "dynamic_resolution": true,
+            "exposure": 1,
+            "fog": "height",
+            "fov": 60.0,
+            "msaa": 1,
+            "normal_maps": true,
+            "offload": "off",
+            "offload_power_cap_w": 80,
+            "quality": "medium",
+            "reduced_motion": false,
+            "reflections": true,
+            "render_scale": "auto",
+            "scale_max": 1.0,
+            "scale_min": 0.375,
+            "sharpen": 0.35,
+            "sky": "environment",
+            "specular": true,
+            "target_fps": 60
+          },
+          "generation": 4,
+          "mode": "off",
+          "pid": null,
+          "powerW": null,
+          "preset": "medium",
+          "profile": "usb-c",
+          "reason": "inactive",
+          "requested": {
+            "alpha_haze": null,
+            "ambient_occlusion": null,
+            "anisotropy": null,
+            "bloom": null,
+            "bloom_strength": 0.15,
+            "dynamic_resolution": true,
+            "exposure": 1.0,
+            "fog": null,
+            "fov": 60.0,
+            "msaa": null,
+            "normal_maps": null,
+            "offload": "off",
+            "offload_power_cap_w": 80,
+            "quality": "medium",
+            "reduced_motion": false,
+            "reflections": null,
+            "render_scale": "auto",
+            "scale_max": 1.0,
+            "scale_min": 0.375,
+            "sharpen": 0.35,
+            "sky": null,
+            "specular": null,
+            "target_fps": 60
+          },
+          "status": "local",
+          "targetFPS": 45,
+          "workerTimings": null
+        },
+        "quality": "high",
+        "renderScale": 1.0,
+        "renderedFrames": 307,
+        "renderer": "Mesa Intel(R) Graphics (PTL)",
+        "reusedFrames": 0,
+        "targetFPS": 60,
+        "upload": {
+          "bytes": 263734472,
+          "completedJobs": 0,
+          "cpuMs": 124.33555400000009,
+          "jobs": 0,
+          "maxJobMs": 37.118679,
+          "maxStepMs": 37.122894,
+          "pending": false,
+          "slowestJob": "shader scene_ #0",
+          "steps": 141
+        }
+      },
+      "id": "03-rime-vault",
+      "pose": {
+        "orientation": [
+          0.08601707965135574,
+          -0.0706249549984932,
+          0.00611304584890604,
+          0.9937684535980225
+        ],
+        "position": [
+          36.0,
+          -4.299999713897705,
+          -78.0
+        ]
+      },
+      "verticalFovDegrees": 60,
+      "path": "artifacts/lumen-reach-v3/after-routes/engine-03-rime-vault.png"
+    }
+  ],
+  "routeTraversal": {
+    "status": "PASS",
+    "nodes": 64,
+    "directedGraphTraversals": 126,
+    "alternateStairs": 14,
+    "traversed": [
+      {
+        "path": "arrival -> court-junction",
+        "end": [
+          1.0,
+          1.7000000476837158,
+          -2.0
+        ]
+      },
+      {
+        "path": "court-junction -> court-wall",
+        "end": [
+          8.0,
+          1.7000000476837158,
+          -12.0
+        ]
+      },
+      {
+        "path": "court-wall -> hall-entry",
+        "end": [
+          8.0,
+          1.7000000476837158,
+          -25.0
+        ]
+      },
+      {
+        "path": "hall-entry -> hall-arrival",
+        "end": [
+          8.0,
+          1.7000000476837158,
+          -33.0
+        ]
+      },
+      {
+        "path": "hall-arrival -> hall-center",
+        "end": [
+          8.0,
+          1.7000000476837158,
+          -46.0
+        ]
+      },
+      {
+        "path": "hall-center -> hall-exit",
+        "end": [
+          20.0,
+          1.7000000476837158,
+          -50.0
+        ]
+      },
+      {
+        "path": "hall-exit -> service-entry",
+        "end": [
+          30.0,
+          1.7000000476837158,
+          -50.0
+        ]
+      },
+      {
+        "path": "service-entry -> descent-top",
+        "end": [
+          30.0,
+          1.7000000476837158,
+          -52.0
+        ]
+      },
+      {
+        "path": "descent-top -> descent-bottom",
+        "end": [
+          30.0,
+          -4.289914608001709,
+          -74.0031967163086
+        ]
+      },
+      {
+        "path": "descent-bottom -> vault-door",
+        "end": [
+          32.0,
+          -4.289897918701172,
+          -74.00312805175781
+        ]
+      },
+      {
+        "path": "vault-door -> vault-arrival",
+        "end": [
+          38.0,
+          -4.299999713897705,
+          -79.0
+        ]
+      },
+      {
+        "path": "vault-arrival -> vault-center",
+        "end": [
+          38.0,
+          -4.299999713897705,
+          -89.0
+        ]
+      },
+      {
+        "path": "vault-center -> vault-exit",
+        "end": [
+          48.0,
+          -4.299999713897705,
+          -98.0
+        ]
+      },
+      {
+        "path": "vault-exit -> rise-entry",
+        "end": [
+          54.0,
+          -4.291378021240234,
+          -99.99755859375
+        ]
+      },
+      {
+        "path": "rise-entry -> rise-ramp-top",
+        "end": [
+          54.0,
+          1.7000000476837158,
+          -124.0
+        ]
+      },
+      {
+        "path": "rise-ramp-top -> rise-arrival",
+        "end": [
+          54.0,
+          1.7095996141433716,
+          -124.99950408935547
+        ]
+      },
+      {
+        "path": "rise-arrival -> rise-ring",
+        "end": [
+          57.0,
+          1.7100000381469727,
+          -132.0
+        ]
+      },
+      {
+        "path": "rise-ring -> rise-wall",
+        "end": [
+          63.0,
+          1.7100000381469727,
+          -136.0
+        ]
+      },
+      {
+        "path": "rise-wall -> fortress-ramp-top",
+        "end": [
+          63.0,
+          4.100000381469727,
+          -146.0
+        ]
+      },
+      {
+        "path": "fortress-ramp-top -> fortress-room",
+        "end": [
+          63.0,
+          4.100000381469727,
+          -152.0
+        ]
+      },
+      {
+        "path": "fortress-room -> fortress-ramp-top",
+        "end": [
+          63.0,
+          4.100000381469727,
+          -146.0
+        ]
+      },
+      {
+        "path": "fortress-ramp-top -> rise-wall",
+        "end": [
+          63.0,
+          1.7100000381469727,
+          -136.0
+        ]
+      },
+      {
+        "path": "rise-wall -> rise-ring",
+        "end": [
+          57.0,
+          1.7100000381469727,
+          -132.0
+        ]
+      },
+      {
+        "path": "rise-ring -> diagnostics-road",
+        "end": [
+          74.0,
+          1.7000000476837158,
+          -128.0
+        ]
+      },
+      {
+        "path": "diagnostics-road -> diagnostics-base",
+        "end": [
+          76.5,
+          1.7057121992111206,
+          -129.9988555908203
+        ]
+      },
+      {
+        "path": "diagnostics-base -> diagnostics-platform",
+        "end": [
+          76.5,
+          4.100000381469727,
+          -142.0
+        ]
+      },
+      {
+        "path": "diagnostics-platform -> diagnostics-base",
+        "end": [
+          76.5,
+          1.7057121992111206,
+          -129.9988555908203
+        ]
+      },
+      {
+        "path": "diagnostics-base -> diagnostics-road",
+        "end": [
+          74.0,
+          1.7000000476837158,
+          -128.0
+        ]
+      },
+      {
+        "path": "diagnostics-road -> rise-ring",
+        "end": [
+          57.0,
+          1.7100000381469727,
+          -132.0
+        ]
+      },
+      {
+        "path": "rise-ring -> rise-arrival",
+        "end": [
+          54.0,
+          1.7095996141433716,
+          -124.99950408935547
+        ]
+      },
+      {
+        "path": "rise-arrival -> dish-road",
+        "end": [
+          37.0,
+          1.7000000476837158,
+          -126.0
+        ]
+      },
+      {
+        "path": "dish-road -> dish-ramp-base",
+        "end": [
+          31.5,
+          1.7085901498794556,
+          -127.99742126464844
+        ]
+      },
+      {
+        "path": "dish-ramp-base -> dish-platform",
+        "end": [
+          31.5,
+          5.700000286102295,
+          -144.0
+        ]
+      },
+      {
+        "path": "dish-platform -> dish-ramp-base",
+        "end": [
+          31.5,
+          1.7086740732192993,
+          -127.99776458740234
+        ]
+      },
+      {
+        "path": "dish-ramp-base -> dish-road",
+        "end": [
+          37.0,
+          1.7000000476837158,
+          -126.0
+        ]
+      },
+      {
+        "path": "dish-road -> rise-arrival",
+        "end": [
+          54.0,
+          1.7095996141433716,
+          -124.99950408935547
+        ]
+      },
+      {
+        "path": "rise-arrival -> gantry-road",
+        "end": [
+          63.0,
+          1.7000000476837158,
+          -124.0
+        ]
+      },
+      {
+        "path": "gantry-road -> gantry-south",
+        "end": [
+          76.0,
+          1.7000000476837158,
+          -113.0
+        ]
+      },
+      {
+        "path": "gantry-south -> gantry-base",
+        "end": [
+          80.5,
+          1.7086224555969238,
+          -113.99755859375
+        ]
+      },
+      {
+        "path": "gantry-base -> gantry-top",
+        "end": [
+          80.5,
+          7.700000286102295,
+          -138.0
+        ]
+      },
+      {
+        "path": "gantry-top -> gantry-east",
+        "end": [
+          80.5,
+          7.700000286102295,
+          -152.0
+        ]
+      },
+      {
+        "path": "gantry-east -> gantry-west",
+        "end": [
+          44.0,
+          7.700000286102295,
+          -152.0
+        ]
+      },
+      {
+        "path": "gantry-west -> gantry-east",
+        "end": [
+          80.5,
+          7.700000286102295,
+          -152.0
+        ]
+      },
+      {
+        "path": "gantry-east -> gantry-top",
+        "end": [
+          80.5,
+          7.700000286102295,
+          -138.0
+        ]
+      },
+      {
+        "path": "gantry-top -> gantry-base",
+        "end": [
+          80.5,
+          1.708570957183838,
+          -113.99735260009766
+        ]
+      },
+      {
+        "path": "gantry-base -> gantry-south",
+        "end": [
+          76.0,
+          1.7000000476837158,
+          -113.0
+        ]
+      },
+      {
+        "path": "gantry-south -> gantry-road",
+        "end": [
+          63.0,
+          1.7000000476837158,
+          -124.0
+        ]
+      },
+      {
+        "path": "gantry-road -> rise-arrival",
+        "end": [
+          54.0,
+          1.7095996141433716,
+          -124.99950408935547
+        ]
+      },
+      {
+        "path": "rise-arrival -> rise-ramp-top",
+        "end": [
+          54.0,
+          1.7000000476837158,
+          -124.0
+        ]
+      },
+      {
+        "path": "rise-ramp-top -> rise-entry",
+        "end": [
+          54.0,
+          -4.291412353515625,
+          -99.99742126464844
+        ]
+      },
+      {
+        "path": "rise-entry -> vault-exit",
+        "end": [
+          48.0,
+          -4.299999713897705,
+          -98.0
+        ]
+      },
+      {
+        "path": "vault-exit -> vault-center",
+        "end": [
+          38.0,
+          -4.299999713897705,
+          -89.0
+        ]
+      },
+      {
+        "path": "vault-center -> vault-arrival",
+        "end": [
+          38.0,
+          -4.299999713897705,
+          -79.0
+        ]
+      },
+      {
+        "path": "vault-arrival -> vault-door",
+        "end": [
+          32.0,
+          -4.289860725402832,
+          -74.00299072265625
+        ]
+      },
+      {
+        "path": "vault-door -> vault-maintenance-base",
+        "end": [
+          28.5,
+          -4.291412353515625,
+          -75.99742126464844
+        ]
+      },
+      {
+        "path": "vault-maintenance-base -> vault-maintenance",
+        "end": [
+          28.5,
+          -0.299999862909317,
+          -92.0
+        ]
+      },
+      {
+        "path": "vault-maintenance -> vault-platform",
+        "end": [
+          28.5,
+          -0.299999862909317,
+          -94.0
+        ]
+      },
+      {
+        "path": "vault-platform -> vault-maintenance",
+        "end": [
+          28.5,
+          -0.299999862909317,
+          -92.0
+        ]
+      },
+      {
+        "path": "vault-maintenance -> vault-maintenance-base",
+        "end": [
+          28.5,
+          -4.29142951965332,
+          -75.99735260009766
+        ]
+      },
+      {
+        "path": "vault-maintenance-base -> vault-door",
+        "end": [
+          32.0,
+          -4.289933681488037,
+          -74.00326538085938
+        ]
+      },
+      {
+        "path": "vault-door -> descent-bottom",
+        "end": [
+          30.0,
+          -4.289821147918701,
+          -74.00285339355469
+        ]
+      },
+      {
+        "path": "descent-bottom -> descent-top",
+        "end": [
+          30.0,
+          1.7000000476837158,
+          -52.0
+        ]
+      },
+      {
+        "path": "descent-top -> service-entry",
+        "end": [
+          30.0,
+          1.7000000476837158,
+          -50.0
+        ]
+      },
+      {
+        "path": "service-entry -> hall-exit",
+        "end": [
+          20.0,
+          1.7000000476837158,
+          -50.0
+        ]
+      },
+      {
+        "path": "hall-exit -> hall-center",
+        "end": [
+          8.0,
+          1.7000000476837158,
+          -46.0
+        ]
+      },
+      {
+        "path": "hall-center -> hall-arrival",
+        "end": [
+          8.0,
+          1.7000000476837158,
+          -33.0
+        ]
+      },
+      {
+        "path": "hall-arrival -> hall-annex-entry",
+        "end": [
+          -10.5,
+          1.7000000476837158,
+          -36.0
+        ]
+      },
+      {
+        "path": "hall-annex-entry -> hall-ramp-base",
+        "end": [
+          -10.5,
+          1.7086052894592285,
+          -39.99748992919922
+        ]
+      },
+      {
+        "path": "hall-ramp-base -> hall-balcony",
+        "end": [
+          -10.5,
+          5.700000286102295,
+          -56.0
+        ]
+      },
+      {
+        "path": "hall-balcony -> hall-balcony-turn",
+        "end": [
+          -10.5,
+          5.700000286102295,
+          -59.20000076293945
+        ]
+      },
+      {
+        "path": "hall-balcony-turn -> hall-upper-door",
+        "end": [
+          -3.5,
+          5.700000286102295,
+          -59.20000076293945
+        ]
+      },
+      {
+        "path": "hall-upper-door -> hall-upper-base",
+        "end": [
+          -3.5,
+          5.70860481262207,
+          -56.00251007080078
+        ]
+      },
+      {
+        "path": "hall-upper-base -> hall-upper",
+        "end": [
+          -3.5,
+          9.700000762939453,
+          -40.0
+        ]
+      },
+      {
+        "path": "hall-upper -> hall-upper-base",
+        "end": [
+          -3.5,
+          5.708553314208984,
+          -56.002716064453125
+        ]
+      },
+      {
+        "path": "hall-upper-base -> hall-upper-door",
+        "end": [
+          -3.5,
+          5.700000286102295,
+          -59.20000076293945
+        ]
+      },
+      {
+        "path": "hall-upper-door -> hall-balcony-turn",
+        "end": [
+          -10.5,
+          5.700000286102295,
+          -59.20000076293945
+        ]
+      },
+      {
+        "path": "hall-balcony-turn -> hall-balcony",
+        "end": [
+          -10.5,
+          5.700000286102295,
+          -56.0
+        ]
+      },
+      {
+        "path": "hall-balcony -> hall-ramp-base",
+        "end": [
+          -10.5,
+          1.7085881233215332,
+          -39.99742126464844
+        ]
+      },
+      {
+        "path": "hall-ramp-base -> hall-annex-entry",
+        "end": [
+          -10.5,
+          1.7000000476837158,
+          -36.0
+        ]
+      },
+      {
+        "path": "hall-annex-entry -> hall-arrival",
+        "end": [
+          8.0,
+          1.7000000476837158,
+          -33.0
+        ]
+      },
+      {
+        "path": "hall-arrival -> hall-entry",
+        "end": [
+          8.0,
+          1.7000000476837158,
+          -25.0
+        ]
+      },
+      {
+        "path": "hall-entry -> court-wall",
+        "end": [
+          8.0,
+          1.7000000476837158,
+          -12.0
+        ]
+      },
+      {
+        "path": "court-wall -> court-junction",
+        "end": [
+          1.0,
+          1.7000000476837158,
+          -2.0
+        ]
+      },
+      {
+        "path": "court-junction -> globe-road",
+        "end": [
+          1.0,
+          1.7000000476837158,
+          2.0
+        ]
+      },
+      {
+        "path": "globe-road -> globe-approach",
+        "end": [
+          -6.0,
+          1.7000000476837158,
+          2.0
+        ]
+      },
+      {
+        "path": "globe-approach -> globe-ramp",
+        "end": [
+          -6.0,
+          1.705655813217163,
+          0.0014273900305852294
+        ]
+      },
+      {
+        "path": "globe-ramp -> globe-terrace",
+        "end": [
+          -6.0,
+          2.9000000953674316,
+          -6.0
+        ]
+      },
+      {
+        "path": "globe-terrace -> globe-platform",
+        "end": [
+          -6.0,
+          2.9000000953674316,
+          -7.0
+        ]
+      },
+      {
+        "path": "globe-platform -> globe-terrace",
+        "end": [
+          -6.0,
+          2.9000000953674316,
+          -6.0
+        ]
+      },
+      {
+        "path": "globe-terrace -> globe-ramp",
+        "end": [
+          -6.0,
+          1.7056324481964111,
+          0.0015439216513186693
+        ]
+      },
+      {
+        "path": "globe-ramp -> globe-approach",
+        "end": [
+          -6.0,
+          1.7000000476837158,
+          2.0
+        ]
+      },
+      {
+        "path": "globe-approach -> globe-road",
+        "end": [
+          1.0,
+          1.7000000476837158,
+          2.0
+        ]
+      },
+      {
+        "path": "globe-road -> court-junction",
+        "end": [
+          1.0,
+          1.7000000476837158,
+          -2.0
+        ]
+      },
+      {
+        "path": "court-junction -> arrival",
+        "end": [
+          -8.0,
+          1.7000000476837158,
+          12.0
+        ]
+      },
+      {
+        "path": "arrival -> lookout-south",
+        "end": [
+          -8.0,
+          1.7000000476837158,
+          14.5
+        ]
+      },
+      {
+        "path": "lookout-south -> lookout-west",
+        "end": [
+          -21.5,
+          1.7000000476837158,
+          14.5
+        ]
+      },
+      {
+        "path": "lookout-west -> lookout-base",
+        "end": [
+          -21.5,
+          1.7086403369903564,
+          10.002370834350586
+        ]
+      },
+      {
+        "path": "lookout-base -> lookout",
+        "end": [
+          -21.5,
+          5.700000286102295,
+          -6.0
+        ]
+      },
+      {
+        "path": "lookout -> cascade-turn",
+        "end": [
+          -21.5,
+          5.700000286102295,
+          -14.0
+        ]
+      },
+      {
+        "path": "cascade-turn -> cascade-bridge",
+        "end": [
+          -31.0,
+          5.700000286102295,
+          -14.0
+        ]
+      },
+      {
+        "path": "cascade-bridge -> cascade-turn",
+        "end": [
+          -21.5,
+          5.700000286102295,
+          -14.0
+        ]
+      },
+      {
+        "path": "cascade-turn -> lookout",
+        "end": [
+          -21.5,
+          5.700000286102295,
+          -6.0
+        ]
+      },
+      {
+        "path": "lookout -> roof-lower",
+        "end": [
+          -21.5,
+          5.708621025085449,
+          -23.9975528717041
+        ]
+      },
+      {
+        "path": "roof-lower -> roof-switchback",
+        "end": [
+          -21.5,
+          9.700000762939453,
+          -40.0
+        ]
+      },
+      {
+        "path": "roof-switchback -> roof-turn",
+        "end": [
+          -16.5,
+          9.700000762939453,
+          -42.0
+        ]
+      },
+      {
+        "path": "roof-turn -> roof-return",
+        "end": [
+          -16.5,
+          9.708603858947754,
+          -40.00251770019531
+        ]
+      },
+      {
+        "path": "roof-return -> roof-upper",
+        "end": [
+          -16.5,
+          13.700000762939453,
+          -24.0
+        ]
+      },
+      {
+        "path": "roof-upper -> roof-start-west",
+        "end": [
+          -16.5,
+          13.699699401855469,
+          -20.0
+        ]
+      },
+      {
+        "path": "roof-start-west -> roof-start",
+        "end": [
+          -11.699999809265137,
+          13.708536148071289,
+          -19.997209548950195
+        ]
+      },
+      {
+        "path": "roof-start -> roof-final",
+        "end": [
+          -11.699999809265137,
+          17.69999885559082,
+          -36.0
+        ]
+      },
+      {
+        "path": "roof-final -> roof-bridge",
+        "end": [
+          -5.0,
+          17.69999885559082,
+          -36.0
+        ]
+      },
+      {
+        "path": "roof-bridge -> rooftop",
+        "end": [
+          -5.0,
+          17.69999885559082,
+          -24.0
+        ]
+      },
+      {
+        "path": "rooftop -> roof-bridge",
+        "end": [
+          -5.0,
+          17.69999885559082,
+          -36.0
+        ]
+      },
+      {
+        "path": "roof-bridge -> roof-final",
+        "end": [
+          -11.699999809265137,
+          17.69999885559082,
+          -36.0
+        ]
+      },
+      {
+        "path": "roof-final -> roof-start",
+        "end": [
+          -11.699999809265137,
+          13.708587646484375,
+          -19.99741554260254
+        ]
+      },
+      {
+        "path": "roof-start -> roof-start-west",
+        "end": [
+          -16.5,
+          13.699625015258789,
+          -19.99998664855957
+        ]
+      },
+      {
+        "path": "roof-start-west -> roof-upper",
+        "end": [
+          -16.5,
+          13.700000762939453,
+          -24.0
+        ]
+      },
+      {
+        "path": "roof-upper -> roof-return",
+        "end": [
+          -16.5,
+          9.708603858947754,
+          -40.00251770019531
+        ]
+      },
+      {
+        "path": "roof-return -> roof-turn",
+        "end": [
+          -16.5,
+          9.700000762939453,
+          -42.0
+        ]
+      },
+      {
+        "path": "roof-turn -> roof-switchback",
+        "end": [
+          -21.5,
+          9.700000762939453,
+          -40.0
+        ]
+      },
+      {
+        "path": "roof-switchback -> roof-lower",
+        "end": [
+          -21.5,
+          5.708586692810059,
+          -23.99741554260254
+        ]
+      },
+      {
+        "path": "roof-lower -> lookout",
+        "end": [
+          -21.5,
+          5.700000286102295,
+          -6.0
+        ]
+      },
+      {
+        "path": "lookout -> lookout-base",
+        "end": [
+          -21.5,
+          1.7085716724395752,
+          10.002645492553711
+        ]
+      },
+      {
+        "path": "lookout-base -> lookout-west",
+        "end": [
+          -21.5,
+          1.7000000476837158,
+          14.5
+        ]
+      },
+      {
+        "path": "lookout-west -> lookout-south",
+        "end": [
+          -8.0,
+          1.7000000476837158,
+          14.5
+        ]
+      },
+      {
+        "path": "lookout-south -> arrival",
+        "end": [
+          -8.0,
+          1.7000000476837158,
+          12.0
+        ]
+      },
+      {
+        "path": "globe-approach",
+        "end": [
+          -3.1500000953674316,
+          2.9000000953674316,
+          -6.0
+        ]
+      },
+      {
+        "path": "lookout-ascent",
+        "end": [
+          -19.149999618530273,
+          5.700000286102295,
+          -6.0
+        ]
+      },
+      {
+        "path": "roof-ascent-lower",
+        "end": [
+          -19.149999618530273,
+          9.700000762939453,
+          -40.0
+        ]
+      },
+      {
+        "path": "roof-ascent-upper",
+        "end": [
+          -14.149999618530273,
+          13.700000762939453,
+          -24.0
+        ]
+      },
+      {
+        "path": "roof-final-approach",
+        "end": [
+          -9.350000381469727,
+          17.69999885559082,
+          -36.0
+        ]
+      },
+      {
+        "path": "hall-balcony-ascent",
+        "end": [
+          -8.149999618530273,
+          5.700000286102295,
+          -56.0
+        ]
+      },
+      {
+        "path": "hall-upper-ascent",
+        "end": [
+          -1.149999976158142,
+          9.700000762939453,
+          -40.0
+        ]
+      },
+      {
+        "path": "service-descent",
+        "end": [
+          33.849998474121094,
+          -4.289895534515381,
+          -74.00312805175781
+        ]
+      },
+      {
+        "path": "vault-maintenance-ascent",
+        "end": [
+          30.850000381469727,
+          -0.299999862909317,
+          -92.0
+        ]
+      },
+      {
+        "path": "snow-service-ascent",
+        "end": [
+          57.849998474121094,
+          1.7000000476837158,
+          -124.0
+        ]
+      },
+      {
+        "path": "fortress-gate-approach",
+        "end": [
+          66.8499984741211,
+          4.100000381469727,
+          -146.0
+        ]
+      },
+      {
+        "path": "diagnostics-platform-ascent",
+        "end": [
+          78.8499984741211,
+          4.100000381469727,
+          -142.0
+        ]
+      },
+      {
+        "path": "dish-service-ascent",
+        "end": [
+          33.849998474121094,
+          5.700000286102295,
+          -144.0
+        ]
+      },
+      {
+        "path": "east-gantry-ascent",
+        "end": [
+          82.8499984741211,
+          7.700000286102295,
+          -138.0
+        ]
+      }
+    ]
+  },
+  "nestedDrmClients": [
+    {
+      "drm-driver": "xe",
+      "drm-client-id": "7549",
+      "drm-pdev": "0000:00:02.0",
+      "drm-total-system": "0",
+      "drm-shared-system": "0",
+      "drm-active-system": "0",
+      "drm-resident-system": "0",
+      "drm-purgeable-system": "0",
+      "drm-total-gtt": "0",
+      "drm-shared-gtt": "0",
+      "drm-active-gtt": "0",
+      "drm-resident-gtt": "0",
+      "drm-total-stolen": "0",
+      "drm-shared-stolen": "0",
+      "drm-active-stolen": "0",
+      "drm-resident-stolen": "0",
+      "drm-cycles-rcs": "0",
+      "drm-total-cycles-rcs": "2587371597565",
+      "drm-cycles-vcs": "0",
+      "drm-total-cycles-vcs": "2587371597565",
+      "drm-cycles-vecs": "0",
+      "drm-total-cycles-vecs": "2587371597565",
+      "drm-cycles-bcs": "0",
+      "drm-total-cycles-bcs": "2587371597565",
+      "drm-cycles-ccs": "0",
+      "drm-total-cycles-ccs": "2587371597565"
+    },
+    {
+      "drm-driver": "xe",
+      "drm-client-id": "7550",
+      "drm-pdev": "0000:00:02.0",
+      "drm-total-system": "0",
+      "drm-shared-system": "0",
+      "drm-active-system": "0",
+      "drm-resident-system": "0",
+      "drm-purgeable-system": "0",
+      "drm-total-gtt": "695344 KiB",
+      "drm-shared-gtt": "52 MiB",
+      "drm-active-gtt": "0",
+      "drm-resident-gtt": "695344 KiB",
+      "drm-total-stolen": "0",
+      "drm-shared-stolen": "0",
+      "drm-active-stolen": "0",
+      "drm-resident-stolen": "0",
+      "drm-cycles-rcs": "835687790",
+      "drm-total-cycles-rcs": "2587371600299",
+      "drm-cycles-vcs": "0",
+      "drm-total-cycles-vcs": "2587371600299",
+      "drm-cycles-vecs": "0",
+      "drm-total-cycles-vecs": "2587371600299",
+      "drm-cycles-bcs": "239",
+      "drm-total-cycles-bcs": "2587371600299",
+      "drm-cycles-ccs": "289",
+      "drm-total-cycles-ccs": "2587371600299"
+    },
+    {
+      "drm-driver": "xe",
+      "drm-client-id": "7553",
+      "drm-pdev": "0000:00:02.0",
+      "drm-total-system": "0",
+      "drm-shared-system": "0",
+      "drm-active-system": "0",
+      "drm-resident-system": "0",
+      "drm-purgeable-system": "0",
+      "drm-total-gtt": "0",
+      "drm-shared-gtt": "0",
+      "drm-active-gtt": "0",
+      "drm-resident-gtt": "0",
+      "drm-total-stolen": "0",
+      "drm-shared-stolen": "0",
+      "drm-active-stolen": "0",
+      "drm-resident-stolen": "0",
+      "drm-cycles-rcs": "0",
+      "drm-total-cycles-rcs": "2587371605712",
+      "drm-cycles-vcs": "0",
+      "drm-total-cycles-vcs": "2587371605712",
+      "drm-cycles-vecs": "0",
+      "drm-total-cycles-vecs": "2587371605712",
+      "drm-cycles-bcs": "0",
+      "drm-total-cycles-bcs": "2587371605712",
+      "drm-cycles-ccs": "0",
+      "drm-total-cycles-ccs": "2587371605712"
+    }
+  ],
+  "status": "PASS",
+  "checks": [
+    "package load",
+    "real spawn walking",
+    "matching 60 degree views",
+    "clean nested exit"
+  ]
+}

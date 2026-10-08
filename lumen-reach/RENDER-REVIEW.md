@@ -1,72 +1,56 @@
-# Lumen Reach 0.5.0 render review
+# Lumen Reach 0.6.0 render review
 
-The owner’s four concepts establish composition, material density and mood.
-The delivery keeps the original twelve inspection poses and adds four close
-views for the entrance fixtures, hall vista, vault services and reflector.
-Final raw engine captures are in `artifacts/lumen-reach/v2-4k/`, taken with
-core’s isolated nested harness under the shared lock at the effective Medium
-preset. Output is native 3840×2160; internal dynamic render scale is recorded
-in the report. The matched Cycles cameras use the same pose and 60° vertical
-FOV. The concept artwork itself is not camera matched.
+This pass focuses on Rime Vault against the owner's `03-frozen-bunker.png`.
+The sixteen previous camera poses remain unchanged; two additional poses inspect
+its console row and sealed continuation. Eighteen raw 3840×2160 Medium captures
+are in `artifacts/lumen-reach-v3/after-4k/` and the v3 gallery folder. Dynamic
+internal resolution is recorded separately from native output size.
 
-Run `python3 tools/compare-lumen.py` for
-`artifacts/lumen-reach/render-review.html`: concept, Cycles and engine side by
-side, with raw images linked. The engine captures have no grading, retouching
-or compositing. Comparison thumbnails only resize images for review.
+The before/after comparison uses freshly captured 0.5.0 and 0.6.0 views at the
+same 1920×1080 output, pose and 60° vertical FOV. Three identical seven-second
+camera paths alternate before/after in the video. Only labels and cuts are
+added. Engine stills are ungraded; thumbnail comparison sheets preserve aspect
+ratio. The owner concept is a composition/mood reference, not a matched camera.
+Run `python3 tools/compare-rime-v3.py` for the linked raw-image review in
+`artifacts/lumen-reach-v3/render-review.html`.
 
-**Sun Court.** The facade and red canvas remain the focal structure, with a
-clear approach and working shelters at its edges. Tiled concrete, maintenance
-plates, drains, vents, pipe clamps, canopy hems, practical fixtures, instrument
-cases and additional red foliage break up the former blank surfaces. Entry
-lights now have structural jambs and seated backplates, inspected in a close
-engine view. Pier/lintel and vestibule-floor overlaps are removed. Mountains,
-waterfall artwork and bridges combine with physical rock and spire layers.
-The engine’s daylight is cooler and harder than the softly painted concept.
+The concept's defining density is long console banks, layered overhead services,
+edge frost, wet metal, low warm practicals and a lit sealed continuation. The new
+Vault has five low floor stations and a three-station wall bank, keyboard beds,
+foot lights, power leads, cases, grated cable channels and a purge-vent cluster.
+Pipe racks now have flanges, captive bolts, channels and hangers. The center lane
+and the full interactive screen approaches remain clear; the room is broader
+than the concept's tight corridor because those validated work volumes remain.
 
-**Array Hall.** Warm floor and column practicals frame the suspended workspace.
-Layered ribs, metal collars, cabinet drawers and indicators populate the tall
-bays; balcony ribs, banners and the supported ring give the upper volume more
-structure. The former blank rear mass is sculpted rock with physical watershed
-spires. Large walking and workspace volumes stay open. The engine retains
-stronger contrast under balconies than the concept and Cycles’ AgX render.
+The mottled all-over frost is gone from the Vault. Dark directional steel,
+glazed vertical condensation and pale granular rime are separate materials.
+Rime geometry follows pipe tops and console sills; thin icicles have blue cores
+and small emissive edge facets. Corner snowbanks stay out of the routes.
+The opaque ice treatment suggests scattering but provides no true transmission.
+The new source masters, exact prompts and hashes are retained in `materials/`.
 
-**Rime Vault.** Frosted coolant trunks, coupling flanges, suspension brackets,
-cable bundles, trays, crossbeams, riveted panels, ice pendants and service
-cabinets now read across the room. Metal floor with local grating and hazard
-panels replaces repetitive all-over striping. Cold fill reveals the pipes;
-amber grazing light separates the work stations and sealed continuation.
-This is a serviced cold room rather than an empty dark box. Steam cards remain
-static and sparse, with no simulated vapor or dynamic accumulation.
+Warm amber instrument lines, console grazing light, red practicals and blue
+upper fill make the room more coherent with the concept. The pressure door has
+layered jambs, interlocks, reinforcement, a center light seam and warm guide
+lights. It reads as a closed extension with light beyond. The engine retains
+less specular sheen and softer floor light pools than Cycles. Floors remain
+smoother and less wet-looking than the painted reference, and steam is still a
+static alpha-card approximation. These limits remain visible in the raw output.
 
-**Signal Rise.** The reflector is a curved bowl with radial and hoop structure,
-a feed horn, three supports and trunnions. Near rock crags, snowbanks, frosted
-ledges, icicles, crates and gantry cables add depth around the fortress and
-landing ring. Blue night and amber/red practicals retain the reference mood.
-The overlapping fortress pier/crown faces are removed. Terrain and metalwork
-remain visibly stylized; the painted reference has finer irregular detail.
-Unusual high viewpoints can still reveal the opaque night enclosure.
+Engine review caught a real bake failure: too many tiny beveled parts exhausted
+fixed lightmap gutters, collapsing useful UV area despite valid ranges and no
+overlaps. Thin detail now avoids those bevels; the Vault's separate atlas is
+2048px with 19.2% useful UV coverage. An authoring/package guard rejects a pack
+below 3%. The final engine captures show the restored lighting on the new kit.
 
-All lit physical materials have original generated texture masters, periodic
-PBR derivatives and/or trim atlas coverage. Exact prompts and source hashes
-are in `materials/generation.json`; the new rock master is part of the same
-provenance chain. Explicit exported material factors preserve red cloth and
-foliage and dark housings. Signs and cases use the Reach mark and vocabulary.
-The package adds no imported game assets or reference lettering.
+Sun Court, Array Hall, Signal Rise, foliage and connector geometry retain their
+triangle counts. Their matched views were captured again for regression review.
+The preceding all-home review is preserved in `reports/render-review-0.5.0.md`.
+All 24 interactive anchors, route/stair graphs and free-placement volumes keep
+their original contracts. New fixed consoles are authored process artwork, not
+additional interactive mounts or claims about live application state.
 
-Clearances take priority over filling the work approaches. Automated checks
-cover 24 mounts, four reserved volumes, support and capsule clearance; the
-engine checks every directed route and alternate stair flight. The final tour
-uses real mounted application content, placed terminals, actual keyboard input
-and the shell HUD. Recording and encoding occur outside the gallery before the
-finished files are moved in; its autocommit process is untouched.
-
-The renderer supplies global atmosphere and static environment reflections.
-Distinct area moods come from baked lighting and opaque vista separation.
-Lighting, steam and distant artwork are static. These limits and the remaining
-stylization are visible in the raw delivery, not concealed by postprocessing.
-
-See `reports/final-report.md` for before/after budgets, measured 4K observations,
-validation results, archive and gallery paths. Exact engine binaries, core
-working-tree hashes and timing samples are in `reports/polish-v2/`; the core
-was being developed concurrently. World GPU estimates and nested process
-residency measure different scopes and are reported separately.
+See `reports/final-report.md` and `reports/polish-v3/` for budgets, shader/material
+coverage, lightmap evidence, full route traversal, engine hashes, archive and
+gallery paths. Blender ran only on 10.2.2.2. Engine testing held the nested lock;
+the owner's real session and gallery autocommit process were untouched.

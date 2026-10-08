@@ -1,0 +1,7 @@
+{
+  "status": "PASS",
+  "test": "New package guard rejected the actual first exported dense kit which passed ranges and overlap checks but rendered black.",
+  "rejectedUv1Area": 0.00010273322,
+  "minimumUv1Area": 0.03,
+  "error": "AssertionError: ('Visual-rime-vault', 'collapsed lightmap island area', np.float32(0.00010273322))"
+}

@@ -1,0 +1,1037 @@
+{
+  "coreDirty": [
+    " M CMakeLists.txt",
+    " M docs/CHANGES-FOR-SDK-AND-SHELL.md",
+    " M src/daemon/Main.cpp",
+    " M src/interaction/Config.cpp",
+    " M src/ipc/Bridge.cpp",
+    " M src/ipc/Bridge.hpp",
+    " M src/ipc/Protocol.hpp",
+    " M src/platform/hyprland/Plugin.cpp",
+    " M src/render/Graphics.hpp",
+    " M src/render/Renderer.cpp",
+    " M src/render/Renderer.hpp",
+    " M src/render/Resolution.hpp",
+    " M tests/render.cpp",
+    "?? dev/nested/offload-power.py",
+    "?? dev/nested/offload_acceptance.py",
+    "?? src/offload/",
+    "?? tests/offload.cpp"
+  ],
+  "coreDiffSHA256": "859e1ef11e701592f1d23690939ba55ff33e97405b99dc63c77f66cfc2a8e90a",
+  "coreCommit": "8ce4f756add95ff8ec490073def804462c76c3ce",
+  "pluginSHA256": "cd5bbb80d47c782a9ff358d165601c5297c296182380316001fb54166d4e422d",
+  "loadedPluginSHA256": "cd5bbb80d47c782a9ff358d165601c5297c296182380316001fb54166d4e422d",
+  "protocol": "0.3",
+  "load": {
+    "revision": 4
+  },
+  "camera": {
+    "active": true,
+    "activeHandle": -1,
+    "aim": "",
+    "captureDirectory": "/home/rick/workspace/hyprune/worlds/artifacts/lumen-reach-v3/after-engine/.nested-state/statehome/hyprune/captures",
+    "captures": [],
+    "childSurfaces": [],
+    "children": 0,
+    "config": {
+      "graphics": {
+        "alpha_haze": null,
+        "ambient_occlusion": null,
+        "anisotropy": null,
+        "bloom": null,
+        "bloom_strength": 0.15,
+        "dynamic_resolution": true,
+        "exposure": 1.0,
+        "fog": null,
+        "fov": 60.0,
+        "msaa": null,
+        "normal_maps": null,
+        "offload": "off",
+        "offload_power_cap_w": 80,
+        "quality": "medium",
+        "reduced_motion": false,
+        "reflections": null,
+        "render_scale": "auto",
+        "scale_max": 1.0,
+        "scale_min": 0.375,
+        "sharpen": 0.35,
+        "sky": null,
+        "specular": null,
+        "target_fps": 60
+      },
+      "input": {
+        "bindings": {
+          "back": "s",
+          "down": "Control_L",
+          "fly": "F4",
+          "focus": "f",
+          "forward": "w",
+          "jump": "space",
+          "left": "a",
+          "noclip": "v",
+          "right": "d",
+          "zoom": "c"
+        },
+        "carry_button": 272,
+        "resize_button": 273,
+        "roll_button": 274,
+        "typing_button": 275,
+        "typing_cursor": true
+      },
+      "player": {
+        "fly_speed": 5.0,
+        "jump_speed": 5.0,
+        "look_inertia": 0.03,
+        "look_sensitivity": 0.0025,
+        "move_inertia": 0.05,
+        "respawn_below": 30.0,
+        "run_multiplier": 1.8,
+        "step_height": 0.35,
+        "walk_speed": 3.5
+      },
+      "tools": {
+        "enabled": true,
+        "slots": [
+          "pointer",
+          "mount",
+          "path",
+          "path",
+          "path"
+        ]
+      },
+      "windows": {
+        "scale": 0.002,
+        "spawn_distance": 5.0,
+        "transition_seconds": 0.35,
+        "wheel_factor": 1.06,
+        "world_workspace": 8
+      }
+    },
+    "cursor": "reticle",
+    "debug": false,
+    "error": "",
+    "eyeHeight": 1.7000000476837158,
+    "frames": 122,
+    "fullscreen": 0,
+    "fullscreenId": "",
+    "gesture": 0,
+    "gestureId": "",
+    "grabbed": "",
+    "handover": 0,
+    "instances": [],
+    "keyboardFocus": false,
+    "layerCursor": false,
+    "mode": "movement",
+    "nativeCursorVisible": false,
+    "nativePointerFocused": false,
+    "noclip": false,
+    "overlayStyle": {
+      "fontFamily": "monospace",
+      "iconAtlas": null,
+      "labelColor": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "promptColor": [
+        0.7,
+        0.9,
+        1.0
+      ],
+      "routeColor": [
+        0.25,
+        1.0,
+        0.65
+      ],
+      "waypointColor": [
+        0.25,
+        1.0,
+        0.65
+      ]
+    },
+    "overlays": {
+      "areaMarkers": false,
+      "frame": 122,
+      "heading": 0.0,
+      "labels": [],
+      "pitch": 0.0,
+      "routeSegments": 0
+    },
+    "ownsInput": true,
+    "pitch": 0.0,
+    "pointer": [
+      0.5,
+      0.5
+    ],
+    "position": [
+      -8.0,
+      1.7000000476837158,
+      12.0
+    ],
+    "positionMode": 0,
+    "pressedButtons": 0,
+    "previousWorkspace": 2,
+    "savedCursorHidden": true,
+    "seatGrab": false,
+    "selectedScale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "superHeld": false,
+    "timings": {
+      "captureMs": 0.027932,
+      "collisionTriangles": 4114,
+      "cpuPassMs": [
+        0.321166,
+        0.014204,
+        0.017452,
+        0.007588
+      ],
+      "cpuRenderMs": 0.361752,
+      "cpuUpdateMs": 0.096165,
+      "debug": false,
+      "deliveredFPS": 60.001488469711674,
+      "frameMs": 16.660116,
+      "gpuCaptureMs": 0.0,
+      "gpuEffectsMs": {
+        "bloom": 0.12276,
+        "msaa_resolve": 0.0,
+        "native_surfaces_geometry": 1.843802,
+        "output_markers": 0.127812,
+        "sky": 0.176458,
+        "upscale_sharpen": 0.351927,
+        "world_shading_shared": 2.746145
+      },
+      "gpuPassMs": [
+        2.9226029999999996,
+        1.843802,
+        0.47468699999999997,
+        0.127812
+      ],
+      "graphics": {
+        "alpha_haze": true,
+        "ambient_occlusion": true,
+        "anisotropy": 2,
+        "bloom": "low",
+        "bloom_strength": 0.12,
+        "dynamic_resolution": true,
+        "exposure": 1,
+        "fog": "height",
+        "fov": 60.0,
+        "msaa": 1,
+        "normal_maps": true,
+        "offload": "off",
+        "offload_power_cap_w": 80,
+        "quality": "medium",
+        "reduced_motion": false,
+        "reflections": true,
+        "render_scale": "auto",
+        "scale_max": 1.0,
+        "scale_min": 0.375,
+        "sharpen": 0.35,
+        "sky": "environment",
+        "specular": true,
+        "target_fps": 60
+      },
+      "inFlight": 1,
+      "internalSize": [
+        1920,
+        1080
+      ],
+      "ipcMs": 0.056062,
+      "msaaSamples": 1,
+      "nativeSize": [
+        1920,
+        1080
+      ],
+      "offload": {
+        "activeRenderer": "in-process",
+        "powerW": null
+      },
+      "quality": "high",
+      "renderScale": 1.0,
+      "renderedFrames": 122,
+      "renderer": "Mesa Intel(R) Graphics (PTL)",
+      "reusedFrames": 0,
+      "targetFPS": 60,
+      "upload": {
+        "bytes": 263734472,
+        "completedJobs": 0,
+        "cpuMs": 111.88716499999997,
+        "jobs": 0,
+        "maxJobMs": 32.774393,
+        "maxStepMs": 32.778344,
+        "pending": false,
+        "slowestJob": "shader scene_ #0",
+        "steps": 141
+      }
+    },
+    "tool": 1,
+    "worldWorkspace": 8,
+    "yaw": 0.0
+  },
+  "graphicsRequest": {
+    "quality": "medium",
+    "render_scale": "auto",
+    "target_fps": 60
+  },
+  "manifestSHA256": "baa1ab3986efcaa817835388e155456bd49b5b000707cbd4a5f52e7f51b8c6fd",
+  "sceneSHA256": "0f2ccff23da219f64f83169416005adc404a295726f4334394373f7f1fbc03bc",
+  "walk": {
+    "before": [
+      -8.0,
+      1.7000000476837158,
+      12.0
+    ],
+    "after": [
+      -8.0,
+      1.7000000476837158,
+      10.251843452453613
+    ]
+  },
+  "views": [
+    {
+      "renderer": {
+        "captureMs": 0.031768,
+        "collisionTriangles": 4114,
+        "cpuPassMs": [
+          0.321115,
+          0.013422,
+          0.016838,
+          0.007362
+        ],
+        "cpuRenderMs": 0.360168,
+        "cpuUpdateMs": 0.218425,
+        "debug": false,
+        "deliveredFPS": 59.99916139172122,
+        "frameMs": 16.659709,
+        "gpuCaptureMs": 0.0,
+        "gpuEffectsMs": {
+          "bloom": 0.122916,
+          "msaa_resolve": 0.0,
+          "native_surfaces_geometry": 0.014218,
+          "output_markers": 0.114739,
+          "sky": 0.173281,
+          "upscale_sharpen": 0.355364,
+          "world_shading_shared": 3.753125
+        },
+        "gpuPassMs": [
+          3.9264059999999996,
+          0.014218,
+          0.47828000000000004,
+          0.114739
+        ],
+        "graphics": {
+          "alpha_haze": true,
+          "ambient_occlusion": true,
+          "anisotropy": 2,
+          "bloom": "low",
+          "bloom_strength": 0.12,
+          "dynamic_resolution": true,
+          "exposure": 1,
+          "fog": "height",
+          "fov": 60.0,
+          "msaa": 1,
+          "normal_maps": true,
+          "offload": "off",
+          "offload_power_cap_w": 80,
+          "quality": "medium",
+          "reduced_motion": false,
+          "reflections": true,
+          "render_scale": "auto",
+          "scale_max": 1.0,
+          "scale_min": 0.375,
+          "sharpen": 0.35,
+          "sky": "environment",
+          "specular": true,
+          "target_fps": 60
+        },
+        "inFlight": 1,
+        "internalSize": [
+          1920,
+          1080
+        ],
+        "ipcMs": 0.057343,
+        "msaaSamples": 1,
+        "nativeSize": [
+          1920,
+          1080
+        ],
+        "offload": {
+          "activeRenderer": "in-process",
+          "powerW": null
+        },
+        "quality": "high",
+        "renderScale": 1.0,
+        "renderedFrames": 306,
+        "renderer": "Mesa Intel(R) Graphics (PTL)",
+        "reusedFrames": 0,
+        "targetFPS": 60,
+        "upload": {
+          "bytes": 263734472,
+          "completedJobs": 0,
+          "cpuMs": 111.88716499999997,
+          "jobs": 0,
+          "maxJobMs": 32.774393,
+          "maxStepMs": 32.778344,
+          "pending": false,
+          "slowestJob": "shader scene_ #0",
+          "steps": 141
+        }
+      },
+      "id": "03-rime-vault",
+      "pose": {
+        "orientation": [
+          0.08601707965135574,
+          -0.0706249549984932,
+          0.00611304584890604,
+          0.9937684535980225
+        ],
+        "position": [
+          36.0,
+          -4.299999713897705,
+          -78.0
+        ]
+      },
+      "verticalFovDegrees": 60,
+      "path": "artifacts/lumen-reach-v3/after-engine/engine-03-rime-vault.png"
+    },
+    {
+      "renderer": {
+        "captureMs": 0.026792,
+        "collisionTriangles": 4114,
+        "cpuPassMs": [
+          0.416108,
+          0.013234,
+          0.023961,
+          0.008129
+        ],
+        "cpuRenderMs": 0.462924,
+        "cpuUpdateMs": 0.094731,
+        "debug": false,
+        "deliveredFPS": 59.99941619584445,
+        "frameMs": 16.573172,
+        "gpuCaptureMs": 5.2e-05,
+        "gpuEffectsMs": {
+          "bloom": 0.123072,
+          "msaa_resolve": 0.0,
+          "native_surfaces_geometry": 0.009531,
+          "output_markers": 0.115,
+          "sky": 0.175572,
+          "upscale_sharpen": 0.368645,
+          "world_shading_shared": 3.042812
+        },
+        "gpuPassMs": [
+          3.218384,
+          0.009531,
+          0.491717,
+          0.115
+        ],
+        "graphics": {
+          "alpha_haze": true,
+          "ambient_occlusion": true,
+          "anisotropy": 2,
+          "bloom": "low",
+          "bloom_strength": 0.12,
+          "dynamic_resolution": true,
+          "exposure": 1,
+          "fog": "height",
+          "fov": 60.0,
+          "msaa": 1,
+          "normal_maps": true,
+          "offload": "off",
+          "offload_power_cap_w": 80,
+          "quality": "medium",
+          "reduced_motion": false,
+          "reflections": true,
+          "render_scale": "auto",
+          "scale_max": 1.0,
+          "scale_min": 0.375,
+          "sharpen": 0.35,
+          "sky": "environment",
+          "specular": true,
+          "target_fps": 60
+        },
+        "inFlight": 1,
+        "internalSize": [
+          1920,
+          1080
+        ],
+        "ipcMs": 0.055569,
+        "msaaSamples": 1,
+        "nativeSize": [
+          1920,
+          1080
+        ],
+        "offload": {
+          "activeRenderer": "in-process",
+          "powerW": null
+        },
+        "quality": "high",
+        "renderScale": 1.0,
+        "renderedFrames": 392,
+        "renderer": "Mesa Intel(R) Graphics (PTL)",
+        "reusedFrames": 0,
+        "targetFPS": 60,
+        "upload": {
+          "bytes": 263734472,
+          "completedJobs": 0,
+          "cpuMs": 111.88716499999997,
+          "jobs": 0,
+          "maxJobMs": 32.774393,
+          "maxStepMs": 32.778344,
+          "pending": false,
+          "slowestJob": "shader scene_ #0",
+          "steps": 141
+        }
+      },
+      "id": "03-rime-vault-tools",
+      "pose": {
+        "orientation": [
+          0.027124037966132164,
+          -0.40665921568870544,
+          0.012080027721822262,
+          0.9130973219871521
+        ],
+        "position": [
+          40.0,
+          -3.799999952316284,
+          -77.5
+        ]
+      },
+      "verticalFovDegrees": 60,
+      "path": "artifacts/lumen-reach-v3/after-engine/engine-03-rime-vault-tools.png"
+    },
+    {
+      "renderer": {
+        "captureMs": 0.025962,
+        "collisionTriangles": 4114,
+        "cpuPassMs": [
+          0.462582,
+          0.018072,
+          0.022201,
+          0.010154
+        ],
+        "cpuRenderMs": 0.515004,
+        "cpuUpdateMs": 0.118284,
+        "debug": false,
+        "deliveredFPS": 59.999594282743466,
+        "frameMs": 16.611454,
+        "gpuCaptureMs": 0.0,
+        "gpuEffectsMs": {
+          "bloom": 0.120781,
+          "msaa_resolve": 0.0,
+          "native_surfaces_geometry": 0.014635,
+          "output_markers": 0.114947,
+          "sky": 0.173437,
+          "upscale_sharpen": 0.363541,
+          "world_shading_shared": 5.515989
+        },
+        "gpuPassMs": [
+          5.689426,
+          0.014635,
+          0.48432200000000003,
+          0.114947
+        ],
+        "graphics": {
+          "alpha_haze": true,
+          "ambient_occlusion": true,
+          "anisotropy": 2,
+          "bloom": "low",
+          "bloom_strength": 0.12,
+          "dynamic_resolution": true,
+          "exposure": 1,
+          "fog": "height",
+          "fov": 60.0,
+          "msaa": 1,
+          "normal_maps": true,
+          "offload": "off",
+          "offload_power_cap_w": 80,
+          "quality": "medium",
+          "reduced_motion": false,
+          "reflections": true,
+          "render_scale": "auto",
+          "scale_max": 1.0,
+          "scale_min": 0.375,
+          "sharpen": 0.35,
+          "sky": "environment",
+          "specular": true,
+          "target_fps": 60
+        },
+        "inFlight": 1,
+        "internalSize": [
+          1920,
+          1080
+        ],
+        "ipcMs": 0.057117,
+        "msaaSamples": 1,
+        "nativeSize": [
+          1920,
+          1080
+        ],
+        "offload": {
+          "activeRenderer": "in-process",
+          "powerW": null
+        },
+        "quality": "high",
+        "renderScale": 1.0,
+        "renderedFrames": 470,
+        "renderer": "Mesa Intel(R) Graphics (PTL)",
+        "reusedFrames": 0,
+        "targetFPS": 60,
+        "upload": {
+          "bytes": 263734472,
+          "completedJobs": 0,
+          "cpuMs": 111.88716499999997,
+          "jobs": 0,
+          "maxJobMs": 32.774393,
+          "maxStepMs": 32.778344,
+          "pending": false,
+          "slowestJob": "shader scene_ #0",
+          "steps": 141
+        }
+      },
+      "id": "03-rime-vault-platform",
+      "pose": {
+        "orientation": [
+          0.008080958388745785,
+          -0.5531209707260132,
+          0.005365556571632624,
+          0.8330445289611816
+        ],
+        "position": [
+          28.5,
+          -0.29999983310699463,
+          -93.0
+        ]
+      },
+      "verticalFovDegrees": 60,
+      "path": "artifacts/lumen-reach-v3/after-engine/engine-03-rime-vault-platform.png"
+    },
+    {
+      "renderer": {
+        "captureMs": 0.024224,
+        "collisionTriangles": 4114,
+        "cpuPassMs": [
+          0.336771,
+          0.01268,
+          0.018249,
+          0.008227
+        ],
+        "cpuRenderMs": 0.377179,
+        "cpuUpdateMs": 0.206429,
+        "debug": false,
+        "deliveredFPS": 59.948900815871475,
+        "frameMs": 16.649533,
+        "gpuCaptureMs": 0.0,
+        "gpuEffectsMs": {
+          "bloom": 0.127187,
+          "msaa_resolve": 5.2e-05,
+          "native_surfaces_geometry": 0.017916,
+          "output_markers": 0.114843,
+          "sky": 0.177395,
+          "upscale_sharpen": 0.362135,
+          "world_shading_shared": 6.148906
+        },
+        "gpuPassMs": [
+          6.326301,
+          0.017916,
+          0.489374,
+          0.114843
+        ],
+        "graphics": {
+          "alpha_haze": true,
+          "ambient_occlusion": true,
+          "anisotropy": 2,
+          "bloom": "low",
+          "bloom_strength": 0.12,
+          "dynamic_resolution": true,
+          "exposure": 1,
+          "fog": "height",
+          "fov": 60.0,
+          "msaa": 1,
+          "normal_maps": true,
+          "offload": "off",
+          "offload_power_cap_w": 80,
+          "quality": "medium",
+          "reduced_motion": false,
+          "reflections": true,
+          "render_scale": "auto",
+          "scale_max": 1.0,
+          "scale_min": 0.375,
+          "sharpen": 0.35,
+          "sky": "environment",
+          "specular": true,
+          "target_fps": 60
+        },
+        "inFlight": 1,
+        "internalSize": [
+          1920,
+          1080
+        ],
+        "ipcMs": 0.045421,
+        "msaaSamples": 1,
+        "nativeSize": [
+          1920,
+          1080
+        ],
+        "offload": {
+          "activeRenderer": "in-process",
+          "powerW": null
+        },
+        "quality": "high",
+        "renderScale": 1.0,
+        "renderedFrames": 549,
+        "renderer": "Mesa Intel(R) Graphics (PTL)",
+        "reusedFrames": 0,
+        "targetFPS": 60,
+        "upload": {
+          "bytes": 263734472,
+          "completedJobs": 0,
+          "cpuMs": 111.88716499999997,
+          "jobs": 0,
+          "maxJobMs": 32.774393,
+          "maxStepMs": 32.778344,
+          "pending": false,
+          "slowestJob": "shader scene_ #0",
+          "steps": 141
+        }
+      },
+      "id": "03-rime-vault-services",
+      "pose": {
+        "orientation": [
+          0.19415283203125,
+          -0.3876602053642273,
+          0.08388812839984894,
+          0.8972107172012329
+        ],
+        "position": [
+          40.0,
+          -4.299999713897705,
+          -86.0
+        ]
+      },
+      "verticalFovDegrees": 60,
+      "path": "artifacts/lumen-reach-v3/after-engine/engine-03-rime-vault-services.png"
+    },
+    {
+      "renderer": {
+        "captureMs": 0.007882,
+        "collisionTriangles": 4114,
+        "cpuPassMs": [
+          0.275936,
+          0.014642,
+          0.014763,
+          0.007233
+        ],
+        "cpuRenderMs": 0.314179,
+        "cpuUpdateMs": 0.206964,
+        "debug": false,
+        "deliveredFPS": 60.00428357792664,
+        "frameMs": 16.231511,
+        "gpuCaptureMs": 0.0,
+        "gpuEffectsMs": {
+          "bloom": 0.122083,
+          "msaa_resolve": 0.0,
+          "native_surfaces_geometry": 0.001197,
+          "output_markers": 0.114791,
+          "sky": 0.171562,
+          "upscale_sharpen": 0.359895,
+          "world_shading_shared": 4.880781
+        },
+        "gpuPassMs": [
+          5.052343,
+          0.001197,
+          0.481978,
+          0.114791
+        ],
+        "graphics": {
+          "alpha_haze": true,
+          "ambient_occlusion": true,
+          "anisotropy": 2,
+          "bloom": "low",
+          "bloom_strength": 0.12,
+          "dynamic_resolution": true,
+          "exposure": 1,
+          "fog": "height",
+          "fov": 60.0,
+          "msaa": 1,
+          "normal_maps": true,
+          "offload": "off",
+          "offload_power_cap_w": 80,
+          "quality": "medium",
+          "reduced_motion": false,
+          "reflections": true,
+          "render_scale": "auto",
+          "scale_max": 1.0,
+          "scale_min": 0.375,
+          "sharpen": 0.35,
+          "sky": "environment",
+          "specular": true,
+          "target_fps": 60
+        },
+        "inFlight": 1,
+        "internalSize": [
+          1920,
+          1080
+        ],
+        "ipcMs": 0.036872,
+        "msaaSamples": 1,
+        "nativeSize": [
+          1920,
+          1080
+        ],
+        "offload": {
+          "activeRenderer": "in-process",
+          "powerW": null
+        },
+        "quality": "high",
+        "renderScale": 1.0,
+        "renderedFrames": 640,
+        "renderer": "Mesa Intel(R) Graphics (PTL)",
+        "reusedFrames": 0,
+        "targetFPS": 60,
+        "upload": {
+          "bytes": 263734472,
+          "completedJobs": 0,
+          "cpuMs": 111.88716499999997,
+          "jobs": 0,
+          "maxJobMs": 32.774393,
+          "maxStepMs": 32.778344,
+          "pending": false,
+          "slowestJob": "shader scene_ #0",
+          "steps": 141
+        }
+      },
+      "id": "03-rime-vault-sealed-door",
+      "pose": {
+        "orientation": [
+          0.16151335835456848,
+          0.4398617446422577,
+          -0.08075667917728424,
+          0.8797234892845154
+        ],
+        "position": [
+          32.0,
+          -4.299999713897705,
+          -97.0
+        ]
+      },
+      "verticalFovDegrees": 60,
+      "path": "artifacts/lumen-reach-v3/after-engine/engine-03-rime-vault-sealed-door.png"
+    },
+    {
+      "renderer": {
+        "captureMs": 0.009826,
+        "collisionTriangles": 4114,
+        "cpuPassMs": [
+          0.310457,
+          0.013444,
+          0.015641,
+          0.006434
+        ],
+        "cpuRenderMs": 0.347437,
+        "cpuUpdateMs": 0.195883,
+        "debug": false,
+        "deliveredFPS": 59.99575392050778,
+        "frameMs": 16.631919,
+        "gpuCaptureMs": 0.0,
+        "gpuEffectsMs": {
+          "bloom": 0.123125,
+          "msaa_resolve": 0.0,
+          "native_surfaces_geometry": 0.001093,
+          "output_markers": 0.115,
+          "sky": 0.170416,
+          "upscale_sharpen": 0.349427,
+          "world_shading_shared": 7.086562
+        },
+        "gpuPassMs": [
+          7.256978,
+          0.001093,
+          0.47255199999999997,
+          0.115
+        ],
+        "graphics": {
+          "alpha_haze": true,
+          "ambient_occlusion": true,
+          "anisotropy": 2,
+          "bloom": "low",
+          "bloom_strength": 0.12,
+          "dynamic_resolution": true,
+          "exposure": 1,
+          "fog": "height",
+          "fov": 60.0,
+          "msaa": 1,
+          "normal_maps": true,
+          "offload": "off",
+          "offload_power_cap_w": 80,
+          "quality": "medium",
+          "reduced_motion": false,
+          "reflections": true,
+          "render_scale": "auto",
+          "scale_max": 1.0,
+          "scale_min": 0.375,
+          "sharpen": 0.35,
+          "sky": "environment",
+          "specular": true,
+          "target_fps": 60
+        },
+        "inFlight": 1,
+        "internalSize": [
+          1920,
+          1080
+        ],
+        "ipcMs": 0.034992,
+        "msaaSamples": 1,
+        "nativeSize": [
+          1920,
+          1080
+        ],
+        "offload": {
+          "activeRenderer": "in-process",
+          "powerW": null
+        },
+        "quality": "high",
+        "renderScale": 1.0,
+        "renderedFrames": 724,
+        "renderer": "Mesa Intel(R) Graphics (PTL)",
+        "reusedFrames": 0,
+        "targetFPS": 60,
+        "upload": {
+          "bytes": 263734472,
+          "completedJobs": 0,
+          "cpuMs": 111.88716499999997,
+          "jobs": 0,
+          "maxJobMs": 32.774393,
+          "maxStepMs": 32.778344,
+          "pending": false,
+          "slowestJob": "shader scene_ #0",
+          "steps": 141
+        }
+      },
+      "id": "03-rime-vault-console-row",
+      "pose": {
+        "orientation": [
+          -0.01584026776254177,
+          0.393860787153244,
+          0.006788685917854309,
+          0.9190084934234619
+        ],
+        "position": [
+          38.0,
+          -4.299999713897705,
+          -85.0
+        ]
+      },
+      "verticalFovDegrees": 60,
+      "path": "artifacts/lumen-reach-v3/after-engine/engine-03-rime-vault-console-row.png"
+    }
+  ],
+  "vaultClip": {
+    "version": "0.6.0",
+    "views": [
+      "03-rime-vault",
+      "03-rime-vault-services",
+      "03-rime-vault-platform"
+    ],
+    "duration": "21.033333",
+    "encodedIn": "/tmp/rime-v3-zi5cow9s",
+    "motion": "20cm sine pan over seven seconds per fixed target",
+    "elapsedSeconds": 21.10277128801681
+  },
+  "nestedDrmClients": [
+    {
+      "drm-driver": "xe",
+      "drm-client-id": "7618",
+      "drm-pdev": "0000:00:02.0",
+      "drm-total-system": "0",
+      "drm-shared-system": "0",
+      "drm-active-system": "0",
+      "drm-resident-system": "0",
+      "drm-purgeable-system": "0",
+      "drm-total-gtt": "0",
+      "drm-shared-gtt": "0",
+      "drm-active-gtt": "0",
+      "drm-resident-gtt": "0",
+      "drm-total-stolen": "0",
+      "drm-shared-stolen": "0",
+      "drm-active-stolen": "0",
+      "drm-resident-stolen": "0",
+      "drm-cycles-rcs": "0",
+      "drm-total-cycles-rcs": "2589951591945",
+      "drm-cycles-vcs": "0",
+      "drm-total-cycles-vcs": "2589951591945",
+      "drm-cycles-vecs": "0",
+      "drm-total-cycles-vecs": "2589951591945",
+      "drm-cycles-bcs": "0",
+      "drm-total-cycles-bcs": "2589951591945",
+      "drm-cycles-ccs": "0",
+      "drm-total-cycles-ccs": "2589951591945"
+    },
+    {
+      "drm-driver": "xe",
+      "drm-client-id": "7619",
+      "drm-pdev": "0000:00:02.0",
+      "drm-total-system": "0",
+      "drm-shared-system": "0",
+      "drm-active-system": "0",
+      "drm-resident-system": "0",
+      "drm-purgeable-system": "0",
+      "drm-total-gtt": "804016 KiB",
+      "drm-shared-gtt": "52 MiB",
+      "drm-active-gtt": "0",
+      "drm-resident-gtt": "804016 KiB",
+      "drm-total-stolen": "0",
+      "drm-shared-stolen": "0",
+      "drm-active-stolen": "0",
+      "drm-resident-stolen": "0",
+      "drm-cycles-rcs": "238413647",
+      "drm-total-cycles-rcs": "2589951594361",
+      "drm-cycles-vcs": "0",
+      "drm-total-cycles-vcs": "2589951594361",
+      "drm-cycles-vecs": "0",
+      "drm-total-cycles-vecs": "2589951594361",
+      "drm-cycles-bcs": "234",
+      "drm-total-cycles-bcs": "2589951594361",
+      "drm-cycles-ccs": "229",
+      "drm-total-cycles-ccs": "2589951594361"
+    },
+    {
+      "drm-driver": "xe",
+      "drm-client-id": "7622",
+      "drm-pdev": "0000:00:02.0",
+      "drm-total-system": "0",
+      "drm-shared-system": "0",
+      "drm-active-system": "0",
+      "drm-resident-system": "0",
+      "drm-purgeable-system": "0",
+      "drm-total-gtt": "0",
+      "drm-shared-gtt": "0",
+      "drm-active-gtt": "0",
+      "drm-resident-gtt": "0",
+      "drm-total-stolen": "0",
+      "drm-shared-stolen": "0",
+      "drm-active-stolen": "0",
+      "drm-resident-stolen": "0",
+      "drm-cycles-rcs": "0",
+      "drm-total-cycles-rcs": "2589951599078",
+      "drm-cycles-vcs": "0",
+      "drm-total-cycles-vcs": "2589951599078",
+      "drm-cycles-vecs": "0",
+      "drm-total-cycles-vecs": "2589951599078",
+      "drm-cycles-bcs": "0",
+      "drm-total-cycles-bcs": "2589951599078",
+      "drm-cycles-ccs": "0",
+      "drm-total-cycles-ccs": "2589951599078"
+    }
+  ],
+  "status": "PASS",
+  "checks": [
+    "package load",
+    "real spawn walking",
+    "matching 60 degree views",
+    "clean nested exit"
+  ]
+}

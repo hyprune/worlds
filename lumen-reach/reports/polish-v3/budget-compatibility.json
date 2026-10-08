@@ -1,0 +1,34 @@
+{
+  "status": "PASS",
+  "anchorsUnchanged": 24,
+  "routesStairsAndPlacementUnchanged": true,
+  "unchangedGeometryChunks": [
+    "Visual-sun-court",
+    "Visual-array-hall",
+    "Visual-signal-rise",
+    "Visual-foliage",
+    "Visual-connector-descent",
+    "Visual-connector-ascent"
+  ],
+  "triangleGrowthPercent": 11.25,
+  "drawGrowthPercent": 3.57,
+  "gpuGrowthPercent": 14.21,
+  "rimeMaterials": [
+    "amber",
+    "black",
+    "condensation",
+    "grating",
+    "ice-body",
+    "ice-rim",
+    "ivory",
+    "metal",
+    "red-light",
+    "rime-crust",
+    "snow",
+    "strip",
+    "trim",
+    "vault-metal"
+  ],
+  "rimeBeforeTriangles": 22236,
+  "rimeAfterTriangles": 44700
+}

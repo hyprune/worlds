@@ -1,108 +1,95 @@
-# Lumen Reach 0.5.0 — visual polish v2
+# Lumen Reach 0.6.0 — Rime Vault frost and density pass
 
-Four connected, original workspace homes. This delivery keeps all 24 mounts,
-four free-placement volumes, 64 route nodes, 63 bidirectional edges and 14
-alternate stair flights. The former release is documented in
-[delivery-0.4.0.md](delivery-0.4.0.md).
+Prepared locally for owner publication; no push or GitHub release was performed.
+The preceding published world is preserved in [delivery-0.5.0.md](delivery-0.5.0.md).
 
-## Changes by home
+## Rime Vault changes
 
-- **Sun Court:** supported entrance jambs and seated light backplates; facade
-  maintenance plates, drains, vents and fasteners; canopy seams, power leads,
-  luminaires, Reach-marked repair cases, service hatches and red foliage.
-  Entry fixtures have a dedicated close engine view. Pier/lintel overlaps and
-  the vestibule's overlapping ground face are removed.
-- **Array Hall:** ribbed architectural bays and collars, populated rack drawers
-  and indicators, service cabinets, balcony structure, suspended ring housing,
-  banners and backed signs. Physical watershed spires and a sculpted rock divide
-  replace the flat blank mass in the rear vista. Warm lighting is retained.
-- **Rime Vault:** large frosted coolant trunks, flanges and hangers; bundled
-  cables and trays; ice pendants, reinforced service panels, pump cabinets,
-  keyboards, Reach-marked cases and local grated/hazard floor panels. Blue fill
-  and warm grazing lights reveal the service detail while keeping a cold room.
-- **Signal Rise:** a deeper reflector with front seams, radial/back hoop ribs,
-  a feed horn, three struts and trunnions; snowbanks and near rock crags; frosted
-  ledges, vents, icicles, cases and hanging gantry cables. Overlapping fortress
-  pier/crown faces are removed. Blue night and amber/red practicals remain distinct.
+- Three original material masters replace mottled frost with vertically streaked
+  frozen steel, pale crystalline rime and glazed frozen condensation. Rime shells
+  sit on pipe tops; ice fringes collect along pipe sides and console sills.
+  Icicles use opaque blue cores and low-emission facing facets to suggest light
+  scattering. Small snowbanks gather in perimeter corners.
+- Five low console stations form two floor banks, with keyboards, foot lights,
+  power leads and Reach-mark badges. A three-station wall bank fills a service
+  wall. These are fixed process instruments; all 24 existing interactive mounts
+  retain their IDs, poses, sizes and clear approaches.
+- Overhead racks have insulated pipes, coupling flanges, captive bolts, support
+  channels and threaded hangers. Grated service channels expose cable runs;
+  warning edges, Reach-marked cases and a three-stack purge cluster add floor
+  detail while retaining a broad central walking route.
+- The sealed continuation has pressure jambs, interlocks, reinforced leaves,
+  a lit center seam, guide lamps and warm spill suggesting an extension beyond.
+  Amber console/floor pools and red practicals lead the room; blue fill picks
+  out high cold services. Original Rime instrument art now uses warm amber lines.
 
-Every lit physical material has a base-color texture. Eleven generated masters,
-periodic 640px PBR derivatives and an eight-band trim sheet have prompt/hash
-provenance. The new rock master used built-in imagegen; the exact prompt and
-SHA256 are in [generation.json](../materials/generation.json). Explicit glTF
-factors preserve red canvas, foliage and dark housings that the exporter otherwise
-washed out. No world names or marks were borrowed from the reference lettering.
+Other home geometry and all route, stair and free-placement contracts are
+unchanged. The visual fit is documented in [RENDER-REVIEW.md](../RENDER-REVIEW.md),
+with raw comparisons in `artifacts/lumen-reach-v3/render-review.html`.
+
+## Materials and bake quality
+
+The three built-in imagegen assets are saved in `lumen-reach/materials/source/`
+as `frost-metal-v3.png`, `rime-crust-v3.png` and `condensation-v3.png`. Exact
+prompts are in [frost-v3-prompts.json](../materials/frost-v3-prompts.json); master
+hashes, attribution and licenses are in [generation.json](../materials/generation.json).
+Periodic 640px albedo/normal/ORM derivatives pass edge checks. All physical
+materials retain texture coverage and explicit authored tint factors.
+
+A first dense pack collapsed to 0.00010 useful UV1 area and produced a black
+engine lightmap despite valid ranges and no overlaps. Thin parts now omit
+unnecessary bevels, the Vault owns a 2048px atlas, and both authoring and package
+checks reject useful UV1 area below 0.03. Final Vault area is **0.19210**.
+The bad package is confirmed to fail the new guard. This fix changes the asset
+pipeline only; it does not alter the owner’s renderer settings.
 
 ## Budgets
 
-| Measurement | 0.4.0 | 0.5.0 |
+| Measurement | 0.5.0 | 0.6.0 |
 | --- | ---: | ---: |
-| Visible triangles | 210,067 | 199,911 |
-| World draw estimate | 65 | 84 |
-| Conservative world GPU MiB | 272.45 | 285.62 |
-| Package MiB | 55.13 | 57.81 |
+| World triangles | 199,911 | 222,403 |
+| Rime Vault triangles | 22,236 | 44,700 |
+| Estimated world draws | 84 | 87 |
+| Conservative world GPU MiB | 285.62 | 326.2 |
+| Package MiB | 57.81 | 66.57 |
 
-Draws count visible glTF primitives only, excluding applications, HUD and
-postprocessing. Geometry is merged by material within four home chunks plus
-two independently baked connector chunks; foliage and distant artwork are
-separate. Reduced small-part tessellation pays for the added kit detail. GPU
-accounting includes all mip levels, separate color/data views and expanded
-40-byte vertices. Core currently has no runtime LOD or chunk culling; this gap
-is recorded in [NOTES-rfc-gaps.md](../../NOTES-rfc-gaps.md).
+World triangle growth is **11.25%**, below the 30%
+allowance; estimated draw growth is **3.57%**, below 40%.
+Static geometry remains merged by material within home/connector chunks, with
+shared distant artwork and screen art. Draw estimates exclude applications,
+HUD and postprocessing. GPU estimates include mip chains, color/data texture
+views and expanded vertices. Runtime chunk culling/LOD remains a documented
+core gap in [NOTES-rfc-gaps.md](../../NOTES-rfc-gaps.md).
 
-The tour's sampled nested process peak is
-**765.63 MiB GTT** across
-103 samples. This includes compositor/output and
-imported application buffers and is separate from the world allocation.
+The 4K Medium run used **Mesa Intel(R) Graphics (PTL)**.
+Rime Vault's short stationary sample measured **59.98 rendered
+frames/s**, with render scales **0.375, 0.4375** and
+median GPU pass sum **4.54 ms**. Output remained 3840×2160.
+These are short observations, not a sustained route FPS guarantee. Full samples
+and loaded binary hashes are retained under `polish-v3/`.
 
-## Automated engine verification
+## Verification and delivery
 
-Core's nested harness ran under `/tmp/worldshell-nested.lock`, with the actual
-**Medium** preset on **Mesa Intel(R) Graphics (PTL)**.
-The 4K output stayed native; dynamic render scale was recorded. Thirty IPC timing
-samples per stationary home view produced these observations:
+Schema 0.2, glTF, UV packing, original material provenance, fixture/decal checks,
+all mount approaches and free volumes, walking support and capsule checks pass.
+The isolated nested engine traversed **126 directed graph edges** and **14
+alternate stair flights**. The comparison uses freshly captured 0.5.0 and 0.6.0
+camera paths on the same test harness. Switchyard's complete validation suite
+passes unchanged. All Blender execution used 10.2.2.2 via the remote wrapper.
+All engine sessions held `/tmp/worldshell-nested.lock`; the real session was
+never controlled, and the gallery autocommit process was never signaled.
 
-| Home | Rendered frames/s | Median GPU pass sum ms | Render scales |
-| --- | ---: | ---: | --- |
-| sun-court | 59.88 | 8.697 | 0.4375 |
-| array-hall | 59.94 | 7.018 | 0.5 |
-| rime-vault | 60.31 | 8.054 | 0.5 |
-| signal-rise | 60.06 | 6.892 | 0.5, 0.5625 |
+- Eighteen raw 4K stills: `/home/rick/workspace/rick-the-alien/worldshell-gallery/screenshots/release-world-v3`
+- Before/after clip: `/home/rick/workspace/rick-the-alien/worldshell-gallery/videos/rime-vault-v3.mp4`
+- String-only metadata: `/home/rick/workspace/rick-the-alien/worldshell-gallery/videos/rime-vault-v3.json`
+- Clip: **42.00s, 1920×1080, 30 fps**; three
+  matched views alternate before/after with labels, no grading or retouching.
+- Archive: `/home/rick/workspace/hyprune/worlds/artifacts/releases/com.hyprune.lumen-reach-0.6.0.tar.zst`
+- Archive size: **43.12 MiB**
+- Archive SHA256: `fe2f7b492cd21578964a7f4cd4ac5f799209c318f7350c506df04bb46be28dd4`
 
-These short samples are not a sustained whole-route FPS guarantee. Exact samples,
-loaded plugin hashes and the core working-tree state are preserved in
-[polish-v2/v2-4k-nested.json](polish-v2/v2-4k-nested.json). Core was being developed
-concurrently; the loaded binary hashes identify what actually ran.
-
-Schema 0.2, glTF (zero errors/warnings), UV1 packing, texture provenance/tints,
-all mount rectangles and two requested window sizes, reserved-volume interiors,
-walking support and capsule checks pass. All **126 directed graph traversals**
-and **14 alternate stair flights** pass in-engine. The narrow-emitter checker
-passes; the named authoring audit seats **175 strips** and backs **173 signs/marks**.
-The original scene had 48 narrow-emitter overlap probe hits. The new 2cm-lens
-regression checks cover all three axes. Switchyard 0.1.1 was rebuilt remotely
-and its complete validation suite passed.
-
-## Delivery paths
-
-- Stills: `/home/rick/workspace/rick-the-alien/worldshell-gallery/screenshots/release-world-v2`
-- Tour: `/home/rick/workspace/rick-the-alien/worldshell-gallery/videos/release-world-tour-v2.mp4`
-- Metadata: `/home/rick/workspace/rick-the-alien/worldshell-gallery/videos/release-world-tour-v2.json`
-- Installable archive: `/home/rick/workspace/hyprune/worlds/artifacts/releases/com.hyprune.lumen-reach-0.5.0.tar.zst`
-- Archive SHA256: `d730d3867bc3a89bfb88a0540458999a22206b7c6f9891ed3f1a36cf54b9181c`
-- Archive size: **36.70 MiB**
-- Tour: **83.50s, 1920×1080, 30 fps**, real placed terminals and mounted
-  workspace content, actual input and the shell HUD.
-
-The sixteen engine stills include twelve unchanged comparison poses and four
-additional detail views. They are ungraded. The tour was encoded in `/tmp`,
-inspected, then copied to a staging file and atomically moved into the gallery.
-The gallery autocommit process was left untouched.
-All Blender execution used `tools/remote-blender.sh` on 10.2.2.2. The owner's
-real session was never controlled. Worlds commits remain local; no push,
-GitHub release or publication was performed by this work.
-
-The concept review is [RENDER-REVIEW.md](../RENDER-REVIEW.md). The delivered
-geometry remains stylized and less densely detailed than the painted concepts;
-large work approaches stay intentionally open. Steam, baked lighting and vistas
-are static; unusual high views can still expose the night enclosure. These
-limits remain visible in the raw evidence.
+Video encoding occurred in `/tmp`, then completed files were staged and moved
+into the gallery after inspection. Screen art in this focused comparison is
+static authored UI. Steam and baked illumination are static; ice scattering is
+an opaque-material approximation. Large workspace and walking clearances keep
+the room broader than the narrow painted concept corridor.

@@ -1,0 +1,85 @@
+{
+  "status": "REVIEWED",
+  "scope": "Six Rime views and twelve unchanged-home views inspected in raw 4K Medium captures. Qualitative concept review is not a pixel-parity assertion.",
+  "findings": [
+    "Console banks and wall instruments visibly populate the floor edges.",
+    "Directional frozen metal replaces mottled frost; rime and condensation read separately.",
+    "Pipe racks, hangers, grated channels, corner drifts and purge cluster are visible.",
+    "Pressure-gate seam, reinforcement and guide lamps read in the close view.",
+    "Engine lightmap lighting is restored; floors and steam remain simpler than the painted concept."
+  ],
+  "images": [
+    {
+      "name": "engine-01-sun-court-entry-fixtures.png",
+      "sha256": "371b22850054edad62eb64702d9121ab1599b8c8720f1a82da94317e899885e4"
+    },
+    {
+      "name": "engine-01-sun-court-terrace.png",
+      "sha256": "d55a261e6892d4340dbe44442979d25c284c7965721b565fca25c485ba320f82"
+    },
+    {
+      "name": "engine-01-sun-court-tools.png",
+      "sha256": "5567c6d3c40f743e6023e2f52f62f091c5ec2fdd903370919c309fad5e1cfb8a"
+    },
+    {
+      "name": "engine-01-sun-court.png",
+      "sha256": "7767dc373a778417965feb130da7f40eb0f5e6737830387de8aa0a3c995adf4a"
+    },
+    {
+      "name": "engine-02-array-hall-balcony.png",
+      "sha256": "d47019b1482b111c75181eac73e3def055471c5bdb6364596850ff2aa74824c8"
+    },
+    {
+      "name": "engine-02-array-hall-tools.png",
+      "sha256": "f157887989d062c10ef6fc47b3af5c9073e7ceaceff7588a05727ae51e8576b9"
+    },
+    {
+      "name": "engine-02-array-hall-vista.png",
+      "sha256": "bd3649a1603da851f39390d68af41eba35cc525b6ebc1d03e473e6a22c7410f9"
+    },
+    {
+      "name": "engine-02-array-hall.png",
+      "sha256": "ec890232cc0e297b6fa4ac5b0bd1c917ecaaf612a4870d3ebd4eed8749f022fc"
+    },
+    {
+      "name": "engine-03-rime-vault-console-row.png",
+      "sha256": "dd072005d228a1e01bca7bd9279e0c0aae24101d7c9050d4239a8e88bb6d7102"
+    },
+    {
+      "name": "engine-03-rime-vault-platform.png",
+      "sha256": "e62da633f60c24ea506fb07966110a42c1c1ecfd101f749a5cf2c34f04ca91f8"
+    },
+    {
+      "name": "engine-03-rime-vault-sealed-door.png",
+      "sha256": "9e530d437ff315ef44c13f42154bdbfdb43451301590e61baa39bd3bfee78fc1"
+    },
+    {
+      "name": "engine-03-rime-vault-services.png",
+      "sha256": "dc393eb60a3eed8a9fc47452838ead898d923fb3826b3823ca401d6b81d4393b"
+    },
+    {
+      "name": "engine-03-rime-vault-tools.png",
+      "sha256": "2a42ea2a54a55da20fcecd47123ab9861b2ecd264e73d42f863216bfd7d19f51"
+    },
+    {
+      "name": "engine-03-rime-vault.png",
+      "sha256": "bc46c9d82e2462a4d51661d89f40e32479cb6623c16284f58e9a1f445a57abbe"
+    },
+    {
+      "name": "engine-04-signal-rise-bench.png",
+      "sha256": "ad9644f013b9402696026ae9d888a1156d0168656c9f5da4cdf786a4357bf589"
+    },
+    {
+      "name": "engine-04-signal-rise-gantry.png",
+      "sha256": "018fd657ab85197b15276084b235ce7e9d11b2f1d8283dbeebc6e0b0d0057053"
+    },
+    {
+      "name": "engine-04-signal-rise-reflector.png",
+      "sha256": "fd2e6637142d37a0f4d88e7ba70e87ea374fe07f42613a8ee3881f86d1f68a10"
+    },
+    {
+      "name": "engine-04-signal-rise.png",
+      "sha256": "214bbd24ebcc90ac40973b6882fb1df4cf94bf13ca69a54afb7fb6f6221c725d"
+    }
+  ]
+}

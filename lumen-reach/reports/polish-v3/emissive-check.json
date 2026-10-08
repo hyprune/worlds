@@ -1,0 +1,2060 @@
+{
+  "status": "PASS",
+  "method": "three triangle-interior probes, all orientations, 3.9mm same-facing tolerance",
+  "emissiveTriangles": 14986,
+  "probedTriangles": 14986,
+  "scope": "all emissive triangles",
+  "stacks": [],
+  "mechanicalMounts": {
+    "status": "PASS",
+    "strips": [
+      {
+        "name": "sun-court-slot-01-facade-wall-01 light",
+        "status": "SEATED",
+        "host": "sun-court-slot-01-facade-wall-01 frame.003",
+        "originalBackGapMeters": 0.016,
+        "position": [
+          8.0,
+          14.89,
+          -23.09
+        ]
+      },
+      {
+        "name": "Entry light",
+        "status": "SEATED",
+        "host": "Entry light backplate",
+        "originalBackGapMeters": -0.008,
+        "position": [
+          2.8,
+          1.55,
+          -23.038
+        ]
+      },
+      {
+        "name": "Entry light.001",
+        "status": "SEATED",
+        "host": "Entry light backplate.001",
+        "originalBackGapMeters": -0.008,
+        "position": [
+          13.2,
+          1.55,
+          -23.038
+        ]
+      },
+      {
+        "name": "Entry pier practical",
+        "status": "SEATED",
+        "host": "Entry pier",
+        "originalBackGapMeters": -0.005,
+        "position": [
+          0.4,
+          2.2,
+          -22.47
+        ]
+      },
+      {
+        "name": "Entry pier practical.001",
+        "status": "SEATED",
+        "host": "Entry pier.001",
+        "originalBackGapMeters": -0.005,
+        "position": [
+          15.6,
+          2.2,
+          -22.47
+        ]
+      },
+      {
+        "name": "Entry ceiling light",
+        "status": "SEATED",
+        "host": "Entry canopy",
+        "originalBackGapMeters": 0.0125,
+        "position": [
+          8.0,
+          4.39,
+          -22.0
+        ]
+      },
+      {
+        "name": "Lookout light",
+        "status": "SEATED",
+        "host": "Guardrail post.129",
+        "originalBackGapMeters": 0.075,
+        "position": [
+          -23.85,
+          4.15,
+          -8.0
+        ]
+      },
+      {
+        "name": "Lookout light.001",
+        "status": "SEATED",
+        "host": "West lookout",
+        "originalBackGapMeters": 0.11,
+        "position": [
+          -23.85,
+          4.15,
+          -13.0
+        ]
+      },
+      {
+        "name": "Lookout light.002",
+        "status": "SEATED",
+        "host": "Guardrail post.133",
+        "originalBackGapMeters": 0.075,
+        "position": [
+          -23.85,
+          4.15,
+          -18.0
+        ]
+      },
+      {
+        "name": "sun-court-slot-01-operator-desk-01 light",
+        "status": "SEATED",
+        "host": "sun-court-slot-01-operator-desk-01 frame.003",
+        "originalBackGapMeters": 0.016,
+        "position": [
+          -15.0,
+          2.81365,
+          7.40656
+        ]
+      },
+      {
+        "name": "sun-court-slot-01-operator-desk-02 light",
+        "status": "SEATED",
+        "host": "sun-court-slot-01-operator-desk-02 frame.003",
+        "originalBackGapMeters": 0.016,
+        "position": [
+          22.0,
+          2.78915,
+          7.81152
+        ]
+      },
+      {
+        "name": "sun-court-slot-01-field-rig-01 light",
+        "status": "SEATED",
+        "host": "Rig upright",
+        "originalBackGapMeters": 0.01036,
+        "position": [
+          -16.5,
+          3.71755,
+          0.08734
+        ]
+      },
+      {
+        "name": "sun-court-slot-01-field-rig-02 light",
+        "status": "SEATED",
+        "host": "Rig upright.001",
+        "originalBackGapMeters": 0.01036,
+        "position": [
+          -13.3,
+          3.71755,
+          0.08734
+        ]
+      },
+      {
+        "name": "sun-court-slot-01-kiosk-pillar-01 light",
+        "status": "SEATED",
+        "host": "sun-court-slot-01-kiosk-pillar-01 frame.003",
+        "originalBackGapMeters": 0.016,
+        "position": [
+          17.0,
+          3.34275,
+          -4.81136
+        ]
+      },
+      {
+        "name": "Rail warm edge",
+        "status": "SEATED",
+        "host": "Court paving",
+        "originalBackGapMeters": 0.01,
+        "position": [
+          6.525,
+          0.018,
+          9.0
+        ]
+      },
+      {
+        "name": "Rail warm edge.001",
+        "status": "SEATED",
+        "host": "Court paving",
+        "originalBackGapMeters": 0.01,
+        "position": [
+          5.525,
+          0.018,
+          -0.5
+        ]
+      },
+      {
+        "name": "Rail warm edge.002",
+        "status": "SEATED",
+        "host": "Paving expansion seam.004",
+        "originalBackGapMeters": -0.006,
+        "position": [
+          2.525,
+          0.018,
+          -5.0
+        ]
+      },
+      {
+        "name": "Rail warm edge.003",
+        "status": "SEATED",
+        "host": "Court paving",
+        "originalBackGapMeters": 0.01,
+        "position": [
+          -0.475,
+          0.018,
+          -11.0
+        ]
+      },
+      {
+        "name": "Rail warm edge.004",
+        "status": "SEATED",
+        "host": "Inset route rail.004",
+        "originalBackGapMeters": -0.00404,
+        "position": [
+          2.025,
+          0.018,
+          -17.5
+        ]
+      },
+      {
+        "name": "Rail warm edge.005",
+        "status": "SEATED",
+        "host": "Court paving",
+        "originalBackGapMeters": 0.01,
+        "position": [
+          6.525,
+          0.018,
+          -22.0
+        ]
+      },
+      {
+        "name": "Rail warm edge.006",
+        "status": "SEATED",
+        "host": "Court paving",
+        "originalBackGapMeters": 0.01,
+        "position": [
+          7.565,
+          0.018,
+          9.0
+        ]
+      },
+      {
+        "name": "Rail warm edge.007",
+        "status": "SEATED",
+        "host": "Court paving",
+        "originalBackGapMeters": 0.01,
+        "position": [
+          6.565,
+          0.018,
+          -0.5
+        ]
+      },
+      {
+        "name": "Rail warm edge.008",
+        "status": "SEATED",
+        "host": "Paving expansion seam.004",
+        "originalBackGapMeters": -0.006,
+        "position": [
+          3.565,
+          0.018,
+          -5.0
+        ]
+      },
+      {
+        "name": "Rail warm edge.009",
+        "status": "SEATED",
+        "host": "Court paving",
+        "originalBackGapMeters": 0.01,
+        "position": [
+          0.565,
+          0.018,
+          -11.0
+        ]
+      },
+      {
+        "name": "Rail warm edge.010",
+        "status": "SEATED",
+        "host": "Inset route rail.010",
+        "originalBackGapMeters": -0.00404,
+        "position": [
+          3.065,
+          0.018,
+          -17.5
+        ]
+      },
+      {
+        "name": "Rail warm edge.011",
+        "status": "SEATED",
+        "host": "Court paving",
+        "originalBackGapMeters": 0.01,
+        "position": [
+          7.565,
+          0.018,
+          -22.0
+        ]
+      },
+      {
+        "name": "Column light",
+        "status": "SEATED",
+        "host": "Atrium column",
+        "originalBackGapMeters": 0.0725,
+        "position": [
+          -5.4,
+          8.0,
+          -32.76
+        ]
+      },
+      {
+        "name": "Column light.001",
+        "status": "SEATED",
+        "host": "Atrium column.001",
+        "originalBackGapMeters": 0.0725,
+        "position": [
+          -5.4,
+          8.0,
+          -43.76
+        ]
+      },
+      {
+        "name": "Column light.002",
+        "status": "SEATED",
+        "host": "Atrium column.002",
+        "originalBackGapMeters": 0.0725,
+        "position": [
+          -5.4,
+          8.0,
+          -57.76
+        ]
+      },
+      {
+        "name": "Column light.003",
+        "status": "SEATED",
+        "host": "Atrium column.003",
+        "originalBackGapMeters": 0.0725,
+        "position": [
+          23.4,
+          8.0,
+          -32.76
+        ]
+      },
+      {
+        "name": "Column light.004",
+        "status": "SEATED",
+        "host": "Atrium column.004",
+        "originalBackGapMeters": 0.0725,
+        "position": [
+          23.4,
+          8.0,
+          -43.76
+        ]
+      },
+      {
+        "name": "Column light.005",
+        "status": "SEATED",
+        "host": "Atrium column.005",
+        "originalBackGapMeters": 0.0725,
+        "position": [
+          23.4,
+          8.0,
+          -57.76
+        ]
+      },
+      {
+        "name": "array-hall-slot-02-hanging-wall-01 light",
+        "status": "SEATED",
+        "host": "array-hall-slot-02-hanging-wall-01 frame.003",
+        "originalBackGapMeters": 0.016,
+        "position": [
+          8.0,
+          14.14,
+          -47.92
+        ]
+      },
+      {
+        "name": "array-hall-slot-02-lectern-01 light",
+        "status": "SEATED",
+        "host": "array-hall-slot-02-lectern-01 frame.003",
+        "originalBackGapMeters": 0.016,
+        "position": [
+          -1.0,
+          2.62045,
+          -40.03164
+        ]
+      },
+      {
+        "name": "array-hall-slot-02-lectern-02 light",
+        "status": "SEATED",
+        "host": "array-hall-slot-02-lectern-02 frame.003",
+        "originalBackGapMeters": 0.016,
+        "position": [
+          18.0,
+          2.62045,
+          -40.03164
+        ]
+      },
+      {
+        "name": "array-hall-slot-02-banner-01 light",
+        "status": "SEATED",
+        "host": "array-hall-slot-02-banner-01 frame.003",
+        "originalBackGapMeters": 0.016,
+        "position": [
+          -8.0,
+          8.84,
+          -37.92
+        ]
+      },
+      {
+        "name": "array-hall-slot-02-banner-02 light",
+        "status": "SEATED",
+        "host": "array-hall-slot-02-banner-02 frame.003",
+        "originalBackGapMeters": 0.016,
+        "position": [
+          21.0,
+          8.84,
+          -43.92
+        ]
+      },
+      {
+        "name": "array-hall-slot-02-operator-desk-01 light",
+        "status": "SEATED",
+        "host": "array-hall-slot-02-operator-desk-01 frame.003",
+        "originalBackGapMeters": 0.016,
+        "position": [
+          -2.0,
+          2.78915,
+          -52.91152
+        ]
+      },
+      {
+        "name": "array-hall-slot-02-operator-desk-02 light",
+        "status": "SEATED",
+        "host": "array-hall-slot-02-operator-desk-02 frame.003",
+        "originalBackGapMeters": 0.016,
+        "position": [
+          8.0,
+          2.78915,
+          -52.91152
+        ]
+      },
+      {
+        "name": "array-hall-slot-02-operator-desk-03 light",
+        "status": "SEATED",
+        "host": "array-hall-slot-02-operator-desk-03 frame.003",
+        "originalBackGapMeters": 0.016,
+        "position": [
+          18.0,
+          2.78915,
+          -52.91152
+        ]
+      },
+      {
+        "name": "Rack status strip",
+        "status": "SEATED",
+        "host": "Archive rack",
+        "originalBackGapMeters": 0.035,
+        "position": [
+          -5.15,
+          0.88,
+          -43.45
+        ]
+      },
+      {
+        "name": "Rack status strip.001",
+        "status": "SEATED",
+        "host": "Archive rack",
+        "originalBackGapMeters": 0.035,
+        "position": [
+          -5.15,
+          1.58,
+          -43.45
+        ]
+      },
+      {
+        "name": "Rack status strip.002",
+        "status": "SEATED",
+        "host": "Archive rack",
+        "originalBackGapMeters": 0.035,
+        "position": [
+          -5.15,
+          2.28,
+          -43.45
+        ]
+      },
+      {
+        "name": "Rack status strip.003",
+        "status": "SEATED",
+        "host": "Archive rack",
+        "originalBackGapMeters": 0.035,
+        "position": [
+          -5.15,
+          2.98,
+          -43.45
+        ]
+      },
+      {
+        "name": "Rack status strip.004",
+        "status": "SEATED",
+        "host": "Archive rack",
+        "originalBackGapMeters": 0.035,
+        "position": [
+          -5.15,
+          3.68,
+          -43.45
+        ]
+      },
+      {
+        "name": "Rack status strip.005",
+        "status": "SEATED",
+        "host": "Archive rack",
+        "originalBackGapMeters": 0.035,
+        "position": [
+          -5.15,
+          4.38,
+          -43.45
+        ]
+      },
+      {
+        "name": "Rack status strip.006",
+        "status": "SEATED",
+        "host": "Archive rack.001",
+        "originalBackGapMeters": 0.035,
+        "position": [
+          -5.15,
+          0.88,
+          -46.45
+        ]
+      },
+      {
+        "name": "Rack status strip.007",
+        "status": "SEATED",
+        "host": "Archive rack.001",
+        "originalBackGapMeters": 0.035,
+        "position": [
+          -5.15,
+          1.58,
+          -46.45
+        ]
+      },
+      {
+        "name": "Rack status strip.008",
+        "status": "SEATED",
+        "host": "Archive rack.001",
+        "originalBackGapMeters": 0.035,
+        "position": [
+          -5.15,
+          2.28,
+          -46.45
+        ]
+      },
+      {
+        "name": "Rack status strip.009",
+        "status": "SEATED",
+        "host": "Archive rack.001",
+        "originalBackGapMeters": 0.035,
+        "position": [
+          -5.15,
+          2.98,
+          -46.45
+        ]
+      },
+      {
+        "name": "Rack status strip.010",
+        "status": "SEATED",
+        "host": "Archive rack.001",
+        "originalBackGapMeters": 0.035,
+        "position": [
+          -5.15,
+          3.68,
+          -46.45
+        ]
+      },
+      {
+        "name": "Rack status strip.011",
+        "status": "SEATED",
+        "host": "Archive rack.001",
+        "originalBackGapMeters": 0.035,
+        "position": [
+          -5.15,
+          4.38,
+          -46.45
+        ]
+      },
+      {
+        "name": "Rack status strip.012",
+        "status": "SEATED",
+        "host": "Archive rack drawer.022",
+        "originalBackGapMeters": 0.0175,
+        "position": [
+          -5.15,
+          0.88,
+          -56.45
+        ]
+      },
+      {
+        "name": "Rack status strip.013",
+        "status": "SEATED",
+        "host": "Archive rack drawer.023",
+        "originalBackGapMeters": -0.015,
+        "position": [
+          -5.15,
+          1.58,
+          -56.45
+        ]
+      },
+      {
+        "name": "Rack status strip.014",
+        "status": "SEATED",
+        "host": "Archive rack drawer.024",
+        "originalBackGapMeters": -0.015,
+        "position": [
+          -5.15,
+          2.28,
+          -56.45
+        ]
+      },
+      {
+        "name": "Rack status strip.015",
+        "status": "SEATED",
+        "host": "Archive rack drawer.025",
+        "originalBackGapMeters": -0.015,
+        "position": [
+          -5.15,
+          2.98,
+          -56.45
+        ]
+      },
+      {
+        "name": "Rack status strip.016",
+        "status": "SEATED",
+        "host": "Archive rack drawer.026",
+        "originalBackGapMeters": -0.015,
+        "position": [
+          -5.15,
+          3.68,
+          -56.45
+        ]
+      },
+      {
+        "name": "Rack status strip.017",
+        "status": "SEATED",
+        "host": "Archive rack drawer.027",
+        "originalBackGapMeters": -0.0225,
+        "position": [
+          -5.15,
+          4.38,
+          -56.45
+        ]
+      },
+      {
+        "name": "Rack status strip.018",
+        "status": "SEATED",
+        "host": "Archive rack.003",
+        "originalBackGapMeters": 0.035,
+        "position": [
+          23.15,
+          0.88,
+          -43.45
+        ]
+      },
+      {
+        "name": "Rack status strip.019",
+        "status": "SEATED",
+        "host": "Archive rack.003",
+        "originalBackGapMeters": 0.035,
+        "position": [
+          23.15,
+          1.58,
+          -43.45
+        ]
+      },
+      {
+        "name": "Rack status strip.020",
+        "status": "SEATED",
+        "host": "Archive rack.003",
+        "originalBackGapMeters": 0.035,
+        "position": [
+          23.15,
+          2.28,
+          -43.45
+        ]
+      },
+      {
+        "name": "Rack status strip.021",
+        "status": "SEATED",
+        "host": "Archive rack.003",
+        "originalBackGapMeters": 0.035,
+        "position": [
+          23.15,
+          2.98,
+          -43.45
+        ]
+      },
+      {
+        "name": "Rack status strip.022",
+        "status": "SEATED",
+        "host": "Archive rack.003",
+        "originalBackGapMeters": 0.035,
+        "position": [
+          23.15,
+          3.68,
+          -43.45
+        ]
+      },
+      {
+        "name": "Rack status strip.023",
+        "status": "SEATED",
+        "host": "Archive rack.003",
+        "originalBackGapMeters": 0.035,
+        "position": [
+          23.15,
+          4.38,
+          -43.45
+        ]
+      },
+      {
+        "name": "Rack status strip.024",
+        "status": "SEATED",
+        "host": "Archive rack.004",
+        "originalBackGapMeters": 0.035,
+        "position": [
+          23.15,
+          0.88,
+          -46.45
+        ]
+      },
+      {
+        "name": "Rack status strip.025",
+        "status": "SEATED",
+        "host": "Archive rack.004",
+        "originalBackGapMeters": 0.035,
+        "position": [
+          23.15,
+          1.58,
+          -46.45
+        ]
+      },
+      {
+        "name": "Rack status strip.026",
+        "status": "SEATED",
+        "host": "Archive rack.004",
+        "originalBackGapMeters": 0.035,
+        "position": [
+          23.15,
+          2.28,
+          -46.45
+        ]
+      },
+      {
+        "name": "Rack status strip.027",
+        "status": "SEATED",
+        "host": "Archive rack.004",
+        "originalBackGapMeters": 0.035,
+        "position": [
+          23.15,
+          2.98,
+          -46.45
+        ]
+      },
+      {
+        "name": "Rack status strip.028",
+        "status": "SEATED",
+        "host": "Archive rack.004",
+        "originalBackGapMeters": 0.035,
+        "position": [
+          23.15,
+          3.68,
+          -46.45
+        ]
+      },
+      {
+        "name": "Rack status strip.029",
+        "status": "SEATED",
+        "host": "Archive rack.004",
+        "originalBackGapMeters": 0.035,
+        "position": [
+          23.15,
+          4.38,
+          -46.45
+        ]
+      },
+      {
+        "name": "Rack status strip.030",
+        "status": "SEATED",
+        "host": "Archive rack.005",
+        "originalBackGapMeters": 0.035,
+        "position": [
+          23.15,
+          0.88,
+          -56.45
+        ]
+      },
+      {
+        "name": "Rack status strip.031",
+        "status": "SEATED",
+        "host": "Archive rack drawer.051",
+        "originalBackGapMeters": -0.015,
+        "position": [
+          23.15,
+          1.58,
+          -56.45
+        ]
+      },
+      {
+        "name": "Rack status strip.032",
+        "status": "SEATED",
+        "host": "Archive rack drawer.052",
+        "originalBackGapMeters": -0.015,
+        "position": [
+          23.15,
+          2.28,
+          -56.45
+        ]
+      },
+      {
+        "name": "Rack status strip.033",
+        "status": "SEATED",
+        "host": "Archive rack drawer.053",
+        "originalBackGapMeters": -0.015,
+        "position": [
+          23.15,
+          2.98,
+          -56.45
+        ]
+      },
+      {
+        "name": "Rack status strip.034",
+        "status": "SEATED",
+        "host": "Archive rack drawer.054",
+        "originalBackGapMeters": -0.015,
+        "position": [
+          23.15,
+          3.68,
+          -56.45
+        ]
+      },
+      {
+        "name": "Rack status strip.035",
+        "status": "SEATED",
+        "host": "Archive rack.005",
+        "originalBackGapMeters": 0.035,
+        "position": [
+          23.15,
+          4.38,
+          -56.45
+        ]
+      },
+      {
+        "name": "Floor guide strip",
+        "status": "SEATED",
+        "host": "Atrium stone floor",
+        "originalBackGapMeters": 0.0075,
+        "position": [
+          -4.0,
+          0.025,
+          -39.5
+        ]
+      },
+      {
+        "name": "Floor guide strip.001",
+        "status": "SEATED",
+        "host": "Atrium stone floor",
+        "originalBackGapMeters": 0.0075,
+        "position": [
+          -4.0,
+          0.025,
+          -54.0
+        ]
+      },
+      {
+        "name": "Floor guide strip.002",
+        "status": "SEATED",
+        "host": "Atrium stone floor",
+        "originalBackGapMeters": 0.0075,
+        "position": [
+          22.0,
+          0.025,
+          -39.5
+        ]
+      },
+      {
+        "name": "Floor guide strip.003",
+        "status": "SEATED",
+        "host": "Atrium stone floor",
+        "originalBackGapMeters": 0.0075,
+        "position": [
+          22.0,
+          0.025,
+          -54.0
+        ]
+      },
+      {
+        "name": "Descent red edge",
+        "status": "SEATED",
+        "host": "Descent side",
+        "originalBackGapMeters": 0.07,
+        "position": [
+          26.85,
+          0.5,
+          -54.0
+        ]
+      },
+      {
+        "name": "Descent amber edge",
+        "status": "SEATED",
+        "host": "Descent side.001",
+        "originalBackGapMeters": 0.02,
+        "position": [
+          34.8,
+          -0.2,
+          -54.0
+        ]
+      },
+      {
+        "name": "Descent red edge.001",
+        "status": "SEATED",
+        "host": "Descent side",
+        "originalBackGapMeters": 0.07,
+        "position": [
+          26.85,
+          -0.5,
+          -58.0
+        ]
+      },
+      {
+        "name": "Descent amber edge.001",
+        "status": "SEATED",
+        "host": "Descent side.001",
+        "originalBackGapMeters": 0.02,
+        "position": [
+          34.8,
+          -1.2,
+          -58.0
+        ]
+      },
+      {
+        "name": "Descent red edge.002",
+        "status": "SEATED",
+        "host": "Descent side",
+        "originalBackGapMeters": 0.07,
+        "position": [
+          26.85,
+          -1.5,
+          -62.0
+        ]
+      },
+      {
+        "name": "Descent amber edge.002",
+        "status": "SEATED",
+        "host": "Descent side.001",
+        "originalBackGapMeters": 0.02,
+        "position": [
+          34.8,
+          -2.2,
+          -62.0
+        ]
+      },
+      {
+        "name": "Descent red edge.003",
+        "status": "SEATED",
+        "host": "Descent side",
+        "originalBackGapMeters": 0.07,
+        "position": [
+          26.85,
+          -2.5,
+          -66.0
+        ]
+      },
+      {
+        "name": "Descent amber edge.003",
+        "status": "SEATED",
+        "host": "Descent side.001",
+        "originalBackGapMeters": 0.02,
+        "position": [
+          34.8,
+          -3.2,
+          -66.0
+        ]
+      },
+      {
+        "name": "Descent red edge.004",
+        "status": "SEATED",
+        "host": "Descent side",
+        "originalBackGapMeters": 0.07,
+        "position": [
+          26.85,
+          -3.5,
+          -70.0
+        ]
+      },
+      {
+        "name": "Descent amber edge.004",
+        "status": "SEATED",
+        "host": "Descent side.001",
+        "originalBackGapMeters": 0.02,
+        "position": [
+          34.8,
+          -4.2,
+          -70.0
+        ]
+      },
+      {
+        "name": "Descent red edge.005",
+        "status": "SEATED",
+        "host": "Descent side",
+        "originalBackGapMeters": 0.07,
+        "position": [
+          26.85,
+          -4.5,
+          -73.85
+        ]
+      },
+      {
+        "name": "Descent amber edge.005",
+        "status": "SEATED",
+        "host": "Guardrail post.264",
+        "originalBackGapMeters": 0.025,
+        "position": [
+          34.8,
+          -5.2,
+          -74.0
+        ]
+      },
+      {
+        "name": "Vault red practical",
+        "status": "SEATED",
+        "host": "Vault frost rib",
+        "originalBackGapMeters": 0.005,
+        "position": [
+          26.8,
+          -2.4,
+          -78.0
+        ]
+      },
+      {
+        "name": "Vault red practical.001",
+        "status": "SEATED",
+        "host": "Vault frost rib.001",
+        "originalBackGapMeters": 0.005,
+        "position": [
+          26.8,
+          -2.4,
+          -87.0
+        ]
+      },
+      {
+        "name": "Vault red practical.002",
+        "status": "SEATED",
+        "host": "Vault frost rib.002",
+        "originalBackGapMeters": 0.005,
+        "position": [
+          26.8,
+          -2.4,
+          -96.0
+        ]
+      },
+      {
+        "name": "Vault red practical.003",
+        "status": "SEATED",
+        "host": "Vault frost rib.003",
+        "originalBackGapMeters": 0.005,
+        "position": [
+          26.8,
+          -2.4,
+          -101.0
+        ]
+      },
+      {
+        "name": "Vault red practical.004",
+        "status": "SEATED",
+        "host": "Vault frost rib.004",
+        "originalBackGapMeters": 0.005,
+        "position": [
+          49.2,
+          -2.4,
+          -78.0
+        ]
+      },
+      {
+        "name": "Vault red practical.005",
+        "status": "SEATED",
+        "host": "Vault frost rib.005",
+        "originalBackGapMeters": 0.005,
+        "position": [
+          49.2,
+          -2.4,
+          -87.0
+        ]
+      },
+      {
+        "name": "Vault red practical.006",
+        "status": "SEATED",
+        "host": "Vault frost rib.006",
+        "originalBackGapMeters": 0.005,
+        "position": [
+          49.2,
+          -2.4,
+          -96.0
+        ]
+      },
+      {
+        "name": "Vault red practical.007",
+        "status": "SEATED",
+        "host": "Vault frost rib.007",
+        "originalBackGapMeters": 0.005,
+        "position": [
+          49.2,
+          -2.4,
+          -101.0
+        ]
+      },
+      {
+        "name": "Ceiling amber bar",
+        "status": "SEATED",
+        "host": "Vault ceiling",
+        "originalBackGapMeters": 0.05,
+        "position": [
+          38.0,
+          3.9,
+          -80.0
+        ]
+      },
+      {
+        "name": "Ceiling amber bar.001",
+        "status": "SEATED",
+        "host": "Vault ceiling",
+        "originalBackGapMeters": 0.05,
+        "position": [
+          38.0,
+          3.9,
+          -86.0
+        ]
+      },
+      {
+        "name": "Ceiling amber bar.002",
+        "status": "SEATED",
+        "host": "Vault ceiling",
+        "originalBackGapMeters": 0.05,
+        "position": [
+          38.0,
+          3.9,
+          -92.0
+        ]
+      },
+      {
+        "name": "Ceiling amber bar.003",
+        "status": "SEATED",
+        "host": "Vault ceiling",
+        "originalBackGapMeters": 0.05,
+        "position": [
+          38.0,
+          3.9,
+          -98.0
+        ]
+      },
+      {
+        "name": "rime-vault-slot-03-wall-inset-console-01 light",
+        "status": "SEATED",
+        "host": "Sign plaque 03 RIME VAULT",
+        "originalBackGapMeters": 0.007,
+        "position": [
+          39.0,
+          3.19,
+          -99.29
+        ]
+      },
+      {
+        "name": "rime-vault-slot-03-operator-desk-01 light",
+        "status": "SEATED",
+        "host": "rime-vault-slot-03-operator-desk-01 frame.003",
+        "originalBackGapMeters": 0.016,
+        "position": [
+          33.6,
+          -3.18085,
+          -80.96848
+        ]
+      },
+      {
+        "name": "rime-vault-slot-03-operator-desk-02 light",
+        "status": "SEATED",
+        "host": "rime-vault-slot-03-operator-desk-02 frame.003",
+        "originalBackGapMeters": 0.016,
+        "position": [
+          45.0,
+          -3.18085,
+          -81.96848
+        ]
+      },
+      {
+        "name": "rime-vault-slot-03-wall-inset-console-02 light",
+        "status": "SEATED",
+        "host": "rime-vault-slot-03-wall-inset-console-02 frame.003",
+        "originalBackGapMeters": 0.016,
+        "position": [
+          49.27,
+          -0.26,
+          -94.0
+        ]
+      },
+      {
+        "name": "rime-vault-slot-03-terminal-bench-01 light",
+        "status": "SEATED",
+        "host": "rime-vault-slot-03-terminal-bench-01 frame.003",
+        "originalBackGapMeters": 0.016,
+        "position": [
+          28.5,
+          0.76842,
+          -95.94433
+        ]
+      },
+      {
+        "name": "Gate red edge",
+        "status": "SEATED",
+        "host": "Gate reinforced leaf",
+        "originalBackGapMeters": -0.01251,
+        "position": [
+          26.8,
+          -3.0,
+          -99.49001
+        ]
+      },
+      {
+        "name": "Gate red edge.001",
+        "status": "SEATED",
+        "host": "Gate reinforced leaf.001",
+        "originalBackGapMeters": -0.01251,
+        "position": [
+          29.2,
+          -3.0,
+          -99.49001
+        ]
+      },
+      {
+        "name": "Vault floor strip",
+        "status": "SEATED",
+        "host": "Vault lower floor",
+        "originalBackGapMeters": 0.0125,
+        "position": [
+          32.1,
+          -5.97,
+          -88.0
+        ]
+      },
+      {
+        "name": "Vault floor strip.001",
+        "status": "SEATED",
+        "host": "Vault lower floor",
+        "originalBackGapMeters": 0.0125,
+        "position": [
+          42.6,
+          -5.97,
+          -88.0
+        ]
+      },
+      {
+        "name": "Console foot light",
+        "status": "SEATED",
+        "host": "Console foot light housing",
+        "originalBackGapMeters": -0.00249,
+        "position": [
+          33.8,
+          -5.68,
+          -84.895
+        ]
+      },
+      {
+        "name": "Console foot light.001",
+        "status": "SEATED",
+        "host": "Console foot light housing.001",
+        "originalBackGapMeters": -0.00249,
+        "position": [
+          33.8,
+          -5.68,
+          -88.295
+        ]
+      },
+      {
+        "name": "Console foot light.002",
+        "status": "SEATED",
+        "host": "Console foot light housing.002",
+        "originalBackGapMeters": -0.0025,
+        "position": [
+          33.8,
+          -5.68,
+          -91.695
+        ]
+      },
+      {
+        "name": "Console foot light.003",
+        "status": "SEATED",
+        "host": "Console foot light housing.003",
+        "originalBackGapMeters": -0.00249,
+        "position": [
+          44.5,
+          -5.68,
+          -84.895
+        ]
+      },
+      {
+        "name": "Console foot light.004",
+        "status": "SEATED",
+        "host": "Console foot light housing.004",
+        "originalBackGapMeters": -0.00249,
+        "position": [
+          44.5,
+          -5.68,
+          -88.295
+        ]
+      },
+      {
+        "name": "Gate amber seam light",
+        "status": "SEATED",
+        "host": "Gate amber seam backing",
+        "originalBackGapMeters": 0.00301,
+        "position": [
+          28.0,
+          -3.0,
+          -99.422
+        ]
+      },
+      {
+        "name": "Gate guide light",
+        "status": "SEATED",
+        "host": "Gate guide lamp housing",
+        "originalBackGapMeters": -0.005,
+        "position": [
+          26.4,
+          -5.22,
+          -99.045
+        ]
+      },
+      {
+        "name": "Gate guide light.001",
+        "status": "SEATED",
+        "host": "Gate guide lamp housing.001",
+        "originalBackGapMeters": -0.005,
+        "position": [
+          29.6,
+          -5.22,
+          -99.045
+        ]
+      },
+      {
+        "name": "Vault overhead light",
+        "status": "SEATED",
+        "host": "Vault overhead luminaire",
+        "originalBackGapMeters": 0.0005,
+        "position": [
+          38.0,
+          3.367,
+          -82.8
+        ]
+      },
+      {
+        "name": "Vault overhead light.001",
+        "status": "SEATED",
+        "host": "Vault overhead luminaire.001",
+        "originalBackGapMeters": 0.0005,
+        "position": [
+          38.0,
+          3.367,
+          -89.0
+        ]
+      },
+      {
+        "name": "Vault overhead light.002",
+        "status": "SEATED",
+        "host": "Vault overhead luminaire.002",
+        "originalBackGapMeters": 0.0005,
+        "position": [
+          38.0,
+          3.367,
+          -95.0
+        ]
+      },
+      {
+        "name": "Ascent amber practical",
+        "status": "SEATED",
+        "host": "Guardrail run.061",
+        "originalBackGapMeters": 0.04,
+        "position": [
+          51.1,
+          -4.5,
+          -102.0
+        ]
+      },
+      {
+        "name": "Ascent amber practical.001",
+        "status": "SEATED",
+        "host": "Guardrail run.063",
+        "originalBackGapMeters": 0.14,
+        "position": [
+          58.5,
+          -4.5,
+          -102.0
+        ]
+      },
+      {
+        "name": "Ascent amber practical.002",
+        "status": "SEATED",
+        "host": "Guardrail run.061",
+        "originalBackGapMeters": 0.04,
+        "position": [
+          51.1,
+          -3.5,
+          -106.0
+        ]
+      },
+      {
+        "name": "Ascent amber practical.003",
+        "status": "SEATED",
+        "host": "Guardrail run.063",
+        "originalBackGapMeters": 0.14,
+        "position": [
+          58.5,
+          -3.5,
+          -106.0
+        ]
+      },
+      {
+        "name": "Ascent amber practical.004",
+        "status": "SEATED",
+        "host": "Guardrail run.061",
+        "originalBackGapMeters": 0.04,
+        "position": [
+          51.1,
+          -2.5,
+          -110.0
+        ]
+      },
+      {
+        "name": "Ascent amber practical.005",
+        "status": "SEATED",
+        "host": "Guardrail run.063",
+        "originalBackGapMeters": 0.14,
+        "position": [
+          58.5,
+          -2.5,
+          -110.0
+        ]
+      },
+      {
+        "name": "Ascent amber practical.006",
+        "status": "SEATED",
+        "host": "Guardrail run.061",
+        "originalBackGapMeters": 0.04,
+        "position": [
+          51.1,
+          -1.5,
+          -114.0
+        ]
+      },
+      {
+        "name": "Ascent amber practical.007",
+        "status": "SEATED",
+        "host": "Guardrail run.063",
+        "originalBackGapMeters": 0.14,
+        "position": [
+          58.5,
+          -1.5,
+          -114.0
+        ]
+      },
+      {
+        "name": "Ascent amber practical.008",
+        "status": "SEATED",
+        "host": "Guardrail run.061",
+        "originalBackGapMeters": 0.04,
+        "position": [
+          51.1,
+          -0.5,
+          -118.0
+        ]
+      },
+      {
+        "name": "Ascent amber practical.009",
+        "status": "SEATED",
+        "host": "Guardrail run.063",
+        "originalBackGapMeters": 0.14,
+        "position": [
+          58.5,
+          -0.5,
+          -118.0
+        ]
+      },
+      {
+        "name": "Ascent amber practical.010",
+        "status": "SEATED",
+        "host": "Guardrail run.061",
+        "originalBackGapMeters": 0.04,
+        "position": [
+          51.1,
+          0.5,
+          -122.0
+        ]
+      },
+      {
+        "name": "Ascent amber practical.011",
+        "status": "SEATED",
+        "host": "Guardrail run.063",
+        "originalBackGapMeters": 0.14,
+        "position": [
+          58.5,
+          0.5,
+          -122.0
+        ]
+      },
+      {
+        "name": "Fortress amber edge",
+        "status": "SEATED",
+        "host": "Fortress gate crown",
+        "originalBackGapMeters": 0.57001,
+        "position": [
+          49.28,
+          10.0,
+          -146.64999
+        ]
+      },
+      {
+        "name": "Fortress amber edge.001",
+        "status": "SEATED",
+        "host": "Fortress gate crown",
+        "originalBackGapMeters": 0.57001,
+        "position": [
+          52.28,
+          10.0,
+          -146.64999
+        ]
+      },
+      {
+        "name": "Fortress amber edge.002",
+        "status": "SEATED",
+        "host": "Fortress gate crown",
+        "originalBackGapMeters": 0.57001,
+        "position": [
+          74.28,
+          10.0,
+          -146.64999
+        ]
+      },
+      {
+        "name": "Fortress amber edge.003",
+        "status": "SEATED",
+        "host": "Fortress gate crown",
+        "originalBackGapMeters": 0.57001,
+        "position": [
+          79.28,
+          10.0,
+          -146.64999
+        ]
+      },
+      {
+        "name": "signal-rise-slot-04-blast-door-screen-01 light",
+        "status": "SEATED",
+        "host": "signal-rise-slot-04-blast-door-screen-01 frame.003",
+        "originalBackGapMeters": 0.01602,
+        "position": [
+          63.0,
+          16.04,
+          -147.06999
+        ]
+      },
+      {
+        "name": "Tower amber seam",
+        "status": "SEATED",
+        "host": "Signal background service tower",
+        "originalBackGapMeters": 0.33001,
+        "position": [
+          30.8,
+          12.0,
+          -164.14999
+        ]
+      },
+      {
+        "name": "Tower amber seam.001",
+        "status": "SEATED",
+        "host": "Signal background service tower",
+        "originalBackGapMeters": 0.33001,
+        "position": [
+          41.8,
+          12.0,
+          -164.14999
+        ]
+      },
+      {
+        "name": "Tower warning practical",
+        "status": "SEATED",
+        "host": "Tower warning mast",
+        "originalBackGapMeters": -0.085,
+        "position": [
+          36.0,
+          27.0,
+          -168.0
+        ]
+      },
+      {
+        "name": "Tower amber seam.002",
+        "status": "SEATED",
+        "host": "Tower service ledge.009",
+        "originalBackGapMeters": 0.2725,
+        "position": [
+          79.8,
+          15.0,
+          -167.14999
+        ]
+      },
+      {
+        "name": "Tower amber seam.003",
+        "status": "SEATED",
+        "host": "Tower service ledge.009",
+        "originalBackGapMeters": 0.2725,
+        "position": [
+          90.8,
+          15.0,
+          -167.14999
+        ]
+      },
+      {
+        "name": "Tower warning practical.001",
+        "status": "SEATED",
+        "host": "Tower warning mast.001",
+        "originalBackGapMeters": -0.085,
+        "position": [
+          85.0,
+          33.0,
+          -171.0
+        ]
+      },
+      {
+        "name": "Tower amber seam.004",
+        "status": "SEATED",
+        "host": "Signal background service tower.002",
+        "originalBackGapMeters": 0.33001,
+        "position": [
+          87.3,
+          7.5,
+          -154.14999
+        ]
+      },
+      {
+        "name": "Tower amber seam.005",
+        "status": "SEATED",
+        "host": "Signal background service tower.002",
+        "originalBackGapMeters": 0.33001,
+        "position": [
+          95.3,
+          7.5,
+          -154.14999
+        ]
+      },
+      {
+        "name": "Tower warning practical.002",
+        "status": "SEATED",
+        "host": "Tower warning mast.002",
+        "originalBackGapMeters": -0.085,
+        "position": [
+          91.0,
+          18.0,
+          -158.0
+        ]
+      },
+      {
+        "name": "Warning grille light",
+        "status": "SEATED",
+        "host": "Warning grille fin",
+        "originalBackGapMeters": 0.0025,
+        "position": [
+          50.5,
+          9.2,
+          -146.64
+        ]
+      },
+      {
+        "name": "Warning grille light.001",
+        "status": "SEATED",
+        "host": "Warning grille fin.001",
+        "originalBackGapMeters": 0.0025,
+        "position": [
+          50.5,
+          9.68,
+          -146.64
+        ]
+      },
+      {
+        "name": "Warning grille light.002",
+        "status": "SEATED",
+        "host": "Warning grille fin.002",
+        "originalBackGapMeters": 0.0025,
+        "position": [
+          50.5,
+          10.16,
+          -146.64
+        ]
+      },
+      {
+        "name": "Warning grille light.003",
+        "status": "SEATED",
+        "host": "Warning grille fin.003",
+        "originalBackGapMeters": 0.0025,
+        "position": [
+          50.5,
+          10.64,
+          -146.64
+        ]
+      },
+      {
+        "name": "Warning grille light.004",
+        "status": "SEATED",
+        "host": "Warning grille fin.004",
+        "originalBackGapMeters": 0.0025,
+        "position": [
+          50.5,
+          11.12,
+          -146.64
+        ]
+      },
+      {
+        "name": "Warning grille light.005",
+        "status": "SEATED",
+        "host": "Warning grille fin.005",
+        "originalBackGapMeters": 0.0025,
+        "position": [
+          50.5,
+          11.6,
+          -146.64
+        ]
+      },
+      {
+        "name": "Warning grille light.006",
+        "status": "SEATED",
+        "host": "Warning grille fin.006",
+        "originalBackGapMeters": 0.0025,
+        "position": [
+          50.5,
+          12.08,
+          -146.64
+        ]
+      },
+      {
+        "name": "Warning grille light.007",
+        "status": "SEATED",
+        "host": "Warning grille fin.007",
+        "originalBackGapMeters": 0.0025,
+        "position": [
+          50.5,
+          12.56,
+          -146.64
+        ]
+      },
+      {
+        "name": "Warning grille light.008",
+        "status": "SEATED",
+        "host": "Warning grille fin.008",
+        "originalBackGapMeters": 0.0025,
+        "position": [
+          50.5,
+          13.04,
+          -146.64
+        ]
+      },
+      {
+        "name": "Warning grille light.009",
+        "status": "SEATED",
+        "host": "Warning grille fin.009",
+        "originalBackGapMeters": 0.0025,
+        "position": [
+          50.5,
+          13.52,
+          -146.64
+        ]
+      },
+      {
+        "name": "Warning grille light.010",
+        "status": "SEATED",
+        "host": "Warning grille fin.010",
+        "originalBackGapMeters": 0.0025,
+        "position": [
+          50.5,
+          14.0,
+          -146.64
+        ]
+      },
+      {
+        "name": "Warning grille light.011",
+        "status": "SEATED",
+        "host": "Warning grille fin.011",
+        "originalBackGapMeters": 0.0025,
+        "position": [
+          50.5,
+          14.48,
+          -146.64
+        ]
+      },
+      {
+        "name": "Warning grille light.012",
+        "status": "SEATED",
+        "host": "Warning grille fin.012",
+        "originalBackGapMeters": 0.0025,
+        "position": [
+          50.5,
+          14.96,
+          -146.64
+        ]
+      },
+      {
+        "name": "Warning grille light.013",
+        "status": "SEATED",
+        "host": "Warning grille fin.013",
+        "originalBackGapMeters": 0.0025,
+        "position": [
+          50.5,
+          15.44,
+          -146.64
+        ]
+      },
+      {
+        "name": "Warning grille light.014",
+        "status": "SEATED",
+        "host": "Warning grille fin.014",
+        "originalBackGapMeters": 0.0025,
+        "position": [
+          76.5,
+          9.2,
+          -146.64
+        ]
+      },
+      {
+        "name": "Warning grille light.015",
+        "status": "SEATED",
+        "host": "Warning grille fin.015",
+        "originalBackGapMeters": 0.0025,
+        "position": [
+          76.5,
+          9.68,
+          -146.64
+        ]
+      },
+      {
+        "name": "Warning grille light.016",
+        "status": "SEATED",
+        "host": "Warning grille fin.016",
+        "originalBackGapMeters": 0.0025,
+        "position": [
+          76.5,
+          10.16,
+          -146.64
+        ]
+      },
+      {
+        "name": "Warning grille light.017",
+        "status": "SEATED",
+        "host": "Warning grille fin.017",
+        "originalBackGapMeters": 0.0025,
+        "position": [
+          76.5,
+          10.64,
+          -146.64
+        ]
+      },
+      {
+        "name": "Warning grille light.018",
+        "status": "SEATED",
+        "host": "Warning grille fin.018",
+        "originalBackGapMeters": 0.0025,
+        "position": [
+          76.5,
+          11.12,
+          -146.64
+        ]
+      },
+      {
+        "name": "Warning grille light.019",
+        "status": "SEATED",
+        "host": "Warning grille fin.019",
+        "originalBackGapMeters": 0.0025,
+        "position": [
+          76.5,
+          11.6,
+          -146.64
+        ]
+      },
+      {
+        "name": "Warning grille light.020",
+        "status": "SEATED",
+        "host": "Warning grille fin.020",
+        "originalBackGapMeters": 0.0025,
+        "position": [
+          76.5,
+          12.08,
+          -146.64
+        ]
+      },
+      {
+        "name": "Warning grille light.021",
+        "status": "SEATED",
+        "host": "Warning grille fin.021",
+        "originalBackGapMeters": 0.0025,
+        "position": [
+          76.5,
+          12.56,
+          -146.64
+        ]
+      },
+      {
+        "name": "Warning grille light.022",
+        "status": "SEATED",
+        "host": "Warning grille fin.022",
+        "originalBackGapMeters": 0.0025,
+        "position": [
+          76.5,
+          13.04,
+          -146.64
+        ]
+      },
+      {
+        "name": "Warning grille light.023",
+        "status": "SEATED",
+        "host": "Warning grille fin.023",
+        "originalBackGapMeters": 0.0025,
+        "position": [
+          76.5,
+          13.52,
+          -146.64
+        ]
+      },
+      {
+        "name": "Warning grille light.024",
+        "status": "SEATED",
+        "host": "Warning grille fin.024",
+        "originalBackGapMeters": 0.0025,
+        "position": [
+          76.5,
+          14.0,
+          -146.64
+        ]
+      },
+      {
+        "name": "Warning grille light.025",
+        "status": "SEATED",
+        "host": "Warning grille fin.025",
+        "originalBackGapMeters": 0.0025,
+        "position": [
+          76.5,
+          14.48,
+          -146.64
+        ]
+      },
+      {
+        "name": "Warning grille light.026",
+        "status": "SEATED",
+        "host": "Warning grille fin.026",
+        "originalBackGapMeters": 0.0025,
+        "position": [
+          76.5,
+          14.96,
+          -146.64
+        ]
+      },
+      {
+        "name": "Warning grille light.027",
+        "status": "SEATED",
+        "host": "Warning grille fin.027",
+        "originalBackGapMeters": 0.0025,
+        "position": [
+          76.5,
+          15.44,
+          -146.64
+        ]
+      },
+      {
+        "name": "Open gate amber jamb",
+        "status": "SEATED",
+        "host": "Gate lower armor",
+        "originalBackGapMeters": 0.41,
+        "position": [
+          59.2,
+          3.4,
+          -147.0
+        ]
+      },
+      {
+        "name": "Open gate amber jamb.001",
+        "status": "SEATED",
+        "host": "Gate lower armor.001",
+        "originalBackGapMeters": 0.01,
+        "position": [
+          67.3,
+          3.4,
+          -147.0
+        ]
+      },
+      {
+        "name": "signal-rise-slot-04-terminal-bench-01 light",
+        "status": "SEATED",
+        "host": "signal-rise-slot-04-terminal-bench-01 frame.003",
+        "originalBackGapMeters": 0.016,
+        "position": [
+          41.0,
+          2.8181,
+          -123.15005
+        ]
+      },
+      {
+        "name": "signal-rise-slot-04-kiosk-pillar-01 light",
+        "status": "SEATED",
+        "host": "signal-rise-slot-04-kiosk-pillar-01 frame.003",
+        "originalBackGapMeters": 0.016,
+        "position": [
+          45.3,
+          3.3405,
+          -122.97289
+        ]
+      },
+      {
+        "name": "signal-rise-slot-04-wall-inset-console-01 light",
+        "status": "SEATED",
+        "host": "signal-rise-slot-04-wall-inset-console-01 frame.003",
+        "originalBackGapMeters": 0.01602,
+        "position": [
+          76.0,
+          6.04,
+          -146.81999
+        ]
+      },
+      {
+        "name": "signal-rise-slot-04-operator-desk-01 light",
+        "status": "SEATED",
+        "host": "signal-rise-slot-04-operator-desk-01 frame.003",
+        "originalBackGapMeters": 0.016,
+        "position": [
+          38.0,
+          2.78915,
+          -135.93848
+        ]
+      },
+      {
+        "name": "Terrace amber strip",
+        "status": "SEATED",
+        "host": "Left snowy terrace",
+        "originalBackGapMeters": 0.01,
+        "position": [
+          49.0,
+          0.035,
+          -132.0
+        ]
+      },
+      {
+        "name": "Terrace amber strip.001",
+        "status": "SEATED",
+        "host": "Right snowy terrace",
+        "originalBackGapMeters": 0.01,
+        "position": [
+          77.0,
+          0.035,
+          -132.0
+        ]
+      }
+    ]
+  },
+  "limitations": "Interior probes are not an exhaustive polygon-intersection proof; mounting rays additionally audit every named thin strip before mesh merging."
+}
