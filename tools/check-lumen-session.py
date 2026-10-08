@@ -57,7 +57,9 @@ def capture(client,children,args,shell_token,socketpath):
  except subprocess.CalledProcessError:
   quality='intel';session.ctl('eval','hl.plugin.hyprune.config({graphics={quality="intel",render_scale="auto",target_fps=60}})')
  session.ctl('eval','hl.plugin.hyprune.toggle("HEADLESS-1")');time.sleep(2)
- assert state()['runtime']['active'];report['camera']=session.camera();report['graphicsRequest']={'quality':quality,'render_scale':'auto','target_fps':60}
+ assert state()['runtime']['active'];report['camera']=session.camera()
+ if quality=='medium':assert report['camera']['timings']['graphics']['quality']=='medium','Medium preset did not take effect'
+ report['graphicsRequest']={'quality':quality,'render_scale':'auto','target_fps':60}
  report['manifestSHA256']=hashlib.sha256((a.package/'world.json').read_bytes()).hexdigest();report['sceneSHA256']=hashlib.sha256((a.package/'scene.gltf').read_bytes()).hexdigest()
  # Real walk from default spawn, before any camera positioning.
  before=state()['movement']['position'];integration.keys('-P','w','-s','500','-p','w');time.sleep(.2);after=state()['movement']['position'];assert math.dist(before,after)>.3,(before,after);report['walk']={'before':before,'after':after}
@@ -70,7 +72,7 @@ def capture(client,children,args,shell_token,socketpath):
   assert abs(sum(x*y for x,y in zip(requested['orientation'],actual['orientation'])))>.99999
   if a.profile and v['id'].count('-')==2:
    time.sleep(2);samples=[]
-   for _ in range(30):samples.append(session.camera()['timings']);time.sleep(.07)
+   for _ in range(30):samples.append({**session.camera()['timings'],'sampleMonotonic':time.monotonic()});time.sleep(.07)
    report.setdefault('performanceViews',[]).append({'id':v['id'],'samples':samples})
   path=a.output/('engine-'+v['id']+'.png');subprocess.run([str(session.HERE/'ctl.py'),'shot',str(path)],check=True);report['views'].append({'renderer':session.camera().get('timings',{}),'id':v['id'],'pose':actual,'verticalFovDegrees':60,'path':str(path)})
  if a.gallery:
@@ -202,7 +204,7 @@ def record(client,children,state,shell_token,socketpath):
   actual=state()['movement']['position'];assert math.dist(actual,pts[-1])<.15,('blocked tour route',ids,actual,pts[-1]);traversals.append({'ids':ids,'reached':actual,'capsuleChecked':True})
  try:
   pause(1);client.call('surface.focus',{'surfaceId':first['surfaceId'],'intent':'keyboard'});integration.keys('-d','24',"printf 'Four homes connected. Tools stay with their home.\\n'");integration.keys('-k','Return');pause(2);integration.keys('-k','Escape')
-  orient([8,24,5]);drive(['court-junction','court-wall','hall-entry','hall-arrival'],'Array Hall',4.5)
+  orient([8,24,5]);drive(['arrival','court-junction','court-wall','hall-entry','hall-arrival'],'Array Hall',4.5)
   orient([-1,39.85,1.95]);pause(2);orient([8,48,10]);pause(3)
   drive(['hall-center'],'Atrium',3.5);orient([20,50,1]);drive(['hall-exit','service-entry'],'Service descent',4.5)
   orient([30,76,-4]);drive(['descent-top','descent-bottom'],'Rime Vault descent',3.8)

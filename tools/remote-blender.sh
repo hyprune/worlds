@@ -26,5 +26,6 @@ mkdir -p "$ROOT/dist/com.hyprune.switchyard"
 if [[ "$status" -eq 0 ]]; then
   rsync -az --delete "$HOST:$REMOTE/dist/com.hyprune.switchyard/" "$ROOT/dist/com.hyprune.switchyard/"
 fi
-rsync -az --exclude 'film-frames' "$HOST:$REMOTE/artifacts/" "$ROOT/artifacts/" || true
+mkdir -p "$ROOT/artifacts/switchyard"
+rsync -az --exclude 'film-frames' "$HOST:$REMOTE/artifacts/switchyard/" "$ROOT/artifacts/switchyard/" || true
 exit "$status"

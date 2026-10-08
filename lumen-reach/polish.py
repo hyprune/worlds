@@ -66,9 +66,11 @@ def apply(area,B):
    plate('Instrument tool case',(x,y,1.19),(.45,.48,.18),'strip')
    B.cyl('Calibration spool',(x,y+.29,1.27),.13,.28,'metal',vertices=12)
   # Foreground repair station frames arrival, outside the work and route volumes.
-  for pos,size in [((-12.2,-14,0),(1.6,1.2,1.0)),((-12.2,-14,1.08),(1.35,1.05,.62)),((-11,-8.9,0),(1.5,1.05,.85))]:B.crate(pos,size)
-  plate('Repair station foldout',(-12.2,-10.4,1.02),(1.8,.9,.10),'wood')
-  cable('Repair station coiled lead',[(-12.2,-10.5,.13),(-11.5,-10,.13),(-11.3,-9.3,.13),(-12,-8.9,.13),(-12.8,-9.4,.13),(-12.2,-10.5,.13)],.022)
+  for pos,size in [((-18.5,-11.5,0),(1.6,1.2,1.0)),((-18.5,-11.5,1.08),(1.35,1.05,.62)),((-18.5,-9.3,0),(1.5,1.05,.85))]:B.crate(pos,size)
+  plate('Repair station foldout',(-18.5,-10.3,1.02),(1.8,.9,.10),'wood')
+  for dx in [-.75,.75]:
+   for dy in [-.30,.30]:box('Repair table foot',(-18.5+dx,-10.3+dy,.50),(.08,.08,1.0),'metal',0,solid=True)
+  cable('Repair station coiled lead',[(-18.5,-10.5,.025),(-17.8,-10,.025),(-17.6,-9.3,.025),(-18.3,-8.9,.025),(-19.1,-9.4,.025),(-18.5,-10.5,.025)],.022)
   B.tree(13,-8,0,1.0)
   # More leaves at the perimeter, not in work pockets.
   B.tree(24,5,0,.85);B.tree(-18,19,4,.60)
