@@ -72,7 +72,7 @@ def graph(d,x,y,w,h,color):
 
 NAMES=['sun-court','array-hall','rime-vault','signal-rise'];TITLES=['SUN COURT','ARRAY HALL','RIME VAULT','SIGNAL RISE']
 for area,title in zip(NAMES,TITLES):
- accent=(206,139,77) if area!='rime-vault' else (236,81,37);blue=(96,156,182)
+ accent=(206,139,77) if area!='rime-vault' else (236,81,37);blue=(190,111,56) if area=='rime-vault' else (96,156,182)
  for style in ['workspace','instrument','banner','map']:
   w,h=(2048,1024) if style=='workspace' else (512,1024) if style=='banner' else (1024,576)
   im=Image.new('RGB',(w,h),(9,17,25));d=ImageDraw.Draw(im);d.rectangle((10,10,w-11,h-11),outline=(65,86,102),width=2);mark(d,29,55,accent);text(d,(85,30),title,accent,4 if w>1024 else 2);text(d,(85,70),'HYPRUNE / WORKSPACE HOME' if style=='workspace' else 'HYPRUNE / INSTRUMENT',blue,2);d.line((24,103,w-24,103),fill=accent,width=2)

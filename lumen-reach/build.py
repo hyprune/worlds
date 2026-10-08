@@ -60,6 +60,10 @@ def init():
  if OUT.exists():shutil.rmtree(OUT)
  OUT.mkdir(parents=True);(OUT/'textures').mkdir();ART.mkdir(parents=True,exist_ok=True)
  for name,asset,col,rough,metal in [('concrete','concrete',(.52,.46,.36),.75,0),('stone','paving',(.24,.28,.3),.3,0),('metal','metal',(.04,.055,.07),.4,.65),('canvas','canvas',(.52,.42,.28),.9,0),('wood','wood',(.3,.16,.07),.6,0),('frost','frost',(.16,.22,.26),.72,.45),('glass','glass',(.025,.06,.09),.18,.2),('grating','grating',(.04,.05,.055),.48,.5),('snow','snow',(.5,.65,.8),.85,0),('strip','strips',(.4,.2,.05),.3,.3),('rock','rock',(.35,.37,.38),.84,0)]:mat(name,col,asset,rough,metal)
+ for name,asset,rough,metal in [('vault-metal','frost-metal-v3',.48,.55),('rime-crust','rime-crust-v3',.88,0),('condensation','condensation-v3',.26,.18)]:mat(name,(1,1,1),asset,rough,metal)
+ mat('ice-body',(.38,.60,.69),'condensation-v3',rough=.2,tint=True)
+ m=mat('ice-rim',(.10,.22,.29),'rime-crust-v3',rough=.18,emit=True,tint=True)
+ P.TILE_METERS.update({'vault-metal':2,'rime-crust':1,'condensation':2,'ice-body':1,'ice-rim':1})
  m=mat('trim',(.5,.3,.12),rough=.4,metal=.35);t=m.node_tree.nodes.new('ShaderNodeTexImage');t.image=bpy.data.images.load(str(HERE/'materials/tiles/reach-trim-albedo.png'));uv=m.node_tree.nodes.new('ShaderNodeUVMap');uv.uv_map='UV0';m.node_tree.links.new(uv.outputs['UV'],t.inputs['Vector']);m.node_tree.links.new(t.outputs['Color'],m.node_tree.nodes['Principled BSDF'].inputs['Base Color'])
  P.TILE_METERS.update(concrete=2,stone=2,metal=1,canvas=1,wood=1,frost=1,glass=2,grating=1,snow=2,strip=1,rock=4)
  for name,col,rough in [('red',(.33,.065,.035),.85),('leaf',(.42,.035,.018),.8),('leaf-gold',(.45,.16,.025),.8),('earth',(.035,.022,.012),.95),('ivory',(.7,.66,.54),.65),('black',(.16,.20,.24),.6),('ice',(.22,.38,.45),.45)]:mat(name,col,{'red':'canvas','leaf':'canvas','leaf-gold':'canvas','earth':'concrete','ivory':'concrete','black':'metal','ice':'frost'}[name],rough=rough,tint=True)
@@ -776,7 +780,7 @@ def manifest(g,lm,nodes,cols,count):
  for area in AREAS:
   area['primaryAnchor']=next(r['anchorId'] for r in MOUNT_ROWS if r['areaId']==area['id'] and r['role']=='mounted-workspace');area['toolAnchors']=[r['anchorId'] for r in MOUNT_ROWS if r['areaId']==area['id'] and r['role']=='tool'];area['dataAnchors']=[r['id'] for r in OBJECTS if r['areaId']==area['id']]
  spawns=[{'id':'arrival','pose':{'position':up(AREAS[0]['spawn']),'rotation':[0,0,0,1]}}]+[{'id':a['id'],'pose':{'position':up(a['spawn']),'rotation':[0,0,0,1]}} for a in AREAS]
- m={'formatVersion':'0.2','id':'com.hyprune.lumen-reach','version':('0.5.0' if count==4 else f'0.{count}.1'),'name':'Lumen Reach','description':f'{count} connected workspace homes on a mountain watershed. Original architecture, instruments and paths.','license':'CC-BY-4.0','scene':'scene.gltf','preview':'preview.png','defaultSpawn':'arrival','spawns':spawns,'anchors':ANCHORS,'zones':[{'id':a['id'],'name':a['name'],'bounds':a['bounds']} for a in AREAS],'navigation':{'kind':'mesh','node':nodes['Navigation'],'agentRadius':.3,'agentHeight':1.8},'collision':[{'node':nodes[o.name],'shape':'mesh','layer':'static'} for o in cols],'lightmaps':lm,'attribution':[{'path':'.','author':'Hyprune contributors','license':'CC-BY-4.0','source':'https://github.com/hyprune/worlds'}],'extensions':{'com.hyprune.lumen-reach.mounts':{'version':1,'areas':[{**{k:v for k,v in a.items() if k not in ['spawn','bounds','name','freePlacementZones']},'spawnId':a['id'],'freePlacementZones':[z['id'] for z in a['freePlacementZones']]} for a in AREAS],'mounts':MOUNT_ROWS,'objects':OBJECTS},'com.hyprune.lumen-reach.routes':{'version':1,'nodes':ROUTES,'edges':EDGES,'semantics':'bidirectional walking centerlines, feet positions in meters'},'com.hyprune.lumen-reach.stairs':{'version':1,'paths':STAIR_ROUTES,'semantics':'visible treads over continuous collision beds; alternate walkable flights'},'com.hyprune.lumen-reach.placement':{'version':1,'zones':[z for a in AREAS for z in a['freePlacementZones']]},'com.hyprune.map':{'version':'0.1','path':'map.svg','projection':'xz','north':[0,0,-1],'bounds':[-36,-162,86,16],'worldToMap':[4/520,0,0,4/780,160/520,690/780]}},'requiredExtensions':[]}
+ m={'formatVersion':'0.2','id':'com.hyprune.lumen-reach','version':('0.6.0' if count==4 else f'0.{count}.1'),'name':'Lumen Reach','description':f'{count} connected workspace homes on a mountain watershed. Original architecture, instruments and paths.','license':'CC-BY-4.0','scene':'scene.gltf','preview':'preview.png','defaultSpawn':'arrival','spawns':spawns,'anchors':ANCHORS,'zones':[{'id':a['id'],'name':a['name'],'bounds':a['bounds']} for a in AREAS],'navigation':{'kind':'mesh','node':nodes['Navigation'],'agentRadius':.3,'agentHeight':1.8},'collision':[{'node':nodes[o.name],'shape':'mesh','layer':'static'} for o in cols],'lightmaps':lm,'attribution':[{'path':'.','author':'Hyprune contributors','license':'CC-BY-4.0','source':'https://github.com/hyprune/worlds'}],'extensions':{'com.hyprune.lumen-reach.mounts':{'version':1,'areas':[{**{k:v for k,v in a.items() if k not in ['spawn','bounds','name','freePlacementZones']},'spawnId':a['id'],'freePlacementZones':[z['id'] for z in a['freePlacementZones']]} for a in AREAS],'mounts':MOUNT_ROWS,'objects':OBJECTS},'com.hyprune.lumen-reach.routes':{'version':1,'nodes':ROUTES,'edges':EDGES,'semantics':'bidirectional walking centerlines, feet positions in meters'},'com.hyprune.lumen-reach.stairs':{'version':1,'paths':STAIR_ROUTES,'semantics':'visible treads over continuous collision beds; alternate walkable flights'},'com.hyprune.lumen-reach.placement':{'version':1,'zones':[z for a in AREAS for z in a['freePlacementZones']]},'com.hyprune.map':{'version':'0.1','path':'map.svg','projection':'xz','north':[0,0,-1],'bounds':[-36,-162,86,16],'worldToMap':[4/520,0,0,4/780,160/520,690/780]}},'requiredExtensions':[]}
  for name in ['fixture-audit.json','decal-audit.json']:shutil.copy2(ART/name,OUT/name)
  (OUT/'world.json').write_text(json.dumps(m,indent=2)+'\n')
  rows=[];masters=json.loads((HERE/'materials/generation.json').read_text());byname={r['name']:r for r in masters}
@@ -815,13 +819,14 @@ if __name__=='__main__':
  sys.path.insert(0,str(HERE));import polish
  init();load_ui();court();polish.apply(0,sys.modules[__name__]);P.log('Sun Court geometry ready')
  if a.areas>=2:hall();polish.apply(1,sys.modules[__name__]);P.log('Array Hall geometry ready')
- if a.areas>=3:vault();polish.apply(2,sys.modules[__name__]);P.log('Rime Vault geometry ready')
+ if a.areas>=3:
+  vault();polish.apply(2,sys.modules[__name__]);import rime_v3;rime_v3.apply(sys.modules[__name__]);P.log('Rime Vault geometry ready')
  if a.areas>=4:rise();polish.apply(3,sys.modules[__name__]);P.log('Signal Rise geometry ready')
  vista();VIEWS=[v for v in json.loads((HERE/'views.json').read_text())['views'] if v['areaCount']<=a.areas]
  if a.preview:stills()
  else:
   # Shared pipeline keeps tiling UV0 distinct from atlas UV1 throughout bake/export.
-  for name,n in zip(NAMES[:a.areas],[1280,1536,1280,1280]):P.RESOLUTIONS[name]=n
+  for name,n in zip(NAMES[:a.areas],[1280,1536,2048,1280]):P.RESOLUTIONS[name]=n
   P.RESOLUTIONS['foliage']=1024
   P.MARGINS.update({'sun-court':4,'array-hall':4,'rime-vault':4,'signal-rise':4,'foliage':2})
   audit_fixtures()
@@ -832,4 +837,18 @@ if __name__=='__main__':
     selected=[o for o in objects if o.name.startswith(prefixes)]
     moved.extend(selected);P.GROUPS[group]=[o for o in objects if o not in selected]
    if moved:P.GROUPS[chunk]=moved;P.RESOLUTIONS[chunk]=768;P.MARGINS[chunk]=4
-  cols,nav=spatial();P.join_groups();P.bake(a.samples);g,lm,nodes=P.export(cols,nav);manifest(g,lm,nodes,cols,a.areas);bpy.ops.wm.save_as_mainfile(filepath=str(ART/'lumen-reach.blend'));stills()
+  cols,nav=spatial();P.join_groups()
+  # A dense detail kit can exhaust pack margins and collapse all lightmap islands.
+  # Geometry/overlap validity alone does not catch the resulting nearly black bake.
+  density=[]
+  for name,objects in P.GROUPS.items():
+   if name in {'vista','atmosphere'}:continue
+   me=objects[0].data;uv=me.uv_layers['UV1'];area=0
+   for face in me.polygons:
+    pts=[uv.data[i].uv for i in face.loop_indices];a0,b0,c0=pts
+    area+=abs((b0.x-a0.x)*(c0.y-a0.y)-(b0.y-a0.y)*(c0.x-a0.x))*.5
+   density.append({'group':name,'uv1Area':area,'triangles':len(me.polygons),'resolution':P.RESOLUTIONS[name]})
+  (ART/'uv-density-report.json').write_text(json.dumps(density,indent=2)+'\n')
+  for row in density:
+   if row['group']=='rime-vault':assert row['uv1Area']>=.03,('rime-vault','collapsed lightmap packing',row['uv1Area'])
+  P.bake(a.samples);g,lm,nodes=P.export(cols,nav);manifest(g,lm,nodes,cols,a.areas);bpy.ops.wm.save_as_mainfile(filepath=str(ART/'lumen-reach.blend'));stills()

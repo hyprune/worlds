@@ -129,3 +129,23 @@ triangle-interior probes in every orientation, independent of the original
 can miss. Probes and mounting rays are complementary evidence, not a claim of
 exhaustive geometric proof. Signage has explicit backplates and brackets;
 visible signs are original Reach lettering, not free-floating facade decals.
+
+## Rime Vault 0.6.0: dense kits and frozen surfaces
+
+The Vault's added consoles, overhead racks, shallow grated service channels,
+vent cluster and ice remain merged by material in its home chunk. Other home
+geometry and the existing interactive anchors/routes/placement volumes stay
+unchanged. The release audit caps world growth at 30% triangles and 40% estimated
+world draws relative to 0.5.0; there is still no supported distance-LOD contract.
+
+Frost is three tiled physical materials with geometric placement: directional
+frozen steel, pale top-only rime and glazed wall condensation. Icicle cores and
+low-emission edge facets approximate scattered light without transmission or
+alpha-sorting requirements. Steam remains the existing static alpha-card system.
+The grated channels retain continuous collision support beneath their bars.
+
+Dense small parts can exhaust a lightmap pack's fixed gutters and collapse its
+useful island area even while UV ranges and overlap tests pass. The Vault now
+uses a 2048px atlas and avoids bevel islands on thin detail. Authoring and package
+checks reject less than 3% useful UV1 coverage for this architectural chunk.
+This is an asset-quality guard, not a new world-format extension.
