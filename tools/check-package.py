@@ -66,6 +66,7 @@ for ni,name in [(i,n.get('name','')) for i,n in enumerate(g['nodes']) if i in s.
    coverage[lo[1]:hi[1],lo[0]:hi[0]]+=inside.astype(np.uint8)
  overlap=int(np.sum(coverage>1));assert overlap==0,(name,'UV1 overlap pixels',overlap)
  assert uvarea<=1.001,(name,uvarea)
+ if name=='Visual-rime-vault':assert uvarea>=.03,(name,'collapsed lightmap island area',uvarea)
  triangle_total+=tris;rows.append({'node':name,'triangles':tris,'uv1Area':round(float(uvarea),5),'overlapSamples':overlap})
 decoded=sum(Image.open(root/g['images'][t['source']]['uri']).width*Image.open(root/g['images'][t['source']]['uri']).height*4 for t in g['textures'])
 # Match M1 Renderer::prepare: expanded visible vertices (40 bytes each),

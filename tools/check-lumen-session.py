@@ -7,7 +7,7 @@ import argparse,fcntl,hashlib,inspect,json,math,os,shutil,signal,subprocess,sys,
 from pathlib import Path
 from types import SimpleNamespace
 ROOT=Path(__file__).resolve().parents[1]
-p=argparse.ArgumentParser();p.add_argument('--core',type=Path,default=ROOT.parent/'core');p.add_argument('--package',type=Path,default=ROOT/'dist/com.hyprune.lumen-reach');p.add_argument('--output',type=Path,default=ROOT/'artifacts/lumen-reach');p.add_argument('--record',action='store_true');p.add_argument('--profile',action='store_true');p.add_argument('--release-review',action='store_true');p.add_argument('--diagnose',action='store_true');p.add_argument('--routes',action='store_true');p.add_argument('--gallery',action='store_true');a=p.parse_args();
+p=argparse.ArgumentParser();p.add_argument('--core',type=Path,default=ROOT.parent/'core');p.add_argument('--package',type=Path,default=ROOT/'dist/com.hyprune.lumen-reach');p.add_argument('--output',type=Path,default=ROOT/'artifacts/lumen-reach');p.add_argument('--record',action='store_true');p.add_argument('--profile',action='store_true');p.add_argument('--release-review',action='store_true');p.add_argument('--diagnose',action='store_true');p.add_argument('--routes',action='store_true');p.add_argument('--gallery',action='store_true');p.add_argument('--vault-clip',action='store_true');a=p.parse_args();
 if a.diagnose:a.record=True
 if a.record and a.routes:p.error('Run --routes and --record in separate fresh sessions; shell launch grants expire after 30 seconds.')
 a.output.mkdir(parents=True,exist_ok=True)
@@ -78,6 +78,7 @@ def capture(client,children,args,shell_token,socketpath):
  if a.gallery:
   gallery=Path.home()/'workspace/rick-the-alien/worldshell-gallery/screenshots/release-world-v2';gallery.mkdir(parents=True,exist_ok=True)
   for v in report['views']:shutil.copy2(v['path'],gallery/Path(v['path']).name)
+ if a.vault_clip:vault_clip(client,manifest)
  if a.routes:route_check(client,state,manifest)
  if a.record:record(client,children,state,shell_token,socketpath)
  verified_state,_=verified();gpu=[];seen=set()
@@ -89,6 +90,34 @@ def capture(client,children,args,shell_token,socketpath):
    seen.add(cid);gpu.append({k:v.strip() for k,v in fields.items() if k.startswith('drm-')})
  report['nestedDrmClients']=gpu
  client.call('runtime.exit',{});time.sleep(.3);assert not session.camera()['active'];report['status']='PASS';report['checks']=['package load','real spawn walking','matching 60 degree views','clean nested exit'];(a.output/'nested-report.json').write_text(json.dumps(report,indent=2)+'\n');print('PASS Lumen Reach nested capture',flush=True)
+
+def vault_clip(client,manifest):
+ """Short real engine camera motion for a matched before/after comparison."""
+ import tempfile
+ staging=Path(tempfile.mkdtemp(prefix='rime-v3-',dir='/tmp'))
+ raw=staging/'vault.mkv';encoded=staging/'vault.mp4'
+ views=json.loads((a.output/'views.json').read_text())['views']
+ ids=['03-rime-vault','03-rime-vault-services','03-rime-vault-platform']
+ selected=[next(v for v in views if v['id']==ident) for ident in ids]
+ client.call('movement.set',{'modeId':'com.hyprune.fly'})
+ client.call('camera.set',pose(selected[0]['position'],selected[0]['target']));time.sleep(1)
+ with (a.output/'vault-recorder.log').open('w') as log:
+  rec=session.envrun('wf-recorder','-o','HEADLESS-1','-r','30','-D','--no-dmabuf','-c','libx264','-p','preset=ultrafast','-p','crf=19','-x','yuv420p','-f',str(raw),stdout=log,stderr=subprocess.STDOUT)
+  try:
+   started=time.monotonic()
+   for v in selected:
+    phase=time.monotonic()
+    while time.monotonic()-phase<7:
+     t=min(1,(time.monotonic()-phase)/7);position=list(v['position']);position[0]+=.20*math.sin(t*math.pi)
+     client.call('camera.set',pose(position,v['target']));time.sleep(.05)
+   elapsed=time.monotonic()-started
+  finally:rec.send_signal(signal.SIGINT);rec.wait(timeout=15)
+ subprocess.run(['ffmpeg','-y','-v','error','-i',str(raw),'-an','-vf','scale=1920:1080:in_range=pc:out_range=tv','-r','30','-c:v','libx264','-preset','medium','-crf','20','-pix_fmt','yuv420p','-color_range','tv','-movflags','+faststart',str(encoded)],check=True)
+ probe=json.loads(subprocess.check_output(['ffprobe','-v','error','-show_format','-of','json',str(encoded)]))
+ assert 20<=float(probe['format']['duration'])<=25
+ shutil.move(str(encoded),a.output/'vault.mp4')
+ report['vaultClip']={'version':manifest['version'],'views':ids,'duration':probe['format']['duration'],'encodedIn':str(staging),'motion':'20cm sine pan over seven seconds per fixed target','elapsedSeconds':elapsed}
+ print('PASS matched Vault motion clip',flush=True)
 
 def route_check(client,state,manifest):
  """Traverse every graph branch and authored alternate stair in real walk mode."""
