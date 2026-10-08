@@ -6,7 +6,7 @@ import numpy as np
 from PIL import Image,ImageDraw
 HERE=Path(__file__).parent;ROOT=HERE.parents[1];OUT=HERE/'tiles';OUT.mkdir(exist_ok=True)
 sys.path.insert(0,str(ROOT/'switchyard'));from lettering import GLYPHS
-PARAMS={'concrete':(2,.78,0,.45),'metal':(1,.43,.65,.18),'paving':(2,.29,0,.4),'canvas':(1,.90,0,.25),'wood':(1,.56,0,.35),'frost':(1,.65,.45,.3),'glass':(2,.18,.2,.05),'strips':(1,.3,.3,.12),'grating':(1,.48,.55,.3),'snow':(2,.88,0,.25),'rock':(4,.84,0,.7)}
+PARAMS={'concrete':(2,.78,0,.45),'metal':(1,.43,.65,.18),'paving':(2,.29,0,.4),'canvas':(1,.90,0,.25),'wood':(1,.56,0,.35),'frost':(1,.65,.45,.3),'glass':(2,.18,.2,.05),'strips':(1,.3,.3,.12),'grating':(1,.48,.55,.3),'snow':(2,.88,0,.25),'rock':(4,.84,0,.7),'frost-metal-v3':(2,.48,.55,.18),'rime-crust-v3':(1,.88,0,.35),'condensation-v3':(2,.26,.18,.14)}
 
 def periodic(a):
  h,w,_=a.shape;v=np.zeros_like(a);v[0]+=a[-1]-a[0];v[-1]+=a[0]-a[-1];v[:,0]+=a[:,-1]-a[:,0];v[:,-1]+=a[:,0]-a[:,-1]
@@ -108,7 +108,7 @@ for area,title in zip(NAMES,TITLES):
     x=margin+i*(w-2*margin)//3;y=h-116;d.rectangle((x,y,x+(w-2*margin)//3-12,h-34),outline=(55,80,95));text(d,(x+12,y+14),label,blue,2);d.line([(x+15,h-43),(x+43,h-74),(x+65,h-55),(x+97,h-94),(x+140,h-42)],fill=accent,width=2)
   if style=='workspace':im=im.resize((1536,768),Image.Resampling.LANCZOS)
   im.save(OUT/f'ui-{area}-{style}.png',optimize=True)
-print('Prepared eleven seam-healed original PBR sets, trim sheet and sixteen original screen layouts')
+print('Prepared fourteen seam-healed original PBR sets, trim sheet and sixteen original screen layouts')
 
 # Original alpha master retained; bounded GPU derivative uses clamp sampling.
 Image.open(HERE/'source/steam.png').convert('RGBA').resize((512,768),Image.Resampling.LANCZOS).save(OUT/'steam-albedo.png',optimize=True)

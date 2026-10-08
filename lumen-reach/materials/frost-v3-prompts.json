@@ -1,0 +1,17 @@
+[
+  {
+    "name": "frost-metal-v3",
+    "prompt": "Use case: photorealistic-natural. Asset type: seamless physically based game material base-color master, square orthographic scan, no perspective. Primary request: dark blue-grey aged steel in a frozen industrial service room, fine brushed metal with slender VERTICAL meltwater streaks, sparse pale frost hairlines descending from cold seams. Dark steel should occupy 80 percent, fine frost 20 percent. Restrained low contrast, realistic fine grain. Entire image one evenly lit material, seamless tileable both axes, no panel borders, no hardware, no lighting gradients, no cast shadows, no text. Avoid mottled camouflage, rock texture, clouds, black-and-white patches, snow blanket, dramatic lighting.",
+    "tool": "built-in imagegen"
+  },
+  {
+    "name": "rime-crust-v3",
+    "prompt": "Use case: photorealistic-natural. Asset type: seamless physically based game material base-color master, square orthographic scan. Primary request: pale ivory-blue crystalline rime crust accumulated on a chilled industrial pipe top. Fine feathery needle crystals and compact granular frost, delicate directional comb structure, subtle pearl grey cavities, broadly uniform pale value with small-scale relief. Entire image one evenly lit seamless material tileable in both axes; no object shape, no pipe visible, no shadows, no gradient, no text. Avoid stone, camouflage, large dark patches, cloud noise, blue paint. Realistic macro frozen water crystal surface.",
+    "tool": "built-in imagegen"
+  },
+  {
+    "name": "condensation-v3",
+    "prompt": "Use case: photorealistic-natural. Asset type: seamless physically based game material base-color master, square orthographic scan. Primary request: thin frozen condensation on dark blue-grey steel, closely spaced VERTICAL translucent ice rivulets with hairline fractures and delicate fern frost beside the rivulets. Most surface remains charcoal steel under a thin clear blue-grey glaze. Subtle pale edges, long downward streaks, low contrast. Even unlit material scan, tileable in both axes, no borders, no hardware, no panel divisions, no light glare, no text. Avoid rock, camouflage, snow blanket, chunky white blobs.",
+    "tool": "built-in imagegen"
+  }
+]

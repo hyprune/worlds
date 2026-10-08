@@ -114,5 +114,29 @@
     "license": "CC-BY-4.0",
     "provenance": "Original built-in imagegen generation for Lumen Reach, 2026-10-08",
     "masterSHA256": "9989f4b96a63cea2c377aca02507939c990eaa99beb4b7185d9bbb4757fa9035"
+  },
+  {
+    "name": "frost-metal-v3",
+    "prompt": "Use case: photorealistic-natural. Asset type: seamless physically based game material base-color master, square orthographic scan, no perspective. Primary request: dark blue-grey aged steel in a frozen industrial service room, fine brushed metal with slender VERTICAL meltwater streaks, sparse pale frost hairlines descending from cold seams. Dark steel should occupy 80 percent, fine frost 20 percent. Restrained low contrast, realistic fine grain. Entire image one evenly lit material, seamless tileable both axes, no panel borders, no hardware, no lighting gradients, no cast shadows, no text. Avoid mottled camouflage, rock texture, clouds, black-and-white patches, snow blanket, dramatic lighting.",
+    "author": "Hyprune contributors",
+    "license": "CC-BY-4.0",
+    "provenance": "Original built-in imagegen generation for Rime Vault, 2026-10-08",
+    "masterSHA256": "adbaa4eb3b6c3a924bf1c3280e25755c288f1e308dfa2a5d36b05ff7445ccf6b"
+  },
+  {
+    "name": "rime-crust-v3",
+    "prompt": "Use case: photorealistic-natural. Asset type: seamless physically based game material base-color master, square orthographic scan. Primary request: pale ivory-blue crystalline rime crust accumulated on a chilled industrial pipe top. Fine feathery needle crystals and compact granular frost, delicate directional comb structure, subtle pearl grey cavities, broadly uniform pale value with small-scale relief. Entire image one evenly lit seamless material tileable in both axes; no object shape, no pipe visible, no shadows, no gradient, no text. Avoid stone, camouflage, large dark patches, cloud noise, blue paint. Realistic macro frozen water crystal surface.",
+    "author": "Hyprune contributors",
+    "license": "CC-BY-4.0",
+    "provenance": "Original built-in imagegen generation for Rime Vault, 2026-10-08",
+    "masterSHA256": "88b8a2bebf0170794d488370e4920ec2caa5bf8bb21c9503a14950c5f7e62280"
+  },
+  {
+    "name": "condensation-v3",
+    "prompt": "Use case: photorealistic-natural. Asset type: seamless physically based game material base-color master, square orthographic scan. Primary request: thin frozen condensation on dark blue-grey steel, closely spaced VERTICAL translucent ice rivulets with hairline fractures and delicate fern frost beside the rivulets. Most surface remains charcoal steel under a thin clear blue-grey glaze. Subtle pale edges, long downward streaks, low contrast. Even unlit material scan, tileable in both axes, no borders, no hardware, no panel divisions, no light glare, no text. Avoid rock, camouflage, snow blanket, chunky white blobs.",
+    "author": "Hyprune contributors",
+    "license": "CC-BY-4.0",
+    "provenance": "Original built-in imagegen generation for Rime Vault, 2026-10-08",
+    "masterSHA256": "39640f92eafde352d2544a3e8e8ef9695268540333dca185dcdbdfc08f6d26fb"
   }
 ]
