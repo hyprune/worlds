@@ -100,3 +100,32 @@ missing fields retain older behavior. Fourteen authored landmarks have human
 labels; the other fifty nodes serve navigation without becoming HUD labels.
 Core commit f7fa0da implements this coordinated behavior and tests routing
 through hidden nodes. This is declarative metadata, not package executable code.
+
+## Lumen Reach visual polish: batching and runtime budgets (2026-10-08)
+
+Version 0.5.0 merges static architecture by material within each of the four
+homes. The descending and ascending connectors have independent nodes and
+768px irradiance atlases; foliage and distant opaque art remain separate shared
+layers. glTF scene nodes support this spatial organization. The inspected core
+renderer submits every material batch (except disabled alpha haze), with no
+frustum/portal/occlusion culling or distance LOD selection. Splitting nodes does
+not currently reduce engine draw submissions. A future standard should define
+chunk bounds/visibility and optional LOD error distances; no unsupported LOD
+extension is shipped here. Per-area chunks already preserve a useful culling
+boundary for that implementation.
+
+The report counts one world draw per visible glTF primitive. This excludes
+application capture, HUD, bloom, resolve and upscaling. World GPU allocation
+includes every mip, linear/color views and expanded vertices; nested DRM
+residency includes compositor/application/output costs and is reported
+separately. Medium uses normal maps, reflections, low bloom and 2x anisotropy;
+validation records the actual effective preset and dynamic internal resolution.
+The immutable world does not force renderer settings on the user's session.
+
+Thin emissive fixture authoring now has mechanical ray checks before merging,
+and `check-coplanar.py --emissive --fixtures <fixture-audit.json>` adds
+triangle-interior probes in every orientation, independent of the original
+10cm grid. This finds centimeter-wide trim overlaps which regular grid samples
+can miss. Probes and mounting rays are complementary evidence, not a claim of
+exhaustive geometric proof. Signage has explicit backplates and brackets;
+visible signs are original Reach lettering, not free-floating facade decals.

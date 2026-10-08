@@ -5,7 +5,7 @@ from pathlib import Path
 if os.environ.get("HYPRUNE_REMOTE_BLENDER")!="1": raise SystemExit("Remote bake host only")
 import bpy,bmesh,numpy as np
 from mathutils import Vector,Matrix
-RESOLUTIONS={};MARGINS={};GROUPS={};BLOCKS=[];COLL=[];MATS={};LIGHTMAPS={};TILE_METERS={}
+RESOLUTIONS={};MARGINS={};GROUPS={};BLOCKS=[];COLL=[];MATS={};LIGHTMAPS={};TILE_METERS={};BEVEL_SEGMENTS=2
 def log(s): print("LUMEN | "+s,flush=True)
 
 def select(obs):
@@ -35,13 +35,15 @@ def add(o,name,mat,group,collision=False):
 def box(name,pos,size,mat='stone',group='hall',bevel=.035,collision=False):
  me=bpy.data.meshes.new(name);bm=bmesh.new();bmesh.ops.create_cube(bm,size=1)
  for v in bm.verts:v.co.x*=size[0];v.co.y*=size[1];v.co.z*=size[2]
- if bevel:bmesh.ops.bevel(bm,geom=list(bm.edges),offset=min(bevel,min(size)*.45),segments=2,affect='EDGES')
+ if bevel:bmesh.ops.bevel(bm,geom=list(bm.edges),offset=min(bevel,min(size)*.45),segments=BEVEL_SEGMENTS,affect='EDGES')
  bm.normal_update();bm.to_mesh(me);bm.free();me.update();o=bpy.data.objects.new(name,me);bpy.context.collection.objects.link(o);o.matrix_world=Matrix.Translation(Vector(pos))
  return add(o,name,mat,group,collision)
 
 def cylinder(name,pos,r,depth,mat='metal',group='hall',vertices=32,collision=False):
- bpy.ops.mesh.primitive_cylinder_add(vertices=vertices,radius=r,depth=depth,location=pos)
- return add(bpy.context.object,name,mat,group,collision)
+ # Direct mesh construction avoids a full dependency-graph update for every pipe.
+ me=bpy.data.meshes.new(name);bm=bmesh.new();bmesh.ops.create_cone(bm,cap_ends=True,cap_tris=False,segments=vertices,radius1=r,radius2=r,depth=depth)
+ bm.normal_update();bm.to_mesh(me);bm.free();me.update();o=bpy.data.objects.new(name,me);bpy.context.collection.objects.link(o);o.matrix_world=Matrix.Translation(Vector(pos))
+ return add(o,name,mat,group,collision)
 
 
 def area(name,pos,target,power,color,size):
@@ -136,8 +138,10 @@ def export(cols,nav):
   color=m.pop('emissiveFactor',None)
   if color is None or not any(color):color=m.get('pbrMetallicRoughness',{}).get('baseColorFactor',[1,1,1,1])[:3]
   gain=m.get('extensions',{}).pop('KHR_materials_emissive_strength',{}).get('emissiveStrength',1)
+  base_texture=m.get('pbrMetallicRoughness',{}).get('baseColorTexture')
   m['pbrMetallicRoughness']={'baseColorFactor':[min(1,c*gain) for c in color]+[1],'metallicFactor':0,'roughnessFactor':1}
   if 'emissiveTexture' in m:m['pbrMetallicRoughness']['baseColorTexture']=m.pop('emissiveTexture')
+  elif base_texture:m['pbrMetallicRoughness']['baseColorTexture']=base_texture
   m.setdefault('extensions',{})['KHR_materials_unlit']={}
   if m.get('name','').startswith('vista--steam-card'):m['alphaMode']='BLEND';m['doubleSided']=True
  if 'KHR_materials_unlit' not in g.setdefault('extensionsUsed',[]):g['extensionsUsed'].append('KHR_materials_unlit')

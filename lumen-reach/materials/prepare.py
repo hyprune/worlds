@@ -6,7 +6,7 @@ import numpy as np
 from PIL import Image,ImageDraw
 HERE=Path(__file__).parent;ROOT=HERE.parents[1];OUT=HERE/'tiles';OUT.mkdir(exist_ok=True)
 sys.path.insert(0,str(ROOT/'switchyard'));from lettering import GLYPHS
-PARAMS={'concrete':(2,.78,0,.45),'metal':(1,.43,.65,.18),'paving':(2,.29,0,.4),'canvas':(1,.90,0,.25),'wood':(1,.56,0,.35),'frost':(1,.65,.45,.3),'glass':(2,.18,.2,.05),'strips':(1,.3,.3,.12),'grating':(1,.48,.55,.3),'snow':(2,.88,0,.25)}
+PARAMS={'concrete':(2,.78,0,.45),'metal':(1,.43,.65,.18),'paving':(2,.29,0,.4),'canvas':(1,.90,0,.25),'wood':(1,.56,0,.35),'frost':(1,.65,.45,.3),'glass':(2,.18,.2,.05),'strips':(1,.3,.3,.12),'grating':(1,.48,.55,.3),'snow':(2,.88,0,.25),'rock':(4,.84,0,.7)}
 
 def periodic(a):
  h,w,_=a.shape;v=np.zeros_like(a);v[0]+=a[-1]-a[0];v[-1]+=a[0]-a[-1];v[:,0]+=a[:,-1]-a[:,0];v[:,-1]+=a[:,0]-a[:,-1]
@@ -36,7 +36,7 @@ trim=Image.new('RGB',(1024,1024));regions=[]
 for i,name in enumerate(['concrete','metal','canvas','wood','frost','glass','strips','grating']):
  src=Image.open(OUT/f'{name}-albedo.png').resize((1024,1024),Image.Resampling.LANCZOS);band=src.crop((0,0,1024,112));trim.paste(band,(0,i*128+8));trim.paste(band.crop((0,0,1024,1)).resize((1024,8)),(0,i*128));trim.paste(band.crop((0,111,1024,112)).resize((1024,8)),(0,i*128+120));regions.append({'id':name,'uvRect':[0,(i*128+8)/1024,1,(i*128+120)/1024],'gutterPixels':8})
 trim.save(OUT/'reach-trim-albedo.png',optimize=True);(OUT/'reach-trim.json').write_text(json.dumps(regions,indent=2)+'\n')
-contact=Image.new('RGB',(5*512,2*544),(14,23,30));d=ImageDraw.Draw(contact)
+contact=Image.new('RGB',(5*512,math.ceil(len(swatches)/5)*544),(14,23,30));d=ImageDraw.Draw(contact)
 for i,(name,im) in enumerate(swatches):x=i%5*512;y=i//5*544;contact.paste(im,(x,y));d.text((x+12,y+519),name,fill='white')
 contact.save(OUT/'repeat-contact-sheet.png',optimize=True);(OUT/'texture-report.json').write_text(json.dumps(rows,indent=2)+'\n')
 
@@ -108,7 +108,7 @@ for area,title in zip(NAMES,TITLES):
     x=margin+i*(w-2*margin)//3;y=h-116;d.rectangle((x,y,x+(w-2*margin)//3-12,h-34),outline=(55,80,95));text(d,(x+12,y+14),label,blue,2);d.line([(x+15,h-43),(x+43,h-74),(x+65,h-55),(x+97,h-94),(x+140,h-42)],fill=accent,width=2)
   if style=='workspace':im=im.resize((1536,768),Image.Resampling.LANCZOS)
   im.save(OUT/f'ui-{area}-{style}.png',optimize=True)
-print('Prepared ten seam-healed original PBR sets, trim sheet and sixteen original screen layouts')
+print('Prepared eleven seam-healed original PBR sets, trim sheet and sixteen original screen layouts')
 
 # Original alpha master retained; bounded GPU derivative uses clamp sampling.
 Image.open(HERE/'source/steam.png').convert('RGBA').resize((512,768),Image.Resampling.LANCZOS).save(OUT/'steam-albedo.png',optimize=True)

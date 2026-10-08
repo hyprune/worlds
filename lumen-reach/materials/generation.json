@@ -106,5 +106,13 @@
     "author": "Hyprune contributors",
     "license": "CC-BY-4.0",
     "provenance": "Original built-in imagegen generation for Lumen Reach, 2026-10-07"
+  },
+  {
+    "name": "rock",
+    "prompt": "Use case: photorealistic-natural. Asset type: seamless tiling PBR albedo texture for original mountain settlement Lumen Reach. Create one square 1024x1024 or higher texture of weathered dark grey alpine gneiss rock, large jagged strata, rough clefts, pale mineral veins and fine granular mineral detail. Palette subdued neutral slate grey with slight warm grey variations. Orthographic flat view of bare rock filling every pixel edge to edge. Uniform diffuse lighting, NO cast shadows, NO directional highlights, NO snow, NO objects, NO perspective, NO lettering or marks. Seamless match left/right and top/bottom, no border. This is a reusable natural rock surface texture, not a landscape image.",
+    "author": "Hyprune contributors",
+    "license": "CC-BY-4.0",
+    "provenance": "Original built-in imagegen generation for Lumen Reach, 2026-10-08",
+    "masterSHA256": "9989f4b96a63cea2c377aca02507939c990eaa99beb4b7185d9bbb4757fa9035"
   }
 ]
