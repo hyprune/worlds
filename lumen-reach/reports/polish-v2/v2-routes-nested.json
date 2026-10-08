@@ -1,0 +1,3029 @@
+{
+  "coreDirty": [
+    " M dev/nested/live_check.py",
+    " M dev/nested/live_regressions.py",
+    " M src/platform/hyprland/Plugin.cpp",
+    " M src/render/Renderer.cpp",
+    " M src/render/Renderer.hpp",
+    " M tests/material-benchmark.cpp",
+    " M tests/render.cpp",
+    "?? dev/nested/graphics_profile.py",
+    "?? docs/evidence/review-audit/upload-after.json",
+    "?? docs/evidence/review-audit/upload-before.json"
+  ],
+  "coreDiffSHA256": "868e9a1b09efaa0693873a626b519eda22ef39030471f956ba0710a10406b3fc",
+  "coreCommit": "06ac1fb91d42e15290c1cb9c96b2928bd7d78835",
+  "pluginSHA256": "9d4f21958d15b3fc34880a61295ee71c68dc22e914549beb157a0c03c38ab87f",
+  "loadedPluginSHA256": "cddae671f792c33ac350bbb73e8fd5289e4707ddb46ecc7aa37a95942597eb86",
+  "protocol": "0.4",
+  "load": {
+    "revision": 4
+  },
+  "camera": {
+    "active": true,
+    "activeHandle": -1,
+    "aim": "",
+    "captureDirectory": "/home/rick/workspace/hyprune/worlds/artifacts/lumen-reach/.nested-state/statehome/hyprune/captures",
+    "captures": [],
+    "childSurfaces": [],
+    "children": 0,
+    "config": {
+      "graphics": {
+        "alpha_haze": null,
+        "ambient_occlusion": null,
+        "anisotropy": null,
+        "bloom": null,
+        "bloom_strength": 0.15,
+        "dynamic_resolution": true,
+        "exposure": 1.0,
+        "fog": null,
+        "fov": 60.0,
+        "msaa": null,
+        "normal_maps": null,
+        "quality": "medium",
+        "reduced_motion": false,
+        "reflections": null,
+        "render_scale": "auto",
+        "sharpen": 0.35,
+        "sky": null,
+        "specular": null,
+        "target_fps": 60
+      },
+      "input": {
+        "bindings": {
+          "back": "s",
+          "down": "Control_L",
+          "fly": "F4",
+          "focus": "f",
+          "forward": "w",
+          "jump": "space",
+          "left": "a",
+          "noclip": "v",
+          "right": "d",
+          "zoom": "c"
+        },
+        "carry_button": 272,
+        "resize_button": 273,
+        "roll_button": 274,
+        "typing_button": 275,
+        "typing_cursor": true
+      },
+      "player": {
+        "fly_speed": 5.0,
+        "jump_speed": 5.0,
+        "look_inertia": 0.03,
+        "look_sensitivity": 0.0025,
+        "move_inertia": 0.05,
+        "respawn_below": 30.0,
+        "run_multiplier": 1.8,
+        "step_height": 0.35,
+        "walk_speed": 3.5
+      },
+      "tools": {
+        "enabled": true,
+        "slots": [
+          "pointer",
+          "mount",
+          "path",
+          "path",
+          "path"
+        ]
+      },
+      "windows": {
+        "scale": 0.002,
+        "spawn_distance": 5.0,
+        "transition_seconds": 0.35,
+        "wheel_factor": 1.06
+      }
+    },
+    "cursor": "reticle",
+    "debug": false,
+    "error": "",
+    "eyeHeight": 1.7000000476837158,
+    "frames": 122,
+    "fullscreen": 0,
+    "fullscreenId": "",
+    "gesture": 0,
+    "gestureId": "",
+    "grabbed": "",
+    "handover": 0,
+    "instances": [],
+    "keyboardFocus": false,
+    "layerCursor": false,
+    "mode": "movement",
+    "nativeCursorVisible": false,
+    "nativePointerFocused": false,
+    "noclip": false,
+    "overlayStyle": {
+      "fontFamily": "monospace",
+      "iconAtlas": null,
+      "labelColor": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "promptColor": [
+        0.7,
+        0.9,
+        1.0
+      ],
+      "routeColor": [
+        0.25,
+        1.0,
+        0.65
+      ],
+      "waypointColor": [
+        0.25,
+        1.0,
+        0.65
+      ]
+    },
+    "overlays": {
+      "areaMarkers": false,
+      "frame": 122,
+      "heading": 0.0,
+      "labels": [],
+      "pitch": 0.0,
+      "routeSegments": 0
+    },
+    "ownsInput": true,
+    "pitch": 0.0,
+    "pointer": [
+      0.5,
+      0.5
+    ],
+    "position": [
+      -8.0,
+      1.7000000476837158,
+      12.0
+    ],
+    "positionMode": 0,
+    "pressedButtons": 0,
+    "savedCursorHidden": true,
+    "seatGrab": false,
+    "selectedScale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "superHeld": false,
+    "timings": {
+      "captureMs": 0.01052,
+      "collisionTriangles": 3910,
+      "cpuPassMs": [
+        0.292958,
+        0.008106,
+        0.01295,
+        0.00789
+      ],
+      "cpuRenderMs": 0.323229,
+      "cpuUpdateMs": 0.153173,
+      "debug": false,
+      "deliveredFPS": 59.99710010016376,
+      "frameMs": 16.742586,
+      "gpuCaptureMs": 0.0,
+      "gpuEffectsMs": {
+        "bloom": 0.123541,
+        "msaa_resolve": 0.0,
+        "native_surfaces_geometry": 5.2e-05,
+        "output_markers": 0.358229,
+        "sky": 0.175364,
+        "upscale_sharpen": 0.287031,
+        "world_shading_shared": 3.598593
+      },
+      "gpuPassMs": [
+        3.7739570000000002,
+        5.2e-05,
+        0.410572,
+        0.358229
+      ],
+      "graphics": {
+        "alpha_haze": true,
+        "ambient_occlusion": true,
+        "anisotropy": 2,
+        "bloom": "low",
+        "bloom_strength": 0.12,
+        "dynamic_resolution": true,
+        "exposure": 1,
+        "fog": "height",
+        "fov": 60.0,
+        "msaa": 1,
+        "normal_maps": true,
+        "quality": "medium",
+        "reduced_motion": false,
+        "reflections": true,
+        "render_scale": "auto",
+        "sharpen": 0.35,
+        "sky": "environment",
+        "specular": true,
+        "target_fps": 60
+      },
+      "inFlight": 1,
+      "internalSize": [
+        1920,
+        1080
+      ],
+      "ipcMs": 0.000381,
+      "msaaSamples": 1,
+      "nativeSize": [
+        1920,
+        1080
+      ],
+      "quality": "high",
+      "renderScale": 1.0,
+      "renderedFrames": 122,
+      "renderer": "Mesa Intel(R) Graphics (PTL)",
+      "reusedFrames": 0,
+      "targetFPS": 60,
+      "upload": {
+        "bytes": 231151016,
+        "completedJobs": 0,
+        "cpuMs": 106.45800499999999,
+        "jobs": 0,
+        "maxStepMs": 58.10364,
+        "pending": false,
+        "steps": 119
+      }
+    },
+    "tool": 1,
+    "yaw": 0.0
+  },
+  "graphicsRequest": {
+    "quality": "medium",
+    "render_scale": "auto",
+    "target_fps": 60
+  },
+  "manifestSHA256": "e571f8545d81ed3b8281ac5df5bf4df21645a3b2d3e6d69ca1a3d21a17f34624",
+  "sceneSHA256": "92f8952e297e5b5c0fc944b4c24623897d11693b4f7b0239c627d12c0cf407c2",
+  "walk": {
+    "before": [
+      -8.0,
+      1.7000000476837158,
+      12.0
+    ],
+    "after": [
+      -8.0,
+      1.7000000476837158,
+      10.196542739868164
+    ]
+  },
+  "views": [
+    {
+      "renderer": {
+        "captureMs": 0.016813,
+        "collisionTriangles": 3910,
+        "cpuPassMs": [
+          0.218122,
+          0.004258,
+          0.009248,
+          0.005409
+        ],
+        "cpuRenderMs": 0.238315,
+        "cpuUpdateMs": 0.045333,
+        "debug": false,
+        "deliveredFPS": 59.99486677920351,
+        "frameMs": 16.690983,
+        "gpuCaptureMs": 0.0,
+        "gpuEffectsMs": {
+          "bloom": 0.121979,
+          "msaa_resolve": 0.0,
+          "native_surfaces_geometry": 0.0,
+          "output_markers": 1.385208,
+          "sky": 0.175989,
+          "upscale_sharpen": 0.284791,
+          "world_shading_shared": 3.202135
+        },
+        "gpuPassMs": [
+          3.378124,
+          0.0,
+          0.40677,
+          1.385208
+        ],
+        "graphics": {
+          "alpha_haze": true,
+          "ambient_occlusion": true,
+          "anisotropy": 2,
+          "bloom": "low",
+          "bloom_strength": 0.12,
+          "dynamic_resolution": true,
+          "exposure": 1,
+          "fog": "height",
+          "fov": 60.0,
+          "msaa": 1,
+          "normal_maps": true,
+          "quality": "medium",
+          "reduced_motion": false,
+          "reflections": true,
+          "render_scale": "auto",
+          "sharpen": 0.35,
+          "sky": "environment",
+          "specular": true,
+          "target_fps": 60
+        },
+        "inFlight": 1,
+        "internalSize": [
+          1920,
+          1080
+        ],
+        "ipcMs": 0.000354,
+        "msaaSamples": 1,
+        "nativeSize": [
+          1920,
+          1080
+        ],
+        "quality": "high",
+        "renderScale": 1.0,
+        "renderedFrames": 309,
+        "renderer": "Mesa Intel(R) Graphics (PTL)",
+        "reusedFrames": 0,
+        "targetFPS": 60,
+        "upload": {
+          "bytes": 231151016,
+          "completedJobs": 0,
+          "cpuMs": 106.45800499999999,
+          "jobs": 0,
+          "maxStepMs": 58.10364,
+          "pending": false,
+          "steps": 119
+        }
+      },
+      "id": "01-sun-court",
+      "pose": {
+        "orientation": [
+          0.059117864817380905,
+          -0.17116305232048035,
+          0.010289458557963371,
+          0.9834136366844177
+        ],
+        "position": [
+          -9.0,
+          2.0,
+          16.0
+        ]
+      },
+      "verticalFovDegrees": 60,
+      "path": "/home/rick/workspace/hyprune/worlds/artifacts/lumen-reach/v2-routes/engine-01-sun-court.png"
+    },
+    {
+      "renderer": {
+        "captureMs": 0.012495,
+        "collisionTriangles": 3910,
+        "cpuPassMs": [
+          0.222435,
+          0.004747,
+          0.009415,
+          0.005825
+        ],
+        "cpuRenderMs": 0.243589,
+        "cpuUpdateMs": 0.177147,
+        "debug": false,
+        "deliveredFPS": 60.004475350181195,
+        "frameMs": 16.671562,
+        "gpuCaptureMs": 0.0,
+        "gpuEffectsMs": {
+          "bloom": 0.123854,
+          "msaa_resolve": 0.0,
+          "native_surfaces_geometry": 0.0,
+          "output_markers": 0.269322,
+          "sky": 0.17776,
+          "upscale_sharpen": 0.289062,
+          "world_shading_shared": 2.380625
+        },
+        "gpuPassMs": [
+          2.5583850000000004,
+          0.0,
+          0.412916,
+          0.269322
+        ],
+        "graphics": {
+          "alpha_haze": true,
+          "ambient_occlusion": true,
+          "anisotropy": 2,
+          "bloom": "low",
+          "bloom_strength": 0.12,
+          "dynamic_resolution": true,
+          "exposure": 1,
+          "fog": "height",
+          "fov": 60.0,
+          "msaa": 1,
+          "normal_maps": true,
+          "quality": "medium",
+          "reduced_motion": false,
+          "reflections": true,
+          "render_scale": "auto",
+          "sharpen": 0.35,
+          "sky": "environment",
+          "specular": true,
+          "target_fps": 60
+        },
+        "inFlight": 1,
+        "internalSize": [
+          1920,
+          1080
+        ],
+        "ipcMs": 0.784461,
+        "msaaSamples": 1,
+        "nativeSize": [
+          1920,
+          1080
+        ],
+        "quality": "high",
+        "renderScale": 1.0,
+        "renderedFrames": 394,
+        "renderer": "Mesa Intel(R) Graphics (PTL)",
+        "reusedFrames": 0,
+        "targetFPS": 60,
+        "upload": {
+          "bytes": 231151016,
+          "completedJobs": 0,
+          "cpuMs": 106.45800499999999,
+          "jobs": 0,
+          "maxStepMs": 58.10364,
+          "pending": false,
+          "steps": 119
+        }
+      },
+      "id": "01-sun-court-terrace",
+      "pose": {
+        "orientation": [
+          0.030215978622436523,
+          -0.7472701072692871,
+          0.034058671444654465,
+          0.6629588007926941
+        ],
+        "position": [
+          -21.0,
+          5.700000286102295,
+          -15.0
+        ]
+      },
+      "verticalFovDegrees": 60,
+      "path": "/home/rick/workspace/hyprune/worlds/artifacts/lumen-reach/v2-routes/engine-01-sun-court-terrace.png"
+    },
+    {
+      "renderer": {
+        "captureMs": 0.0416,
+        "collisionTriangles": 3910,
+        "cpuPassMs": [
+          0.236311,
+          0.004664,
+          0.011118,
+          0.005427
+        ],
+        "cpuRenderMs": 0.258523,
+        "cpuUpdateMs": 0.184193,
+        "debug": false,
+        "deliveredFPS": 59.99787943494925,
+        "frameMs": 16.738696,
+        "gpuCaptureMs": 0.0,
+        "gpuEffectsMs": {
+          "bloom": 0.130052,
+          "msaa_resolve": 0.0,
+          "native_surfaces_geometry": 0.0,
+          "output_markers": 0.28401,
+          "sky": 0.174479,
+          "upscale_sharpen": 0.322968,
+          "world_shading_shared": 2.755104
+        },
+        "gpuPassMs": [
+          2.929583,
+          0.0,
+          0.45302,
+          0.28401
+        ],
+        "graphics": {
+          "alpha_haze": true,
+          "ambient_occlusion": true,
+          "anisotropy": 2,
+          "bloom": "low",
+          "bloom_strength": 0.12,
+          "dynamic_resolution": true,
+          "exposure": 1,
+          "fog": "height",
+          "fov": 60.0,
+          "msaa": 1,
+          "normal_maps": true,
+          "quality": "medium",
+          "reduced_motion": false,
+          "reflections": true,
+          "render_scale": "auto",
+          "sharpen": 0.35,
+          "sky": "environment",
+          "specular": true,
+          "target_fps": 60
+        },
+        "inFlight": 1,
+        "internalSize": [
+          1920,
+          1080
+        ],
+        "ipcMs": 0.002757,
+        "msaaSamples": 1,
+        "nativeSize": [
+          1920,
+          1080
+        ],
+        "quality": "high",
+        "renderScale": 1.0,
+        "renderedFrames": 477,
+        "renderer": "Mesa Intel(R) Graphics (PTL)",
+        "reusedFrames": 0,
+        "targetFPS": 60,
+        "upload": {
+          "bytes": 231151016,
+          "completedJobs": 0,
+          "cpuMs": 106.45800499999999,
+          "jobs": 0,
+          "maxStepMs": 58.10364,
+          "pending": false,
+          "steps": 119
+        }
+      },
+      "id": "01-sun-court-tools",
+      "pose": {
+        "orientation": [
+          0.016189953312277794,
+          0.1665656566619873,
+          -0.0027352748438715935,
+          0.9858936667442322
+        ],
+        "position": [
+          -12.0,
+          2.0999999046325684,
+          11.5
+        ]
+      },
+      "verticalFovDegrees": 60,
+      "path": "/home/rick/workspace/hyprune/worlds/artifacts/lumen-reach/v2-routes/engine-01-sun-court-tools.png"
+    },
+    {
+      "renderer": {
+        "captureMs": 0.007792,
+        "collisionTriangles": 3910,
+        "cpuPassMs": [
+          0.259505,
+          0.00511,
+          0.011743,
+          0.007145
+        ],
+        "cpuRenderMs": 0.284809,
+        "cpuUpdateMs": 0.034032,
+        "debug": false,
+        "deliveredFPS": 59.99844916008611,
+        "frameMs": 16.64166,
+        "gpuCaptureMs": 0.0,
+        "gpuEffectsMs": {
+          "bloom": 0.11677,
+          "msaa_resolve": 0.0,
+          "native_surfaces_geometry": 0.0,
+          "output_markers": 0.268437,
+          "sky": 0.176562,
+          "upscale_sharpen": 0.282656,
+          "world_shading_shared": 2.33802
+        },
+        "gpuPassMs": [
+          2.5145820000000003,
+          0.0,
+          0.399426,
+          0.268437
+        ],
+        "graphics": {
+          "alpha_haze": true,
+          "ambient_occlusion": true,
+          "anisotropy": 2,
+          "bloom": "low",
+          "bloom_strength": 0.12,
+          "dynamic_resolution": true,
+          "exposure": 1,
+          "fog": "height",
+          "fov": 60.0,
+          "msaa": 1,
+          "normal_maps": true,
+          "quality": "medium",
+          "reduced_motion": false,
+          "reflections": true,
+          "render_scale": "auto",
+          "sharpen": 0.35,
+          "sky": "environment",
+          "specular": true,
+          "target_fps": 60
+        },
+        "inFlight": 1,
+        "internalSize": [
+          1920,
+          1080
+        ],
+        "ipcMs": 0.000431,
+        "msaaSamples": 1,
+        "nativeSize": [
+          1920,
+          1080
+        ],
+        "quality": "high",
+        "renderScale": 1.0,
+        "renderedFrames": 557,
+        "renderer": "Mesa Intel(R) Graphics (PTL)",
+        "reusedFrames": 0,
+        "targetFPS": 60,
+        "upload": {
+          "bytes": 231151016,
+          "completedJobs": 0,
+          "cpuMs": 106.45800499999999,
+          "jobs": 0,
+          "maxStepMs": 58.10364,
+          "pending": false,
+          "steps": 119
+        }
+      },
+      "id": "02-array-hall",
+      "pose": {
+        "orientation": [
+          0.20474699139595032,
+          -0.0,
+          0.0,
+          0.978814959526062
+        ],
+        "position": [
+          8.0,
+          2.0,
+          -33.0
+        ]
+      },
+      "verticalFovDegrees": 60,
+      "path": "/home/rick/workspace/hyprune/worlds/artifacts/lumen-reach/v2-routes/engine-02-array-hall.png"
+    },
+    {
+      "renderer": {
+        "captureMs": 0.011748,
+        "collisionTriangles": 3910,
+        "cpuPassMs": [
+          0.306755,
+          0.008286,
+          0.014205,
+          0.008518
+        ],
+        "cpuRenderMs": 0.33885,
+        "cpuUpdateMs": 0.14881,
+        "debug": false,
+        "deliveredFPS": 60.00462734045036,
+        "frameMs": 16.680488,
+        "gpuCaptureMs": 0.0,
+        "gpuEffectsMs": {
+          "bloom": 0.121302,
+          "msaa_resolve": 0.0,
+          "native_surfaces_geometry": 5.2e-05,
+          "output_markers": 0.267447,
+          "sky": 0.184322,
+          "upscale_sharpen": 0.293125,
+          "world_shading_shared": 2.752031
+        },
+        "gpuPassMs": [
+          2.936353,
+          5.2e-05,
+          0.414427,
+          0.267447
+        ],
+        "graphics": {
+          "alpha_haze": true,
+          "ambient_occlusion": true,
+          "anisotropy": 2,
+          "bloom": "low",
+          "bloom_strength": 0.12,
+          "dynamic_resolution": true,
+          "exposure": 1,
+          "fog": "height",
+          "fov": 60.0,
+          "msaa": 1,
+          "normal_maps": true,
+          "quality": "medium",
+          "reduced_motion": false,
+          "reflections": true,
+          "render_scale": "auto",
+          "sharpen": 0.35,
+          "sky": "environment",
+          "specular": true,
+          "target_fps": 60
+        },
+        "inFlight": 1,
+        "internalSize": [
+          1920,
+          1080
+        ],
+        "ipcMs": 0.0004,
+        "msaaSamples": 1,
+        "nativeSize": [
+          1920,
+          1080
+        ],
+        "quality": "high",
+        "renderScale": 1.0,
+        "renderedFrames": 635,
+        "renderer": "Mesa Intel(R) Graphics (PTL)",
+        "reusedFrames": 0,
+        "targetFPS": 60,
+        "upload": {
+          "bytes": 231151016,
+          "completedJobs": 0,
+          "cpuMs": 106.45800499999999,
+          "jobs": 0,
+          "maxStepMs": 58.10364,
+          "pending": false,
+          "steps": 119
+        }
+      },
+      "id": "02-array-hall-balcony",
+      "pose": {
+        "orientation": [
+          -0.09023118019104004,
+          -0.3735569417476654,
+          -0.03653879091143608,
+          0.9224849343299866
+        ],
+        "position": [
+          -3.5,
+          9.700000762939453,
+          -38.0
+        ]
+      },
+      "verticalFovDegrees": 60,
+      "path": "/home/rick/workspace/hyprune/worlds/artifacts/lumen-reach/v2-routes/engine-02-array-hall-balcony.png"
+    },
+    {
+      "renderer": {
+        "captureMs": 0.009657,
+        "collisionTriangles": 3910,
+        "cpuPassMs": [
+          0.359906,
+          0.009153,
+          0.017737,
+          0.01041
+        ],
+        "cpuRenderMs": 0.398687,
+        "cpuUpdateMs": 0.057395,
+        "debug": false,
+        "deliveredFPS": 59.99776250344295,
+        "frameMs": 16.642782,
+        "gpuCaptureMs": 0.0,
+        "gpuEffectsMs": {
+          "bloom": 0.122395,
+          "msaa_resolve": 0.0,
+          "native_surfaces_geometry": 0.0,
+          "output_markers": 0.272343,
+          "sky": 0.173333,
+          "upscale_sharpen": 0.28677,
+          "world_shading_shared": 2.915156
+        },
+        "gpuPassMs": [
+          3.088489,
+          0.0,
+          0.409165,
+          0.272343
+        ],
+        "graphics": {
+          "alpha_haze": true,
+          "ambient_occlusion": true,
+          "anisotropy": 2,
+          "bloom": "low",
+          "bloom_strength": 0.12,
+          "dynamic_resolution": true,
+          "exposure": 1,
+          "fog": "height",
+          "fov": 60.0,
+          "msaa": 1,
+          "normal_maps": true,
+          "quality": "medium",
+          "reduced_motion": false,
+          "reflections": true,
+          "render_scale": "auto",
+          "sharpen": 0.35,
+          "sky": "environment",
+          "specular": true,
+          "target_fps": 60
+        },
+        "inFlight": 1,
+        "internalSize": [
+          1920,
+          1080
+        ],
+        "ipcMs": 0.807108,
+        "msaaSamples": 1,
+        "nativeSize": [
+          1920,
+          1080
+        ],
+        "quality": "high",
+        "renderScale": 1.0,
+        "renderedFrames": 723,
+        "renderer": "Mesa Intel(R) Graphics (PTL)",
+        "reusedFrames": 0,
+        "targetFPS": 60,
+        "upload": {
+          "bytes": 231151016,
+          "completedJobs": 0,
+          "cpuMs": 106.45800499999999,
+          "jobs": 0,
+          "maxStepMs": 58.10364,
+          "pending": false,
+          "steps": 119
+        }
+      },
+      "id": "02-array-hall-tools",
+      "pose": {
+        "orientation": [
+          0.0022548662964254618,
+          0.9238634705543518,
+          -0.005443728994578123,
+          0.38267678022384644
+        ],
+        "position": [
+          14.0,
+          2.0999999046325684,
+          -58.0
+        ]
+      },
+      "verticalFovDegrees": 60,
+      "path": "/home/rick/workspace/hyprune/worlds/artifacts/lumen-reach/v2-routes/engine-02-array-hall-tools.png"
+    },
+    {
+      "renderer": {
+        "captureMs": 0.017845,
+        "collisionTriangles": 3910,
+        "cpuPassMs": [
+          0.217305,
+          0.003623,
+          0.009926,
+          0.005862
+        ],
+        "cpuRenderMs": 0.237591,
+        "cpuUpdateMs": 0.176195,
+        "debug": false,
+        "deliveredFPS": 60.00259091187557,
+        "frameMs": 16.645313,
+        "gpuCaptureMs": 0.0,
+        "gpuEffectsMs": {
+          "bloom": 0.12375,
+          "msaa_resolve": 0.0,
+          "native_surfaces_geometry": 0.0,
+          "output_markers": 0.275937,
+          "sky": 0.175677,
+          "upscale_sharpen": 0.295,
+          "world_shading_shared": 4.083906
+        },
+        "gpuPassMs": [
+          4.259583,
+          0.0,
+          0.41874999999999996,
+          0.275937
+        ],
+        "graphics": {
+          "alpha_haze": true,
+          "ambient_occlusion": true,
+          "anisotropy": 2,
+          "bloom": "low",
+          "bloom_strength": 0.12,
+          "dynamic_resolution": true,
+          "exposure": 1,
+          "fog": "height",
+          "fov": 60.0,
+          "msaa": 1,
+          "normal_maps": true,
+          "quality": "medium",
+          "reduced_motion": false,
+          "reflections": true,
+          "render_scale": "auto",
+          "sharpen": 0.35,
+          "sky": "environment",
+          "specular": true,
+          "target_fps": 60
+        },
+        "inFlight": 1,
+        "internalSize": [
+          1920,
+          1080
+        ],
+        "ipcMs": 0.000353,
+        "msaaSamples": 1,
+        "nativeSize": [
+          1920,
+          1080
+        ],
+        "quality": "high",
+        "renderScale": 1.0,
+        "renderedFrames": 795,
+        "renderer": "Mesa Intel(R) Graphics (PTL)",
+        "reusedFrames": 0,
+        "targetFPS": 60,
+        "upload": {
+          "bytes": 231151016,
+          "completedJobs": 0,
+          "cpuMs": 106.45800499999999,
+          "jobs": 0,
+          "maxStepMs": 58.10364,
+          "pending": false,
+          "steps": 119
+        }
+      },
+      "id": "03-rime-vault",
+      "pose": {
+        "orientation": [
+          0.08601707965135574,
+          -0.0706249549984932,
+          0.00611304584890604,
+          0.9937684535980225
+        ],
+        "position": [
+          36.0,
+          -4.299999713897705,
+          -78.0
+        ]
+      },
+      "verticalFovDegrees": 60,
+      "path": "/home/rick/workspace/hyprune/worlds/artifacts/lumen-reach/v2-routes/engine-03-rime-vault.png"
+    },
+    {
+      "renderer": {
+        "captureMs": 0.012382,
+        "collisionTriangles": 3910,
+        "cpuPassMs": [
+          0.252807,
+          0.005959,
+          0.011644,
+          0.006188
+        ],
+        "cpuRenderMs": 0.277736,
+        "cpuUpdateMs": 0.073507,
+        "debug": false,
+        "deliveredFPS": 59.999148912072684,
+        "frameMs": 16.643529,
+        "gpuCaptureMs": 5.2e-05,
+        "gpuEffectsMs": {
+          "bloom": 0.122812,
+          "msaa_resolve": 0.0,
+          "native_surfaces_geometry": 0.0,
+          "output_markers": 0.272812,
+          "sky": 0.173333,
+          "upscale_sharpen": 0.286718,
+          "world_shading_shared": 3.63427
+        },
+        "gpuPassMs": [
+          3.807603,
+          0.0,
+          0.40952999999999995,
+          0.272812
+        ],
+        "graphics": {
+          "alpha_haze": true,
+          "ambient_occlusion": true,
+          "anisotropy": 2,
+          "bloom": "low",
+          "bloom_strength": 0.12,
+          "dynamic_resolution": true,
+          "exposure": 1,
+          "fog": "height",
+          "fov": 60.0,
+          "msaa": 1,
+          "normal_maps": true,
+          "quality": "medium",
+          "reduced_motion": false,
+          "reflections": true,
+          "render_scale": "auto",
+          "sharpen": 0.35,
+          "sky": "environment",
+          "specular": true,
+          "target_fps": 60
+        },
+        "inFlight": 1,
+        "internalSize": [
+          1920,
+          1080
+        ],
+        "ipcMs": 0.740569,
+        "msaaSamples": 1,
+        "nativeSize": [
+          1920,
+          1080
+        ],
+        "quality": "high",
+        "renderScale": 1.0,
+        "renderedFrames": 878,
+        "renderer": "Mesa Intel(R) Graphics (PTL)",
+        "reusedFrames": 0,
+        "targetFPS": 60,
+        "upload": {
+          "bytes": 231151016,
+          "completedJobs": 0,
+          "cpuMs": 106.45800499999999,
+          "jobs": 0,
+          "maxStepMs": 58.10364,
+          "pending": false,
+          "steps": 119
+        }
+      },
+      "id": "03-rime-vault-tools",
+      "pose": {
+        "orientation": [
+          0.027124037966132164,
+          -0.40665921568870544,
+          0.012080027721822262,
+          0.9130973219871521
+        ],
+        "position": [
+          40.0,
+          -3.799999952316284,
+          -77.5
+        ]
+      },
+      "verticalFovDegrees": 60,
+      "path": "/home/rick/workspace/hyprune/worlds/artifacts/lumen-reach/v2-routes/engine-03-rime-vault-tools.png"
+    },
+    {
+      "renderer": {
+        "captureMs": 0.018587,
+        "collisionTriangles": 3910,
+        "cpuPassMs": [
+          0.276519,
+          0.006565,
+          0.013135,
+          0.007837
+        ],
+        "cpuRenderMs": 0.30529,
+        "cpuUpdateMs": 0.071194,
+        "debug": false,
+        "deliveredFPS": 59.99838166365139,
+        "frameMs": 16.332794,
+        "gpuCaptureMs": 0.0,
+        "gpuEffectsMs": {
+          "bloom": 0.122552,
+          "msaa_resolve": 0.0,
+          "native_surfaces_geometry": 0.0,
+          "output_markers": 0.268437,
+          "sky": 0.174062,
+          "upscale_sharpen": 0.292812,
+          "world_shading_shared": 4.171302
+        },
+        "gpuPassMs": [
+          4.345364,
+          0.0,
+          0.415364,
+          0.268437
+        ],
+        "graphics": {
+          "alpha_haze": true,
+          "ambient_occlusion": true,
+          "anisotropy": 2,
+          "bloom": "low",
+          "bloom_strength": 0.12,
+          "dynamic_resolution": true,
+          "exposure": 1,
+          "fog": "height",
+          "fov": 60.0,
+          "msaa": 1,
+          "normal_maps": true,
+          "quality": "medium",
+          "reduced_motion": false,
+          "reflections": true,
+          "render_scale": "auto",
+          "sharpen": 0.35,
+          "sky": "environment",
+          "specular": true,
+          "target_fps": 60
+        },
+        "inFlight": 1,
+        "internalSize": [
+          1920,
+          1080
+        ],
+        "ipcMs": 0.000477,
+        "msaaSamples": 1,
+        "nativeSize": [
+          1920,
+          1080
+        ],
+        "quality": "high",
+        "renderScale": 1.0,
+        "renderedFrames": 953,
+        "renderer": "Mesa Intel(R) Graphics (PTL)",
+        "reusedFrames": 0,
+        "targetFPS": 60,
+        "upload": {
+          "bytes": 231151016,
+          "completedJobs": 0,
+          "cpuMs": 106.45800499999999,
+          "jobs": 0,
+          "maxStepMs": 58.10364,
+          "pending": false,
+          "steps": 119
+        }
+      },
+      "id": "03-rime-vault-platform",
+      "pose": {
+        "orientation": [
+          0.008080958388745785,
+          -0.5531209707260132,
+          0.005365556571632624,
+          0.8330445289611816
+        ],
+        "position": [
+          28.5,
+          -0.29999983310699463,
+          -93.0
+        ]
+      },
+      "verticalFovDegrees": 60,
+      "path": "/home/rick/workspace/hyprune/worlds/artifacts/lumen-reach/v2-routes/engine-03-rime-vault-platform.png"
+    },
+    {
+      "renderer": {
+        "captureMs": 0.017281,
+        "collisionTriangles": 3910,
+        "cpuPassMs": [
+          0.22968,
+          0.00583,
+          0.010817,
+          0.006318
+        ],
+        "cpuRenderMs": 0.254309,
+        "cpuUpdateMs": 0.055464,
+        "debug": false,
+        "deliveredFPS": 60.00058413027692,
+        "frameMs": 16.665143,
+        "gpuCaptureMs": 0.0,
+        "gpuEffectsMs": {
+          "bloom": 1.204218,
+          "msaa_resolve": 0.0,
+          "native_surfaces_geometry": 5.2e-05,
+          "output_markers": 0.275,
+          "sky": 0.174843,
+          "upscale_sharpen": 0.286875,
+          "world_shading_shared": 4.07302
+        },
+        "gpuPassMs": [
+          4.247863,
+          5.2e-05,
+          1.491093,
+          0.275
+        ],
+        "graphics": {
+          "alpha_haze": true,
+          "ambient_occlusion": true,
+          "anisotropy": 2,
+          "bloom": "low",
+          "bloom_strength": 0.12,
+          "dynamic_resolution": true,
+          "exposure": 1,
+          "fog": "height",
+          "fov": 60.0,
+          "msaa": 1,
+          "normal_maps": true,
+          "quality": "medium",
+          "reduced_motion": false,
+          "reflections": true,
+          "render_scale": "auto",
+          "sharpen": 0.35,
+          "sky": "environment",
+          "specular": true,
+          "target_fps": 60
+        },
+        "inFlight": 1,
+        "internalSize": [
+          1920,
+          1080
+        ],
+        "ipcMs": 0.000412,
+        "msaaSamples": 1,
+        "nativeSize": [
+          1920,
+          1080
+        ],
+        "quality": "high",
+        "renderScale": 1.0,
+        "renderedFrames": 1029,
+        "renderer": "Mesa Intel(R) Graphics (PTL)",
+        "reusedFrames": 0,
+        "targetFPS": 60,
+        "upload": {
+          "bytes": 231151016,
+          "completedJobs": 0,
+          "cpuMs": 106.45800499999999,
+          "jobs": 0,
+          "maxStepMs": 58.10364,
+          "pending": false,
+          "steps": 119
+        }
+      },
+      "id": "04-signal-rise",
+      "pose": {
+        "orientation": [
+          0.08306252956390381,
+          -0.29618340730667114,
+          0.025864964351058006,
+          0.9511608481407166
+        ],
+        "position": [
+          38.0,
+          2.0999999046325684,
+          -119.0
+        ]
+      },
+      "verticalFovDegrees": 60,
+      "path": "/home/rick/workspace/hyprune/worlds/artifacts/lumen-reach/v2-routes/engine-04-signal-rise.png"
+    },
+    {
+      "renderer": {
+        "captureMs": 0.010705,
+        "collisionTriangles": 3910,
+        "cpuPassMs": [
+          0.212968,
+          0.004766,
+          0.008624,
+          0.004637
+        ],
+        "cpuRenderMs": 0.232072,
+        "cpuUpdateMs": 0.047364,
+        "debug": false,
+        "deliveredFPS": 59.96265915345207,
+        "frameMs": 16.717534,
+        "gpuCaptureMs": 0.0,
+        "gpuEffectsMs": {
+          "bloom": 0.13052,
+          "msaa_resolve": 0.0,
+          "native_surfaces_geometry": 0.0,
+          "output_markers": 0.269583,
+          "sky": 0.173593,
+          "upscale_sharpen": 0.311979,
+          "world_shading_shared": 4.435104
+        },
+        "gpuPassMs": [
+          4.608697,
+          0.0,
+          0.442499,
+          0.269583
+        ],
+        "graphics": {
+          "alpha_haze": true,
+          "ambient_occlusion": true,
+          "anisotropy": 2,
+          "bloom": "low",
+          "bloom_strength": 0.12,
+          "dynamic_resolution": true,
+          "exposure": 1,
+          "fog": "height",
+          "fov": 60.0,
+          "msaa": 1,
+          "normal_maps": true,
+          "quality": "medium",
+          "reduced_motion": false,
+          "reflections": true,
+          "render_scale": "auto",
+          "sharpen": 0.35,
+          "sky": "environment",
+          "specular": true,
+          "target_fps": 60
+        },
+        "inFlight": 1,
+        "internalSize": [
+          1920,
+          1080
+        ],
+        "ipcMs": 1.359406,
+        "msaaSamples": 1,
+        "nativeSize": [
+          1920,
+          1080
+        ],
+        "quality": "high",
+        "renderScale": 1.0,
+        "renderedFrames": 1107,
+        "renderer": "Mesa Intel(R) Graphics (PTL)",
+        "reusedFrames": 0,
+        "targetFPS": 60,
+        "upload": {
+          "bytes": 231151016,
+          "completedJobs": 0,
+          "cpuMs": 106.45800499999999,
+          "jobs": 0,
+          "maxStepMs": 58.10364,
+          "pending": false,
+          "steps": 119
+        }
+      },
+      "id": "04-signal-rise-bench",
+      "pose": {
+        "orientation": [
+          -0.01950492151081562,
+          -0.09851868450641632,
+          -0.0019313677912577987,
+          0.9949421882629395
+        ],
+        "position": [
+          40.0,
+          2.0999999046325684,
+          -118.0
+        ]
+      },
+      "verticalFovDegrees": 60,
+      "path": "/home/rick/workspace/hyprune/worlds/artifacts/lumen-reach/v2-routes/engine-04-signal-rise-bench.png"
+    },
+    {
+      "renderer": {
+        "captureMs": 0.006988,
+        "collisionTriangles": 3910,
+        "cpuPassMs": [
+          0.225214,
+          0.00476,
+          0.009271,
+          0.005688
+        ],
+        "cpuRenderMs": 0.246232,
+        "cpuUpdateMs": 0.16206,
+        "debug": false,
+        "deliveredFPS": 59.997768263013924,
+        "frameMs": 16.666002,
+        "gpuCaptureMs": 0.0,
+        "gpuEffectsMs": {
+          "bloom": 0.127187,
+          "msaa_resolve": 0.0,
+          "native_surfaces_geometry": 0.0,
+          "output_markers": 0.274427,
+          "sky": 0.180572,
+          "upscale_sharpen": 0.319687,
+          "world_shading_shared": 2.781927
+        },
+        "gpuPassMs": [
+          2.962499,
+          0.0,
+          0.446874,
+          0.274427
+        ],
+        "graphics": {
+          "alpha_haze": true,
+          "ambient_occlusion": true,
+          "anisotropy": 2,
+          "bloom": "low",
+          "bloom_strength": 0.12,
+          "dynamic_resolution": true,
+          "exposure": 1,
+          "fog": "height",
+          "fov": 60.0,
+          "msaa": 1,
+          "normal_maps": true,
+          "quality": "medium",
+          "reduced_motion": false,
+          "reflections": true,
+          "render_scale": "auto",
+          "sharpen": 0.35,
+          "sky": "environment",
+          "specular": true,
+          "target_fps": 60
+        },
+        "inFlight": 1,
+        "internalSize": [
+          1920,
+          1080
+        ],
+        "ipcMs": 0.730484,
+        "msaaSamples": 1,
+        "nativeSize": [
+          1920,
+          1080
+        ],
+        "quality": "high",
+        "renderScale": 1.0,
+        "renderedFrames": 1194,
+        "renderer": "Mesa Intel(R) Graphics (PTL)",
+        "reusedFrames": 0,
+        "targetFPS": 60,
+        "upload": {
+          "bytes": 231151016,
+          "completedJobs": 0,
+          "cpuMs": 106.45800499999999,
+          "jobs": 0,
+          "maxStepMs": 58.10364,
+          "pending": false,
+          "steps": 119
+        }
+      },
+      "id": "04-signal-rise-gantry",
+      "pose": {
+        "orientation": [
+          -0.0017370297573506832,
+          0.7337198257446289,
+          0.00187577900942415,
+          0.6794474124908447
+        ],
+        "position": [
+          77.0,
+          7.700000286102295,
+          -152.0
+        ]
+      },
+      "verticalFovDegrees": 60,
+      "path": "/home/rick/workspace/hyprune/worlds/artifacts/lumen-reach/v2-routes/engine-04-signal-rise-gantry.png"
+    },
+    {
+      "renderer": {
+        "captureMs": 0.013647,
+        "collisionTriangles": 3910,
+        "cpuPassMs": [
+          0.213099,
+          0.004229,
+          0.008744,
+          0.004944
+        ],
+        "cpuRenderMs": 0.23209,
+        "cpuUpdateMs": 0.044236,
+        "debug": false,
+        "deliveredFPS": 59.99740505223409,
+        "frameMs": 16.6123,
+        "gpuCaptureMs": 5.2e-05,
+        "gpuEffectsMs": {
+          "bloom": 0.121406,
+          "msaa_resolve": 0.0,
+          "native_surfaces_geometry": 5.2e-05,
+          "output_markers": 0.269635,
+          "sky": 0.175364,
+          "upscale_sharpen": 0.289635,
+          "world_shading_shared": 2.609947
+        },
+        "gpuPassMs": [
+          2.785311,
+          5.2e-05,
+          0.411041,
+          0.269635
+        ],
+        "graphics": {
+          "alpha_haze": true,
+          "ambient_occlusion": true,
+          "anisotropy": 2,
+          "bloom": "low",
+          "bloom_strength": 0.12,
+          "dynamic_resolution": true,
+          "exposure": 1,
+          "fog": "height",
+          "fov": 60.0,
+          "msaa": 1,
+          "normal_maps": true,
+          "quality": "medium",
+          "reduced_motion": false,
+          "reflections": true,
+          "render_scale": "auto",
+          "sharpen": 0.35,
+          "sky": "environment",
+          "specular": true,
+          "target_fps": 60
+        },
+        "inFlight": 1,
+        "internalSize": [
+          1920,
+          1080
+        ],
+        "ipcMs": 0.000398,
+        "msaaSamples": 1,
+        "nativeSize": [
+          1920,
+          1080
+        ],
+        "quality": "high",
+        "renderScale": 1.0,
+        "renderedFrames": 1278,
+        "renderer": "Mesa Intel(R) Graphics (PTL)",
+        "reusedFrames": 0,
+        "targetFPS": 60,
+        "upload": {
+          "bytes": 231151016,
+          "completedJobs": 0,
+          "cpuMs": 106.45800499999999,
+          "jobs": 0,
+          "maxStepMs": 58.10364,
+          "pending": false,
+          "steps": 119
+        }
+      },
+      "id": "01-sun-court-entry-fixtures",
+      "pose": {
+        "orientation": [
+          -0.022885948419570923,
+          0.32862186431884766,
+          0.007965702563524246,
+          0.9441506266593933
+        ],
+        "position": [
+          6.0,
+          1.7999999523162842,
+          -19.0
+        ]
+      },
+      "verticalFovDegrees": 60,
+      "path": "/home/rick/workspace/hyprune/worlds/artifacts/lumen-reach/v2-routes/engine-01-sun-court-entry-fixtures.png"
+    },
+    {
+      "renderer": {
+        "captureMs": 0.011666,
+        "collisionTriangles": 3910,
+        "cpuPassMs": [
+          0.238939,
+          0.005088,
+          0.011608,
+          0.007153
+        ],
+        "cpuRenderMs": 0.263791,
+        "cpuUpdateMs": 0.031774,
+        "debug": false,
+        "deliveredFPS": 59.99997180001325,
+        "frameMs": 16.680973,
+        "gpuCaptureMs": 0.0,
+        "gpuEffectsMs": {
+          "bloom": 0.119895,
+          "msaa_resolve": 0.0,
+          "native_surfaces_geometry": 0.0,
+          "output_markers": 0.27177,
+          "sky": 0.179531,
+          "upscale_sharpen": 0.28875,
+          "world_shading_shared": 1.24026
+        },
+        "gpuPassMs": [
+          1.419791,
+          0.0,
+          0.40864500000000004,
+          0.27177
+        ],
+        "graphics": {
+          "alpha_haze": true,
+          "ambient_occlusion": true,
+          "anisotropy": 2,
+          "bloom": "low",
+          "bloom_strength": 0.12,
+          "dynamic_resolution": true,
+          "exposure": 1,
+          "fog": "height",
+          "fov": 60.0,
+          "msaa": 1,
+          "normal_maps": true,
+          "quality": "medium",
+          "reduced_motion": false,
+          "reflections": true,
+          "render_scale": "auto",
+          "sharpen": 0.35,
+          "sky": "environment",
+          "specular": true,
+          "target_fps": 60
+        },
+        "inFlight": 1,
+        "internalSize": [
+          1920,
+          1080
+        ],
+        "ipcMs": 0.806237,
+        "msaaSamples": 1,
+        "nativeSize": [
+          1920,
+          1080
+        ],
+        "quality": "high",
+        "renderScale": 1.0,
+        "renderedFrames": 1358,
+        "renderer": "Mesa Intel(R) Graphics (PTL)",
+        "reusedFrames": 0,
+        "targetFPS": 60,
+        "upload": {
+          "bytes": 231151016,
+          "completedJobs": 0,
+          "cpuMs": 106.45800499999999,
+          "jobs": 0,
+          "maxStepMs": 58.10364,
+          "pending": false,
+          "steps": 119
+        }
+      },
+      "id": "02-array-hall-vista",
+      "pose": {
+        "orientation": [
+          0.15976570546627045,
+          -0.032850008457899094,
+          0.0053196195513010025,
+          0.9865939021110535
+        ],
+        "position": [
+          9.0,
+          2.0,
+          -49.0
+        ]
+      },
+      "verticalFovDegrees": 60,
+      "path": "/home/rick/workspace/hyprune/worlds/artifacts/lumen-reach/v2-routes/engine-02-array-hall-vista.png"
+    },
+    {
+      "renderer": {
+        "captureMs": 0.018398,
+        "collisionTriangles": 3910,
+        "cpuPassMs": [
+          0.24203,
+          0.00456,
+          0.011465,
+          0.007657
+        ],
+        "cpuRenderMs": 0.266983,
+        "cpuUpdateMs": 0.17696,
+        "debug": false,
+        "deliveredFPS": 60.00293282531795,
+        "frameMs": 16.670439,
+        "gpuCaptureMs": 0.0,
+        "gpuEffectsMs": {
+          "bloom": 0.116666,
+          "msaa_resolve": 0.0,
+          "native_surfaces_geometry": 0.0,
+          "output_markers": 0.27,
+          "sky": 0.177135,
+          "upscale_sharpen": 0.298645,
+          "world_shading_shared": 2.854375
+        },
+        "gpuPassMs": [
+          3.03151,
+          0.0,
+          0.415311,
+          0.27
+        ],
+        "graphics": {
+          "alpha_haze": true,
+          "ambient_occlusion": true,
+          "anisotropy": 2,
+          "bloom": "low",
+          "bloom_strength": 0.12,
+          "dynamic_resolution": true,
+          "exposure": 1,
+          "fog": "height",
+          "fov": 60.0,
+          "msaa": 1,
+          "normal_maps": true,
+          "quality": "medium",
+          "reduced_motion": false,
+          "reflections": true,
+          "render_scale": "auto",
+          "sharpen": 0.35,
+          "sky": "environment",
+          "specular": true,
+          "target_fps": 60
+        },
+        "inFlight": 1,
+        "internalSize": [
+          1920,
+          1080
+        ],
+        "ipcMs": 0.000653,
+        "msaaSamples": 1,
+        "nativeSize": [
+          1920,
+          1080
+        ],
+        "quality": "high",
+        "renderScale": 1.0,
+        "renderedFrames": 1433,
+        "renderer": "Mesa Intel(R) Graphics (PTL)",
+        "reusedFrames": 0,
+        "targetFPS": 60,
+        "upload": {
+          "bytes": 231151016,
+          "completedJobs": 0,
+          "cpuMs": 106.45800499999999,
+          "jobs": 0,
+          "maxStepMs": 58.10364,
+          "pending": false,
+          "steps": 119
+        }
+      },
+      "id": "03-rime-vault-services",
+      "pose": {
+        "orientation": [
+          0.19415283203125,
+          -0.3876602053642273,
+          0.08388812839984894,
+          0.8972107172012329
+        ],
+        "position": [
+          40.0,
+          -4.299999713897705,
+          -86.0
+        ]
+      },
+      "verticalFovDegrees": 60,
+      "path": "/home/rick/workspace/hyprune/worlds/artifacts/lumen-reach/v2-routes/engine-03-rime-vault-services.png"
+    },
+    {
+      "renderer": {
+        "captureMs": 0.019532,
+        "collisionTriangles": 3910,
+        "cpuPassMs": [
+          0.289199,
+          0.008346,
+          0.014906,
+          0.008836
+        ],
+        "cpuRenderMs": 0.32243,
+        "cpuUpdateMs": 0.056761,
+        "debug": false,
+        "deliveredFPS": 59.99606851762611,
+        "frameMs": 16.66279,
+        "gpuCaptureMs": 0.0,
+        "gpuEffectsMs": {
+          "bloom": 0.120156,
+          "msaa_resolve": 0.0,
+          "native_surfaces_geometry": 0.0,
+          "output_markers": 0.272239,
+          "sky": 0.170208,
+          "upscale_sharpen": 0.291145,
+          "world_shading_shared": 3.330208
+        },
+        "gpuPassMs": [
+          3.500416,
+          0.0,
+          0.41130099999999997,
+          0.272239
+        ],
+        "graphics": {
+          "alpha_haze": true,
+          "ambient_occlusion": true,
+          "anisotropy": 2,
+          "bloom": "low",
+          "bloom_strength": 0.12,
+          "dynamic_resolution": true,
+          "exposure": 1,
+          "fog": "height",
+          "fov": 60.0,
+          "msaa": 1,
+          "normal_maps": true,
+          "quality": "medium",
+          "reduced_motion": false,
+          "reflections": true,
+          "render_scale": "auto",
+          "sharpen": 0.35,
+          "sky": "environment",
+          "specular": true,
+          "target_fps": 60
+        },
+        "inFlight": 1,
+        "internalSize": [
+          1920,
+          1080
+        ],
+        "ipcMs": 0.000443,
+        "msaaSamples": 1,
+        "nativeSize": [
+          1920,
+          1080
+        ],
+        "quality": "high",
+        "renderScale": 1.0,
+        "renderedFrames": 1521,
+        "renderer": "Mesa Intel(R) Graphics (PTL)",
+        "reusedFrames": 0,
+        "targetFPS": 60,
+        "upload": {
+          "bytes": 231151016,
+          "completedJobs": 0,
+          "cpuMs": 106.45800499999999,
+          "jobs": 0,
+          "maxStepMs": 58.10364,
+          "pending": false,
+          "steps": 119
+        }
+      },
+      "id": "04-signal-rise-reflector",
+      "pose": {
+        "orientation": [
+          0.03462609648704529,
+          0.3580172657966614,
+          -0.01328727975487709,
+          0.9329780340194702
+        ],
+        "position": [
+          44.0,
+          9.0,
+          -139.0
+        ]
+      },
+      "verticalFovDegrees": 60,
+      "path": "/home/rick/workspace/hyprune/worlds/artifacts/lumen-reach/v2-routes/engine-04-signal-rise-reflector.png"
+    }
+  ],
+  "routeTraversal": {
+    "status": "PASS",
+    "nodes": 64,
+    "directedGraphTraversals": 126,
+    "alternateStairs": 14,
+    "traversed": [
+      {
+        "path": "arrival -> court-junction",
+        "end": [
+          1.0,
+          1.7000000476837158,
+          -2.0
+        ]
+      },
+      {
+        "path": "court-junction -> court-wall",
+        "end": [
+          8.0,
+          1.7000000476837158,
+          -12.0
+        ]
+      },
+      {
+        "path": "court-wall -> hall-entry",
+        "end": [
+          8.0,
+          1.7000000476837158,
+          -25.0
+        ]
+      },
+      {
+        "path": "hall-entry -> hall-arrival",
+        "end": [
+          8.0,
+          1.7000000476837158,
+          -33.0
+        ]
+      },
+      {
+        "path": "hall-arrival -> hall-center",
+        "end": [
+          8.0,
+          1.7000000476837158,
+          -46.0
+        ]
+      },
+      {
+        "path": "hall-center -> hall-exit",
+        "end": [
+          20.0,
+          1.7000000476837158,
+          -50.0
+        ]
+      },
+      {
+        "path": "hall-exit -> service-entry",
+        "end": [
+          30.0,
+          1.7000000476837158,
+          -50.0
+        ]
+      },
+      {
+        "path": "service-entry -> descent-top",
+        "end": [
+          30.0,
+          1.7000000476837158,
+          -52.0
+        ]
+      },
+      {
+        "path": "descent-top -> descent-bottom",
+        "end": [
+          30.0,
+          -4.289914608001709,
+          -74.0031967163086
+        ]
+      },
+      {
+        "path": "descent-bottom -> vault-door",
+        "end": [
+          32.0,
+          -4.289916038513184,
+          -74.0031967163086
+        ]
+      },
+      {
+        "path": "vault-door -> vault-arrival",
+        "end": [
+          38.0,
+          -4.299999713897705,
+          -79.0
+        ]
+      },
+      {
+        "path": "vault-arrival -> vault-center",
+        "end": [
+          38.0,
+          -4.299999713897705,
+          -89.0
+        ]
+      },
+      {
+        "path": "vault-center -> vault-exit",
+        "end": [
+          48.0,
+          -4.299999713897705,
+          -98.0
+        ]
+      },
+      {
+        "path": "vault-exit -> rise-entry",
+        "end": [
+          54.0,
+          -4.291412353515625,
+          -99.99742126464844
+        ]
+      },
+      {
+        "path": "rise-entry -> rise-ramp-top",
+        "end": [
+          54.0,
+          1.7000000476837158,
+          -124.0
+        ]
+      },
+      {
+        "path": "rise-ramp-top -> rise-arrival",
+        "end": [
+          54.0,
+          1.7095996141433716,
+          -124.99950408935547
+        ]
+      },
+      {
+        "path": "rise-arrival -> rise-ring",
+        "end": [
+          57.0,
+          1.7100000381469727,
+          -132.0
+        ]
+      },
+      {
+        "path": "rise-ring -> rise-wall",
+        "end": [
+          63.0,
+          1.7100000381469727,
+          -136.0
+        ]
+      },
+      {
+        "path": "rise-wall -> fortress-ramp-top",
+        "end": [
+          63.0,
+          4.100000381469727,
+          -146.0
+        ]
+      },
+      {
+        "path": "fortress-ramp-top -> fortress-room",
+        "end": [
+          63.0,
+          4.100000381469727,
+          -152.0
+        ]
+      },
+      {
+        "path": "fortress-room -> fortress-ramp-top",
+        "end": [
+          63.0,
+          4.100000381469727,
+          -146.0
+        ]
+      },
+      {
+        "path": "fortress-ramp-top -> rise-wall",
+        "end": [
+          63.0,
+          1.7100000381469727,
+          -136.0
+        ]
+      },
+      {
+        "path": "rise-wall -> rise-ring",
+        "end": [
+          57.0,
+          1.7100000381469727,
+          -132.0
+        ]
+      },
+      {
+        "path": "rise-ring -> diagnostics-road",
+        "end": [
+          74.0,
+          1.7000000476837158,
+          -128.0
+        ]
+      },
+      {
+        "path": "diagnostics-road -> diagnostics-base",
+        "end": [
+          76.5,
+          1.7057121992111206,
+          -129.9988555908203
+        ]
+      },
+      {
+        "path": "diagnostics-base -> diagnostics-platform",
+        "end": [
+          76.5,
+          4.100000381469727,
+          -142.0
+        ]
+      },
+      {
+        "path": "diagnostics-platform -> diagnostics-base",
+        "end": [
+          76.5,
+          1.7057121992111206,
+          -129.9988555908203
+        ]
+      },
+      {
+        "path": "diagnostics-base -> diagnostics-road",
+        "end": [
+          74.0,
+          1.7000000476837158,
+          -128.0
+        ]
+      },
+      {
+        "path": "diagnostics-road -> rise-ring",
+        "end": [
+          57.0,
+          1.7100000381469727,
+          -132.0
+        ]
+      },
+      {
+        "path": "rise-ring -> rise-arrival",
+        "end": [
+          54.0,
+          1.7095996141433716,
+          -124.99950408935547
+        ]
+      },
+      {
+        "path": "rise-arrival -> dish-road",
+        "end": [
+          37.0,
+          1.7000000476837158,
+          -126.0
+        ]
+      },
+      {
+        "path": "dish-road -> dish-ramp-base",
+        "end": [
+          31.5,
+          1.7085367441177368,
+          -127.9972152709961
+        ]
+      },
+      {
+        "path": "dish-ramp-base -> dish-platform",
+        "end": [
+          31.5,
+          5.700000286102295,
+          -144.0
+        ]
+      },
+      {
+        "path": "dish-platform -> dish-ramp-base",
+        "end": [
+          31.5,
+          1.7086740732192993,
+          -127.99776458740234
+        ]
+      },
+      {
+        "path": "dish-ramp-base -> dish-road",
+        "end": [
+          37.0,
+          1.7000000476837158,
+          -126.0
+        ]
+      },
+      {
+        "path": "dish-road -> rise-arrival",
+        "end": [
+          54.0,
+          1.7095996141433716,
+          -124.99950408935547
+        ]
+      },
+      {
+        "path": "rise-arrival -> gantry-road",
+        "end": [
+          63.0,
+          1.7000000476837158,
+          -124.0
+        ]
+      },
+      {
+        "path": "gantry-road -> gantry-south",
+        "end": [
+          76.0,
+          1.7000000476837158,
+          -113.0
+        ]
+      },
+      {
+        "path": "gantry-south -> gantry-base",
+        "end": [
+          80.5,
+          1.7086396217346191,
+          -113.99762725830078
+        ]
+      },
+      {
+        "path": "gantry-base -> gantry-top",
+        "end": [
+          80.5,
+          7.700000286102295,
+          -138.0
+        ]
+      },
+      {
+        "path": "gantry-top -> gantry-east",
+        "end": [
+          80.5,
+          7.700000286102295,
+          -152.0
+        ]
+      },
+      {
+        "path": "gantry-east -> gantry-west",
+        "end": [
+          44.0,
+          7.700000286102295,
+          -152.0
+        ]
+      },
+      {
+        "path": "gantry-west -> gantry-east",
+        "end": [
+          80.5,
+          7.700000286102295,
+          -152.0
+        ]
+      },
+      {
+        "path": "gantry-east -> gantry-top",
+        "end": [
+          80.5,
+          7.700000286102295,
+          -138.0
+        ]
+      },
+      {
+        "path": "gantry-top -> gantry-base",
+        "end": [
+          80.5,
+          1.7085881233215332,
+          -113.99742126464844
+        ]
+      },
+      {
+        "path": "gantry-base -> gantry-south",
+        "end": [
+          76.0,
+          1.7000000476837158,
+          -113.0
+        ]
+      },
+      {
+        "path": "gantry-south -> gantry-road",
+        "end": [
+          63.0,
+          1.7000000476837158,
+          -124.0
+        ]
+      },
+      {
+        "path": "gantry-road -> rise-arrival",
+        "end": [
+          54.0,
+          1.7095996141433716,
+          -124.99950408935547
+        ]
+      },
+      {
+        "path": "rise-arrival -> rise-ramp-top",
+        "end": [
+          54.0,
+          1.7000000476837158,
+          -124.0
+        ]
+      },
+      {
+        "path": "rise-ramp-top -> rise-entry",
+        "end": [
+          54.0,
+          -4.291326522827148,
+          -99.99776458740234
+        ]
+      },
+      {
+        "path": "rise-entry -> vault-exit",
+        "end": [
+          48.0,
+          -4.299999713897705,
+          -98.0
+        ]
+      },
+      {
+        "path": "vault-exit -> vault-center",
+        "end": [
+          38.0,
+          -4.299999713897705,
+          -89.0
+        ]
+      },
+      {
+        "path": "vault-center -> vault-arrival",
+        "end": [
+          38.0,
+          -4.299999713897705,
+          -79.0
+        ]
+      },
+      {
+        "path": "vault-arrival -> vault-door",
+        "end": [
+          32.0,
+          -4.289878845214844,
+          -74.00305938720703
+        ]
+      },
+      {
+        "path": "vault-door -> vault-maintenance-base",
+        "end": [
+          28.5,
+          -4.29139518737793,
+          -75.99748992919922
+        ]
+      },
+      {
+        "path": "vault-maintenance-base -> vault-maintenance",
+        "end": [
+          28.5,
+          -0.299999862909317,
+          -92.0
+        ]
+      },
+      {
+        "path": "vault-maintenance -> vault-platform",
+        "end": [
+          28.5,
+          -0.29999983310699463,
+          -94.0
+        ]
+      },
+      {
+        "path": "vault-platform -> vault-maintenance",
+        "end": [
+          28.5,
+          -0.299999862909317,
+          -92.0
+        ]
+      },
+      {
+        "path": "vault-maintenance -> vault-maintenance-base",
+        "end": [
+          28.5,
+          -4.291378021240234,
+          -75.99755859375
+        ]
+      },
+      {
+        "path": "vault-maintenance-base -> vault-door",
+        "end": [
+          32.0,
+          -4.289933681488037,
+          -74.00326538085938
+        ]
+      },
+      {
+        "path": "vault-door -> descent-bottom",
+        "end": [
+          30.0,
+          -4.289821147918701,
+          -74.00285339355469
+        ]
+      },
+      {
+        "path": "descent-bottom -> descent-top",
+        "end": [
+          30.0,
+          1.7000000476837158,
+          -52.0
+        ]
+      },
+      {
+        "path": "descent-top -> service-entry",
+        "end": [
+          30.0,
+          1.7000000476837158,
+          -50.0
+        ]
+      },
+      {
+        "path": "service-entry -> hall-exit",
+        "end": [
+          20.0,
+          1.7000000476837158,
+          -50.0
+        ]
+      },
+      {
+        "path": "hall-exit -> hall-center",
+        "end": [
+          8.0,
+          1.7000000476837158,
+          -46.0
+        ]
+      },
+      {
+        "path": "hall-center -> hall-arrival",
+        "end": [
+          8.0,
+          1.7000000476837158,
+          -33.0
+        ]
+      },
+      {
+        "path": "hall-arrival -> hall-annex-entry",
+        "end": [
+          -10.5,
+          1.7000000476837158,
+          -36.0
+        ]
+      },
+      {
+        "path": "hall-annex-entry -> hall-ramp-base",
+        "end": [
+          -10.5,
+          1.7086739540100098,
+          -39.997764587402344
+        ]
+      },
+      {
+        "path": "hall-ramp-base -> hall-balcony",
+        "end": [
+          -10.5,
+          5.700000286102295,
+          -56.0
+        ]
+      },
+      {
+        "path": "hall-balcony -> hall-balcony-turn",
+        "end": [
+          -10.5,
+          5.700000286102295,
+          -59.20000076293945
+        ]
+      },
+      {
+        "path": "hall-balcony-turn -> hall-upper-door",
+        "end": [
+          -3.5,
+          5.699999809265137,
+          -59.20000076293945
+        ]
+      },
+      {
+        "path": "hall-upper-door -> hall-upper-base",
+        "end": [
+          -3.5,
+          5.70860481262207,
+          -56.00251007080078
+        ]
+      },
+      {
+        "path": "hall-upper-base -> hall-upper",
+        "end": [
+          -3.5,
+          9.700000762939453,
+          -40.0
+        ]
+      },
+      {
+        "path": "hall-upper -> hall-upper-base",
+        "end": [
+          -3.5,
+          5.708673477172852,
+          -56.002235412597656
+        ]
+      },
+      {
+        "path": "hall-upper-base -> hall-upper-door",
+        "end": [
+          -3.5,
+          5.700000286102295,
+          -59.20000076293945
+        ]
+      },
+      {
+        "path": "hall-upper-door -> hall-balcony-turn",
+        "end": [
+          -10.5,
+          5.699999809265137,
+          -59.20000076293945
+        ]
+      },
+      {
+        "path": "hall-balcony-turn -> hall-balcony",
+        "end": [
+          -10.5,
+          5.700000286102295,
+          -56.0
+        ]
+      },
+      {
+        "path": "hall-balcony -> hall-ramp-base",
+        "end": [
+          -10.5,
+          1.7086739540100098,
+          -39.997764587402344
+        ]
+      },
+      {
+        "path": "hall-ramp-base -> hall-annex-entry",
+        "end": [
+          -10.5,
+          1.7000000476837158,
+          -36.0
+        ]
+      },
+      {
+        "path": "hall-annex-entry -> hall-arrival",
+        "end": [
+          8.0,
+          1.7000000476837158,
+          -33.0
+        ]
+      },
+      {
+        "path": "hall-arrival -> hall-entry",
+        "end": [
+          8.0,
+          1.7000000476837158,
+          -25.0
+        ]
+      },
+      {
+        "path": "hall-entry -> court-wall",
+        "end": [
+          8.0,
+          1.7000000476837158,
+          -12.0
+        ]
+      },
+      {
+        "path": "court-wall -> court-junction",
+        "end": [
+          1.0,
+          1.7000000476837158,
+          -2.0
+        ]
+      },
+      {
+        "path": "court-junction -> globe-road",
+        "end": [
+          1.0,
+          1.7000000476837158,
+          2.0
+        ]
+      },
+      {
+        "path": "globe-road -> globe-approach",
+        "end": [
+          -6.0,
+          1.7000000476837158,
+          2.0
+        ]
+      },
+      {
+        "path": "globe-approach -> globe-ramp",
+        "end": [
+          -6.0,
+          1.705644130706787,
+          0.001485649961978197
+        ]
+      },
+      {
+        "path": "globe-ramp -> globe-terrace",
+        "end": [
+          -6.0,
+          2.9000000953674316,
+          -6.0
+        ]
+      },
+      {
+        "path": "globe-terrace -> globe-platform",
+        "end": [
+          -6.0,
+          2.9000000953674316,
+          -7.0
+        ]
+      },
+      {
+        "path": "globe-platform -> globe-terrace",
+        "end": [
+          -6.0,
+          2.9000000953674316,
+          -6.0
+        ]
+      },
+      {
+        "path": "globe-terrace -> globe-ramp",
+        "end": [
+          -6.0,
+          1.7056208848953247,
+          0.0016022108029574156
+        ]
+      },
+      {
+        "path": "globe-ramp -> globe-approach",
+        "end": [
+          -6.0,
+          1.7000000476837158,
+          2.0
+        ]
+      },
+      {
+        "path": "globe-approach -> globe-road",
+        "end": [
+          1.0,
+          1.7000000476837158,
+          2.0
+        ]
+      },
+      {
+        "path": "globe-road -> court-junction",
+        "end": [
+          1.0,
+          1.7000000476837158,
+          -2.0
+        ]
+      },
+      {
+        "path": "court-junction -> arrival",
+        "end": [
+          -8.0,
+          1.7000000476837158,
+          12.0
+        ]
+      },
+      {
+        "path": "arrival -> lookout-south",
+        "end": [
+          -8.0,
+          1.7000000476837158,
+          14.5
+        ]
+      },
+      {
+        "path": "lookout-south -> lookout-west",
+        "end": [
+          -21.5,
+          1.7000000476837158,
+          14.5
+        ]
+      },
+      {
+        "path": "lookout-west -> lookout-base",
+        "end": [
+          -21.5,
+          1.7086231708526611,
+          10.002439498901367
+        ]
+      },
+      {
+        "path": "lookout-base -> lookout",
+        "end": [
+          -21.5,
+          5.700000286102295,
+          -6.0
+        ]
+      },
+      {
+        "path": "lookout -> cascade-turn",
+        "end": [
+          -21.5,
+          5.700000286102295,
+          -14.0
+        ]
+      },
+      {
+        "path": "cascade-turn -> cascade-bridge",
+        "end": [
+          -31.0,
+          5.700000286102295,
+          -14.0
+        ]
+      },
+      {
+        "path": "cascade-bridge -> cascade-turn",
+        "end": [
+          -21.5,
+          5.700000286102295,
+          -14.0
+        ]
+      },
+      {
+        "path": "cascade-turn -> lookout",
+        "end": [
+          -21.5,
+          5.700000286102295,
+          -6.0
+        ]
+      },
+      {
+        "path": "lookout -> roof-lower",
+        "end": [
+          -21.5,
+          5.708621025085449,
+          -23.9975528717041
+        ]
+      },
+      {
+        "path": "roof-lower -> roof-switchback",
+        "end": [
+          -21.5,
+          9.700000762939453,
+          -40.0
+        ]
+      },
+      {
+        "path": "roof-switchback -> roof-turn",
+        "end": [
+          -16.5,
+          9.700000762939453,
+          -42.0
+        ]
+      },
+      {
+        "path": "roof-turn -> roof-return",
+        "end": [
+          -16.5,
+          9.708551406860352,
+          -40.002723693847656
+        ]
+      },
+      {
+        "path": "roof-return -> roof-upper",
+        "end": [
+          -16.5,
+          13.700000762939453,
+          -24.0
+        ]
+      },
+      {
+        "path": "roof-upper -> roof-start-west",
+        "end": [
+          -16.5,
+          13.699699401855469,
+          -20.0
+        ]
+      },
+      {
+        "path": "roof-start-west -> roof-start",
+        "end": [
+          -11.699999809265137,
+          13.708673477172852,
+          -19.997758865356445
+        ]
+      },
+      {
+        "path": "roof-start -> roof-final",
+        "end": [
+          -11.699999809265137,
+          17.69999885559082,
+          -36.0
+        ]
+      },
+      {
+        "path": "roof-final -> roof-bridge",
+        "end": [
+          -5.0,
+          17.69999885559082,
+          -36.0
+        ]
+      },
+      {
+        "path": "roof-bridge -> rooftop",
+        "end": [
+          -5.0,
+          17.69999885559082,
+          -24.0
+        ]
+      },
+      {
+        "path": "rooftop -> roof-bridge",
+        "end": [
+          -5.0,
+          17.69999885559082,
+          -36.0
+        ]
+      },
+      {
+        "path": "roof-bridge -> roof-final",
+        "end": [
+          -11.699999809265137,
+          17.69999885559082,
+          -36.0
+        ]
+      },
+      {
+        "path": "roof-final -> roof-start",
+        "end": [
+          -11.699999809265137,
+          13.708656311035156,
+          -19.997690200805664
+        ]
+      },
+      {
+        "path": "roof-start -> roof-start-west",
+        "end": [
+          -16.5,
+          13.699623107910156,
+          -19.999969482421875
+        ]
+      },
+      {
+        "path": "roof-start-west -> roof-upper",
+        "end": [
+          -16.5,
+          13.700000762939453,
+          -24.0
+        ]
+      },
+      {
+        "path": "roof-upper -> roof-return",
+        "end": [
+          -16.5,
+          9.708585739135742,
+          -40.002586364746094
+        ]
+      },
+      {
+        "path": "roof-return -> roof-turn",
+        "end": [
+          -16.5,
+          9.700000762939453,
+          -42.0
+        ]
+      },
+      {
+        "path": "roof-turn -> roof-switchback",
+        "end": [
+          -21.5,
+          9.700000762939453,
+          -40.0
+        ]
+      },
+      {
+        "path": "roof-switchback -> roof-lower",
+        "end": [
+          -21.5,
+          5.708552360534668,
+          -23.997278213500977
+        ]
+      },
+      {
+        "path": "roof-lower -> lookout",
+        "end": [
+          -21.5,
+          5.700000286102295,
+          -6.0
+        ]
+      },
+      {
+        "path": "lookout -> lookout-base",
+        "end": [
+          -21.5,
+          1.7086575031280518,
+          10.002302169799805
+        ]
+      },
+      {
+        "path": "lookout-base -> lookout-west",
+        "end": [
+          -21.5,
+          1.7000000476837158,
+          14.5
+        ]
+      },
+      {
+        "path": "lookout-west -> lookout-south",
+        "end": [
+          -8.0,
+          1.7000000476837158,
+          14.5
+        ]
+      },
+      {
+        "path": "lookout-south -> arrival",
+        "end": [
+          -8.0,
+          1.7000000476837158,
+          12.0
+        ]
+      },
+      {
+        "path": "globe-approach",
+        "end": [
+          -3.1500000953674316,
+          2.9000000953674316,
+          -6.0
+        ]
+      },
+      {
+        "path": "lookout-ascent",
+        "end": [
+          -19.149999618530273,
+          5.700000286102295,
+          -6.0
+        ]
+      },
+      {
+        "path": "roof-ascent-lower",
+        "end": [
+          -19.149999618530273,
+          9.700000762939453,
+          -40.0
+        ]
+      },
+      {
+        "path": "roof-ascent-upper",
+        "end": [
+          -14.149999618530273,
+          13.700000762939453,
+          -24.0
+        ]
+      },
+      {
+        "path": "roof-final-approach",
+        "end": [
+          -9.350000381469727,
+          17.69999885559082,
+          -36.0
+        ]
+      },
+      {
+        "path": "hall-balcony-ascent",
+        "end": [
+          -8.149999618530273,
+          5.699999809265137,
+          -56.0
+        ]
+      },
+      {
+        "path": "hall-upper-ascent",
+        "end": [
+          -1.149999976158142,
+          9.700000762939453,
+          -40.0
+        ]
+      },
+      {
+        "path": "service-descent",
+        "end": [
+          33.849998474121094,
+          -4.289914131164551,
+          -74.0031967163086
+        ]
+      },
+      {
+        "path": "vault-maintenance-ascent",
+        "end": [
+          30.850000381469727,
+          -0.299999862909317,
+          -92.0
+        ]
+      },
+      {
+        "path": "snow-service-ascent",
+        "end": [
+          57.849998474121094,
+          1.7000000476837158,
+          -124.0
+        ]
+      },
+      {
+        "path": "fortress-gate-approach",
+        "end": [
+          66.8499984741211,
+          4.100000381469727,
+          -146.0
+        ]
+      },
+      {
+        "path": "diagnostics-platform-ascent",
+        "end": [
+          78.8499984741211,
+          4.100000381469727,
+          -142.0
+        ]
+      },
+      {
+        "path": "dish-service-ascent",
+        "end": [
+          33.849998474121094,
+          5.700000286102295,
+          -144.0
+        ]
+      },
+      {
+        "path": "east-gantry-ascent",
+        "end": [
+          82.8499984741211,
+          7.700000286102295,
+          -138.0
+        ]
+      }
+    ]
+  },
+  "nestedDrmClients": [
+    {
+      "drm-driver": "xe",
+      "drm-client-id": "6404",
+      "drm-pdev": "0000:00:02.0",
+      "drm-total-system": "0",
+      "drm-shared-system": "0",
+      "drm-active-system": "0",
+      "drm-resident-system": "0",
+      "drm-purgeable-system": "0",
+      "drm-total-gtt": "0",
+      "drm-shared-gtt": "0",
+      "drm-active-gtt": "0",
+      "drm-resident-gtt": "0",
+      "drm-total-stolen": "0",
+      "drm-shared-stolen": "0",
+      "drm-active-stolen": "0",
+      "drm-resident-stolen": "0",
+      "drm-cycles-rcs": "0",
+      "drm-total-cycles-rcs": "2457915472091",
+      "drm-cycles-vcs": "0",
+      "drm-total-cycles-vcs": "2457915472091",
+      "drm-cycles-vecs": "0",
+      "drm-total-cycles-vecs": "2457915472091",
+      "drm-cycles-bcs": "0",
+      "drm-total-cycles-bcs": "2457915472091",
+      "drm-cycles-ccs": "0",
+      "drm-total-cycles-ccs": "2457915472091"
+    },
+    {
+      "drm-driver": "xe",
+      "drm-client-id": "6405",
+      "drm-pdev": "0000:00:02.0",
+      "drm-total-system": "0",
+      "drm-shared-system": "0",
+      "drm-active-system": "0",
+      "drm-resident-system": "0",
+      "drm-purgeable-system": "0",
+      "drm-total-gtt": "633656 KiB",
+      "drm-shared-gtt": "52 MiB",
+      "drm-active-gtt": "0",
+      "drm-resident-gtt": "633656 KiB",
+      "drm-total-stolen": "0",
+      "drm-shared-stolen": "0",
+      "drm-active-stolen": "0",
+      "drm-resident-stolen": "0",
+      "drm-cycles-rcs": "878325484",
+      "drm-total-cycles-rcs": "2457915474673",
+      "drm-cycles-vcs": "0",
+      "drm-total-cycles-vcs": "2457915474673",
+      "drm-cycles-vecs": "0",
+      "drm-total-cycles-vecs": "2457915474673",
+      "drm-cycles-bcs": "259",
+      "drm-total-cycles-bcs": "2457915474673",
+      "drm-cycles-ccs": "238",
+      "drm-total-cycles-ccs": "2457915474673"
+    },
+    {
+      "drm-driver": "xe",
+      "drm-client-id": "6408",
+      "drm-pdev": "0000:00:02.0",
+      "drm-total-system": "0",
+      "drm-shared-system": "0",
+      "drm-active-system": "0",
+      "drm-resident-system": "0",
+      "drm-purgeable-system": "0",
+      "drm-total-gtt": "0",
+      "drm-shared-gtt": "0",
+      "drm-active-gtt": "0",
+      "drm-resident-gtt": "0",
+      "drm-total-stolen": "0",
+      "drm-shared-stolen": "0",
+      "drm-active-stolen": "0",
+      "drm-resident-stolen": "0",
+      "drm-cycles-rcs": "0",
+      "drm-total-cycles-rcs": "2457915480487",
+      "drm-cycles-vcs": "0",
+      "drm-total-cycles-vcs": "2457915480487",
+      "drm-cycles-vecs": "0",
+      "drm-total-cycles-vecs": "2457915480487",
+      "drm-cycles-bcs": "0",
+      "drm-total-cycles-bcs": "2457915480487",
+      "drm-cycles-ccs": "0",
+      "drm-total-cycles-ccs": "2457915480487"
+    }
+  ],
+  "status": "PASS",
+  "checks": [
+    "package load",
+    "real spawn walking",
+    "matching 60 degree views",
+    "clean nested exit"
+  ]
+}

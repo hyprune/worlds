@@ -1,0 +1,80 @@
+{
+  "preset": "Medium",
+  "nativeOutput": [
+    3840,
+    2160
+  ],
+  "renderer": "Mesa Intel(R) Graphics (PTL)",
+  "scope": "30 live IPC samples per stationary home view after settling; submission-rate/GPU observations, not a whole-route FPS guarantee",
+  "views": [
+    {
+      "home": "01-sun-court",
+      "samples": 30,
+      "elapsedSeconds": 2.856,
+      "renderedFramesPerSecond": 59.88,
+      "medianGpuPassSumMs": 8.697,
+      "renderScales": [
+        0.4375
+      ],
+      "internalSizes": [
+        [
+          1680,
+          945
+        ]
+      ]
+    },
+    {
+      "home": "02-array-hall",
+      "samples": 30,
+      "elapsedSeconds": 2.853,
+      "renderedFramesPerSecond": 59.94,
+      "medianGpuPassSumMs": 7.018,
+      "renderScales": [
+        0.5
+      ],
+      "internalSizes": [
+        [
+          1920,
+          1080
+        ]
+      ]
+    },
+    {
+      "home": "03-rime-vault",
+      "samples": 30,
+      "elapsedSeconds": 2.868,
+      "renderedFramesPerSecond": 60.31,
+      "medianGpuPassSumMs": 8.054,
+      "renderScales": [
+        0.5
+      ],
+      "internalSizes": [
+        [
+          1920,
+          1080
+        ]
+      ]
+    },
+    {
+      "home": "04-signal-rise",
+      "samples": 30,
+      "elapsedSeconds": 2.847,
+      "renderedFramesPerSecond": 60.06,
+      "medianGpuPassSumMs": 6.892,
+      "renderScales": [
+        0.5,
+        0.5625
+      ],
+      "internalSizes": [
+        [
+          1920,
+          1080
+        ],
+        [
+          2160,
+          1215
+        ]
+      ]
+    }
+  ]
+}

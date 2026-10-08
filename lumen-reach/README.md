@@ -71,8 +71,9 @@ samplers clamp and filter linearly at the base level. Generated PBR tiles use
 for captured applications. See the final render review and reports for the
 measured differences between Cycles, the engine and the owner's concepts.
 
-The delivered tour, local archive, all four milestone commits and exact measured
-figures are indexed in [reports/final-report.md](reports/final-report.md). The
+The delivered tour, local archive and measured figures are indexed in
+[reports/final-report.md](reports/final-report.md). The original milestone
+delivery remains in [reports/delivery-0.4.0.md](reports/delivery-0.4.0.md). The
 primary-wall capture requires core commit d20d7fe or later: this corrects sampling
 of client buffers with no mip chain. `--diagnose` is a short real four-wall check;
 run it in a fresh locked session separately from the complete route audit.
@@ -90,7 +91,9 @@ python3 tools/check-lumen-session.py --release-review
 This captures 4K stills and per-home Medium/iGPU timing samples, traverses every
 route and alternate stair, then records a 60–90 second live-app tour at 1080p.
 The script uses core's effective Medium preset when available and records the
-loaded plugin hash. Tour encoding happens in a unique `/tmp/lumen-tour-v2-*`
+loaded plugin hash. The current tour uses shell protocol 0.7, explicitly returns
+home applications to workspace composites and checks that the HUD stays live.
+Tour encoding happens in a unique `/tmp/lumen-tour-v2-*`
 directory before moving the finished MP4 and JSON into artifacts. Gallery files
 are copied only after review; its autocommit service is never controlled.
 

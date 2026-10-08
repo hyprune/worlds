@@ -1,69 +1,72 @@
-# Lumen Reach render review
+# Lumen Reach 0.5.0 render review
 
-The final four-home package is reviewed in core's real nested engine. Twelve
-ungraded engine stills share the Cycles cameras and 60° vertical FOV. The owner
-art is a composition and mood reference; it is not a camera-matched render.
-Run `python3 tools/compare-lumen.py` to produce the local three-column review
-at `artifacts/lumen-reach/render-review.html`, with links to full raw captures.
+The owner’s four concepts establish composition, material density and mood.
+The delivery keeps the original twelve inspection poses and adds four close
+views for the entrance fixtures, hall vista, vault services and reflector.
+Final raw engine captures are in `artifacts/lumen-reach/v2-4k/`, taken with
+core’s isolated nested harness under the shared lock at the effective Medium
+preset. Output is native 3840×2160; internal dynamic render scale is recorded
+in the report. The matched Cycles cameras use the same pose and 60° vertical
+FOV. The concept artwork itself is not camera matched.
 
-Sun Court keeps a dominant framed workspace facade, foreground canvas work
-shelter, a raised armillary terrace, red foliage, wet paving rails and a mountain
-watershed panorama. The stairs, west lookout, expansion bridge and rooftop
-shelter are usable destinations. The engine is cooler and less softly lit than
-Cycles; the concrete texture and large clear screen approach stay legible.
+Run `python3 tools/compare-lumen.py` for
+`artifacts/lumen-reach/render-review.html`: concept, Cycles and engine side by
+side, with raw images linked. The engine captures have no grading, retouching
+or compositing. Comparison thumbnails only resize images for review.
 
-Array Hall keeps a tall ribbed atrium, hanging workspace wall, ceiling ring,
-lecterns, banners, server blocks and side balconies. Warm irradiance and floor
-and pillar practicals separate it from the court. The engine shows harder
-contrast under the balcony, and bright upper concrete, compared with Cycles'
-AgX tone map. These differences remain in the delivered captures.
+**Sun Court.** The facade and red canvas remain the focal structure, with a
+clear approach and working shelters at its edges. Tiled concrete, maintenance
+plates, drains, vents, pipe clamps, canopy hems, practical fixtures, instrument
+cases and additional red foliage break up the former blank surfaces. Entry
+lights now have structural jambs and seated backplates, inspected in a close
+engine view. Pier/lintel and vestibule-floor overlaps are removed. Mountains,
+waterfall artwork and bridges combine with physical rock and spire layers.
+The engine’s daylight is cooler and harder than the softly painted concept.
 
-Rime Vault is reached by a real descending service route. It has a broad cold
-work room, inset workspace, angled desks, diagnostics, pipes, grating, maintenance
-platform and sealed continuation. Amber/red practicals and original instrument
-artwork carry the dark composition. Its engine metal and shadows are darker
-than the Cycles reference. Generated alpha plume cards replace the earlier
-opaque steam fallback; the plumes are static, not simulated vapor.
+**Array Hall.** Warm floor and column practicals frame the suspended workspace.
+Layered ribs, metal collars, cabinet drawers and indicators populate the tall
+bays; balcony ribs, banners and the supported ring give the upper volume more
+structure. The former blank rear mass is sculpted rock with physical watershed
+spires. Large walking and workspace volumes stay open. The engine retains
+stronger contrast under balconies than the concept and Cycles’ AgX render.
 
-Signal Rise adds a snow basin with blue night, armor-framed wall workspace,
-angled terminal bench and side menu, door diagnostics, antenna dish, masts,
-cable gantry, amber landing ring and red warnings. Stairs and ramps reach the
-dish, operator room and gantry. An opaque rock ridge isolates its night vista
-from the daylight homes. The original panorama fades into the opaque zenith
-closure to avoid a stretched star row; seams can become visible from unusual
-high viewpoints. The dish and snowy terrain remain deliberately stylized
-procedural geometry rather than the reference's dense painted detailing.
+**Rime Vault.** Frosted coolant trunks, coupling flanges, suspension brackets,
+cable bundles, trays, crossbeams, riveted panels, ice pendants and service
+cabinets now read across the room. Metal floor with local grating and hazard
+panels replaces repetitive all-over striping. Cold fill reveals the pipes;
+amber grazing light separates the work stations and sealed continuation.
+This is a serviced cold room rather than an empty dark box. Steam cards remain
+static and sparse, with no simulated vapor or dynamic accumulation.
 
-Every primary workspace and tool mount has a physical frame and stable area/slot
-ownership. The audit sweeps 1.6×0.9m, 3.2×1.8m and the full anchor rectangle
-continuously against exported visual triangles, with 4m tool and 16m primary
-approaches. Four reserved volumes support free placement. The full engine route
-audit traverses every graph edge both ways and every alternate stair flight.
-A slab lip found by that audit was replaced by a continuous roof landing.
+**Signal Rise.** The reflector is a curved bowl with radial and hoop structure,
+a feed horn, three supports and trunnions. Near rock crags, snowbanks, frosted
+ledges, icicles, crates and gantry cables add depth around the fortress and
+landing ring. Blue night and amber/red practicals retain the reference mood.
+The overlapping fortress pier/crown faces are removed. Terrain and metalwork
+remain visibly stylized; the painted reference has finer irregular detail.
+Unusual high viewpoints can still reveal the opaque night enclosure.
 
-All masters are original imagegen assets with prompts and hashes. Periodic PBR
-derivatives, trim bands and UI are generated locally; geometry, UV1 packing,
-Cycles irradiance and matched renders run only on the remote bake host. Static
-screen artwork is a placeholder; the final tour uses actual captured applications
-and the shell's real HUD. No capture is graded, retouched or composited to conceal
-engine behavior. Thumbnail contact sheets are only review aids.
+All lit physical materials have original generated texture masters, periodic
+PBR derivatives and/or trim atlas coverage. Exact prompts and source hashes
+are in `materials/generation.json`; the new rock master is part of the same
+provenance chain. Explicit exported material factors preserve red cloth and
+foliage and dark housings. Signs and cases use the Reach mark and vocabulary.
+The package adds no imported game assets or reference lettering.
 
-Core M2 provides alpha and world-wide atmosphere/static environment reflections.
-Area moods here come from distinct baked light and opaque vistas. The package
-stays valid format 0.2 through optional coordinated extensions. Per-area dynamic
-weather, animated vapor and view-dependent reflections are not implemented.
+Clearances take priority over filling the work approaches. Automated checks
+cover 24 mounts, four reserved volumes, support and capsule clearance; the
+engine checks every directed route and alternate stair flight. The final tour
+uses real mounted application content, placed terminals, actual keyboard input
+and the shell HUD. Recording and encoding occur outside the gallery before the
+finished files are moved in; its autocommit process is untouched.
 
-Exact package, GPU and engine evidence is in `reports/package-check.json`,
-`reports/milestone-04-nested-report.json`, `reports/tour-nested-report.json` and
-`reports/release.json`. GPU texture estimates and kernel process residency are
-separate measurements; the latter includes the nested compositor, renderer and
-imported application buffers. The tour's exact scene/plugin hashes are recorded.
+The renderer supplies global atmosphere and static environment reflections.
+Distinct area moods come from baked lighting and opaque vista separation.
+Lighting, steam and distant artwork are static. These limits and the remaining
+stylization are visible in the raw delivery, not concealed by postprocessing.
 
-The reviewed delivery runs 83.13 seconds at 1920×1080/30 fps. Live application
-content is visible on all four primary walls; four real terminals are placed
-on owned mounts, and the opening includes actual terminal typing. The full
-recording contact sheet and selected full-resolution frames were inspected.
-Core d20d7fe corrects the incomplete-mipmap client sampling found during this
-review. The final nested process peak is 786.02 MiB across 97 kernel samples;
-the 55.13 MiB package has a conservative 272.45 MiB world GPU estimate.
-See reports/final-report.md for the local gallery and installable archive.
+See `reports/final-report.md` for before/after budgets, measured 4K observations,
+validation results, archive and gallery paths. Exact engine binaries, core
+working-tree hashes and timing samples are in `reports/polish-v2/`; the core
+was being developed concurrently. World GPU estimates and nested process
+residency measure different scopes and are reported separately.

@@ -1,0 +1,101 @@
+[
+  {
+    "name": "concrete",
+    "masterSHA256": "2f0b4ac650422ff327f67dd7061bc94e0010db696ff80c3cc7b610278b5df0d6",
+    "tileMeters": 2,
+    "texelDensityPxPerMeter": 320.0,
+    "edgeMeanErrorBefore": 0.12598447501659393,
+    "edgeMaxErrorAfter": 0,
+    "normalStrength": 0.45
+  },
+  {
+    "name": "metal",
+    "masterSHA256": "72063f7c08f13e977d4efbeb37bbce9f6cdf384d085c1634ecd3b42a16d080fa",
+    "tileMeters": 1,
+    "texelDensityPxPerMeter": 640.0,
+    "edgeMeanErrorBefore": 0.06052900105714798,
+    "edgeMaxErrorAfter": 0,
+    "normalStrength": 0.18
+  },
+  {
+    "name": "paving",
+    "masterSHA256": "6efa934bf770c9635e3ff05ab702765e2813d2eb8749b586e378dca6a793c33b",
+    "tileMeters": 2,
+    "texelDensityPxPerMeter": 320.0,
+    "edgeMeanErrorBefore": 0.13520219922065735,
+    "edgeMaxErrorAfter": 0,
+    "normalStrength": 0.4
+  },
+  {
+    "name": "canvas",
+    "masterSHA256": "8244febc81b548bb0ca89b71140ade429099f842b2bb277bd141fdbf2880c0b1",
+    "tileMeters": 1,
+    "texelDensityPxPerMeter": 640.0,
+    "edgeMeanErrorBefore": 0.23343953490257263,
+    "edgeMaxErrorAfter": 0,
+    "normalStrength": 0.25
+  },
+  {
+    "name": "wood",
+    "masterSHA256": "440aa1ae341032111dbb61862ddff5bdedcd4bbfc6c9791148964415ec21910b",
+    "tileMeters": 1,
+    "texelDensityPxPerMeter": 640.0,
+    "edgeMeanErrorBefore": 0.12735295295715332,
+    "edgeMaxErrorAfter": 0,
+    "normalStrength": 0.35
+  },
+  {
+    "name": "frost",
+    "masterSHA256": "79abb429f5b83a988b5eabc1a1bc32966f53c0333925b0b8efbc3296e82f921d",
+    "tileMeters": 1,
+    "texelDensityPxPerMeter": 640.0,
+    "edgeMeanErrorBefore": 0.19815361499786377,
+    "edgeMaxErrorAfter": 0,
+    "normalStrength": 0.3
+  },
+  {
+    "name": "glass",
+    "masterSHA256": "d50ea1b565ffaf4e95087fb9e744f96ce812a1709bb254d067c9fd8509e08e8a",
+    "tileMeters": 2,
+    "texelDensityPxPerMeter": 320.0,
+    "edgeMeanErrorBefore": 0.05340074002742767,
+    "edgeMaxErrorAfter": 0,
+    "normalStrength": 0.05
+  },
+  {
+    "name": "strips",
+    "masterSHA256": "1467d387d6ee5d5f3d1b5edacb92274e1f79a5d8f9f6b308e4bf1a456fae06b6",
+    "tileMeters": 1,
+    "texelDensityPxPerMeter": 640.0,
+    "edgeMeanErrorBefore": 0.315925270318985,
+    "edgeMaxErrorAfter": 0,
+    "normalStrength": 0.12
+  },
+  {
+    "name": "grating",
+    "masterSHA256": "de8950f390a72d90bc5bd3bbe45e00a12c96ec16494bce613df75c03eacc78ab",
+    "tileMeters": 1,
+    "texelDensityPxPerMeter": 640.0,
+    "edgeMeanErrorBefore": 0.07979574799537659,
+    "edgeMaxErrorAfter": 0,
+    "normalStrength": 0.3
+  },
+  {
+    "name": "snow",
+    "masterSHA256": "1fad28ebafcbdc6c8cc5a21833568087f6ace73c4de5384161bde089751ffa05",
+    "tileMeters": 2,
+    "texelDensityPxPerMeter": 320.0,
+    "edgeMeanErrorBefore": 0.06405636668205261,
+    "edgeMaxErrorAfter": 0,
+    "normalStrength": 0.25
+  },
+  {
+    "name": "rock",
+    "masterSHA256": "9989f4b96a63cea2c377aca02507939c990eaa99beb4b7185d9bbb4757fa9035",
+    "tileMeters": 4,
+    "texelDensityPxPerMeter": 160.0,
+    "edgeMeanErrorBefore": 0.23457516729831696,
+    "edgeMaxErrorAfter": 0,
+    "normalStrength": 0.7
+  }
+]

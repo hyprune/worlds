@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: MIT
 """Original settlement detail kit. All dimensions in meters; edge/ceiling dressing.
 Kept separate from the circulation plan so clearance sweeps stay authoritative.
-Uses the existing ten generated PBR masters and Reach trim atlas, no new samplers.
+Reuses the settlement's generated PBR masters and Reach trim atlas.
 """
 import math,random
 from mathutils import Vector,Matrix

@@ -1,0 +1,75 @@
+{
+  "status": "PASS",
+  "directory": "/home/rick/workspace/rick-the-alien/worldshell-gallery/screenshots/release-world-v2",
+  "count": 16,
+  "resolution": [
+    3840,
+    2160
+  ],
+  "files": [
+    {
+      "name": "engine-01-sun-court-entry-fixtures.png",
+      "sha256": "989c3b4283c57e40db43398e0b9360df0d60e0546e3c8caf8ab1c4db268265f0"
+    },
+    {
+      "name": "engine-01-sun-court-terrace.png",
+      "sha256": "873d83489d982c7abefa11ce8f25979fc857d4835800208caea44b204f4ff2c7"
+    },
+    {
+      "name": "engine-01-sun-court-tools.png",
+      "sha256": "9e145190f8ad2ce36f4a4c9328b8bba32dec898bf2e0efb8735871670081119c"
+    },
+    {
+      "name": "engine-01-sun-court.png",
+      "sha256": "4e471ccab3c2328eb5c8d76cc13e5e0d89c496532d46ecd9a5b0e6c9d72588da"
+    },
+    {
+      "name": "engine-02-array-hall-balcony.png",
+      "sha256": "1af69e273c3fa7d02826d89c3e11762e4881980df3bbfa73ed4836a57409a32c"
+    },
+    {
+      "name": "engine-02-array-hall-tools.png",
+      "sha256": "3417bbe0b792c2a873d0c43f2374fc0cf1d4654880674a9c1e60f5eb9203dc9f"
+    },
+    {
+      "name": "engine-02-array-hall-vista.png",
+      "sha256": "466b10ef8798d5ba8c5bb5244aee54a6763e21dd6233b96a5193195e35017fd2"
+    },
+    {
+      "name": "engine-02-array-hall.png",
+      "sha256": "f54b6013f7d4caf3d1e517dd5f18ac46c7f12dcb6be9b69d847e893c68a68872"
+    },
+    {
+      "name": "engine-03-rime-vault-platform.png",
+      "sha256": "71667dc1d392288195cdd2de60ec9eb62dfa9fbbafea79d5ed13e5f56eb118e3"
+    },
+    {
+      "name": "engine-03-rime-vault-services.png",
+      "sha256": "23419944fd1a9985712eb6117cfa83b0fa84b6640ed4c9e8e4d136ea211001a6"
+    },
+    {
+      "name": "engine-03-rime-vault-tools.png",
+      "sha256": "f37431b92ee2a94695471cb987da5c2409159d5c62563d3ea2e901f23434709c"
+    },
+    {
+      "name": "engine-03-rime-vault.png",
+      "sha256": "0e36de139b03d91f7c9aa332cbd72799482b415148b9d981a1cd718e0cfae2f2"
+    },
+    {
+      "name": "engine-04-signal-rise-bench.png",
+      "sha256": "c63b32dc56166d4151709e66461a1e9d0d9ae8b2df8a4f6a77f737f22e19e23a"
+    },
+    {
+      "name": "engine-04-signal-rise-gantry.png",
+      "sha256": "c741ccdea6e4880f60b3f3d925ade0f442ab58e8424709a2548554bd3c8fa0b3"
+    },
+    {
+      "name": "engine-04-signal-rise-reflector.png",
+      "sha256": "270386a27b30ba5d5557f9a4ad2e935a0dc73445adf17413eed9e0814c8a28af"
+    },
+    {
+      "name": "engine-04-signal-rise.png",
+      "sha256": "74efa7a7f1790307517888a8881f0e91a9f965f1c17312be81b89527c8be8ddb"
+    }
+  ]
+}

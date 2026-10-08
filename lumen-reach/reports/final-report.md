@@ -1,69 +1,108 @@
-# Lumen Reach delivery
+# Lumen Reach 0.5.0 — visual polish v2
 
-One connected release world with four original workspace homes: Sun Court,
-Array Hall, Rime Vault and Signal Rise. Each owns one primary mounted workspace
-and its physical tool mounts; stable area/slot names and reusable themed kits
-support future homes. The settlement identity and original marks are in
-[IDENTITY.md](../IDENTITY.md).
+Four connected, original workspace homes. This delivery keeps all 24 mounts,
+four free-placement volumes, 64 route nodes, 63 bidirectional edges and 14
+alternate stair flights. The former release is documented in
+[delivery-0.4.0.md](delivery-0.4.0.md).
 
-| Milestone | Local commit |
-| --- | --- |
-| Sun Court | d16f2a0 |
-| Array Hall | 0c14cdd |
-| Rime Vault | 190f5ac |
-| Signal Rise and connected world | db28820 |
+## Changes by home
 
-The world includes 24 planar anchors (four primary walls and twenty tools),
-21 data objects, four free-placement volumes, 64 route nodes, 63 bidirectional
-edges, 14 alternate stair flights, balconies, rooftop work shelter, lower
-maintenance deck, operator room and antenna/cable gantry. Paving rails and
-practicals follow travel routes; the sealed continuation leaves an expansion
-destination. Tool approaches reserve 4m and primary walls reserve 16m.
+- **Sun Court:** supported entrance jambs and seated light backplates; facade
+  maintenance plates, drains, vents and fasteners; canopy seams, power leads,
+  luminaires, Reach-marked repair cases, service hatches and red foliage.
+  Entry fixtures have a dedicated close engine view. Pier/lintel overlaps and
+  the vestibule's overlapping ground face are removed.
+- **Array Hall:** ribbed architectural bays and collars, populated rack drawers
+  and indicators, service cabinets, balcony structure, suspended ring housing,
+  banners and backed signs. Physical watershed spires and a sculpted rock divide
+  replace the flat blank mass in the rear vista. Warm lighting is retained.
+- **Rime Vault:** large frosted coolant trunks, flanges and hangers; bundled
+  cables and trays; ice pendants, reinforced service panels, pump cabinets,
+  keyboards, Reach-marked cases and local grated/hazard floor panels. Blue fill
+  and warm grazing lights reveal the service detail while keeping a cold room.
+- **Signal Rise:** a deeper reflector with front seams, radial/back hoop ribs,
+  a feed horn, three struts and trunnions; snowbanks and near rock crags; frosted
+  ledges, vents, icicles, cases and hanging gantry cables. Overlapping fortress
+  pier/crown faces are removed. Blue night and amber/red practicals remain distinct.
 
-Original generated masters, prompts and hashes are committed. Seam-healed PBR
-tiles, trim bands, physical screen frames and original UI use the shared bake
-pipeline; procedural geometry, UV1 lightmaps and Cycles renders ran exclusively
-on 10.2.2.2. No local Blender execution or owner-session control occurred.
+Every lit physical material has a base-color texture. Eleven generated masters,
+periodic 640px PBR derivatives and an eight-band trim sheet have prompt/hash
+provenance. The new rock master used built-in imagegen; the exact prompt and
+SHA256 are in [generation.json](../materials/generation.json). Explicit glTF
+factors preserve red canvas, foliage and dark housings that the exporter otherwise
+washed out. No world names or marks were borrowed from the reference lettering.
 
-| Delivery measurement | Result |
-| --- | --- |
-| Package files | 55.13 MiB |
-| Compressed archive | 32.94 MiB |
-| Conservative world GPU allocation | 272.45 MiB |
-| Sampled nested process peak with live apps and recording | 786.02 MiB |
-| Tour | 83.13s, 1920×1080, 30 fps |
+## Budgets
 
-The GPU sample includes the nested compositor, renderer and imported
-application buffers (97 samples), and does not establish an upper bound
-between samples. Conservative world accounting includes all mip levels,
-color/data texture views and expanded visible geometry. Exact hashes, bytes and
-measurement scopes are in [release.json](release.json).
+| Measurement | 0.4.0 | 0.5.0 |
+| --- | ---: | ---: |
+| Visible triangles | 210,067 | 199,911 |
+| World draw estimate | 65 | 84 |
+| Conservative world GPU MiB | 272.45 | 285.62 |
+| Package MiB | 55.13 | 57.81 |
 
-Schema 0.2, glTF (zero errors and warnings), independent/non-overlapping UV1,
-provenance, full-anchor and two requested window-size sweeps, free-volume
-interiors, capsule support and graph limits pass. The real engine audit passed
-all 126 directed graph traversals and all 14 stair flights. Its scene hash
-matches the final tour; the later core change affects capture sampling. The
-tour passes real travel, four placed terminals, actual keyboard input and
-authenticated Quickshell HUD. A separate four-wall diagnostic verifies useful
-live btop content on every primary wall.
+Draws count visible glTF primitives only, excluding applications, HUD and
+postprocessing. Geometry is merged by material within four home chunks plus
+two independently baked connector chunks; foliage and distant artwork are
+separate. Reduced small-part tessellation pays for the added kit detail. GPU
+accounting includes all mip levels, separate color/data views and expanded
+40-byte vertices. Core currently has no runtime LOD or chunk culling; this gap
+is recorded in [NOTES-rfc-gaps.md](../../NOTES-rfc-gaps.md).
 
-The gallery has twelve raw matched engine compositions, additional live primary
-and tool views, and [the reviewed tour](/home/rick/workspace/rick-the-alien/worldshell-gallery/videos/release-world-tour.mp4)
-with its title/tag/notes JSON. Files are local. The gallery autocommit/push
-service is stopped; the gallery server remains available. Worlds was pulled
-before every milestone and closing commit; no worlds push was made.
+The tour's sampled nested process peak is
+**765.63 MiB GTT** across
+103 samples. This includes compositor/output and
+imported application buffers and is separate from the world allocation.
 
-The local installable archive is
-[com.hyprune.lumen-reach-0.4.0.tar.zst](/home/rick/workspace/hyprune/worlds/artifacts/releases/com.hyprune.lumen-reach-0.4.0.tar.zst); its SHA256 is
-`4e6fcabf7c01db1f7a2947cd84092cbb2c0a12bd46be337640505ee73733e6ef`. Build and verification commands are in [README.md](../README.md).
-Core d20d7fe or later is needed for correct primary capture sampling;
-shell ee66bff supplies the visible Overview terminology. Switchyard remains
-an unchanged walkable test world and its existing validation passed.
+## Automated engine verification
 
-The concept/engine/Cycles review is [RENDER-REVIEW.md](../RENDER-REVIEW.md),
-with raw image links in the generated comparison HTML. Engine contrast remains
-harder than Cycles; steam and environment reflections are static, atmosphere
-is world-wide, and the snowy dish/terrain use simpler procedural detail than
-the painted concept. Unusual high views can expose opaque night-card seams.
-These limits remain visible in the ungraded evidence.
+Core's nested harness ran under `/tmp/worldshell-nested.lock`, with the actual
+**Medium** preset on **Mesa Intel(R) Graphics (PTL)**.
+The 4K output stayed native; dynamic render scale was recorded. Thirty IPC timing
+samples per stationary home view produced these observations:
+
+| Home | Rendered frames/s | Median GPU pass sum ms | Render scales |
+| --- | ---: | ---: | --- |
+| sun-court | 59.88 | 8.697 | 0.4375 |
+| array-hall | 59.94 | 7.018 | 0.5 |
+| rime-vault | 60.31 | 8.054 | 0.5 |
+| signal-rise | 60.06 | 6.892 | 0.5, 0.5625 |
+
+These short samples are not a sustained whole-route FPS guarantee. Exact samples,
+loaded plugin hashes and the core working-tree state are preserved in
+[polish-v2/v2-4k-nested.json](polish-v2/v2-4k-nested.json). Core was being developed
+concurrently; the loaded binary hashes identify what actually ran.
+
+Schema 0.2, glTF (zero errors/warnings), UV1 packing, texture provenance/tints,
+all mount rectangles and two requested window sizes, reserved-volume interiors,
+walking support and capsule checks pass. All **126 directed graph traversals**
+and **14 alternate stair flights** pass in-engine. The narrow-emitter checker
+passes; the named authoring audit seats **175 strips** and backs **173 signs/marks**.
+The original scene had 48 narrow-emitter overlap probe hits. The new 2cm-lens
+regression checks cover all three axes. Switchyard 0.1.1 was rebuilt remotely
+and its complete validation suite passed.
+
+## Delivery paths
+
+- Stills: `/home/rick/workspace/rick-the-alien/worldshell-gallery/screenshots/release-world-v2`
+- Tour: `/home/rick/workspace/rick-the-alien/worldshell-gallery/videos/release-world-tour-v2.mp4`
+- Metadata: `/home/rick/workspace/rick-the-alien/worldshell-gallery/videos/release-world-tour-v2.json`
+- Installable archive: `/home/rick/workspace/hyprune/worlds/artifacts/releases/com.hyprune.lumen-reach-0.5.0.tar.zst`
+- Archive SHA256: `d730d3867bc3a89bfb88a0540458999a22206b7c6f9891ed3f1a36cf54b9181c`
+- Archive size: **36.70 MiB**
+- Tour: **83.50s, 1920×1080, 30 fps**, real placed terminals and mounted
+  workspace content, actual input and the shell HUD.
+
+The sixteen engine stills include twelve unchanged comparison poses and four
+additional detail views. They are ungraded. The tour was encoded in `/tmp`,
+inspected, then copied to a staging file and atomically moved into the gallery.
+The gallery autocommit process was left untouched.
+All Blender execution used `tools/remote-blender.sh` on 10.2.2.2. The owner's
+real session was never controlled. Worlds commits remain local; no push,
+GitHub release or publication was performed by this work.
+
+The concept review is [RENDER-REVIEW.md](../RENDER-REVIEW.md). The delivered
+geometry remains stylized and less densely detailed than the painted concepts;
+large work approaches stay intentionally open. Steam, baked lighting and vistas
+are static; unusual high views can still expose the night enclosure. These
+limits remain visible in the raw evidence.

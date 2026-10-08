@@ -49,5 +49,7 @@
       "uv1Area": 0.0,
       "overlapSamples": 0
     }
-  ]
+  ],
+  "drawCallEstimate": 65,
+  "drawCallScope": "one draw per visible glTF primitive, world geometry only; excludes postprocessing, applications and HUD"
 }
