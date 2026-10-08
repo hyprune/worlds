@@ -21,7 +21,7 @@ Run `make build`, `make validate`, and `make film`. Blender runs only on the rem
 
 ## Content policy
 
-Official assets must be original or properly attributed CC0/CC-BY-4.0. No third-party game assets or derivatives, even as temporary tests, screenshots or thumbnails. For every asset record author, source, license and modifications in the manifest/ATTRIBUTION.md. Keep editable sources and document reproducible export steps.
+Official assets must be original or properly attributed CC0/CC-BY-4.0. Nothing without that provenance, even as temporary tests, screenshots or thumbnails. For every asset record author, source, license and modifications in the manifest/ATTRIBUTION.md. Keep editable sources and document reproducible export steps.
 
 Default original content license: **CC-BY-4.0** (see LICENSE). Scripts and tooling are **MIT** (see LICENSE-MIT); mark each script `SPDX-License-Identifier: MIT`. Original documentation is CC-BY-4.0 here. Third-party assets retain their upstream license; preserve notices and mark exceptions explicitly. Attribute original content to “Hyprune contributors,” link the package source, link the license and indicate modifications.
 
