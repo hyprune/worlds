@@ -17,23 +17,24 @@ def periodic(a):
   l=a[i].copy();r=a[-1-i].copy();a[i]=(1-t)*l+t*r;a[-1-i]=(1-t)*r+t*l
  return a
 
+TILE_RESOLUTION=640
 rows=[];swatches=[]
 for name,(meters,rough,metal,strength) in PARAMS.items():
- path=HERE/'source'/f'{name}.png';a=np.array(Image.open(path).convert('RGB').resize((1024,1024),Image.Resampling.LANCZOS),dtype=np.float32)/255
+ path=HERE/'source'/f'{name}.png';a=np.array(Image.open(path).convert('RGB').resize((TILE_RESOLUTION,TILE_RESOLUTION),Image.Resampling.LANCZOS),dtype=np.float32)/255
  before=float(np.mean(abs(a[:,0]-a[:,-1]))+np.mean(abs(a[0]-a[-1])));a=periodic(a)
  if name=='wood':a*=.72
  rgb=np.round(a*255).astype('uint8');rgb[:,-1]=rgb[:,0];rgb[-1]=rgb[0];Image.fromarray(rgb).save(OUT/f'{name}-albedo.png',optimize=True)
  gray=a@np.array([.2126,.7152,.0722]);dx=(np.roll(gray,-1,axis=1)-np.roll(gray,1,axis=1))*strength;dy=(np.roll(gray,-1,axis=0)-np.roll(gray,1,axis=0))*strength
  norm=np.stack([-dx,dy,np.ones_like(dx)],axis=-1);norm/=np.linalg.norm(norm,axis=-1)[:,:,None];norm=np.round((norm*.5+.5)*255).astype('uint8');norm[:,-1]=norm[:,0];norm[-1]=norm[0];Image.fromarray(norm).save(OUT/f'{name}-normal.png',optimize=True)
  orm=np.ones_like(a);orm[:,:,1]=np.clip(rough+(gray-gray.mean())*.12,.08,.98);orm[:,:,2]=metal;orm=np.round(orm*255).astype('uint8');orm[:,-1]=orm[:,0];orm[-1]=orm[0];Image.fromarray(orm).save(OUT/f'{name}-orm.png',optimize=True)
- Image.fromarray(np.roll(np.roll(rgb,512,axis=0),512,axis=1)).save(OUT/f'{name}-offset.png',optimize=True)
+ Image.fromarray(np.roll(np.roll(rgb,TILE_RESOLUTION//2,axis=0),TILE_RESOLUTION//2,axis=1)).save(OUT/f'{name}-offset.png',optimize=True)
  im=Image.fromarray(rgb).resize((256,256));tile=Image.new('RGB',(512,512))
  for x in [0,256]:
   for y in [0,256]:tile.paste(im,(x,y))
- swatches.append((name,tile));rows.append({'name':name,'masterSHA256':hashlib.sha256(path.read_bytes()).hexdigest(),'tileMeters':meters,'texelDensityPxPerMeter':1024/meters,'edgeMeanErrorBefore':before,'edgeMaxErrorAfter':int(np.max(abs(rgb[:,0].astype(int)-rgb[:,-1].astype(int)))),'normalStrength':strength})
+ swatches.append((name,tile));rows.append({'name':name,'masterSHA256':hashlib.sha256(path.read_bytes()).hexdigest(),'tileMeters':meters,'texelDensityPxPerMeter':TILE_RESOLUTION/meters,'edgeMeanErrorBefore':before,'edgeMaxErrorAfter':int(np.max(abs(rgb[:,0].astype(int)-rgb[:,-1].astype(int)))),'normalStrength':strength})
 trim=Image.new('RGB',(1024,1024));regions=[]
 for i,name in enumerate(['concrete','metal','canvas','wood','frost','glass','strips','grating']):
- src=Image.open(OUT/f'{name}-albedo.png');band=src.crop((0,0,1024,112));trim.paste(band,(0,i*128+8));trim.paste(band.crop((0,0,1024,1)).resize((1024,8)),(0,i*128));trim.paste(band.crop((0,111,1024,112)).resize((1024,8)),(0,i*128+120));regions.append({'id':name,'uvRect':[0,(i*128+8)/1024,1,(i*128+120)/1024],'gutterPixels':8})
+ src=Image.open(OUT/f'{name}-albedo.png').resize((1024,1024),Image.Resampling.LANCZOS);band=src.crop((0,0,1024,112));trim.paste(band,(0,i*128+8));trim.paste(band.crop((0,0,1024,1)).resize((1024,8)),(0,i*128));trim.paste(band.crop((0,111,1024,112)).resize((1024,8)),(0,i*128+120));regions.append({'id':name,'uvRect':[0,(i*128+8)/1024,1,(i*128+120)/1024],'gutterPixels':8})
 trim.save(OUT/'reach-trim-albedo.png',optimize=True);(OUT/'reach-trim.json').write_text(json.dumps(regions,indent=2)+'\n')
 contact=Image.new('RGB',(5*512,2*544),(14,23,30));d=ImageDraw.Draw(contact)
 for i,(name,im) in enumerate(swatches):x=i%5*512;y=i//5*544;contact.paste(im,(x,y));d.text((x+12,y+519),name,fill='white')
@@ -105,5 +106,17 @@ for area,title in zip(NAMES,TITLES):
    graph(d,left+12,int(h*.72),right-left-27,int(h*.14),accent)
    for i,label in enumerate(['UPPER CASCADE','WATERSHED SPIRE','LUMEN REACH']):
     x=margin+i*(w-2*margin)//3;y=h-116;d.rectangle((x,y,x+(w-2*margin)//3-12,h-34),outline=(55,80,95));text(d,(x+12,y+14),label,blue,2);d.line([(x+15,h-43),(x+43,h-74),(x+65,h-55),(x+97,h-94),(x+140,h-42)],fill=accent,width=2)
+  if style=='workspace':im=im.resize((1536,768),Image.Resampling.LANCZOS)
   im.save(OUT/f'ui-{area}-{style}.png',optimize=True)
 print('Prepared ten seam-healed original PBR sets, trim sheet and sixteen original screen layouts')
+
+# Original alpha master retained; bounded GPU derivative uses clamp sampling.
+Image.open(HERE/'source/steam.png').convert('RGBA').resize((512,768),Image.Resampling.LANCZOS).save(OUT/'steam-albedo.png',optimize=True)
+
+# Fade the top sky into the exact shared zenith paint; no stretched star row.
+night=np.asarray(Image.open(HERE/'source/night-vista.png').convert('RGB').resize((1600,538),Image.Resampling.LANCZOS),dtype=np.float32)
+zenith=np.array([2,28,61],dtype=np.float32)
+h=night.shape[0]
+for y in range(int(h*.22)):
+ t=max(0,1-y/(h*.22));t=t*t*(3-2*t);night[y]=night[y]*(1-t)+zenith*t
+Image.fromarray(np.round(night).astype('uint8')).save(OUT/'night-vista-albedo.png',optimize=True)

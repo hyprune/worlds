@@ -10,7 +10,7 @@ A package is a data-only directory containing `world.json`, glTF 2.0 geometry an
 
 **Worlds in this repo**
 
-- **Release world** (in progress): built from the owner's concept art in [concept/release-world](concept/release-world/BRIEF.md): four themed areas, each one workspace's home.
+- **[Lumen Reach](lumen-reach/README.md)** (release world): Sun Court, Array Hall, Rime Vault and Signal Rise are four connected workspace homes, with physical tool mounts, open work zones, mountain vistas and paths to terraces, a rooftop, lower rooms and a cable gantry.
 - **[Switchyard](switchyard/README.md)** (test world): Hyprune's first original world, an original blue-hour terminal with a bronze vault, six timber-canopied docks, a concourse, labeled cargo, a rail-city vista, surface anchors, collision, navigation and UV1 lightmaps. Kept as a walkable test map for paths, navigation, docking and renderer parity, and as a record of how the worlds evolved.
 
 Schema examples remain synthetic manifest fixtures, not playable packages.

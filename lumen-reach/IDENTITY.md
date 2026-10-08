@@ -45,3 +45,22 @@ are generated for this settlement, with recorded prompts/hashes and seam healing
 The owner's reference compositions inform architecture, props and illumination;
 reference lettering and marks are excluded. No imported game models, textures,
 names, logos, fonts or audio are used.
+
+## Theme kits
+
+The home ID and workspace slot are independent of the theme index in
+`set_area`. A future home chooses a new `area_id`, `title` and `slot` while
+retaining one of the four theme indices. `owner` and `anchor_id` derive all
+mount and data identities from that home. Duplicate home IDs or slots fail
+at authoring time. The existing four identities remain stable.
+
+Sun Court's kit is canvas shelters, pale facade/terrace blocks, operator benches,
+field rig rails, planters and armillary instruments. Array Hall's kit is tall
+ribbed columns, a suspended light ring/wall, lecterns, framed banners, server
+blocks and balcony flights. Rime Vault's kit is inset consoles, frosted service
+panels, ceiling pipes, maintenance benches and amber/red route practicals.
+Signal Rise's kit is segmented armor, warning grilles, angled terminal benches,
+snow-capped cases, dishes, masts and cable gantries. Shared meter-based frame,
+stair, ramp, canopy, case and instrument primitives give each kit consistent
+proportions. New connected areas still require their own authored floor layout,
+lighting bake, routes, work clearances and engine review.

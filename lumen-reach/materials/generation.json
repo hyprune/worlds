@@ -86,5 +86,25 @@
     "license": "CC-BY-4.0",
     "masterSHA256": "15c8eb9f730dc94bb07156f597c54e9280265cfedbee1867e9f4a9ab0c5d9333",
     "provenance": "Original built-in imagegen mountain watershed vista, 2026-10-07"
+  },
+  {
+    "name": "night-vista",
+    "source": "source/night-vista.png",
+    "tool": "imagegen",
+    "masterSHA256": "8ee999d4683383293782ff1f5c4e5605fbc18b46baba510aa7517c6178f6bb9b",
+    "prompt": "An original ultra-wide 3:1 photorealistic alpine landscape matte painting for the Lumen Reach world. A cold high-altitude snowy mountain basin at blue night, immense dark granite peaks with white snow and ice, dense layered ridges, low pale steam-like cloud in the ravines, star-dusted indigo sky. Sparse amber pinpricks of far settlement lights among the lower slopes. Mountains occupy lower two thirds, sky upper third. No buildings in foreground, no technology, no dish, no people, no interface, no lettering, no symbols or logos, no known fictional setting. Cinematic realistic environment with deep blue shadows and soft moonlit snow, crisp mountain silhouette.",
+    "author": "Hyprune contributors",
+    "license": "CC-BY-4.0",
+    "provenance": "Original built-in imagegen generation for Lumen Reach, 2026-10-07"
+  },
+  {
+    "name": "steam",
+    "source": "source/steam.png",
+    "tool": "imagegen",
+    "masterSHA256": "8295f97958555fe104dad326c00a0bc195ccc543689abf615ac737818217d4e2",
+    "prompt": "Create an original realistic VFX texture of one thin wispy steam plume rising from a small industrial vent. Tall narrow white and pale cold-blue vapor, softly billowing and curling upward, very soft translucent feathered edges, sparse separated wisps, denser at bottom, fades away at top, centered in a portrait canvas with generous empty margins. Transparent background, absolutely no scenery, objects, ground, lettering or marks. This is an original game-world particle card, no known fictional reference. Preserve realistic semi-transparent alpha, not an opaque white cutout.",
+    "author": "Hyprune contributors",
+    "license": "CC-BY-4.0",
+    "provenance": "Original built-in imagegen generation for Lumen Reach, 2026-10-07"
   }
 ]

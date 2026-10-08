@@ -93,3 +93,10 @@ is still deferred by core; distinct area lighting is baked into UV1. Day and
 night opaque vistas remain independent architecture/art layers. See core's
 `docs/M2.md` for alpha, fog, bloom and static IBL support; these new facilities
 are not a reason to grade screenshots or hide parity differences.
+
+The final routes adapter also accepts optional node `label` and `waypoint`.
+`waypoint:false` preserves a pathfinding turn but omits it from public places;
+missing fields retain older behavior. Fourteen authored landmarks have human
+labels; the other fifty nodes serve navigation without becoming HUD labels.
+Core commit f7fa0da implements this coordinated behavior and tests routing
+through hidden nodes. This is declarative metadata, not package executable code.

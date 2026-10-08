@@ -1,0 +1,57 @@
+[
+  {
+    "group": "sun-court",
+    "resolution": 1280,
+    "peakLinear": 20.400230407714844,
+    "intensity": 20.5,
+    "seconds": 2.23,
+    "samples": 64,
+    "marginPixels": 4,
+    "islandSeparationPixels": 4,
+    "supportedMipLevels": 2
+  },
+  {
+    "group": "foliage",
+    "resolution": 1024,
+    "peakLinear": 1.8061600923538208,
+    "intensity": 1.9,
+    "seconds": 2.14,
+    "samples": 64,
+    "marginPixels": 2,
+    "islandSeparationPixels": 2,
+    "supportedMipLevels": 0
+  },
+  {
+    "group": "array-hall",
+    "resolution": 1536,
+    "peakLinear": 19.653608322143555,
+    "intensity": 19.7,
+    "seconds": 2.8,
+    "samples": 64,
+    "marginPixels": 4,
+    "islandSeparationPixels": 4,
+    "supportedMipLevels": 2
+  },
+  {
+    "group": "rime-vault",
+    "resolution": 1280,
+    "peakLinear": 11.724140167236328,
+    "intensity": 11.8,
+    "seconds": 2.33,
+    "samples": 64,
+    "marginPixels": 4,
+    "islandSeparationPixels": 4,
+    "supportedMipLevels": 2
+  },
+  {
+    "group": "signal-rise",
+    "resolution": 1280,
+    "peakLinear": 27.748666763305664,
+    "intensity": 27.8,
+    "seconds": 2.1,
+    "samples": 64,
+    "marginPixels": 4,
+    "islandSeparationPixels": 4,
+    "supportedMipLevels": 2
+  }
+]

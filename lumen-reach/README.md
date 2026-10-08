@@ -8,7 +8,7 @@ Build ONLY on the remote bake host:
 
 ```sh
 python3 lumen-reach/materials/prepare.py
-./tools/remote-lumen.sh --areas 1 --samples 64
+./tools/remote-lumen.sh --areas 4 --samples 64
 ```
 
 `--areas 1` produces the first milestone; 2/3/4 include successive homes and
@@ -24,3 +24,49 @@ encode area/slot ownership. Free-placement volumes are declared in the optional
 placement extension and continuously swept against exported visual triangles.
 Unknown extensions are optional. Static screen UI is labeled authored artwork;
 live applications come from core's actual window capture.
+
+Verification and nested review:
+
+```sh
+make lumen-validate
+GLTF_VALIDATOR_DIR=/tmp/hyprune-gltf-audit/node_modules node tools/validate-gltf.mjs dist/com.hyprune.lumen-reach
+python3 tools/check-lumen-session.py
+python3 tools/check-lumen-session.py --routes
+python3 tools/check-lumen-session.py --record
+```
+
+The scenario uses core's actual nested session implementation under the shared
+lifetime flock. Its verified controller checks the nested process, configuration,
+compositor lock, socket and display. Recording binds four actual compositor
+workspaces to the authored homes and places real kitty windows on owned mounts.
+Core performs capsule-checked auto-drive; camera turns happen while stationary.
+The recording includes Quickshell's actual leased HUD. Captures are staged in
+`artifacts/lumen-reach` for review before copying to the gallery. Build host Blender is
+never launched by validation or nested capture.
+
+`reports/` contains milestone evidence, exact package/core hashes, two-size
+window sweeps, free-volume checks, all route branches, UV1 and GPU allocation
+accounting. Package figures include every file; conservative GPU figures include
+all mip levels, color/data views and expanded visible geometry. Process DRM
+memory, when exposed by the kernel, is recorded separately from this estimate.
+
+The complete package is version 0.4.0. `make lumen-release` produces its sorted,
+fixed-date tar.zst archive and checksum without a network publication. Core M2
+is required for the transparent steam cards and typed workspace/tool behavior;
+the manifest remains schema-valid world 0.2 through the coordinated adapter.
+The four lighting moods come from baked irradiance. Core M2 currently exposes
+world-wide atmosphere and static environment reflections, so these are not
+presented as independently changing per-area atmosphere.
+
+Visible stairs use continuous sloped collision beds beneath the individual
+treads. Both the graph ramps and alternate stair flights receive independent
+support/capsule checks. The graph stays within core's 64-node/256-edge limits.
+Placement checks include both requested window sizes and each full mount
+rectangle, plus every reserved volume interior, against exported visual meshes.
+
+Lightmap atlases are independent per architectural area; the leaf-card atlas
+uses 2px gutters at 1024, and the architectural atlases use 4px gutters. Their
+samplers clamp and filter linearly at the base level. Generated PBR tiles use
+640px periodic derivatives, verified matching edge pixels, to leave headroom
+for captured applications. See the final render review and reports for the
+measured differences between Cycles, the engine and the owner's concepts.

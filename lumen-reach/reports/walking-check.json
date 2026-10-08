@@ -1,6 +1,6 @@
 {
   "status": "PASS",
-  "connectedNodes": 46,
+  "connectedNodes": 64,
   "edges": [
     {
       "edge": [
@@ -187,9 +187,9 @@
         "roof-start-west",
         "roof-start"
       ],
-      "meters": 4.0,
+      "meters": 4.800000000000001,
       "slope": 0.0,
-      "samples": 16
+      "samples": 20
     },
     {
       "edge": [
@@ -205,9 +205,9 @@
         "roof-final",
         "roof-bridge"
       ],
-      "meters": 3.5,
+      "meters": 6.699999999999999,
       "slope": 0.0,
-      "samples": 14
+      "samples": 27
     },
     {
       "edge": [
@@ -406,6 +406,238 @@
       "meters": 2.0,
       "slope": 0.0,
       "samples": 8
+    },
+    {
+      "edge": [
+        "rise-entry",
+        "rise-ramp-top"
+      ],
+      "meters": 24.73863375370596,
+      "slope": 0.25,
+      "samples": 99
+    },
+    {
+      "edge": [
+        "rise-ramp-top",
+        "rise-arrival"
+      ],
+      "meters": 1.0,
+      "slope": 0.0,
+      "samples": 4
+    },
+    {
+      "edge": [
+        "rise-arrival",
+        "rise-ring"
+      ],
+      "meters": 7.615773105863909,
+      "slope": 0.0,
+      "samples": 31
+    },
+    {
+      "edge": [
+        "rise-ring",
+        "rise-wall"
+      ],
+      "meters": 7.211102550927978,
+      "slope": 0.0,
+      "samples": 29
+    },
+    {
+      "edge": [
+        "rise-wall",
+        "fortress-ramp-top"
+      ],
+      "meters": 10.283968105745952,
+      "slope": 0.24,
+      "samples": 42
+    },
+    {
+      "edge": [
+        "fortress-ramp-top",
+        "fortress-room"
+      ],
+      "meters": 6.0,
+      "slope": 0.0,
+      "samples": 24
+    },
+    {
+      "edge": [
+        "rise-ring",
+        "diagnostics-road"
+      ],
+      "meters": 17.46424919657298,
+      "slope": 0.0,
+      "samples": 70
+    },
+    {
+      "edge": [
+        "diagnostics-road",
+        "diagnostics-base"
+      ],
+      "meters": 3.2015621187164243,
+      "slope": 0.0,
+      "samples": 13
+    },
+    {
+      "edge": [
+        "diagnostics-base",
+        "diagnostics-platform"
+      ],
+      "meters": 12.237646832622683,
+      "slope": 0.19999999999999998,
+      "samples": 49
+    },
+    {
+      "edge": [
+        "rise-arrival",
+        "dish-road"
+      ],
+      "meters": 17.029386365926403,
+      "slope": 0.0,
+      "samples": 69
+    },
+    {
+      "edge": [
+        "dish-road",
+        "dish-ramp-base"
+      ],
+      "meters": 5.852349955359813,
+      "slope": 0.0,
+      "samples": 24
+    },
+    {
+      "edge": [
+        "dish-ramp-base",
+        "dish-platform"
+      ],
+      "meters": 16.492422502470642,
+      "slope": 0.25,
+      "samples": 66
+    },
+    {
+      "edge": [
+        "rise-arrival",
+        "gantry-road"
+      ],
+      "meters": 9.055385138137417,
+      "slope": 0.0,
+      "samples": 37
+    },
+    {
+      "edge": [
+        "gantry-road",
+        "gantry-south"
+      ],
+      "meters": 17.029386365926403,
+      "slope": 0.0,
+      "samples": 69
+    },
+    {
+      "edge": [
+        "gantry-south",
+        "gantry-base"
+      ],
+      "meters": 4.6097722286464435,
+      "slope": 0.0,
+      "samples": 19
+    },
+    {
+      "edge": [
+        "gantry-base",
+        "gantry-top"
+      ],
+      "meters": 24.73863375370596,
+      "slope": 0.25,
+      "samples": 99
+    },
+    {
+      "edge": [
+        "gantry-top",
+        "gantry-east"
+      ],
+      "meters": 14.0,
+      "slope": 0.0,
+      "samples": 56
+    },
+    {
+      "edge": [
+        "gantry-east",
+        "gantry-west"
+      ],
+      "meters": 36.5,
+      "slope": 0.0,
+      "samples": 146
+    },
+    {
+      "stair": "globe-approach",
+      "meters": 6.118823416311342,
+      "samples": 25
+    },
+    {
+      "stair": "lookout-ascent",
+      "meters": 16.492422502470642,
+      "samples": 66
+    },
+    {
+      "stair": "roof-ascent-lower",
+      "meters": 16.492422502470642,
+      "samples": 66
+    },
+    {
+      "stair": "roof-ascent-upper",
+      "meters": 16.492422502470642,
+      "samples": 66
+    },
+    {
+      "stair": "roof-final-approach",
+      "meters": 16.492422502470642,
+      "samples": 66
+    },
+    {
+      "stair": "hall-balcony-ascent",
+      "meters": 16.492422502470642,
+      "samples": 66
+    },
+    {
+      "stair": "hall-upper-ascent",
+      "meters": 16.492422502470642,
+      "samples": 66
+    },
+    {
+      "stair": "service-descent",
+      "meters": 22.80350850198276,
+      "samples": 92
+    },
+    {
+      "stair": "vault-maintenance-ascent",
+      "meters": 16.492422502470642,
+      "samples": 66
+    },
+    {
+      "stair": "snow-service-ascent",
+      "meters": 24.73863375370596,
+      "samples": 99
+    },
+    {
+      "stair": "fortress-gate-approach",
+      "meters": 10.283968105745952,
+      "samples": 42
+    },
+    {
+      "stair": "diagnostics-platform-ascent",
+      "meters": 12.237646832622683,
+      "samples": 49
+    },
+    {
+      "stair": "dish-service-ascent",
+      "meters": 16.492422502470642,
+      "samples": 66
+    },
+    {
+      "stair": "east-gantry-ascent",
+      "meters": 24.73863375370596,
+      "samples": 99
     }
   ],
   "failures": [],

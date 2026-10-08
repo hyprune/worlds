@@ -38,16 +38,17 @@ def check(p):
  t=tri[valid];a,b,c=t[:,0],t[:,1],t[:,2];v0=b[:,[0,2]]-a[:,[0,2]];v1=c[:,[0,2]]-a[:,[0,2]];v2=p[[0,2]]-a[:,[0,2]];den=v0[:,0]*v1[:,1]-v0[:,1]*v1[:,0];safe=abs(den)>1e-10
  u=np.divide(v2[:,0]*v1[:,1]-v2[:,1]*v1[:,0],den,out=np.zeros(len(den)),where=safe);v=np.divide(v0[:,0]*v2[:,1]-v0[:,1]*v2[:,0],den,out=np.zeros(len(den)),where=safe);y=a[:,1]+u*(b[:,1]-a[:,1])+v*(c[:,1]-a[:,1]);supported=safe&(u>=-1e-5)&(v>=-1e-5)&(u+v<=1+1e-5)&(abs(y-p[1])<.06)
  if not supported.any():return 'no walkable support'
- # Vertical standing capsule: ignore only the supporting floor contact (bottom cap).
- valid=(high[:,0]>p[0]-.3)&(low[:,0]<p[0]+.3)&(high[:,2]>p[2]-.3)&(low[:,2]<p[2]+.3)&(high[:,1]>p[1]+.12)&(low[:,1]<p[1]+1.8)
+ # Match core's 0.3m bottom cap and 3cm push-out budget. Include
+ # small slab risers: ignoring all geometry below feet+0.12 missed a roof join.
+ valid=(high[:,0]>p[0]-.3)&(low[:,0]<p[0]+.3)&(high[:,2]>p[2]-.3)&(low[:,2]<p[2]+.3)&(high[:,1]>p[1]+.025)&(low[:,1]<p[1]+1.8)
  t=tri[valid]
  if not len(t):return None
  # Resolve closest capsule-axis point using convex distance minimization.
- bottom=p+np.array([0,.33,0]);top=p+np.array([0,1.5,0]);lower=np.zeros(len(t));upper=np.ones(len(t))
+ bottom=p+np.array([0,.3,0]);top=p+np.array([0,1.5,0]);lower=np.zeros(len(t));upper=np.ones(len(t))
  for _ in range(22):
   u=(2*lower+upper)/3;v=(lower+2*upper)/3;du=nearest(bottom+(top-bottom)*u[:,None],t);dv=nearest(bottom+(top-bottom)*v[:,None],t);choose=du<dv;upper=np.where(choose,v,upper);lower=np.where(choose,lower,u)
  dist=nearest(bottom+(top-bottom)*((lower+upper)/2)[:,None],t)
- if np.min(dist)<.285**2:return 'standing capsule intersects collision'
+ if np.min(dist)<.27**2:return 'standing capsule intersects collision'
  return None
 for e in route['edges']:
  a,b=nodes[e['from']],nodes[e['to']];delta=b-a;horizontal=np.linalg.norm(delta[[0,2]]);slope=abs(delta[1])/max(horizontal,1e-6);assert slope<=.4,(e,'slope too steep',slope)
@@ -57,5 +58,12 @@ for e in route['edges']:
   if error:bad.append({'position':p.tolist(),'reason':error})
  if bad:failures.append({'edge':[e['from'],e['to']],'failures':bad[:5],'failedSamples':len(bad)})
  rows.append({'edge':[e['from'],e['to']],'meters':float(np.linalg.norm(delta)),'slope':float(slope),'samples':samples})
+for flight in m['extensions'].get('com.hyprune.lumen-reach.stairs',{}).get('paths',[]):
+ a,b=np.array(flight['from']),np.array(flight['to']);samples=max(2,math.ceil(np.linalg.norm(b-a)/.25));bad=[]
+ for t in np.linspace(0,1,samples):
+  p=a+(b-a)*t;error=check(p)
+  if error:bad.append({'position':p.tolist(),'reason':error})
+ if bad:failures.append({'stair':flight['id'],'failures':bad[:5],'failedSamples':len(bad)})
+ rows.append({'stair':flight['id'],'meters':float(np.linalg.norm(b-a)),'samples':samples})
 report={'status':'FAIL' if failures else 'PASS','connectedNodes':len(seen),'edges':rows,'failures':failures,'method':'exported collision triangle floor support and continuous standing capsule clearance sampled at <=0.25m; all graph branches'}
 print(json.dumps(report,indent=2));sys.exit(1 if failures else 0)

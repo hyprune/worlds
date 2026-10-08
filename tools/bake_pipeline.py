@@ -5,7 +5,7 @@ from pathlib import Path
 if os.environ.get("HYPRUNE_REMOTE_BLENDER")!="1": raise SystemExit("Remote bake host only")
 import bpy,bmesh,numpy as np
 from mathutils import Vector,Matrix
-RESOLUTIONS={};GROUPS={};BLOCKS=[];COLL=[];MATS={};LIGHTMAPS={};TILE_METERS={}
+RESOLUTIONS={};MARGINS={};GROUPS={};BLOCKS=[];COLL=[];MATS={};LIGHTMAPS={};TILE_METERS={}
 def log(s): print("LUMEN | "+s,flush=True)
 
 def select(obs):
@@ -25,7 +25,7 @@ def add(o,name,mat,group,collision=False):
    v=o.matrix_world@o.data.vertices[o.data.loops[li].vertex_index].co;uv.data[li].uv=(v[axes[0]]/TILE_METERS.get(mat,1),v[axes[1]]/TILE_METERS.get(mat,1))
    if mat=='trim':
     coords=[(o.matrix_world@o.data.vertices[o.data.loops[j].vertex_index].co)[axes[1]] for j in p.loop_indices];span=max(coords)-min(coords)
-    uv.data[li].uv=(v[axes[0]],.8671875-(v[axes[1]]-min(coords))/max(span,1e-6)*.109375)
+    uv.data[li].uv=(v[axes[0]],.2421875-(v[axes[1]]-min(coords))/max(span,1e-6)*.109375)
  if collision:
   vs=[o.matrix_world@Vector(v) for v in o.bound_box];lo=[min(v[i] for v in vs) for i in range(3)];hi=[max(v[i] for v in vs) for i in range(3)]
   COLL.append((name,lo,hi))
@@ -67,7 +67,7 @@ def join_groups():
   if name in {'vista','atmosphere'}:
    GROUPS[name]=[o];continue
   select([o]);uv=o.data.uv_layers.new(name='UV1');o.data.uv_layers.active=uv;uv.active_render=True
-  bpy.ops.object.mode_set(mode='EDIT');bpy.ops.mesh.select_all(action='SELECT');bpy.ops.uv.smart_project(angle_limit=math.radians(30),island_margin=.003,margin_method='FRACTION',scale_to_bounds=True);bpy.ops.uv.pack_islands(rotate=True,scale=True,margin_method='FRACTION',margin=8/(RESOLUTIONS.get(name,2048)));bpy.ops.object.mode_set(mode='OBJECT')
+  bpy.ops.object.mode_set(mode='EDIT');bpy.ops.mesh.select_all(action='SELECT');bpy.ops.uv.smart_project(angle_limit=math.radians(30),island_margin=.003,margin_method='FRACTION',scale_to_bounds=True);bpy.ops.uv.pack_islands(rotate=True,scale=True,margin_method='FRACTION',margin=MARGINS.get(name,8)/(RESOLUTIONS.get(name,2048)));bpy.ops.object.mode_set(mode='OBJECT')
   uv=o.data.uv_layers['UV1'];log(f'UV1 {name}: {min(c for d in uv.data for c in d.uv):.5f} .. {max(c for d in uv.data for c in d.uv):.5f}');assert all(-1e-6<=c<=1.000001 for d in uv.data for c in d.uv),name
   o.data.uv_layers['UV0'].active_render=True
   GROUPS[name]=[o]
@@ -83,7 +83,7 @@ def bake(samples):
  rows=[]
  for name,obs in GROUPS.items():
   if name in {'vista','atmosphere'}:continue
-  t=time.time();o=obs[0];n=RESOLUTIONS.get(name,2048)
+  t=time.time();o=obs[0];n=RESOLUTIONS.get(name,2048);margin=MARGINS.get(name,8);s.render.bake.margin=margin
   im=bpy.data.images.new('Irradiance '+name,width=n,height=n,alpha=False,float_buffer=True)
   for m in o.data.materials:
    node=m.node_tree.nodes.new('ShaderNodeTexImage');node.name='Lighting bake target';node.image=im;m.node_tree.nodes.active=node
@@ -99,7 +99,7 @@ def bake(samples):
   a[:,:,:3]=np.clip(a[:,:,:3]/intensity,0,1);a[:,:,3]=1
   save_srgb('lightmap-'+name,a);LIGHTMAPS[name]=intensity
   for m in o.data.materials:m.node_tree.nodes.remove(m.node_tree.nodes['Lighting bake target'])
-  bpy.data.images.remove(im);rows.append({'group':name,'resolution':n,'peakLinear':peak,'intensity':intensity,'seconds':round(time.time()-t,2),'samples':samples,'marginPixels':8,'islandSeparationPixels':8,'supportedMipLevels':2})
+  bpy.data.images.remove(im);rows.append({'group':name,'resolution':n,'peakLinear':peak,'intensity':intensity,'seconds':round(time.time()-t,2),'samples':samples,'marginPixels':margin,'islandSeparationPixels':margin,'supportedMipLevels':0 if name=='foliage' else 2})
   log('Baked '+name);(ART/'bake-report.json').write_text(json.dumps(rows,indent=2)+'\n')
 
 
@@ -139,6 +139,7 @@ def export(cols,nav):
   m['pbrMetallicRoughness']={'baseColorFactor':[min(1,c*gain) for c in color]+[1],'metallicFactor':0,'roughnessFactor':1}
   if 'emissiveTexture' in m:m['pbrMetallicRoughness']['baseColorTexture']=m.pop('emissiveTexture')
   m.setdefault('extensions',{})['KHR_materials_unlit']={}
+  if m.get('name','').startswith('vista--steam-card'):m['alphaMode']='BLEND';m['doubleSided']=True
  if 'KHR_materials_unlit' not in g.setdefault('extensionsUsed',[]):g['extensionsUsed'].append('KHR_materials_unlit')
  # At isolated degenerate UV caps MikkTSpace may output zero tangents.
  # Supply a deterministic unit orthogonal fallback, preserving other tangents.

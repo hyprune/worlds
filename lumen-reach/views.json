@@ -94,7 +94,7 @@
         -4.3
       ],
       "target": [
-        38,
+        39,
         99,
         -0.6
       ]
@@ -104,12 +104,12 @@
       "areaCount": 3,
       "position": [
         40,
-        82,
+        77.5,
         -3.8
       ],
       "target": [
         45,
-        88,
+        82,
         -3.4
       ]
     },
@@ -125,6 +125,48 @@
         38,
         97,
         -0.1
+      ]
+    },
+    {
+      "id": "04-signal-rise",
+      "areaCount": 4,
+      "position": [
+        38,
+        119,
+        2.1
+      ],
+      "target": [
+        58,
+        148,
+        8.3
+      ]
+    },
+    {
+      "id": "04-signal-rise-bench",
+      "areaCount": 4,
+      "position": [
+        40,
+        118,
+        2.1
+      ],
+      "target": [
+        41,
+        123,
+        1.9
+      ]
+    },
+    {
+      "id": "04-signal-rise-gantry",
+      "areaCount": 4,
+      "position": [
+        77,
+        152,
+        7.7
+      ],
+      "target": [
+        38,
+        149,
+        7.5
       ]
     }
   ]

@@ -1,0 +1,248 @@
+{
+  "coreCommit": "f7fa0da53f85b977b836755e4df704d191093e66",
+  "loadedPluginSHA256": "9a7e5a5152dd6d09d9fc15ce7492e2a78d293e2c3d7eac721a08e1002babfb4a",
+  "protocol": "0.4",
+  "load": {
+    "revision": 3
+  },
+  "manifestSHA256": "e7db7fe048f6094e7677a121b5736b0ea8a593a5dc7a2fd7f064ae9b70867eba",
+  "sceneSHA256": "e3b3dc840e91d06d7274b52fcd71988fe8d54841d576648a29c109280b1fc8e9",
+  "walk": {
+    "before": [
+      -8.0,
+      1.7000000476837158,
+      12.0
+    ],
+    "after": [
+      -8.0,
+      1.7000000476837158,
+      10.250083923339844
+    ]
+  },
+  "views": [
+    {
+      "id": "01-sun-court",
+      "pose": {
+        "orientation": [
+          0.059117864817380905,
+          -0.17116305232048035,
+          0.010289458557963371,
+          0.9834136366844177
+        ],
+        "position": [
+          -9.0,
+          2.0,
+          16.0
+        ]
+      },
+      "verticalFovDegrees": 60,
+      "path": "/home/rick/workspace/hyprune/worlds/artifacts/lumen-reach/engine-01-sun-court.png"
+    },
+    {
+      "id": "01-sun-court-terrace",
+      "pose": {
+        "orientation": [
+          0.030215978622436523,
+          -0.7472701072692871,
+          0.034058671444654465,
+          0.6629588007926941
+        ],
+        "position": [
+          -21.0,
+          5.699999809265137,
+          -15.0
+        ]
+      },
+      "verticalFovDegrees": 60,
+      "path": "/home/rick/workspace/hyprune/worlds/artifacts/lumen-reach/engine-01-sun-court-terrace.png"
+    },
+    {
+      "id": "01-sun-court-tools",
+      "pose": {
+        "orientation": [
+          0.016189953312277794,
+          0.1665656566619873,
+          -0.0027352748438715935,
+          0.9858936667442322
+        ],
+        "position": [
+          -12.0,
+          2.0999999046325684,
+          11.5
+        ]
+      },
+      "verticalFovDegrees": 60,
+      "path": "/home/rick/workspace/hyprune/worlds/artifacts/lumen-reach/engine-01-sun-court-tools.png"
+    },
+    {
+      "id": "02-array-hall",
+      "pose": {
+        "orientation": [
+          0.20474699139595032,
+          0.0,
+          -0.0,
+          0.978814959526062
+        ],
+        "position": [
+          8.0,
+          2.0,
+          -33.0
+        ]
+      },
+      "verticalFovDegrees": 60,
+      "path": "/home/rick/workspace/hyprune/worlds/artifacts/lumen-reach/engine-02-array-hall.png"
+    },
+    {
+      "id": "02-array-hall-balcony",
+      "pose": {
+        "orientation": [
+          -0.09023118019104004,
+          -0.3735569417476654,
+          -0.03653879091143608,
+          0.9224849343299866
+        ],
+        "position": [
+          -3.5,
+          9.699999809265137,
+          -38.0
+        ]
+      },
+      "verticalFovDegrees": 60,
+      "path": "/home/rick/workspace/hyprune/worlds/artifacts/lumen-reach/engine-02-array-hall-balcony.png"
+    },
+    {
+      "id": "02-array-hall-tools",
+      "pose": {
+        "orientation": [
+          0.0022548662964254618,
+          0.9238634705543518,
+          -0.005443728994578123,
+          0.38267678022384644
+        ],
+        "position": [
+          14.0,
+          2.0999999046325684,
+          -58.0
+        ]
+      },
+      "verticalFovDegrees": 60,
+      "path": "/home/rick/workspace/hyprune/worlds/artifacts/lumen-reach/engine-02-array-hall-tools.png"
+    },
+    {
+      "id": "03-rime-vault",
+      "pose": {
+        "orientation": [
+          0.08601707965135574,
+          -0.0706249549984932,
+          0.00611304584890604,
+          0.9937684535980225
+        ],
+        "position": [
+          36.0,
+          -4.300000190734863,
+          -78.0
+        ]
+      },
+      "verticalFovDegrees": 60,
+      "path": "/home/rick/workspace/hyprune/worlds/artifacts/lumen-reach/engine-03-rime-vault.png"
+    },
+    {
+      "id": "03-rime-vault-tools",
+      "pose": {
+        "orientation": [
+          0.027124037966132164,
+          -0.40665921568870544,
+          0.012080027721822262,
+          0.9130973219871521
+        ],
+        "position": [
+          40.0,
+          -3.799999952316284,
+          -77.5
+        ]
+      },
+      "verticalFovDegrees": 60,
+      "path": "/home/rick/workspace/hyprune/worlds/artifacts/lumen-reach/engine-03-rime-vault-tools.png"
+    },
+    {
+      "id": "03-rime-vault-platform",
+      "pose": {
+        "orientation": [
+          0.008080958388745785,
+          -0.5531209707260132,
+          0.005365556571632624,
+          0.8330445289611816
+        ],
+        "position": [
+          28.5,
+          -0.30000001192092896,
+          -93.0
+        ]
+      },
+      "verticalFovDegrees": 60,
+      "path": "/home/rick/workspace/hyprune/worlds/artifacts/lumen-reach/engine-03-rime-vault-platform.png"
+    },
+    {
+      "id": "04-signal-rise",
+      "pose": {
+        "orientation": [
+          0.08306252956390381,
+          -0.29618340730667114,
+          0.025864964351058006,
+          0.9511608481407166
+        ],
+        "position": [
+          38.0,
+          2.0999999046325684,
+          -119.0
+        ]
+      },
+      "verticalFovDegrees": 60,
+      "path": "/home/rick/workspace/hyprune/worlds/artifacts/lumen-reach/engine-04-signal-rise.png"
+    },
+    {
+      "id": "04-signal-rise-bench",
+      "pose": {
+        "orientation": [
+          -0.01950492151081562,
+          -0.09851868450641632,
+          -0.0019313677912577987,
+          0.9949421882629395
+        ],
+        "position": [
+          40.0,
+          2.0999999046325684,
+          -118.0
+        ]
+      },
+      "verticalFovDegrees": 60,
+      "path": "/home/rick/workspace/hyprune/worlds/artifacts/lumen-reach/engine-04-signal-rise-bench.png"
+    },
+    {
+      "id": "04-signal-rise-gantry",
+      "pose": {
+        "orientation": [
+          -0.0017370297573506832,
+          0.7337198257446289,
+          0.00187577900942415,
+          0.6794474124908447
+        ],
+        "position": [
+          77.0,
+          7.699999809265137,
+          -152.0
+        ]
+      },
+      "verticalFovDegrees": 60,
+      "path": "/home/rick/workspace/hyprune/worlds/artifacts/lumen-reach/engine-04-signal-rise-gantry.png"
+    }
+  ],
+  "status": "PASS",
+  "checks": [
+    "package load",
+    "real spawn walking",
+    "matching 60 degree views",
+    "clean nested exit"
+  ],
+  "routeEvidence": "milestone-04-route-report.json"
+}

@@ -12,8 +12,9 @@ P.OUT=OUT;P.ART=ART
 ANCHORS=[];OBJECTS=[];AREAS=[];ROUTES=[];EDGES=[];WALK=[];MOUNT_ROWS=[]
 NAMES=['sun-court','array-hall','rime-vault','signal-rise']
 TITLES=['SUN COURT','ARRAY HALL','RIME VAULT','SIGNAL RISE']
-AREA=0;BASE=0;G='sun-court';COUNT={}
+AREA=0;BASE=0;G='sun-court';COUNT={};STAIR_ROUTES=[]
 UNLIT=set();VIEWS=[]
+LANDMARKS={'arrival': 'Sun Court', 'globe-platform': 'Instrument terrace', 'lookout': 'West lookout', 'cascade-bridge': 'Upper Cascade', 'rooftop': 'Rooftop shelter', 'hall-arrival': 'Array Hall', 'hall-upper': 'Upper balcony', 'vault-arrival': 'Rime Vault', 'vault-platform': 'Maintenance deck', 'rise-arrival': 'Signal Rise', 'fortress-room': 'Gate operator room', 'diagnostics-platform': 'Diagnostics deck', 'dish-platform': 'Dish terrace', 'gantry-west': 'Cable gantry'}
 
 def box(name,pos,size,mat='concrete',bevel=.025,solid=False,group=None):
  return P.box(name,pos,size,mat,group or G,bevel,solid)
@@ -53,10 +54,12 @@ def init():
  if OUT.exists():shutil.rmtree(OUT)
  OUT.mkdir(parents=True);(OUT/'textures').mkdir();ART.mkdir(parents=True,exist_ok=True)
  for name,asset,col,rough,metal in [('concrete','concrete',(.52,.46,.36),.75,0),('stone','paving',(.24,.28,.3),.3,0),('metal','metal',(.04,.055,.07),.4,.65),('canvas','canvas',(.52,.42,.28),.9,0),('wood','wood',(.3,.16,.07),.6,0),('frost','frost',(.16,.22,.26),.72,.45),('glass','glass',(.025,.06,.09),.18,.2),('grating','grating',(.04,.05,.055),.48,.5),('snow','snow',(.5,.65,.8),.85,0),('strip','strips',(.4,.2,.05),.3,.3)]:mat(name,col,asset,rough,metal)
+ m=mat('trim',(.5,.3,.12),rough=.4,metal=.35);t=m.node_tree.nodes.new('ShaderNodeTexImage');t.image=bpy.data.images.load(str(HERE/'materials/tiles/reach-trim-albedo.png'));uv=m.node_tree.nodes.new('ShaderNodeUVMap');uv.uv_map='UV0';m.node_tree.links.new(uv.outputs['UV'],t.inputs['Vector']);m.node_tree.links.new(t.outputs['Color'],m.node_tree.nodes['Principled BSDF'].inputs['Base Color'])
  P.TILE_METERS.update(concrete=2,stone=2,metal=1,canvas=1,wood=1,frost=1,glass=2,grating=1,snow=2,strip=1)
  for name,col,rough in [('red',(.33,.065,.035),.85),('leaf',(.42,.035,.018),.8),('leaf-gold',(.45,.16,.025),.8),('earth',(.035,.022,.012),.95),('ivory',(.7,.66,.54),.65),('black',(.008,.014,.020),.6),('ice',(.22,.38,.45),.45)]:mat(name,col,rough=rough)
  for name,col in [('amber',(1,.42,.085)),('red-light',(.9,.018,.006)),('cyan',(.11,.48,.68)),('white',(.62,.73,.82))]:mat(name,col,emit=True)
- for name,col in [('sky-far',(.24,.38,.49)),('mountain-far',(.29,.38,.43)),('mountain-mid',(.18,.27,.30)),('mountain-near',(.10,.19,.19)),('snow-peak',(.64,.69,.70)),('waterfall',(.47,.68,.74)),('spire',(.67,.64,.54)),('night',(.014,.027,.072)),('night-peak',(.035,.063,.12))]:mat(name,col,unlit=True)
+ for name,col in [('sky-far',(.24,.38,.49)),('mountain-far',(.29,.38,.43)),('mountain-mid',(.18,.27,.30)),('mountain-near',(.10,.19,.19)),('snow-peak',(.64,.69,.70)),('waterfall',(.47,.68,.74)),('spire',(.67,.64,.54)),('night',(.00060705,.01161225,.04666509)),('night-peak',(.035,.063,.12))]:mat(name,col,unlit=True)
+ m=mat('steam-card',(1,1,1),emit=True);nt=m.node_tree;t=nt.nodes.new('ShaderNodeTexImage');t.image=bpy.data.images.load(str(HERE/'materials/tiles/steam-albedo.png'));t.extension='EXTEND';u=nt.nodes.new('ShaderNodeUVMap');u.uv_map='UV0';nt.links.new(u.outputs['UV'],t.inputs['Vector']);p=nt.nodes.get('Principled BSDF');nt.links.new(t.outputs['Color'],p.inputs['Base Color']);nt.links.new(t.outputs['Color'],p.inputs['Emission Color']);nt.links.new(t.outputs['Alpha'],p.inputs['Alpha']);m.surface_render_method='DITHERED'
  s=bpy.context.scene;s.unit_settings.system='METRIC';s.unit_settings.scale_length=1;s.render.engine='CYCLES';s.cycles.samples=48;s.cycles.use_denoising=True;s.cycles.max_bounces=5;s.cycles.diffuse_bounces=3;P.gpu()
  s.world=bpy.data.worlds.new('Watershed sky');s.world.use_nodes=True;s.world.node_tree.nodes['Background'].inputs[0].default_value=(.32,.43,.57,1);s.world.node_tree.nodes['Background'].inputs[1].default_value=.28
  s.view_settings.view_transform='AgX';s.view_settings.look='AgX - Medium High Contrast';s.render.resolution_x=1920;s.render.resolution_y=1080;s.render.resolution_percentage=100;s.render.image_settings.file_format='PNG';s.render.image_settings.color_mode='RGB'
@@ -94,18 +97,23 @@ def slab(name,x0,x1,y0,y1,z,mat='stone'):
  o=box(name,((x0+x1)/2,(y0+y1)/2,z-.16),(x1-x0,y1-y0,.32),mat,.015);WALK.append(o)
  return o
 
-def ramp(name,x0,x1,y0,y1,z0,z1,steps=0,mat='concrete'):
+def ramp(name,x0,x1,y0,y1,z0,z1,steps=0,mat='concrete',stairs_side='right'):
  # Exact sloped walking/collision surface. Visible stairs flank a broad ramp.
  o=mesh(name,[(x0,y0,z0),(x1,y0,z0),(x1,y1,z1),(x0,y1,z1),(x0,y0,z0-.25),(x1,y0,z0-.25),(x1,y1,z1-.25),(x0,y1,z1-.25)],[(0,1,2,3),(7,6,5,4),(0,4,5,1),(1,5,6,2),(2,6,7,3),(3,7,4,0)],mat,True)
  if steps:
+  # Continuous collision bed lets core walk the visible steps without a step-up feature.
+  xa,xb=(x0-1.7,x0) if stairs_side=='left' else (x1,x1+1.7)
+  mesh(name+' stair bed',[(xa,y0,z0),(xb,y0,z0),(xb,y1,z1),(xa,y1,z1),(xa,y0,z0-.3),(xb,y0,z0-.3),(xb,y1,z1-.3),(xa,y1,z1-.3)],[(0,1,2,3),(7,6,5,4),(0,4,5,1),(1,5,6,2),(2,6,7,3),(3,7,4,0)],mat,True)
+  STAIR_ROUTES.append({'id':name.lower().replace(' ','-'),'from':up(((xa+xb)/2,y0,z0)),'to':up(((xa+xb)/2,y1,z1)),'width':1.65})
   for i in range(steps):
-   t=(i+1)/steps;y=y0+(y1-y0)*(i+.5)/steps;z=z0+(z1-z0)*t
-   box(name+' stair tread',(x1+.85,y,z-.1),(1.65,abs(y1-y0)/steps,.2),mat,.008,solid=True)
- rail((x0,y0,z0),(x0,y1,z1));rail((x1+1.7,y0,z0),(x1+1.7,y1,z1))
+   t=(i+1)/steps if z1>=z0 else i/steps;y=y0+(y1-y0)*(i+.5)/steps;z=z0+(z1-z0)*t
+   box(name+' stair tread',((xa+xb)/2,y,z-.1),(1.65,abs(y1-y0)/steps,.2),mat,.008)
+ left=x0-1.7 if steps and stairs_side=='left' else x0;right=x1 if stairs_side=='left' else x1+1.7
+ rail((left,y0,z0),(left,y1,z1));rail((right,y0,z0),(right,y1,z1))
  return o
 
 def point(name,pos,previous=None,width=3):
- ROUTES.append({'id':name,'position':up(pos)})
+ ROUTES.append({'id':name,'position':up(pos),'waypoint':name in LANDMARKS,**({'label':LANDMARKS[name]} if name in LANDMARKS else {})})
  if previous:EDGES.append({'from':previous,'to':name,'width':width})
  return name
 
@@ -114,7 +122,7 @@ def quat(q):
  # Convert the authored local screen axes into glTF world coordinates.
  c=Matrix.Rotation(-math.pi/2,4,'X').to_quaternion();r=c@q;return [r.x,r.y,r.z,r.w]
 
-def owner():return NAMES[AREA],f'{AREA+1:02d}'
+def owner():return G,AREAS[-1]['workspaceSlot']
 def anchor_id(kind):
  area,slot=owner();key=(area,kind);COUNT[key]=COUNT.get(key,0)+1;return f'{area}-slot-{slot}-{kind}-{COUNT[key]:02d}'
 
@@ -125,9 +133,13 @@ def screen(kind,pos,size,role='tool',tilt=0,style='instrument',yaw=0):
   o=box(name,center+r@Vector(local),size,mat,.025,group=group);o.rotation_mode='QUATERNION';o.rotation_quaternion=q;return o
  panel(ident+' casing',(0,0,-.13),(w+.42,h+.42,.26),'metal')
  panel(ident+' inset',(0,0,-.012),(w+.10,h+.10,.025),'black')
- for x in [-w/2-.14,w/2+.14]:panel(ident+' frame',(x,0,.012),(.11,h+.4,.08),'strip')
- for y in [-h/2-.14,h/2+.14]:panel(ident+' frame',(0,y,.012),(w+.4,.11,.08),'strip')
+ for x in [-w/2-.14,w/2+.14]:panel(ident+' frame',(x,0,.012),(.11,h+.4,.08),'trim')
+ for y in [-h/2-.14,h/2+.14]:panel(ident+' frame',(0,y,.012),(w+.4,.11,.08),'trim')
  panel(ident+' light',(0,h/2+.17,.06),(w,.026,.024),'amber')
+ # Mechanical bezel details stay behind the usable screen plane.
+ for x in [-w/2-.15,w/2+.15]:
+  for y in [-h/2-.15,h/2+.15]:panel(ident+' captive fastener',(x,y,.041),(.055,.055,.028),'ivory')
+ for x in [-w*.3,-w*.1,w*.1,w*.3]:panel(ident+' bezel cooling slot',(x,-h/2-.14,.039),(w*.105,.025,.016),'black')
  # Static original UI plane uses its own UV rectangle and unlit material.
  verts=[tuple(center+r@Vector(v)) for v in [(-w/2,-h/2,.025),(w/2,-h/2,.025),(w/2,h/2,.025),(-w/2,h/2,.025)]]
  o=mesh(ident+' placeholder',verts,[(0,1,2,3)],'ui-'+NAMES[AREA]+'-'+style,group='vista')
@@ -161,17 +173,18 @@ def tree(x,y,z=0,scale=1):
    p=Vector(end)+Vector((rng.uniform(-.65,.65),rng.uniform(-.65,.65),rng.uniform(-.35,.5)))*scale
    verts=[];faces=[]
    for k in range(12):
-    c=p+Vector((rng.uniform(-.25,.25),rng.uniform(-.25,.25),rng.uniform(-.13,.13)))*scale;rr=rng.uniform(.055,.14)*scale;a=rng.random()*math.tau;u=Vector((math.cos(a)*rr,math.sin(a)*rr,rr*.35));v=Vector((-math.sin(a)*rr*.5,math.cos(a)*rr*.5,rr*.05));n=len(verts);verts.extend([c-u,c+v,c+u,c-v]);faces.append((n,n+1,n+2,n+3))
-   mesh('Red canopy leaves',verts,faces,'leaf-gold' if j%5==0 else 'leaf')
+    c=p+Vector((rng.uniform(-.25,.25),rng.uniform(-.25,.25),rng.uniform(-.13,.13)))*scale;rr=rng.uniform(.095,.235)*scale;a=rng.random()*math.tau;u=Vector((math.cos(a)*rr,math.sin(a)*rr,rr*.35));v=Vector((-math.sin(a)*rr*.5,math.cos(a)*rr*.5,rr*.05));n=len(verts);verts.extend([c-u,c+v,c+u,c-v]);faces.append((n,n+1,n+2,n+3))
+   mesh('Red canopy leaves',verts,faces,'leaf-gold' if j%5==0 else 'leaf',group='foliage')
 
 
 def banner(x,y,z,h=4):
  box('Canvas standard',(x,y,z),(1.25,.055,h),'red');sigil((x,y-.035,z+.2),.75)
  rod('Banner suspension',(x-.75,y,z+h/2+.15),(x+.75,y,z+h/2+.15),.06)
 
-def canopy(x,y,z,w=6,d=5):
+def canopy(x,y,z,w=6,d=5,base=None):
+ if base is None:base=BASE
  for dx in [-w/2,w/2]:
-  for dy in [-d/2,d/2]:rod('Shelter mast',(x+dx,y+dy,BASE),(x+dx,y+dy,z+.3),.06)
+  for dy in [-d/2,d/2]:rod('Shelter mast',(x+dx,y+dy,base),(x+dx,y+dy,z+.3),.06)
  # Sagged original canvas panels, opaque by design.
  verts=[(x-w/2,y-d/2,z+.2),(x+w/2,y-d/2,z+.2),(x-w/2,y,z-.12),(x+w/2,y,z-.12),(x-w/2,y+d/2,z+.2),(x+w/2,y+d/2,z+.2)]
  mesh('Canvas canopy',verts,[(0,1,3,2),(2,3,5,4)],'canvas')
@@ -191,10 +204,11 @@ def globe(pos,r=1.8):
  data('globe',center)
 
 
-def set_area(i,bounds,spawn,free):
+def set_area(i,bounds,spawn,free,area_id=None,title=None,slot=None):
  global AREA,G,BASE
- AREA=i;G=NAMES[i];BASE=spawn[2]
- AREAS.append({'id':G,'name':TITLES[i].title(),'workspaceSlot':f'{i+1:02d}','theme':G,'primaryAnchor':None,'toolAnchors':[],'dataAnchors':[],'bounds':{'min':up((bounds[0],bounds[3],bounds[4])),'max':up((bounds[1],bounds[2],bounds[5]))},'spawn':spawn,'freePlacementZones':[{'id':G+'-open-work','bounds':{'min':up((free[0],free[3],free[4])),'max':up((free[1],free[2],free[5]))},'windowSizes':[[1.6,.9],[3.2,1.8]],'clearance':.15}]})
+ AREA=i;G=area_id or NAMES[i];BASE=spawn[2];slot=slot or f'{i+1:02d}'
+ assert not any(a['id']==G or a['workspaceSlot']==slot for a in AREAS),'home IDs and slots must be unique'
+ AREAS.append({'id':G,'name':title or TITLES[i].title(),'workspaceSlot':slot,'theme':NAMES[i],'primaryAnchor':None,'toolAnchors':[],'dataAnchors':[],'bounds':{'min':up((bounds[0],bounds[3],bounds[4])),'max':up((bounds[1],bounds[2],bounds[5]))},'spawn':spawn,'freePlacementZones':[{'id':G+'-open-work','bounds':{'min':up((free[0],free[3],free[4])),'max':up((free[1],free[2],free[5]))},'windowSizes':[[1.6,.9],[3.2,1.8]],'clearance':.15}]})
 
 
 def court():
@@ -208,10 +222,17 @@ def court():
  label('ARRAY HALL',(8,23.12,3.35),.35)
  for x in [2.8,13.2]:box('Entry light',(x,23.07,1.55),(.075,.05,2.7),'amber')
  # Layered facade ribs, worn service panels and warm physical entry detailing.
+ for x in [-5.6,-3.6,20.8,23.0]:
+  for z in [6.5,9.5,12.5]:
+   box('Facade maintenance plate',(x,23.08,z),(1.45,.18,2.25),'concrete',.025)
+   for dx in [-.58,.58]:
+    for dz in [-.9,.9]:box('Plate captive fixing',(x+dx,22.95,z+dz),(.055,.06,.055),'metal',0)
+  box('Facade service drain',(x,22.96,1.0),(.15,.12,1.5),'metal')
+
  for x in [-7,-5,-3,21,24]:
   box('Facade vertical rib',(x,23.12,9.2),(.16,.26,13.1),'concrete',.015)
   box('Rib metal foot',(x,22.93,.5),(.38,.25,1),'metal')
- for z in [5.45,15.4]:box('Facade horizontal seam',(8,22.99,z),(29,.09,.055),'metal',0)
+ for z in [5.3,15.4]:box('Facade horizontal seam',(8,22.99,z),(29,.09,.055),'metal',0)
  for x in [0.4,15.6]:
   box('Entry pier',(x,22.83,2.45),(.64,.65,4.9),'concrete',solid=True)
   box('Entry pier practical',(x,22.47,2.2),(.10,.08,3.1),'amber')
@@ -222,7 +243,7 @@ def court():
  box('Vestibule ceiling',(8,28,4.5),(16,8,.22),'concrete')
  P.area('Entry warm pool',(8,27,4.1),(8,27,0),650,(1,.62,.27),7)
  # Upper roof is reached by the western terrace ramp, then bridge.
- slab('Facade rooftop',-7,25,22,27,16,'concrete');rail((-7,22,16),(25,22,16));canopy(17,24.4,19.2,8,4)
+ slab('Facade rooftop',-7,25,22,27,16,'concrete');rail((-7,22,16),(25,22,16));canopy(17,24.4,19.2,8,4,base=16)
  # Globe terrace and winding rails sit off the command wall's clear approach.
  slab('Instrument terrace',-13,-2,6,15,1.2,'concrete');ramp('Globe approach',-8,-4,0,6,0,1.2,8)
  globe((-7,10,1.2));tree(-12,12,1.2,.8);lamp((-3,14,1.2))
@@ -230,13 +251,13 @@ def court():
  slab('West lookout',-24,-16,6,20,4,'concrete');ramp('Lookout ascent',-23,-20,-10,6,0,4,20)
  slab('Upper landing',-24,-16,20,24,4,'concrete');ramp('Roof ascent lower',-23,-20,24,40,4,8,20)
  slab('Roof landing',-24,-16,40,44,8,'concrete');ramp('Roof ascent upper',-18,-15,40,24,8,12,20)
- slab('Roof upper landing',-19,-11,20,24,12,'concrete');ramp('Roof final approach',-14,-11,20,36,12,16,20)
- slab('Rooftop bridge',-14,-7,35.7,37.5,16,'concrete');slab('Rooftop bridge run',-11,-7,22,36,16,'concrete');rail((-11,22,16),(-11,36,16))
+ slab('Roof upper landing',-20,-7.3,20,24,12,'concrete');ramp('Roof final approach',-13.2,-10.2,20,36,12,16,20)
+ slab('Rooftop bridge',-13.2,-3,36,37.5,16,'concrete');slab('Rooftop bridge run',-7,-3,22,36,16,'concrete');rail((-7,22,16),(-7,36,16))
  slab('Cascade expansion bridge',-34,-24,12,16,4,'concrete');rail((-34,12,4),(-24,12,4));rail((-34,16,4),(-24,16,4))
  box('Cascade route gate',(-34,14,5),( .18,4,2),'metal',solid=True);sigil((-32,11.94,4.8),.7);label('UPPER CASCADE',(-28,11.93,5.25),.23)
  rail((-24,6,4),(-24,12,4));rail((-24,16,4),(-24,24,4));banner(-19,9,7,3.5);tree(-20,17,4,.8)
  # Raised annex has substantial supports, so its walkable route reads as architecture.
- for x,y,z in [(-23,10,4),(-23,25,4),(-23,39,8),(-16,23,12),(-14.6,33,16)]:
+ for x,y,z in [(-23,10,4),(-23,25,4),(-23,39,8),(-16,23,12),(-20.2,33,16)]:
   box('Annex pier',(x,y,z/2-.3),(.75,.85,z+.6),'concrete',.04,solid=True)
  for y in [8,13,18]:box('Lookout light',(-23.85,y,4.15),(.06,.55,.08),'amber')
  # Field shelter foreground deliberately crops into the arrival composition.
@@ -253,7 +274,7 @@ def court():
  rod('Rig crossbar',(-17.8,0,3.8),(-11.8,0,3.8),.07)
  for p in [(-19,-2,0),(-19,-2,.85),(-21,-6,0),(-21,-4.8,0),(-22,1,0),(23,14,0)]:crate(p)
  for x,y in [(19,-6),(21,3),(19,16),(-23,-14),(-2,19)]:tree(x,y,0,.85)
- for x,y in [(-13,3),(13,-3),(22,9),(-1,17),(16,20)]:lamp((x,y,0))
+ for x,y in [(-13,3),(13,-3),(22,9),(-1,17),(22,20)]:lamp((x,y,0))
  box('Kiosk base',(17,5,.6),(1.8,1.0,1.2),'concrete',.09,solid=True);screen('kiosk-pillar',(17,4.8,2.2),(1.6,2.0),tilt=.08)
  banner(24,20,10,6);banner(-4,24,10,6)
  slab('Lookout seat terrace',-16,-13,16,20,4,'concrete')
@@ -269,7 +290,7 @@ def court():
  for y in [-12,-8,-4,1,5,18,21]:box('Paving expansion seam',(3,y,.01),(37,.025,.012),'metal',0)
  point('arrival',(-8,-12,0));point('court-junction',(1,2,0),'arrival');point('court-wall',(8,12,0),'court-junction');point('hall-entry',(8,25,0),'court-wall')
  point('globe-road',(1,-2,0),'court-junction');point('globe-approach',(-6,-2,0),'globe-road');point('globe-ramp',(-6,0,0),'globe-approach');point('globe-terrace',(-6,6,1.2),'globe-ramp');point('globe-platform',(-6,7,1.2),'globe-terrace')
- point('lookout-south',(-8,-14.5,0),'arrival');point('lookout-west',(-21.5,-14.5,0),'lookout-south');point('lookout-base',(-21.5,-10,0),'lookout-west');point('lookout',(-21.5,6,4),'lookout-base');point('cascade-turn',(-21.5,14,4),'lookout');point('cascade-bridge',(-31,14,4),'cascade-turn');point('roof-lower',(-21.5,24,4),'lookout');point('roof-switchback',(-21.5,40,8),'roof-lower');point('roof-turn',(-16.5,42,8),'roof-switchback');point('roof-return',(-16.5,40,8),'roof-turn');point('roof-upper',(-16.5,24,12),'roof-return');point('roof-start-west',(-16.5,20,12),'roof-upper');point('roof-start',(-12.5,20,12),'roof-start-west');point('roof-final',(-12.5,36,16),'roof-start');point('roof-bridge',(-9,36,16),'roof-final');point('rooftop',(-9,24,16),'roof-bridge')
+ point('lookout-south',(-8,-14.5,0),'arrival');point('lookout-west',(-21.5,-14.5,0),'lookout-south');point('lookout-base',(-21.5,-10,0),'lookout-west');point('lookout',(-21.5,6,4),'lookout-base');point('cascade-turn',(-21.5,14,4),'lookout');point('cascade-bridge',(-31,14,4),'cascade-turn');point('roof-lower',(-21.5,24,4),'lookout');point('roof-switchback',(-21.5,40,8),'roof-lower');point('roof-turn',(-16.5,42,8),'roof-switchback');point('roof-return',(-16.5,40,8),'roof-turn');point('roof-upper',(-16.5,24,12),'roof-return');point('roof-start-west',(-16.5,20,12),'roof-upper');point('roof-start',(-11.7,20,12),'roof-start-west');point('roof-final',(-11.7,36,16),'roof-start');point('roof-bridge',(-5,36,16),'roof-final');point('rooftop',(-5,24,16),'roof-bridge')
  VIEWS.extend([{'id':'01-sun-court','position':[-13,-13,1.9],'target':[4,23,7]},{'id':'01-sun-court-terrace','position':[-21,15,5.7],'target':[4,12,8]}])
 
 
@@ -299,16 +320,17 @@ def hall():
  for x in [-6,-2,2,6,10,14,18,22,24]:rod('Panorama mullion',(x,60,0),(x,60,20.6),.06)
  box('Panorama parapet',(9,60,.5),(30,.35,1),'concrete',solid=True)
  # The main wall hangs above the travel floor, rather than turning the hall into a corridor.
- screen('hanging-wall',(8,48,10),(18,8),'mounted-workspace',style='workspace')
- for x in [-.5,16.5]:rod('Workspace suspension',(x,48.3,14.5),(x,48.3,20.8),.09)
+ screen('hanging-wall',(8,48,10),(16,8),'mounted-workspace',style='workspace')
+ for x in [.6,15.4]:rod('Workspace suspension',(x,48.3,14.17),(x,48.3,20.8),.09)
  label('02 ARRAY HALL',(8,47.67,15.2),.42)
  sigil((-3,43.65,11),1.4)
  for x in [-1,18]:
   cyl('Lectern base',(x,40,.14),.55,.28,'metal')
   box('Lectern stem',(x,40,.62),(.32,.36,1.2),'metal',solid=True)
   screen('lectern',(x,39.85,1.95),(1.8,1.1),tilt=.38)
- screen('banner',(-3,38,6.6),(1.55,4.2),style='banner')
+ screen('banner',(-8,38,6.6),(1.55,4.2),style='banner')
  screen('banner',(21,44,6.6),(1.55,4.2),style='banner')
+ for x,y in [(-8,38),(21,44)]:rod('Banner mast',(x,y+.2,0),(x,y+.2,9.4),.055)
  for x in [-2,8,18]:
   box('Rear operator bench',(x,52.8,1),(3.8,1.1,.18),'wood',solid=True)
   for dx in [-1.5,1.5]:box('Rear bench leg',(x+dx,52.8,.5),(.12,.8,1),'metal',solid=True)
@@ -329,9 +351,9 @@ def hall():
  slab('Hall balcony landing',-13,-2,56,60,4,'concrete')
  slab('Hall first balcony',-6,-2,48,60,4,'concrete')
  ramp('Hall upper ascent',-5,-2,56,40,4,8,20)
- slab('Hall upper balcony',-6,-2,32,40,8,'concrete')
+ slab('Hall upper balcony',-6,0,32,40,8,'concrete')
  # Upper landing stops at the ramp crest; no slab crosses its rising clearance.
- rail((-2,32,8),(-2,39,8));rail((-2,57,4),(-2,60,4))
+ rail((-.2,32,8),(-.2,39,8));rail((-2,57,4),(-2,60,4))
  for y in [32.5,58]:box('Hall balcony support',(-11,y,1.8),(.8,.8,3.6),'concrete',solid=True)
  P.area('Hall warm skylight',(4,42,19),(8,46,0),13000,(1,.63,.26),12)
  P.area('Hall warm window',(12,59,14),(8,45,3),8500,(1,.76,.43),9)
@@ -345,13 +367,13 @@ def hall():
 
 
 def steam(pos,scale=1):
- # Opaque pale ribbons: supported now, no alpha blending dependency.
- x,y,z=pos
- for j in range(3):
-  verts=[]
-  for i in range(16):
-   t=i/15;a=t*math.tau*1.5+j*2.1;r=(.08+.20*t)*scale;px=x+math.cos(a)*r;py=y+math.sin(a)*r;pz=z+t*1.5*scale;w=(.014+.018*t)*scale;verts.extend([(px-w,py,pz),(px+w,py,pz)])
-  mesh('Vent steam ribbon',verts,[(2*i,2*i+1,2*i+3,2*i+2) for i in range(15)],'ice')
+ # Original generated alpha art, supported by core M2. Two crossed vent cards.
+ x,y,z=pos;w=1.4*scale;h=2.2*scale
+ for angle in [0,math.pi/2]:
+  dx=math.cos(angle)*w/2;dy=math.sin(angle)*w/2
+  o=mesh('Soft vent steam',[(x-dx,y-dy,z),(x+dx,y+dy,z),(x+dx,y+dy,z+h),(x-dx,y-dy,z+h)],[(0,1,2,3)],'steam-card',group='vista')
+  for i,v in enumerate([(0,0),(1,0),(1,1),(0,1)]):o.data.uv_layers[0].data[i].uv=v
+
 
 def vault():
  set_area(2,(26,55,52,103,-6.4,5),(38,79,-6),(36,42,77,83,-5.85,-1.2))
@@ -374,6 +396,7 @@ def vault():
  for x in [26,50]:
   spans=[(76,102)] if x<30 else [(76,96)]
   for ya,yb in spans:box('Vault side shell',(x,(ya+yb)/2,-1),(.6,yb-ya,10),'metal',solid=True)
+ box('Vault exit crown',(50,99,2.1),(.6,6,4.2),'metal',solid=True)
  box('Vault rear shell',(38,102,-1),(24,.65,10),'metal',solid=True)
  box('Vault ceiling',(38,89,4.2),(24,26,.45),'metal',solid=True)
  for x in [26.5,49.5]:
@@ -381,24 +404,24 @@ def vault():
    box('Vault frost rib',(x,y,-1),(.55,.4,9.5),'frost',solid=True)
    box('Vault red practical',(x+( .30 if x<30 else -.30),y,-2.4),(.04,.14,1.4),'red-light')
  for x in [29,33,43,47]:
-  rod('Ceiling coolant pipe',(x,77,2.8),(x,101,2.8),.19,'frost')
-  for y in [80,86,92,98]:cyl('Coolant flange',(x,y,2.8),.25,.12,'metal').rotation_euler=(math.pi/2,0,0)
+  rod('Ceiling coolant pipe',(x,77,3.65),(x,101,3.65),.19,'frost')
+  for y in [80,86,92,98]:cyl('Coolant flange',(x,y,3.65),.25,.12,'metal').rotation_euler=(math.pi/2,0,0)
  for y in [80,86,92,98]:
   rod('Vault cable tray',(27,y,3.55),(49,y,3.55),.055)
   box('Ceiling amber bar',(38,y,3.9),(5,.12,.05),'amber')
  # Main console is visibly recessed into a heavy service frame.
- box('Console backing',(38,100,-.5),(16,1.1,8.7),'frost',solid=True)
- screen('wall-inset-console',(38,99.37,-.1),(13.8,6.3),'mounted-workspace',style='workspace')
- label('03 RIME VAULT',(38,99.03,3.45),.32)
- for x in [30,46]:box('Console amber side',(x,99.20,-.8),(.08,.06,6.9),'amber')
- for x,y in [(33.6,81),(45,87)]:
+ box('Console backing',(39,100,-.5),(16,1.1,8.7),'frost',solid=True)
+ screen('wall-inset-console',(39,99.37,-.1),(13.8,6.3),'mounted-workspace',style='workspace')
+ label('03 RIME VAULT',(39,99.03,3.45),.32)
+ for x in [31,47]:box('Console amber side',(x,99.20,-.8),(.08,.06,6.9),'amber')
+ for x,y in [(33.6,81),(45,82)]:
   box('Vault instrument desk',(x,y,-5),(3.8,1.15,.17),'metal',solid=True)
   for dx in [-1.5,1.5]:box('Vault desk support',(x+dx,y,-5.5),(.16,.85,1),'frost',solid=True)
   screen('operator-desk',(x,y-.12,-4.02),(2.55,1.4),tilt=.20)
  screen('wall-inset-console',(49.35,94,-1.4),(3.0,2.0),yaw=-math.pi/2)
  ramp('Vault maintenance ascent',27,30,76,92,-6,-2,20,'grating')
- slab('Vault maintenance platform',26.4,30.7,92,98,-2,'grating')
- rail((30.6,93,-2),(30.6,98,-2));rail((26.5,92,-2),(26.5,98,-2))
+ slab('Vault maintenance platform',26.4,32,92,98,-2,'grating')
+ rail((32,93,-2),(32,98,-2));rail((26.5,92,-2),(26.5,98,-2))
  box('Maintenance terminal plinth',(28.5,96,-1.0),(3.6,1,.16),'metal',solid=True)
  screen('terminal-bench',(28.5,95.85,-.02),(2.3,1.3),tilt=.22)
  # Separate sealed continuation hints at a larger settlement.
@@ -407,7 +430,7 @@ def vault():
  label('SEALED',(28,99.58,-1.8),.25);label('CONTINUATION',(28,99.58,-2.3),.16)
  for x in [26.8,29.2]:box('Gate red edge',(x,99.62,-3),(.04,.045,4),'red-light')
  for x,y in [(47,80),(47,100),(34,96)]:crate((x,y,-6))
- box('Steam vent',(47,93,-5.5),(1,.6,.5),'frost',solid=True);steam((47,93,-5.2),1.3)
+ box('Steam vent',(47,91,-5.5),(1,.6,.5),'frost',solid=True);steam((47,91,-5.2),1.3)
  for x in [32.5,43.5]:box('Vault floor strip',(x,88,-5.97),(.08,22,.035),'amber',0)
  P.area('Vault cold ceiling',(38,83,3.4),(38,88,-5),750,(.18,.38,.7),8)
  P.area('Vault red service',(27,94,1),(32,93,-4),430,(1,.045,.018),4)
@@ -418,29 +441,185 @@ def vault():
   for a,b in zip([(38+off,78,-5.975),(38+off,89,-5.975),(48+off,98,-5.975)],[(38+off,89,-5.975),(48+off,98,-5.975),(54+off,100,-5.975)]):rod('Vault inset route rail',a,b,.018,'metal')
 
 
+def dish(pos,r=5):
+ x,y,z=pos;q=Matrix.Rotation(1.15,4,'X').to_3x3();verts=[Vector(pos)];faces=[]
+ for ring in range(1,13):
+  rr=r*ring/12
+  for j in range(48):
+   ang=j*math.tau/48;verts.append(Vector(pos)+q@Vector((rr*math.cos(ang),rr*math.sin(ang),.075*rr*rr)))
+ for j in range(48):faces.append((0,1+j,1+(j+1)%48))
+ for ring in range(1,12):
+  a=1+(ring-1)*48;b=1+ring*48
+  for j in range(48):k=(j+1)%48;faces.append((a+j,b+j,b+k,a+k))
+ mesh('Parabolic link dish',verts,faces,'frost')
+ rim=[]
+ for j in range(48):
+  ang=j*math.tau/48;rim.append(Vector(pos)+q@Vector((r*math.cos(ang),r*math.sin(ang),.075*r*r)))
+ for a,b in zip(rim,rim[1:]+rim[:1]):rod('Dish rim',a,b,.06,'metal')
+ focus=Vector(pos)+q@Vector((0,0,3.6))
+ for j in [4,20,36]:rod('Dish receiver support',rim[j],focus,.045)
+ cyl('Dish receiver',focus,.20,.5,'metal');rod('Dish pivot',(x,y,z-4),(x,y,z),.32,'metal')
+ data('radar-dish',pos)
+
+def night_vista():
+ # The snow basin sits beyond an opaque rock ridge. The lower connection
+ # tunnels below it, so night art never becomes a blue wall in the daylight homes.
+ m=mat('ridge-rock',(1,1,1),unlit=True);nt=m.node_tree;t=nt.nodes.new('ShaderNodeTexImage');t.image=bpy.data.images.load(str(HERE/'materials/tiles/concrete-albedo.png'));u=nt.nodes.new('ShaderNodeUVMap');u.uv_map='UV0';nt.links.new(u.outputs['UV'],t.inputs['Vector']);nt.links.new(t.outputs['Color'],next(n for n in nt.nodes if n.type=='EMISSION').inputs['Color']);P.TILE_METERS['ridge-rock']=8
+ verts=[];faces=[]
+ for i in range(26):
+  x=3+i*4;top=46+3*math.sin(i*.79)+2*math.cos(i*1.71);verts.extend([(x,105,-.25),(x,105,top),(x,112,top-3),(x,112,-.25)])
+ for i in range(25):
+  j=i*4;faces.extend([(j,j+4,j+5,j+1),(j+1,j+5,j+6,j+2),(j+2,j+6,j+7,j+3),(j+3,j+7,j+4,j)])
+ mesh('Snow basin rock ridge',verts,faces,'ridge-rock',solid=True,group='vista')
+ m=mat('signal-night-vista',(1,1,1),unlit=True);nt=m.node_tree;t=nt.nodes.new('ShaderNodeTexImage');t.image=bpy.data.images.load(str(HERE/'materials/tiles/night-vista-albedo.png'));uv=nt.nodes.new('ShaderNodeUVMap');uv.uv_map='UV0';nt.links.new(uv.outputs['UV'],t.inputs['Vector']);em=next(n for n in nt.nodes if n.type=='EMISSION');nt.links.new(t.outputs['Color'],em.inputs['Color'])
+ verts=[];uvs=[];faces=[]
+ for i in range(97):
+  u=i/96;ang=(u-.5)*(2*math.acos(-28/42));x=57+42*math.sin(ang);y=140+42*math.cos(ang);bottom=-3;verts.extend([(x,y,bottom),(x,y,35)]);uvs.extend([(u,(bottom+3)/38),(u,1)])
+ for i in range(96):j=2*i;faces.append((j,j+2,j+3,j+1))
+ o=mesh('Night opaque mountain cards',verts,faces,'signal-night-vista',group='vista')
+ for p in o.data.polygons:
+  for li,vi in zip(p.loop_indices,p.vertices):o.data.uv_layers[0].data[li].uv=uvs[vi]
+ # The panorama fades to the same zenith paint as the opaque closure.
+ def sky_uv(o):return o
+ # A shallow opaque canopy closes the basin above the opaque cards. Its
+ # southern edge stays behind the rock ridge; the daylight sphere stays visible
+ # in the other homes. Sky skirts close the card-to-canopy junction exactly.
+ verts=[];faces=[]
+ for i in range(97):
+  angle=(i/96-.5)*(2*math.acos(-28/42));x=57+42*math.sin(angle);y=140+42*math.cos(angle);verts.extend([(x,y,35),(x,y,40)])
+ for i in range(96):j=i*2;faces.append((j,j+2,j+3,j+1))
+ sky_uv(mesh('Signal upper sky skirts',verts,faces,'night',group='vista'))
+ sky_uv(mesh('Signal opaque sky canopy',[(15,112,40),(99,112,40),(99,183,40),(15,183,40)],[(0,1,2,3)],'night',group='vista'))
+ rng=random.Random(704);verts=[];faces=[]
+ for i in range(220):
+  x=rng.uniform(17,97);y=rng.uniform(114,181);r=rng.uniform(.015,.045);j=len(verts);verts.extend([(x-r,y-r,39.98),(x+r,y-r,39.98),(x+r,y+r,39.98),(x-r,y+r,39.98)]);faces.append((j,j+1,j+2,j+3))
+ mesh('Signal stars',verts,faces,'snow-peak',group='vista')
+
+def rise():
+ set_area(3,(29,85,100,160,-6.4,28),(54,125,0),(52,62,125,130,.15,4.8))
+ ramp('Snow service ascent',51,57,100,124,-6,0,30,'grating')
+ for x in [50.7,59]:box('Snow ascent shell',(x,112,-1.8),(.5,24,12),'metal',solid=True)
+ mesh('Snow ascent ceiling',[(50.4,100,-1),(59.3,100,-1),(59.3,124,5),(50.4,124,5)],[(0,1,2,3)],'metal',True)
+ for y in range(102,125,4):
+  z=-6+(y-100)*.25
+  for x in [51.1,58.5]:box('Ascent amber practical',(x,y,z+1),(.04,.6,.15),'amber')
+ P.area('Snow ascent pool',(54,119,2.5),(54,121,-.8),260,(.22,.40,1),3)
+ # Preserve an actual hole in the yard paving above the rising tunnel.
+ slab('Left snowy terrace',29,50,112,160,0,'snow');slab('Right snowy terrace',60,85,112,160,0,'snow');slab('Central snowy landing',50,60,124,160,0,'snow')
+ slab('Landing ring pavement',50,64,125,139,.01,'grating');torus('Arrival landing ring',(57,132,.055),4.8,.025,'amber')
+ for ang in [i*math.tau/12 for i in range(12)]:
+  x=57+5.3*math.cos(ang);y=132+5.3*math.sin(ang);box('Ring direction tick',(x,y,.06),(.32,.14,.035),'ivory',0)
+ # Massive gate facade; entrance is under the mounted workspace wall.
+ for x,w in [(54,10),(73.5,13)]:box('Signal fortress pier',(x,148,10),(w,1.5,20),'concrete',.07,solid=True)
+ box('Fortress gate crown',(64.5,148,12.5),(31,1.5,15),'concrete',solid=True)
+ for x in [49,52,74,79]:
+  box('Fortress armor rib',(x,146.95,11),(.5,.45,19),'metal',solid=True)
+  box('Fortress amber edge',(x+.28,146.65,10),(.07,.06,18),'amber')
+ screen('blast-door-screen',(63,147.15,10.7),(18.5,10.4),'mounted-workspace',style='workspace')
+ label('04 SIGNAL RISE',(63,146.82,17),.45);sigil((78,146.90,18),.7)
+ # Outer facility layers are beyond every work floor and walking destination.
+ for x,y,w,h in [(36,168,12,24),(85,171,12,30),(91,158,9,15)]:
+  box('Signal background service tower',(x,y,h/2),(w,7,h),'concrete',.06)
+  for dx in [-w/2+.5,w/2-.5]:
+   box('Tower vertical armor',(x+dx,y-3.65,h/2),(.55,.35,h-1),'metal')
+   box('Tower amber seam',(x+dx+.30,y-3.85,h/2),(.055,.04,h-2),'amber',0)
+  for z in range(3,h,4):
+   box('Tower service ledge',(x,y-3.9,z),(w-1,1,.4),'metal')
+   box('Tower snow ledge',(x,y-3.9,z+.27),(w-.8,1.1,.14),'snow')
+  box('Tower snow crown',(x,y,h+.12),(w+.25,7.3,.24),'snow')
+  rod('Tower warning mast',(x,y,h),(x,y,h+3),.055)
+  cyl('Tower warning practical',(x,y,h+3),.09,.17,'red-light')
+ # Deep segmented service bays, original grille motif and accumulated snow.
+ for x in [50.5,76.5]:
+  box('Warning grille recess',(x,146.91,12.4),(1.05,.22,7.4),'black')
+  for z in [9.2+i*.48 for i in range(14)]:
+   box('Warning grille fin',(x,146.74,z),(.86,.16,.11),'metal')
+   box('Warning grille light',(x,146.64,z),(.68,.035,.035),'red-light',0)
+  for z in [2,6.7,17.4,19.6]:
+   box('Service bay armor',(x,147.02,z),(3.0,.30,.56),'metal')
+   box('Armor accumulated snow',(x,146.96,z+.36),(3.0,.42,.15),'snow')
+ for x in [54,58,68,72]:
+  box('Crown plate',(x,147.05,18.5),(3.6,.28,2.0),'metal')
+  box('Crown snowy cap',(x,146.99,19.65),(3.6,.44,.16),'snow')
+ for x in [57.5,68.5]:
+  box('Gate lower armor',(x,146.94,3.4),(2.5,.35,1.6),'metal')
+  box('Gate lower snowy cap',(x,146.89,4.28),(2.5,.5,.15),'snow')
+
+ slab('Signal operator room',54,80,146,158,2.4,'grating')
+ ramp('Fortress gate approach',60,66,136,146,0,2.4,12,'concrete')
+ box('Fortress room roof',(64.5,153,20.2),(31,12,.5),'metal',solid=True)
+ box('Fortress rear wall',(64.5,158,10),(31,.6,20),'frost',solid=True)
+ for x in [59.2,67.3]:box('Open gate amber jamb',(x,147.0,3.4),(.08,.12,2),'amber')
+ # Foreground waist-high angled bench plus a distinct side-menu mount.
+ box('Signal terminal bench',(41,123,1),(4.8,1.35,.17),'metal',solid=True)
+ for x in [39,43]:box('Terminal bench pedestal',(x,123,.5),(.35,1.1,1),'frost',solid=True)
+ screen('terminal-bench',(41,122.85,1.95),(3.7,1.55),tilt=.42,style='map')
+ box('Bench side menu pillar',(45.3,123,.65),(.8,.6,1.3),'frost',solid=True)
+ screen('kiosk-pillar',(45.3,122.9,2.25),(1.0,1.9),tilt=.14)
+ screen('wall-inset-console',(76,146.9,4.9),(3.0,2.0))
+ ramp('Diagnostics platform ascent',75,78,130,142,0,2.4,12,'concrete')
+ slab('Diagnostics platform',72,80,142,148,2.4,'concrete')
+ rail((72,142,2.4),(72,148,2.4))
+ box('Field operator bench',(38,136,1),(3.8,1,.17),'metal',solid=True)
+ screen('operator-desk',(38,135.85,1.95),(2.5,1.4),tilt=.20)
+ # Stairs and broad ramps reach both the dish deck and the cable gantry.
+ ramp('Dish service ascent',30,33,128,144,0,4,20,'concrete')
+ slab('Dish service platform',29,41,144,154,4,'concrete')
+ rail((29,144,4),(29,154,4));rail((29,154,4),(41,154,4))
+ cyl('Dish mounting base',(35,149,4.5),2.0,1,'metal');dish((35,149,8.5),5)
+ ramp('East gantry ascent',79,82,114,138,0,6,30,'grating')
+ slab('Cable gantry bridge',42,84,150.5,153.5,6,'grating')
+ slab('Gantry east landing',79,84,138,153.5,6,'grating')
+ rail((84,138,6),(84,153.5,6));rail((79,138,6),(79,146,6))
+ rail((42,150.5,6),(79,150.5,6));rail((42,153.5,6),(84,153.5,6))
+ for x in [43,75]:box('Gantry pier',(x,152,2.8),(.6,.6,5.6),'metal',solid=True)
+ for off in [0,.13,.26]:rod('Gantry cable run',(42,153.0+off,6.3),(83,153.0+off,6.3),.05,'black')
+ for x,y,h in [(46,153,23),(82,151,26),(31,116,15)]:
+  for dx,dy in [(-.5,-.4),(.5,-.4),(0,.5)]:rod('Link mast',(x+dx,y+dy,0),(x,y,h),.06)
+  for z in range(3,h,3):rod('Mast brace',(x-.4,y,z),(x+.4,y,z+2),.035)
+  cyl('Mast warning beacon',(x,y,h+.12),.13,.26,'red-light');box('Antenna blade',(x,y,h-3),(.3,.2,3),'metal')
+ for x,y in [(32,121),(48,151),(82,143),(46,132),(47.5,133),(70,139),(71.5,139),(34,140)]:
+  crate((x,y,0));box('Case snow cap',(x,y,.85),(1.4,1,.12),'snow')
+ for x,y in [(67,126),(68,132),(68,138),(45,127),(46,138)]:
+  box('Thawed service pavement',(x,y,.018),(4.5,3.2,.025),'stone',0)
+  for dx in [-2,2]:box('Pavement edge bolt',(x+dx,y,.039),(.12,.12,.012),'metal',0)
+
+ box('Signal steam vent',(48,143,.3),(1,.7,.6),'frost',solid=True);steam((48,143,.6),1.8)
+ for x,y in [(31,126),(47,141),(73,131)]:lamp((x,y,0),2.6)
+ for x in [49,77]:box('Terrace amber strip',(x,132,.035),(.08,25,.05),'amber',0)
+ for x in [50,78]:box('Fortress snow ledge',(x,147.5,20.5),(2.6,2.3,.3),'snow')
+ P.area('Signal blue moonlight',(42,133,28),(57,139,0),4200,(.14,.28,1),20)
+ P.area('Signal amber gate',(63,143,14),(63,137,0),1150,(1,.38,.08),9)
+ P.area('Signal red warning',(82,150,18),(72,146,4),180,(1,.04,.012),4)
+ night_vista()
+ point('rise-ramp-top',(54,124,0),'rise-entry');point('rise-arrival',(54,125,0),'rise-ramp-top');point('rise-ring',(57,132,0),'rise-arrival');point('rise-wall',(63,136,0),'rise-ring');point('fortress-ramp-top',(63,146,2.4),'rise-wall');point('fortress-room',(63,152,2.4),'fortress-ramp-top')
+ point('diagnostics-road',(74,128,0),'rise-ring');point('diagnostics-base',(76.5,130,0),'diagnostics-road');point('diagnostics-platform',(76.5,142,2.4),'diagnostics-base')
+ point('dish-road',(37,126,0),'rise-arrival');point('dish-ramp-base',(31.5,128,0),'dish-road');point('dish-platform',(31.5,144,4),'dish-ramp-base')
+ point('gantry-road',(63,124,0),'rise-arrival');point('gantry-south',(76,113,0),'gantry-road');point('gantry-base',(80.5,114,0),'gantry-south');point('gantry-top',(80.5,138,6),'gantry-base');point('gantry-east',(80.5,152,6),'gantry-top');point('gantry-west',(44,152,6),'gantry-east')
+ for off in [-.5,.5]:
+  for a,b in zip([(54+off,124,.03),(57+off,132,.03),(63+off,136,.03)],[(57+off,132,.03),(63+off,136,.03),(63+off,146,2.43)]):rod('Snow inset route rail',a,b,.020,'metal')
+
+
 def vista():
  # Original opaque mountain art has depth layers; continuous sphere hides card edges.
  path=HERE/'materials/source/vista.png'
  m=mat('watershed-vista',(1,1,1),unlit=True);nt=m.node_tree;t=nt.nodes.new('ShaderNodeTexImage');t.image=bpy.data.images.load(str(path));t.extension='EXTEND';uv=nt.nodes.new('ShaderNodeUVMap');uv.uv_map='UV0';nt.links.new(uv.outputs['UV'],t.inputs['Vector']);em=next(n for n in nt.nodes if n.type=='EMISSION');nt.links.new(t.outputs['Color'],em.inputs['Color'])
- skyline=[(0,113),(100,115),(170,150),(230,172),(310,144),(350,142),(395,126),(425,45),(445,151),(465,32),(478,126),(493,90),(514,141),(557,129),(585,104),(598,127),(609,64),(620,168),(675,154),(706,126),(760,120),(832,107),(871,150),(976,178),(1090,141),(1160,142),(1250,89),(1325,132),(1374,92),(1435,87),(1499,52),(1572,140),(1640,169),(1666,152),(1740,151),(1800,138),(1852,146),(1920,121),(1970,129),(2048,137)]
+ # Wrap the complete painting over a sphere; the top sky row extends to the
+ # zenith. Precise angular UVs preserve the original mountain scale and avoid
+ # polygonal cuts between the painting's sky and a mismatched flat sky color.
  verts=[];uvs=[];faces=[]
- for x,y in skyline:
-  u=x/2048;theta=(u-.5)*math.radians(360);px=178.5*math.sin(theta);py=178.5*math.cos(theta);z=1.7*(-9+72*(1-y/683));verts.extend([(px,py,-15.3),(px,py,z)]);uvs.extend([(u,0),(u,1-y/683)])
- for i in range(len(skyline)-1):q=i*2;faces.append((q,q+2,q+3,q+1))
- o=mesh('Watershed wrapped silhouette cards',verts,faces,'watershed-vista',group='vista')
- for face in o.data.polygons:
-  for li,vi in zip(face.loop_indices,face.vertices):o.data.uv_layers[0].data[li].uv=uvs[vi]
+ for k in range(49):
+  latitude=-math.pi/2+k*math.pi/48;v=max(0,min(1,(105*math.tan(latitude)+9)/72))
+  for j in range(97):
+   u=j/96;angle=(u-.5)*math.tau;r=400*math.cos(latitude);verts.append((r*math.sin(angle),r*math.cos(angle),400*math.sin(latitude)));uvs.append((u,v))
+ for k in range(48):
+  for j in range(96):a=k*97+j;faces.append((a,a+1,a+98,a+97))
+ o=mesh('Watershed sky sphere',verts,faces,'watershed-vista',group='vista')
+ for p in o.data.polygons:
+  for li,vi in zip(p.loop_indices,p.vertices):o.data.uv_layers[0].data[li].uv=uvs[vi]
  # A second opaque cropped cliff card creates foreground parallax below the skyline.
  o=mesh('Cascade near cliff',[(-95,73,-9),(-27,73,-9),(-27,73,11),(-46,73,20),(-62,73,12),(-80,73,17),(-95,73,9)],[(0,1,2,3,4,5,6)],'watershed-vista',group='vista')
  for i,v in enumerate(o.data.vertices):o.data.uv_layers[0].data[i].uv=((v.co.x+120)/216,(v.co.z+9)/72)
- # Procedural sky uses a continuous spherical gradient, not an alpha haze card.
- n=512;yy,xx=np.mgrid[:n,:n];a=np.ones((n,n,4),np.float32);mix=np.clip((yy/n-.4)/.6,0,1)[:,:,None];a[:,:,:3]=np.array([.22,.35,.52])[None,None,:]*(1-mix)+np.array([.07,.20,.45])[None,None,:]*mix
- sky=bpy.data.images.new('Reach daylight gradient',width=n,height=n,alpha=False,float_buffer=True);sky.pixels.foreach_set(a.ravel());sky.filepath_raw=str(OUT/'textures/sky-gradient.png');sky.file_format='PNG';sky.save()
- m=mat('reach-sky',(1,1,1),unlit=True);nt=m.node_tree;t=nt.nodes.new('ShaderNodeTexImage');t.image=sky;t.extension='EXTEND';em=next(n for n in nt.nodes if n.type=='EMISSION');nt.links.new(t.outputs['Color'],em.inputs['Color'])
- bpy.ops.mesh.primitive_uv_sphere_add(segments=64,ring_count=24,radius=220,location=(5,40,0));o=bpy.context.object;uvs=[tuple(v.uv) for v in o.data.uv_layers[0].data];P.add(o,'Day sky sphere','reach-sky','vista')
- for i,v in enumerate(uvs):o.data.uv_layers[0].data[i].uv=v
- for p in o.data.polygons:p.flip()
- bpy.ops.mesh.primitive_uv_sphere_add(segments=32,ring_count=16,radius=6,location=(-12,110,69));P.add(bpy.context.object,'Watershed moon','snow-peak','vista')
  # The reachable west lookout looks across actual piers and an aqueduct extension.
  for x in range(-87,-27,6):
   box('Aqueduct pier',(x,63,2),(1.0,2.2,14),'spire',0,group='vista')
@@ -459,13 +638,20 @@ def spatial():
  # Collision uses exact walkable slopes, plus substantial prop/wall bounds.
  cols=[]
  for i,o in enumerate(WALK):
-  c=bpy.data.objects.new('CollisionWalk-'+str(i),o.data.copy());c.matrix_world=o.matrix_world.copy();bpy.context.collection.objects.link(c);cols.append(c)
+  data=o.data.copy()
+  if o.name=='Rooftop bridge':
+   # A top-only walking sheet joins the final slope without a false slab riser.
+   top=[tuple(p.vertices) for p in data.polygons if p.normal.z>.9]
+   verts=[tuple(v.co) for v in data.vertices];data=bpy.data.meshes.new('Continuous rooftop landing');data.from_pydata(verts,[],top);data.update()
+  c=bpy.data.objects.new('CollisionWalk-'+str(i),data);c.matrix_world=o.matrix_world.copy();bpy.context.collection.objects.link(c);cols.append(c)
  for i,(name,lo,hi) in enumerate(P.COLL):
   bpy.ops.mesh.primitive_cube_add(size=1,location=[(a+b)/2 for a,b in zip(lo,hi)]);c=bpy.context.object;c.name='CollisionProp-'+str(i);c.dimensions=[b-a for a,b in zip(lo,hi)];bpy.ops.object.transform_apply(location=False,rotation=False,scale=True);cols.append(c)
  # Path-following triangular ribbons include elevations and connect the actual ramps.
  lookup={p['id']:p['position'] for p in ROUTES};verts=[];faces=[]
  for e in EDGES:
   a,b=lookup[e['from']],lookup[e['to']];aa=Vector((a[0],-a[2],a[1]));bb=Vector((b[0],-b[2],b[1]));v=bb-aa;cross=Vector((-v.y,v.x,0));cross.normalize();cross*=max(.6,e['width']/2-.35);q=len(verts);verts.extend([aa-cross,aa+cross,bb+cross,bb-cross]);faces.extend([(q,q+1,q+2),(q,q+2,q+3)])
+ for stair in STAIR_ROUTES:
+  a,b=stair['from'],stair['to'];aa=Vector((a[0],-a[2],a[1]));bb=Vector((b[0],-b[2],b[1]));side=Vector((.6,0,0));q=len(verts);verts.extend([aa-side,aa+side,bb+side,bb-side]);faces.extend([(q,q+1,q+2),(q,q+2,q+3)])
  me=bpy.data.meshes.new('Walking centerline ribbons');me.from_pydata(verts,[],faces);nav=bpy.data.objects.new('Navigation',me);bpy.context.collection.objects.link(nav)
  for o in cols+[nav]:o.hide_render=True
  return cols,nav
@@ -475,14 +661,17 @@ def manifest(g,lm,nodes,cols,count):
  for area in AREAS:
   area['primaryAnchor']=next(r['anchorId'] for r in MOUNT_ROWS if r['areaId']==area['id'] and r['role']=='mounted-workspace');area['toolAnchors']=[r['anchorId'] for r in MOUNT_ROWS if r['areaId']==area['id'] and r['role']=='tool'];area['dataAnchors']=[r['id'] for r in OBJECTS if r['areaId']==area['id']]
  spawns=[{'id':'arrival','pose':{'position':up(AREAS[0]['spawn']),'rotation':[0,0,0,1]}}]+[{'id':a['id'],'pose':{'position':up(a['spawn']),'rotation':[0,0,0,1]}} for a in AREAS]
- m={'formatVersion':'0.2','id':'com.hyprune.lumen-reach','version':f'0.{count}.0','name':'Lumen Reach','description':'Four connected workspace homes on a mountain watershed. Original architecture, instruments and paths.','license':'CC-BY-4.0','scene':'scene.gltf','preview':'preview.png','defaultSpawn':'arrival','spawns':spawns,'anchors':ANCHORS,'zones':[{'id':a['id'],'name':a['name'],'bounds':a['bounds']} for a in AREAS],'navigation':{'kind':'mesh','node':nodes['Navigation'],'agentRadius':.3,'agentHeight':1.8},'collision':[{'node':nodes[o.name],'shape':'mesh','layer':'static'} for o in cols],'lightmaps':lm,'attribution':[{'path':'.','author':'Hyprune contributors','license':'CC-BY-4.0','source':'https://github.com/hyprune/worlds'}],'extensions':{'com.hyprune.lumen-reach.mounts':{'version':1,'areas':[{**{k:v for k,v in a.items() if k not in ['spawn','bounds','name','freePlacementZones']},'spawnId':a['id'],'freePlacementZones':[z['id'] for z in a['freePlacementZones']]} for a in AREAS],'mounts':MOUNT_ROWS,'objects':OBJECTS},'com.hyprune.lumen-reach.routes':{'version':1,'nodes':ROUTES,'edges':EDGES,'semantics':'bidirectional walking centerlines, feet positions in meters'},'com.hyprune.lumen-reach.placement':{'version':1,'zones':[z for a in AREAS for z in a['freePlacementZones']]},'com.hyprune.map':{'version':'0.1','path':'map.svg','projection':'xz','north':[0,0,-1],'bounds':[-26,-160,80,16],'worldToMap':[4/520,0,0,4/780,160/520,690/780]}},'requiredExtensions':[]}
+ m={'formatVersion':'0.2','id':'com.hyprune.lumen-reach','version':f'0.{count}.0','name':'Lumen Reach','description':f'{count} connected workspace homes on a mountain watershed. Original architecture, instruments and paths.','license':'CC-BY-4.0','scene':'scene.gltf','preview':'preview.png','defaultSpawn':'arrival','spawns':spawns,'anchors':ANCHORS,'zones':[{'id':a['id'],'name':a['name'],'bounds':a['bounds']} for a in AREAS],'navigation':{'kind':'mesh','node':nodes['Navigation'],'agentRadius':.3,'agentHeight':1.8},'collision':[{'node':nodes[o.name],'shape':'mesh','layer':'static'} for o in cols],'lightmaps':lm,'attribution':[{'path':'.','author':'Hyprune contributors','license':'CC-BY-4.0','source':'https://github.com/hyprune/worlds'}],'extensions':{'com.hyprune.lumen-reach.mounts':{'version':1,'areas':[{**{k:v for k,v in a.items() if k not in ['spawn','bounds','name','freePlacementZones']},'spawnId':a['id'],'freePlacementZones':[z['id'] for z in a['freePlacementZones']]} for a in AREAS],'mounts':MOUNT_ROWS,'objects':OBJECTS},'com.hyprune.lumen-reach.routes':{'version':1,'nodes':ROUTES,'edges':EDGES,'semantics':'bidirectional walking centerlines, feet positions in meters'},'com.hyprune.lumen-reach.stairs':{'version':1,'paths':STAIR_ROUTES,'semantics':'visible treads over continuous collision beds; alternate walkable flights'},'com.hyprune.lumen-reach.placement':{'version':1,'zones':[z for a in AREAS for z in a['freePlacementZones']]},'com.hyprune.map':{'version':'0.1','path':'map.svg','projection':'xz','north':[0,0,-1],'bounds':[-36,-162,86,16],'worldToMap':[4/520,0,0,4/780,160/520,690/780]}},'requiredExtensions':[]}
  (OUT/'world.json').write_text(json.dumps(m,indent=2)+'\n')
  rows=[];masters=json.loads((HERE/'materials/generation.json').read_text());byname={r['name']:r for r in masters}
  for p in sorted((OUT/'textures').glob('*.png')):
-  asset=p.name.split('-')[0];r=byname.get(asset);recipe='Original procedural color, signage or screen placeholder from materials/prepare.py and build.py.'
+  asset=next((k for k in sorted(byname,key=len,reverse=True) if p.name==k+'.png' or p.name.startswith(k+'-')),None);r=byname.get(asset);recipe='Original procedural color, signage or screen placeholder from materials/prepare.py and build.py.'
   if p.name.startswith('lightmap-'):recipe='Cycles diffuse DIRECT+INDIRECT without COLOR; OIDN RTLightmap; peak normalized linear irradiance, sRGB encoding, UV1.'
   if r:recipe='Original imagegen master, toroidal seam healing, periodic edge collar and wrap-safe PBR derivatives.'
-  rows.append({'path':p.relative_to(OUT).as_posix(),'author':'Hyprune contributors','license':'CC-BY-4.0','recipe':recipe,**({'masterSHA256':r['masterSHA256'],'prompt':r['prompt']} if r else {})})
+  if asset=='night-vista':recipe='Original generated night panorama, 1600px bounded derivative, smooth upper-sky fade to shared zenith paint for opaque basin closure.'
+  if asset=='steam':recipe='Original generated RGBA plume, bounded 512x768 derivative, clamp sampled BLEND crossed cards; core M2 alpha.'
+  if p.name.startswith('reach-trim'):recipe='Original generated material masters composed into eight trim bands with 8px gutters; strip band mapped explicitly. Masters/prompts in source materials/generation.json.'
+  rows.append({'path':p.relative_to(OUT).as_posix(),'author':'Hyprune contributors','license':'CC-BY-4.0','recipe':recipe,**({'masterSHA256':r['masterSHA256'],'prompt':r['prompt']} if r else {}),**({'derivedFrom':[{k:byname[name][k] for k in ['name','masterSHA256','prompt']} for name in ['concrete','metal','canvas','wood','frost','glass','strips','grating']]} if p.name.startswith('reach-trim') else {})})
  (OUT/'texture-provenance.json').write_text(json.dumps(rows,indent=2)+'\n');shutil.copy2(ROOT/'LICENSE',OUT/'LICENSE');shutil.copy2(HERE/'IDENTITY.md',OUT/'IDENTITY.md');shutil.copy2(HERE/'ATTRIBUTION.md',OUT/'ATTRIBUTION.md')
  svg=['<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 780"><rect width="520" height="780" fill="#10212d"/>']
  look={p['id']:p['position'] for p in ROUTES}
@@ -503,7 +692,7 @@ def stills():
 
 if __name__=='__main__':
  import argparse
- p=argparse.ArgumentParser();p.add_argument('--areas',type=int,choices=[1,2,3,4],default=1);p.add_argument('--samples',type=int,default=64);p.add_argument('--preview',action='store_true');p.add_argument('--stills',action='store_true');a=p.parse_args(sys.argv[sys.argv.index('--')+1:])
+ p=argparse.ArgumentParser();p.add_argument('--areas',type=int,choices=[1,2,3,4],default=4);p.add_argument('--samples',type=int,default=64);p.add_argument('--preview',action='store_true');p.add_argument('--stills',action='store_true');a=p.parse_args(sys.argv[sys.argv.index('--')+1:])
  BUILD_AREAS=a.areas
  if a.stills:
   bpy.ops.wm.open_mainfile(filepath=str(ART/'lumen-reach.blend'));P.gpu();VIEWS=[v for v in json.loads((HERE/'views.json').read_text())['views'] if v['areaCount']<=a.areas];(ART/'views.json').write_text(json.dumps({'verticalFovDegrees':60,'views':VIEWS},indent=2)+'\n');stills();sys.exit(0)
@@ -515,5 +704,7 @@ if __name__=='__main__':
  if a.preview:stills()
  else:
   # Shared pipeline keeps tiling UV0 distinct from atlas UV1 throughout bake/export.
-  for name,n in zip(NAMES[:a.areas],[3072,2560,2048,2560]):P.RESOLUTIONS[name]=n
+  for name,n in zip(NAMES[:a.areas],[1280,1536,1280,1280]):P.RESOLUTIONS[name]=n
+  P.RESOLUTIONS['foliage']=1024
+  P.MARGINS.update({'sun-court':4,'array-hall':4,'rime-vault':4,'signal-rise':4,'foliage':2})
   cols,nav=spatial();P.join_groups();P.bake(a.samples);g,lm,nodes=P.export(cols,nav);manifest(g,lm,nodes,cols,a.areas);bpy.ops.wm.save_as_mainfile(filepath=str(ART/'lumen-reach.blend'));stills()

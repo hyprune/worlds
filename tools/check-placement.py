@@ -39,7 +39,9 @@ def intersect(center,R,half):
 failures=[];checks=[];anchors={r['id']:r for r in m['anchors']};sizes=[(1.6,.9),(3.2,1.8)]
 for r in mounts['mounts']:
  anchor=anchors[r['anchorId']];R=rotation(anchor['pose']['rotation']);origin=np.array(anchor['pose']['position']);depth=r.get('clearanceMeters',4)
- for w,h in sizes:
+ assert depth>=(16 if r['role']=='mounted-workspace' else 4),('insufficient mount approach',r['anchorId'],depth)
+ for w,h in list(dict.fromkeys(sizes+[tuple(anchor['size'])])):
+  # Include the actual mount rectangle, particularly whole-workspace walls.
   # Start beyond the physical bezel; continuous swept slab, not discrete samples.
   start=.10;end=depth;center=origin+R[:,2]*(start+end)/2
   hit=intersect(center,R,[w/2,h/2,(end-start)/2])
