@@ -159,7 +159,11 @@ def record(client,children,state,shell_token,socketpath):
    address=window['address'];session.ctl('eval',f'hl.dispatch(hl.dsp.window.float({{window="address:{address}",action="enable"}}))');session.ctl('eval',f'hl.dispatch(hl.dsp.window.resize({{window="address:{address}",x={width},y={height}}}))')
    window=next(w for w in json.loads(session.ctl('clients','-j')) if w.get('title')==title)
    report.setdefault('nativeApplications',[]).append({k:window[k] for k in ['title','address','monitor','workspace','at','size','floating']})
-   if kind=='Home':pause(2) # allow first terminal repaint before another surface occludes it
+   if kind=='Home':
+    pause(2) # allow first terminal repaint before another surface occludes it
+    # Current core places newly launched applications in a free area. Return the
+    # Home application explicitly so it participates in its workspace composite.
+    client.call('surface.return',{'surfaceId':surface['id']})
    if kind=='Bench':
     kindname='lectern' if area['id']=='array-hall' else 'terminal-bench' if area['id']=='signal-rise' else 'operator-desk'
     anchor=next(r['anchorId'] for r in mounts if r['areaId']==area['id'] and r['mountType']==kindname)
@@ -175,6 +179,11 @@ def record(client,children,state,shell_token,socketpath):
   client.call('camera.set',pose(position,target));pause(.6);subprocess.run([str(session.HERE/'ctl.py'),'shot',str((a.output/('live-'+area+'.png')).resolve())],check=True)
  report['mountedApplicationState']=state()['mounts']
  report['capturesAfterSetup']=session.camera()['captures']
+ homes=[c for c in report['capturesAfterSetup'] if c['title'].endswith(' / Home')]
+ assert len(homes)==4 and all(not c['visible'] for c in homes),'Home applications must remain in workspace composites'
+ for v in json.loads((a.output/'views.json').read_text())['views']:
+  if v['id'].count('-')!=2:continue
+  client.call('camera.set',pose(v['position'],v['target']));pause(.6);subprocess.run([str(session.HERE/'ctl.py'),'shot',str((a.output/('live-workspace-'+v['id']+'.png')).resolve())],check=True)
  if a.diagnose:
   report['beforeDiagnostics']=session.camera()
   report['nativeAfterSetup']=json.loads(session.ctl('clients','-j'))
