@@ -2,7 +2,7 @@
   "uri": "scene.gltf",
   "mimeType": "model/gltf+json",
   "validatorVersion": "2.0.0-dev.3.10",
-  "validatedAt": "2026-10-09T13:34:18.177Z",
+  "validatedAt": "2026-10-09T16:40:06.706Z",
   "issues": {
     "numErrors": 0,
     "numWarnings": 0,
@@ -4758,7 +4758,7 @@
         "mimeType": "application/gltf-buffer",
         "storage": "external",
         "uri": "scene.bin",
-        "byteLength": 34404452
+        "byteLength": 34684352
       },
       {
         "pointer": "/images/0",
@@ -5650,8 +5650,8 @@
     "hasTextures": true,
     "hasDefaultScene": true,
     "drawCallCount": 417,
-    "totalVertexCount": 598111,
-    "totalTriangleCount": 249588,
+    "totalVertexCount": 603932,
+    "totalTriangleCount": 249670,
     "maxUVs": 2,
     "maxInfluences": 0,
     "maxAttributes": 5

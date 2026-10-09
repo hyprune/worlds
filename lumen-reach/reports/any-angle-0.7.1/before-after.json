@@ -1,0 +1,111 @@
+{
+  "title": "Lumen Reach 0.7.1: owner live-walk defects, exact-pose before/after",
+  "subtitle": "Columns: owner live capture of 0.7.0 (their session, 4K) | nested 0.7.0 | nested 0.7.1 (same private Intel nested harness, Medium, 0.5 scale, culling on). Poses from the capture JSONs.",
+  "columns": [
+    "Owner live 0.7.0",
+    "Nested 0.7.0",
+    "Nested 0.7.1"
+  ],
+  "rows": [
+    {
+      "id": "owner-1791554896814",
+      "title": "Sun Court edge, day panorama (defect 1)",
+      "caption": "0.7.0: two semi-transparent, mirrored copies of the painting plus row streaks (seam processing in materials/sky.py, seam facing due south), and grey wavy valley-shelf crests across the painted valley. 0.7.1: single clean painting (its seam now faces the Signal massif), no shelves in front; the outer terrain bowl stays >=6 deg below every walkable eye.",
+      "images": [
+        "/home/rick/.local/state/hyprune/captures/capture-1791554896814.png",
+        "artifacts/any-angle-0.7.1/nested-before/owner-1791554896814.png",
+        "artifacts/any-angle-0.7.1/sweep/owner-1791554896814.png"
+      ]
+    },
+    {
+      "id": "owner-1791558572827",
+      "title": "Snow-service stair from the top (defect 2)",
+      "caption": "0.7.0: Rise rock foundation top capped the stair; the closed night sky closed its end (blue rectangle). 0.7.1: portal cut through foundation, mountain shell and basin sky; treads, rails and the Vault lower passage visible at the bottom.",
+      "images": [
+        "/home/rick/.local/state/hyprune/captures/capture-1791558572827.png",
+        "artifacts/any-angle-0.7.1/nested-before/owner-1791558572827.png",
+        "artifacts/any-angle-0.7.1/sweep/owner-1791558572827.png"
+      ]
+    },
+    {
+      "id": "owner-1791558584009",
+      "title": "Snow-service stair from below (defect 2)",
+      "caption": "0.7.0: foundation south slope and mountain shell filled the opening with a rock wall. 0.7.1: the passage runs up to the Signal Rise gate screen; walkable both ways (route traversal PASS incl. the alternate flight).",
+      "images": [
+        "/home/rick/.local/state/hyprune/captures/capture-1791558584009.png",
+        "artifacts/any-angle-0.7.1/nested-before/owner-1791558584009.png",
+        "artifacts/any-angle-0.7.1/sweep/owner-1791558584009.png"
+      ]
+    },
+    {
+      "id": "owner-1791558599880",
+      "title": "Signal Rise night sky looking up (defect 3)",
+      "caption": "0.7.0: painted night master magnified up to ~930 screen px per texel on a basin wall 1-20 m away: blocks, streaks and concentric rings. 0.7.1: band-limited procedural gradient (every texel step <= 4 levels): smooth. Honest note: the painted night mountains are gone from the basin sky.",
+      "images": [
+        "/home/rick/.local/state/hyprune/captures/capture-1791558599880.png",
+        "artifacts/any-angle-0.7.1/nested-before/owner-1791558599880.png",
+        "artifacts/any-angle-0.7.1/sweep/owner-1791558599880.png"
+      ]
+    },
+    {
+      "id": "owner-1791558632233",
+      "title": "Stair enclosure from outside, night (defects 2+3)",
+      "caption": "0.7.0: rock floor inside the enclosure, blocky sky. 0.7.1: stair visible inside, smooth sky. Nested renders at Medium 0.5 scale; the live column is the owner session at their settings.",
+      "images": [
+        "/home/rick/.local/state/hyprune/captures/capture-1791558632233.png",
+        "artifacts/any-angle-0.7.1/nested-before/owner-1791558632233.png",
+        "artifacts/any-angle-0.7.1/sweep/owner-1791558632233.png"
+      ]
+    },
+    {
+      "id": "rise-corner-se",
+      "title": "Rise yard SE corner (found by the new leak check)",
+      "caption": "0.7.0: the ellipsoidal basin sky met the rail only at x=57, so yard corners stood outside it: the day sky and Sun Court showed through. 0.7.1: power-4 basin keeps every yard eye inside.",
+      "images": [
+        null,
+        "artifacts/any-angle-0.7.1/nested-before/rise-corner-se.png",
+        "artifacts/any-angle-0.7.1/sweep/rise-corner-se.png"
+      ]
+    },
+    {
+      "id": "rise-corner-sw",
+      "title": "Rise yard SW corner (found by the new leak check)",
+      "caption": "0.7.0: the mountain shell seen from outside filled the view inside the yard. 0.7.1: night yard, existing snow crags (polish props, unchanged).",
+      "images": [
+        null,
+        "artifacts/any-angle-0.7.1/nested-before/rise-corner-sw.png",
+        "artifacts/any-angle-0.7.1/sweep/rise-corner-sw.png"
+      ]
+    },
+    {
+      "id": "rise-zenith",
+      "title": "Rise straight up",
+      "caption": "0.7.0: concentric rings. 0.7.1: smooth.",
+      "images": [
+        null,
+        "artifacts/any-angle-0.7.1/nested-before/rise-zenith.png",
+        "artifacts/any-angle-0.7.1/sweep/rise-zenith.png"
+      ]
+    },
+    {
+      "id": "sky-zenith",
+      "title": "Day sky straight up from 60 m (found by the new pole check)",
+      "caption": "0.7.0: faint concentric rings at the zenith (pole fan rows not uniform). 0.7.1: uniform polar band, no rings. Cloud detail near the zenith is softer.",
+      "images": [
+        null,
+        "artifacts/any-angle-0.7.1/nested-before/sky-zenith.png",
+        "artifacts/any-angle-0.7.1/sweep/sky-zenith.png"
+      ]
+    },
+    {
+      "id": "court-day-seam",
+      "title": "Worst case for the relocated day seam: 45 m above the Court, looking straight at it",
+      "caption": "Only fly height can face the seam. Its landscape rows sit behind the Signal massif from every walkable eye (check-sky: 0 of 14,325 rays) and here too; cloud rows above the peaks are softened across the join, with no visible cut. The panorama is rotated ~161 deg relative to 0.7.0, so each direction now shows a different part of the same painting (the moon moved out of this view).",
+      "images": [
+        null,
+        "artifacts/any-angle-0.7.1/nested-before-seam/court-day-seam.png",
+        "artifacts/any-angle-0.7.1/nested-after-seam/court-day-seam.png"
+      ]
+    }
+  ]
+}

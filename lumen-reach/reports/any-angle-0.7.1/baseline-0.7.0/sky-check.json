@@ -1,0 +1,516 @@
+{
+  "status": "FAIL",
+  "method": "Deterministic sky/backdrop audit from every walkable eye position.\n\nCatches the 0.7.0 owner defects without image judgement:\n- layers: every enclosing sky is opaque and single sided; no large blended\n  backdrop card can double-expose a sky.\n- ghost: seam processing must not superimpose mirrored or row-shifted copies\n  of the painting (mirror correlation across the longitude seam, coherent\n  per-row offsets near the seam versus the image centre).\n- seam: every texture row whose seam step exceeds SEAM_SOFT_STEP must be\n  hidden behind opaque geometry from every eye at that latitude.\n- leaks: no view ray from a walkable eye first meets the culled back of a sky\n  or terrain shell (standing outside a closed sky and seeing past it), and\n  no terrain shell stands inside a closed sky at walking level.\n- magnification: screen pixels per sky texel at 3840x2160, 60 deg vertical\n  fov, nearest approach from any eye. Above MAX_PAINTED_MAGNIFICATION the\n  texture under that triangle must be smooth (per-texel step <= SMOOTH_STEP\n  levels), so bilinear magnification cannot show blocks, rings or streaks.\n- terrain: distant backdrop terrain stays TERRAIN_DIP below every eye.\n- poles: texture rows under the polar fans are uniform.",
+  "eyes": 955,
+  "distantTerrain": {
+    "farVertices": 2805,
+    "maxElevationDegrees": 3.49,
+    "eye": [
+      53.33,
+      -4.3,
+      -100.92
+    ],
+    "vertex": [
+      41.07,
+      3.47,
+      -227.61
+    ]
+  },
+  "thresholds": {
+    "maxPaintedMagnification": 12.0,
+    "smoothStep": 4,
+    "poleRange": 3,
+    "ghostMirrorCorrelation": 0.15,
+    "rowStreakRatio": 2.0,
+    "terrainDipDegrees": 6.0,
+    "screen": [
+      3840,
+      2160
+    ],
+    "verticalFovDegrees": 60
+  },
+  "skies": [
+    {
+      "material": "night-sky-v7",
+      "alphaMode": "OPAQUE",
+      "doubleSided": false,
+      "seamMirrorCorrelation": 0.095,
+      "centreMirrorCorrelation": -0.007,
+      "seamRowStreakRatio": 2.923,
+      "seamColumnStepMax": 49.0,
+      "maxScreenPixelsPerTexel": 931.7,
+      "worstEye": [
+        74.38,
+        1.7,
+        -114.38
+      ],
+      "magnifiedTriangles": 665,
+      "blockyMagnifiedTriangles": 615,
+      "poleBandRange": 0.0,
+      "seamHardRows": 20,
+      "seamSoftRowsStepMax": 12.0,
+      "seamAzimuthDegrees": 180.0,
+      "seamOccludedLatitudes": [
+        5,
+        10,
+        15,
+        20,
+        25
+      ],
+      "seamVisibleRays": 1085,
+      "seamRays": 4775
+    },
+    {
+      "material": "sky-v7",
+      "alphaMode": "OPAQUE",
+      "doubleSided": false,
+      "seamMirrorCorrelation": 0.27,
+      "centreMirrorCorrelation": 0.003,
+      "seamRowStreakRatio": 2.263,
+      "seamColumnStepMax": 43.0,
+      "maxScreenPixelsPerTexel": 8.8,
+      "worstEye": [
+        80.15,
+        7.7,
+        -153.14
+      ],
+      "magnifiedTriangles": 0,
+      "blockyMagnifiedTriangles": 0,
+      "poleBandRange": 4.0,
+      "seamHardRows": 55,
+      "seamSoftRowsStepMax": 12.0,
+      "seamAzimuthDegrees": 180.0,
+      "seamOccludedLatitudes": [
+        -30,
+        -25,
+        -20,
+        -15,
+        -10,
+        -5,
+        0,
+        5,
+        10,
+        15,
+        20,
+        25
+      ],
+      "seamVisibleRays": 2775,
+      "seamRays": 11460
+    }
+  ],
+  "failures": [
+    {
+      "test": "containment",
+      "count": 94,
+      "eyes": 4,
+      "examples": [
+        {
+          "eye": [
+            54.0,
+            -0.3,
+            -116.0
+          ],
+          "direction": [
+            0.719,
+            -0.06,
+            -0.693
+          ],
+          "terrain": "land-sun",
+          "meters": 1.33,
+          "sky": "night-sky-v7"
+        },
+        {
+          "eye": [
+            54.0,
+            -0.3,
+            -116.0
+          ],
+          "direction": [
+            -0.995,
+            -0.1,
+            0.025
+          ],
+          "terrain": "land-sun",
+          "meters": 0.8,
+          "sky": "night-sky-v7"
+        },
+        {
+          "eye": [
+            54.0,
+            -0.3,
+            -116.0
+          ],
+          "direction": [
+            0.747,
+            -0.14,
+            0.65
+          ],
+          "terrain": "land-sun",
+          "meters": 0.57,
+          "sky": "night-sky-v7"
+        },
+        {
+          "eye": [
+            54.0,
+            -0.3,
+            -116.0
+          ],
+          "direction": [
+            -0.111,
+            -0.18,
+            -0.977
+          ],
+          "terrain": "land-sun",
+          "meters": 0.44,
+          "sky": "night-sky-v7"
+        },
+        {
+          "eye": [
+            54.0,
+            -0.3,
+            -116.0
+          ],
+          "direction": [
+            -0.574,
+            -0.22,
+            0.789
+          ],
+          "terrain": "land-sun",
+          "meters": 0.36,
+          "sky": "night-sky-v7"
+        },
+        {
+          "eye": [
+            54.0,
+            -0.3,
+            -116.0
+          ],
+          "direction": [
+            0.946,
+            -0.26,
+            -0.192
+          ],
+          "terrain": "land-sun",
+          "meters": 0.31,
+          "sky": "night-sky-v7"
+        },
+        {
+          "eye": [
+            54.0,
+            -0.3,
+            -116.0
+          ],
+          "direction": [
+            -0.818,
+            -0.3,
+            -0.491
+          ],
+          "terrain": "land-sun",
+          "meters": 0.27,
+          "sky": "night-sky-v7"
+        },
+        {
+          "eye": [
+            54.0,
+            -0.3,
+            -116.0
+          ],
+          "direction": [
+            0.267,
+            -0.34,
+            0.902
+          ],
+          "terrain": "land-sun",
+          "meters": 0.24,
+          "sky": "night-sky-v7"
+        }
+      ]
+    },
+    {
+      "test": "terrainHorizon",
+      "farVertices": 2805,
+      "maxElevationDegrees": 3.49,
+      "eye": [
+        53.33,
+        -4.3,
+        -100.92
+      ],
+      "vertex": [
+        41.07,
+        3.47,
+        -227.61
+      ]
+    },
+    {
+      "test": "leaks",
+      "count": 891,
+      "eyes": 24,
+      "examples": [
+        {
+          "eye": [
+            54.0,
+            -1.8,
+            -110.0
+          ],
+          "direction": [
+            -0.111,
+            0.82,
+            0.561
+          ],
+          "culledShell": "land-mid",
+          "meters": 2.62
+        },
+        {
+          "eye": [
+            54.0,
+            -1.8,
+            -110.0
+          ],
+          "direction": [
+            0.471,
+            0.7,
+            0.536
+          ],
+          "culledShell": "land-sun",
+          "meters": 1.29
+        },
+        {
+          "eye": [
+            54.0,
+            -1.8,
+            -110.0
+          ],
+          "direction": [
+            0.813,
+            0.58,
+            -0.054
+          ],
+          "culledShell": "land-sun",
+          "meters": 2.92
+        },
+        {
+          "eye": [
+            54.0,
+            -1.8,
+            -110.0
+          ],
+          "direction": [
+            0.133,
+            0.5,
+            0.856
+          ],
+          "culledShell": "land-sun",
+          "meters": 1.04
+        },
+        {
+          "eye": [
+            54.0,
+            -1.8,
+            -110.0
+          ],
+          "direction": [
+            0.812,
+            0.38,
+            0.443
+          ],
+          "culledShell": "land-sun",
+          "meters": 1.03
+        },
+        {
+          "eye": [
+            54.0,
+            -1.8,
+            -110.0
+          ],
+          "direction": [
+            -0.382,
+            0.3,
+            0.874
+          ],
+          "culledShell": "land-sun",
+          "meters": 1.45
+        },
+        {
+          "eye": [
+            54.0,
+            -1.8,
+            -110.0
+          ],
+          "direction": [
+            0.476,
+            0.18,
+            0.861
+          ],
+          "culledShell": "land-sun",
+          "meters": 0.78
+        },
+        {
+          "eye": [
+            54.0,
+            -1.8,
+            -110.0
+          ],
+          "direction": [
+            0.987,
+            0.06,
+            0.149
+          ],
+          "culledShell": "land-sun",
+          "meters": 1.21
+        }
+      ]
+    },
+    {
+      "test": "ghost",
+      "material": "night-sky-v7",
+      "rowStreakRatio": 2.923
+    },
+    {
+      "test": "magnification",
+      "material": "night-sky-v7",
+      "triangles": 615,
+      "worst": {
+        "pixelsPerTexel": 931.7,
+        "texelStep": 137.0,
+        "eye": [
+          74.38,
+          1.7,
+          -114.38
+        ],
+        "centroid": [
+          73.6,
+          2.48,
+          -113.78
+        ]
+      }
+    },
+    {
+      "test": "seam",
+      "material": "night-sky-v7",
+      "visibleRays": 1085,
+      "eyes": 239,
+      "examples": [
+        {
+          "eye": [
+            30.37,
+            5.62,
+            -143.66
+          ],
+          "latitude": 5
+        },
+        {
+          "eye": [
+            30.4,
+            1.78,
+            -128.34
+          ],
+          "latitude": 5
+        },
+        {
+          "eye": [
+            30.44,
+            5.62,
+            -143.67
+          ],
+          "latitude": 5
+        },
+        {
+          "eye": [
+            31.12,
+            3.03,
+            -133.33
+          ],
+          "latitude": 5
+        },
+        {
+          "eye": [
+            31.44,
+            1.7,
+            -127.03
+          ],
+          "latitude": 5
+        },
+        {
+          "eye": [
+            31.45,
+            1.7,
+            -126.86
+          ],
+          "latitude": 5
+        }
+      ]
+    },
+    {
+      "test": "ghost",
+      "material": "sky-v7",
+      "mirrorCorrelation": 0.27,
+      "centreCorrelation": 0.003
+    },
+    {
+      "test": "ghost",
+      "material": "sky-v7",
+      "rowStreakRatio": 2.263
+    },
+    {
+      "test": "poles",
+      "material": "sky-v7",
+      "range": 4.0
+    },
+    {
+      "test": "seam",
+      "material": "sky-v7",
+      "visibleRays": 2775,
+      "eyes": 575,
+      "examples": [
+        {
+          "eye": [
+            31.75,
+            42.11,
+            -14.85
+          ],
+          "latitude": -10
+        },
+        {
+          "eye": [
+            -31.0,
+            5.7,
+            -14.0
+          ],
+          "latitude": -5
+        },
+        {
+          "eye": [
+            -30.68,
+            5.7,
+            -13.0
+          ],
+          "latitude": -5
+        },
+        {
+          "eye": [
+            -30.66,
+            5.7,
+            -15.07
+          ],
+          "latitude": -5
+        },
+        {
+          "eye": [
+            -30.65,
+            5.7,
+            -12.89
+          ],
+          "latitude": -5
+        },
+        {
+          "eye": [
+            -26.25,
+            5.7,
+            -14.0
+          ],
+          "latitude": -5
+        }
+      ]
+    }
+  ]
+}

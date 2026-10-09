@@ -1,0 +1,927 @@
+{
+  "status": "PASS",
+  "method": "Rendered-geometry clearance along every stair flight and walking edge.\n\nCollision audits (check-walking.py) cannot see render-only geometry: in 0.7.0\na non-colliding rock foundation and the closed night-sky shells capped the\nsnow-service stair while capsule routes walked straight through them. This\ncheck uses only *visible* triangles, including vista art:\n- headroom: vertical rays from 0.6 m to 2 m across the flight width;\n- body: a 0.25 m capsule from 0.6 m (clear of tread nosings) to 1.8 m;\n- sightline: eye-height rays to every sample up to 6 m ahead and behind,\n  culling back faces of single-sided materials exactly as the renderer does.",
+  "knee": 0.6,
+  "head": 2.0,
+  "eye": 1.6,
+  "radius": 0.25,
+  "sampleStep": 0.25,
+  "sightlineMeters": 6.0,
+  "flights": [
+    {
+      "kind": "stair",
+      "id": "globe-approach",
+      "meters": 6.12,
+      "samples": 78,
+      "blocked": 0
+    },
+    {
+      "kind": "stair",
+      "id": "lookout-ascent",
+      "meters": 16.49,
+      "samples": 201,
+      "blocked": 0
+    },
+    {
+      "kind": "stair",
+      "id": "roof-ascent-lower",
+      "meters": 16.49,
+      "samples": 201,
+      "blocked": 5
+    },
+    {
+      "kind": "stair",
+      "id": "roof-ascent-upper",
+      "meters": 16.49,
+      "samples": 201,
+      "blocked": 0
+    },
+    {
+      "kind": "stair",
+      "id": "roof-final-approach",
+      "meters": 16.49,
+      "samples": 201,
+      "blocked": 0
+    },
+    {
+      "kind": "stair",
+      "id": "hall-balcony-ascent",
+      "meters": 16.49,
+      "samples": 201,
+      "blocked": 0
+    },
+    {
+      "kind": "stair",
+      "id": "hall-upper-ascent",
+      "meters": 16.49,
+      "samples": 201,
+      "blocked": 0
+    },
+    {
+      "kind": "stair",
+      "id": "service-descent",
+      "meters": 22.8,
+      "samples": 279,
+      "blocked": 0
+    },
+    {
+      "kind": "stair",
+      "id": "vault-maintenance-ascent",
+      "meters": 16.49,
+      "samples": 201,
+      "blocked": 0
+    },
+    {
+      "kind": "stair",
+      "id": "snow-service-ascent",
+      "meters": 24.74,
+      "samples": 300,
+      "blocked": 24
+    },
+    {
+      "kind": "stair",
+      "id": "fortress-gate-approach",
+      "meters": 10.28,
+      "samples": 129,
+      "blocked": 0
+    },
+    {
+      "kind": "stair",
+      "id": "diagnostics-platform-ascent",
+      "meters": 12.24,
+      "samples": 150,
+      "blocked": 0
+    },
+    {
+      "kind": "stair",
+      "id": "dish-service-ascent",
+      "meters": 16.49,
+      "samples": 201,
+      "blocked": 0
+    },
+    {
+      "kind": "stair",
+      "id": "east-gantry-ascent",
+      "meters": 24.74,
+      "samples": 300,
+      "blocked": 0
+    },
+    {
+      "kind": "edge",
+      "id": "arrival>court-junction",
+      "meters": 16.64,
+      "samples": 68,
+      "blocked": 0
+    },
+    {
+      "kind": "edge",
+      "id": "court-junction>court-wall",
+      "meters": 12.21,
+      "samples": 50,
+      "blocked": 0
+    },
+    {
+      "kind": "edge",
+      "id": "court-wall>hall-entry",
+      "meters": 13.0,
+      "samples": 53,
+      "blocked": 0
+    },
+    {
+      "kind": "edge",
+      "id": "court-junction>globe-road",
+      "meters": 4.0,
+      "samples": 17,
+      "blocked": 0
+    },
+    {
+      "kind": "edge",
+      "id": "globe-road>globe-approach",
+      "meters": 7.0,
+      "samples": 29,
+      "blocked": 0
+    },
+    {
+      "kind": "edge",
+      "id": "globe-approach>globe-ramp",
+      "meters": 2.0,
+      "samples": 9,
+      "blocked": 0
+    },
+    {
+      "kind": "edge",
+      "id": "globe-ramp>globe-terrace",
+      "meters": 6.12,
+      "samples": 26,
+      "blocked": 0
+    },
+    {
+      "kind": "edge",
+      "id": "globe-terrace>globe-platform",
+      "meters": 1.0,
+      "samples": 5,
+      "blocked": 0
+    },
+    {
+      "kind": "edge",
+      "id": "arrival>lookout-south",
+      "meters": 2.5,
+      "samples": 11,
+      "blocked": 0
+    },
+    {
+      "kind": "edge",
+      "id": "lookout-south>lookout-west",
+      "meters": 13.5,
+      "samples": 55,
+      "blocked": 0
+    },
+    {
+      "kind": "edge",
+      "id": "lookout-west>lookout-base",
+      "meters": 4.5,
+      "samples": 19,
+      "blocked": 0
+    },
+    {
+      "kind": "edge",
+      "id": "lookout-base>lookout",
+      "meters": 16.49,
+      "samples": 67,
+      "blocked": 0
+    },
+    {
+      "kind": "edge",
+      "id": "lookout>cascade-turn",
+      "meters": 8.0,
+      "samples": 33,
+      "blocked": 0
+    },
+    {
+      "kind": "edge",
+      "id": "cascade-turn>cascade-bridge",
+      "meters": 9.5,
+      "samples": 39,
+      "blocked": 0
+    },
+    {
+      "kind": "edge",
+      "id": "lookout>roof-lower",
+      "meters": 18.0,
+      "samples": 73,
+      "blocked": 0
+    },
+    {
+      "kind": "edge",
+      "id": "roof-lower>roof-switchback",
+      "meters": 16.49,
+      "samples": 67,
+      "blocked": 0
+    },
+    {
+      "kind": "edge",
+      "id": "roof-switchback>roof-turn",
+      "meters": 5.39,
+      "samples": 23,
+      "blocked": 0
+    },
+    {
+      "kind": "edge",
+      "id": "roof-turn>roof-return",
+      "meters": 2.0,
+      "samples": 9,
+      "blocked": 0
+    },
+    {
+      "kind": "edge",
+      "id": "roof-return>roof-upper",
+      "meters": 16.49,
+      "samples": 67,
+      "blocked": 0
+    },
+    {
+      "kind": "edge",
+      "id": "roof-upper>roof-start-west",
+      "meters": 4.0,
+      "samples": 17,
+      "blocked": 0
+    },
+    {
+      "kind": "edge",
+      "id": "roof-start-west>roof-start",
+      "meters": 4.8,
+      "samples": 21,
+      "blocked": 0
+    },
+    {
+      "kind": "edge",
+      "id": "roof-start>roof-final",
+      "meters": 16.49,
+      "samples": 67,
+      "blocked": 0
+    },
+    {
+      "kind": "edge",
+      "id": "roof-final>roof-bridge",
+      "meters": 6.7,
+      "samples": 28,
+      "blocked": 8
+    },
+    {
+      "kind": "edge",
+      "id": "roof-bridge>rooftop",
+      "meters": 12.0,
+      "samples": 49,
+      "blocked": 9
+    },
+    {
+      "kind": "edge",
+      "id": "hall-entry>hall-arrival",
+      "meters": 8.0,
+      "samples": 33,
+      "blocked": 0
+    },
+    {
+      "kind": "edge",
+      "id": "hall-arrival>hall-center",
+      "meters": 13.0,
+      "samples": 53,
+      "blocked": 0
+    },
+    {
+      "kind": "edge",
+      "id": "hall-center>hall-exit",
+      "meters": 12.65,
+      "samples": 52,
+      "blocked": 0
+    },
+    {
+      "kind": "edge",
+      "id": "hall-exit>service-entry",
+      "meters": 10.0,
+      "samples": 41,
+      "blocked": 0
+    },
+    {
+      "kind": "edge",
+      "id": "hall-arrival>hall-annex-entry",
+      "meters": 18.74,
+      "samples": 76,
+      "blocked": 1
+    },
+    {
+      "kind": "edge",
+      "id": "hall-annex-entry>hall-ramp-base",
+      "meters": 4.0,
+      "samples": 17,
+      "blocked": 0
+    },
+    {
+      "kind": "edge",
+      "id": "hall-ramp-base>hall-balcony",
+      "meters": 16.49,
+      "samples": 67,
+      "blocked": 0
+    },
+    {
+      "kind": "edge",
+      "id": "hall-balcony>hall-balcony-turn",
+      "meters": 3.2,
+      "samples": 14,
+      "blocked": 0
+    },
+    {
+      "kind": "edge",
+      "id": "hall-balcony-turn>hall-upper-door",
+      "meters": 7.0,
+      "samples": 29,
+      "blocked": 0
+    },
+    {
+      "kind": "edge",
+      "id": "hall-upper-door>hall-upper-base",
+      "meters": 3.2,
+      "samples": 14,
+      "blocked": 0
+    },
+    {
+      "kind": "edge",
+      "id": "hall-upper-base>hall-upper",
+      "meters": 16.49,
+      "samples": 67,
+      "blocked": 1
+    },
+    {
+      "kind": "edge",
+      "id": "service-entry>descent-top",
+      "meters": 2.0,
+      "samples": 9,
+      "blocked": 0
+    },
+    {
+      "kind": "edge",
+      "id": "descent-top>descent-bottom",
+      "meters": 22.8,
+      "samples": 93,
+      "blocked": 0
+    },
+    {
+      "kind": "edge",
+      "id": "descent-bottom>vault-door",
+      "meters": 2.0,
+      "samples": 9,
+      "blocked": 0
+    },
+    {
+      "kind": "edge",
+      "id": "vault-door>vault-arrival",
+      "meters": 7.81,
+      "samples": 33,
+      "blocked": 0
+    },
+    {
+      "kind": "edge",
+      "id": "vault-arrival>vault-center",
+      "meters": 10.0,
+      "samples": 41,
+      "blocked": 0
+    },
+    {
+      "kind": "edge",
+      "id": "vault-center>vault-exit",
+      "meters": 13.45,
+      "samples": 55,
+      "blocked": 0
+    },
+    {
+      "kind": "edge",
+      "id": "vault-exit>rise-entry",
+      "meters": 6.32,
+      "samples": 27,
+      "blocked": 0
+    },
+    {
+      "kind": "edge",
+      "id": "vault-door>vault-maintenance-base",
+      "meters": 4.03,
+      "samples": 18,
+      "blocked": 0
+    },
+    {
+      "kind": "edge",
+      "id": "vault-maintenance-base>vault-maintenance",
+      "meters": 16.49,
+      "samples": 67,
+      "blocked": 0
+    },
+    {
+      "kind": "edge",
+      "id": "vault-maintenance>vault-platform",
+      "meters": 2.0,
+      "samples": 9,
+      "blocked": 0
+    },
+    {
+      "kind": "edge",
+      "id": "rise-entry>rise-ramp-top",
+      "meters": 24.74,
+      "samples": 100,
+      "blocked": 0
+    },
+    {
+      "kind": "edge",
+      "id": "rise-ramp-top>rise-arrival",
+      "meters": 1.0,
+      "samples": 5,
+      "blocked": 0
+    },
+    {
+      "kind": "edge",
+      "id": "rise-arrival>rise-ring",
+      "meters": 7.62,
+      "samples": 32,
+      "blocked": 0
+    },
+    {
+      "kind": "edge",
+      "id": "rise-ring>rise-wall",
+      "meters": 7.21,
+      "samples": 30,
+      "blocked": 0
+    },
+    {
+      "kind": "edge",
+      "id": "rise-wall>fortress-ramp-top",
+      "meters": 10.28,
+      "samples": 43,
+      "blocked": 0
+    },
+    {
+      "kind": "edge",
+      "id": "fortress-ramp-top>fortress-room",
+      "meters": 6.0,
+      "samples": 25,
+      "blocked": 0
+    },
+    {
+      "kind": "edge",
+      "id": "rise-ring>diagnostics-road",
+      "meters": 17.46,
+      "samples": 71,
+      "blocked": 0
+    },
+    {
+      "kind": "edge",
+      "id": "diagnostics-road>diagnostics-base",
+      "meters": 3.2,
+      "samples": 14,
+      "blocked": 0
+    },
+    {
+      "kind": "edge",
+      "id": "diagnostics-base>diagnostics-platform",
+      "meters": 12.24,
+      "samples": 50,
+      "blocked": 0
+    },
+    {
+      "kind": "edge",
+      "id": "rise-arrival>dish-road",
+      "meters": 17.03,
+      "samples": 70,
+      "blocked": 0
+    },
+    {
+      "kind": "edge",
+      "id": "dish-road>dish-ramp-base",
+      "meters": 5.85,
+      "samples": 25,
+      "blocked": 0
+    },
+    {
+      "kind": "edge",
+      "id": "dish-ramp-base>dish-platform",
+      "meters": 16.49,
+      "samples": 67,
+      "blocked": 0
+    },
+    {
+      "kind": "edge",
+      "id": "rise-arrival>gantry-road",
+      "meters": 9.06,
+      "samples": 38,
+      "blocked": 0
+    },
+    {
+      "kind": "edge",
+      "id": "gantry-road>gantry-south",
+      "meters": 17.03,
+      "samples": 70,
+      "blocked": 0
+    },
+    {
+      "kind": "edge",
+      "id": "gantry-south>gantry-base",
+      "meters": 4.61,
+      "samples": 20,
+      "blocked": 0
+    },
+    {
+      "kind": "edge",
+      "id": "gantry-base>gantry-top",
+      "meters": 24.74,
+      "samples": 100,
+      "blocked": 0
+    },
+    {
+      "kind": "edge",
+      "id": "gantry-top>gantry-east",
+      "meters": 14.0,
+      "samples": 57,
+      "blocked": 0
+    },
+    {
+      "kind": "edge",
+      "id": "gantry-east>gantry-west",
+      "meters": 36.5,
+      "samples": 147,
+      "blocked": 0
+    }
+  ],
+  "failures": [],
+  "acceptedPreexisting": [
+    {
+      "kind": "stair",
+      "id": "roof-ascent-lower",
+      "meters": 16.49,
+      "samples": 201,
+      "blocked": 5,
+      "tests": [
+        "capsule"
+      ],
+      "materials": [
+        "concrete"
+      ],
+      "examples": [
+        {
+          "test": "capsule",
+          "lane": -0.475,
+          "feet": [
+            -19.625,
+            6.121,
+            -32.485
+          ],
+          "distance": 0.239,
+          "material": "concrete"
+        },
+        {
+          "test": "capsule",
+          "lane": -0.475,
+          "feet": [
+            -19.625,
+            6.182,
+            -32.727
+          ],
+          "distance": 0.2,
+          "material": "concrete"
+        },
+        {
+          "test": "capsule",
+          "lane": -0.475,
+          "feet": [
+            -19.625,
+            6.242,
+            -32.97
+          ],
+          "distance": 0.2,
+          "material": "concrete"
+        },
+        {
+          "test": "capsule",
+          "lane": -0.475,
+          "feet": [
+            -19.625,
+            6.303,
+            -33.212
+          ],
+          "distance": 0.2,
+          "material": "concrete"
+        },
+        {
+          "test": "capsule",
+          "lane": -0.475,
+          "feet": [
+            -19.625,
+            6.364,
+            -33.455
+          ],
+          "distance": 0.212,
+          "material": "concrete"
+        }
+      ],
+      "reason": "outer lane passes 0.20 m from the landing wall face at the top step"
+    },
+    {
+      "kind": "stair",
+      "id": "snow-service-ascent",
+      "meters": 24.74,
+      "samples": 300,
+      "blocked": 24,
+      "tests": [
+        "capsule"
+      ],
+      "materials": [
+        "metal",
+        "soffit"
+      ],
+      "examples": [
+        {
+          "test": "capsule",
+          "lane": 0.475,
+          "feet": [
+            58.325,
+            -5.576,
+            -101.697
+          ],
+          "distance": 0.156,
+          "material": "soffit"
+        },
+        {
+          "test": "capsule",
+          "lane": 0.475,
+          "feet": [
+            58.325,
+            -5.515,
+            -101.939
+          ],
+          "distance": 0.155,
+          "material": "soffit"
+        },
+        {
+          "test": "capsule",
+          "lane": 0.475,
+          "feet": [
+            58.325,
+            -5.455,
+            -102.182
+          ],
+          "distance": 0.155,
+          "material": "soffit"
+        },
+        {
+          "test": "capsule",
+          "lane": 0.475,
+          "feet": [
+            58.325,
+            -5.394,
+            -102.424
+          ],
+          "distance": 0.206,
+          "material": "metal"
+        },
+        {
+          "test": "capsule",
+          "lane": 0.475,
+          "feet": [
+            58.325,
+            -4.606,
+            -105.576
+          ],
+          "distance": 0.206,
+          "material": "metal"
+        },
+        {
+          "test": "capsule",
+          "lane": 0.475,
+          "feet": [
+            58.325,
+            -4.545,
+            -105.818
+          ],
+          "distance": 0.155,
+          "material": "soffit"
+        }
+      ],
+      "reason": "wall-side lane passes 0.16 m from the tunnel wall lamps and handrail where the treads meet the wall"
+    },
+    {
+      "kind": "edge",
+      "id": "roof-final>roof-bridge",
+      "meters": 6.7,
+      "samples": 28,
+      "blocked": 8,
+      "tests": [
+        "capsule",
+        "headroom"
+      ],
+      "materials": [
+        "metal"
+      ],
+      "examples": [
+        {
+          "test": "capsule",
+          "lane": 0.0,
+          "feet": [
+            -5.993,
+            16.0,
+            -36.0
+          ],
+          "distance": 0.018,
+          "material": "metal"
+        },
+        {
+          "test": "headroom",
+          "lane": 0.0,
+          "feet": [
+            -5.744,
+            16.0,
+            -36.0
+          ],
+          "hitHeight": 0.88,
+          "material": "metal"
+        },
+        {
+          "test": "capsule",
+          "lane": 0.0,
+          "feet": [
+            -5.744,
+            16.0,
+            -36.0
+          ],
+          "distance": 0.0,
+          "material": "metal"
+        },
+        {
+          "test": "headroom",
+          "lane": 0.0,
+          "feet": [
+            -5.496,
+            16.0,
+            -36.0
+          ],
+          "hitHeight": 0.88,
+          "material": "metal"
+        },
+        {
+          "test": "capsule",
+          "lane": 0.0,
+          "feet": [
+            -5.496,
+            16.0,
+            -36.0
+          ],
+          "distance": 0.0,
+          "material": "metal"
+        },
+        {
+          "test": "headroom",
+          "lane": 0.0,
+          "feet": [
+            -5.248,
+            16.0,
+            -36.0
+          ],
+          "hitHeight": 0.88,
+          "material": "metal"
+        }
+      ],
+      "reason": "metal member 0.88-1.12 m above the 16 m roof bridge crosses the centreline (render-only; walk harness passes); candidate fix"
+    },
+    {
+      "kind": "edge",
+      "id": "roof-bridge>rooftop",
+      "meters": 12.0,
+      "samples": 49,
+      "blocked": 9,
+      "tests": [
+        "capsule"
+      ],
+      "materials": [
+        "metal"
+      ],
+      "examples": [
+        {
+          "test": "capsule",
+          "lane": 0.0,
+          "feet": [
+            -5.0,
+            16.0,
+            -36.0
+          ],
+          "distance": 0.225,
+          "material": "metal"
+        },
+        {
+          "test": "capsule",
+          "lane": 0.0,
+          "feet": [
+            -5.0,
+            16.0,
+            -35.75
+          ],
+          "distance": 0.225,
+          "material": "metal"
+        },
+        {
+          "test": "capsule",
+          "lane": 0.0,
+          "feet": [
+            -5.0,
+            16.0,
+            -35.5
+          ],
+          "distance": 0.225,
+          "material": "metal"
+        },
+        {
+          "test": "capsule",
+          "lane": 0.0,
+          "feet": [
+            -5.0,
+            16.0,
+            -35.25
+          ],
+          "distance": 0.225,
+          "material": "metal"
+        },
+        {
+          "test": "capsule",
+          "lane": 0.0,
+          "feet": [
+            -5.0,
+            16.0,
+            -35.0
+          ],
+          "distance": 0.225,
+          "material": "metal"
+        },
+        {
+          "test": "capsule",
+          "lane": 0.0,
+          "feet": [
+            -5.0,
+            16.0,
+            -34.75
+          ],
+          "distance": 0.225,
+          "material": "metal"
+        }
+      ],
+      "reason": "same roof-bridge member, 0.23 m beside the centreline"
+    },
+    {
+      "kind": "edge",
+      "id": "hall-arrival>hall-annex-entry",
+      "meters": 18.74,
+      "samples": 76,
+      "blocked": 1,
+      "tests": [
+        "capsule"
+      ],
+      "materials": [
+        "leaf"
+      ],
+      "examples": [
+        {
+          "test": "capsule",
+          "lane": 0.0,
+          "feet": [
+            -3.593,
+            0.0,
+            -34.88
+          ],
+          "distance": 0.24,
+          "material": "leaf"
+        }
+      ],
+      "reason": "single leaf tip at 2.0 m, 0.24 m from the centreline"
+    },
+    {
+      "kind": "edge",
+      "id": "hall-upper-base>hall-upper",
+      "meters": 16.49,
+      "samples": 67,
+      "blocked": 1,
+      "tests": [
+        "capsule"
+      ],
+      "materials": [
+        "metal"
+      ],
+      "examples": [
+        {
+          "test": "capsule",
+          "lane": 0.0,
+          "feet": [
+            -3.5,
+            7.091,
+            -43.636
+          ],
+          "distance": 0.205,
+          "material": "metal"
+        }
+      ],
+      "reason": "5 cm vertical mullion 0.20 m beside the centreline"
+    }
+  ]
+}
