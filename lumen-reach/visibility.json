@@ -152,7 +152,7 @@
       "nodeNames": [
         "Visual-rime-vault"
       ],
-      "reason": "Underground home with two open travel connections; no direct Court visibility. Retain Court/Hall silhouettes through the wide north opening from anywhere in the room.",
+      "reason": "Underground home with two open travel connections; no direct Court visibility. Retain Court/Hall silhouettes through the wide north opening from anywhere in the room. Since 0.7.1 the snow-service stair is open: the Rise around its top sees the lower passage.",
       "visibleFrom": [
         "array-hall",
         "connector-descent",
@@ -160,7 +160,8 @@
         "court-entrance-sightline",
         "entry-vestibule",
         "court-service-edge",
-        "elevated-review"
+        "elevated-review",
+        "rise-stair-sightline"
       ]
     },
     {
@@ -214,7 +215,8 @@
         "array-hall",
         "connector-ascent",
         "court-entrance-sightline",
-        "elevated-review"
+        "elevated-review",
+        "vault-stair-sightline"
       ]
     },
     {
@@ -252,6 +254,42 @@
       "nodeNames": [],
       "reason": "Upper terraces, ramps, roof and bridge can see the low end of the ascending connector beyond the hall.",
       "visibleFrom": []
+    },
+    {
+      "id": "rise-stair-sightline",
+      "nodeNames": [],
+      "reason": "Rise yard, gantry and dish deck cameras that can look down the open snow-service stair into the Vault lower passage. AABB overestimates the tunnel view cone.",
+      "visibleFrom": [],
+      "bounds": {
+        "min": [
+          44,
+          -0.5,
+          -150
+        ],
+        "max": [
+          66,
+          12,
+          -110
+        ]
+      }
+    },
+    {
+      "id": "vault-stair-sightline",
+      "nodeNames": [],
+      "reason": "Vault lower passage cameras that can look up the open snow-service stair to the Rise yard and gate.",
+      "visibleFrom": [],
+      "bounds": {
+        "min": [
+          48,
+          -6.5,
+          -104
+        ],
+        "max": [
+          59.5,
+          2,
+          -94
+        ]
+      }
     },
     {
       "id": "elevated-review",

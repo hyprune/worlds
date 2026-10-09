@@ -578,6 +578,11 @@ def rise():
  ramp('Snow service ascent',51,57,100,124,-6,0,30,'grating')
  for x in [50.7,59]:box('Snow ascent shell',(x,112,-1.8),(.5,24,12),'metal',solid=True)
  mesh('Snow ascent ceiling',[(50.4,100,-1),(59.3,100,-1),(59.3,124,5),(50.4,124,5)],[(0,1,2,3)],'metal',True)
+ # The alternate flight's foot ends on the perimeter apron. Close its south
+ # and east sides and roof it, so the opened stair never looks outside.
+ box('Snow ascent mouth wall',(57.725,99.15,-2.6),(3.05,.3,7.6),'metal',solid=True)
+ box('Snow ascent mouth side',(59.025,99.55,-2.6),(.45,1.1,7.6),'metal',solid=True)
+ box('Snow ascent mouth roof',(57.75,99.55,-1.1),(3.1,1.1,.2),'metal',solid=True)
  for y in range(102,125,4):
   z=-6+(y-100)*.25
   for x in [51.1,58.5]:box('Ascent amber practical',(x,y,z+1),(.04,.6,.15),'amber')
