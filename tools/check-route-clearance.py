@@ -26,8 +26,6 @@ KNEE,HEAD,EYE,RADIUS,STEP,AHEAD=.6,2.0,1.6,.25,.25,6.0
 KNOWN={
  'snow-service-ascent':({'capsule'},{'metal','soffit'},30,'wall-side lane passes 0.16 m from the tunnel wall lamps and handrail where the treads meet the wall'),
  'roof-ascent-lower':({'capsule'},{'concrete'},6,'outer lane passes 0.20 m from the landing wall face at the top step'),
- 'roof-final>roof-bridge':({'capsule','headroom'},{'metal'},10,'metal member 0.88-1.12 m above the 16 m roof bridge crosses the centreline (render-only; walk harness passes); candidate fix'),
- 'roof-bridge>rooftop':({'capsule'},{'metal'},10,'same roof-bridge member, 0.23 m beside the centreline'),
  'hall-arrival>hall-annex-entry':({'capsule'},{'leaf'},2,'single leaf tip at 2.0 m, 0.24 m from the centreline'),
  'hall-upper-base>hall-upper':({'capsule'},{'metal'},14,'5 cm vertical mullion 0.20 m beside the centreline'),
 }
