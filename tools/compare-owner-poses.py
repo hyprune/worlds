@@ -12,13 +12,13 @@ import argparse,json,textwrap
 from pathlib import Path
 from PIL import Image,ImageDraw,ImageFont,ImageOps
 p=argparse.ArgumentParser(description=__doc__);p.add_argument('spec',type=Path);p.add_argument('--output',type=Path,required=True);a=p.parse_args()
-spec=json.loads(a.spec.read_text());W,H,PAD,CAP=960,540,12,96
-try:font=ImageFont.truetype('DejaVuSans.ttf',22);small=ImageFont.truetype('DejaVuSans.ttf',18);big=ImageFont.truetype('DejaVuSans-Bold.ttf',30)
+spec=json.loads(a.spec.read_text());W,H,PAD,CAP=960,540,12,150
+try:font=ImageFont.truetype('DejaVuSans.ttf',30);small=ImageFont.truetype('DejaVuSans.ttf',25);big=ImageFont.truetype('DejaVuSans-Bold.ttf',40)
 except OSError:font=small=big=ImageFont.load_default()
-cols=spec['columns'];rows=spec['rows'];top=110
+cols=spec['columns'];rows=spec['rows'];top=150
 sheet=Image.new('RGB',(PAD+len(cols)*(W+PAD),top+len(rows)*(H+CAP+PAD)),(12,18,24));d=ImageDraw.Draw(sheet)
-d.text((PAD,14),spec['title'],font=big,fill='white');d.text((PAD,56),spec['subtitle'],font=small,fill=(190,200,210))
-for c,label in enumerate(cols):d.text((PAD+c*(W+PAD)+6,84),label,font=font,fill=(245,186,112))
+d.text((PAD,14),spec['title'],font=big,fill='white');d.text((PAD,66),spec['subtitle'],font=small,fill=(190,200,210))
+for c,label in enumerate(cols):d.text((PAD+c*(W+PAD)+6,112),label,font=font,fill=(245,186,112))
 for r,row in enumerate(rows):
  y=top+r*(H+CAP+PAD)
  for c,path in enumerate(row['images']):
@@ -27,5 +27,5 @@ for r,row in enumerate(rows):
    im=ImageOps.contain(Image.open(path).convert('RGB'),(W,H));sheet.paste(im,(x+(W-im.width)//2,y+(H-im.height)//2))
   else:d.text((x+20,y+H//2-12),'no live capture at this pose',font=font,fill=(140,150,160))
  d.text((PAD,y+H+6),row['id']+' - '+row['title'],font=font,fill='white')
- for i,line in enumerate(textwrap.wrap(row['caption'],width=250)[:3]):d.text((PAD,y+H+34+i*22),line,font=small,fill=(200,208,216))
+ for i,line in enumerate(textwrap.wrap(row['caption'],width=200)[:3]):d.text((PAD,y+H+44+i*32),line,font=small,fill=(200,208,216))
 a.output.parent.mkdir(parents=True,exist_ok=True);sheet.save(a.output,quality=90);print(a.output,sheet.size)
