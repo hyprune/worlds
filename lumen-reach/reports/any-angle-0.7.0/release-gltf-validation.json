@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "numErrors": 0,
+  "numWarnings": 0,
+  "numInfos": 789,
+  "validatorVersion": "2.0.0-dev.3.10",
+  "totalTriangleCount": 249588,
+  "drawCallCount": 417
+}

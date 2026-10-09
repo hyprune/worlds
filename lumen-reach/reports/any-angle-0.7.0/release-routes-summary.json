@@ -1,0 +1,56 @@
+{
+  "status": "PASS",
+  "coreCommit": "0735e4dd4d6390313a323f4d511c3e48d5048c92",
+  "coreDirty": [],
+  "loadedPluginSHA256": "18f26a66625d88ad3aa95434c8f99a5b2768fee1ff59f3e06a2be70fa28fbebd",
+  "manifestSHA256": "f7b536749fd85ae8d677fd0339a49b7b539477633ab09129c9e1468e20b6f34d",
+  "sceneSHA256": "00f8a83249ab16f73ae45fbe145b1924f2bec81cdb7aa32a3cd61afa40758a18",
+  "checks": [
+    "package load",
+    "real spawn walking",
+    "matching 60 degree views",
+    "clean nested exit"
+  ],
+  "walk": {
+    "before": [
+      -8.0,
+      1.7000000476837158,
+      12.0
+    ],
+    "after": [
+      -8.0,
+      1.7000000476837158,
+      10.253259658813477
+    ]
+  },
+  "phase": "release candidate: sixth bake (source 141be25)",
+  "rawReport": "artifacts/any-angle-0.7.0/routes-final/nested-report.json",
+  "routeTraversal": {
+    "status": "PASS",
+    "nodes": 64,
+    "directedGraphTraversals": 126,
+    "traversed": 140,
+    "alternateStairs": 14
+  },
+  "stills": [
+    "01-sun-court",
+    "01-sun-court-terrace",
+    "01-sun-court-tools",
+    "02-array-hall",
+    "02-array-hall-balcony",
+    "02-array-hall-tools",
+    "03-rime-vault",
+    "03-rime-vault-tools",
+    "03-rime-vault-platform",
+    "04-signal-rise",
+    "04-signal-rise-bench",
+    "04-signal-rise-gantry",
+    "01-sun-court-entry-fixtures",
+    "02-array-hall-vista",
+    "03-rime-vault-services",
+    "04-signal-rise-reflector",
+    "03-rime-vault-sealed-door",
+    "03-rime-vault-console-row"
+  ],
+  "stillCapture": "60 degree hero poses placed with noclip held, collision restored before routes"
+}

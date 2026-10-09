@@ -1,0 +1,123 @@
+{
+  "anchors": 24,
+  "areas": [
+    {
+      "dataAnchors": [
+        "sun-court-slot-01-globe-01",
+        "sun-court-slot-01-crate-01",
+        "sun-court-slot-01-crate-02",
+        "sun-court-slot-01-crate-03",
+        "sun-court-slot-01-crate-04",
+        "sun-court-slot-01-crate-05",
+        "sun-court-slot-01-crate-06",
+        "sun-court-slot-01-crate-07",
+        "sun-court-slot-01-crate-08",
+        "sun-court-slot-01-crate-09",
+        "sun-court-slot-01-crate-10"
+      ],
+      "freePlacementZones": [
+        "sun-court-open-work"
+      ],
+      "id": "sun-court",
+      "primaryAnchor": "sun-court-slot-01-facade-wall-01",
+      "spawnId": "sun-court",
+      "theme": "sun-court",
+      "toolAnchors": [
+        "sun-court-slot-01-operator-desk-01",
+        "sun-court-slot-01-operator-desk-02",
+        "sun-court-slot-01-field-rig-01",
+        "sun-court-slot-01-field-rig-02",
+        "sun-court-slot-01-kiosk-pillar-01"
+      ],
+      "workspaceSlot": "01"
+    },
+    {
+      "dataAnchors": [
+        "array-hall-slot-02-crate-01",
+        "array-hall-slot-02-crate-02",
+        "array-hall-slot-02-crate-03",
+        "array-hall-slot-02-crate-04"
+      ],
+      "freePlacementZones": [
+        "array-hall-open-work"
+      ],
+      "id": "array-hall",
+      "primaryAnchor": "array-hall-slot-02-hanging-wall-01",
+      "spawnId": "array-hall",
+      "theme": "array-hall",
+      "toolAnchors": [
+        "array-hall-slot-02-lectern-01",
+        "array-hall-slot-02-lectern-02",
+        "array-hall-slot-02-banner-01",
+        "array-hall-slot-02-banner-02",
+        "array-hall-slot-02-operator-desk-01",
+        "array-hall-slot-02-operator-desk-02",
+        "array-hall-slot-02-operator-desk-03"
+      ],
+      "workspaceSlot": "02"
+    },
+    {
+      "dataAnchors": [
+        "rime-vault-slot-03-crate-01",
+        "rime-vault-slot-03-crate-02",
+        "rime-vault-slot-03-crate-03",
+        "rime-vault-slot-03-crate-04",
+        "rime-vault-slot-03-crate-05",
+        "rime-vault-slot-03-crate-06",
+        "rime-vault-slot-03-crate-07",
+        "rime-vault-slot-03-crate-08",
+        "rime-vault-slot-03-crate-09",
+        "rime-vault-slot-03-crate-10"
+      ],
+      "freePlacementZones": [
+        "rime-vault-open-work"
+      ],
+      "id": "rime-vault",
+      "primaryAnchor": "rime-vault-slot-03-wall-inset-console-01",
+      "spawnId": "rime-vault",
+      "theme": "rime-vault",
+      "toolAnchors": [
+        "rime-vault-slot-03-operator-desk-01",
+        "rime-vault-slot-03-operator-desk-02",
+        "rime-vault-slot-03-wall-inset-console-02",
+        "rime-vault-slot-03-terminal-bench-01"
+      ],
+      "workspaceSlot": "03"
+    },
+    {
+      "dataAnchors": [
+        "signal-rise-slot-04-radar-dish-01",
+        "signal-rise-slot-04-crate-01",
+        "signal-rise-slot-04-crate-02",
+        "signal-rise-slot-04-crate-03",
+        "signal-rise-slot-04-crate-04",
+        "signal-rise-slot-04-crate-05",
+        "signal-rise-slot-04-crate-06",
+        "signal-rise-slot-04-crate-07",
+        "signal-rise-slot-04-crate-08",
+        "signal-rise-slot-04-crate-09",
+        "signal-rise-slot-04-crate-10",
+        "signal-rise-slot-04-crate-11"
+      ],
+      "freePlacementZones": [
+        "signal-rise-open-work"
+      ],
+      "id": "signal-rise",
+      "primaryAnchor": "signal-rise-slot-04-blast-door-screen-01",
+      "spawnId": "signal-rise",
+      "theme": "signal-rise",
+      "toolAnchors": [
+        "signal-rise-slot-04-terminal-bench-01",
+        "signal-rise-slot-04-kiosk-pillar-01",
+        "signal-rise-slot-04-wall-inset-console-01",
+        "signal-rise-slot-04-operator-desk-01"
+      ],
+      "workspaceSlot": "04"
+    }
+  ],
+  "collisionTriangles": 5122,
+  "estimatedGpuBytes": 391774152,
+  "objects": 37,
+  "placementZones": 4,
+  "worldId": "com.hyprune.lumen-reach"
+}

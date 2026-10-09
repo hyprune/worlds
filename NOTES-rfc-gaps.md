@@ -187,10 +187,12 @@ select submissions and must never be treated as movement limits. Lumen's
 `playable-volumes.json` declares each home's and connector's authoring footprint.
 The builder unions these footprints and exports collision-only perimeter
 backstops, plus physical guard collisions, using the existing static-mesh
-contract. The runtime does not interpret that source JSON. Ordinary walking
-stays inside the authored envelope in six engine probes. The ordinary-fly escape
-witness also stopped at the perimeter; separating movement modes remains an
-open issue at the handoff checkpoint. Held authoring photos can exceed it.
+contract. The runtime does not interpret that source JSON. Each backstop piece
+rises only 2.5 m above the highest walkable top within 3 m inside it (core's jump
+lifts feet 1.27 m). Ordinary walking stays inside in six engine probes, repeated
+jumping stops at the court edge, and ordinary fly at 6 m crosses it. Fly below
+that height is still stopped, because static collision cannot tell modes
+apart. Held authoring photos and noclip ignore it.
 A future normative volume contract should distinguish walk, climb and fly and
 specify what happens when spawning/teleporting outside overlapping areas.
 

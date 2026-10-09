@@ -1,37 +1,37 @@
 {
   "status": "PASS",
-  "packageBytes": 69806484,
-  "decodedTextureBytes": 165315776,
-  "conservativeGpuBytes": 342043960,
-  "mippedTextureViewsBytes": 315355600,
-  "expandedGeometryBytes": 26688360,
+  "packageBytes": 74672393,
+  "decodedTextureBytes": 192806912,
+  "conservativeGpuBytes": 390725592,
+  "mippedTextureViewsBytes": 361408152,
+  "expandedGeometryBytes": 29317440,
   "colorTextureViews": 28,
   "textureObjects": 63,
   "textureProvenanceEntries": 63,
-  "visualTriangles": 222403,
-  "drawCallEstimate": 87,
+  "visualTriangles": 244312,
+  "drawCallEstimate": 99,
   "drawCallScope": "one draw per visible glTF primitive, world geometry only; excludes postprocessing, applications and HUD",
   "untexturedPhysicalMaterials": [],
   "anchors": 24,
-  "collisionNodes": 230,
-  "lightmapBindings": 68,
+  "collisionNodes": 286,
+  "lightmapBindings": 78,
   "UV1": [
     {
       "node": "Visual-array-hall",
-      "triangles": 28040,
-      "uv1Area": 0.11693,
+      "triangles": 29260,
+      "uv1Area": 0.1119,
       "overlapSamples": 0
     },
     {
       "node": "Visual-connector-ascent",
-      "triangles": 2490,
-      "uv1Area": 0.51477,
+      "triangles": 2534,
+      "uv1Area": 0.49968,
       "overlapSamples": 0
     },
     {
       "node": "Visual-connector-descent",
-      "triangles": 2754,
-      "uv1Area": 0.47107,
+      "triangles": 2798,
+      "uv1Area": 0.46608,
       "overlapSamples": 0
     },
     {
@@ -42,25 +42,25 @@
     },
     {
       "node": "Visual-rime-vault",
-      "triangles": 44700,
-      "uv1Area": 0.19209,
+      "triangles": 44612,
+      "uv1Area": 0.19766,
       "overlapSamples": 0
     },
     {
       "node": "Visual-signal-rise",
-      "triangles": 58940,
-      "uv1Area": 0.00616,
+      "triangles": 62624,
+      "uv1Area": 0.15881,
       "overlapSamples": 0
     },
     {
       "node": "Visual-sun-court",
-      "triangles": 45672,
-      "uv1Area": 0.0271,
+      "triangles": 46804,
+      "uv1Area": 0.1855,
       "overlapSamples": 0
     },
     {
       "node": "Visual-vista",
-      "triangles": 19071,
+      "triangles": 34944,
       "uv1Area": 0.0,
       "overlapSamples": 0
     }

@@ -158,5 +158,7 @@ in the final report.
 
 `playable-volumes.json` is authoring metadata. Its footprint union generates
 static collision backstops because world format 0.5 has no movement-volume
-contract. Visibility bounds remain separate. An elevated review region retains
+contract. Each piece rises only `walkClearance` (2.5 m) above the highest
+walkable top within 3 m inside it: walking and jumping stop inside, ordinary fly
+passes over. Visibility bounds remain separate. An elevated review region retains
 all homes above 21m, where room-level occlusion assumptions no longer apply.

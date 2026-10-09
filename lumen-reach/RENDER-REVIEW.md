@@ -1,56 +1,31 @@
-# Lumen Reach 0.6.0 render review
+# Lumen Reach 0.7.0 render review
 
-This pass focuses on Rime Vault against the owner's `03-frozen-bunker.png`.
-The sixteen previous camera poses remain unchanged; two additional poses inspect
-its console row and sealed continuation. Eighteen raw 3840×2160 Medium captures
-are in `artifacts/lumen-reach-v3/after-4k/` and the v3 gallery folder. Dynamic
-internal resolution is recorded separately from native output size.
+0.7.0 is a playability pass, not an art pass. The review standard was: no holes,
+no sky leaks, no missing faces, no windows lost in geometry, and nothing that
+blocks walking or ordinary fly. The previous Rime Vault art review is preserved
+in `reports/render-review-0.6.0.md`; 0.5.0's is in `reports/render-review-0.5.0.md`.
 
-The before/after comparison uses freshly captured 0.5.0 and 0.6.0 views at the
-same 1920×1080 output, pose and 60° vertical FOV. Three identical seven-second
-camera paths alternate before/after in the video. Only labels and cuts are
-added. Engine stills are ungraded; thumbnail comparison sheets preserve aspect
-ratio. The owner concept is a composition/mood reference, not a matched camera.
-Run `python3 tools/compare-rime-v3.py` for the linked raw-image review in
-`artifacts/lumen-reach-v3/render-review.html`.
+Engine evidence is the sixth bake only (manifest `f7b53674…`). The any-angle
+sweep captured 56 native-4K views: nine sanitized owner poses, four homes,
+eleven targeted inspections (pole, seam, roofs, soffits, aqueduct, spires,
+basin exterior) and 32 views from seed 7009, half walkable and half elevated up
+to 60 m. Every view was captured with visibility culling on and off; all 56
+pairs have zero changed central pixels. The route harness captured the 18 hero
+poses. All home screens and tool anchors are visible and clear of walls.
 
-The concept's defining density is long console banks, layered overhead services,
-edge frost, wet metal, low warm practicals and a lit sealed continuation. The new
-Vault has five low floor stations and a three-station wall bank, keyboard beds,
-foot lights, power leads, cases, grated cable channels and a purge-vent cluster.
-Pipe racks now have flanges, captive bolts, channels and hangers. The center lane
-and the full interactive screen approaches remain clear; the room is broader
-than the concept's tight corridor because those validated work volumes remain.
+Reviewed and accepted:
 
-The mottled all-over frost is gone from the Vault. Dark directional steel,
-glazed vertical condensation and pale granular rime are separate materials.
-Rime geometry follows pipe tops and console sills; thin icicles have blue cores
-and small emissive edge facets. Corner snowbanks stay out of the routes.
-The opaque ice treatment suggests scattering but provides no true transmission.
-The new source masters, exact prompts and hashes are retained in `materials/`.
+- `rise-exterior` is an inspection pose pressed against the mountain shell
+  crown. The frame shows rock and snow faces with no sky through them, so it is
+  a too-close camera rather than a missing face.
+- `random-20`/`random-26` are inside the closed basin sky at 47–52 m looking
+  high. The flat dark blue matches the night texture's uniform upper band; it is
+  not the clear colour.
 
-Warm amber instrument lines, console grazing light, red practicals and blue
-upper fill make the room more coherent with the concept. The pressure door has
-layered jambs, interlocks, reinforcement, a center light seam and warm guide
-lights. It reads as a closed extension with light beyond. The engine retains
-less specular sheen and softer floor light pools than Cycles. Floors remain
-smoother and less wet-looking than the painted reference, and steam is still a
-static alpha-card approximation. These limits remain visible in the raw output.
+Known and deliberately out of scope for 0.7.0: the jagged mountain crown seen
+from above, soft distant panorama at 4K (1774×887 master), and angular joints
+in the aqueduct arch blocks (they read as joints, not holes, in the sweep).
 
-Engine review caught a real bake failure: too many tiny beveled parts exhausted
-fixed lightmap gutters, collapsing useful UV area despite valid ranges and no
-overlaps. Thin detail now avoids those bevels; the Vault's separate atlas is
-2048px with 19.2% useful UV coverage. An authoring/package guard rejects a pack
-below 3%. The final engine captures show the restored lighting on the new kit.
-
-Sun Court, Array Hall, Signal Rise, foliage and connector geometry retain their
-triangle counts. Their matched views were captured again for regression review.
-The preceding all-home review is preserved in `reports/render-review-0.5.0.md`.
-All 24 interactive anchors, route/stair graphs and free-placement volumes keep
-their original contracts. New fixed consoles are authored process artwork, not
-additional interactive mounts or claims about live application state.
-
-See `reports/final-report.md` and `reports/polish-v3/` for budgets, shader/material
-coverage, lightmap evidence, full route traversal, engine hashes, archive and
-gallery paths. Blender ran only on 10.2.2.2. Engine testing held the nested lock;
-the owner's real session and gallery autocommit process were untouched.
+Contact sheets and selected raw stills:
+`~/workspace/rick-the-alien/worldshell-gallery/screenshots/release-world-v4/`.
+Blender ran only on 10.2.2.2. Engine testing was nested only.
