@@ -1,0 +1,14 @@
+{
+  "coordinates": "Blender metres (x, y, z-up); glTF is (x, z, -y)",
+  "semantics": "Surface-only cuts through render shells that a walkable passage crosses. Each portal is the passage interior: x between the wall centrelines, y along the flight, z from 0.15 m inside the floor slab to 0.01 m above the ceiling plane. Cut edges stay inside wall, slab and ceiling thickness.",
+  "portals": [
+    {
+      "id": "snow-service-ascent",
+      "x": [50.7, 59.0],
+      "y": [100.0, 124.0],
+      "floor": {"z": -6.15, "slope": 0.25},
+      "ceiling": {"z": -0.99, "slope": 0.25},
+      "objects": ["Signal closed basin sky", "Signal mountain outer shell", "Rise cliff foundations"]
+    }
+  ]
+}

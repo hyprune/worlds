@@ -162,6 +162,33 @@ def vista(B):
   B.box('Spire foundation',(x,y,-8),(w+1.7,w+1.7,18),'land-mid',.12,group='vista')
 
 
+def portals(B):
+ # 0.7.0 capped the snow-service stair: the Rise rock foundation's top and
+ # south slope, the mountain shell and the closed night sky all crossed the
+ # passage. They are render-only (no collision), so routes walked through.
+ # Bisect only faces near each portal by its six planes and delete the faces
+ # inside: the passage's own walls, slab and ceiling close the cut edges.
+ import bmesh
+ spec=json.loads((B.HERE/'portals.json').read_text());report=[]
+ for pt in spec['portals']:
+  (x0,x1),(y0,y1),f,c=pt['x'],pt['y'],pt['floor'],pt['ceiling']
+  planes=[((x0,0,0),(1,0,0)),((x1,0,0),(-1,0,0)),((0,y0,0),(0,1,0)),((0,y1,0),(0,-1,0)),((0,y0,f['z']),(0,-f['slope'],1)),((0,y0,c['z']),(0,c['slope'],-1))]
+  inside=lambda q,e=0:all((Vector(q)-Vector(co)).dot(Vector(no).normalized())>e for co,no in planes)
+  zlo=f['z']+min(0,f['slope']*(y1-y0));zhi=c['z']+max(0,c['slope']*(y1-y0))
+  for name in pt['objects']:
+   o=B.bpy.data.objects[name];assert o.matrix_world.is_identity,(name,'portal cut assumes world-space mesh')
+   bm=bmesh.new();bm.from_mesh(o.data);before=len(bm.faces)
+   for co,no in planes:
+    near=[g for g in bm.faces if any(x0-1<v.co.x<x1+1 and y0-1<v.co.y<y1+1 and zlo-1<v.co.z<zhi+1 for v in g.verts) or (min(v.co.x for v in g.verts)<x1 and max(v.co.x for v in g.verts)>x0 and min(v.co.y for v in g.verts)<y1 and max(v.co.y for v in g.verts)>y0 and min(v.co.z for v in g.verts)<zhi and max(v.co.z for v in g.verts)>zlo)]
+    geom=list({e for g in near for e in g.edges})+list({v for g in near for v in g.verts})+near
+    bmesh.ops.bisect_plane(bm,geom=geom,plane_co=co,plane_no=no,dist=1e-5)
+   gone=[g for g in bm.faces if inside(g.calc_center_median(),1e-4)]
+   bmesh.ops.delete(bm,geom=gone,context='FACES');bm.to_mesh(o.data);o.data.update()
+   report.append({'portal':pt['id'],'object':name,'facesBefore':before,'facesRemoved':len(gone),'facesAfter':len(bm.faces)});bm.free()
+   assert gone,(pt['id'],name,'portal does not cross this shell')
+ (B.ART/'portal-report.json').write_text(json.dumps(report,indent=2)+'\n')
+
+
 def architecture(B):
  # Change the existing roof face material, without a coplanar overlay.
  for group,objects in list(B.P.GROUPS.items()):
@@ -175,6 +202,7 @@ def architecture(B):
     o.data.materials.append(B.P.MATS['soffit']);idx=len(o.data.materials)-1
     for p in o.data.polygons:
      if p.normal.z<.4:p.material_index=idx
+ portals(B)
  # The alternate stair starts receive a short supported apron before the
  # perimeter backstop; its capsule must not straddle the outside boundary.
  B.slab('Service descent stair apron',33,35.4,51.4,52,0,'metal')
