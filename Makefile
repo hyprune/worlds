@@ -73,9 +73,24 @@ lumen-nested:
 
 lumen-tour:
 	python3 tools/check-lumen-session.py --record
-lumen-release: lumen-validate lumen-budgets
+# Since 0.8.0 the release package is the world format 0.7 build of the
+# validated source package: KTX2 material textures, meshopt + quantised
+# geometry, PNG lightmaps, every world.json index verified (verify.mjs).
+LUMEN_RELEASE_PACKAGE := dist-07/com.hyprune.lumen-reach
+OPTIMISE_CORE ?= ../core-optimise
+LUMEN_PERF_BASELINE ?=
+.PHONY: lumen-release-check lumen-perf-gate
+lumen-release-check:
+	node $(SCHEMA_DIR)/bin/validate.mjs world $(LUMEN_RELEASE_PACKAGE)/world.json - 0.7
+	$(OPTIMISE_CORE)/build/hyprune-world-check $(LUMEN_RELEASE_PACKAGE) > $(LUMEN_REPORTS)/release-core-world-check.json
+	cp $(LUMEN_RELEASE_PACKAGE).verify.json $(LUMEN_REPORTS)/release-verify.json
+	python3 -c "import json; assert json.load(open('$(LUMEN_REPORTS)/release-verify.json'))['status']=='PASS'"
+# Nested route capture vs the previous release (tools/check-perf-gate.py).
+lumen-perf-gate:
+	python3 tools/check-perf-gate.py $(LUMEN_RELEASE_PACKAGE) --core $(OPTIMISE_CORE) $(if $(LUMEN_PERF_BASELINE),--baseline-package $(LUMEN_PERF_BASELINE)) --output $(LUMEN_REPORTS)/perf-gate --record
+lumen-release: lumen-validate lumen-optimize lumen-release-check lumen-perf-gate lumen-budgets
 	mkdir -p artifacts/releases
-	tar --sort=name --mtime='UTC 2026-10-09' --owner=0 --group=0 --numeric-owner -I zstd -cf artifacts/releases/com.hyprune.lumen-reach-$(LUMEN_VERSION).tar.zst -C dist com.hyprune.lumen-reach
+	tar --sort=name --mtime='UTC 2026-10-09' --owner=0 --group=0 --numeric-owner -I zstd -cf artifacts/releases/com.hyprune.lumen-reach-$(LUMEN_VERSION).tar.zst -C dist-07 com.hyprune.lumen-reach
 	sha256sum artifacts/releases/com.hyprune.lumen-reach-$(LUMEN_VERSION).tar.zst > artifacts/releases/LUMEN-SHA256SUMS
 
 .PHONY: visibility-annotate visibility-validate visibility-nested
@@ -97,7 +112,7 @@ gltf-deps:
 budgets:
 	node tools/gltf/budgets.mjs $(PACKAGE) --output switchyard/reports/budgets.json > /dev/null
 lumen-budgets:
-	node tools/gltf/budgets.mjs $(LUMEN_PACKAGE) $(if $(LUMEN_BASELINE),--baseline $(LUMEN_BASELINE)) --output $(LUMEN_REPORTS)/budgets.json > /dev/null
+	node tools/gltf/budgets.mjs $(LUMEN_RELEASE_PACKAGE) $(if $(LUMEN_BASELINE),--baseline $(LUMEN_BASELINE)) --output $(LUMEN_REPORTS)/budgets.json > /dev/null
 
 # Recast/Detour (recast-navigation-js, pinned by package-lock.json) for check-navmesh.
 .PHONY: navmesh-deps navmesh-test
@@ -107,16 +122,12 @@ navmesh-test:
 	python3 -m unittest tests/test_navmesh_check.py
 
 # World format 0.7 optimisation (KHR_texture_basisu KTX2 + EXT_meshopt_compression
-# + KHR_mesh_quantization), runs on the bake host. HELD until the 0.7 contract
-# merges (core perf/compressed-assets, RFC-0004 amendment, schema 0.7): never
-# part of build/release by default. Validate the source package first (the
-# Python checks read 0.5 packages); verify.mjs proves the optimised copy
-# equivalent. Output goes to dist-07/, not dist/.
+# + KHR_mesh_quantization) on the bake host. Lumen's release build since 0.8.0;
+# Switchyard's stays behind HYPRUNE_FORMAT_07=1. The Python checks read the
+# source package; verify.mjs proves the optimised copy equivalent (dist-07/).
 .PHONY: lumen-optimize optimize
 lumen-optimize:
-	@[ "$(HYPRUNE_FORMAT_07)" = 1 ] || { echo 'world format 0.7 is not merged yet; HYPRUNE_FORMAT_07=1 builds a test package in dist-07/' >&2; exit 2; }
-	tools/remote-optimize.sh $(LUMEN_PACKAGE) dist-07/com.hyprune.lumen-reach
-	node tools/gltf/budgets.mjs dist-07/com.hyprune.lumen-reach --baseline $(LUMEN_PACKAGE) --output dist-07/com.hyprune.lumen-reach.budgets.json > /dev/null
+	tools/remote-optimize.sh $(LUMEN_PACKAGE) $(LUMEN_RELEASE_PACKAGE)
 optimize:
 	@[ "$(HYPRUNE_FORMAT_07)" = 1 ] || { echo 'world format 0.7 is not merged yet; HYPRUNE_FORMAT_07=1 builds a test package in dist-07/' >&2; exit 2; }
 	tools/remote-optimize.sh $(PACKAGE) dist-07/com.hyprune.switchyard
