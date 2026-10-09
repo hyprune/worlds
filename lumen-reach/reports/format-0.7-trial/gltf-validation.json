@@ -1,0 +1,17 @@
+{
+ "validator": "gltf-validator 2.0.0-dev.3.10",
+ "issues": {
+  "numErrors": 0,
+  "numWarnings": 112,
+  "numInfos": 805
+ },
+ "warningCodes": {
+  "VALUE_NOT_IN_LIST": 56,
+  "IMAGE_UNRECOGNIZED_FORMAT": 56
+ },
+ "unsupported": [
+  "Cannot validate an extension as it is not supported by the validator: 'EXT_meshopt_compression'.",
+  "Cannot validate an extension as it is not supported by the validator: 'KHR_texture_basisu'."
+ ],
+ "note": "All warnings are the validator lacking KTX2/meshopt support (image/ktx2 MIME not in its list)."
+}

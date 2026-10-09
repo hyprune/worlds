@@ -1,0 +1,143 @@
+{
+ "tool": "glTF-Transform 4.5.1 inspect() + visible-scene traversal",
+ "method": "triangles/draws: visible scene primitives per node instance; GPU MiB: glTF-Transform VRAM estimate, full mip chains, lightmaps included, plus visible vertex/index buffers",
+ "world": "com.hyprune.switchyard",
+ "version": "0.1.2",
+ "formatVersion": "0.7",
+ "visibleTriangles": 201558,
+ "drawCalls": 134,
+ "materials": 134,
+ "collisionTriangles": 1980,
+ "textures": {
+  "count": 45,
+  "lightmaps": 9,
+  "ktx2": 36
+ },
+ "gpuMiB": {
+  "total": 296.78,
+  "materialTextures": 31.75,
+  "lightmaps": 256,
+  "vertexBuffers": 7.88,
+  "indexBuffers": 1.15
+ },
+ "packageMiB": 53.17,
+ "extensionsUsed": [
+  "EXT_meshopt_compression",
+  "KHR_materials_unlit",
+  "KHR_mesh_quantization",
+  "KHR_texture_basisu",
+  "KHR_texture_transform"
+ ],
+ "extensionsRequired": [
+  "EXT_meshopt_compression",
+  "KHR_mesh_quantization",
+  "KHR_texture_basisu",
+  "KHR_texture_transform"
+ ],
+ "largestTextures": [
+  {
+   "name": "textures/lightmap-hall.png",
+   "resolution": "4096x4096",
+   "mimeType": "image/png",
+   "lightmap": true,
+   "gpuMiB": 85.33
+  },
+  {
+   "name": "textures/lightmap-vault.png",
+   "resolution": "2048x2048",
+   "mimeType": "image/png",
+   "lightmap": true,
+   "gpuMiB": 21.33
+  },
+  {
+   "name": "textures/lightmap-concourse.png",
+   "resolution": "2048x2048",
+   "mimeType": "image/png",
+   "lightmap": true,
+   "gpuMiB": 21.33
+  },
+  {
+   "name": "textures/lightmap-build.png",
+   "resolution": "2048x2048",
+   "mimeType": "image/png",
+   "lightmap": true,
+   "gpuMiB": 21.33
+  },
+  {
+   "name": "textures/lightmap-research.png",
+   "resolution": "2048x2048",
+   "mimeType": "image/png",
+   "lightmap": true,
+   "gpuMiB": 21.33
+  },
+  {
+   "name": "textures/lightmap-commons.png",
+   "resolution": "2048x2048",
+   "mimeType": "image/png",
+   "lightmap": true,
+   "gpuMiB": 21.33
+  },
+  {
+   "name": "textures/lightmap-studio.png",
+   "resolution": "2048x2048",
+   "mimeType": "image/png",
+   "lightmap": true,
+   "gpuMiB": 21.33
+  },
+  {
+   "name": "textures/lightmap-systems.png",
+   "resolution": "2048x2048",
+   "mimeType": "image/png",
+   "lightmap": true,
+   "gpuMiB": 21.33
+  }
+ ],
+ "largestMeshes": [
+  {
+   "name": "Vertical perimeter pylon",
+   "triangles": 38684
+  },
+  {
+   "name": "Sphere",
+   "triangles": 34540
+  },
+  {
+   "name": "Arrival suspension",
+   "triangles": 23588
+  },
+  {
+   "name": "Dock architectural wall.002",
+   "triangles": 16616
+  },
+  {
+   "name": "Dock architectural wall.005",
+   "triangles": 16592
+  },
+  {
+   "name": "Dock architectural wall.001",
+   "triangles": 16592
+  },
+  {
+   "name": "Dock architectural wall.003",
+   "triangles": 16436
+  },
+  {
+   "name": "Dock architectural wall.004",
+   "triangles": 16328
+  }
+ ],
+ "inspectWarnings": [],
+ "baseline": {
+  "version": "0.1.2",
+  "visibleTriangles": 201558,
+  "drawCalls": 134,
+  "gpuMiB": 401.93,
+  "packageMiB": 72
+ },
+ "delta": {
+  "visibleTriangles": 0,
+  "drawCalls": 0,
+  "gpuMiB": -105.15,
+  "packageMiB": -18.83
+ }
+}

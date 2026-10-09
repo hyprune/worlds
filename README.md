@@ -23,6 +23,8 @@ Validation also needs Node: run `make navmesh-deps` once (installs the pinned Re
 
 `make lumen-budgets` / `make budgets` (part of the release targets; `make gltf-deps` once) write glTF-Transform `inspect()` budgets: visible triangles, draws and GPU MiB including mips and lightmaps. `LUMEN_BASELINE=<previous package>` adds deltas.
 
+World format 0.7 compressed assets are prepared but held until that contract merges: `HYPRUNE_FORMAT_07=1 make lumen-optimize` (or `optimize`) runs `tools/remote-optimize.sh` on the bake host. It encodes material textures to UASTC KTX2 with basisu 2.1.0, and compresses geometry with glTF-Transform meshopt and 16-bit quantisation (stock cleanup off, so materials are not pruned). It re-appends the PNG lightmap textures that glTF-Transform drops, and `tools/gltf/verify.mjs` diffs every index world.json references against the source. Output goes to `dist-07/`. gltfpack is not used: it renumbers nodes and materials.
+
 ## Content policy
 
 Official assets must be original or properly attributed CC0/CC-BY-4.0. Nothing without that provenance, even as temporary tests, screenshots or thumbnails. For every asset record author, source, license and modifications in the manifest/ATTRIBUTION.md. Keep editable sources and document reproducible export steps.

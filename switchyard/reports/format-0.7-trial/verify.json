@@ -1,0 +1,27 @@
+{
+ "status": "PASS",
+ "src": "work/src-com.hyprune.switchyard",
+ "dst": "work/out-com.hyprune.switchyard",
+ "formatVersion": "0.7",
+ "extensionsRequired": [
+  "EXT_meshopt_compression",
+  "KHR_mesh_quantization",
+  "KHR_texture_basisu",
+  "KHR_texture_transform"
+ ],
+ "counts": {
+  "nodes": 176,
+  "meshes": 176,
+  "materials": 134,
+  "primitives": 300,
+  "lightmaps": 123,
+  "ktx2Images": 36
+ },
+ "maxCollisionErrorMeters": 0.000432,
+ "maxWorldBoundsErrorMeters": 0.003331,
+ "packageMiB": {
+  "src": 72,
+  "dst": 53.17
+ },
+ "failures": []
+}

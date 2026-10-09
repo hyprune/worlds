@@ -1,0 +1,232 @@
+{
+ "items": [
+  {
+   "image": 1,
+   "png": "textures/metal-albedo.png",
+   "ktx2": "textures/metal-albedo.ktx2",
+   "mode": "srgb"
+  },
+  {
+   "image": 2,
+   "png": "textures/metal-orm.png",
+   "ktx2": "textures/metal-orm.ktx2",
+   "mode": "linear"
+  },
+  {
+   "image": 0,
+   "png": "textures/metal-normal.png",
+   "ktx2": "textures/metal-normal.ktx2",
+   "mode": "normal"
+  },
+  {
+   "image": 4,
+   "png": "textures/wood-albedo.png",
+   "ktx2": "textures/wood-albedo.ktx2",
+   "mode": "srgb"
+  },
+  {
+   "image": 5,
+   "png": "textures/wood-orm.png",
+   "ktx2": "textures/wood-orm.ktx2",
+   "mode": "linear"
+  },
+  {
+   "image": 3,
+   "png": "textures/wood-normal.png",
+   "ktx2": "textures/wood-normal.ktx2",
+   "mode": "normal"
+  },
+  {
+   "image": 7,
+   "png": "textures/stone-albedo.png",
+   "ktx2": "textures/stone-albedo.ktx2",
+   "mode": "srgb"
+  },
+  {
+   "image": 8,
+   "png": "textures/stone-orm.png",
+   "ktx2": "textures/stone-orm.ktx2",
+   "mode": "linear"
+  },
+  {
+   "image": 6,
+   "png": "textures/stone-normal.png",
+   "ktx2": "textures/stone-normal.ktx2",
+   "mode": "normal"
+  },
+  {
+   "image": 9,
+   "png": "textures/albedo-warm.png",
+   "ktx2": "textures/albedo-warm.ktx2",
+   "mode": "srgb"
+  },
+  {
+   "image": 10,
+   "png": "textures/panel-sheen.png",
+   "ktx2": "textures/panel-sheen.ktx2",
+   "mode": "srgb"
+  },
+  {
+   "image": 11,
+   "png": "textures/albedo-coral-glow.png",
+   "ktx2": "textures/albedo-coral-glow.ktx2",
+   "mode": "srgb"
+  },
+  {
+   "image": 12,
+   "png": "textures/albedo-letter.png",
+   "ktx2": "textures/albedo-letter.ktx2",
+   "mode": "srgb"
+  },
+  {
+   "image": 13,
+   "png": "textures/albedo-coral.png",
+   "ktx2": "textures/albedo-coral.ktx2",
+   "mode": "srgb"
+  },
+  {
+   "image": 15,
+   "png": "textures/brass-albedo.png",
+   "ktx2": "textures/brass-albedo.ktx2",
+   "mode": "srgb"
+  },
+  {
+   "image": 16,
+   "png": "textures/brass-orm.png",
+   "ktx2": "textures/brass-orm.ktx2",
+   "mode": "linear"
+  },
+  {
+   "image": 14,
+   "png": "textures/brass-normal.png",
+   "ktx2": "textures/brass-normal.ktx2",
+   "mode": "normal"
+  },
+  {
+   "image": 18,
+   "png": "textures/rubber-albedo.png",
+   "ktx2": "textures/rubber-albedo.ktx2",
+   "mode": "srgb"
+  },
+  {
+   "image": 19,
+   "png": "textures/rubber-orm.png",
+   "ktx2": "textures/rubber-orm.ktx2",
+   "mode": "linear"
+  },
+  {
+   "image": 17,
+   "png": "textures/rubber-normal.png",
+   "ktx2": "textures/rubber-normal.ktx2",
+   "mode": "normal"
+  },
+  {
+   "image": 21,
+   "png": "textures/cloth-albedo.png",
+   "ktx2": "textures/cloth-albedo.ktx2",
+   "mode": "srgb"
+  },
+  {
+   "image": 22,
+   "png": "textures/cloth-orm.png",
+   "ktx2": "textures/cloth-orm.ktx2",
+   "mode": "linear"
+  },
+  {
+   "image": 20,
+   "png": "textures/cloth-normal.png",
+   "ktx2": "textures/cloth-normal.ktx2",
+   "mode": "normal"
+  },
+  {
+   "image": 23,
+   "png": "textures/albedo-soil.png",
+   "ktx2": "textures/albedo-soil.ktx2",
+   "mode": "srgb"
+  },
+  {
+   "image": 24,
+   "png": "textures/albedo-leaf-dark.png",
+   "ktx2": "textures/albedo-leaf-dark.ktx2",
+   "mode": "srgb"
+  },
+  {
+   "image": 25,
+   "png": "textures/albedo-leaf.png",
+   "ktx2": "textures/albedo-leaf.ktx2",
+   "mode": "srgb"
+  },
+  {
+   "image": 26,
+   "png": "textures/panel-albedo.png",
+   "ktx2": "textures/panel-albedo.ktx2",
+   "mode": "srgb"
+  },
+  {
+   "image": 28,
+   "png": "textures/panel-orm.png",
+   "ktx2": "textures/panel-orm.ktx2",
+   "mode": "linear"
+  },
+  {
+   "image": 27,
+   "png": "textures/panel-normal.png",
+   "ktx2": "textures/panel-normal.ktx2",
+   "mode": "normal"
+  },
+  {
+   "image": 29,
+   "png": "textures/albedo-cyan-glow.png",
+   "ktx2": "textures/albedo-cyan-glow.ktx2",
+   "mode": "srgb"
+  },
+  {
+   "image": 30,
+   "png": "textures/albedo-cyan.png",
+   "ktx2": "textures/albedo-cyan.ktx2",
+   "mode": "srgb"
+  },
+  {
+   "image": 32,
+   "png": "textures/transit-trim-albedo.png",
+   "ktx2": "textures/transit-trim-albedo.ktx2",
+   "mode": "srgb"
+  },
+  {
+   "image": 31,
+   "png": "textures/trim-sheen.png",
+   "ktx2": "textures/trim-sheen.ktx2",
+   "mode": "srgb"
+  },
+  {
+   "image": 33,
+   "png": "textures/albedo-amber-glow.png",
+   "ktx2": "textures/albedo-amber-glow.ktx2",
+   "mode": "srgb"
+  },
+  {
+   "image": 34,
+   "png": "textures/albedo-amber.png",
+   "ktx2": "textures/albedo-amber.ktx2",
+   "mode": "srgb"
+  },
+  {
+   "image": 35,
+   "png": "textures/sky-gradient.png",
+   "ktx2": "textures/sky-gradient.ktx2",
+   "mode": "srgb"
+  }
+ ],
+ "skipped": [],
+ "lightmapImages": [
+  "textures/lightmap-hall.png",
+  "textures/lightmap-vault.png",
+  "textures/lightmap-concourse.png",
+  "textures/lightmap-build.png",
+  "textures/lightmap-research.png",
+  "textures/lightmap-commons.png",
+  "textures/lightmap-studio.png",
+  "textures/lightmap-systems.png",
+  "textures/lightmap-archive.png"
+ ]
+}

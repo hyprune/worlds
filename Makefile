@@ -105,3 +105,19 @@ navmesh-deps:
 	npm ci --prefix tools/navmesh --no-audit --no-fund
 navmesh-test:
 	python3 -m unittest tests/test_navmesh_check.py
+
+# World format 0.7 optimisation (KHR_texture_basisu KTX2 + EXT_meshopt_compression
+# + KHR_mesh_quantization), runs on the bake host. HELD until the 0.7 contract
+# merges (core perf/compressed-assets, RFC-0004 amendment, schema 0.7): never
+# part of build/release by default. Validate the source package first (the
+# Python checks read 0.5 packages); verify.mjs proves the optimised copy
+# equivalent. Output goes to dist-07/, not dist/.
+.PHONY: lumen-optimize optimize
+lumen-optimize:
+	@[ "$(HYPRUNE_FORMAT_07)" = 1 ] || { echo 'world format 0.7 is not merged yet; HYPRUNE_FORMAT_07=1 builds a test package in dist-07/' >&2; exit 2; }
+	tools/remote-optimize.sh $(LUMEN_PACKAGE) dist-07/com.hyprune.lumen-reach
+	node tools/gltf/budgets.mjs dist-07/com.hyprune.lumen-reach --baseline $(LUMEN_PACKAGE) --output dist-07/com.hyprune.lumen-reach.budgets.json > /dev/null
+optimize:
+	@[ "$(HYPRUNE_FORMAT_07)" = 1 ] || { echo 'world format 0.7 is not merged yet; HYPRUNE_FORMAT_07=1 builds a test package in dist-07/' >&2; exit 2; }
+	tools/remote-optimize.sh $(PACKAGE) dist-07/com.hyprune.switchyard
+	node tools/gltf/budgets.mjs dist-07/com.hyprune.switchyard --baseline $(PACKAGE) --output dist-07/com.hyprune.switchyard.budgets.json > /dev/null
