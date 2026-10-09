@@ -205,18 +205,18 @@
         "roof-final",
         "roof-bridge"
       ],
-      "meters": 6.699999999999999,
+      "meters": 6.760177512462227,
       "slope": 0.0,
-      "samples": 27
+      "samples": 28
     },
     {
       "edge": [
         "roof-bridge",
         "rooftop"
       ],
-      "meters": 12.0,
+      "meters": 12.899999999999999,
       "slope": 0.0,
-      "samples": 48
+      "samples": 52
     },
     {
       "edge": [

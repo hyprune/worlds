@@ -1,0 +1,37 @@
+{
+  "title": "Lumen Reach 0.7.1 -> 0.7.2: roof ramp access and roof bridge clearance",
+  "subtitle": "Exact poses, private Intel nested, Medium 0.5 scale, core 0735e4d; columns differ only by package. Navmesh map: screenshots/navmesh-2026-10-09/lumen-0.7.2-navmesh.png",
+  "columns": [
+    "nested 0.7.1 (published)",
+    "nested 0.7.2"
+  ],
+  "rows": [
+    {
+      "id": "roof-ramp-foot",
+      "title": "Final roof ramp foot, from above the court",
+      "caption": "0.7.1: the ramp starts flush with the y=12 slab's open front lip; rails start 0.5 m up, so the foot was reachable only with the body hanging over the drop. 0.7.2: a 1.5 m apron with a parapet and end returns in front of the foot.",
+      "images": [
+        "artifacts/any-angle-0.7.2/before-views/roof-ramp-foot.png",
+        "artifacts/any-angle-0.7.2/sweep/roof-ramp-foot.png"
+      ]
+    },
+    {
+      "id": "roof-ramp-foot-eye",
+      "title": "Same spot at eye height, from the west",
+      "caption": "0.7.2: the apron runs past the ramp foot behind a 1.0 m guard rail; roof-start/roof-start-west now stand on the main navmesh (navmesh-allow pin removed).",
+      "images": [
+        "artifacts/any-angle-0.7.2/before-views/roof-ramp-foot-eye.png",
+        "artifacts/any-angle-0.7.2/sweep/roof-ramp-foot-eye.png"
+      ]
+    },
+    {
+      "id": "roof-bridge-eye",
+      "title": "Roof bridge through the Array Hall west bay, eye height",
+      "caption": "0.7.1: a render-only metal lintel at 0.88-1.12 m and a concrete rib inside the 1.5 m walkway (walked through). 0.7.2: lintel raised to clear 2.28 m; rib stops under the deck and resumes 2.6 m above it; route centreline mid-bridge (route-clearance pins removed).",
+      "images": [
+        "artifacts/any-angle-0.7.2/before-views/roof-bridge-eye.png",
+        "artifacts/any-angle-0.7.2/sweep/roof-bridge-eye.png"
+      ]
+    }
+  ]
+}

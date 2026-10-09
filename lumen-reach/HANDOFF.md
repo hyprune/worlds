@@ -1,114 +1,96 @@
-# Lumen Reach 0.7.1 handoff — 2026-10-09
+# Lumen Reach 0.7.2 handoff — 2026-10-09
 
 **Release candidate verified; not published, not pushed.** The lead reviews
-first. No nested session or bake is left running. Published baseline: 0.7.0
-(original package kept at `artifacts/any-angle-0.7.1/before/`, SHA-identical
-to the 0.7.0 record in `reports/release-0.7.0.json`).
+first. No nested session or bake is left running. Published baseline: 0.7.1
+(package kept at `artifacts/any-angle-0.7.2/before/`, SHA-identical to
+`reports/release-0.7.1.json`).
 
-Scope (owner direction): fix only the three defects from the owner's 0.7.0
-live walk; playable over glossy, no redesign.
+Scope (lead direction): two small fixes found by the new navmesh and
+route-clearance checks; no redesign.
 
 ## Release candidate
 
-- Package: `dist/com.hyprune.lumen-reach/` (fourth 0.7.1 bake on 10.2.2.2,
-  build inputs at `2dfd3dd`)
-- Manifest SHA256 `15e18acc05200e6fb90bd9d084c8105ae0b165f6cd54972bb4667c34da8a6af2`
-- Scene SHA256 `ff8e95bf3f11ddf76b444b2764c4a7d73d82973b8d53a05c967894e88790ab73`
-- Archive `artifacts/releases/com.hyprune.lumen-reach-0.7.1.tar.zst`,
-  46,888,010 bytes, SHA256
-  `326406931e5b8c9cebb6e385cc1aed9303a0f7a47141048fdeec8eb0738e2549`.
+- Package: `dist/com.hyprune.lumen-reach/` (third 0.7.2 bake on 10.2.2.2,
+  build inputs at `b0ad62d`)
+- Manifest SHA256 `9ce52ac96e5fd1ffce5c77b5fa2461ef82233505f5ba6983a0f1fdf2fc414f03`
+- Scene SHA256 `12c587d4dda1f87e5fe4d561fcaee3c8c62f72f747f789edfefd114b033f9d40`
+- Archive `artifacts/releases/com.hyprune.lumen-reach-0.7.2.tar.zst`,
+  46,817,572 bytes, SHA256
+  `cb1adac2e85f2d15df2c17af0bb196c8a5a460b7a3a113aac4966b58ed55f33c`
+  (`sha256sum -c artifacts/releases/LUMEN-SHA256SUMS` from the repo root).
   All 76 extracted files are identical to `dist/`; the extracted copy passes
   schema 0.5 and core world-check.
-- Record: `reports/release.json`; evidence under `reports/any-angle-0.7.1/`.
-- Gallery (`screenshots/release-world-v4/`): `lumen-0.7.1-before-after.jpg`
-  (owner live | nested 0.7.0 | nested 0.7.1 at the exact capture poses) and
-  `lumen-0.7.1-any-angle-contact-sheet.jpg`.
+- Record: `reports/release.json`; evidence under `reports/any-angle-0.7.2/`.
+- Gallery: `screenshots/release-world-v4/lumen-0.7.2-before-after.jpg`
+  (exact poses, nested 0.7.1 | nested 0.7.2),
+  `lumen-0.7.2-any-angle-contact-sheet.jpg`, and
+  `screenshots/navmesh-2026-10-09/lumen-0.7.2-navmesh.png`.
 
-## Causes and fixes
+## Fixes
 
-1. **Day panorama doubled/ghosted** (capture-1791554896814). Not two layers:
-   `materials/sky.py` "healed" the longitude seam by cross-fading each edge
-   with its *mirror* (48 columns) and adding every row's full seam offset as
-   a ramp across the whole width. That superimposed a mirrored ghost and
-   row streaks, and the seam (u=0) faced due south, centred in the Sun
-   Court's main view. A bilinear software reprojection of the texture alone
-   reproduced the capture. Fix: low-pass seam join (no detail blended),
-   gradual cloud-row softening above the peaks, uniform polar rows; the
-   sphere's seam now faces the Signal massif (`DAY_SEAM`), which hides the
-   seam's landscape rows from every walkable eye. The grey wavy bands were
-   the terrain disk's outer shelves (r >= 174 m) cresting near eye level;
-   they now fall away as a bowl, >= 13.9 deg below every walkable eye.
-   Side effect: the painting is rotated ~161 deg, so every direction shows
-   a different part of it (the Court's south view now shows its centre).
-2. **Snow-service stair capped** (…572827, …584009, …632233). The 0.7.0
-   "Rise cliff foundations" rock block (top at z −0.38 over the whole yard)
-   capped the passage; its south slope plus the mountain shell walled the
-   bottom; the closed night sky crossed it (the blue rectangle). All are
-   render-only, so collision route harnesses walked through. Fix: a declared
-   portal (`portals.json`) bisects and deletes exactly the shell faces inside
-   the passage (cut edges hidden in its walls, slab and ceiling). Opening it
-   exposed two follow-ons, also fixed: visibility culling dropped the Vault
-   passage when seen from the Rise (0.6.1 regions assumed rock between
-   them; two sightline regions added), and the alternate flight's foot
-   ended on the perimeter apron open to the outside (short wall/side/roof).
-3. **Night sky pixelated/ringed** (…599880, …632233). Not a core sampler
-   bug (samplers are LINEAR/LINEAR_MIPMAP_LINEAR; the bilinear reprojection
-   reproduces the blocks). The basin ellipsoid's walls are 1–20 m from the
-   yard, so the painted 2048×1024 master was magnified up to ~930 screen
-   px per texel at 4K. Fix: a band-limited procedural gradient with soft
-   ridge bands (every texel step <= 4 levels). The new leak check also
-   showed the ellipsoid met the y=112 rail only at x=57: both yard corners
-   stood outside the basin and saw the day sky / Sun Court or the shell from
-   outside. The basin and shell are now power-4 superellipsoids (south wall
-   0.4–0.8 m beyond the rail). Honest note: the painted night mountains are
-   gone from the basin sky; it is plain and smooth.
-
-## New deterministic checks (in `make lumen-validate`)
-
-- `tools/check-sky.py`: opaque single-sided sky layers, no large blended
-  backdrop cards, seam mirror-ghost and row-streak scores, hard seam rows
-  occluded from all ~955 walkable eyes, no view leak past a culled sky/shell,
-  no terrain inside a closed sky, distant terrain >= 6 deg below eye level,
-  screen px per sky texel (4K, 60°) vs local texture step, uniform pole bands.
-- `tools/check-route-clearance.py`: render-geometry headroom rays, body
-  capsule and eye sightlines along all 14 stair flights and 63 route edges.
-  Six reviewed pre-existing findings are pinned (see "Not fixed").
-- `tools/check-any-angle.py`: accepts sky holes only at declared portals and
-  checks the power-4 basin shape.
-- Both new checks fail 0.7.0 on every owner defect class
-  (`reports/any-angle-0.7.1/baseline-0.7.0/`).
+1. **Roof ramp access** (check-navmesh). The final roof ramp's foot sat on
+   the y=12 `Roof upper landing`'s open south lip; its rails start 0.5 m up
+   the ramp and the slab under the ramp has no headroom, so the only way on
+   was a 0.5 m gap between the rail ends and an 8 m drop. Core's capsule
+   could overhang the lip (the nested route walk passed); a navmesh agent
+   could not, so the whole upper roof was a separate island. The landing now
+   extends 1.5 m south (`build.py`) with a parapet and end returns. The
+   roof route is on the main navmesh (main area 7,114 -> 7,366 m2) and the
+   pin is gone from `navmesh-allow.json`.
+2. **Roof bridge member** (check-route-clearance). The render-only `Hall
+   service lintel` (`polish.py`, west bay y 34..42, z 17) crossed the roof
+   bridge 0.88-1.12 m above the deck. Raised to z 18.4 (2.28 m clear). Both
+   pins are gone from `check-route-clearance.py`.
+3. **Found while fixing 1-2, same passage.** With the roof joined, the
+   navmesh showed the `roof-final>roof-bridge` centreline ran along the
+   bridge's south lip, beside an open 1.5 m slot (x -8.5..-7, between the
+   ramp and the bridge-run rails) that drops to the ground. Also the
+   render-only `Atrium secondary rib` (x -5.8, y 36.8) stood inside the
+   1.5 m bridge walkway (0.65 m off the old centreline, so the
+   route-clearance lane missed it). The rib now stops under the deck and
+   resumes 2.6 m above. `roof-bridge` sits 0.9 m into the bridge, so the
+   route clears the slot. `roof-start(-west)` and `roof-final` keep their
+   0.7.1 positions at the ramp ends: check-walking samples straight
+   node-to-node profiles, and the graph is at core's 64-node limit, so no
+   nodes were added.
 
 ## Verified on the release package
 
-- `make lumen-validate` PASS; glTF validator 0 errors/0 warnings; core
-  `hyprune-world-check` (core-visibility-bench `0735e4d`).
-- Any-angle nested (`artifacts/any-angle-0.7.1/sweep/`): 66 views incl. the
-  five new owner poses and new targeted views, 66/66 culling pairs
-  unchanged, 6/6 walking probes stop inside, jump stops at x=25.64, fly
-  crosses to x=30.21.
-- Route traversal (`artifacts/any-angle-0.7.1/routes/`): 64 nodes, 126
+- `make lumen-validate` PASS, including check-navmesh (only the 0.19 m2
+  vault sliver stays allow-listed), check-route-clearance (4 pre-existing
+  pins, none on the roof), check-sky, geometry, walking and placement.
+- glTF validator 0 errors / 0 warnings; core `hyprune-world-check`
+  (core-visibility-bench `0735e4d`, plugin `18f26a66…`, as for 0.7.1).
+- Any-angle nested (`artifacts/any-angle-0.7.2/sweep/`): 69 views (66 + the
+  new `roof-ramp-foot`, `roof-ramp-foot-eye`, `roof-bridge-eye`), 69/69
+  culling pairs unchanged, 6/6 walking probes stop inside, jump stops at
+  x=25.64, fly crosses to x=30.28. Streak candidates: maximum 0.012 at
+  `rise-corner-sw`, as in 0.7.1.
+- Route traversal (`artifacts/any-angle-0.7.2/routes/`): 64 nodes, 126
   directed traversals, 14 alternate stairs, 18 hero stills. PASS.
-- Budgets: 244,526 triangles, 99 batches, 372.65 conservative GPU MiB
-  (0.7.0: 244,312 / 99 / 372.62). Collision unchanged (5,122 triangles).
+- Budgets: 245,330 triangles (+804), 99 draws, 277.92 GPU MiB
+  (glTF-Transform estimate, +0.09), 372.74 conservative MiB; collision
+  5,194 triangles.
 
 ## Not fixed (reported, out of scope)
 
-- Roof bridge: a render-only metal member 0.88–1.12 m above the 16 m bridge
-  crosses the `roof-final>roof-bridge` centreline (walk passes through it).
-  Candidate fix for the next release.
-- Minor clearances (0.2 m) beside routes: landing wall at the top of
-  `roof-ascent-lower`, a mullion at `hall-upper`, one leaf tip, and the
-  snow stair's wall-side lane passing its wall lamps.
-- Fly views above ~25° can face the softened cloud join of the day seam;
-  the massif's jagged crown and soft 4K panorama remain as in 0.7.0.
-- Transient: one sweep run (bake 3) hung in `grim` on random-14 (no frame
-  delivered by the nested compositor); the rerun on the final package
-  captured it normally. Core lead may want to look if it recurs.
+- **The roof walkway is mostly unguarded.** Rails exist only along the
+  ramp, the bridge run's west side (x -7) and the new apron. The 1.5 m
+  bridge's north edge (z -37.5), its east end, the run's east edge (x -3)
+  and the slot opening beside the ramp top drop 8-16 m. Routes keep
+  >= 0.6 m from these edges. Railing them is a small, separate decision
+  (design: does the rooftop stay open?).
+- The landing's west edge (x -20, y 20..24) is also unrailed, as before.
+- Unchanged from 0.7.1: minor 0.2 m clearances (roof-ascent-lower landing
+  wall, hall-upper mullion, a leaf tip, snow stair wall lamps), the soft
+  cloud join of the day seam above ~25 deg fly views.
+- Nested harness note: `check-lumen-session.py --routes --output <dir>`
+  needs the bake's `artifacts/lumen-reach/views.json` copied into `<dir>`.
 
 ## Next steps for the lead
 
 Review the before/after sheet, then push `worlds` and publish
-`lumen-reach-v0.7.1` with the archive above; update
+`lumen-reach-v0.7.2` with the archive above; update
 `hyprune/worlds/releases.json` in the meta repo with its URL and hash.
 Every commit ends with:
 

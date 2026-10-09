@@ -1,0 +1,200 @@
+{
+  "status": "PASS",
+  "worldVersion": "0.7.2",
+  "coreCommit": "0735e4dd4d6390313a323f4d511c3e48d5048c92",
+  "pluginSHA256": "18f26a66625d88ad3aa95434c8f99a5b2768fee1ff59f3e06a2be70fa28fbebd",
+  "manifestSHA256": "9ce52ac96e5fd1ffce5c77b5fa2461ef82233505f5ba6983a0f1fdf2fc414f03",
+  "sceneSHA256": "12c587d4dda1f87e5fe4d561fcaee3c8c62f72f747f789edfefd114b033f9d40",
+  "method": "Private native-4K Intel nested; Medium fixed 0.5 scale; held photos. Owner poses, deterministic route samples, elevated random views to 60m, pole/seam and roof inspection. Culling on/off image comparison. Streak scores are candidates for review, not semantic proof.",
+  "views": 69,
+  "cullingPairs": 69,
+  "cullingLosses": [],
+  "boundaryProbes": [
+    {
+      "id": "court-east",
+      "start": [
+        25.2,
+        1.7,
+        0
+      ],
+      "end": [
+        25.635000228881836,
+        1.7000000476837158,
+        4.768082817463437e-07
+      ],
+      "axis": 0,
+      "outwardSign": 1,
+      "limit": 26,
+      "inside": true
+    },
+    {
+      "id": "court-south",
+      "start": [
+        0,
+        1.7,
+        15.2
+      ],
+      "end": [
+        -2.0030540326843038e-05,
+        1.7000000476837158,
+        15.635000228881836
+      ],
+      "axis": 2,
+      "outwardSign": 1,
+      "limit": 16,
+      "inside": true
+    },
+    {
+      "id": "court-west",
+      "start": [
+        -23.2,
+        1.7,
+        10
+      ],
+      "end": [
+        -23.635000228881836,
+        1.7000000476837158,
+        10.0
+      ],
+      "axis": 0,
+      "outwardSign": -1,
+      "limit": -24,
+      "inside": true
+    },
+    {
+      "id": "hall-west",
+      "start": [
+        -12.2,
+        1.7,
+        -34
+      ],
+      "end": [
+        -12.635000228881836,
+        1.7000000476837158,
+        -34.0
+      ],
+      "axis": 0,
+      "outwardSign": -1,
+      "limit": -13,
+      "inside": true
+    },
+    {
+      "id": "rise-east",
+      "start": [
+        84.2,
+        1.7,
+        -120
+      ],
+      "end": [
+        84.63499450683594,
+        1.7000000476837158,
+        -120.0
+      ],
+      "axis": 0,
+      "outwardSign": 1,
+      "limit": 85,
+      "inside": true
+    },
+    {
+      "id": "rise-south",
+      "start": [
+        70,
+        1.7,
+        -112.8
+      ],
+      "end": [
+        70.0,
+        1.7000000476837158,
+        -112.36500549316406
+      ],
+      "axis": 2,
+      "outwardSign": 1,
+      "limit": -112,
+      "inside": true
+    }
+  ],
+  "jumpBoundaryWitness": [
+    25.635000228881836,
+    1.7505635023117065,
+    0.002719148760661483
+  ],
+  "flyBoundaryWitness": [
+    30.278173446655273,
+    6.0,
+    -3.8338541230587e-07
+  ],
+  "viewIds": [
+    "owner-1791547507663",
+    "owner-1791547755306",
+    "owner-1791547761094",
+    "owner-1791547776428",
+    "owner-1791547781479",
+    "owner-1791547802616",
+    "owner-1791547819687",
+    "owner-1791547839640",
+    "owner-1791547849421",
+    "owner-1791554896814",
+    "owner-1791558572827",
+    "owner-1791558584009",
+    "owner-1791558599880",
+    "owner-1791558632233",
+    "01-sun-court",
+    "02-array-hall",
+    "03-rime-vault",
+    "04-signal-rise",
+    "court-60-down",
+    "court-60-north",
+    "sky-seam",
+    "sky-zenith",
+    "hall-roof",
+    "vault-roof",
+    "rise-60",
+    "rise-exterior",
+    "stair-soffit",
+    "cascade-model",
+    "spire-model",
+    "rise-zenith",
+    "rise-corner-se",
+    "rise-corner-sw",
+    "stair-tunnel-up",
+    "court-day-seam",
+    "roof-ramp-foot",
+    "roof-ramp-foot-eye",
+    "roof-bridge-eye",
+    "random-00",
+    "random-01",
+    "random-02",
+    "random-03",
+    "random-04",
+    "random-05",
+    "random-06",
+    "random-07",
+    "random-08",
+    "random-09",
+    "random-10",
+    "random-11",
+    "random-12",
+    "random-13",
+    "random-14",
+    "random-15",
+    "random-16",
+    "random-17",
+    "random-18",
+    "random-19",
+    "random-20",
+    "random-21",
+    "random-22",
+    "random-23",
+    "random-24",
+    "random-25",
+    "random-26",
+    "random-27",
+    "random-28",
+    "random-29",
+    "random-30",
+    "random-31"
+  ],
+  "raw": "artifacts/any-angle-0.7.2/sweep/",
+  "maxCullingChangedPixelFraction": 0,
+  "maxStreakCandidateFraction": 0.011969532100108813
+}

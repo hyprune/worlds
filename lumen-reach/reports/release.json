@@ -1,87 +1,94 @@
 {
   "status": "PASS",
   "worldId": "com.hyprune.lumen-reach",
-  "version": "0.7.1",
+  "version": "0.7.2",
   "formatVersion": "0.5",
-  "sourceCommit": "50ad2c0aae5d7c49af74024045ad9de36268159f",
-  "sourceNote": "Package bytes baked on 10.2.2.2 (fourth 0.7.1 bake) from the build inputs committed at 2dfd3dd; later commits change only harness, reports and docs.",
-  "sceneSHA256": "ff8e95bf3f11ddf76b444b2764c4a7d73d82973b8d53a05c967894e88790ab73",
-  "manifestSHA256": "15e18acc05200e6fb90bd9d084c8105ae0b165f6cd54972bb4667c34da8a6af2",
+  "sourceCommit": "b0ad62d",
+  "sourceNote": "Package bytes baked on 10.2.2.2 (third 0.7.2 bake) from the build inputs committed at b0ad62d.",
+  "sceneSHA256": "12c587d4dda1f87e5fe4d561fcaee3c8c62f72f747f789edfefd114b033f9d40",
+  "manifestSHA256": "9ce52ac96e5fd1ffce5c77b5fa2461ef82233505f5ba6983a0f1fdf2fc414f03",
   "archive": {
     "status": "PASS",
-    "path": "/home/rick/workspace/hyprune/worlds/artifacts/releases/com.hyprune.lumen-reach-0.7.1.tar.zst",
-    "sha256": "326406931e5b8c9cebb6e385cc1aed9303a0f7a47141048fdeec8eb0738e2549",
-    "bytes": 46888010,
+    "path": "artifacts/releases/com.hyprune.lumen-reach-0.7.2.tar.zst",
+    "sha256": "cb1adac2e85f2d15df2c17af0bb196c8a5a460b7a3a113aac4966b58ed55f33c",
+    "bytes": 46817572,
     "identicalExtractedFiles": 76,
-    "manifestSHA256": "15e18acc05200e6fb90bd9d084c8105ae0b165f6cd54972bb4667c34da8a6af2",
-    "version": "0.7.1",
+    "version": "0.7.2",
     "formatVersion": "0.5",
     "extractedChecks": [
-      "diff -r against dist: identical",
-      "schema 0.5 validate",
-      "core hyprune-world-check"
+      "schema 0.5 VALID",
+      "core hyprune-world-check PASS",
+      "sha256sum -c LUMEN-SHA256SUMS OK"
     ]
   },
   "published": false,
   "coreCommit": "0735e4dd4d6390313a323f4d511c3e48d5048c92",
   "loadedPluginSHA256": "18f26a66625d88ad3aa95434c8f99a5b2768fee1ff59f3e06a2be70fa28fbebd",
   "fixes": {
-    "dayPanoramaGhost": "materials/sky.py mirror cross-fade and full-width row ramp replaced by a low-pass seam join; seam rotated to face the Signal massif; outer valley shelves lowered into a bowl",
-    "snowServiceStair": "portal cut (portals.json) through Rise foundation, mountain shell and basin sky; apron foot closed; two visibility sightlines",
-    "nightSkyPixelation": "procedural band-limited basin sky (texel step <=4); power-4 basin keeps yard corners inside",
-    "dayZenithRings": "uniform polar fan rows"
+    "roofRampAccess": "The final roof ramp foot sat on the y=12 slab's open south lip (rails start 0.5 m up, no headroom under the ramp): reachable only with the capsule hanging over the drop. Roof upper landing extended 1.5 m south with a parapet and end returns (build.py). roof-start/roof-start-west/roof-final/roof-bridge/rooftop now on the main navmesh; navmesh-allow pin removed.",
+    "roofBridgeMember": "Render-only Hall service lintel (polish.py, west bay y 34..42) 0.88-1.12 m above the z=16 roof bridge raised to clear 2.28 m; check-route-clearance pins removed.",
+    "roofBridgeRib": "Found once the roof joined the navmesh: the render-only Atrium secondary rib (x -5.8, y 36.8) stood inside the 1.5 m bridge walkway; it now stops under the deck and resumes 2.6 m above. roof-bridge node moved 0.9 m into the bridge so the route clears the open slot beside the ramp top (graph stays at 64 nodes)."
   },
   "budgets": {
-    "visibleTriangles": 244526,
+    "visibleTriangles": 245330,
     "unfilteredMaterialBatches": 99,
-    "conservativeGpuMiB": 372.65,
-    "collisionTriangles": 5122,
-    "baseline070": {
-      "visibleTriangles": 244312,
-      "unfilteredMaterialBatches": 99,
-      "conservativeGpuMiB": 372.62
-    },
+    "conservativeGpuMiB": 372.74,
+    "collisionTriangles": 5194,
     "gltfTransform": {
-      "report": "reports/any-angle-0.7.1/budgets.json",
-      "tool": "glTF-Transform 4.5.1 inspect() + visible-scene traversal",
-      "visibleTriangles": 244526,
+      "report": "reports/any-angle-0.7.2/budgets.json",
+      "visibleTriangles": 245330,
       "drawCalls": 99,
       "gpuMiB": {
-        "total": 277.83,
+        "total": 277.92,
         "materialTextures": 157.83,
         "lightmaps": 87.33,
-        "vertexBuffers": 31.04,
-        "indexBuffers": 1.62
+        "vertexBuffers": 31.12,
+        "indexBuffers": 1.63
       },
       "packageMiB": 70.46,
-      "baseline070": {
-        "version": "0.7.0",
-        "visibleTriangles": 244312,
+      "baseline071": {
+        "version": "0.7.1",
+        "visibleTriangles": 244526,
         "drawCalls": 99,
-        "gpuMiB": 277.55,
-        "packageMiB": 71.21
+        "gpuMiB": 277.83,
+        "packageMiB": 70.46
       },
-      "note": "glTF-Transform VRAM estimate: one RGBA8 texture per image with full mips (lightmaps included) plus visible vertex/index buffers. It tracks core's single-upload estimate (269.5 MiB measured on 0.7.0 in core docs/PERF-2026-10.md); conservativeGpuMiB above keeps check-package's older sRGB+linear dual-view count."
+      "delta": {
+        "visibleTriangles": 804,
+        "drawCalls": 0,
+        "gpuMiB": 0.09,
+        "packageMiB": 0
+      }
     }
   },
   "offlineChecks": [
-    "make lumen-validate (geometry/sky topology, check-sky, check-route-clearance, visibility, schema 0.5, package, placement, walking, emissive, decals)",
+    "make lumen-validate PASS (geometry/sky topology, check-sky, check-route-clearance, check-navmesh, visibility, schema 0.5, package, placement, walking, emissive, decals)",
+    "check-navmesh PASS: main navmesh 7365.8 m2, all 64 nodes/63 edges/42 stair lanes/24 approaches on it; 1 allow-listed (0.19 m2 vault sliver)",
+    "check-route-clearance PASS: 77 flights/edges, 4 pre-existing pins (none on the roof)",
     "glTF validator: 0 errors, 0 warnings",
-    "core hyprune-world-check",
-    "new checks fail 0.7.0 on every owner defect class (reports/any-angle-0.7.1/baseline-0.7.0/)",
-    "check-navmesh (Recast/Detour, added after the release candidate): PASS on 0.7.1 and 0.7.0 with reviewed findings pinned in navmesh-allow.json (reports/any-angle-0.7.1/navmesh-check.json, navmesh.svg)"
+    "core hyprune-world-check PASS"
   ],
-  "evidence": {
-    "anyAngle": "reports/any-angle-0.7.1/release-session-summary.json",
-    "routes": "reports/any-angle-0.7.1/release-routes-summary.json",
-    "sky": "reports/any-angle-0.7.1/sky-check.json",
-    "routeClearance": "reports/any-angle-0.7.1/route-clearance.json",
-    "portals": "reports/any-angle-0.7.1/portal-report.json",
-    "boundary": "reports/any-angle-0.7.1/playable-boundary-report.json",
-    "gltf": "reports/any-angle-0.7.1/release-gltf-validation.json",
-    "coreWorldCheck": "reports/any-angle-0.7.1/release-core-world-check.json",
-    "beforeAfter": "reports/any-angle-0.7.1/before-after.json",
-    "baseline070": "reports/any-angle-0.7.1/baseline-0.7.0/"
+  "nested": {
+    "anyAngle": "69 views (66 + roof-ramp-foot, roof-ramp-foot-eye, roof-bridge-eye), 0 culling losses, 6/6 walking boundary probes inside, jump stops at x=25.64, fly crosses to x=30.28",
+    "routes": "64 nodes, 126 directed traversals, 14 alternate stairs, 18 hero stills: PASS"
   },
-  "gallery": "/home/rick/workspace/rick-the-alien/worldshell-gallery/screenshots/release-world-v4/"
+  "evidence": {
+    "anyAngle": "reports/any-angle-0.7.2/release-session-summary.json",
+    "routes": "reports/any-angle-0.7.2/release-routes-summary.json",
+    "navmesh": "reports/any-angle-0.7.2/navmesh-check.json",
+    "navmeshMap": "reports/any-angle-0.7.2/navmesh.svg",
+    "sky": "reports/any-angle-0.7.2/sky-check.json",
+    "routeClearance": "reports/any-angle-0.7.2/route-clearance.json",
+    "portals": "reports/any-angle-0.7.2/portal-report.json",
+    "boundary": "reports/any-angle-0.7.2/playable-boundary-report.json",
+    "gltf": "reports/any-angle-0.7.2/release-gltf-validation.json",
+    "coreWorldCheck": "reports/any-angle-0.7.2/release-core-world-check.json",
+    "beforeAfter": "reports/any-angle-0.7.2/before-after.json",
+    "baseline071": "artifacts/any-angle-0.7.2/before/ (SHA-identical to the published 0.7.1 package)"
+  },
+  "gallery": {
+    "beforeAfter": "screenshots/release-world-v4/lumen-0.7.2-before-after.jpg",
+    "anyAngle": "screenshots/release-world-v4/lumen-0.7.2-any-angle-contact-sheet.jpg",
+    "navmesh": "screenshots/navmesh-2026-10-09/lumen-0.7.2-navmesh.png"
+  }
 }

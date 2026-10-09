@@ -1,0 +1,23 @@
+[
+  {
+    "portal": "snow-service-ascent",
+    "object": "Signal closed basin sky",
+    "facesBefore": 3072,
+    "facesRemoved": 6,
+    "facesAfter": 3080
+  },
+  {
+    "portal": "snow-service-ascent",
+    "object": "Signal mountain outer shell",
+    "facesBefore": 3072,
+    "facesRemoved": 6,
+    "facesAfter": 3081
+  },
+  {
+    "portal": "snow-service-ascent",
+    "object": "Rise cliff foundations",
+    "facesBefore": 6,
+    "facesRemoved": 2,
+    "facesAfter": 17
+  }
+]

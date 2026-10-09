@@ -1,0 +1,87 @@
+{
+  "status": "PASS",
+  "worldId": "com.hyprune.lumen-reach",
+  "version": "0.7.1",
+  "formatVersion": "0.5",
+  "sourceCommit": "50ad2c0aae5d7c49af74024045ad9de36268159f",
+  "sourceNote": "Package bytes baked on 10.2.2.2 (fourth 0.7.1 bake) from the build inputs committed at 2dfd3dd; later commits change only harness, reports and docs.",
+  "sceneSHA256": "ff8e95bf3f11ddf76b444b2764c4a7d73d82973b8d53a05c967894e88790ab73",
+  "manifestSHA256": "15e18acc05200e6fb90bd9d084c8105ae0b165f6cd54972bb4667c34da8a6af2",
+  "archive": {
+    "status": "PASS",
+    "path": "/home/rick/workspace/hyprune/worlds/artifacts/releases/com.hyprune.lumen-reach-0.7.1.tar.zst",
+    "sha256": "326406931e5b8c9cebb6e385cc1aed9303a0f7a47141048fdeec8eb0738e2549",
+    "bytes": 46888010,
+    "identicalExtractedFiles": 76,
+    "manifestSHA256": "15e18acc05200e6fb90bd9d084c8105ae0b165f6cd54972bb4667c34da8a6af2",
+    "version": "0.7.1",
+    "formatVersion": "0.5",
+    "extractedChecks": [
+      "diff -r against dist: identical",
+      "schema 0.5 validate",
+      "core hyprune-world-check"
+    ]
+  },
+  "published": false,
+  "coreCommit": "0735e4dd4d6390313a323f4d511c3e48d5048c92",
+  "loadedPluginSHA256": "18f26a66625d88ad3aa95434c8f99a5b2768fee1ff59f3e06a2be70fa28fbebd",
+  "fixes": {
+    "dayPanoramaGhost": "materials/sky.py mirror cross-fade and full-width row ramp replaced by a low-pass seam join; seam rotated to face the Signal massif; outer valley shelves lowered into a bowl",
+    "snowServiceStair": "portal cut (portals.json) through Rise foundation, mountain shell and basin sky; apron foot closed; two visibility sightlines",
+    "nightSkyPixelation": "procedural band-limited basin sky (texel step <=4); power-4 basin keeps yard corners inside",
+    "dayZenithRings": "uniform polar fan rows"
+  },
+  "budgets": {
+    "visibleTriangles": 244526,
+    "unfilteredMaterialBatches": 99,
+    "conservativeGpuMiB": 372.65,
+    "collisionTriangles": 5122,
+    "baseline070": {
+      "visibleTriangles": 244312,
+      "unfilteredMaterialBatches": 99,
+      "conservativeGpuMiB": 372.62
+    },
+    "gltfTransform": {
+      "report": "reports/any-angle-0.7.1/budgets.json",
+      "tool": "glTF-Transform 4.5.1 inspect() + visible-scene traversal",
+      "visibleTriangles": 244526,
+      "drawCalls": 99,
+      "gpuMiB": {
+        "total": 277.83,
+        "materialTextures": 157.83,
+        "lightmaps": 87.33,
+        "vertexBuffers": 31.04,
+        "indexBuffers": 1.62
+      },
+      "packageMiB": 70.46,
+      "baseline070": {
+        "version": "0.7.0",
+        "visibleTriangles": 244312,
+        "drawCalls": 99,
+        "gpuMiB": 277.55,
+        "packageMiB": 71.21
+      },
+      "note": "glTF-Transform VRAM estimate: one RGBA8 texture per image with full mips (lightmaps included) plus visible vertex/index buffers. It tracks core's single-upload estimate (269.5 MiB measured on 0.7.0 in core docs/PERF-2026-10.md); conservativeGpuMiB above keeps check-package's older sRGB+linear dual-view count."
+    }
+  },
+  "offlineChecks": [
+    "make lumen-validate (geometry/sky topology, check-sky, check-route-clearance, visibility, schema 0.5, package, placement, walking, emissive, decals)",
+    "glTF validator: 0 errors, 0 warnings",
+    "core hyprune-world-check",
+    "new checks fail 0.7.0 on every owner defect class (reports/any-angle-0.7.1/baseline-0.7.0/)",
+    "check-navmesh (Recast/Detour, added after the release candidate): PASS on 0.7.1 and 0.7.0 with reviewed findings pinned in navmesh-allow.json (reports/any-angle-0.7.1/navmesh-check.json, navmesh.svg)"
+  ],
+  "evidence": {
+    "anyAngle": "reports/any-angle-0.7.1/release-session-summary.json",
+    "routes": "reports/any-angle-0.7.1/release-routes-summary.json",
+    "sky": "reports/any-angle-0.7.1/sky-check.json",
+    "routeClearance": "reports/any-angle-0.7.1/route-clearance.json",
+    "portals": "reports/any-angle-0.7.1/portal-report.json",
+    "boundary": "reports/any-angle-0.7.1/playable-boundary-report.json",
+    "gltf": "reports/any-angle-0.7.1/release-gltf-validation.json",
+    "coreWorldCheck": "reports/any-angle-0.7.1/release-core-world-check.json",
+    "beforeAfter": "reports/any-angle-0.7.1/before-after.json",
+    "baseline070": "reports/any-angle-0.7.1/baseline-0.7.0/"
+  },
+  "gallery": "/home/rick/workspace/rick-the-alien/worldshell-gallery/screenshots/release-world-v4/"
+}
