@@ -48,19 +48,23 @@ film-fetch:
 
 LUMEN_PACKAGE := dist/com.hyprune.lumen-reach
 LUMEN_AREAS ?= 4
+LUMEN_VERSION = $(shell python3 -c "import json; print(json.load(open('$(LUMEN_PACKAGE)/world.json'))['version'])")
+LUMEN_REPORTS = lumen-reach/reports/any-angle-$(LUMEN_VERSION)
 VISIBILITY_CORE ?= ../core
 .PHONY: lumen-build lumen-validate lumen-nested lumen-tour lumen-release
 lumen-build:
 	python3 lumen-reach/materials/prepare.py
 	./tools/remote-lumen.sh --areas $(LUMEN_AREAS) --samples 64
 lumen-validate:
-	python3 tools/check-any-angle.py $(LUMEN_PACKAGE) --output lumen-reach/reports/any-angle-0.7.0/geometry-check.json
+	python3 tools/check-any-angle.py $(LUMEN_PACKAGE) --output $(LUMEN_REPORTS)/geometry-check.json
+	python3 tools/check-sky.py $(LUMEN_PACKAGE) --poses lumen-reach/review-poses-v7.json --output $(LUMEN_REPORTS)/sky-check.json
+	python3 tools/check-route-clearance.py $(LUMEN_PACKAGE) --output $(LUMEN_REPORTS)/route-clearance.json
 	python3 tools/check-visibility.py $(LUMEN_PACKAGE)
 	node $(SCHEMA_DIR)/bin/validate.mjs world $(LUMEN_PACKAGE)/world.json - 0.5
 	python3 tools/check-package.py $(LUMEN_PACKAGE) > lumen-reach/reports/package-check.json
 	python3 tools/check-placement.py $(LUMEN_PACKAGE) --output lumen-reach/reports/placement-check.json
 	python3 tools/check-walking.py $(LUMEN_PACKAGE) > lumen-reach/reports/walking-check.json
-	python3 tools/check-coplanar.py $(LUMEN_PACKAGE) --emissive --fixtures $(LUMEN_PACKAGE)/fixture-audit.json > lumen-reach/reports/any-angle-0.7.0/emissive-check.json
+	python3 tools/check-coplanar.py $(LUMEN_PACKAGE) --emissive --fixtures $(LUMEN_PACKAGE)/fixture-audit.json > $(LUMEN_REPORTS)/emissive-check.json
 	python3 -c "import json; assert json.load(open('$(LUMEN_PACKAGE)/decal-audit.json'))['status']=='PASS'"
 lumen-nested:
 	python3 tools/check-lumen-session.py
@@ -69,8 +73,8 @@ lumen-tour:
 	python3 tools/check-lumen-session.py --record
 lumen-release: lumen-validate
 	mkdir -p artifacts/releases
-	tar --sort=name --mtime='UTC 2026-10-09' --owner=0 --group=0 --numeric-owner -I zstd -cf artifacts/releases/com.hyprune.lumen-reach-0.7.0.tar.zst -C dist com.hyprune.lumen-reach
-	sha256sum artifacts/releases/com.hyprune.lumen-reach-0.7.0.tar.zst > artifacts/releases/LUMEN-SHA256SUMS
+	tar --sort=name --mtime='UTC 2026-10-09' --owner=0 --group=0 --numeric-owner -I zstd -cf artifacts/releases/com.hyprune.lumen-reach-$(LUMEN_VERSION).tar.zst -C dist com.hyprune.lumen-reach
+	sha256sum artifacts/releases/com.hyprune.lumen-reach-$(LUMEN_VERSION).tar.zst > artifacts/releases/LUMEN-SHA256SUMS
 
 .PHONY: visibility-annotate visibility-validate visibility-nested
 visibility-annotate:
