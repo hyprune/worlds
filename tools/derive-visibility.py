@@ -191,6 +191,9 @@ def main():
   'cell':CELL,'eye':[EYE_LOW,EYE_HIGH],'near':NEAR,'targets':a.targets,'forwardRays':a.forward,'seed':a.seed,'package':m['id']+' '+m['version'],
   'sceneSHA256':hashlib.sha256((a.package/m['scene']).read_bytes()).hexdigest()},'areas':areas}
  (a.output/'visibility.generated.json').write_text(json.dumps(spec,indent=1)+'\n')
+ region_of={q:k for k,r in enumerate(regions) for q in r['cells']}
+ (a.output/'cells.json').write_text(json.dumps({'units':[un['name'] for un in units],'cells':[{'min':c['min'],'max':c['max'],'eyes':len(c['eyes']),
+  'sampled':[units[u]['name'] for u in np.nonzero(raw[k])[0]],'visible':[units[u]['name'] for u in np.nonzero(dilated[k])[0]],'region':region_of[k]} for k,c in enumerate(cells)]})+'\n')
  # Comparison at every cell eye sample with core's semantics.
  node_units={un['node']:u for u,un in enumerate(units)};prims=np.array([un['primitives'] for un in units])
  def visible(areas_,owners,eye):
