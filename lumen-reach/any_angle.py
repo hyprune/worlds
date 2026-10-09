@@ -12,15 +12,19 @@ def image_material(B,name,filename):
  return m
 
 
-def sphere(B,name,center,radii,material,inside=True,segments=128,rings=48):
+def sphere(B,name,center,radii,material,inside=True,segments=128,rings=48,seam=-math.pi,power=2):
  # Explicit single-vertex poles and welded longitude closure: no degenerate
  # polar quads or open boundary. UV discontinuity lives on loops, not geometry.
+ # `seam` is the azimuth (from +Y towards +X) of u=0. power>2 squares off the
+ # horizontal section (superellipse) while UVs stay on the direction's
+ # latitude/longitude, so the texture mapping is unchanged.
  verts=[(center[0],center[1],center[2]-radii[2])];uvs=[(.5,0)];faces=[]
  for k in range(1,rings):
   lat=-math.pi/2+k*math.pi/rings
   for j in range(segments):
-   a=(j/segments-.5)*math.tau
-   verts.append((center[0]+radii[0]*math.cos(lat)*math.sin(a),center[1]+radii[1]*math.cos(lat)*math.cos(a),center[2]+radii[2]*math.sin(lat)))
+   a=seam+j/segments*math.tau;n=(math.cos(lat)*math.sin(a),math.cos(lat)*math.cos(a),math.sin(lat))
+   r=1/math.sqrt((abs(n[0])**power+abs(n[1])**power)**(2/power)+n[2]**2)
+   verts.append(tuple(center[i]+radii[i]*n[i]*r for i in range(3)))
    uvs.append((j/segments,k/rings))
  top=len(verts);verts.append((center[0],center[1],center[2]+radii[2]));uvs.append((.5,1))
  for j in range(segments):
@@ -86,18 +90,26 @@ def night(B):
   if p.center.z>48 and p.normal.z>.4:p.material_index=3
 
 
+# The panorama's only seam (the painting's left/right edges) faces the Signal
+# massif: from every walkable eye the massif hides its landscape band. 0.7.0
+# put it due south, centred in the Sun Court's main outward view.
+DAY_SEAM=math.atan2(57-20,170-65)
+
+
 def vista(B):
  image_material(B,'sky-v7','sky-v7-albedo.png')
- sphere(B,'Watershed complete sky',(20,65,0),(310,310,310),'sky-v7')
- # Continuous terrain disk: deep valley under the settlement, serrated shelves
- # and ridges beyond. Every crest has a back slope and a real top.
+ sphere(B,'Watershed complete sky',(20,65,0),(310,310,310),'sky-v7',seam=DAY_SEAM)
+ # Continuous terrain disk: deep valley under the settlement, then a bowl
+ # that keeps falling outward. 0.7.0's outer shelves (r>=174 m) crested near
+ # eye level and banded flat grey across the painted valley; beyond the
+ # settlement the terrain now stays >=6 degrees below every walkable eye.
  segments=128;verts=[(20,65,-14)];faces=[]
  radii=[28,56,82,108,140,174,215,258,292]
  for k,r in enumerate(radii):
   for j in range(segments):
    a=j/segments*math.tau;wave=math.sin(a*7+k*.7)**2
-   h=[-14,-15,-28,-62,-70,-34,-18,-46,-83][k]
-   amp=[0,0,2,6,10,15,17,12,0][k]
+   h=[-14,-15,-28,-62,-70,-76,-80,-84,-88][k]
+   amp=[0,0,2,6,10,6,4,2,0][k]
    z=h+amp*wave+amp*.35*math.sin(a*13+k)
    verts.append((20+r*math.sin(a),65+r*.76*math.cos(a),z))
  for j in range(segments):faces.append((0,1+(j+1)%segments,1+j))
