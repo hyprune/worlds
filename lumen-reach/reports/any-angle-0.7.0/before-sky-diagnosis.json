@@ -1,0 +1,13 @@
+{
+  "version": "0.6.1",
+  "skyTriangles": 9216,
+  "collapsedLatitudeTriangles": 7104,
+  "collapsedLatitudeFraction": 0.7708333333333334,
+  "longitudeEdgeMaxDifference": 171,
+  "sampler": {
+    "magFilter": 9729,
+    "minFilter": 9987,
+    "wrapS": 33071,
+    "wrapT": 33071
+  }
+}
