@@ -11,3 +11,4 @@ __pycache__/
 /tools/navmesh/node_modules/
 /tools/gltf/node_modules/
 /dist-07/
+.nested-state/

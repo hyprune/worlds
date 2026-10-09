@@ -38,11 +38,14 @@ p.add_argument('--session-report',type=Path,help='re-evaluate an existing captur
 a=p.parse_args();a.output.mkdir(parents=True,exist_ok=True)
 version=json.loads((a.package/'world.json').read_text())['version']
 semver=lambda v:tuple(int(x) for x in re.findall(r'\d+',v)[:3])
-cmd=[sys.executable,str(ROOT/'tools/lumen-measure-session.py'),'gate','--rounds','2','--core',str(a.core),'--output',str(a.output/'session')]
+# Nested state (~200 MB) stays under artifacts/; only the JSON joins the reports.
+work=ROOT/'artifacts/perf-gate'/version
+cmd=[sys.executable,str(ROOT/'tools/lumen-measure-session.py'),'gate','--rounds','2','--core',str(a.core),'--output',str(work)]
 if a.baseline_package:cmd+=['--package',str(a.baseline_package)]
 cmd+=['--package',str(a.package)]
 if not a.session_report:subprocess.run(cmd,check=True)
-s=json.loads((a.session_report or a.output/'session/report.json').read_text())
+s=json.loads((a.session_report or work/'report.json').read_text())
+(a.output/'session-report.json').write_text(json.dumps(s,indent=1)+'\n')
 cand=s['runs']['B' if a.baseline_package else 'A']
 record={'version':version,'coreCommit':s['coreCommit'],'pluginSHA256':s['pluginSHA256'],'scale':s['scale'],'quality':s['quality'],'routePoses':s['routePoses'],
  'manifestSHA256':s['packages']['B' if a.baseline_package else 'A']['manifestSHA256'],**cand}
