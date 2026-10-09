@@ -14,6 +14,12 @@ Baseline, in order of preference:
   was taken with the same core commit, plugin, scale and quality (else the
   gate fails asking for --baseline-package).
 
+Settled scale is a tripwire, not a fine measure: on Intel at 4K core starts
+at 0.5 and only steps down when the running GPU average exceeds 1.08x its
+budget (600/target_fps ms = 10 ms at 60), or up below 0.6x for 6 s. Lumen
+0.7.2/0.8.0 sit at p50 9.0 / p95 10.5 ms, so the scale holds at 0.5 unless a
+release pushes the route over budget. GPU ms p50/p95 are the sensitive gate.
+
 Fails when p50 GPU ms grows > P50_LIMIT, p95 > P95_LIMIT, or the settled scale
 drops by more than SCALE_DROP (p50) / SCALE_DROP_P05 (p05). A/A runs of the
 same package agree within ~1 % per pose (opt-0.8.0/aa-noise), so the limits
@@ -28,14 +34,15 @@ p=argparse.ArgumentParser(description=__doc__,formatter_class=argparse.RawDescri
 p.add_argument('package',type=Path);p.add_argument('--baseline-package',type=Path)
 p.add_argument('--records',type=Path,default=ROOT/'lumen-reach/reports/perf');p.add_argument('--output',type=Path,required=True)
 p.add_argument('--core',type=Path,default=ROOT.parent/'core-optimise');p.add_argument('--record',action='store_true')
-a=p.parse_args()
+p.add_argument('--session-report',type=Path,help='re-evaluate an existing capture instead of running one')
+a=p.parse_args();a.output.mkdir(parents=True,exist_ok=True)
 version=json.loads((a.package/'world.json').read_text())['version']
 semver=lambda v:tuple(int(x) for x in re.findall(r'\d+',v)[:3])
 cmd=[sys.executable,str(ROOT/'tools/lumen-measure-session.py'),'gate','--rounds','2','--core',str(a.core),'--output',str(a.output/'session')]
 if a.baseline_package:cmd+=['--package',str(a.baseline_package)]
 cmd+=['--package',str(a.package)]
-subprocess.run(cmd,check=True)
-s=json.loads((a.output/'session/report.json').read_text())
+if not a.session_report:subprocess.run(cmd,check=True)
+s=json.loads((a.session_report or a.output/'session/report.json').read_text())
 cand=s['runs']['B' if a.baseline_package else 'A']
 record={'version':version,'coreCommit':s['coreCommit'],'pluginSHA256':s['pluginSHA256'],'scale':s['scale'],'quality':s['quality'],'routePoses':s['routePoses'],
  'manifestSHA256':s['packages']['B' if a.baseline_package else 'A']['manifestSHA256'],**cand}
