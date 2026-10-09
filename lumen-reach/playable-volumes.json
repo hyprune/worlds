@@ -1,11 +1,10 @@
 {
   "version": 1,
   "coordinates": "Blender authoring X/Y horizontal, Z vertical, meters",
-  "runtimeContract": "World format 0.5 has no playable-volume field. These authoring volumes generate collision-only perimeter backstops; they are not visibility regions. Ordinary walking probes stop inside. The fly escape witness failed and remains an open item; see HANDOFF.md. No new required extension.",
-  "vertical": [
-    -20,
-    65
-  ],
+  "backstopBottom": -20,
+  "walkClearance": 2.5,
+  "backstopFallbackTop": 65,
+  "runtimeContract": "World format 0.5 has no playable-volume field. These authoring volumes generate collision-only perimeter backstops; they are not visibility regions. Each backstop piece rises only walkClearance above the highest walkable top within 3m inside it, so ordinary walking (including jumps) stops inside while ordinary fly passes overhead. No new required extension.",
   "areas": [
     {
       "id": "sun-court",

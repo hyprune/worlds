@@ -77,8 +77,13 @@ def acceptance(client,children,args,shell_token,socketpath):
    client.call('movement.set',{'modeId':'com.hyprune.walk'});client.call('camera.set',{'position':pos,'orientation':q(yaw,0)});time.sleep(.2)
    integration.keys('-P','w','-s','1000','-p','w');time.sleep(.2);end=client.call('camera.get',{})['position']
    row={'id':name,'start':pos,'end':end,'axis':axis,'outwardSign':sign,'limit':limit,'inside':sign*(end[axis]-limit)<-.20};report['boundaryProbes'].append(row);save();assert row['inside'],row
-  client.call('movement.set',{'modeId':'com.hyprune.fly'});client.call('camera.set',{'position':[25.2,3,0],'orientation':q(math.pi/2,0)});integration.keys('-P','w','-s','1000','-p','w');time.sleep(.2)
-  report['flyBoundaryWitness']=client.call('camera.get',{})['position'];assert report['flyBoundaryWitness'][0]>26.5
+  # Repeated jumps still stop at the walk-height backstop (court-east top 3.5m).
+  client.call('movement.set',{'modeId':'com.hyprune.walk'});client.call('camera.set',{'position':[25.2,1.7,0],'orientation':q(math.pi/2,0)});time.sleep(.2)
+  integration.keys('-P','w','-P','space','-s','1500','-p','space','-p','w');time.sleep(.6)
+  report['jumpBoundaryWitness']=client.call('camera.get',{})['position'];save();assert report['jumpBoundaryWitness'][0]<25.8,report['jumpBoundaryWitness']
+  # Ordinary fly (collision on, not noclip) passes over it at 6m eye height.
+  client.call('movement.set',{'modeId':'com.hyprune.fly'});client.call('camera.set',{'position':[25.2,6,0],'orientation':q(math.pi/2,0)});integration.keys('-P','w','-s','1000','-p','w');time.sleep(.2)
+  report['flyBoundaryWitness']=client.call('camera.get',{})['position'];save();assert report['flyBoundaryWitness'][0]>26.5,report['flyBoundaryWitness']
  client.call('runtime.exit',{});sheet()
  report['cullingLosses']=[v['id'] for v in report['views'] if v.get('cullingChangedPixelFraction',0)>.00005]
  report['status']='PASS' if not report['cullingLosses'] else 'FAIL';save();assert report['status']=='PASS',report['cullingLosses']

@@ -204,15 +204,34 @@ def boundaries(B):
  edges=[]
  for i,j in sorted(cells):
   for di,dj,a,b in [(-1,0,(xs[i],ys[j]),(xs[i],ys[j+1])),(1,0,(xs[i+1],ys[j+1]),(xs[i+1],ys[j])),(0,-1,(xs[i+1],ys[j]),(xs[i],ys[j])),(0,1,(xs[i],ys[j+1]),(xs[i+1],ys[j+1]))]:
-   if (i+di,j+dj) not in cells:edges.append((a,b))
- vertices=[];faces=[];lo,hi=spec['vertical']
- for a,b in edges:
-  q=len(vertices);vertices.extend([(a[0],a[1],lo),(b[0],b[1],lo),(b[0],b[1],hi),(a[0],a[1],hi)]);faces.append((q,q+1,q+2,q+3))
- me=B.bpy.data.meshes.new('Playable perimeter');me.from_pydata(vertices,[],faces);o=B.bpy.data.objects.new('Playable perimeter',me);B.bpy.context.collection.objects.link(o);o.hide_render=True;B.WALK.append(o)
- # Visible guards at the previously open ground-level external edges.
+   if (i+di,j+dj) not in cells:edges.append((a,b,(-di,-dj)))
+ # Visible guards at the previously open ground-level external edges. Guard tops count as walkable below.
  old=B.G
  for group,runs in [('sun-court',[((-24,-16,0),(-24,6,0)),((26,22,0),(26,26,0))]),('array-hall',[((-13,32,0),(-13,60,0))]),('signal-rise',[((29,112,0),(50.4,112,0)),((59.3,112,0),(85,112,0)),((85,112,0),(85,160,0)),((29,112,0),(29,143,0))])]:
   B.G=group
   for a,b in runs:B.rail(a,b)
  B.G=old
- spec['collisionBoundarySegments']=len(edges);(B.ART/'playable-boundary-report.json').write_text(json.dumps(spec,indent=2)+'\n')
+ # Backstops stop walking only: each <=2m piece rises walkClearance above the
+ # highest walkable top (collision faces and prop boxes) in an inward strip.
+ # Core jump lifts feet 5^2/(2*9.81)=1.27m, so ordinary fly passes overhead.
+ tops=[]
+ for o in B.WALK:
+  w=[o.matrix_world@v.co for v in o.data.vertices]
+  for p in o.data.polygons:
+   c=[w[i] for i in p.vertices];n=(c[1]-c[0]).cross(c[2]-c[0])
+   if n.length>1e-9 and abs(n.z)/n.length>.65:tops.append((min(v.x for v in c),max(v.x for v in c),min(v.y for v in c),max(v.y for v in c),max(v.z for v in c)))
+ tops+=[(lo[0],hi[0],lo[1],hi[1],hi[2]) for name,lo,hi in B.P.COLL]
+ def highest(a,b,inward,depth):
+  c=[a,b,[a[0]+inward[0]*depth,a[1]+inward[1]*depth],[b[0]+inward[0]*depth,b[1]+inward[1]*depth]]
+  x0=min(v[0] for v in c)-.3;x1=max(v[0] for v in c)+.3;y0=min(v[1] for v in c)-.3;y1=max(v[1] for v in c)+.3
+  return max((t[4] for t in tops if t[0]<=x1 and t[1]>=x0 and t[2]<=y1 and t[3]>=y0),default=None)
+ vertices=[];faces=[];lo=spec['backstopBottom'];clear=spec['walkClearance'];pieces=[]
+ for a,b,inward in edges:
+  k=max(1,math.ceil(math.dist(a,b)/2))
+  for t in range(k):
+   p=[a[i]+(b[i]-a[i])*t/k for i in [0,1]];r=[a[i]+(b[i]-a[i])*(t+1)/k for i in [0,1]]
+   top=highest(p,r,inward,3);top=highest(p,r,inward,8) if top is None else top
+   hi=(spec['backstopFallbackTop'] if top is None else top+clear);pieces.append(round(hi,3))
+   q=len(vertices);vertices.extend([(p[0],p[1],lo),(r[0],r[1],lo),(r[0],r[1],hi),(p[0],p[1],hi)]);faces.append((q,q+1,q+2,q+3))
+ me=B.bpy.data.meshes.new('Playable perimeter');me.from_pydata(vertices,[],faces);o=B.bpy.data.objects.new('Playable perimeter',me);B.bpy.context.collection.objects.link(o);o.hide_render=True;B.WALK.append(o)
+ spec['collisionBoundarySegments']=len(edges);spec['collisionBackstopPieces']=len(pieces);spec['backstopTopRange']=[min(pieces),max(pieces)];(B.ART/'playable-boundary-report.json').write_text(json.dumps(spec,indent=2)+'\n')
