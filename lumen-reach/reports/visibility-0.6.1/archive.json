@@ -1,0 +1,10 @@
+{
+  "status": "PASS",
+  "path": "/home/rick/workspace/hyprune/worlds/artifacts/releases/com.hyprune.lumen-reach-0.6.1.tar.zst",
+  "sha256": "f0bf4f25abe4db0bda0029128d75404da011be5cc7194a9c4e0e68306a39e616",
+  "bytes": 45220010,
+  "identicalExtractedFiles": 75,
+  "manifestSHA256": "1aad59bcc7064cb3bb080add9b31bb6bf186b8e2e0ce28dad1f41cdf147cc0ac",
+  "version": "0.6.1",
+  "formatVersion": "0.5"
+}

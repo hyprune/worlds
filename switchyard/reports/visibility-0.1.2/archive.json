@@ -1,0 +1,10 @@
+{
+  "status": "PASS",
+  "path": "/home/rick/workspace/hyprune/worlds/artifacts/releases/com.hyprune.switchyard-0.1.2.tar.zst",
+  "sha256": "e041570442de717f3cbb36ca252977b47732ba873f014a8ba78c06ada370e7fd",
+  "bytes": 58883205,
+  "identicalExtractedFiles": 71,
+  "manifestSHA256": "8947d9d178a1c4e65258ccf4db5e3aa0f8731cb4d9423b5552c8f86902c3abb0",
+  "version": "0.1.2",
+  "formatVersion": "0.5"
+}

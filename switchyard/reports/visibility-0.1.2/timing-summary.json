@@ -1,0 +1,152 @@
+{
+  "status": "PASS",
+  "nativeOutput": [
+    3840,
+    2160
+  ],
+  "internalScale": 0.5,
+  "preset": "Low (Intel legacy mapping)",
+  "renderer": "Mesa Intel(R) Graphics (PTL)",
+  "samplesPerStatePerView": 64,
+  "method": "Intel legacy preset maps to Low; native 4K, fixed 0.5 internal scale, offload off. ABBA culling states, warm-up before each block. No owner-session control.",
+  "measurements": [
+    {
+      "world": "switchyard",
+      "view": "01-concourse",
+      "off": {
+        "submitted": 134,
+        "cpuRenderMs": 0.40060450000000003,
+        "gpuPassSumMs": 3.8746855,
+        "frameMs": 16.6595455
+      },
+      "on": {
+        "submitted": 134,
+        "cpuRenderMs": 0.381861,
+        "gpuPassSumMs": 5.560675,
+        "frameMs": 16.6631175
+      },
+      "submissionReductionPercent": 0.0,
+      "cpuRenderReductionPercent": 4.68,
+      "gpuPassReductionPercent": -43.51,
+      "frameTimeReductionPercent": -0.02,
+      "blocks": [
+        {
+          "culling": false,
+          "cpuMedianMs": 0.41902799999999996,
+          "gpuMedianMs": 3.8679405,
+          "frameMedianMs": 16.662407
+        },
+        {
+          "culling": true,
+          "cpuMedianMs": 0.38204899999999997,
+          "gpuMedianMs": 6.6530185,
+          "frameMedianMs": 16.666752000000002
+        },
+        {
+          "culling": true,
+          "cpuMedianMs": 0.381264,
+          "gpuMedianMs": 3.8737745,
+          "frameMedianMs": 16.6631175
+        },
+        {
+          "culling": false,
+          "cpuMedianMs": 0.3939635,
+          "gpuMedianMs": 3.882498,
+          "frameMedianMs": 16.659044
+        }
+      ]
+    },
+    {
+      "world": "switchyard",
+      "view": "03-build",
+      "off": {
+        "submitted": 134,
+        "cpuRenderMs": 0.5109865,
+        "gpuPassSumMs": 5.8330185,
+        "frameMs": 16.662018
+      },
+      "on": {
+        "submitted": 134,
+        "cpuRenderMs": 0.5153220000000001,
+        "gpuPassSumMs": 6.3562215,
+        "frameMs": 16.650538
+      },
+      "submissionReductionPercent": 0.0,
+      "cpuRenderReductionPercent": -0.85,
+      "gpuPassReductionPercent": -8.97,
+      "frameTimeReductionPercent": 0.07,
+      "blocks": [
+        {
+          "culling": false,
+          "cpuMedianMs": 0.50868,
+          "gpuMedianMs": 6.238071,
+          "frameMedianMs": 16.667624
+        },
+        {
+          "culling": true,
+          "cpuMedianMs": 0.5153220000000001,
+          "gpuMedianMs": 7.313929999999999,
+          "frameMedianMs": 16.654491
+        },
+        {
+          "culling": true,
+          "cpuMedianMs": 0.5120825,
+          "gpuMedianMs": 5.8270285,
+          "frameMedianMs": 16.649949
+        },
+        {
+          "culling": false,
+          "cpuMedianMs": 0.511098,
+          "gpuMedianMs": 5.1994765,
+          "frameMedianMs": 16.652122499999997
+        }
+      ]
+    },
+    {
+      "world": "switchyard",
+      "view": "04-route",
+      "off": {
+        "submitted": 134,
+        "cpuRenderMs": 0.4567055,
+        "gpuPassSumMs": 6.1559349999999995,
+        "frameMs": 16.667385
+      },
+      "on": {
+        "submitted": 134,
+        "cpuRenderMs": 0.439251,
+        "gpuPassSumMs": 5.5073155,
+        "frameMs": 16.6609065
+      },
+      "submissionReductionPercent": 0.0,
+      "cpuRenderReductionPercent": 3.82,
+      "gpuPassReductionPercent": 10.54,
+      "frameTimeReductionPercent": 0.04,
+      "blocks": [
+        {
+          "culling": false,
+          "cpuMedianMs": 0.4993315,
+          "gpuMedianMs": 7.285415,
+          "frameMedianMs": 16.6728455
+        },
+        {
+          "culling": true,
+          "cpuMedianMs": 0.4848765,
+          "gpuMedianMs": 6.8764045000000005,
+          "frameMedianMs": 16.6645305
+        },
+        {
+          "culling": true,
+          "cpuMedianMs": 0.3933705,
+          "gpuMedianMs": 3.926456,
+          "frameMedianMs": 16.657282000000002
+        },
+        {
+          "culling": false,
+          "cpuMedianMs": 0.40563099999999996,
+          "gpuMedianMs": 3.924425,
+          "frameMedianMs": 16.663064
+        }
+      ]
+    }
+  ]
+}

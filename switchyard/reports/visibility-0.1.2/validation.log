@@ -1,0 +1,300 @@
+python3 tools/check-visibility.py dist/com.hyprune.switchyard
+{
+  "status": "PASS",
+  "version": "0.1.2",
+  "regions": 11,
+  "ownedDraws": {
+    "concourse": 15,
+    "build": 16,
+    "research": 16,
+    "commons": 16,
+    "studio": 16,
+    "systems": 16,
+    "archive": 16,
+    "aisle-1": 0,
+    "aisle-2": 0,
+    "aisle-3": 0,
+    "cross-aisle": 0
+  },
+  "alwaysVisible": [
+    "Visual-hall",
+    "Visual-vault",
+    "Visual-vista"
+  ],
+  "routeSources": [
+    {
+      "id": "concourse",
+      "sourceAreas": [
+        "concourse"
+      ]
+    },
+    {
+      "id": "junction-1",
+      "sourceAreas": [
+        "aisle-1",
+        "concourse"
+      ]
+    },
+    {
+      "id": "build",
+      "sourceAreas": [
+        "aisle-1",
+        "build"
+      ]
+    },
+    {
+      "id": "studio",
+      "sourceAreas": [
+        "aisle-1",
+        "studio"
+      ]
+    },
+    {
+      "id": "junction-2",
+      "sourceAreas": [
+        "aisle-2",
+        "concourse"
+      ]
+    },
+    {
+      "id": "research",
+      "sourceAreas": [
+        "aisle-2",
+        "research"
+      ]
+    },
+    {
+      "id": "systems",
+      "sourceAreas": [
+        "aisle-2",
+        "systems"
+      ]
+    },
+    {
+      "id": "junction-3",
+      "sourceAreas": [
+        "aisle-3",
+        "concourse"
+      ]
+    },
+    {
+      "id": "commons",
+      "sourceAreas": [
+        "aisle-3",
+        "commons"
+      ]
+    },
+    {
+      "id": "archive",
+      "sourceAreas": [
+        "aisle-3",
+        "archive"
+      ]
+    }
+  ]
+}
+node ../schema/bin/validate.mjs world dist/com.hyprune.switchyard/world.json - 0.5
+VALID world: dist/com.hyprune.switchyard/world.json
+python3 tools/check-package.py dist/com.hyprune.switchyard
+{
+  "status": "PASS",
+  "packageBytes": 75494165,
+  "decodedTextureBytes": 301203456,
+  "conservativeGpuBytes": 480666956,
+  "mippedTextureViewsBytes": 456479996,
+  "expandedGeometryBytes": 24186960,
+  "colorTextureViews": 22,
+  "textureObjects": 45,
+  "textureProvenanceEntries": 63,
+  "visualTriangles": 201558,
+  "drawCallEstimate": 134,
+  "drawCallScope": "one draw per visible glTF primitive, world geometry only; excludes postprocessing, applications and HUD",
+  "untexturedPhysicalMaterials": [
+    "archive--panel",
+    "build--panel",
+    "commons--panel",
+    "concourse--panel",
+    "research--panel",
+    "studio--panel",
+    "systems--panel"
+  ],
+  "anchors": 6,
+  "collisionNodes": 165,
+  "lightmapBindings": 123,
+  "UV1": [
+    {
+      "node": "Visual-archive",
+      "triangles": 16592,
+      "uv1Area": 0.07735,
+      "overlapSamples": 0
+    },
+    {
+      "node": "Visual-build",
+      "triangles": 16196,
+      "uv1Area": 0.0791,
+      "overlapSamples": 0
+    },
+    {
+      "node": "Visual-commons",
+      "triangles": 16616,
+      "uv1Area": 0.07677,
+      "overlapSamples": 0
+    },
+    {
+      "node": "Visual-concourse",
+      "triangles": 23588,
+      "uv1Area": 0.12907,
+      "overlapSamples": 0
+    },
+    {
+      "node": "Visual-hall",
+      "triangles": 5986,
+      "uv1Area": 0.3386,
+      "overlapSamples": 0
+    },
+    {
+      "node": "Visual-research",
+      "triangles": 16592,
+      "uv1Area": 0.07715,
+      "overlapSamples": 0
+    },
+    {
+      "node": "Visual-studio",
+      "triangles": 16436,
+      "uv1Area": 0.07741,
+      "overlapSamples": 0
+    },
+    {
+      "node": "Visual-systems",
+      "triangles": 16328,
+      "uv1Area": 0.07684,
+      "overlapSamples": 0
+    },
+    {
+      "node": "Visual-vault",
+      "triangles": 38684,
+      "uv1Area": 0.00545,
+      "overlapSamples": 0
+    },
+    {
+      "node": "Visual-vista",
+      "triangles": 34540,
+      "uv1Area": 0.0,
+      "overlapSamples": 0
+    }
+  ]
+}
+python3 tools/check-lettering.py
+{
+  "status": "PASS",
+  "glyphCount": 38,
+  "usedGlyphs": "-/0123456ABCDEHIKLMNOPRSTUVWXY",
+  "strings": [
+    "01",
+    "01 / BUILD",
+    "01-1",
+    "01-2",
+    "01-3",
+    "02",
+    "02 / RESEARCH",
+    "02-1",
+    "02-2",
+    "02-3",
+    "03",
+    "03 / COMMONS",
+    "03-1",
+    "03-2",
+    "03-3",
+    "04",
+    "04 / STUDIO",
+    "04-1",
+    "04-2",
+    "04-3",
+    "05",
+    "05 / SYSTEMS",
+    "05-1",
+    "05-2",
+    "05-3",
+    "06",
+    "06 / ARCHIVE",
+    "06-1",
+    "06-2",
+    "06-3",
+    "APPLICATION DOCK",
+    "CONCOURSE / SIX PERMANENT DOCKS",
+    "HYPRUNE",
+    "NORTH",
+    "RAIL",
+    "SWITCHYARD"
+  ],
+  "DversusOChangedPixels": 8,
+  "proof": "artifacts/switchyard/lettering-proof.png"
+}
+python3 tools/check-texel-density.py dist/com.hyprune.switchyard
+{
+  "status": "PASS",
+  "method": "sqrt(UV0 pixel area / physical triangle area), faces above .02 m2; bevels and unique trim/sheen sheets excluded",
+  "surfaces": [
+    {
+      "asset": "brass",
+      "substantialFaces": 17610,
+      "surfaceAreaSquareMeters": 1027.42,
+      "areaWeightedMedianPxPerMeter": 998.62,
+      "fractionAreaWithin512to1024Tolerance": 0.9973
+    },
+    {
+      "asset": "cloth",
+      "substantialFaces": 2304,
+      "surfaceAreaSquareMeters": 122.45,
+      "areaWeightedMedianPxPerMeter": 1024.0,
+      "fractionAreaWithin512to1024Tolerance": 1.0
+    },
+    {
+      "asset": "metal",
+      "substantialFaces": 5996,
+      "surfaceAreaSquareMeters": 5597.82,
+      "areaWeightedMedianPxPerMeter": 1024.0,
+      "fractionAreaWithin512to1024Tolerance": 1.0
+    },
+    {
+      "asset": "rubber",
+      "substantialFaces": 792,
+      "surfaceAreaSquareMeters": 507.41,
+      "areaWeightedMedianPxPerMeter": 1024.0,
+      "fractionAreaWithin512to1024Tolerance": 1.0
+    },
+    {
+      "asset": "stone",
+      "substantialFaces": 1904,
+      "surfaceAreaSquareMeters": 3856.4,
+      "areaWeightedMedianPxPerMeter": 512.0,
+      "fractionAreaWithin512to1024Tolerance": 0.9772
+    },
+    {
+      "asset": "wood",
+      "substantialFaces": 3476,
+      "surfaceAreaSquareMeters": 729.31,
+      "areaWeightedMedianPxPerMeter": 1024.0,
+      "fractionAreaWithin512to1024Tolerance": 1.0
+    }
+  ]
+}
+python3 tools/check-coplanar.py dist/com.hyprune.switchyard
+{
+  "status": "PASS",
+  "probeSpacingMeters": 0.1,
+  "sameFacingGapMeters": 0.004,
+  "facesScanned": 115142,
+  "stacks": []
+}
+python3 tools/check-routes.py dist/com.hyprune.switchyard artifacts/switchyard/spatial-authoring.json
+{
+  "status": "PASS",
+  "routeEdges": 9,
+  "centerlineCapsuleSamples": 1927,
+  "connectedNavCells": 4735,
+  "exportedNavTriangles": 9470,
+  "collisionExportMatchesSource": true,
+  "agentRadius": 0.3,
+  "agentHeight": 1.8
+}

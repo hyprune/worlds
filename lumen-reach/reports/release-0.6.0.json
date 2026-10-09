@@ -1,0 +1,264 @@
+{
+  "status": "PASS",
+  "worldId": "com.hyprune.lumen-reach",
+  "version": "0.6.0",
+  "sourceCommit": "e479983e7476bb08b90572259719e7fdb0bc88ce",
+  "sceneSHA256": "0f2ccff23da219f64f83169416005adc404a295726f4334394373f7f1fbc03bc",
+  "manifestSHA256": "baa1ab3986efcaa817835388e155456bd49b5b000707cbd4a5f52e7f51b8c6fd",
+  "before": {
+    "status": "PASS",
+    "packageBytes": 60620988,
+    "decodedTextureBytes": 140346560,
+    "conservativeGpuBytes": 299499180,
+    "mippedTextureViewsBytes": 275509860,
+    "expandedGeometryBytes": 23989320,
+    "colorTextureViews": 25,
+    "textureObjects": 54,
+    "textureProvenanceEntries": 54,
+    "visualTriangles": 199911,
+    "drawCallEstimate": 84,
+    "drawCallScope": "one draw per visible glTF primitive, world geometry only; excludes postprocessing, applications and HUD",
+    "untexturedPhysicalMaterials": [],
+    "anchors": 24,
+    "collisionNodes": 213,
+    "lightmapBindings": 65,
+    "UV1": [
+      {
+        "node": "Visual-array-hall",
+        "triangles": 28040,
+        "uv1Area": 0.11693,
+        "overlapSamples": 0
+      },
+      {
+        "node": "Visual-connector-ascent",
+        "triangles": 2490,
+        "uv1Area": 0.51477,
+        "overlapSamples": 0
+      },
+      {
+        "node": "Visual-connector-descent",
+        "triangles": 2754,
+        "uv1Area": 0.47107,
+        "overlapSamples": 0
+      },
+      {
+        "node": "Visual-foliage",
+        "triangles": 20736,
+        "uv1Area": 0.2132,
+        "overlapSamples": 0
+      },
+      {
+        "node": "Visual-rime-vault",
+        "triangles": 22236,
+        "uv1Area": 0.14628,
+        "overlapSamples": 0
+      },
+      {
+        "node": "Visual-signal-rise",
+        "triangles": 58940,
+        "uv1Area": 0.00616,
+        "overlapSamples": 0
+      },
+      {
+        "node": "Visual-sun-court",
+        "triangles": 45672,
+        "uv1Area": 0.0271,
+        "overlapSamples": 0
+      },
+      {
+        "node": "Visual-vista",
+        "triangles": 19043,
+        "uv1Area": 0.0,
+        "overlapSamples": 0
+      }
+    ]
+  },
+  "after": {
+    "status": "PASS",
+    "packageBytes": 69802165,
+    "decodedTextureBytes": 165315776,
+    "conservativeGpuBytes": 342043960,
+    "mippedTextureViewsBytes": 315355600,
+    "expandedGeometryBytes": 26688360,
+    "colorTextureViews": 28,
+    "textureObjects": 63,
+    "textureProvenanceEntries": 63,
+    "visualTriangles": 222403,
+    "drawCallEstimate": 87,
+    "drawCallScope": "one draw per visible glTF primitive, world geometry only; excludes postprocessing, applications and HUD",
+    "untexturedPhysicalMaterials": [],
+    "anchors": 24,
+    "collisionNodes": 230,
+    "lightmapBindings": 68,
+    "UV1": [
+      {
+        "node": "Visual-array-hall",
+        "triangles": 28040,
+        "uv1Area": 0.11693,
+        "overlapSamples": 0
+      },
+      {
+        "node": "Visual-connector-ascent",
+        "triangles": 2490,
+        "uv1Area": 0.51477,
+        "overlapSamples": 0
+      },
+      {
+        "node": "Visual-connector-descent",
+        "triangles": 2754,
+        "uv1Area": 0.47107,
+        "overlapSamples": 0
+      },
+      {
+        "node": "Visual-foliage",
+        "triangles": 20736,
+        "uv1Area": 0.2132,
+        "overlapSamples": 0
+      },
+      {
+        "node": "Visual-rime-vault",
+        "triangles": 44700,
+        "uv1Area": 0.19209,
+        "overlapSamples": 0
+      },
+      {
+        "node": "Visual-signal-rise",
+        "triangles": 58940,
+        "uv1Area": 0.00616,
+        "overlapSamples": 0
+      },
+      {
+        "node": "Visual-sun-court",
+        "triangles": 45672,
+        "uv1Area": 0.0271,
+        "overlapSamples": 0
+      },
+      {
+        "node": "Visual-vista",
+        "triangles": 19071,
+        "uv1Area": 0.0,
+        "overlapSamples": 0
+      }
+    ]
+  },
+  "budgetCompatibility": {
+    "status": "PASS",
+    "anchorsUnchanged": 24,
+    "routesStairsAndPlacementUnchanged": true,
+    "unchangedGeometryChunks": [
+      "Visual-sun-court",
+      "Visual-array-hall",
+      "Visual-signal-rise",
+      "Visual-foliage",
+      "Visual-connector-descent",
+      "Visual-connector-ascent"
+    ],
+    "triangleGrowthPercent": 11.25,
+    "drawGrowthPercent": 3.57,
+    "gpuGrowthPercent": 14.21,
+    "rimeMaterials": [
+      "amber",
+      "black",
+      "condensation",
+      "grating",
+      "ice-body",
+      "ice-rim",
+      "ivory",
+      "metal",
+      "red-light",
+      "rime-crust",
+      "snow",
+      "strip",
+      "trim",
+      "vault-metal"
+    ],
+    "rimeBeforeTriangles": 22236,
+    "rimeAfterTriangles": 44700
+  },
+  "archive": {
+    "path": "/home/rick/workspace/hyprune/worlds/artifacts/releases/com.hyprune.lumen-reach-0.6.0.tar.zst",
+    "sha256": "fe2f7b492cd21578964a7f4cd4ac5f799209c318f7350c506df04bb46be28dd4",
+    "bytes": 45219398
+  },
+  "stills": "/home/rick/workspace/rick-the-alien/worldshell-gallery/screenshots/release-world-v3",
+  "video": {
+    "path": "/home/rick/workspace/rick-the-alien/worldshell-gallery/videos/rime-vault-v3.mp4",
+    "metadata": "/home/rick/workspace/rick-the-alien/worldshell-gallery/videos/rime-vault-v3.json",
+    "durationSeconds": 42.0,
+    "sha256": "44ef46a189b6a59d2661d749b9f5e9f6f277607d6693f4daa14e98d417a92ecc"
+  },
+  "performance": [
+    {
+      "view": "01-sun-court",
+      "framesPerSecond": 59.95,
+      "medianGpuPassMs": 4.73,
+      "renderScales": [
+        0.5
+      ]
+    },
+    {
+      "view": "02-array-hall",
+      "framesPerSecond": 60.01,
+      "medianGpuPassMs": 9.0,
+      "renderScales": [
+        0.5625
+      ]
+    },
+    {
+      "view": "03-rime-vault",
+      "framesPerSecond": 59.98,
+      "medianGpuPassMs": 4.54,
+      "renderScales": [
+        0.375,
+        0.4375
+      ]
+    },
+    {
+      "view": "04-signal-rise",
+      "framesPerSecond": 59.87,
+      "medianGpuPassMs": 3.692,
+      "renderScales": [
+        0.375,
+        0.4375
+      ]
+    }
+  ],
+  "engine": {
+    "before-engine": {
+      "coreCommit": "e68f5c2fc0049125343e298f7bbcaad5dfb773d3",
+      "loadedPluginSHA256": "324bc6f78d78ef5037b89e31913c68e1c1bb662be2ee58b8ef0b14027140e481",
+      "graphicsRequest": {
+        "quality": "medium",
+        "render_scale": "auto",
+        "target_fps": 60
+      }
+    },
+    "after-4k": {
+      "coreCommit": "c34aaa717128e03b8db70784f48958948f669d08",
+      "loadedPluginSHA256": "f1f7cd037512d3417cecd939276587ddea15f203a129de315a62f6a041b67bf6",
+      "graphicsRequest": {
+        "quality": "medium",
+        "render_scale": "auto",
+        "target_fps": 60
+      }
+    },
+    "after-routes": {
+      "coreCommit": "c34aaa717128e03b8db70784f48958948f669d08",
+      "loadedPluginSHA256": "f1f7cd037512d3417cecd939276587ddea15f203a129de315a62f6a041b67bf6",
+      "graphicsRequest": {
+        "quality": "medium",
+        "render_scale": "auto",
+        "target_fps": 60
+      }
+    },
+    "after-engine": {
+      "coreCommit": "8ce4f756add95ff8ec490073def804462c76c3ce",
+      "loadedPluginSHA256": "cd5bbb80d47c782a9ff358d165601c5297c296182380316001fb54166d4e422d",
+      "graphicsRequest": {
+        "quality": "medium",
+        "render_scale": "auto",
+        "target_fps": 60
+      }
+    }
+  }
+}

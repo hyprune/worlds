@@ -1,0 +1,1387 @@
+python3 tools/check-visibility.py dist/com.hyprune.lumen-reach
+{
+  "status": "PASS",
+  "version": "0.6.1",
+  "regions": 7,
+  "ownedDraws": {
+    "sun-court": 15,
+    "entry-vestibule": 0,
+    "array-hall": 15,
+    "connector-descent": 5,
+    "rime-vault": 14,
+    "connector-ascent": 3,
+    "signal-rise": 14
+  },
+  "alwaysVisible": [
+    "Visual-foliage",
+    "Visual-vista"
+  ],
+  "routeSources": [
+    {
+      "id": "arrival",
+      "sourceAreas": [
+        "sun-court"
+      ]
+    },
+    {
+      "id": "court-junction",
+      "sourceAreas": [
+        "sun-court"
+      ]
+    },
+    {
+      "id": "court-wall",
+      "sourceAreas": [
+        "sun-court"
+      ]
+    },
+    {
+      "id": "hall-entry",
+      "sourceAreas": [
+        "entry-vestibule",
+        "sun-court"
+      ]
+    },
+    {
+      "id": "globe-road",
+      "sourceAreas": [
+        "sun-court"
+      ]
+    },
+    {
+      "id": "globe-approach",
+      "sourceAreas": [
+        "sun-court"
+      ]
+    },
+    {
+      "id": "globe-ramp",
+      "sourceAreas": [
+        "sun-court"
+      ]
+    },
+    {
+      "id": "globe-terrace",
+      "sourceAreas": [
+        "sun-court"
+      ]
+    },
+    {
+      "id": "globe-platform",
+      "sourceAreas": [
+        "sun-court"
+      ]
+    },
+    {
+      "id": "lookout-south",
+      "sourceAreas": [
+        "sun-court"
+      ]
+    },
+    {
+      "id": "lookout-west",
+      "sourceAreas": [
+        "sun-court"
+      ]
+    },
+    {
+      "id": "lookout-base",
+      "sourceAreas": [
+        "sun-court"
+      ]
+    },
+    {
+      "id": "lookout",
+      "sourceAreas": [
+        "sun-court"
+      ]
+    },
+    {
+      "id": "cascade-turn",
+      "sourceAreas": [
+        "sun-court"
+      ]
+    },
+    {
+      "id": "cascade-bridge",
+      "sourceAreas": [
+        "sun-court"
+      ]
+    },
+    {
+      "id": "roof-lower",
+      "sourceAreas": [
+        "sun-court"
+      ]
+    },
+    {
+      "id": "roof-switchback",
+      "sourceAreas": [
+        "array-hall"
+      ]
+    },
+    {
+      "id": "roof-turn",
+      "sourceAreas": [
+        "array-hall"
+      ]
+    },
+    {
+      "id": "roof-return",
+      "sourceAreas": [
+        "array-hall"
+      ]
+    },
+    {
+      "id": "roof-upper",
+      "sourceAreas": [
+        "sun-court"
+      ]
+    },
+    {
+      "id": "roof-start-west",
+      "sourceAreas": [
+        "sun-court"
+      ]
+    },
+    {
+      "id": "roof-start",
+      "sourceAreas": [
+        "sun-court"
+      ]
+    },
+    {
+      "id": "roof-final",
+      "sourceAreas": [
+        "array-hall"
+      ]
+    },
+    {
+      "id": "roof-bridge",
+      "sourceAreas": [
+        "array-hall"
+      ]
+    },
+    {
+      "id": "rooftop",
+      "sourceAreas": [
+        "sun-court"
+      ]
+    },
+    {
+      "id": "hall-arrival",
+      "sourceAreas": [
+        "array-hall",
+        "entry-vestibule"
+      ]
+    },
+    {
+      "id": "hall-center",
+      "sourceAreas": [
+        "array-hall"
+      ]
+    },
+    {
+      "id": "hall-exit",
+      "sourceAreas": [
+        "array-hall"
+      ]
+    },
+    {
+      "id": "service-entry",
+      "sourceAreas": [
+        "array-hall"
+      ]
+    },
+    {
+      "id": "hall-annex-entry",
+      "sourceAreas": [
+        "array-hall"
+      ]
+    },
+    {
+      "id": "hall-ramp-base",
+      "sourceAreas": [
+        "array-hall"
+      ]
+    },
+    {
+      "id": "hall-balcony",
+      "sourceAreas": [
+        "array-hall"
+      ]
+    },
+    {
+      "id": "hall-balcony-turn",
+      "sourceAreas": [
+        "array-hall"
+      ]
+    },
+    {
+      "id": "hall-upper-door",
+      "sourceAreas": [
+        "array-hall"
+      ]
+    },
+    {
+      "id": "hall-upper-base",
+      "sourceAreas": [
+        "array-hall"
+      ]
+    },
+    {
+      "id": "hall-upper",
+      "sourceAreas": [
+        "array-hall"
+      ]
+    },
+    {
+      "id": "descent-top",
+      "sourceAreas": [
+        "array-hall",
+        "connector-descent"
+      ]
+    },
+    {
+      "id": "descent-bottom",
+      "sourceAreas": [
+        "connector-descent"
+      ]
+    },
+    {
+      "id": "vault-door",
+      "sourceAreas": [
+        "connector-descent"
+      ]
+    },
+    {
+      "id": "vault-arrival",
+      "sourceAreas": [
+        "rime-vault"
+      ]
+    },
+    {
+      "id": "vault-center",
+      "sourceAreas": [
+        "rime-vault"
+      ]
+    },
+    {
+      "id": "vault-exit",
+      "sourceAreas": [
+        "rime-vault"
+      ]
+    },
+    {
+      "id": "rise-entry",
+      "sourceAreas": [
+        "connector-ascent",
+        "rime-vault"
+      ]
+    },
+    {
+      "id": "vault-maintenance-base",
+      "sourceAreas": [
+        "connector-descent",
+        "rime-vault"
+      ]
+    },
+    {
+      "id": "vault-maintenance",
+      "sourceAreas": [
+        "rime-vault"
+      ]
+    },
+    {
+      "id": "vault-platform",
+      "sourceAreas": [
+        "rime-vault"
+      ]
+    },
+    {
+      "id": "rise-ramp-top",
+      "sourceAreas": [
+        "connector-ascent",
+        "signal-rise"
+      ]
+    },
+    {
+      "id": "rise-arrival",
+      "sourceAreas": [
+        "connector-ascent",
+        "signal-rise"
+      ]
+    },
+    {
+      "id": "rise-ring",
+      "sourceAreas": [
+        "signal-rise"
+      ]
+    },
+    {
+      "id": "rise-wall",
+      "sourceAreas": [
+        "signal-rise"
+      ]
+    },
+    {
+      "id": "fortress-ramp-top",
+      "sourceAreas": [
+        "signal-rise"
+      ]
+    },
+    {
+      "id": "fortress-room",
+      "sourceAreas": [
+        "signal-rise"
+      ]
+    },
+    {
+      "id": "diagnostics-road",
+      "sourceAreas": [
+        "signal-rise"
+      ]
+    },
+    {
+      "id": "diagnostics-base",
+      "sourceAreas": [
+        "signal-rise"
+      ]
+    },
+    {
+      "id": "diagnostics-platform",
+      "sourceAreas": [
+        "signal-rise"
+      ]
+    },
+    {
+      "id": "dish-road",
+      "sourceAreas": [
+        "signal-rise"
+      ]
+    },
+    {
+      "id": "dish-ramp-base",
+      "sourceAreas": [
+        "signal-rise"
+      ]
+    },
+    {
+      "id": "dish-platform",
+      "sourceAreas": [
+        "signal-rise"
+      ]
+    },
+    {
+      "id": "gantry-road",
+      "sourceAreas": [
+        "signal-rise"
+      ]
+    },
+    {
+      "id": "gantry-south",
+      "sourceAreas": [
+        "signal-rise"
+      ]
+    },
+    {
+      "id": "gantry-base",
+      "sourceAreas": [
+        "signal-rise"
+      ]
+    },
+    {
+      "id": "gantry-top",
+      "sourceAreas": [
+        "signal-rise"
+      ]
+    },
+    {
+      "id": "gantry-east",
+      "sourceAreas": [
+        "signal-rise"
+      ]
+    },
+    {
+      "id": "gantry-west",
+      "sourceAreas": [
+        "signal-rise"
+      ]
+    }
+  ]
+}
+node ../schema/bin/validate.mjs world dist/com.hyprune.lumen-reach/world.json - 0.5
+VALID world: dist/com.hyprune.lumen-reach/world.json
+python3 tools/check-package.py dist/com.hyprune.lumen-reach > lumen-reach/reports/package-check.json
+python3 tools/check-placement.py dist/com.hyprune.lumen-reach --output lumen-reach/reports/placement-check.json
+{
+  "status": "PASS",
+  "visibleTriangles": 222403,
+  "checks": [
+    {
+      "anchorId": "sun-court-slot-01-facade-wall-01",
+      "windowSize": [
+        1.6,
+        0.9
+      ],
+      "sweepMeters": [
+        0.1,
+        16
+      ],
+      "hits": 0
+    },
+    {
+      "anchorId": "sun-court-slot-01-facade-wall-01",
+      "windowSize": [
+        3.2,
+        1.8
+      ],
+      "sweepMeters": [
+        0.1,
+        16
+      ],
+      "hits": 0
+    },
+    {
+      "anchorId": "sun-court-slot-01-facade-wall-01",
+      "windowSize": [
+        18.8,
+        9.3
+      ],
+      "sweepMeters": [
+        0.1,
+        16
+      ],
+      "hits": 0
+    },
+    {
+      "anchorId": "sun-court-slot-01-operator-desk-01",
+      "windowSize": [
+        1.6,
+        0.9
+      ],
+      "sweepMeters": [
+        0.1,
+        4
+      ],
+      "hits": 0
+    },
+    {
+      "anchorId": "sun-court-slot-01-operator-desk-01",
+      "windowSize": [
+        3.2,
+        1.8
+      ],
+      "sweepMeters": [
+        0.1,
+        4
+      ],
+      "hits": 0
+    },
+    {
+      "anchorId": "sun-court-slot-01-operator-desk-01",
+      "windowSize": [
+        2.6,
+        1.45
+      ],
+      "sweepMeters": [
+        0.1,
+        4
+      ],
+      "hits": 0
+    },
+    {
+      "anchorId": "sun-court-slot-01-operator-desk-02",
+      "windowSize": [
+        1.6,
+        0.9
+      ],
+      "sweepMeters": [
+        0.1,
+        4
+      ],
+      "hits": 0
+    },
+    {
+      "anchorId": "sun-court-slot-01-operator-desk-02",
+      "windowSize": [
+        3.2,
+        1.8
+      ],
+      "sweepMeters": [
+        0.1,
+        4
+      ],
+      "hits": 0
+    },
+    {
+      "anchorId": "sun-court-slot-01-operator-desk-02",
+      "windowSize": [
+        2.5,
+        1.4
+      ],
+      "sweepMeters": [
+        0.1,
+        4
+      ],
+      "hits": 0
+    },
+    {
+      "anchorId": "sun-court-slot-01-field-rig-01",
+      "windowSize": [
+        1.6,
+        0.9
+      ],
+      "sweepMeters": [
+        0.1,
+        4
+      ],
+      "hits": 0
+    },
+    {
+      "anchorId": "sun-court-slot-01-field-rig-01",
+      "windowSize": [
+        3.2,
+        1.8
+      ],
+      "sweepMeters": [
+        0.1,
+        4
+      ],
+      "hits": 0
+    },
+    {
+      "anchorId": "sun-court-slot-01-field-rig-01",
+      "windowSize": [
+        2.4,
+        1.35
+      ],
+      "sweepMeters": [
+        0.1,
+        4
+      ],
+      "hits": 0
+    },
+    {
+      "anchorId": "sun-court-slot-01-field-rig-02",
+      "windowSize": [
+        1.6,
+        0.9
+      ],
+      "sweepMeters": [
+        0.1,
+        4
+      ],
+      "hits": 0
+    },
+    {
+      "anchorId": "sun-court-slot-01-field-rig-02",
+      "windowSize": [
+        3.2,
+        1.8
+      ],
+      "sweepMeters": [
+        0.1,
+        4
+      ],
+      "hits": 0
+    },
+    {
+      "anchorId": "sun-court-slot-01-field-rig-02",
+      "windowSize": [
+        2.4,
+        1.35
+      ],
+      "sweepMeters": [
+        0.1,
+        4
+      ],
+      "hits": 0
+    },
+    {
+      "anchorId": "sun-court-slot-01-kiosk-pillar-01",
+      "windowSize": [
+        1.6,
+        0.9
+      ],
+      "sweepMeters": [
+        0.1,
+        4
+      ],
+      "hits": 0
+    },
+    {
+      "anchorId": "sun-court-slot-01-kiosk-pillar-01",
+      "windowSize": [
+        3.2,
+        1.8
+      ],
+      "sweepMeters": [
+        0.1,
+        4
+      ],
+      "hits": 0
+    },
+    {
+      "anchorId": "sun-court-slot-01-kiosk-pillar-01",
+      "windowSize": [
+        1.6,
+        2.0
+      ],
+      "sweepMeters": [
+        0.1,
+        4
+      ],
+      "hits": 0
+    },
+    {
+      "anchorId": "array-hall-slot-02-hanging-wall-01",
+      "windowSize": [
+        1.6,
+        0.9
+      ],
+      "sweepMeters": [
+        0.1,
+        16
+      ],
+      "hits": 0
+    },
+    {
+      "anchorId": "array-hall-slot-02-hanging-wall-01",
+      "windowSize": [
+        3.2,
+        1.8
+      ],
+      "sweepMeters": [
+        0.1,
+        16
+      ],
+      "hits": 0
+    },
+    {
+      "anchorId": "array-hall-slot-02-hanging-wall-01",
+      "windowSize": [
+        16,
+        8
+      ],
+      "sweepMeters": [
+        0.1,
+        16
+      ],
+      "hits": 0
+    },
+    {
+      "anchorId": "array-hall-slot-02-lectern-01",
+      "windowSize": [
+        1.6,
+        0.9
+      ],
+      "sweepMeters": [
+        0.1,
+        4
+      ],
+      "hits": 0
+    },
+    {
+      "anchorId": "array-hall-slot-02-lectern-01",
+      "windowSize": [
+        3.2,
+        1.8
+      ],
+      "sweepMeters": [
+        0.1,
+        4
+      ],
+      "hits": 0
+    },
+    {
+      "anchorId": "array-hall-slot-02-lectern-01",
+      "windowSize": [
+        1.8,
+        1.1
+      ],
+      "sweepMeters": [
+        0.1,
+        4
+      ],
+      "hits": 0
+    },
+    {
+      "anchorId": "array-hall-slot-02-lectern-02",
+      "windowSize": [
+        1.6,
+        0.9
+      ],
+      "sweepMeters": [
+        0.1,
+        4
+      ],
+      "hits": 0
+    },
+    {
+      "anchorId": "array-hall-slot-02-lectern-02",
+      "windowSize": [
+        3.2,
+        1.8
+      ],
+      "sweepMeters": [
+        0.1,
+        4
+      ],
+      "hits": 0
+    },
+    {
+      "anchorId": "array-hall-slot-02-lectern-02",
+      "windowSize": [
+        1.8,
+        1.1
+      ],
+      "sweepMeters": [
+        0.1,
+        4
+      ],
+      "hits": 0
+    },
+    {
+      "anchorId": "array-hall-slot-02-banner-01",
+      "windowSize": [
+        1.6,
+        0.9
+      ],
+      "sweepMeters": [
+        0.1,
+        4
+      ],
+      "hits": 0
+    },
+    {
+      "anchorId": "array-hall-slot-02-banner-01",
+      "windowSize": [
+        3.2,
+        1.8
+      ],
+      "sweepMeters": [
+        0.1,
+        4
+      ],
+      "hits": 0
+    },
+    {
+      "anchorId": "array-hall-slot-02-banner-01",
+      "windowSize": [
+        1.55,
+        4.2
+      ],
+      "sweepMeters": [
+        0.1,
+        4
+      ],
+      "hits": 0
+    },
+    {
+      "anchorId": "array-hall-slot-02-banner-02",
+      "windowSize": [
+        1.6,
+        0.9
+      ],
+      "sweepMeters": [
+        0.1,
+        4
+      ],
+      "hits": 0
+    },
+    {
+      "anchorId": "array-hall-slot-02-banner-02",
+      "windowSize": [
+        3.2,
+        1.8
+      ],
+      "sweepMeters": [
+        0.1,
+        4
+      ],
+      "hits": 0
+    },
+    {
+      "anchorId": "array-hall-slot-02-banner-02",
+      "windowSize": [
+        1.55,
+        4.2
+      ],
+      "sweepMeters": [
+        0.1,
+        4
+      ],
+      "hits": 0
+    },
+    {
+      "anchorId": "array-hall-slot-02-operator-desk-01",
+      "windowSize": [
+        1.6,
+        0.9
+      ],
+      "sweepMeters": [
+        0.1,
+        4
+      ],
+      "hits": 0
+    },
+    {
+      "anchorId": "array-hall-slot-02-operator-desk-01",
+      "windowSize": [
+        3.2,
+        1.8
+      ],
+      "sweepMeters": [
+        0.1,
+        4
+      ],
+      "hits": 0
+    },
+    {
+      "anchorId": "array-hall-slot-02-operator-desk-01",
+      "windowSize": [
+        2.55,
+        1.4
+      ],
+      "sweepMeters": [
+        0.1,
+        4
+      ],
+      "hits": 0
+    },
+    {
+      "anchorId": "array-hall-slot-02-operator-desk-02",
+      "windowSize": [
+        1.6,
+        0.9
+      ],
+      "sweepMeters": [
+        0.1,
+        4
+      ],
+      "hits": 0
+    },
+    {
+      "anchorId": "array-hall-slot-02-operator-desk-02",
+      "windowSize": [
+        3.2,
+        1.8
+      ],
+      "sweepMeters": [
+        0.1,
+        4
+      ],
+      "hits": 0
+    },
+    {
+      "anchorId": "array-hall-slot-02-operator-desk-02",
+      "windowSize": [
+        2.55,
+        1.4
+      ],
+      "sweepMeters": [
+        0.1,
+        4
+      ],
+      "hits": 0
+    },
+    {
+      "anchorId": "array-hall-slot-02-operator-desk-03",
+      "windowSize": [
+        1.6,
+        0.9
+      ],
+      "sweepMeters": [
+        0.1,
+        4
+      ],
+      "hits": 0
+    },
+    {
+      "anchorId": "array-hall-slot-02-operator-desk-03",
+      "windowSize": [
+        3.2,
+        1.8
+      ],
+      "sweepMeters": [
+        0.1,
+        4
+      ],
+      "hits": 0
+    },
+    {
+      "anchorId": "array-hall-slot-02-operator-desk-03",
+      "windowSize": [
+        2.55,
+        1.4
+      ],
+      "sweepMeters": [
+        0.1,
+        4
+      ],
+      "hits": 0
+    },
+    {
+      "anchorId": "rime-vault-slot-03-wall-inset-console-01",
+      "windowSize": [
+        1.6,
+        0.9
+      ],
+      "sweepMeters": [
+        0.1,
+        16
+      ],
+      "hits": 0
+    },
+    {
+      "anchorId": "rime-vault-slot-03-wall-inset-console-01",
+      "windowSize": [
+        3.2,
+        1.8
+      ],
+      "sweepMeters": [
+        0.1,
+        16
+      ],
+      "hits": 0
+    },
+    {
+      "anchorId": "rime-vault-slot-03-wall-inset-console-01",
+      "windowSize": [
+        13.8,
+        6.3
+      ],
+      "sweepMeters": [
+        0.1,
+        16
+      ],
+      "hits": 0
+    },
+    {
+      "anchorId": "rime-vault-slot-03-operator-desk-01",
+      "windowSize": [
+        1.6,
+        0.9
+      ],
+      "sweepMeters": [
+        0.1,
+        4
+      ],
+      "hits": 0
+    },
+    {
+      "anchorId": "rime-vault-slot-03-operator-desk-01",
+      "windowSize": [
+        3.2,
+        1.8
+      ],
+      "sweepMeters": [
+        0.1,
+        4
+      ],
+      "hits": 0
+    },
+    {
+      "anchorId": "rime-vault-slot-03-operator-desk-01",
+      "windowSize": [
+        2.55,
+        1.4
+      ],
+      "sweepMeters": [
+        0.1,
+        4
+      ],
+      "hits": 0
+    },
+    {
+      "anchorId": "rime-vault-slot-03-operator-desk-02",
+      "windowSize": [
+        1.6,
+        0.9
+      ],
+      "sweepMeters": [
+        0.1,
+        4
+      ],
+      "hits": 0
+    },
+    {
+      "anchorId": "rime-vault-slot-03-operator-desk-02",
+      "windowSize": [
+        3.2,
+        1.8
+      ],
+      "sweepMeters": [
+        0.1,
+        4
+      ],
+      "hits": 0
+    },
+    {
+      "anchorId": "rime-vault-slot-03-operator-desk-02",
+      "windowSize": [
+        2.55,
+        1.4
+      ],
+      "sweepMeters": [
+        0.1,
+        4
+      ],
+      "hits": 0
+    },
+    {
+      "anchorId": "rime-vault-slot-03-wall-inset-console-02",
+      "windowSize": [
+        1.6,
+        0.9
+      ],
+      "sweepMeters": [
+        0.1,
+        4
+      ],
+      "hits": 0
+    },
+    {
+      "anchorId": "rime-vault-slot-03-wall-inset-console-02",
+      "windowSize": [
+        3.2,
+        1.8
+      ],
+      "sweepMeters": [
+        0.1,
+        4
+      ],
+      "hits": 0
+    },
+    {
+      "anchorId": "rime-vault-slot-03-wall-inset-console-02",
+      "windowSize": [
+        3.0,
+        2.0
+      ],
+      "sweepMeters": [
+        0.1,
+        4
+      ],
+      "hits": 0
+    },
+    {
+      "anchorId": "rime-vault-slot-03-terminal-bench-01",
+      "windowSize": [
+        1.6,
+        0.9
+      ],
+      "sweepMeters": [
+        0.1,
+        4
+      ],
+      "hits": 0
+    },
+    {
+      "anchorId": "rime-vault-slot-03-terminal-bench-01",
+      "windowSize": [
+        3.2,
+        1.8
+      ],
+      "sweepMeters": [
+        0.1,
+        4
+      ],
+      "hits": 0
+    },
+    {
+      "anchorId": "rime-vault-slot-03-terminal-bench-01",
+      "windowSize": [
+        2.3,
+        1.3
+      ],
+      "sweepMeters": [
+        0.1,
+        4
+      ],
+      "hits": 0
+    },
+    {
+      "anchorId": "signal-rise-slot-04-blast-door-screen-01",
+      "windowSize": [
+        1.6,
+        0.9
+      ],
+      "sweepMeters": [
+        0.1,
+        16
+      ],
+      "hits": 0
+    },
+    {
+      "anchorId": "signal-rise-slot-04-blast-door-screen-01",
+      "windowSize": [
+        3.2,
+        1.8
+      ],
+      "sweepMeters": [
+        0.1,
+        16
+      ],
+      "hits": 0
+    },
+    {
+      "anchorId": "signal-rise-slot-04-blast-door-screen-01",
+      "windowSize": [
+        18.5,
+        10.4
+      ],
+      "sweepMeters": [
+        0.1,
+        16
+      ],
+      "hits": 0
+    },
+    {
+      "anchorId": "signal-rise-slot-04-terminal-bench-01",
+      "windowSize": [
+        1.6,
+        0.9
+      ],
+      "sweepMeters": [
+        0.1,
+        4
+      ],
+      "hits": 0
+    },
+    {
+      "anchorId": "signal-rise-slot-04-terminal-bench-01",
+      "windowSize": [
+        3.2,
+        1.8
+      ],
+      "sweepMeters": [
+        0.1,
+        4
+      ],
+      "hits": 0
+    },
+    {
+      "anchorId": "signal-rise-slot-04-terminal-bench-01",
+      "windowSize": [
+        3.7,
+        1.55
+      ],
+      "sweepMeters": [
+        0.1,
+        4
+      ],
+      "hits": 0
+    },
+    {
+      "anchorId": "signal-rise-slot-04-kiosk-pillar-01",
+      "windowSize": [
+        1.6,
+        0.9
+      ],
+      "sweepMeters": [
+        0.1,
+        4
+      ],
+      "hits": 0
+    },
+    {
+      "anchorId": "signal-rise-slot-04-kiosk-pillar-01",
+      "windowSize": [
+        3.2,
+        1.8
+      ],
+      "sweepMeters": [
+        0.1,
+        4
+      ],
+      "hits": 0
+    },
+    {
+      "anchorId": "signal-rise-slot-04-kiosk-pillar-01",
+      "windowSize": [
+        1.0,
+        1.9
+      ],
+      "sweepMeters": [
+        0.1,
+        4
+      ],
+      "hits": 0
+    },
+    {
+      "anchorId": "signal-rise-slot-04-wall-inset-console-01",
+      "windowSize": [
+        1.6,
+        0.9
+      ],
+      "sweepMeters": [
+        0.1,
+        4
+      ],
+      "hits": 0
+    },
+    {
+      "anchorId": "signal-rise-slot-04-wall-inset-console-01",
+      "windowSize": [
+        3.2,
+        1.8
+      ],
+      "sweepMeters": [
+        0.1,
+        4
+      ],
+      "hits": 0
+    },
+    {
+      "anchorId": "signal-rise-slot-04-wall-inset-console-01",
+      "windowSize": [
+        3.0,
+        2.0
+      ],
+      "sweepMeters": [
+        0.1,
+        4
+      ],
+      "hits": 0
+    },
+    {
+      "anchorId": "signal-rise-slot-04-operator-desk-01",
+      "windowSize": [
+        1.6,
+        0.9
+      ],
+      "sweepMeters": [
+        0.1,
+        4
+      ],
+      "hits": 0
+    },
+    {
+      "anchorId": "signal-rise-slot-04-operator-desk-01",
+      "windowSize": [
+        3.2,
+        1.8
+      ],
+      "sweepMeters": [
+        0.1,
+        4
+      ],
+      "hits": 0
+    },
+    {
+      "anchorId": "signal-rise-slot-04-operator-desk-01",
+      "windowSize": [
+        2.5,
+        1.4
+      ],
+      "sweepMeters": [
+        0.1,
+        4
+      ],
+      "hits": 0
+    },
+    {
+      "zoneId": "sun-court-open-work",
+      "windowSize": [
+        1.6,
+        0.9
+      ],
+      "continuousSweeps": 30,
+      "yawDegrees": [
+        0,
+        90
+      ]
+    },
+    {
+      "zoneId": "sun-court-open-work",
+      "windowSize": [
+        3.2,
+        1.8
+      ],
+      "continuousSweeps": 30,
+      "yawDegrees": [
+        0,
+        90
+      ]
+    },
+    {
+      "zoneId": "array-hall-open-work",
+      "windowSize": [
+        1.6,
+        0.9
+      ],
+      "continuousSweeps": 30,
+      "yawDegrees": [
+        0,
+        90
+      ]
+    },
+    {
+      "zoneId": "array-hall-open-work",
+      "windowSize": [
+        3.2,
+        1.8
+      ],
+      "continuousSweeps": 30,
+      "yawDegrees": [
+        0,
+        90
+      ]
+    },
+    {
+      "zoneId": "rime-vault-open-work",
+      "windowSize": [
+        1.6,
+        0.9
+      ],
+      "continuousSweeps": 30,
+      "yawDegrees": [
+        0,
+        90
+      ]
+    },
+    {
+      "zoneId": "rime-vault-open-work",
+      "windowSize": [
+        3.2,
+        1.8
+      ],
+      "continuousSweeps": 30,
+      "yawDegrees": [
+        0,
+        90
+      ]
+    },
+    {
+      "zoneId": "signal-rise-open-work",
+      "windowSize": [
+        1.6,
+        0.9
+      ],
+      "continuousSweeps": 30,
+      "yawDegrees": [
+        0,
+        90
+      ]
+    },
+    {
+      "zoneId": "signal-rise-open-work",
+      "windowSize": [
+        3.2,
+        1.8
+      ],
+      "continuousSweeps": 30,
+      "yawDegrees": [
+        0,
+        90
+      ]
+    }
+  ],
+  "failures": [],
+  "method": "continuous triangle/OBB SAT against exported visual geometry; all reserved-volume interiors and two window sizes"
+}
+python3 tools/check-walking.py dist/com.hyprune.lumen-reach > lumen-reach/reports/walking-check.json
+python3 tools/check-coplanar.py dist/com.hyprune.lumen-reach --emissive --fixtures dist/com.hyprune.lumen-reach/fixture-audit.json > lumen-reach/reports/polish-v3/emissive-check.json
+python3 -c "import json; assert json.load(open('dist/com.hyprune.lumen-reach/decal-audit.json'))['status']=='PASS'"

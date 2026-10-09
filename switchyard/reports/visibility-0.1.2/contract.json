@@ -1,0 +1,104 @@
+{
+  "status": "PASS",
+  "version": "0.1.2",
+  "regions": 11,
+  "ownedDraws": {
+    "concourse": 15,
+    "build": 16,
+    "research": 16,
+    "commons": 16,
+    "studio": 16,
+    "systems": 16,
+    "archive": 16,
+    "aisle-1": 0,
+    "aisle-2": 0,
+    "aisle-3": 0,
+    "cross-aisle": 0
+  },
+  "alwaysVisible": [
+    "Visual-hall",
+    "Visual-vault",
+    "Visual-vista"
+  ],
+  "routeSources": [
+    {
+      "id": "concourse",
+      "sourceAreas": [
+        "concourse"
+      ]
+    },
+    {
+      "id": "junction-1",
+      "sourceAreas": [
+        "aisle-1",
+        "concourse"
+      ]
+    },
+    {
+      "id": "build",
+      "sourceAreas": [
+        "aisle-1",
+        "build"
+      ]
+    },
+    {
+      "id": "studio",
+      "sourceAreas": [
+        "aisle-1",
+        "studio"
+      ]
+    },
+    {
+      "id": "junction-2",
+      "sourceAreas": [
+        "aisle-2",
+        "concourse"
+      ]
+    },
+    {
+      "id": "research",
+      "sourceAreas": [
+        "aisle-2",
+        "research"
+      ]
+    },
+    {
+      "id": "systems",
+      "sourceAreas": [
+        "aisle-2",
+        "systems"
+      ]
+    },
+    {
+      "id": "junction-3",
+      "sourceAreas": [
+        "aisle-3",
+        "concourse"
+      ]
+    },
+    {
+      "id": "commons",
+      "sourceAreas": [
+        "aisle-3",
+        "commons"
+      ]
+    },
+    {
+      "id": "archive",
+      "sourceAreas": [
+        "aisle-3",
+        "archive"
+      ]
+    }
+  ],
+  "unchangedAssetFiles": 70,
+  "unchangedContracts": [
+    "anchors",
+    "collision",
+    "navigation",
+    "lightmaps",
+    "spawns",
+    "zones",
+    "extensions"
+  ]
+}

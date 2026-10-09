@@ -1,0 +1,19 @@
+{
+  "status": "PASS",
+  "schema": "world 0.5",
+  "glTFErrors": 0,
+  "glTFWarnings": 0,
+  "fullStaticSuite": "PASS; final schema, indexed ownership and byte-identical assets/contracts checked after the sightline refinements",
+  "pairedViews": 30,
+  "regionAndRouteProbes": 134,
+  "matchedNativeOutput": [
+    3840,
+    2160
+  ],
+  "preset": "Low (legacy Intel)",
+  "internalScale": 0.5,
+  "nestedLock": "/tmp/worldshell-nested.lock",
+  "sourceCommit": "b510aa1e8db8c67aa72a66c40d22acf570541969",
+  "assetAndContractAudit": "contract.json",
+  "archiveVerification": "archive.json"
+}

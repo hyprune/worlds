@@ -1,0 +1,91 @@
+{
+  "status": "EXPLORATORY",
+  "coreCommit": "2494c136ab43c55f20084514e7ae3799ef75822a",
+  "initialLosses": [
+    {
+      "view": "01-sun-court",
+      "changedPixelFraction": 0.0011241309710697466,
+      "off": {
+        "culled": 0,
+        "submitted": 87,
+        "total": 87
+      },
+      "on": {
+        "culled": 17,
+        "submitted": 70,
+        "total": 87
+      }
+    },
+    {
+      "view": "01-sun-court-tools",
+      "changedPixelFraction": 0.0021401939896837857,
+      "off": {
+        "culled": 0,
+        "submitted": 87,
+        "total": 87
+      },
+      "on": {
+        "culled": 17,
+        "submitted": 70,
+        "total": 87
+      }
+    },
+    {
+      "view": "entry-through",
+      "changedPixelFraction": 0.003496159452792106,
+      "off": {
+        "culled": 0,
+        "submitted": 87,
+        "total": 87
+      },
+      "on": {
+        "culled": 17,
+        "submitted": 70,
+        "total": 87
+      }
+    },
+    {
+      "view": "descent-bottom",
+      "changedPixelFraction": 0.005508662256111236,
+      "off": {
+        "culled": 0,
+        "submitted": 87,
+        "total": 87
+      },
+      "on": {
+        "culled": 17,
+        "submitted": 70,
+        "total": 87
+      }
+    },
+    {
+      "view": "vault-looking-out",
+      "changedPixelFraction": 0.03403579838528818,
+      "off": {
+        "culled": 0,
+        "submitted": 87,
+        "total": 87
+      },
+      "on": {
+        "culled": 44,
+        "submitted": 43,
+        "total": 87
+      }
+    },
+    {
+      "view": "vault-center-out",
+      "changedPixelFraction": 0.044778958286611346,
+      "off": {
+        "culled": 0,
+        "submitted": 87,
+        "total": 87
+      },
+      "on": {
+        "culled": 44,
+        "submitted": 43,
+        "total": 87
+      }
+    }
+  ],
+  "reason": "Initial coarse regions removed shells through the Court opening, the far tunnel mouth and daylight architecture seen from inside the Vault. Final specs explicitly retain these apertures."
+}

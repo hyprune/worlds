@@ -1,264 +1,255 @@
 {
   "status": "PASS",
   "worldId": "com.hyprune.lumen-reach",
-  "version": "0.6.0",
-  "sourceCommit": "e479983e7476bb08b90572259719e7fdb0bc88ce",
+  "version": "0.6.1",
+  "formatVersion": "0.5",
+  "sourceCommit": "b510aa1e8db8c67aa72a66c40d22acf570541969",
   "sceneSHA256": "0f2ccff23da219f64f83169416005adc404a295726f4334394373f7f1fbc03bc",
-  "manifestSHA256": "baa1ab3986efcaa817835388e155456bd49b5b000707cbd4a5f52e7f51b8c6fd",
-  "before": {
-    "status": "PASS",
-    "packageBytes": 60620988,
-    "decodedTextureBytes": 140346560,
-    "conservativeGpuBytes": 299499180,
-    "mippedTextureViewsBytes": 275509860,
-    "expandedGeometryBytes": 23989320,
-    "colorTextureViews": 25,
-    "textureObjects": 54,
-    "textureProvenanceEntries": 54,
-    "visualTriangles": 199911,
-    "drawCallEstimate": 84,
-    "drawCallScope": "one draw per visible glTF primitive, world geometry only; excludes postprocessing, applications and HUD",
-    "untexturedPhysicalMaterials": [],
-    "anchors": 24,
-    "collisionNodes": 213,
-    "lightmapBindings": 65,
-    "UV1": [
-      {
-        "node": "Visual-array-hall",
-        "triangles": 28040,
-        "uv1Area": 0.11693,
-        "overlapSamples": 0
-      },
-      {
-        "node": "Visual-connector-ascent",
-        "triangles": 2490,
-        "uv1Area": 0.51477,
-        "overlapSamples": 0
-      },
-      {
-        "node": "Visual-connector-descent",
-        "triangles": 2754,
-        "uv1Area": 0.47107,
-        "overlapSamples": 0
-      },
-      {
-        "node": "Visual-foliage",
-        "triangles": 20736,
-        "uv1Area": 0.2132,
-        "overlapSamples": 0
-      },
-      {
-        "node": "Visual-rime-vault",
-        "triangles": 22236,
-        "uv1Area": 0.14628,
-        "overlapSamples": 0
-      },
-      {
-        "node": "Visual-signal-rise",
-        "triangles": 58940,
-        "uv1Area": 0.00616,
-        "overlapSamples": 0
-      },
-      {
-        "node": "Visual-sun-court",
-        "triangles": 45672,
-        "uv1Area": 0.0271,
-        "overlapSamples": 0
-      },
-      {
-        "node": "Visual-vista",
-        "triangles": 19043,
-        "uv1Area": 0.0,
-        "overlapSamples": 0
-      }
-    ]
-  },
-  "after": {
-    "status": "PASS",
-    "packageBytes": 69802165,
-    "decodedTextureBytes": 165315776,
-    "conservativeGpuBytes": 342043960,
-    "mippedTextureViewsBytes": 315355600,
-    "expandedGeometryBytes": 26688360,
-    "colorTextureViews": 28,
-    "textureObjects": 63,
-    "textureProvenanceEntries": 63,
-    "visualTriangles": 222403,
-    "drawCallEstimate": 87,
-    "drawCallScope": "one draw per visible glTF primitive, world geometry only; excludes postprocessing, applications and HUD",
-    "untexturedPhysicalMaterials": [],
-    "anchors": 24,
-    "collisionNodes": 230,
-    "lightmapBindings": 68,
-    "UV1": [
-      {
-        "node": "Visual-array-hall",
-        "triangles": 28040,
-        "uv1Area": 0.11693,
-        "overlapSamples": 0
-      },
-      {
-        "node": "Visual-connector-ascent",
-        "triangles": 2490,
-        "uv1Area": 0.51477,
-        "overlapSamples": 0
-      },
-      {
-        "node": "Visual-connector-descent",
-        "triangles": 2754,
-        "uv1Area": 0.47107,
-        "overlapSamples": 0
-      },
-      {
-        "node": "Visual-foliage",
-        "triangles": 20736,
-        "uv1Area": 0.2132,
-        "overlapSamples": 0
-      },
-      {
-        "node": "Visual-rime-vault",
-        "triangles": 44700,
-        "uv1Area": 0.19209,
-        "overlapSamples": 0
-      },
-      {
-        "node": "Visual-signal-rise",
-        "triangles": 58940,
-        "uv1Area": 0.00616,
-        "overlapSamples": 0
-      },
-      {
-        "node": "Visual-sun-court",
-        "triangles": 45672,
-        "uv1Area": 0.0271,
-        "overlapSamples": 0
-      },
-      {
-        "node": "Visual-vista",
-        "triangles": 19071,
-        "uv1Area": 0.0,
-        "overlapSamples": 0
-      }
-    ]
-  },
-  "budgetCompatibility": {
-    "status": "PASS",
-    "anchorsUnchanged": 24,
-    "routesStairsAndPlacementUnchanged": true,
-    "unchangedGeometryChunks": [
-      "Visual-sun-court",
-      "Visual-array-hall",
-      "Visual-signal-rise",
-      "Visual-foliage",
-      "Visual-connector-descent",
-      "Visual-connector-ascent"
-    ],
-    "triangleGrowthPercent": 11.25,
-    "drawGrowthPercent": 3.57,
-    "gpuGrowthPercent": 14.21,
-    "rimeMaterials": [
-      "amber",
-      "black",
-      "condensation",
-      "grating",
-      "ice-body",
-      "ice-rim",
-      "ivory",
-      "metal",
-      "red-light",
-      "rime-crust",
-      "snow",
-      "strip",
-      "trim",
-      "vault-metal"
-    ],
-    "rimeBeforeTriangles": 22236,
-    "rimeAfterTriangles": 44700
-  },
+  "manifestSHA256": "1aad59bcc7064cb3bb080add9b31bb6bf186b8e2e0ce28dad1f41cdf147cc0ac",
   "archive": {
-    "path": "/home/rick/workspace/hyprune/worlds/artifacts/releases/com.hyprune.lumen-reach-0.6.0.tar.zst",
-    "sha256": "fe2f7b492cd21578964a7f4cd4ac5f799209c318f7350c506df04bb46be28dd4",
-    "bytes": 45219398
+    "status": "PASS",
+    "path": "/home/rick/workspace/hyprune/worlds/artifacts/releases/com.hyprune.lumen-reach-0.6.1.tar.zst",
+    "sha256": "f0bf4f25abe4db0bda0029128d75404da011be5cc7194a9c4e0e68306a39e616",
+    "bytes": 45220010,
+    "identicalExtractedFiles": 75,
+    "manifestSHA256": "1aad59bcc7064cb3bb080add9b31bb6bf186b8e2e0ce28dad1f41cdf147cc0ac",
+    "version": "0.6.1",
+    "formatVersion": "0.5"
   },
-  "stills": "/home/rick/workspace/rick-the-alien/worldshell-gallery/screenshots/release-world-v3",
-  "video": {
-    "path": "/home/rick/workspace/rick-the-alien/worldshell-gallery/videos/rime-vault-v3.mp4",
-    "metadata": "/home/rick/workspace/rick-the-alien/worldshell-gallery/videos/rime-vault-v3.json",
-    "durationSeconds": 42.0,
-    "sha256": "44ef46a189b6a59d2661d749b9f5e9f6f277607d6693f4daa14e98d417a92ecc"
-  },
-  "performance": [
+  "coreCommit": "2494c136ab43c55f20084514e7ae3799ef75822a",
+  "loadedPluginSHA256": "c3a8c3d79933ade9a12d1a53b1ee3dc88b2f0d1b48fe1e61685cd0160a6cad1e",
+  "timings": [
     {
+      "world": "lumen-reach",
       "view": "01-sun-court",
-      "framesPerSecond": 59.95,
-      "medianGpuPassMs": 4.73,
-      "renderScales": [
-        0.5
+      "off": {
+        "submitted": 87,
+        "cpuRenderMs": 0.3199805,
+        "gpuPassSumMs": 5.4593465000000005,
+        "frameMs": 16.6686785
+      },
+      "on": {
+        "submitted": 84,
+        "cpuRenderMs": 0.2877415,
+        "gpuPassSumMs": 4.7851015,
+        "frameMs": 16.6698145
+      },
+      "submissionReductionPercent": 3.45,
+      "cpuRenderReductionPercent": 10.08,
+      "gpuPassReductionPercent": 12.35,
+      "frameTimeReductionPercent": -0.01,
+      "blocks": [
+        {
+          "culling": false,
+          "cpuMedianMs": 0.3355065,
+          "gpuMedianMs": 6.2367945,
+          "frameMedianMs": 16.6724125
+        },
+        {
+          "culling": true,
+          "cpuMedianMs": 0.28462149999999997,
+          "gpuMedianMs": 4.7851015,
+          "frameMedianMs": 16.669280999999998
+        },
+        {
+          "culling": true,
+          "cpuMedianMs": 0.28790499999999997,
+          "gpuMedianMs": 4.489815999999999,
+          "frameMedianMs": 16.671612500000002
+        },
+        {
+          "culling": false,
+          "cpuMedianMs": 0.29588000000000003,
+          "gpuMedianMs": 3.846196,
+          "frameMedianMs": 16.667140500000002
+        }
       ]
     },
     {
+      "world": "lumen-reach",
       "view": "02-array-hall",
-      "framesPerSecond": 60.01,
-      "medianGpuPassMs": 9.0,
-      "renderScales": [
-        0.5625
+      "off": {
+        "submitted": 87,
+        "cpuRenderMs": 0.265788,
+        "gpuPassSumMs": 5.8811695,
+        "frameMs": 16.66721
+      },
+      "on": {
+        "submitted": 84,
+        "cpuRenderMs": 0.26321,
+        "gpuPassSumMs": 6.522836,
+        "frameMs": 16.666196
+      },
+      "submissionReductionPercent": 3.45,
+      "cpuRenderReductionPercent": 0.97,
+      "gpuPassReductionPercent": -10.91,
+      "frameTimeReductionPercent": 0.01,
+      "blocks": [
+        {
+          "culling": false,
+          "cpuMedianMs": 0.265276,
+          "gpuMedianMs": 5.363826,
+          "frameMedianMs": 16.673547
+        },
+        {
+          "culling": true,
+          "cpuMedianMs": 0.2648405,
+          "gpuMedianMs": 6.8922375,
+          "frameMedianMs": 16.6633395
+        },
+        {
+          "culling": true,
+          "cpuMedianMs": 0.2619,
+          "gpuMedianMs": 6.0226015,
+          "frameMedianMs": 16.6679295
+        },
+        {
+          "culling": false,
+          "cpuMedianMs": 0.269376,
+          "gpuMedianMs": 7.5766124999999995,
+          "frameMedianMs": 16.6560385
+        }
       ]
     },
     {
+      "world": "lumen-reach",
       "view": "03-rime-vault",
-      "framesPerSecond": 59.98,
-      "medianGpuPassMs": 4.54,
-      "renderScales": [
-        0.375,
-        0.4375
+      "off": {
+        "submitted": 87,
+        "cpuRenderMs": 0.2747855,
+        "gpuPassSumMs": 5.479685,
+        "frameMs": 16.6668095
+      },
+      "on": {
+        "submitted": 73,
+        "cpuRenderMs": 0.2460055,
+        "gpuPassSumMs": 4.5817689999999995,
+        "frameMs": 16.671663000000002
+      },
+      "submissionReductionPercent": 16.09,
+      "cpuRenderReductionPercent": 10.47,
+      "gpuPassReductionPercent": 16.39,
+      "frameTimeReductionPercent": -0.03,
+      "blocks": [
+        {
+          "culling": false,
+          "cpuMedianMs": 0.28476250000000003,
+          "gpuMedianMs": 5.4673680000000004,
+          "frameMedianMs": 16.661236000000002
+        },
+        {
+          "culling": true,
+          "cpuMedianMs": 0.25431000000000004,
+          "gpuMedianMs": 7.1248155,
+          "frameMedianMs": 16.669999
+        },
+        {
+          "culling": true,
+          "cpuMedianMs": 0.222765,
+          "gpuMedianMs": 4.1815595000000005,
+          "frameMedianMs": 16.6741725
+        },
+        {
+          "culling": false,
+          "cpuMedianMs": 0.2626045,
+          "gpuMedianMs": 5.4874715,
+          "frameMedianMs": 16.6748515
+        }
       ]
     },
     {
+      "world": "lumen-reach",
       "view": "04-signal-rise",
-      "framesPerSecond": 59.87,
-      "medianGpuPassMs": 3.692,
-      "renderScales": [
-        0.375,
-        0.4375
+      "off": {
+        "submitted": 87,
+        "cpuRenderMs": 0.27419,
+        "gpuPassSumMs": 4.284607,
+        "frameMs": 16.671415500000002
+      },
+      "on": {
+        "submitted": 68,
+        "cpuRenderMs": 0.21919899999999998,
+        "gpuPassSumMs": 4.3022375,
+        "frameMs": 16.6605705
+      },
+      "submissionReductionPercent": 21.84,
+      "cpuRenderReductionPercent": 20.06,
+      "gpuPassReductionPercent": -0.41,
+      "frameTimeReductionPercent": 0.07,
+      "blocks": [
+        {
+          "culling": false,
+          "cpuMedianMs": 0.2772335,
+          "gpuMedianMs": 5.8129925,
+          "frameMedianMs": 16.6750995
+        },
+        {
+          "culling": true,
+          "cpuMedianMs": 0.2287555,
+          "gpuMedianMs": 4.8866385,
+          "frameMedianMs": 16.658068
+        },
+        {
+          "culling": true,
+          "cpuMedianMs": 0.210813,
+          "gpuMedianMs": 3.9489564999999995,
+          "frameMedianMs": 16.663563500000002
+        },
+        {
+          "culling": false,
+          "cpuMedianMs": 0.2701055,
+          "gpuMedianMs": 3.6923414999999995,
+          "frameMedianMs": 16.6693055
+        }
+      ]
+    },
+    {
+      "world": "lumen-reach",
+      "view": "court-east",
+      "off": {
+        "submitted": 87,
+        "cpuRenderMs": 0.3475605,
+        "gpuPassSumMs": 7.331013,
+        "frameMs": 16.667834
+      },
+      "on": {
+        "submitted": 87,
+        "cpuRenderMs": 0.2803825,
+        "gpuPassSumMs": 7.230831,
+        "frameMs": 16.6642395
+      },
+      "submissionReductionPercent": 0.0,
+      "cpuRenderReductionPercent": 19.33,
+      "gpuPassReductionPercent": 1.37,
+      "frameTimeReductionPercent": 0.02,
+      "blocks": [
+        {
+          "culling": false,
+          "cpuMedianMs": 0.429025,
+          "gpuMedianMs": 8.486092,
+          "frameMedianMs": 16.663034500000002
+        },
+        {
+          "culling": true,
+          "cpuMedianMs": 0.274605,
+          "gpuMedianMs": 5.7431235,
+          "frameMedianMs": 16.6621035
+        },
+        {
+          "culling": true,
+          "cpuMedianMs": 0.328941,
+          "gpuMedianMs": 9.4224455,
+          "frameMedianMs": 16.66629
+        },
+        {
+          "culling": false,
+          "cpuMedianMs": 0.28637999999999997,
+          "gpuMedianMs": 6.884815,
+          "frameMedianMs": 16.67211
+        }
       ]
     }
   ],
-  "engine": {
-    "before-engine": {
-      "coreCommit": "e68f5c2fc0049125343e298f7bbcaad5dfb773d3",
-      "loadedPluginSHA256": "324bc6f78d78ef5037b89e31913c68e1c1bb662be2ee58b8ef0b14027140e481",
-      "graphicsRequest": {
-        "quality": "medium",
-        "render_scale": "auto",
-        "target_fps": 60
-      }
-    },
-    "after-4k": {
-      "coreCommit": "c34aaa717128e03b8db70784f48958948f669d08",
-      "loadedPluginSHA256": "f1f7cd037512d3417cecd939276587ddea15f203a129de315a62f6a041b67bf6",
-      "graphicsRequest": {
-        "quality": "medium",
-        "render_scale": "auto",
-        "target_fps": 60
-      }
-    },
-    "after-routes": {
-      "coreCommit": "c34aaa717128e03b8db70784f48958948f669d08",
-      "loadedPluginSHA256": "f1f7cd037512d3417cecd939276587ddea15f203a129de315a62f6a041b67bf6",
-      "graphicsRequest": {
-        "quality": "medium",
-        "render_scale": "auto",
-        "target_fps": 60
-      }
-    },
-    "after-engine": {
-      "coreCommit": "8ce4f756add95ff8ec490073def804462c76c3ce",
-      "loadedPluginSHA256": "cd5bbb80d47c782a9ff358d165601c5297c296182380316001fb54166d4e422d",
-      "graphicsRequest": {
-        "quality": "medium",
-        "render_scale": "auto",
-        "target_fps": 60
-      }
-    }
-  }
+  "visualChecks": 30,
+  "boundaryAndRouteProbes": 134
 }

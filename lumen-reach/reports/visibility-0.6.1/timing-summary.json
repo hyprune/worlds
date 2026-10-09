@@ -1,0 +1,244 @@
+{
+  "status": "PASS",
+  "nativeOutput": [
+    3840,
+    2160
+  ],
+  "internalScale": 0.5,
+  "preset": "Low (Intel legacy mapping)",
+  "renderer": "Mesa Intel(R) Graphics (PTL)",
+  "samplesPerStatePerView": 64,
+  "method": "Intel legacy preset maps to Low; native 4K, fixed 0.5 internal scale, offload off. ABBA culling states, warm-up before each block. No owner-session control.",
+  "measurements": [
+    {
+      "world": "lumen-reach",
+      "view": "01-sun-court",
+      "off": {
+        "submitted": 87,
+        "cpuRenderMs": 0.3199805,
+        "gpuPassSumMs": 5.4593465000000005,
+        "frameMs": 16.6686785
+      },
+      "on": {
+        "submitted": 84,
+        "cpuRenderMs": 0.2877415,
+        "gpuPassSumMs": 4.7851015,
+        "frameMs": 16.6698145
+      },
+      "submissionReductionPercent": 3.45,
+      "cpuRenderReductionPercent": 10.08,
+      "gpuPassReductionPercent": 12.35,
+      "frameTimeReductionPercent": -0.01,
+      "blocks": [
+        {
+          "culling": false,
+          "cpuMedianMs": 0.3355065,
+          "gpuMedianMs": 6.2367945,
+          "frameMedianMs": 16.6724125
+        },
+        {
+          "culling": true,
+          "cpuMedianMs": 0.28462149999999997,
+          "gpuMedianMs": 4.7851015,
+          "frameMedianMs": 16.669280999999998
+        },
+        {
+          "culling": true,
+          "cpuMedianMs": 0.28790499999999997,
+          "gpuMedianMs": 4.489815999999999,
+          "frameMedianMs": 16.671612500000002
+        },
+        {
+          "culling": false,
+          "cpuMedianMs": 0.29588000000000003,
+          "gpuMedianMs": 3.846196,
+          "frameMedianMs": 16.667140500000002
+        }
+      ]
+    },
+    {
+      "world": "lumen-reach",
+      "view": "02-array-hall",
+      "off": {
+        "submitted": 87,
+        "cpuRenderMs": 0.265788,
+        "gpuPassSumMs": 5.8811695,
+        "frameMs": 16.66721
+      },
+      "on": {
+        "submitted": 84,
+        "cpuRenderMs": 0.26321,
+        "gpuPassSumMs": 6.522836,
+        "frameMs": 16.666196
+      },
+      "submissionReductionPercent": 3.45,
+      "cpuRenderReductionPercent": 0.97,
+      "gpuPassReductionPercent": -10.91,
+      "frameTimeReductionPercent": 0.01,
+      "blocks": [
+        {
+          "culling": false,
+          "cpuMedianMs": 0.265276,
+          "gpuMedianMs": 5.363826,
+          "frameMedianMs": 16.673547
+        },
+        {
+          "culling": true,
+          "cpuMedianMs": 0.2648405,
+          "gpuMedianMs": 6.8922375,
+          "frameMedianMs": 16.6633395
+        },
+        {
+          "culling": true,
+          "cpuMedianMs": 0.2619,
+          "gpuMedianMs": 6.0226015,
+          "frameMedianMs": 16.6679295
+        },
+        {
+          "culling": false,
+          "cpuMedianMs": 0.269376,
+          "gpuMedianMs": 7.5766124999999995,
+          "frameMedianMs": 16.6560385
+        }
+      ]
+    },
+    {
+      "world": "lumen-reach",
+      "view": "03-rime-vault",
+      "off": {
+        "submitted": 87,
+        "cpuRenderMs": 0.2747855,
+        "gpuPassSumMs": 5.479685,
+        "frameMs": 16.6668095
+      },
+      "on": {
+        "submitted": 73,
+        "cpuRenderMs": 0.2460055,
+        "gpuPassSumMs": 4.5817689999999995,
+        "frameMs": 16.671663000000002
+      },
+      "submissionReductionPercent": 16.09,
+      "cpuRenderReductionPercent": 10.47,
+      "gpuPassReductionPercent": 16.39,
+      "frameTimeReductionPercent": -0.03,
+      "blocks": [
+        {
+          "culling": false,
+          "cpuMedianMs": 0.28476250000000003,
+          "gpuMedianMs": 5.4673680000000004,
+          "frameMedianMs": 16.661236000000002
+        },
+        {
+          "culling": true,
+          "cpuMedianMs": 0.25431000000000004,
+          "gpuMedianMs": 7.1248155,
+          "frameMedianMs": 16.669999
+        },
+        {
+          "culling": true,
+          "cpuMedianMs": 0.222765,
+          "gpuMedianMs": 4.1815595000000005,
+          "frameMedianMs": 16.6741725
+        },
+        {
+          "culling": false,
+          "cpuMedianMs": 0.2626045,
+          "gpuMedianMs": 5.4874715,
+          "frameMedianMs": 16.6748515
+        }
+      ]
+    },
+    {
+      "world": "lumen-reach",
+      "view": "04-signal-rise",
+      "off": {
+        "submitted": 87,
+        "cpuRenderMs": 0.27419,
+        "gpuPassSumMs": 4.284607,
+        "frameMs": 16.671415500000002
+      },
+      "on": {
+        "submitted": 68,
+        "cpuRenderMs": 0.21919899999999998,
+        "gpuPassSumMs": 4.3022375,
+        "frameMs": 16.6605705
+      },
+      "submissionReductionPercent": 21.84,
+      "cpuRenderReductionPercent": 20.06,
+      "gpuPassReductionPercent": -0.41,
+      "frameTimeReductionPercent": 0.07,
+      "blocks": [
+        {
+          "culling": false,
+          "cpuMedianMs": 0.2772335,
+          "gpuMedianMs": 5.8129925,
+          "frameMedianMs": 16.6750995
+        },
+        {
+          "culling": true,
+          "cpuMedianMs": 0.2287555,
+          "gpuMedianMs": 4.8866385,
+          "frameMedianMs": 16.658068
+        },
+        {
+          "culling": true,
+          "cpuMedianMs": 0.210813,
+          "gpuMedianMs": 3.9489564999999995,
+          "frameMedianMs": 16.663563500000002
+        },
+        {
+          "culling": false,
+          "cpuMedianMs": 0.2701055,
+          "gpuMedianMs": 3.6923414999999995,
+          "frameMedianMs": 16.6693055
+        }
+      ]
+    },
+    {
+      "world": "lumen-reach",
+      "view": "court-east",
+      "off": {
+        "submitted": 87,
+        "cpuRenderMs": 0.3475605,
+        "gpuPassSumMs": 7.331013,
+        "frameMs": 16.667834
+      },
+      "on": {
+        "submitted": 87,
+        "cpuRenderMs": 0.2803825,
+        "gpuPassSumMs": 7.230831,
+        "frameMs": 16.6642395
+      },
+      "submissionReductionPercent": 0.0,
+      "cpuRenderReductionPercent": 19.33,
+      "gpuPassReductionPercent": 1.37,
+      "frameTimeReductionPercent": 0.02,
+      "blocks": [
+        {
+          "culling": false,
+          "cpuMedianMs": 0.429025,
+          "gpuMedianMs": 8.486092,
+          "frameMedianMs": 16.663034500000002
+        },
+        {
+          "culling": true,
+          "cpuMedianMs": 0.274605,
+          "gpuMedianMs": 5.7431235,
+          "frameMedianMs": 16.6621035
+        },
+        {
+          "culling": true,
+          "cpuMedianMs": 0.328941,
+          "gpuMedianMs": 9.4224455,
+          "frameMedianMs": 16.66629
+        },
+        {
+          "culling": false,
+          "cpuMedianMs": 0.28637999999999997,
+          "gpuMedianMs": 6.884815,
+          "frameMedianMs": 16.67211
+        }
+      ]
+    }
+  ]
+}
