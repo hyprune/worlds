@@ -67,18 +67,27 @@ def materials(B):
  B.mat('soffit',(.72,.76,.74),'concrete',rough=.85,tint=True);B.P.TILE_METERS['soffit']=2
 
 
+# Signal Rise's closed sky. A plain ellipsoid's south wall met the yard rail
+# only at x=57: the yard corners (29|85, 112) stood outside the basin, seeing
+# past its culled back. A squared-off (power 4) section keeps every yard eye
+# inside, with the south wall 0.4-0.8 m beyond the y=112 guard rail.
+NIGHT_CENTER=(57,170,0);NIGHT_RADII=(70,58.8,76);NIGHT_POWER=4
+
+
 def night(B):
  # The painted 40 m flat lid is replaced by a closed sky inside a textured
  # mountain shell. From the yard it is a cold basin; from above it is rock.
  image_material(B,'night-sky-v7','night-sky-v7-albedo.png')
- sphere(B,'Signal closed basin sky',(57,170,0),(70,58,76),'night-sky-v7',segments=96,rings=32)
- o=sphere(B,'Signal mountain outer shell',(57,170,0),(71.5,59.5,77.5),'land-sun',inside=False,segments=96,rings=32)
+ sphere(B,'Signal closed basin sky',NIGHT_CENTER,NIGHT_RADII,'night-sky-v7',segments=96,rings=32,power=NIGHT_POWER)
+ o=sphere(B,'Signal mountain outer shell',NIGHT_CENTER,tuple(r+1.5 for r in NIGHT_RADII),'land-sun',inside=False,segments=96,rings=32,power=NIGHT_POWER)
  # Break the ellipsoid into broad crags while keeping the entire shell outside
  # its smooth inner surface; closed silhouette is intentional from every side.
  for v in o.data.vertices:
   p=v.co-Vector((57,170,0));r=math.atan2(p.x,p.y)
   scale=1+.09*(math.sin(r*7+p.z*.08)**2)+.035*math.sin(r*13)**2
   v.co=Vector((57,170,0))+p*scale
+  # Crags never reach past the Vault's rear shell or the stair tunnel mouth.
+  v.co.y=max(v.co.y,102.8)
  o.data.update()
  for p in o.data.polygons:
   axes=[a for a in range(3) if a!=max(range(3),key=lambda a:abs(p.normal[a]))]
