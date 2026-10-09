@@ -338,6 +338,9 @@ def export(cols,nav):
   manifest['attribution'].append({'path':rel,'author':'Hyprune contributors','license':'CC-BY-4.0','source':'https://github.com/hyprune/worlds/tree/main/switchyard/build.py'})
  (OUT/'texture-provenance.json').write_text(json.dumps(records,indent=2)+'\n')
  manifest['extensions']['com.hyprune.switchyard.materials']={'version':'0.1','path':'texture-provenance.json','uv0TexelDensityPxPerMeter':[512,1024]}
+ sys.path.insert(0,str(ROOT/'tools'))
+ from world_visibility import annotate
+ annotate(manifest,g)
  manifest['requiredExtensions']=[];(OUT/'world.json').write_text(json.dumps(manifest,indent=2)+'\n')
  (OUT/'LICENSE').write_text((ROOT/'LICENSE').read_text());(OUT/'ATTRIBUTION.md').write_text((Path(__file__).parent/'ATTRIBUTION.md').read_text())
  # A vector blueprint derives from exactly the same station/route coordinates.

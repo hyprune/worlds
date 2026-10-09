@@ -149,3 +149,32 @@ useful island area even while UV ranges and overlap tests pass. The Vault now
 uses a 2048px atlas and avoids bevel islands on thin detail. Authoring and package
 checks reject less than 3% useful UV1 coverage for this architectural chunk.
 This is an asset-quality guard, not a new world-format extension.
+
+## Visibility regions adopted (2026-10-09)
+
+World format 0.5 closes the authored submission-culling gap noted above. Lumen
+Reach 0.6.1 and Switchyard 0.1.2 resolve stable chunk names to glTF subtree indices
+and declare camera bounds plus directed `visibleFrom` links. Source-of-truth
+specs are `<world>/visibility.json`; `tools/world_visibility.py` runs after export
+or patches an existing package without rebaking. It preserves every asset and
+all non-visibility manifest contracts. The shipped packages now require a core
+that accepts world format 0.5. Earlier 0.2 delivery reports remain historical.
+
+Region bounds select camera membership, not geometry containment. Doorway and
+connector overlaps intentionally union visibility. Links are not transitive;
+rooms seen through an opening must be explicitly retained. An empty ownership
+list is useful for a doorway or aisle whose geometry is already part of a shared
+chunk. Unassigned vista/structural nodes remain visible, and leaving all authored
+bounds restores all submissions. Collision, navigation and application surfaces
+are outside this filtering contract. These regions do not provide distance LOD,
+streaming or GPU allocation savings.
+
+Switchyard's pavilions are open-sided, with high canopies and cross-aisle views;
+whole neighboring docks cannot safely be culled merely because the camera enters
+one workspace. Its conservative links therefore retain the open hall. This is
+an intentional limit of the existing architecture, not an unimplemented switch.
+Lumen Reach's separated homes and enclosed travel connectors permit useful
+submission reduction. Both worlds' measured results and entrance checks are in
+their `VISIBILITY.md` reports. The 0.5 amendment is currently published in docs
+`rfcs/0005-surfaces.md` under “Amendment: world 0.5 ink and authored visibility”,
+in addition to core `docs/AUTHORING.md`; RFC-0004 remains the base world contract.

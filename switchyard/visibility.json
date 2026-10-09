@@ -1,0 +1,344 @@
+{
+  "formatVersion": "0.5",
+  "version": "0.1.2",
+  "unassignedAlwaysVisible": [
+    "Visual-hall",
+    "Visual-vault",
+    "Visual-vista"
+  ],
+  "areas": [
+    {
+      "id": "concourse",
+      "bounds": {
+        "min": [
+          -21,
+          -0.2,
+          -1
+        ],
+        "max": [
+          21,
+          20.5,
+          13
+        ]
+      },
+      "nodeNames": [
+        "Visual-concourse"
+      ],
+      "reason": "Open arrival lounge and gantry; all six docks remain in view.",
+      "visibleFrom": [
+        "build",
+        "research",
+        "commons",
+        "studio",
+        "systems",
+        "archive",
+        "aisle-1",
+        "aisle-2",
+        "aisle-3",
+        "cross-aisle"
+      ]
+    },
+    {
+      "id": "build",
+      "bounds": {
+        "min": [
+          -17,
+          -0.2,
+          -12
+        ],
+        "max": [
+          -7,
+          7.5,
+          -1
+        ]
+      },
+      "nodeNames": [
+        "Visual-build"
+      ],
+      "reason": "Open-sided dock; adjacent canopies and routes are visible.",
+      "visibleFrom": [
+        "concourse",
+        "research",
+        "commons",
+        "studio",
+        "systems",
+        "archive",
+        "aisle-1",
+        "aisle-2",
+        "aisle-3",
+        "cross-aisle"
+      ]
+    },
+    {
+      "id": "research",
+      "bounds": {
+        "min": [
+          -5,
+          -0.2,
+          -12
+        ],
+        "max": [
+          5,
+          7.5,
+          -1
+        ]
+      },
+      "nodeNames": [
+        "Visual-research"
+      ],
+      "reason": "Open-sided dock; adjacent canopies and routes are visible.",
+      "visibleFrom": [
+        "concourse",
+        "build",
+        "commons",
+        "studio",
+        "systems",
+        "archive",
+        "aisle-1",
+        "aisle-2",
+        "aisle-3",
+        "cross-aisle"
+      ]
+    },
+    {
+      "id": "commons",
+      "bounds": {
+        "min": [
+          7,
+          -0.2,
+          -12
+        ],
+        "max": [
+          17,
+          7.5,
+          -1
+        ]
+      },
+      "nodeNames": [
+        "Visual-commons"
+      ],
+      "reason": "Open-sided dock; adjacent canopies and routes are visible.",
+      "visibleFrom": [
+        "concourse",
+        "build",
+        "research",
+        "studio",
+        "systems",
+        "archive",
+        "aisle-1",
+        "aisle-2",
+        "aisle-3",
+        "cross-aisle"
+      ]
+    },
+    {
+      "id": "studio",
+      "bounds": {
+        "min": [
+          -17,
+          -0.2,
+          -26
+        ],
+        "max": [
+          -7,
+          7.5,
+          -15
+        ]
+      },
+      "nodeNames": [
+        "Visual-studio"
+      ],
+      "reason": "Open-sided dock; adjacent canopies and routes are visible.",
+      "visibleFrom": [
+        "concourse",
+        "build",
+        "research",
+        "commons",
+        "systems",
+        "archive",
+        "aisle-1",
+        "aisle-2",
+        "aisle-3",
+        "cross-aisle"
+      ]
+    },
+    {
+      "id": "systems",
+      "bounds": {
+        "min": [
+          -5,
+          -0.2,
+          -26
+        ],
+        "max": [
+          5,
+          7.5,
+          -15
+        ]
+      },
+      "nodeNames": [
+        "Visual-systems"
+      ],
+      "reason": "Open-sided dock; adjacent canopies and routes are visible.",
+      "visibleFrom": [
+        "concourse",
+        "build",
+        "research",
+        "commons",
+        "studio",
+        "archive",
+        "aisle-1",
+        "aisle-2",
+        "aisle-3",
+        "cross-aisle"
+      ]
+    },
+    {
+      "id": "archive",
+      "bounds": {
+        "min": [
+          7,
+          -0.2,
+          -26
+        ],
+        "max": [
+          17,
+          7.5,
+          -15
+        ]
+      },
+      "nodeNames": [
+        "Visual-archive"
+      ],
+      "reason": "Open-sided dock; adjacent canopies and routes are visible.",
+      "visibleFrom": [
+        "concourse",
+        "build",
+        "research",
+        "commons",
+        "studio",
+        "systems",
+        "aisle-1",
+        "aisle-2",
+        "aisle-3",
+        "cross-aisle"
+      ]
+    },
+    {
+      "id": "aisle-1",
+      "bounds": {
+        "min": [
+          -15.9,
+          -0.2,
+          -30
+        ],
+        "max": [
+          -13.4,
+          7.5,
+          5
+        ]
+      },
+      "nodeNames": [],
+      "reason": "Longitudinal walking connector; its continuous floor remains shared.",
+      "visibleFrom": [
+        "concourse",
+        "build",
+        "research",
+        "commons",
+        "studio",
+        "systems",
+        "archive",
+        "aisle-2",
+        "aisle-3",
+        "cross-aisle"
+      ]
+    },
+    {
+      "id": "aisle-2",
+      "bounds": {
+        "min": [
+          -3.9,
+          -0.2,
+          -30
+        ],
+        "max": [
+          -1.4,
+          7.5,
+          5
+        ]
+      },
+      "nodeNames": [],
+      "reason": "Longitudinal walking connector; its continuous floor remains shared.",
+      "visibleFrom": [
+        "concourse",
+        "build",
+        "research",
+        "commons",
+        "studio",
+        "systems",
+        "archive",
+        "aisle-1",
+        "aisle-3",
+        "cross-aisle"
+      ]
+    },
+    {
+      "id": "aisle-3",
+      "bounds": {
+        "min": [
+          8.1,
+          -0.2,
+          -30
+        ],
+        "max": [
+          10.6,
+          7.5,
+          5
+        ]
+      },
+      "nodeNames": [],
+      "reason": "Longitudinal walking connector; its continuous floor remains shared.",
+      "visibleFrom": [
+        "concourse",
+        "build",
+        "research",
+        "commons",
+        "studio",
+        "systems",
+        "archive",
+        "aisle-1",
+        "aisle-2",
+        "cross-aisle"
+      ]
+    },
+    {
+      "id": "cross-aisle",
+      "bounds": {
+        "min": [
+          -21,
+          -0.2,
+          -15.6
+        ],
+        "max": [
+          21,
+          7.5,
+          -11
+        ]
+      },
+      "nodeNames": [],
+      "reason": "Cross-dock connector with open sightlines.",
+      "visibleFrom": [
+        "concourse",
+        "build",
+        "research",
+        "commons",
+        "studio",
+        "systems",
+        "archive",
+        "aisle-1",
+        "aisle-2",
+        "aisle-3"
+      ]
+    }
+  ]
+}

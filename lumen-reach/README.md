@@ -18,7 +18,7 @@ scenes, PBR derivatives, bake atlases, renders and recordings remain in ignored
 `dist/` and `artifacts/`. The dedicated runner refuses the local machine.
 The test world's source and entrypoint remain intact.
 
-World format 0.2, standard tiled UV0 and independent normalized UV1 irradiance.
+World format 0.5, standard tiled UV0 and independent normalized UV1 irradiance.
 Physical mount frames and the optional `com.hyprune.lumen-reach.mounts` extension
 encode area/slot ownership. Free-placement volumes are declared in the optional
 placement extension and continuously swept against exported visual triangles.
@@ -50,10 +50,10 @@ accounting. Package figures include every file; conservative GPU figures include
 all mip levels, color/data views and expanded visible geometry. Process DRM
 memory, when exposed by the kernel, is recorded separately from this estimate.
 
-The complete package is version 0.6.0. `make lumen-release` produces its sorted,
+The complete package is version 0.6.1. `make lumen-release` produces its sorted,
 fixed-date tar.zst archive and checksum without a network publication. Core M2
 is required for the transparent steam cards and typed workspace/tool behavior;
-the manifest remains schema-valid world 0.2 through the coordinated adapter.
+the manifest remains schema-valid world 0.5 through the coordinated adapter.
 The four lighting moods come from baked irradiance. Core M2 currently exposes
 world-wide atmosphere and static environment reflections, so these are not
 presented as independently changing per-area atmosphere.
@@ -110,7 +110,7 @@ Rime Vault v3 adds a directional frost/ice material set, console banks, overhead
 pipe racks, grated cable channels, purge vents and a lit pressure-door kit.
 The original 24 interactive mounts and all walking/placement contracts remain
 unchanged. See `reports/delivery-0.5.0.md` for the preceding release and
-`reports/final-report.md` for 0.6.0 evidence and delivery paths.
+`reports/final-report.md` for 0.6.1 evidence and delivery paths.
 
 For a matched short camera clip, prepare an output directory with `views.json`
 and run `tools/check-lumen-session.py --vault-clip --package <package> --output
@@ -118,3 +118,20 @@ and run `tools/check-lumen-session.py --vault-clip --package <package> --output
 <after-dir> <output-dir>` alternates the same three views and writes string-only
 JSON metadata. It encodes in `/tmp`; gallery delivery follows visual inspection.
 `tools/check-rime-v3.py` checks budget growth and unchanged mount/route contracts.
+
+## Authored visibility
+
+`visibility.json` owns camera-region bounds, stable glTF subtree names and directed
+links. The exporter resolves names after every bake. To update an existing
+package without rebaking or changing any asset:
+
+```sh
+make visibility-annotate
+make visibility-validate
+make visibility-nested
+```
+
+Regions do not alter workspaces, collision or navigation. Overlapping doorway
+bounds union the visible sets; outside all bounds core draws everything. Shared
+architecture/art stays unassigned and always visible. See `VISIBILITY.md` for
+links, retained sightlines and paired 4K Intel timing evidence.
