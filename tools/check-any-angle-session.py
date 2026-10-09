@@ -56,7 +56,7 @@ def acceptance(client,children,args,shell_token,socketpath):
  client.call('graphics.set',{'patch':{'quality':'medium','offload':'off','dynamic_resolution':False,'outline':False,'visibility_culling':True}});time.sleep(6)
  for v in views:
   lens={k:v[k] for k in ['position','orientation']};lens.update(fov=60,renderScale=.5)
-  client.call('camera.photo',lens);time.sleep(.3);actual=client.call('camera.get',{});assert actual['held'] and math.dist(actual['position'],v['position'])<1e-4
+  client.call('camera.photo',lens);time.sleep(.3);actual=client.call('camera.get',{});assert actual['held'] and math.dist(actual['position'],v['position'])<1e-4;assert abs(sum(x*y for x,y in zip(actual['orientation'],v['orientation'])))>.99999
   client.call('graphics.set',{'patch':{'visibility_culling':True}});time.sleep(.35)
   t=client.call('graphics.get',{})['timings'];assert t['nativeSize']==[3840,2160] and t['renderScale']==.5,t;assert 'Intel' in t['renderer'] and t['graphics']['quality']=='medium',t
   path=a.output/(v['id']+'.png');subprocess.run([str(session.HERE/'ctl.py'),'shot',str(path)],check=True,stdout=subprocess.DEVNULL)
@@ -69,7 +69,17 @@ def acceptance(client,children,args,shell_token,socketpath):
    for _ in range(32):samples.append(client.call('graphics.get',{})['timings']);time.sleep(.08)
    row['performanceSamples']=samples;row['performance']={k:statistics.median(x[k] for x in samples) for k in ['cpuRenderMs','frameMs']};row['performance']['gpuPassSumMs']=statistics.median(sum(x['gpuPassMs']) for x in samples if all(y is not None for y in x['gpuPassMs']))
   report['views'].append(row);save();print('VIEW',v['id'],'streak',round(row['verticalStreakCandidateFraction'],4),'culling delta',row.get('cullingChangedPixelFraction'),flush=True)
- client.call('camera.release',{});client.call('runtime.exit',{});sheet()
+ client.call('camera.release',{})
+ if not a.owners_only:
+  import integration
+  report['boundaryProbes']=[]
+  for name,pos,yaw,axis,sign,limit in [('court-east',[25.2,1.7,0],math.pi/2,0,1,26),('court-south',[0,1.7,15.2],math.pi,2,1,16),('court-west',[-23.2,1.7,10],-math.pi/2,0,-1,-24),('hall-west',[-12.2,1.7,-34],-math.pi/2,0,-1,-13),('rise-east',[84.2,1.7,-120],math.pi/2,0,1,85),('rise-south',[70,1.7,-112.8],math.pi,2,1,-112)]:
+   client.call('movement.set',{'modeId':'com.hyprune.walk'});client.call('camera.set',{'position':pos,'orientation':q(yaw,0)});time.sleep(.2)
+   integration.keys('-P','w','-s','1000','-p','w');time.sleep(.2);end=client.call('camera.get',{})['position']
+   row={'id':name,'start':pos,'end':end,'axis':axis,'outwardSign':sign,'limit':limit,'inside':sign*(end[axis]-limit)<-.20};report['boundaryProbes'].append(row);save();assert row['inside'],row
+  client.call('movement.set',{'modeId':'com.hyprune.fly'});client.call('camera.set',{'position':[25.2,3,0],'orientation':q(math.pi/2,0)});integration.keys('-P','w','-s','1000','-p','w');time.sleep(.2)
+  report['flyBoundaryWitness']=client.call('camera.get',{})['position'];assert report['flyBoundaryWitness'][0]>26.5
+ client.call('runtime.exit',{});sheet()
  report['cullingLosses']=[v['id'] for v in report['views'] if v.get('cullingChangedPixelFraction',0)>.00005]
  report['status']='PASS' if not report['cullingLosses'] else 'FAIL';save();assert report['status']=='PASS',report['cullingLosses']
 authoring.acceptance=acceptance

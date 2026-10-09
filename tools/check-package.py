@@ -37,7 +37,13 @@ if factor_path.exists():
  factors=json.loads(factor_path.read_text())
  for _,_,p,_,_ in s.primitives():
   material=g['materials'][p['material']];name=material['name'].split('--')[-1]
-  if name in factors:assert np.allclose(material['pbrMetallicRoughness']['baseColorFactor'],factors[name]+[1]),(name,'lost authored albedo tint')
+  if name in factors:
+   pbr=material['pbrMetallicRoughness']
+   # Fogged matte scenery may carry its baked tint through emission, with
+   # zero diffuse reflectance. Verify the same factor survives that export.
+   emission_only=('emissiveTexture' in material and 'baseColorTexture' not in pbr and pbr['baseColorFactor']==[0,0,0,1])
+   actual=material.get('emissiveFactor',[]) if emission_only else pbr['baseColorFactor'][:3]
+   assert np.allclose(actual,factors[name]),(name,'lost authored texture tint')
 rows=[];triangle_total=0
 # Raster interior occupancy independently detects intersecting exported UV1 triangles.
 # Shared triangle edges are excluded, including triangulated quad diagonals.
@@ -51,6 +57,13 @@ for ni,name in [(i,n.get('name','')) for i,n in enumerate(g['nodes']) if i in s.
    assert material not in light,(name,'unlit material must not receive irradiance')
    tris+=len(indices);continue
   assert 'TEXCOORD_0' in p['attributes']
+  pbr=mat.get('pbrMetallicRoughness',{})
+  prelit=('emissiveTexture' in mat and any(mat.get('emissiveFactor',[])) and pbr.get('baseColorFactor')==[0,0,0,1] and 'baseColorTexture' not in pbr and pbr.get('metallicFactor')==0 and pbr.get('roughnessFactor')==1)
+  if prelit:
+   assert material not in light,(name,'prelit emitter must not receive irradiance')
+   assert mat['emissiveTexture'].get('texCoord',0)==0
+   assert np.isfinite(s.accessor(p['attributes']['TEXCOORD_0'])).all()
+   tris+=len(indices);continue
   assert material in light,(name,'missing lighting binding')
   assert 'TEXCOORD_1' in p['attributes']
   uv=s.accessor(p['attributes']['TEXCOORD_1']);assert np.isfinite(uv).all()
@@ -86,5 +99,5 @@ geometry=triangle_total*3*40;gpu=mipped+geometry
 buffers=sum(b['byteLength'] for b in g['buffers'])
 assert gpu<=512*1024**2,('M1 GPU budget including mips and color/data views',gpu)
 size=sum(p.stat().st_size for p in root.rglob('*') if p.is_file());assert size<1024**3
-report={'status':'PASS','packageBytes':size,'decodedTextureBytes':decoded,'conservativeGpuBytes':gpu,'mippedTextureViewsBytes':mipped,'expandedGeometryBytes':geometry,'colorTextureViews':len(color),'textureObjects':len(g['textures']),'textureProvenanceEntries':len(provenance),'visualTriangles':triangle_total,'drawCallEstimate':sum(1 for _ in s.primitives()),'drawCallScope':'one draw per visible glTF primitive, world geometry only; excludes postprocessing, applications and HUD','untexturedPhysicalMaterials':sorted({s.doc['materials'][p['material']]['name'] for _,_,p,_,_ in s.primitives() if 'KHR_materials_unlit' not in s.doc['materials'][p['material']].get('extensions',{}) and 'baseColorTexture' not in s.doc['materials'][p['material']].get('pbrMetallicRoughness',{})}),'anchors':len(m['anchors']),'collisionNodes':len(m['collision']),'lightmapBindings':len(light),'UV1':rows}
+report={'status':'PASS','packageBytes':size,'decodedTextureBytes':decoded,'conservativeGpuBytes':gpu,'mippedTextureViewsBytes':mipped,'expandedGeometryBytes':geometry,'colorTextureViews':len(color),'textureObjects':len(g['textures']),'textureProvenanceEntries':len(provenance),'visualTriangles':triangle_total,'drawCallEstimate':sum(1 for _ in s.primitives()),'drawCallScope':'one draw per visible glTF primitive, world geometry only; excludes postprocessing, applications and HUD','untexturedPhysicalMaterials':sorted({s.doc['materials'][p['material']]['name'] for _,_,p,_,_ in s.primitives() if 'KHR_materials_unlit' not in s.doc['materials'][p['material']].get('extensions',{}) and 'baseColorTexture' not in s.doc['materials'][p['material']].get('pbrMetallicRoughness',{}) and 'emissiveTexture' not in s.doc['materials'][p['material']]}),'anchors':len(m['anchors']),'collisionNodes':len(m['collision']),'lightmapBindings':len(light),'UV1':rows}
 print(json.dumps(report,indent=2))

@@ -138,5 +138,13 @@
     "license": "CC-BY-4.0",
     "provenance": "Original built-in imagegen generation for Rime Vault, 2026-10-08",
     "masterSHA256": "39640f92eafde352d2544a3e8e8ef9695268540333dca185dcdbdfc08f6d26fb"
+  },
+  {
+    "name": "sky-v7",
+    "author": "Hyprune contributors",
+    "license": "CC-BY-4.0",
+    "provenance": "Original built-in imagegen generation 2026-10-09; vista.png style reference",
+    "masterSHA256": "95697c93eae363c50dfe18e99dda6fda12414da413e12b6ee0e088659cd6c3fb",
+    "prompt": "Create a production environment texture for Lumen Reach, an original mountain watershed settlement. Input image is a STYLE AND LANDSCAPE REFERENCE, not a layout to copy literally. Output a single 2:1 equirectangular spherical panorama texture, 360 degrees longitude and full 180 degrees latitude, preferably 4096x2048. Horizon exactly halfway down. Upper half: clear pale blue alpine daylight with airy wispy clouds, warm sun out of frame, small pale moon; converge to uniform blue at zenith edge. Along horizon: layered alpine peaks, distant warm limestone aqueduct bridges, a very distant slim spire settlement, pine slopes and red autumn trees, waterfalls cascading into a deep mist-filled valley. Mountain silhouettes should occupy only about 15 percent of image height around the horizon. Lower half is looking down into a deep foggy alpine watershed, mossy rock shelves and forested slopes fading into soft blue-gray atmospheric haze at the nadir; converge to uniform blue-gray at bottom edge. Critical spherical environment mapping: left/right edges must match continuously as a full 360 degree wrap, no card edges, no vertical streaks, no duplicated columns, no rectangular borders. No foreground platform, no nearby architecture, no readable lettering, no logos. Detailed realistic environmental matte painting, natural warm/cold balance and generous atmospheric distance. The full texture is a sky and distant environment, not a perspective photograph."
   }
 ]

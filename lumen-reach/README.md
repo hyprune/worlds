@@ -50,7 +50,7 @@ accounting. Package figures include every file; conservative GPU figures include
 all mip levels, color/data views and expanded visible geometry. Process DRM
 memory, when exposed by the kernel, is recorded separately from this estimate.
 
-The complete package is version 0.6.1. `make lumen-release` produces its sorted,
+The current candidate is version 0.7.0; see HANDOFF.md for unfinished checks. `make lumen-release` produces its sorted,
 fixed-date tar.zst archive and checksum without a network publication. Core M2
 is required for the transparent steam cards and typed workspace/tool behavior;
 the manifest remains schema-valid world 0.5 through the coordinated adapter.
@@ -135,3 +135,28 @@ Regions do not alter workspaces, collision or navigation. Overlapping doorway
 bounds union the visible sets; outside all bounds core draws everything. Shared
 architecture/art stays unassigned and always visible. See `VISIBILITY.md` for
 links, retained sightlines and paired 4K Intel timing evidence.
+
+
+Any-angle review (0.7.0) uses a closed spherical sky, a textured mountain shell
+around the cold basin, solid watershed shelves and modeled distant masonry.
+Exposed roofs have stone roofing, metal copings and extraction housings. Stair
+soffits use corrected outward winding, textured finishes and baked grazing fill.
+Sun Court and Signal Rise now use 2048px lightmaps to keep exposed faces readable.
+
+```sh
+python3 tools/check-any-angle-session.py --core ../core-visibility-bench --output artifacts/any-angle-0.7.0/final
+```
+
+The script takes core's shared nested flock internally. It replays the owner's
+sanitized poses, samples route positions and elevated views with seed 7009,
+checks culling pairs, and tests walking barriers plus a free-flight witness.
+`make lumen-validate` checks sky topology, mapping, seams and the far-clip
+margin as well as existing placement/walking/material contracts. The finite
+image sweep complements these structural checks; it is not an exhaustive proof
+of every possible view. Gallery contact sheets and raw image paths are indexed
+in the final report.
+
+`playable-volumes.json` is authoring metadata. Its footprint union generates
+static collision backstops because world format 0.5 has no movement-volume
+contract. Visibility bounds remain separate. An elevated review region retains
+all homes above 21m, where room-level occlusion assumptions no longer apply.

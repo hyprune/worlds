@@ -1,6 +1,6 @@
 {
   "formatVersion": "0.5",
-  "version": "0.6.1",
+  "version": "0.7.0",
   "unassignedAlwaysVisible": [
     "Visual-foliage",
     "Visual-vista"
@@ -31,7 +31,8 @@
         "connector-ascent",
         "signal-rise",
         "court-entrance-sightline",
-        "rime-vault"
+        "rime-vault",
+        "elevated-review"
       ]
     },
     {
@@ -102,7 +103,8 @@
         "connector-ascent",
         "signal-rise",
         "court-entrance-sightline",
-        "rime-vault"
+        "rime-vault",
+        "elevated-review"
       ]
     },
     {
@@ -129,7 +131,8 @@
         "array-hall",
         "rime-vault",
         "connector-ascent",
-        "court-entrance-sightline"
+        "court-entrance-sightline",
+        "elevated-review"
       ]
     },
     {
@@ -156,7 +159,8 @@
         "connector-ascent",
         "court-entrance-sightline",
         "entry-vestibule",
-        "court-service-edge"
+        "court-service-edge",
+        "elevated-review"
       ]
     },
     {
@@ -182,7 +186,8 @@
         "signal-rise",
         "connector-descent",
         "court-upper-sightline",
-        "court-service-edge"
+        "court-service-edge",
+        "elevated-review"
       ]
     },
     {
@@ -208,7 +213,8 @@
         "entry-vestibule",
         "array-hall",
         "connector-ascent",
-        "court-entrance-sightline"
+        "court-entrance-sightline",
+        "elevated-review"
       ]
     },
     {
@@ -246,6 +252,24 @@
       "nodeNames": [],
       "reason": "Upper terraces, ramps, roof and bridge can see the low end of the ascending connector beyond the hall.",
       "visibleFrom": []
+    },
+    {
+      "id": "elevated-review",
+      "bounds": {
+        "min": [
+          -36,
+          21,
+          -180
+        ],
+        "max": [
+          110,
+          65,
+          17
+        ]
+      },
+      "nodeNames": [],
+      "visibleFrom": [],
+      "reason": "Conservative elevated/noclip envelope: roofs and all homes can be seen above the architectural occluders. Union with local regions retains all owned geometry; outside all regions also renders all."
     }
   ]
 }

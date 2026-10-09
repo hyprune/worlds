@@ -120,3 +120,6 @@ h=night.shape[0]
 for y in range(int(h*.22)):
  t=max(0,1-y/(h*.22));t=t*t*(3-2*t);night[y]=night[y]*(1-t)+zenith*t
 Image.fromarray(np.round(night).astype('uint8')).save(OUT/'night-vista-albedo.png',optimize=True)
+
+from sky import prepare as prepare_sky
+prepare_sky()

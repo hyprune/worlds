@@ -162,6 +162,9 @@ def sigil(pos,h=1,mat='ivory'):
 
 def rail(a,b,height=1.0):
  a,b=Vector(a),Vector(b);n=max(1,int((b-a).length/1.7))
+ d=b-a;side=Vector((-d.y,d.x,0));side.normalize();side*=.065;upv=Vector((0,0,height))
+ verts=[a-side,a+side,b+side,b-side,a-side+upv,a+side+upv,b+side+upv,b-side+upv]
+ me=bpy.data.meshes.new('Guard collision');me.from_pydata(verts,[],[(0,3,2,1),(0,1,5,4),(1,2,6,5),(2,3,7,6),(3,0,4,7),(4,5,6,7)]);o=bpy.data.objects.new('Guard collision',me);bpy.context.collection.objects.link(o);o.hide_render=True;WALK.append(o)
  for i in range(n+1):
   p=a+(b-a)*(i/n);rod('Guardrail post',p,p+Vector((0,0,height)),.045)
  for z in [height*.5,height]:rod('Guardrail run',a+Vector((0,0,z)),b+Vector((0,0,z)),.04)
@@ -171,18 +174,22 @@ def slab(name,x0,x1,y0,y1,z,mat='stone'):
  return o
 
 def ramp(name,x0,x1,y0,y1,z0,z1,steps=0,mat='concrete',stairs_side='right'):
+ faces=[(0,1,2,3),(7,6,5,4),(0,4,5,1),(1,5,6,2),(2,6,7,3),(3,7,4,0)]
+ if y1<y0:faces=[tuple(reversed(f)) for f in faces]
  # Exact sloped walking/collision surface. Visible stairs flank a broad ramp.
- o=mesh(name,[(x0,y0,z0),(x1,y0,z0),(x1,y1,z1),(x0,y1,z1),(x0,y0,z0-.25),(x1,y0,z0-.25),(x1,y1,z1-.25),(x0,y1,z1-.25)],[(0,1,2,3),(7,6,5,4),(0,4,5,1),(1,5,6,2),(2,6,7,3),(3,7,4,0)],mat,True)
+ o=mesh(name,[(x0,y0,z0),(x1,y0,z0),(x1,y1,z1),(x0,y1,z1),(x0,y0,z0-.25),(x1,y0,z0-.25),(x1,y1,z1-.25),(x0,y1,z1-.25)],faces,mat,True)
  if steps:
   # Continuous collision bed lets core walk the visible steps without a step-up feature.
   xa,xb=(x0-1.7,x0) if stairs_side=='left' else (x1,x1+1.7)
-  mesh(name+' stair bed',[(xa,y0,z0),(xb,y0,z0),(xb,y1,z1),(xa,y1,z1),(xa,y0,z0-.3),(xb,y0,z0-.3),(xb,y1,z1-.3),(xa,y1,z1-.3)],[(0,1,2,3),(7,6,5,4),(0,4,5,1),(1,5,6,2),(2,6,7,3),(3,7,4,0)],mat,True)
+  mesh(name+' stair bed',[(xa,y0,z0),(xb,y0,z0),(xb,y1,z1),(xa,y1,z1),(xa,y0,z0-.3),(xb,y0,z0-.3),(xb,y1,z1-.3),(xa,y1,z1-.3)],faces,mat,True)
   STAIR_ROUTES.append({'id':name.lower().replace(' ','-'),'from':up(((xa+xb)/2,y0,z0)),'to':up(((xa+xb)/2,y1,z1)),'width':1.65})
   for i in range(steps):
    t=(i+1)/steps if z1>=z0 else i/steps;y=y0+(y1-y0)*(i+.5)/steps;z=z0+(z1-z0)*t
    box(name+' stair tread',((xa+xb)/2,y,z-.1),(1.65,abs(y1-y0)/steps,.2),mat,.008)
  left=x0-1.7 if steps and stairs_side=='left' else x0;right=x1 if stairs_side=='left' else x1+1.7
- rail((left,y0,z0),(left,y1,z1));rail((right,y0,z0),(right,y1,z1))
+ # Half-meter openings at each landing keep lateral walking approaches clear.
+ t=.5/abs(y1-y0)
+ for x in [left,right]:rail((x,y0+(y1-y0)*t,z0+(z1-z0)*t),(x,y1-(y1-y0)*t,z1-(z1-z0)*t))
  return o
 
 def point(name,pos,previous=None,width=3):
@@ -335,7 +342,7 @@ def court():
  slab('Upper landing',-24,-16,20,24,4,'concrete');ramp('Roof ascent lower',-23,-20,24,40,4,8,20)
  slab('Roof landing',-24,-16,40,44,8,'concrete');ramp('Roof ascent upper',-18,-15,40,24,8,12,20)
  slab('Roof upper landing',-20,-7.3,20,24,12,'concrete');ramp('Roof final approach',-13.2,-10.2,20,36,12,16,20)
- slab('Rooftop bridge',-13.2,-3,36,37.5,16,'concrete');slab('Rooftop bridge run',-7,-3,22,36,16,'concrete');rail((-7,22,16),(-7,36,16))
+ slab('Rooftop bridge',-13.2,-3,36,37.5,16,'concrete');slab('Rooftop bridge run',-7,-3,22,36,16,'concrete');rail((-7,22,16),(-7,35.5,16))
  slab('Cascade expansion bridge',-34,-24,12,16,4,'concrete');rail((-34,12,4),(-24,12,4));rail((-34,16,4),(-24,16,4))
  box('Cascade route gate',(-34,14,5),( .18,4,2),'metal',solid=True);box('Bridge route plaque',(-32,12.0,4.96),(1.2,.10,1.1),'metal',.008);sigil((-32,11.935,4.8),.7);label('UPPER CASCADE',(-28,11.93,5.25),.23)
  rail((-24,6,4),(-24,12,4));rail((-24,16,4),(-24,24,4));banner(-19,9,7,3.5);tree(-20,17,4,.8)
@@ -467,7 +474,7 @@ def vault():
  for y in range(54,77,4):
   z=-(y-52)/4
   box('Descent red edge',(26.85,min(y,73.85),z+1),(.06,.45,.12),'red-light')
-  box('Descent amber edge',(34.8,y,z+.3),(.06,.5,.13),'amber')
+  box('Descent amber edge',(34.8,min(y,73.7),z+.3),(.06,.5,.13),'amber')
   rod('Service conduit',(34.7,y-1,z+3.7),(34.7,y+1,z+3.2),.09,'frost')
  P.area('Descent lower pool',(30,72,.7),(30,76,-6),320,(.32,.55,1),3)
  slab('Vault lower floor',26,50,74,102,-6,'metal')
@@ -562,48 +569,9 @@ def dish(pos,r=5):
  data('radar-dish',pos)
 
 def night_vista():
- # The snow basin sits beyond an opaque rock ridge. The lower connection
- # tunnels below it, so night art never becomes a blue wall in the daylight homes.
- m=mat('ridge-rock',(.65,.68,.72),'rock',unlit=True,tint=True);P.TILE_METERS['ridge-rock']=5
- verts=[];faces=[];rng=random.Random(481)
- for k in range(9):
-  t=k/8
-  for i in range(27):
-   x=3+i*4;top=43+7*math.sin(i*.55)**2+3*math.cos(i*1.1)
-   # All facade relief is behind the occupied service rooms and above the tunnel.
-   y=104.0+4*t+2*math.sin(i*1.71+k*.93)**2
-   verts.append((x,y,-.25+t*(top+.25)))
- for k in range(8):
-  for i in range(26):
-   j=k*27+i;faces.extend([(j,j+1,j+28),(j,j+28,j+27)])
- # Close the night-facing back and crest against the opaque night canopy.
- for i in range(27):verts.append((3+i*4,112,-.25))
- for i in range(26):
-  j=8*27+i;b=9*27+i;faces.append((j,j+1,b+1,b))
- mesh('Snow basin sculpted rock divide',verts,faces,'ridge-rock',solid=True,group='vista')
- m=mat('signal-night-vista',(1,1,1),unlit=True);nt=m.node_tree;t=nt.nodes.new('ShaderNodeTexImage');t.image=bpy.data.images.load(str(HERE/'materials/tiles/night-vista-albedo.png'));uv=nt.nodes.new('ShaderNodeUVMap');uv.uv_map='UV0';nt.links.new(uv.outputs['UV'],t.inputs['Vector']);em=next(n for n in nt.nodes if n.type=='EMISSION');nt.links.new(t.outputs['Color'],em.inputs['Color'])
- verts=[];uvs=[];faces=[]
- for i in range(97):
-  u=i/96;ang=(u-.5)*(2*math.acos(-28/42));x=57+42*math.sin(ang);y=140+42*math.cos(ang);bottom=-3;verts.extend([(x,y,bottom),(x,y,35)]);uvs.extend([(u,(bottom+3)/38),(u,1)])
- for i in range(96):j=2*i;faces.append((j,j+2,j+3,j+1))
- o=mesh('Night opaque mountain cards',verts,faces,'signal-night-vista',group='vista')
- for p in o.data.polygons:
-  for li,vi in zip(p.loop_indices,p.vertices):o.data.uv_layers[0].data[li].uv=uvs[vi]
- # The panorama fades to the same zenith paint as the opaque closure.
- def sky_uv(o):return o
- # A shallow opaque canopy closes the basin above the opaque cards. Its
- # southern edge stays behind the rock ridge; the daylight sphere stays visible
- # in the other homes. Sky skirts close the card-to-canopy junction exactly.
- verts=[];faces=[]
- for i in range(97):
-  angle=(i/96-.5)*(2*math.acos(-28/42));x=57+42*math.sin(angle);y=140+42*math.cos(angle);verts.extend([(x,y,35),(x,y,40)])
- for i in range(96):j=i*2;faces.append((j,j+2,j+3,j+1))
- sky_uv(mesh('Signal upper sky skirts',verts,faces,'night',group='vista'))
- sky_uv(mesh('Signal opaque sky canopy',[(15,112,40),(99,112,40),(99,183,40),(15,183,40)],[(0,1,2,3)],'night',group='vista'))
- rng=random.Random(704);verts=[];faces=[]
- for i in range(220):
-  x=rng.uniform(17,97);y=rng.uniform(114,181);r=rng.uniform(.015,.045);j=len(verts);verts.extend([(x-r,y-r,39.98),(x+r,y-r,39.98),(x+r,y+r,39.98),(x-r,y+r,39.98)]);faces.append((j,j+1,j+2,j+3))
- mesh('Signal stars',verts,faces,'snow-peak',group='vista')
+ import any_angle
+ any_angle.night(sys.modules[__name__])
+
 
 def rise():
  set_area(3,(29,85,100,160,-6.4,28),(54,125,0),(52,62,125,130,.15,4.8))
@@ -711,38 +679,8 @@ def rise():
 
 
 def vista():
- # Original opaque mountain art has depth layers; continuous sphere hides card edges.
- path=HERE/'materials/source/vista.png'
- m=mat('watershed-vista',(1,1,1),unlit=True);nt=m.node_tree;t=nt.nodes.new('ShaderNodeTexImage');t.image=bpy.data.images.load(str(path));t.extension='EXTEND';uv=nt.nodes.new('ShaderNodeUVMap');uv.uv_map='UV0';nt.links.new(uv.outputs['UV'],t.inputs['Vector']);em=next(n for n in nt.nodes if n.type=='EMISSION');nt.links.new(t.outputs['Color'],em.inputs['Color'])
- # Wrap the complete painting over a sphere; the top sky row extends to the
- # zenith. Precise angular UVs preserve the original mountain scale and avoid
- # polygonal cuts between the painting's sky and a mismatched flat sky color.
- verts=[];uvs=[];faces=[]
- for k in range(49):
-  latitude=-math.pi/2+k*math.pi/48;v=max(0,min(1,(105*math.tan(latitude)+9)/72))
-  for j in range(97):
-   u=j/96;angle=(u-.5)*math.tau;r=400*math.cos(latitude);verts.append((r*math.sin(angle),r*math.cos(angle),400*math.sin(latitude)));uvs.append((u,v))
- for k in range(48):
-  for j in range(96):a=k*97+j;faces.append((a,a+1,a+98,a+97))
- o=mesh('Watershed sky sphere',verts,faces,'watershed-vista',group='vista')
- for p in o.data.polygons:
-  for li,vi in zip(p.loop_indices,p.vertices):o.data.uv_layers[0].data[li].uv=uvs[vi]
- # A second opaque cropped cliff card creates foreground parallax below the skyline.
- o=mesh('Cascade near cliff',[(-95,73,-9),(-27,73,-9),(-27,73,11),(-46,73,20),(-62,73,12),(-80,73,17),(-95,73,9)],[(0,1,2,3,4,5,6)],'watershed-vista',group='vista')
- for i,v in enumerate(o.data.vertices):o.data.uv_layers[0].data[i].uv=((v.co.x+120)/216,(v.co.z+9)/72)
- # The reachable west lookout looks across actual piers and an aqueduct extension.
- for x in range(-87,-27,6):
-  box('Aqueduct pier',(x,63,2),(1.0,2.2,14),'spire',0,group='vista')
-  for j in range(12):
-   a=math.pi*j/12;b=math.pi*(j+1)/12;rod('Aqueduct arch',(x+3+2.5*math.cos(a),62.8,5+3*math.sin(a)),(x+3+2.5*math.cos(b),62.8,5+3*math.sin(b)),.16,'spire','vista')
- box('Upper Cascade bridge',(-54,63,9.3),(66,2.8,.65),'spire',0,group='vista')
- for x,y,h,w in [(5,88,31,3.8),(12,94,43,4.6),(19,98,35,3.4),(-5,92,23,3)]:
-  verts=[(x+dx*w,y+dy*w,-2) for dx,dy in [(-.5,-.5),(.5,-.5),(.5,.5),(-.5,.5)]]
-  verts += [(x+dx*w*.48,y+dy*w*.48,h*.79) for dx,dy in [(-.5,-.5),(.5,-.5),(.5,.5),(-.5,.5)]]
-  verts += [(x-.16,y,h),(x+.16,y,h)]
-  mesh('Watershed Spire outpost',verts,[(0,1,5,4),(1,2,6,5),(2,3,7,6),(3,0,4,7),(4,5,9,8),(5,6,9),(6,7,8,9),(7,4,8)],'spire',group='vista')
-  for z in [h*.25,h*.48,h*.68]:box('Spire observation band',(x,y-w*.43,z),(w*.77,.19,.36),'metal',0,group='vista')
-
+ import any_angle
+ any_angle.vista(sys.modules[__name__])
 
 
 def load_ui():
@@ -780,18 +718,21 @@ def manifest(g,lm,nodes,cols,count):
  for area in AREAS:
   area['primaryAnchor']=next(r['anchorId'] for r in MOUNT_ROWS if r['areaId']==area['id'] and r['role']=='mounted-workspace');area['toolAnchors']=[r['anchorId'] for r in MOUNT_ROWS if r['areaId']==area['id'] and r['role']=='tool'];area['dataAnchors']=[r['id'] for r in OBJECTS if r['areaId']==area['id']]
  spawns=[{'id':'arrival','pose':{'position':up(AREAS[0]['spawn']),'rotation':[0,0,0,1]}}]+[{'id':a['id'],'pose':{'position':up(a['spawn']),'rotation':[0,0,0,1]}} for a in AREAS]
- m={'formatVersion':'0.2','id':'com.hyprune.lumen-reach','version':('0.6.1' if count==4 else f'0.{count}.1'),'name':'Lumen Reach','description':f'{count} connected workspace homes on a mountain watershed. Original architecture, instruments and paths.','license':'CC-BY-4.0','scene':'scene.gltf','preview':'preview.png','defaultSpawn':'arrival','spawns':spawns,'anchors':ANCHORS,'zones':[{'id':a['id'],'name':a['name'],'bounds':a['bounds']} for a in AREAS],'navigation':{'kind':'mesh','node':nodes['Navigation'],'agentRadius':.3,'agentHeight':1.8},'collision':[{'node':nodes[o.name],'shape':'mesh','layer':'static'} for o in cols],'lightmaps':lm,'attribution':[{'path':'.','author':'Hyprune contributors','license':'CC-BY-4.0','source':'https://github.com/hyprune/worlds'}],'extensions':{'com.hyprune.lumen-reach.mounts':{'version':1,'areas':[{**{k:v for k,v in a.items() if k not in ['spawn','bounds','name','freePlacementZones']},'spawnId':a['id'],'freePlacementZones':[z['id'] for z in a['freePlacementZones']]} for a in AREAS],'mounts':MOUNT_ROWS,'objects':OBJECTS},'com.hyprune.lumen-reach.routes':{'version':1,'nodes':ROUTES,'edges':EDGES,'semantics':'bidirectional walking centerlines, feet positions in meters'},'com.hyprune.lumen-reach.stairs':{'version':1,'paths':STAIR_ROUTES,'semantics':'visible treads over continuous collision beds; alternate walkable flights'},'com.hyprune.lumen-reach.placement':{'version':1,'zones':[z for a in AREAS for z in a['freePlacementZones']]},'com.hyprune.map':{'version':'0.1','path':'map.svg','projection':'xz','north':[0,0,-1],'bounds':[-36,-162,86,16],'worldToMap':[4/520,0,0,4/780,160/520,690/780]}},'requiredExtensions':[]}
- for name in ['fixture-audit.json','decal-audit.json']:shutil.copy2(ART/name,OUT/name)
+ m={'formatVersion':'0.2','id':'com.hyprune.lumen-reach','version':('0.7.0' if count==4 else f'0.{count}.1'),'name':'Lumen Reach','description':f'{count} connected workspace homes on a mountain watershed. Original architecture, instruments and paths.','license':'CC-BY-4.0','scene':'scene.gltf','preview':'preview.png','defaultSpawn':'arrival','spawns':spawns,'anchors':ANCHORS,'zones':[{'id':a['id'],'name':a['name'],'bounds':a['bounds']} for a in AREAS],'navigation':{'kind':'mesh','node':nodes['Navigation'],'agentRadius':.3,'agentHeight':1.8},'collision':[{'node':nodes[o.name],'shape':'mesh','layer':'static'} for o in cols],'lightmaps':lm,'attribution':[{'path':'.','author':'Hyprune contributors','license':'CC-BY-4.0','source':'https://github.com/hyprune/worlds'}],'extensions':{'com.hyprune.lumen-reach.mounts':{'version':1,'areas':[{**{k:v for k,v in a.items() if k not in ['spawn','bounds','name','freePlacementZones']},'spawnId':a['id'],'freePlacementZones':[z['id'] for z in a['freePlacementZones']]} for a in AREAS],'mounts':MOUNT_ROWS,'objects':OBJECTS},'com.hyprune.lumen-reach.routes':{'version':1,'nodes':ROUTES,'edges':EDGES,'semantics':'bidirectional walking centerlines, feet positions in meters'},'com.hyprune.lumen-reach.stairs':{'version':1,'paths':STAIR_ROUTES,'semantics':'visible treads over continuous collision beds; alternate walkable flights'},'com.hyprune.lumen-reach.placement':{'version':1,'zones':[z for a in AREAS for z in a['freePlacementZones']]},'com.hyprune.map':{'version':'0.1','path':'map.svg','projection':'xz','north':[0,0,-1],'bounds':[-36,-162,86,16],'worldToMap':[4/520,0,0,4/780,160/520,690/780]}},'requiredExtensions':[]}
+ for name in ['fixture-audit.json','decal-audit.json','playable-boundary-report.json']:shutil.copy2(ART/name,OUT/name)
  if count==4:
   from world_visibility import annotate
   annotate(m,g)
+  import any_angle
+  any_angle.finish_export(sys.modules[__name__],g,m)
  (OUT/'world.json').write_text(json.dumps(m,indent=2)+'\n')
  rows=[];masters=json.loads((HERE/'materials/generation.json').read_text());byname={r['name']:r for r in masters}
  for p in sorted((OUT/'textures').glob('*.png')):
-  asset=next((k for k in sorted(byname,key=len,reverse=True) if p.name==k+'.png' or p.name.startswith(k+'-')),None);r=byname.get(asset);recipe='Original procedural color, signage or screen placeholder from materials/prepare.py and build.py.'
+  asset=next((k for k in sorted(byname,key=len,reverse=True) if p.name==k+'.png' or p.name.startswith(k+'-')),None);r=byname.get('night-vista' if p.name.startswith('night-sky-v7') else asset);recipe='Original procedural color, signage or screen placeholder from materials/prepare.py and build.py.'
   if p.name.startswith('lightmap-'):recipe='Cycles diffuse DIRECT+INDIRECT without COLOR; OIDN RTLightmap; peak normalized linear irradiance, sRGB encoding, UV1.'
   if r:recipe='Original imagegen master, toroidal seam healing, periodic edge collar and wrap-safe PBR derivatives.'
   if asset=='night-vista':recipe='Original generated night panorama, 1600px bounded derivative, smooth upper-sky fade to shared zenith paint for opaque basin closure.'
+  if asset=='sky-v7' or p.name.startswith('night-sky-v7'):recipe='Spherical panorama from original imagegen master; longitude seam correction, full latitude range, uniform pole caps; materials/sky.py.'
   if asset=='steam':recipe='Original generated RGBA plume, bounded 512x768 derivative, clamp sampled BLEND crossed cards; core M2 alpha.'
   if p.name.startswith('reach-trim'):recipe='Original generated material masters composed into eight trim bands with 8px gutters; strip band mapped explicitly. Masters/prompts in source materials/generation.json.'
   rows.append({'path':p.relative_to(OUT).as_posix(),'author':'Hyprune contributors','license':'CC-BY-4.0','recipe':recipe,**({'masterSHA256':r['masterSHA256'],'prompt':r['prompt']} if r else {}),**({'derivedFrom':[{k:byname[name][k] for k in ['name','masterSHA256','prompt']} for name in ['concrete','metal','canvas','wood','frost','glass','strips','grating']]} if p.name.startswith('reach-trim') else {})})
@@ -820,16 +761,16 @@ if __name__=='__main__':
  if a.stills:
   bpy.ops.wm.open_mainfile(filepath=str(ART/'lumen-reach.blend'));P.gpu();VIEWS=[v for v in json.loads((HERE/'views.json').read_text())['views'] if v['areaCount']<=a.areas];(ART/'views.json').write_text(json.dumps({'verticalFovDegrees':60,'views':VIEWS},indent=2)+'\n');stills();sys.exit(0)
  sys.path.insert(0,str(HERE));import polish
- init();load_ui();court();polish.apply(0,sys.modules[__name__]);P.log('Sun Court geometry ready')
+ init();import any_angle;any_angle.materials(sys.modules[__name__]);load_ui();court();polish.apply(0,sys.modules[__name__]);P.log('Sun Court geometry ready')
  if a.areas>=2:hall();polish.apply(1,sys.modules[__name__]);P.log('Array Hall geometry ready')
  if a.areas>=3:
   vault();polish.apply(2,sys.modules[__name__]);import rime_v3;rime_v3.apply(sys.modules[__name__]);P.log('Rime Vault geometry ready')
  if a.areas>=4:rise();polish.apply(3,sys.modules[__name__]);P.log('Signal Rise geometry ready')
- vista();VIEWS=[v for v in json.loads((HERE/'views.json').read_text())['views'] if v['areaCount']<=a.areas]
+ vista();any_angle.architecture(sys.modules[__name__]);any_angle.boundaries(sys.modules[__name__]);VIEWS=[v for v in json.loads((HERE/'views.json').read_text())['views'] if v['areaCount']<=a.areas]
  if a.preview:stills()
  else:
   # Shared pipeline keeps tiling UV0 distinct from atlas UV1 throughout bake/export.
-  for name,n in zip(NAMES[:a.areas],[1280,1536,2048,1280]):P.RESOLUTIONS[name]=n
+  for name,n in zip(NAMES[:a.areas],[2048,1536,2048,2048]):P.RESOLUTIONS[name]=n
   P.RESOLUTIONS['foliage']=1024
   P.MARGINS.update({'sun-court':4,'array-hall':4,'rime-vault':4,'signal-rise':4,'foliage':2})
   audit_fixtures()

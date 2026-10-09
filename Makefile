@@ -54,12 +54,13 @@ lumen-build:
 	python3 lumen-reach/materials/prepare.py
 	./tools/remote-lumen.sh --areas $(LUMEN_AREAS) --samples 64
 lumen-validate:
+	python3 tools/check-any-angle.py $(LUMEN_PACKAGE) --output lumen-reach/reports/any-angle-0.7.0/geometry-check.json
 	python3 tools/check-visibility.py $(LUMEN_PACKAGE)
 	node $(SCHEMA_DIR)/bin/validate.mjs world $(LUMEN_PACKAGE)/world.json - 0.5
 	python3 tools/check-package.py $(LUMEN_PACKAGE) > lumen-reach/reports/package-check.json
 	python3 tools/check-placement.py $(LUMEN_PACKAGE) --output lumen-reach/reports/placement-check.json
 	python3 tools/check-walking.py $(LUMEN_PACKAGE) > lumen-reach/reports/walking-check.json
-	python3 tools/check-coplanar.py $(LUMEN_PACKAGE) --emissive --fixtures $(LUMEN_PACKAGE)/fixture-audit.json > lumen-reach/reports/visibility-0.6.1/emissive-check.json
+	python3 tools/check-coplanar.py $(LUMEN_PACKAGE) --emissive --fixtures $(LUMEN_PACKAGE)/fixture-audit.json > lumen-reach/reports/any-angle-0.7.0/emissive-check.json
 	python3 -c "import json; assert json.load(open('$(LUMEN_PACKAGE)/decal-audit.json'))['status']=='PASS'"
 lumen-nested:
 	python3 tools/check-lumen-session.py
@@ -68,8 +69,8 @@ lumen-tour:
 	python3 tools/check-lumen-session.py --record
 lumen-release: lumen-validate
 	mkdir -p artifacts/releases
-	tar --sort=name --mtime='UTC 2026-10-09' --owner=0 --group=0 --numeric-owner -I zstd -cf artifacts/releases/com.hyprune.lumen-reach-0.6.1.tar.zst -C dist com.hyprune.lumen-reach
-	sha256sum artifacts/releases/com.hyprune.lumen-reach-0.6.1.tar.zst > artifacts/releases/LUMEN-SHA256SUMS
+	tar --sort=name --mtime='UTC 2026-10-09' --owner=0 --group=0 --numeric-owner -I zstd -cf artifacts/releases/com.hyprune.lumen-reach-0.7.0.tar.zst -C dist com.hyprune.lumen-reach
+	sha256sum artifacts/releases/com.hyprune.lumen-reach-0.7.0.tar.zst > artifacts/releases/LUMEN-SHA256SUMS
 
 .PHONY: visibility-annotate visibility-validate visibility-nested
 visibility-annotate:

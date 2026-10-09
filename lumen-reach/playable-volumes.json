@@ -1,0 +1,118 @@
+{
+  "version": 1,
+  "coordinates": "Blender authoring X/Y horizontal, Z vertical, meters",
+  "runtimeContract": "World format 0.5 has no playable-volume field. These authoring volumes generate collision-only perimeter backstops; they are not visibility regions. Ordinary walking probes stop inside. The fly escape witness failed and remains an open item; see HANDOFF.md. No new required extension.",
+  "vertical": [
+    -20,
+    65
+  ],
+  "areas": [
+    {
+      "id": "sun-court",
+      "rects": [
+        [
+          -24,
+          26,
+          -16,
+          27
+        ],
+        [
+          -24,
+          -7,
+          20,
+          44
+        ],
+        [
+          -34,
+          -24,
+          12,
+          16
+        ],
+        [
+          -13.2,
+          -3,
+          22,
+          37.5
+        ]
+      ]
+    },
+    {
+      "id": "entry-vestibule",
+      "rects": [
+        [
+          0,
+          16,
+          26,
+          32
+        ]
+      ]
+    },
+    {
+      "id": "array-hall",
+      "rects": [
+        [
+          -13,
+          27,
+          32,
+          62
+        ],
+        [
+          24,
+          33,
+          48,
+          52
+        ]
+      ]
+    },
+    {
+      "id": "connector-descent",
+      "rects": [
+        [
+          26.3,
+          35.4,
+          51.4,
+          77
+        ]
+      ]
+    },
+    {
+      "id": "rime-vault",
+      "rects": [
+        [
+          26,
+          50,
+          74,
+          102
+        ],
+        [
+          50,
+          56,
+          96,
+          103
+        ]
+      ]
+    },
+    {
+      "id": "connector-ascent",
+      "rects": [
+        [
+          50.4,
+          59.3,
+          99.4,
+          125
+        ]
+      ]
+    },
+    {
+      "id": "signal-rise",
+      "rects": [
+        [
+          29,
+          85,
+          112,
+          160
+        ]
+      ]
+    }
+  ]
+}

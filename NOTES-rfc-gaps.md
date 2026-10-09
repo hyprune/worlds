@@ -178,3 +178,34 @@ submission reduction. Both worlds' measured results and entrance checks are in
 their `VISIBILITY.md` reports. The 0.5 amendment is currently published in docs
 `rfcs/0005-surfaces.md` under “Amendment: world 0.5 ink and authored visibility”,
 in addition to core `docs/AUTHORING.md`; RFC-0004 remains the base world contract.
+
+## Any-angle environments and walking limits (2026-10-09, Lumen Reach 0.7.0)
+
+Published world format 0.5 and core AUTHORING still have no playable-volume or
+per-area movement-boundary contract. `zones` are labels; `visibility.areas.bounds`
+select submissions and must never be treated as movement limits. Lumen's
+`playable-volumes.json` declares each home's and connector's authoring footprint.
+The builder unions these footprints and exports collision-only perimeter
+backstops, plus physical guard collisions, using the existing static-mesh
+contract. The runtime does not interpret that source JSON. Ordinary walking
+stays inside the authored envelope in six engine probes. The ordinary-fly escape
+witness also stopped at the perimeter; separating movement modes remains an
+open issue at the handoff checkpoint. Held authoring photos can exceed it.
+A future normative volume contract should distinguish walk, climb and fly and
+specify what happens when spawning/teleporting outside overlapping areas.
+
+Core's current projection has a 500 m far plane. An origin-centered 400 m sky
+can clip when viewed from the far end of this settlement. The new closed 310 m
+sphere is centered on the whole site's envelope; automated checks cover all
+view directions from the declared review box through 60 m elevation. Latitude
+uses the full texture, longitude repeats with matched edge pixels, and polar
+caps are uniform. This fixes the old clamped-edge smear at its source.
+
+The atmosphere contract supplies distance/height fog but no spatial sky-volume
+blend. Signal's cold basin therefore uses a closed inner sky and a textured
+mountain exterior; it is an authored environment shell, not a dynamic time-of-day
+system. Shared distant terrain uses baked directional material shading because
+core does not consume glTF vertex colors. No new material extension is required.
+The terrain's baked directional shading is exported as emission-textured PBR so
+core applies distance fog to it. Only the actual sky domes use the unlit fog
+exclusion. This uses the standard material profile, with no vertex-color dependency.
