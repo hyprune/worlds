@@ -40,13 +40,36 @@
       "visibleTriangles": 244312,
       "unfilteredMaterialBatches": 99,
       "conservativeGpuMiB": 372.62
+    },
+    "gltfTransform": {
+      "report": "reports/any-angle-0.7.1/budgets.json",
+      "tool": "glTF-Transform 4.5.1 inspect() + visible-scene traversal",
+      "visibleTriangles": 244526,
+      "drawCalls": 99,
+      "gpuMiB": {
+        "total": 277.83,
+        "materialTextures": 157.83,
+        "lightmaps": 87.33,
+        "vertexBuffers": 31.04,
+        "indexBuffers": 1.62
+      },
+      "packageMiB": 70.46,
+      "baseline070": {
+        "version": "0.7.0",
+        "visibleTriangles": 244312,
+        "drawCalls": 99,
+        "gpuMiB": 277.55,
+        "packageMiB": 71.21
+      },
+      "note": "glTF-Transform VRAM estimate: one RGBA8 texture per image with full mips (lightmaps included) plus visible vertex/index buffers. It tracks core's single-upload estimate (269.5 MiB measured on 0.7.0 in core docs/PERF-2026-10.md); conservativeGpuMiB above keeps check-package's older sRGB+linear dual-view count."
     }
   },
   "offlineChecks": [
     "make lumen-validate (geometry/sky topology, check-sky, check-route-clearance, visibility, schema 0.5, package, placement, walking, emissive, decals)",
     "glTF validator: 0 errors, 0 warnings",
     "core hyprune-world-check",
-    "new checks fail 0.7.0 on every owner defect class (reports/any-angle-0.7.1/baseline-0.7.0/)"
+    "new checks fail 0.7.0 on every owner defect class (reports/any-angle-0.7.1/baseline-0.7.0/)",
+    "check-navmesh (Recast/Detour, added after the release candidate): PASS on 0.7.1 and 0.7.0 with reviewed findings pinned in navmesh-allow.json (reports/any-angle-0.7.1/navmesh-check.json, navmesh.svg)"
   ],
   "evidence": {
     "anyAngle": "reports/any-angle-0.7.1/release-session-summary.json",

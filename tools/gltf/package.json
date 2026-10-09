@@ -1,0 +1,13 @@
+{
+  "name": "hyprune-worlds-gltf",
+  "private": true,
+  "description": "glTF-Transform budget reports and the (flagged) world format 0.7 optimisation step",
+  "license": "MIT",
+  "type": "module",
+  "dependencies": {
+    "@gltf-transform/core": "4.5.1",
+    "@gltf-transform/extensions": "4.5.1",
+    "@gltf-transform/functions": "4.5.1",
+    "meshoptimizer": "1.3.0"
+  }
+}

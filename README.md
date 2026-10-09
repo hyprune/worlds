@@ -21,6 +21,8 @@ Run `make build`, `make validate`, and `make film`. Blender runs only on the rem
 
 Validation also needs Node: run `make navmesh-deps` once (installs the pinned Recast/Detour build, `recast-navigation-js`, into `tools/navmesh/`). `tools/check-navmesh.py` builds a navmesh from each package's exported collision with the Hyprune agent (radius 0.3 m, height 1.8 m, climb 0.35 m, route slope 0.4). It checks that every spawn, route node and edge, stair lane and screen approach is reachable from the default spawn, and gates narrow routes, undeclared jump-up roofs, drop-in pits and walkable floor outside the visibility areas. It writes a JSON report and a top-down `navmesh.svg`. Reviewed exceptions live in each world's `navmesh-allow.json`, pinned by id and area. The check sees collision only: render-only obstructions are `check-route-clearance.py`'s job.
 
+`make lumen-budgets` / `make budgets` (part of the release targets; `make gltf-deps` once) write glTF-Transform `inspect()` budgets: visible triangles, draws and GPU MiB including mips and lightmaps. `LUMEN_BASELINE=<previous package>` adds deltas.
+
 ## Content policy
 
 Official assets must be original or properly attributed CC0/CC-BY-4.0. Nothing without that provenance, even as temporary tests, screenshots or thumbnails. For every asset record author, source, license and modifications in the manifest/ATTRIBUTION.md. Keep editable sources and document reproducible export steps.

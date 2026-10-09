@@ -26,7 +26,7 @@ validate:
 gallery:
 	mkdir -p $(GALLERY_DIR)/videos
 	cp artifacts/switchyard/world-switchyard.mp4 artifacts/switchyard/world-switchyard.json $(GALLERY_DIR)/videos/
-release: validate
+release: validate budgets
 	mkdir -p artifacts/releases
 	tar --sort=name --mtime='UTC 2026-10-09' --owner=0 --group=0 --numeric-owner -I zstd -cf artifacts/releases/com.hyprune.switchyard-$(VERSION).tar.zst -C dist com.hyprune.switchyard
 	sha256sum artifacts/releases/com.hyprune.switchyard-$(VERSION).tar.zst > artifacts/releases/SHA256SUMS
@@ -73,7 +73,7 @@ lumen-nested:
 
 lumen-tour:
 	python3 tools/check-lumen-session.py --record
-lumen-release: lumen-validate
+lumen-release: lumen-validate lumen-budgets
 	mkdir -p artifacts/releases
 	tar --sort=name --mtime='UTC 2026-10-09' --owner=0 --group=0 --numeric-owner -I zstd -cf artifacts/releases/com.hyprune.lumen-reach-$(LUMEN_VERSION).tar.zst -C dist com.hyprune.lumen-reach
 	sha256sum artifacts/releases/com.hyprune.lumen-reach-$(LUMEN_VERSION).tar.zst > artifacts/releases/LUMEN-SHA256SUMS
@@ -87,6 +87,17 @@ visibility-validate:
 	python3 tools/check-visibility.py $(PACKAGE)
 visibility-nested:
 	HYPRUNE_NESTED_4K=1 python3 tools/check-visibility-session.py --core $(VISIBILITY_CORE)
+
+# glTF-Transform inspect() budgets (triangles, draws, GPU MiB incl. mips) for
+# the release record. LUMEN_BASELINE=<previous package dir> adds deltas.
+LUMEN_BASELINE ?=
+.PHONY: gltf-deps budgets lumen-budgets
+gltf-deps:
+	npm ci --prefix tools/gltf --no-audit --no-fund
+budgets:
+	node tools/gltf/budgets.mjs $(PACKAGE) --output switchyard/reports/budgets.json > /dev/null
+lumen-budgets:
+	node tools/gltf/budgets.mjs $(LUMEN_PACKAGE) $(if $(LUMEN_BASELINE),--baseline $(LUMEN_BASELINE)) --output $(LUMEN_REPORTS)/budgets.json > /dev/null
 
 # Recast/Detour (recast-navigation-js, pinned by package-lock.json) for check-navmesh.
 .PHONY: navmesh-deps navmesh-test
