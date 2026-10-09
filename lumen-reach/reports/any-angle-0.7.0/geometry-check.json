@@ -1,0 +1,37 @@
+{
+  "status": "PASS",
+  "scope": "Closed sky topology, winding, all-latitude UVs, texture edge and pole continuity, conservative far-clip envelope, architectural texture coverage. Engine random/owner images remain a separate visual review; finite samples do not prove arbitrary mesh quality.",
+  "skies": [
+    {
+      "material": "night-sky-v7",
+      "triangles": 5952,
+      "closedManifold": true,
+      "inwardWinding": true,
+      "fullLatitudeUV": true,
+      "seamlessLongitude": true,
+      "uniformPoles": true
+    },
+    {
+      "material": "sky-v7",
+      "triangles": 12032,
+      "closedManifold": true,
+      "inwardWinding": true,
+      "fullLatitudeUV": true,
+      "seamlessLongitude": true,
+      "uniformPoles": true,
+      "reviewEnvelope": {
+        "min": [
+          -36,
+          -6,
+          -180
+        ],
+        "max": [
+          110,
+          60,
+          17
+        ]
+      },
+      "conservativeMaxSkyDistance": 467.87653403846946
+    }
+  ]
+}

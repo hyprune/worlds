@@ -1,0 +1,68 @@
+{
+  "status": "PASS",
+  "packageBytes": 74442697,
+  "decodedTextureBytes": 192806912,
+  "conservativeGpuBytes": 390475992,
+  "mippedTextureViewsBytes": 361408152,
+  "expandedGeometryBytes": 29067840,
+  "colorTextureViews": 28,
+  "textureObjects": 63,
+  "textureProvenanceEntries": 63,
+  "visualTriangles": 242232,
+  "drawCallEstimate": 99,
+  "drawCallScope": "one draw per visible glTF primitive, world geometry only; excludes postprocessing, applications and HUD",
+  "untexturedPhysicalMaterials": [],
+  "anchors": 24,
+  "collisionNodes": 284,
+  "lightmapBindings": 78,
+  "UV1": [
+    {
+      "node": "Visual-array-hall",
+      "triangles": 29260,
+      "uv1Area": 0.1119,
+      "overlapSamples": 0
+    },
+    {
+      "node": "Visual-connector-ascent",
+      "triangles": 2490,
+      "uv1Area": 0.51478,
+      "overlapSamples": 0
+    },
+    {
+      "node": "Visual-connector-descent",
+      "triangles": 2754,
+      "uv1Area": 0.47722,
+      "overlapSamples": 0
+    },
+    {
+      "node": "Visual-foliage",
+      "triangles": 20736,
+      "uv1Area": 0.2132,
+      "overlapSamples": 0
+    },
+    {
+      "node": "Visual-rime-vault",
+      "triangles": 44612,
+      "uv1Area": 0.19766,
+      "overlapSamples": 0
+    },
+    {
+      "node": "Visual-signal-rise",
+      "triangles": 62624,
+      "uv1Area": 0.15881,
+      "overlapSamples": 0
+    },
+    {
+      "node": "Visual-sun-court",
+      "triangles": 46804,
+      "uv1Area": 0.1855,
+      "overlapSamples": 0
+    },
+    {
+      "node": "Visual-vista",
+      "triangles": 32952,
+      "uv1Area": 0.0,
+      "overlapSamples": 0
+    }
+  ]
+}

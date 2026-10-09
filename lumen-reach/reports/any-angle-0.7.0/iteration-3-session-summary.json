@@ -1,0 +1,1078 @@
+{
+  "status": "FAIL",
+  "seed": 7009,
+  "worldVersion": "0.7.0",
+  "coreCommit": "0735e4dd4d6390313a323f4d511c3e48d5048c92",
+  "manifestSHA256": "ee0a3db0ced8888c167334ee6c53ccff1210123089daf67beb5d0f832ab72cb8",
+  "sceneSHA256": "6f7d9b9062d13a6ed63ec75e70b4b461be88eebf25db102bff1c84acc6842be6",
+  "pluginSHA256": "18f26a66625d88ad3aa95434c8f99a5b2768fee1ff59f3e06a2be70fa28fbebd",
+  "method": "Private native-4K Intel nested; Medium fixed 0.5 scale; held photos. Owner poses, deterministic route samples, elevated random views to 60m, pole/seam and roof inspection. Culling on/off image comparison. Streak scores are candidates for review, not semantic proof.",
+  "phase": "iteration-3; superseded by iteration-4 bake; not release evidence",
+  "rawReport": "artifacts/any-angle-0.7.0/final/report.json",
+  "viewCount": 56,
+  "cullingLosses": [],
+  "boundaryProbes": [
+    {
+      "id": "court-east",
+      "start": [
+        25.2,
+        1.7,
+        0
+      ],
+      "end": [
+        25.635000228881836,
+        1.7000000476837158,
+        4.779768687512842e-07
+      ],
+      "axis": 0,
+      "outwardSign": 1,
+      "limit": 26,
+      "inside": true
+    },
+    {
+      "id": "court-south",
+      "start": [
+        0,
+        1.7,
+        15.2
+      ],
+      "end": [
+        -2.002683686441742e-05,
+        1.7000000476837158,
+        15.635000228881836
+      ],
+      "axis": 2,
+      "outwardSign": 1,
+      "limit": 16,
+      "inside": true
+    },
+    {
+      "id": "court-west",
+      "start": [
+        -23.2,
+        1.7,
+        10
+      ],
+      "end": [
+        -23.635000228881836,
+        1.7000000476837158,
+        10.0
+      ],
+      "axis": 0,
+      "outwardSign": -1,
+      "limit": -24,
+      "inside": true
+    },
+    {
+      "id": "hall-west",
+      "start": [
+        -12.2,
+        1.7,
+        -34
+      ],
+      "end": [
+        -12.635000228881836,
+        1.7000000476837158,
+        -34.0
+      ],
+      "axis": 0,
+      "outwardSign": -1,
+      "limit": -13,
+      "inside": true
+    },
+    {
+      "id": "rise-east",
+      "start": [
+        84.2,
+        1.7,
+        -120
+      ],
+      "end": [
+        84.63499450683594,
+        1.7000000476837158,
+        -120.0
+      ],
+      "axis": 0,
+      "outwardSign": 1,
+      "limit": 85,
+      "inside": true
+    },
+    {
+      "id": "rise-south",
+      "start": [
+        70,
+        1.7,
+        -112.8
+      ],
+      "end": [
+        70.0,
+        1.7000000476837158,
+        -112.36500549316406
+      ],
+      "axis": 2,
+      "outwardSign": 1,
+      "limit": -112,
+      "inside": true
+    }
+  ],
+  "flyBoundaryWitness": [
+    25.700000762939453,
+    3.0,
+    -9.536456104797253e-07
+  ],
+  "failure": "Fly witness stopped at x25.7; expected x>26.5. Ordinary fly appears constrained by the tall static perimeter. Needs resolution before release.",
+  "views": [
+    {
+      "id": "owner-1791547507663",
+      "kind": "owner",
+      "position": [
+        -7.8509979248046875,
+        1.7000000476837158,
+        13.570409774780273
+      ],
+      "orientation": [
+        0.10817901471191557,
+        -0.21352986232993737,
+        0.023798240847898805,
+        0.970636874635341
+      ],
+      "verticalStreakCandidateFraction": 0.0,
+      "cullingChangedPixelFraction": 0.0
+    },
+    {
+      "id": "owner-1791547755306",
+      "kind": "owner",
+      "position": [
+        -21.454647064208984,
+        9.700000762939453,
+        -40.1099967956543
+      ],
+      "orientation": [
+        -0.03403668822830441,
+        0.3711097668248652,
+        0.013613344073973396,
+        0.9278651419709477
+      ],
+      "verticalStreakCandidateFraction": 0.0,
+      "cullingChangedPixelFraction": 0.0
+    },
+    {
+      "id": "owner-1791547761094",
+      "kind": "owner",
+      "position": [
+        -18.359798431396484,
+        9.700000762939453,
+        -41.874332427978516
+      ],
+      "orientation": [
+        -0.013513593090342169,
+        -0.9720515891894518,
+        -0.057834175505889956,
+        0.22713057676060258
+      ],
+      "verticalStreakCandidateFraction": 0.001088139281828074,
+      "cullingChangedPixelFraction": 0.0
+    },
+    {
+      "id": "owner-1791547776428",
+      "kind": "owner",
+      "position": [
+        -18.341360092163086,
+        13.700000762939453,
+        -21.152950286865234
+      ],
+      "orientation": [
+        0.06033567228388718,
+        -0.9277990138074261,
+        -0.3255454785180575,
+        -0.171955628126758
+      ],
+      "verticalStreakCandidateFraction": 0.0,
+      "cullingChangedPixelFraction": 0.0
+    },
+    {
+      "id": "owner-1791547781479",
+      "kind": "owner",
+      "position": [
+        -18.341360092163086,
+        13.700000762939453,
+        -21.152950286865234
+      ],
+      "orientation": [
+        -0.08943453689038042,
+        -0.826045677965502,
+        -0.13697676160023237,
+        0.5393397522037757
+      ],
+      "verticalStreakCandidateFraction": 0.0,
+      "cullingChangedPixelFraction": 0.0
+    },
+    {
+      "id": "owner-1791547802616",
+      "kind": "owner",
+      "position": [
+        -6.209018707275391,
+        17.69999885559082,
+        -28.936601638793945
+      ],
+      "orientation": [
+        -0.044293360400817806,
+        -0.9542919108786524,
+        -0.2338926291434826,
+        0.1807188011478688
+      ],
+      "verticalStreakCandidateFraction": 0.0,
+      "cullingChangedPixelFraction": 0.0
+    },
+    {
+      "id": "owner-1791547819687",
+      "kind": "owner",
+      "position": [
+        3.375859260559082,
+        22.774755477905273,
+        -24.58541488647461
+      ],
+      "orientation": [
+        -0.052332909791893235,
+        0.14037390183011678,
+        0.007430235848560166,
+        0.9886866165944278
+      ],
+      "verticalStreakCandidateFraction": 0.001088139281828074,
+      "cullingChangedPixelFraction": 0.0
+    },
+    {
+      "id": "owner-1791547839640",
+      "kind": "owner",
+      "position": [
+        31.75011444091797,
+        42.10688400268555,
+        -14.849081993103027
+      ],
+      "orientation": [
+        -0.4807098377861335,
+        0.2276718026864988,
+        0.13081335596773078,
+        0.8366429752394797
+      ],
+      "verticalStreakCandidateFraction": 0.0,
+      "cullingChangedPixelFraction": 0.0
+    },
+    {
+      "id": "owner-1791547849421",
+      "kind": "owner",
+      "position": [
+        31.75011444091797,
+        42.10688400268555,
+        -14.849081993103027
+      ],
+      "orientation": [
+        -0.27244618592835484,
+        0.6888125823086717,
+        0.5924222386331991,
+        0.31677467291306705
+      ],
+      "verticalStreakCandidateFraction": 0.0,
+      "cullingChangedPixelFraction": 0.0
+    },
+    {
+      "id": "01-sun-court",
+      "kind": "home",
+      "position": [
+        -9,
+        2.0,
+        16
+      ],
+      "orientation": [
+        0.05911787224901306,
+        -0.17116305567370016,
+        0.010289460218501195,
+        0.9834136528244882
+      ],
+      "verticalStreakCandidateFraction": 0.0,
+      "cullingChangedPixelFraction": 0.0
+    },
+    {
+      "id": "02-array-hall",
+      "kind": "home",
+      "position": [
+        8,
+        2.0,
+        -33
+      ],
+      "orientation": [
+        0.20474699643439326,
+        -0.0,
+        0.0,
+        0.9788149301329105
+      ],
+      "verticalStreakCandidateFraction": 0.0,
+      "cullingChangedPixelFraction": 0.0
+    },
+    {
+      "id": "03-rime-vault",
+      "kind": "home",
+      "position": [
+        36,
+        -4.3,
+        -78
+      ],
+      "orientation": [
+        0.08601708089333719,
+        -0.0706249519746081,
+        0.006113045722145054,
+        0.9937684884444528
+      ],
+      "verticalStreakCandidateFraction": 0.0,
+      "cullingChangedPixelFraction": 0.0
+    },
+    {
+      "id": "04-signal-rise",
+      "kind": "home",
+      "position": [
+        38,
+        2.1,
+        -119
+      ],
+      "orientation": [
+        0.0830625225330817,
+        -0.2961834072430383,
+        0.025864963101682174,
+        0.951160875093217
+      ],
+      "verticalStreakCandidateFraction": 0.006528835690968444,
+      "cullingChangedPixelFraction": 0.0
+    },
+    {
+      "id": "court-60-down",
+      "kind": "targeted",
+      "position": [
+        4,
+        60,
+        -8
+      ],
+      "orientation": [
+        -0.7071067811865475,
+        -0.0,
+        -0.0,
+        0.7071067811865476
+      ],
+      "verticalStreakCandidateFraction": 0.0,
+      "cullingChangedPixelFraction": 0.0
+    },
+    {
+      "id": "court-60-north",
+      "kind": "targeted",
+      "position": [
+        4,
+        60,
+        -8
+      ],
+      "orientation": [
+        -0.2023401814622708,
+        -0.11141899259070634,
+        -0.023177747267503445,
+        0.9726803437345133
+      ],
+      "verticalStreakCandidateFraction": 0.0,
+      "cullingChangedPixelFraction": 0.0
+    },
+    {
+      "id": "sky-seam",
+      "kind": "targeted",
+      "position": [
+        4,
+        30,
+        -8
+      ],
+      "orientation": [
+        1.416277596434463e-18,
+        -0.9997324757477871,
+        0.023129568417939454,
+        6.121595882140932e-17
+      ],
+      "verticalStreakCandidateFraction": 0.0,
+      "cullingChangedPixelFraction": 0.0
+    },
+    {
+      "id": "sky-zenith",
+      "kind": "targeted",
+      "position": [
+        4,
+        60,
+        -8
+      ],
+      "orientation": [
+        0.7070714249637121,
+        -0.0,
+        0.0,
+        0.707142135641616
+      ],
+      "verticalStreakCandidateFraction": 0.0,
+      "cullingChangedPixelFraction": 0.0
+    },
+    {
+      "id": "hall-roof",
+      "kind": "targeted",
+      "position": [
+        2,
+        38,
+        -45
+      ],
+      "orientation": [
+        -0.48285847790293274,
+        -0.5038966642300359,
+        -0.4187809375546931,
+        0.5809977353104896
+      ],
+      "verticalStreakCandidateFraction": 0.0,
+      "cullingChangedPixelFraction": 0.0
+    },
+    {
+      "id": "vault-roof",
+      "kind": "targeted",
+      "position": [
+        65,
+        35,
+        -68
+      ],
+      "orientation": [
+        -0.35016835739097674,
+        0.4138516757130047,
+        0.1763888182302644,
+        0.8215813391228979
+      ],
+      "verticalStreakCandidateFraction": 0.0,
+      "cullingChangedPixelFraction": 0.0
+    },
+    {
+      "id": "rise-60",
+      "kind": "targeted",
+      "position": [
+        57,
+        60,
+        -143
+      ],
+      "orientation": [
+        -0.7071067811865475,
+        -0.0,
+        -0.0,
+        0.7071067811865476
+      ],
+      "verticalStreakCandidateFraction": 0.001088139281828074,
+      "cullingChangedPixelFraction": 0.0
+    },
+    {
+      "id": "rise-exterior",
+      "kind": "targeted",
+      "position": [
+        110,
+        60,
+        -170
+      ],
+      "orientation": [
+        -0.11124103568373488,
+        0.818720492726959,
+        0.16953853190451637,
+        0.5371953769054577
+      ],
+      "verticalStreakCandidateFraction": 0.0,
+      "cullingChangedPixelFraction": 0.0
+    },
+    {
+      "id": "stair-soffit",
+      "kind": "targeted",
+      "position": [
+        -17,
+        1.7,
+        -28
+      ],
+      "orientation": [
+        0.26843018507622385,
+        0.2705462268151857,
+        -0.0788384517084736,
+        0.9211593094726997
+      ],
+      "verticalStreakCandidateFraction": 0.0,
+      "cullingChangedPixelFraction": 0.0
+    },
+    {
+      "id": "cascade-model",
+      "kind": "targeted",
+      "position": [
+        -32,
+        15,
+        -28
+      ],
+      "orientation": [
+        -0.09804082796895654,
+        0.3035558140647466,
+        0.03141865917128771,
+        0.9472353095480177
+      ],
+      "verticalStreakCandidateFraction": 0.0,
+      "cullingChangedPixelFraction": 0.0
+    },
+    {
+      "id": "spire-model",
+      "kind": "targeted",
+      "position": [
+        -2,
+        26,
+        -67
+      ],
+      "orientation": [
+        -0.031892166826412736,
+        -0.2367746969608139,
+        -0.007776705899676608,
+        0.9710098637086962
+      ],
+      "verticalStreakCandidateFraction": 0.0,
+      "cullingChangedPixelFraction": 0.0
+    },
+    {
+      "id": "random-00",
+      "kind": "walkable",
+      "position": [
+        -14.335885383743891,
+        13.7,
+        -20.0
+      ],
+      "orientation": [
+        0.23256091037704557,
+        -0.5386401664068987,
+        0.15770720372395575,
+        0.7942988304103934
+      ],
+      "verticalStreakCandidateFraction": 0.0,
+      "cullingChangedPixelFraction": 0.0
+    },
+    {
+      "id": "random-01",
+      "kind": "walkable",
+      "position": [
+        28.5,
+        -0.30000000000000004,
+        -93.10456773535566
+      ],
+      "orientation": [
+        -0.07519010045680052,
+        -0.7797022727116794,
+        -0.6142486460368324,
+        0.09544325834471835
+      ],
+      "verticalStreakCandidateFraction": 0.0,
+      "cullingChangedPixelFraction": 0.0
+    },
+    {
+      "id": "random-02",
+      "kind": "walkable",
+      "position": [
+        15.229628068999187,
+        1.7,
+        -48.409876022999725
+      ],
+      "orientation": [
+        -0.4575948767667275,
+        -0.35526292181426766,
+        -0.20614405942621375,
+        0.7886062464272742
+      ],
+      "verticalStreakCandidateFraction": 0.0,
+      "cullingChangedPixelFraction": 0.0
+    },
+    {
+      "id": "random-03",
+      "kind": "walkable",
+      "position": [
+        -18.304799027895083,
+        1.7,
+        14.5
+      ],
+      "orientation": [
+        0.3407093993757101,
+        0.4832951445134693,
+        -0.2115996315541169,
+        0.7781828219595377
+      ],
+      "verticalStreakCandidateFraction": 0.0,
+      "cullingChangedPixelFraction": 0.0
+    },
+    {
+      "id": "random-04",
+      "kind": "walkable",
+      "position": [
+        -10.5,
+        1.7,
+        -38.69638984065257
+      ],
+      "orientation": [
+        -0.013833252717306968,
+        -0.5114979715049398,
+        -0.00823583229708662,
+        0.8591336551037708
+      ],
+      "verticalStreakCandidateFraction": 0.006528835690968444,
+      "cullingChangedPixelFraction": 0.0
+    },
+    {
+      "id": "random-05",
+      "kind": "walkable",
+      "position": [
+        -10.5,
+        3.1526655301846267,
+        -45.81066212073851
+      ],
+      "orientation": [
+        0.3614658831194721,
+        0.6057947939791444,
+        -0.35795375146533837,
+        0.6117386653958673
+      ],
+      "verticalStreakCandidateFraction": 0.0,
+      "cullingChangedPixelFraction": 0.0
+    },
+    {
+      "id": "random-06",
+      "kind": "walkable",
+      "position": [
+        54.37900708266622,
+        1.7,
+        -125.88434985955452
+      ],
+      "orientation": [
+        -0.03106124201077898,
+        -0.9688222418895275,
+        -0.18127312792830977,
+        0.16600818038875145
+      ],
+      "verticalStreakCandidateFraction": 0.0,
+      "cullingChangedPixelFraction": 0.0
+    },
+    {
+      "id": "random-07",
+      "kind": "walkable",
+      "position": [
+        8.0,
+        1.7,
+        -40.08587543217295
+      ],
+      "orientation": [
+        -0.6166870681717528,
+        0.030883685311046193,
+        0.02422393845164259,
+        0.7862292660141997
+      ],
+      "verticalStreakCandidateFraction": 0.001088139281828074,
+      "cullingChangedPixelFraction": 0.0
+    },
+    {
+      "id": "random-08",
+      "kind": "walkable",
+      "position": [
+        28.666146343600605,
+        1.7,
+        -50.0
+      ],
+      "orientation": [
+        -0.0993948172353368,
+        0.8586611764948631,
+        0.1820994573325774,
+        0.46868053290743
+      ],
+      "verticalStreakCandidateFraction": 0.0,
+      "cullingChangedPixelFraction": 0.0
+    },
+    {
+      "id": "random-09",
+      "kind": "walkable",
+      "position": [
+        55.83158251650606,
+        1.7,
+        -124.79649083149933
+      ],
+      "orientation": [
+        0.18512527733636647,
+        -0.7932144458707473,
+        0.5004372474275611,
+        0.29343148423477444
+      ],
+      "verticalStreakCandidateFraction": 0.0,
+      "cullingChangedPixelFraction": 0.0
+    },
+    {
+      "id": "random-10",
+      "kind": "walkable",
+      "position": [
+        5.167620004909055,
+        1.7,
+        -7.9537428641557915
+      ],
+      "orientation": [
+        0.2044684145899738,
+        0.7953582735599157,
+        -0.41268463240734216,
+        0.39406760624246917
+      ],
+      "verticalStreakCandidateFraction": 0.0,
+      "cullingChangedPixelFraction": 0.0
+    },
+    {
+      "id": "random-11",
+      "kind": "walkable",
+      "position": [
+        -10.5,
+        2.513717990818871,
+        -43.254871963275484
+      ],
+      "orientation": [
+        0.09967668444069006,
+        0.07953577354764461,
+        -0.007993377735719643,
+        0.991803773544678
+      ],
+      "verticalStreakCandidateFraction": 0.0,
+      "cullingChangedPixelFraction": 0.0
+    },
+    {
+      "id": "random-12",
+      "kind": "walkable",
+      "position": [
+        -2.2244038420877823,
+        1.7,
+        3.0157393099143284
+      ],
+      "orientation": [
+        -0.011325867633502467,
+        0.9012691827890528,
+        0.43246788390094604,
+        0.02360326823427598
+      ],
+      "verticalStreakCandidateFraction": 0.0,
+      "cullingChangedPixelFraction": 0.0
+    },
+    {
+      "id": "random-13",
+      "kind": "walkable",
+      "position": [
+        -21.5,
+        5.7,
+        -8.680365883085766
+      ],
+      "orientation": [
+        0.2627122777455912,
+        -0.27691107965659856,
+        0.07899632298084694,
+        0.9209028689501657
+      ],
+      "verticalStreakCandidateFraction": 0.0,
+      "cullingChangedPixelFraction": 0.0
+    },
+    {
+      "id": "random-14",
+      "kind": "walkable",
+      "position": [
+        -9.27673305003348,
+        5.7,
+        -59.2
+      ],
+      "orientation": [
+        -0.08393412759653981,
+        0.8550113648484872,
+        0.14633784782559492,
+        0.49040377496335386
+      ],
+      "verticalStreakCandidateFraction": 0.0,
+      "cullingChangedPixelFraction": 0.0
+    },
+    {
+      "id": "random-15",
+      "kind": "walkable",
+      "position": [
+        30.0,
+        1.7,
+        -51.73391599272544
+      ],
+      "orientation": [
+        0.1752222836458784,
+        0.8246172945261795,
+        -0.3712699349268243,
+        0.38918132573606234
+      ],
+      "verticalStreakCandidateFraction": 0.0,
+      "cullingChangedPixelFraction": 0.0
+    },
+    {
+      "id": "random-16",
+      "kind": "elevated",
+      "position": [
+        1.0,
+        56.699767474581435,
+        0.14348369125389304
+      ],
+      "orientation": [
+        -0.36777070572170145,
+        0.5329384940123733,
+        0.2759214744906344,
+        0.7103440078776617
+      ],
+      "verticalStreakCandidateFraction": 0.0,
+      "cullingChangedPixelFraction": 0.0
+    },
+    {
+      "id": "random-17",
+      "kind": "elevated",
+      "position": [
+        60.69593936463862,
+        26.84063042288714,
+        -134.46395957642574
+      ],
+      "orientation": [
+        0.0559491735777528,
+        0.6449770830697271,
+        -0.047439470438417536,
+        0.7606732208612021
+      ],
+      "verticalStreakCandidateFraction": 0.0,
+      "cullingChangedPixelFraction": 0.0
+    },
+    {
+      "id": "random-18",
+      "kind": "elevated",
+      "position": [
+        -6.0,
+        39.4030646467438,
+        -6.423873479749468
+      ],
+      "orientation": [
+        0.08697012423243794,
+        -0.253793080372411,
+        0.022918854589461933,
+        0.9630680121104555
+      ],
+      "verticalStreakCandidateFraction": 0.0,
+      "cullingChangedPixelFraction": 0.0
+    },
+    {
+      "id": "random-19",
+      "kind": "elevated",
+      "position": [
+        -6.005467617036905,
+        30.605193139412226,
+        -36.0
+      ],
+      "orientation": [
+        0.42011449960958935,
+        -0.48583269667662315,
+        0.2872237656368253,
+        0.7106144570096409
+      ],
+      "verticalStreakCandidateFraction": 0.0,
+      "cullingChangedPixelFraction": 0.0
+    },
+    {
+      "id": "random-20",
+      "kind": "elevated",
+      "position": [
+        31.5,
+        47.30204815000435,
+        -139.6926492660261
+      ],
+      "orientation": [
+        0.03861227161332528,
+        0.9359713312728718,
+        -0.10863852837358827,
+        0.33266263641859106
+      ],
+      "verticalStreakCandidateFraction": 0.0,
+      "cullingChangedPixelFraction": 0.0
+    },
+    {
+      "id": "random-21",
+      "kind": "elevated",
+      "position": [
+        77.92654480200721,
+        49.516197202471474,
+        -113.42812106711271
+      ],
+      "orientation": [
+        0.030481913656700898,
+        0.9032297058283169,
+        -0.4230986839263228,
+        0.06507269096119542
+      ],
+      "verticalStreakCandidateFraction": 0.0,
+      "cullingChangedPixelFraction": 0.0
+    },
+    {
+      "id": "random-22",
+      "kind": "elevated",
+      "position": [
+        30.8603166945097,
+        26.813310405146915,
+        -74.0
+      ],
+      "orientation": [
+        -0.05334322052335006,
+        0.6190290115881384,
+        0.042203836974579585,
+        0.7824170369956374
+      ],
+      "verticalStreakCandidateFraction": 0.0,
+      "cullingChangedPixelFraction": 0.0
+    },
+    {
+      "id": "random-23",
+      "kind": "elevated",
+      "position": [
+        77.97454018737061,
+        50.68812558115978,
+        -113.43878670830458
+      ],
+      "orientation": [
+        0.3018319744337329,
+        0.6840319248827194,
+        -0.3782657652815084,
+        0.5458138838163344
+      ],
+      "verticalStreakCandidateFraction": 0.0,
+      "cullingChangedPixelFraction": 0.0
+    },
+    {
+      "id": "random-24",
+      "kind": "elevated",
+      "position": [
+        -6.0,
+        27.390719862119912,
+        -6.749625532657529
+      ],
+      "orientation": [
+        0.0011834782948012081,
+        -0.6933713887224688,
+        0.0011387932794246372,
+        0.7205785313413573
+      ],
+      "verticalStreakCandidateFraction": 0.0,
+      "cullingChangedPixelFraction": 0.0
+    },
+    {
+      "id": "random-25",
+      "kind": "elevated",
+      "position": [
+        -21.5,
+        42.26271589727822,
+        -14.070148639138054
+      ],
+      "orientation": [
+        -0.310171998262945,
+        0.4314753160107742,
+        0.16091272967953624,
+        0.8317027573562894
+      ],
+      "verticalStreakCandidateFraction": 0.0,
+      "cullingChangedPixelFraction": 0.0
+    },
+    {
+      "id": "random-26",
+      "kind": "elevated",
+      "position": [
+        59.611036488521336,
+        52.35562069953479,
+        -133.74069099234757
+      ],
+      "orientation": [
+        0.33393897702738967,
+        0.6582622624022332,
+        -0.4106500003349156,
+        0.5352963018216433
+      ],
+      "verticalStreakCandidateFraction": 0.0,
+      "cullingChangedPixelFraction": 0.0
+    },
+    {
+      "id": "random-27",
+      "kind": "elevated",
+      "position": [
+        28.5,
+        41.78944402027879,
+        -88.40497486545584
+      ],
+      "orientation": [
+        -0.4736748937673382,
+        -0.3987040231611922,
+        -0.2541777309743956,
+        0.7430079932317607
+      ],
+      "verticalStreakCandidateFraction": 0.0,
+      "cullingChangedPixelFraction": 0.0
+    },
+    {
+      "id": "random-28",
+      "kind": "elevated",
+      "position": [
+        -18.142478575842738,
+        44.45481748299444,
+        14.5
+      ],
+      "orientation": [
+        -0.1975547134037926,
+        0.3991558060855314,
+        0.08850556828326651,
+        0.8909621440123093
+      ],
+      "verticalStreakCandidateFraction": 0.0,
+      "cullingChangedPixelFraction": 0.0
+    },
+    {
+      "id": "random-29",
+      "kind": "elevated",
+      "position": [
+        30.777567429264792,
+        41.222879593298295,
+        -74.69853289756297
+      ],
+      "orientation": [
+        0.07677172529894088,
+        0.38660172008872845,
+        -0.03231443317319616,
+        0.9184775389892533
+      ],
+      "verticalStreakCandidateFraction": 0.0,
+      "cullingChangedPixelFraction": 0.0
+    },
+    {
+      "id": "random-30",
+      "kind": "elevated",
+      "position": [
+        66.46340708004539,
+        30.125721224108574,
+        -121.06942477842313
+      ],
+      "orientation": [
+        -0.5052193364187776,
+        -0.30315874551209665,
+        -0.19535469322299,
+        0.7840183294820684
+      ],
+      "verticalStreakCandidateFraction": 0.0,
+      "cullingChangedPixelFraction": 0.0
+    },
+    {
+      "id": "random-31",
+      "kind": "elevated",
+      "position": [
+        28.5,
+        46.24574094701964,
+        -92.43601558646324
+      ],
+      "orientation": [
+        0.05450007541414543,
+        -0.44466606145502935,
+        0.027119118789585103,
+        0.8936254187107711
+      ],
+      "verticalStreakCandidateFraction": 0.0,
+      "cullingChangedPixelFraction": 0.0
+    }
+  ]
+}
