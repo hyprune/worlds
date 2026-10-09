@@ -97,11 +97,13 @@ def nearest(T,origin,target):
 # inside one at or above walking level (rock walls inside a basin's yard).
 closed=[(k,(pp.max(axis=0)+pp.min(axis=0))/2,Triangles(s,lambda key,mat,k=k:key==k)) for k,_,_,pp,_,_ in sorted(skies,key=lambda r:np.ptp(r[3],axis=0).max())[:-1]]
 def inside_closed(point):
- # Majority of five rays towards the centre region cross no sky wall (one
- # ray may slip through a passage portal).
+ # Most of seven rays to targets spread across the sky's extent cross no
+ # sky wall (a ray or two may slip through a passage portal).
  for k,c,T in closed:
-  clear=sum(nearest(T,point,c+o) is None for o in np.array([(0,0,0),(0,20,0),(0,-20,0),(20,0,0),(-20,0,0)],float))
-  if clear>=3:return k
+  half=(T.tri.reshape(-1,3).max(axis=0)-T.tri.reshape(-1,3).min(axis=0))/2*.6
+  targets=[c]+[c+half*np.array(v) for v in [(1,0,0),(-1,0,0),(0,1,0),(0,-1,0),(0,0,1),(0,0,-1)]]
+  clear=sum(nearest(T,point,t) is None for t in targets)
+  if clear>=5:return k
  return None
 
 # Leak rays: 50 fibonacci directions to 700 m from every eye.
