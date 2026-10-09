@@ -230,8 +230,13 @@ def boundaries(B):
   k=max(1,math.ceil(math.dist(a,b)/2))
   for t in range(k):
    p=[a[i]+(b[i]-a[i])*t/k for i in [0,1]];r=[a[i]+(b[i]-a[i])*(t+1)/k for i in [0,1]]
-   top=highest(p,r,inward,3);top=highest(p,r,inward,8) if top is None else top
-   hi=(spec['backstopFallbackTop'] if top is None else top+clear);pieces.append(round(hi,3))
-   q=len(vertices);vertices.extend([(p[0],p[1],lo),(r[0],r[1],lo),(r[0],r[1],hi),(p[0],p[1],hi)]);faces.append((q,q+1,q+2,q+3))
+   top=highest(p,r,inward,3);top=highest(p,r,inward,8) if top is None else top;pieces.append([p,r,top])
+ # A piece with no walkable surface inside follows pieces within 3m of it.
+ for piece in pieces:
+  if piece[2] is None:piece[2]=max((o[2] for o in pieces if o[2] is not None and min(math.dist(u,v) for u in piece[:2] for v in o[:2])<3),default=None)
+ for p,r,top in pieces:
+  hi=spec['backstopFallbackTop'] if top is None else top+clear
+  q=len(vertices);vertices.extend([(p[0],p[1],lo),(r[0],r[1],lo),(r[0],r[1],hi),(p[0],p[1],hi)]);faces.append((q,q+1,q+2,q+3))
+ pieces=[round(spec['backstopFallbackTop'] if top is None else top+clear,3) for p,r,top in pieces]
  me=B.bpy.data.meshes.new('Playable perimeter');me.from_pydata(vertices,[],faces);o=B.bpy.data.objects.new('Playable perimeter',me);B.bpy.context.collection.objects.link(o);o.hide_render=True;B.WALK.append(o)
  spec['collisionBoundarySegments']=len(edges);spec['collisionBackstopPieces']=len(pieces);spec['backstopTopRange']=[min(pieces),max(pieces)];(B.ART/'playable-boundary-report.json').write_text(json.dumps(spec,indent=2)+'\n')
