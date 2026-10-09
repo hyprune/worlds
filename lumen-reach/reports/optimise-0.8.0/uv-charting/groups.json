@@ -1,0 +1,58 @@
+[
+  {
+    "group": "sun-court",
+    "triangles": 47596,
+    "resolution": 2048,
+    "margin": 4,
+    "blenderUnwrapSeconds": 0.96,
+    "bakeSeconds": 4.63
+  },
+  {
+    "group": "foliage",
+    "triangles": 20736,
+    "resolution": 1024,
+    "margin": 2,
+    "blenderUnwrapSeconds": 0.26,
+    "bakeSeconds": 2.21
+  },
+  {
+    "group": "array-hall",
+    "triangles": 29272,
+    "resolution": 1536,
+    "margin": 4,
+    "blenderUnwrapSeconds": 0.57,
+    "bakeSeconds": 2.93
+  },
+  {
+    "group": "rime-vault",
+    "triangles": 44612,
+    "resolution": 2048,
+    "margin": 4,
+    "blenderUnwrapSeconds": 0.8,
+    "bakeSeconds": 4.76
+  },
+  {
+    "group": "signal-rise",
+    "triangles": 62624,
+    "resolution": 2048,
+    "margin": 4,
+    "blenderUnwrapSeconds": 0.58,
+    "bakeSeconds": 4.51
+  },
+  {
+    "group": "connector-descent",
+    "triangles": 2798,
+    "resolution": 768,
+    "margin": 4,
+    "blenderUnwrapSeconds": 12.22,
+    "bakeSeconds": 1.86
+  },
+  {
+    "group": "connector-ascent",
+    "triangles": 2666,
+    "resolution": 768,
+    "margin": 4,
+    "blenderUnwrapSeconds": 12.3,
+    "bakeSeconds": 1.87
+  }
+]

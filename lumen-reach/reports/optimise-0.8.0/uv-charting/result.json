@@ -1,0 +1,236 @@
+{
+ "tool": "xatlas 0.0.10 (python bindings, MIT) vs Blender 5.2 smart_project+pack_islands",
+ "groups": [
+  {
+   "group": "sun-court",
+   "triangles": 47596,
+   "resolution": 2048,
+   "paddingPx": 4,
+   "bakeSeconds": 4.63,
+   "blender": {
+    "coverage": 0.1829,
+    "densityMedianPxPerM": 8.36,
+    "densityCV": 0.005,
+    "charts": 17807,
+    "chartsUnder2x2Texels": 14177,
+    "zeroAreaUVTriangles": 0,
+    "seconds": 0.96
+   },
+   "xatlas": {
+    "coverage": 0.22,
+    "densityMedianPxPerM": 8.8,
+    "densityCV": 0.127,
+    "charts": 7612,
+    "chartsUnder2x2Texels": 2704,
+    "zeroAreaUVTriangles": 0,
+    "seconds": 4.94,
+    "atlasCount": 1,
+    "packPasses": 4,
+    "texelsPerUnit": 8.77,
+    "utilization": 0.6954,
+    "atlasSize": [
+     2048,
+     2048
+    ]
+   }
+  },
+  {
+   "group": "foliage",
+   "triangles": 20736,
+   "resolution": 1024,
+   "paddingPx": 2,
+   "bakeSeconds": 2.21,
+   "blender": {
+    "coverage": 0.2132,
+    "densityMedianPxPerM": 33.36,
+    "densityCV": 0.017,
+    "charts": 10368,
+    "chartsUnder2x2Texels": 45,
+    "zeroAreaUVTriangles": 0,
+    "seconds": 0.26
+   },
+   "xatlas": {
+    "coverage": 0.0761,
+    "densityMedianPxPerM": 19.52,
+    "densityCV": 0.076,
+    "charts": 10368,
+    "chartsUnder2x2Texels": 1809,
+    "zeroAreaUVTriangles": 0,
+    "seconds": 12.16,
+    "atlasCount": 1,
+    "packPasses": 6,
+    "texelsPerUnit": 17.053,
+    "utilization": 0.7173,
+    "atlasSize": [
+     1024,
+     1024
+    ]
+   }
+  },
+  {
+   "group": "array-hall",
+   "triangles": 29272,
+   "resolution": 1536,
+   "paddingPx": 4,
+   "bakeSeconds": 2.93,
+   "blender": {
+    "coverage": 0.1101,
+    "densityMedianPxPerM": 5.21,
+    "densityCV": 0.004,
+    "charts": 13948,
+    "chartsUnder2x2Texels": 11852,
+    "zeroAreaUVTriangles": 0,
+    "seconds": 0.57
+   },
+   "xatlas": {
+    "coverage": 0.1989,
+    "densityMedianPxPerM": 6.67,
+    "densityCV": 0.123,
+    "charts": 5400,
+    "chartsUnder2x2Texels": 2639,
+    "zeroAreaUVTriangles": 0,
+    "seconds": 3.79,
+    "atlasCount": 1,
+    "packPasses": 4,
+    "texelsPerUnit": 6.633,
+    "utilization": 0.7656,
+    "atlasSize": [
+     1536,
+     1536
+    ]
+   }
+  },
+  {
+   "group": "rime-vault",
+   "triangles": 44612,
+   "resolution": 2048,
+   "paddingPx": 4,
+   "bakeSeconds": 4.76,
+   "blender": {
+    "coverage": 0.1977,
+    "densityMedianPxPerM": 9.85,
+    "densityCV": 0.006,
+    "charts": 18904,
+    "chartsUnder2x2Texels": 14747,
+    "zeroAreaUVTriangles": 0,
+    "seconds": 0.8
+   },
+   "xatlas": {
+    "coverage": 0.2124,
+    "densityMedianPxPerM": 9.84,
+    "densityCV": 0.093,
+    "charts": 9641,
+    "chartsUnder2x2Texels": 5259,
+    "zeroAreaUVTriangles": 0,
+    "seconds": 6.55,
+    "atlasCount": 1,
+    "packPasses": 4,
+    "texelsPerUnit": 9.799,
+    "utilization": 0.7181,
+    "atlasSize": [
+     2048,
+     2048
+    ]
+   }
+  },
+  {
+   "group": "signal-rise",
+   "triangles": 62624,
+   "resolution": 2048,
+   "paddingPx": 4,
+   "bakeSeconds": 4.51,
+   "blender": {
+    "coverage": 0.1588,
+    "densityMedianPxPerM": 5.56,
+    "densityCV": 0.009,
+    "charts": 22551,
+    "chartsUnder2x2Texels": 19316,
+    "zeroAreaUVTriangles": 0,
+    "seconds": 0.58
+   },
+   "xatlas": {
+    "coverage": 0.2144,
+    "densityMedianPxPerM": 6.19,
+    "densityCV": 0.12,
+    "charts": 9575,
+    "chartsUnder2x2Texels": 4295,
+    "zeroAreaUVTriangles": 0,
+    "seconds": 6.49,
+    "atlasCount": 1,
+    "packPasses": 4,
+    "texelsPerUnit": 6.17,
+    "utilization": 0.7202,
+    "atlasSize": [
+     2048,
+     2048
+    ]
+   }
+  },
+  {
+   "group": "connector-descent",
+   "triangles": 2798,
+   "resolution": 768,
+   "paddingPx": 4,
+   "bakeSeconds": 1.86,
+   "blender": {
+    "coverage": 0.4661,
+    "densityMedianPxPerM": 12.05,
+    "densityCV": 0.008,
+    "charts": 1555,
+    "chartsUnder2x2Texels": 1216,
+    "zeroAreaUVTriangles": 0,
+    "seconds": 12.22
+   },
+   "xatlas": {
+    "coverage": 0.6387,
+    "densityMedianPxPerM": 13.95,
+    "densityCV": 0.021,
+    "charts": 369,
+    "chartsUnder2x2Texels": 29,
+    "zeroAreaUVTriangles": 0,
+    "seconds": 0.16,
+    "atlasCount": 1,
+    "packPasses": 2,
+    "texelsPerUnit": 13.907,
+    "utilization": 0.8967,
+    "atlasSize": [
+     768,
+     768
+    ]
+   }
+  },
+  {
+   "group": "connector-ascent",
+   "triangles": 2666,
+   "resolution": 768,
+   "paddingPx": 4,
+   "bakeSeconds": 1.87,
+   "blender": {
+    "coverage": 0.4696,
+    "densityMedianPxPerM": 11.66,
+    "densityCV": 0.006,
+    "charts": 1573,
+    "chartsUnder2x2Texels": 1216,
+    "zeroAreaUVTriangles": 0,
+    "seconds": 12.3
+   },
+   "xatlas": {
+    "coverage": 0.6282,
+    "densityMedianPxPerM": 13.36,
+    "densityCV": 0.02,
+    "charts": 344,
+    "chartsUnder2x2Texels": 24,
+    "zeroAreaUVTriangles": 0,
+    "seconds": 0.14,
+    "atlasCount": 1,
+    "packPasses": 2,
+    "texelsPerUnit": 13.322,
+    "utilization": 0.8898,
+    "atlasSize": [
+     768,
+     768
+    ]
+   }
+  }
+ ]
+}

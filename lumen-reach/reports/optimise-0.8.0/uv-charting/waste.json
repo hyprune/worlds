@@ -1,0 +1,58 @@
+[
+ {
+  "group": "sun-court",
+  "charts": 17807,
+  "tinyCharts": 14177,
+  "tinyChartsTexelArea": 0.0028,
+  "tinyChartsPaddedFootprint": 0.346,
+  "allChartsPaddedFootprint": 0.926
+ },
+ {
+  "group": "foliage",
+  "charts": 10368,
+  "tinyCharts": 45,
+  "tinyChartsTexelArea": 0.0002,
+  "tinyChartsPaddedFootprint": 0.002,
+  "allChartsPaddedFootprint": 0.986
+ },
+ {
+  "group": "array-hall",
+  "charts": 13948,
+  "tinyCharts": 11852,
+  "tinyChartsTexelArea": 0.0019,
+  "tinyChartsPaddedFootprint": 0.43,
+  "allChartsPaddedFootprint": 0.939
+ },
+ {
+  "group": "rime-vault",
+  "charts": 18904,
+  "tinyCharts": 14747,
+  "tinyChartsTexelArea": 0.0029,
+  "tinyChartsPaddedFootprint": 0.336,
+  "allChartsPaddedFootprint": 0.944
+ },
+ {
+  "group": "signal-rise",
+  "charts": 22551,
+  "tinyCharts": 19316,
+  "tinyChartsTexelArea": 0.0027,
+  "tinyChartsPaddedFootprint": 0.431,
+  "allChartsPaddedFootprint": 0.961
+ },
+ {
+  "group": "connector-descent",
+  "charts": 1555,
+  "tinyCharts": 1216,
+  "tinyChartsTexelArea": 0.0014,
+  "tinyChartsPaddedFootprint": 0.203,
+  "allChartsPaddedFootprint": 0.912
+ },
+ {
+  "group": "connector-ascent",
+  "charts": 1573,
+  "tinyCharts": 1216,
+  "tinyChartsTexelArea": 0.0012,
+  "tinyChartsPaddedFootprint": 0.203,
+  "allChartsPaddedFootprint": 0.935
+ }
+]
