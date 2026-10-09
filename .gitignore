@@ -7,3 +7,5 @@ __pycache__/
 /switchyard/materials/tiles/
 
 /lumen-reach/materials/tiles/
+
+/tools/navmesh/node_modules/

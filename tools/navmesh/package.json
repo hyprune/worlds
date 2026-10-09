@@ -1,0 +1,10 @@
+{
+  "name": "hyprune-worlds-navmesh",
+  "private": true,
+  "description": "Build-time Recast/Detour navmesh check for Hyprune world packages",
+  "license": "MIT",
+  "type": "module",
+  "dependencies": {
+    "recast-navigation": "0.43.1"
+  }
+}
