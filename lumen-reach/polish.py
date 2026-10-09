@@ -86,10 +86,18 @@ def apply(area,B):
     plate('Rack cable spine',(face,y+.82,2.5),(.15,.10,4.8),'black')
    for ya,yb in [(34,42),(49,57)]:
     for z in [6,12,17]:
+     # 0.7.2: the west top lintel of this bay sat 0.88 m above the roof bridge
+     # (z 16) and crossed the walkway; raised to clear 2.28 m.
+     if x<0 and ya==34 and z==17:z=18.4
      plate('Hall service lintel',(x,(ya+yb)/2,z),(.75,yb-ya,.24),'metal')
   for x in [-5.8,23.8]:
    for y in [36.8,41.5,50,54.8]:
-    plate('Atrium secondary rib',(x,y,11.5),(.58,.30,17.5),'concrete')
+    if x<0 and y==36.8:
+     # 0.7.2: the roof bridge (z 16, y 36..37.5) crosses this rib, which stood
+     # render-only in the walkway; it now stops under the deck and resumes
+     # 2.6 m above it.
+     for z0,z1 in [(2.75,15.8),(18.6,20.25)]:plate('Atrium secondary rib',(x,y,(z0+z1)/2),(.58,.30,z1-z0),'concrete')
+    else:plate('Atrium secondary rib',(x,y,11.5),(.58,.30,17.5),'concrete')
     for z in [4.7,9.2,15.3]:plate('Pier inset collar',(x,y,z),(.66,.50,.13),'trim')
   # A visible housing, radial braces and properly hung ceiling ring.
   B.torus('Light ring structural rim',(8,46,19.93),8.5,.14,'metal')
