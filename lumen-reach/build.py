@@ -344,7 +344,9 @@ def court():
  # 0.7.2: the final ramp's foot used to sit on this slab's open south lip
  # (rails start 0.5 m up the ramp, no headroom under it), so it was reachable
  # only by a capsule hanging over the drop. A 1.5 m railed apron makes it a
- # proper landing (tools/check-navmesh.py).
+ # proper landing (tools/check-navmesh.py). Route nodes stay at the ramp's
+ # ends (the graph is at core's 64-node limit); roof-bridge sits 0.9 m into
+ # the 1.5 m bridge so the diagonal clears the open slot beside the ramp.
  slab('Roof upper landing',-20,-7.3,18.5,24,12,'concrete');ramp('Roof final approach',-13.2,-10.2,20,36,12,16,20)
  rail((-20,18.5,12),(-7.3,18.5,12));rail((-20,18.5,12),(-20,20,12));rail((-7.3,18.5,12),(-7.3,20,12))
  slab('Rooftop bridge',-13.2,-3,36,37.5,16,'concrete');slab('Rooftop bridge run',-7,-3,22,36,16,'concrete');rail((-7,22,16),(-7,35.5,16))
@@ -385,7 +387,7 @@ def court():
  for y in [-12,-8,-4,1,5,18,21]:box('Paving expansion seam',(3,y,.01),(37,.025,.012),'metal',0)
  point('arrival',(-8,-12,0));point('court-junction',(1,2,0),'arrival');point('court-wall',(8,12,0),'court-junction');point('hall-entry',(8,25,0),'court-wall')
  point('globe-road',(1,-2,0),'court-junction');point('globe-approach',(-6,-2,0),'globe-road');point('globe-ramp',(-6,0,0),'globe-approach');point('globe-terrace',(-6,6,1.2),'globe-ramp');point('globe-platform',(-6,7,1.2),'globe-terrace')
- point('lookout-south',(-8,-14.5,0),'arrival');point('lookout-west',(-21.5,-14.5,0),'lookout-south');point('lookout-base',(-21.5,-10,0),'lookout-west');point('lookout',(-21.5,6,4),'lookout-base');point('cascade-turn',(-21.5,14,4),'lookout');point('cascade-bridge',(-31,14,4),'cascade-turn');point('roof-lower',(-21.5,24,4),'lookout');point('roof-switchback',(-21.5,40,8),'roof-lower');point('roof-turn',(-16.5,42,8),'roof-switchback');point('roof-return',(-16.5,40,8),'roof-turn');point('roof-upper',(-16.5,24,12),'roof-return');point('roof-start-west',(-16.5,19.25,12),'roof-upper');point('roof-start',(-11.7,19.25,12),'roof-start-west');point('roof-final',(-11.7,36.75,16),'roof-start');point('roof-bridge',(-5,36.75,16),'roof-final');point('rooftop',(-5,24,16),'roof-bridge')
+ point('lookout-south',(-8,-14.5,0),'arrival');point('lookout-west',(-21.5,-14.5,0),'lookout-south');point('lookout-base',(-21.5,-10,0),'lookout-west');point('lookout',(-21.5,6,4),'lookout-base');point('cascade-turn',(-21.5,14,4),'lookout');point('cascade-bridge',(-31,14,4),'cascade-turn');point('roof-lower',(-21.5,24,4),'lookout');point('roof-switchback',(-21.5,40,8),'roof-lower');point('roof-turn',(-16.5,42,8),'roof-switchback');point('roof-return',(-16.5,40,8),'roof-turn');point('roof-upper',(-16.5,24,12),'roof-return');point('roof-start-west',(-16.5,20,12),'roof-upper');point('roof-start',(-11.7,20,12),'roof-start-west');point('roof-final',(-11.7,36,16),'roof-start');point('roof-bridge',(-5,36.9,16),'roof-final');point('rooftop',(-5,24,16),'roof-bridge')
  VIEWS.extend([{'id':'01-sun-court','position':[-13,-13,1.9],'target':[4,23,7]},{'id':'01-sun-court-terrace','position':[-21,15,5.7],'target':[4,12,8]}])
 
 
