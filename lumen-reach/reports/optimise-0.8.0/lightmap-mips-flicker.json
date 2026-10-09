@@ -1,0 +1,77 @@
+{
+ "method": "Temporal shimmer from lumen-measure-session.py flicker frames.\n\nFrames are held stills at 3.5 m/s walking, 1/60 s apart, pitched 0.10-0.12 rad\ndown with a 60 deg FOV. The band 0.44-0.52 of the image height sees floor at\nroughly 15-60 m. Per pixel luminance L(t): smooth motion gives small second\ndifferences L(t+1)-2L(t)+L(t-1); shimmer and crawling texels give large ones.\nReports mean |second difference| and its 95th percentile (0-255 luminance),\nplus mean |first difference| for scale, per variant and path.\nflicker-metric.py <report.json> [--output out.json] Second block: per path, pixels where A and B differ anywhere along the walk, their fraction of the frame, and shimmer on those pixels only (A = no lightmap mips, B = mips).",
+ "rows": [
+  {
+   "variant": "A",
+   "path": "court-north",
+   "frames": 24,
+   "meanAbsSecondDiff": 11.4369,
+   "p95AbsSecondDiff": 80.543,
+   "meanAbsFirstDiff": 6.7073
+  },
+  {
+   "variant": "A",
+   "path": "rise-north",
+   "frames": 24,
+   "meanAbsSecondDiff": 4.7014,
+   "p95AbsSecondDiff": 14.629,
+   "meanAbsFirstDiff": 2.9898
+  },
+  {
+   "variant": "A",
+   "path": "hall-north",
+   "frames": 24,
+   "meanAbsSecondDiff": 8.0792,
+   "p95AbsSecondDiff": 28.281,
+   "meanAbsFirstDiff": 5.1514
+  },
+  {
+   "variant": "B",
+   "path": "court-north",
+   "frames": 24,
+   "meanAbsSecondDiff": 11.3785,
+   "p95AbsSecondDiff": 80.209,
+   "meanAbsFirstDiff": 6.6885
+  },
+  {
+   "variant": "B",
+   "path": "rise-north",
+   "frames": 24,
+   "meanAbsSecondDiff": 4.6918,
+   "p95AbsSecondDiff": 14.57,
+   "meanAbsFirstDiff": 2.9832
+  },
+  {
+   "variant": "B",
+   "path": "hall-north",
+   "frames": 24,
+   "meanAbsSecondDiff": 8.1259,
+   "p95AbsSecondDiff": 28.281,
+   "meanAbsFirstDiff": 5.1457
+  },
+  {
+   "path": "court-north",
+   "pixelsChangedFraction": 0.07421,
+   "meanAbsDiffAB": 0.2261,
+   "shimmerChangedPixelsA": 21.0066,
+   "shimmerChangedPixelsB": 20.0774,
+   "shimmerReduction": 0.0442
+  },
+  {
+   "path": "hall-north",
+   "pixelsChangedFraction": 0.02998,
+   "meanAbsDiffAB": 0.1067,
+   "shimmerChangedPixelsA": 16.4659,
+   "shimmerChangedPixelsB": 16.5041,
+   "shimmerReduction": -0.0023
+  },
+  {
+   "path": "rise-north",
+   "pixelsChangedFraction": 0.02051,
+   "meanAbsDiffAB": 0.0716,
+   "shimmerChangedPixelsA": 11.9611,
+   "shimmerChangedPixelsB": 11.9014,
+   "shimmerReduction": 0.005
+  }
+ ]
+}

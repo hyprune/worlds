@@ -1,0 +1,68 @@
+{
+ "session": "artifacts/opt-0.8.0/ab/report.json",
+ "coreCommit": "49c84088871a836fa5f4d02493c80de09d288fbe",
+ "pluginSHA256": "a98e051dc33f526d2417a50c4ab617869118b47ef4fd60efd38f27b101195973",
+ "setup": "private nested, native 3840x2160, Intel, quality medium, fixed render scale 0.5, continuous rendering; 3 rounds alternating A/B/C in one compositor; 30 frames per pose",
+ "variants": {
+  "A": {
+   "package": "0.7.2 published (format 0.5)",
+   "packageMiB": 70.46,
+   "gpuMiB": 270.54,
+   "loadReadyMsWarm": 2677.8,
+   "loadReadyMsCold": 3124.6,
+   "uploadCpuMsWarm": 53.7,
+   "uploadSteps": 111,
+   "gpuMsPerPose": {
+    "array-hall": 9.27,
+    "arrival": 9.765,
+    "rime-vault": 9.516,
+    "signal-rise": 9.157
+   },
+   "gpuMsMeanOfPoses": 9.427,
+   "worldShadingMsMedian": 3.241
+  },
+  "B": {
+   "package": "0.8.0 source (format 0.5, lightmap mips)",
+   "packageMiB": 70.46,
+   "gpuMiB": 270.54,
+   "loadReadyMsWarm": 2699.9,
+   "loadReadyMsCold": 2792.0,
+   "uploadCpuMsWarm": 54.2,
+   "uploadSteps": 111,
+   "gpuMsPerPose": {
+    "array-hall": 9.47,
+    "arrival": 9.52,
+    "rime-vault": 9.991,
+    "signal-rise": 9.411
+   },
+   "gpuMsMeanOfPoses": 9.598,
+   "worldShadingMsMedian": 3.188
+  },
+  "C": {
+   "package": "0.8.0 release (format 0.7)",
+   "packageMiB": 41.37,
+   "gpuMiB": 149.8,
+   "loadReadyMsWarm": 2058.4,
+   "loadReadyMsCold": 2139.6,
+   "uploadCpuMsWarm": 38.2,
+   "uploadSteps": 68,
+   "gpuMsPerPose": {
+    "array-hall": 9.212,
+    "arrival": 9.219,
+    "rime-vault": 9.719,
+    "signal-rise": 9.442
+   },
+   "gpuMsMeanOfPoses": 9.398,
+   "worldShadingMsMedian": 3.129
+  }
+ },
+ "releaseVs072": {
+  "packageMiB": -41.3,
+  "gpuMiB": -44.6,
+  "loadReadyMsWarm": -23.1,
+  "uploadCpuMsWarm": -28.9,
+  "gpuMsMeanOfPoses": -0.3,
+  "worldShadingMsMedian": -3.5,
+  "unit": "percent change, 0.8.0 release vs 0.7.2"
+ }
+}

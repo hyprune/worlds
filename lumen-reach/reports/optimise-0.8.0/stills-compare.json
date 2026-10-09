@@ -1,0 +1,98 @@
+[
+ {
+  "a": "artifacts/opt-0.8.0/ab/A-arrival.png",
+  "b": "artifacts/opt-0.8.0/ab/C-arrival.png",
+  "psnrDb": 38.07,
+  "deltaE2000Mean": 0.866,
+  "deltaE2000P95": 2.189,
+  "pixelsOver2": 0.06596
+ },
+ {
+  "a": "artifacts/opt-0.8.0/ab/B-arrival.png",
+  "b": "artifacts/opt-0.8.0/ab/C-arrival.png",
+  "psnrDb": 38.51,
+  "deltaE2000Mean": 0.846,
+  "deltaE2000P95": 2.157,
+  "pixelsOver2": 0.06285
+ },
+ {
+  "a": "artifacts/opt-0.8.0/ab/A-arrival.png",
+  "b": "artifacts/opt-0.8.0/ab/B-arrival.png",
+  "psnrDb": 48.15,
+  "deltaE2000Mean": 0.194,
+  "deltaE2000P95": 1.058,
+  "pixelsOver2": 0.00725
+ },
+ {
+  "a": "artifacts/opt-0.8.0/ab/A-array-hall.png",
+  "b": "artifacts/opt-0.8.0/ab/C-array-hall.png",
+  "psnrDb": 40.89,
+  "deltaE2000Mean": 0.76,
+  "deltaE2000P95": 1.976,
+  "pixelsOver2": 0.04793
+ },
+ {
+  "a": "artifacts/opt-0.8.0/ab/B-array-hall.png",
+  "b": "artifacts/opt-0.8.0/ab/C-array-hall.png",
+  "psnrDb": 41.03,
+  "deltaE2000Mean": 0.727,
+  "deltaE2000P95": 1.913,
+  "pixelsOver2": 0.04287
+ },
+ {
+  "a": "artifacts/opt-0.8.0/ab/A-array-hall.png",
+  "b": "artifacts/opt-0.8.0/ab/B-array-hall.png",
+  "psnrDb": 51.8,
+  "deltaE2000Mean": 0.307,
+  "deltaE2000P95": 1.219,
+  "pixelsOver2": 0.00739
+ },
+ {
+  "a": "artifacts/opt-0.8.0/ab/A-rime-vault.png",
+  "b": "artifacts/opt-0.8.0/ab/C-rime-vault.png",
+  "psnrDb": 36.22,
+  "deltaE2000Mean": 0.745,
+  "deltaE2000P95": 1.896,
+  "pixelsOver2": 0.04542
+ },
+ {
+  "a": "artifacts/opt-0.8.0/ab/B-rime-vault.png",
+  "b": "artifacts/opt-0.8.0/ab/C-rime-vault.png",
+  "psnrDb": 36.27,
+  "deltaE2000Mean": 0.735,
+  "deltaE2000P95": 1.875,
+  "pixelsOver2": 0.04462
+ },
+ {
+  "a": "artifacts/opt-0.8.0/ab/A-rime-vault.png",
+  "b": "artifacts/opt-0.8.0/ab/B-rime-vault.png",
+  "psnrDb": 53.45,
+  "deltaE2000Mean": 0.184,
+  "deltaE2000P95": 0.98,
+  "pixelsOver2": 0.00365
+ },
+ {
+  "a": "artifacts/opt-0.8.0/ab/A-signal-rise.png",
+  "b": "artifacts/opt-0.8.0/ab/C-signal-rise.png",
+  "psnrDb": 41.26,
+  "deltaE2000Mean": 0.526,
+  "deltaE2000P95": 1.635,
+  "pixelsOver2": 0.02757
+ },
+ {
+  "a": "artifacts/opt-0.8.0/ab/B-signal-rise.png",
+  "b": "artifacts/opt-0.8.0/ab/C-signal-rise.png",
+  "psnrDb": 41.33,
+  "deltaE2000Mean": 0.52,
+  "deltaE2000P95": 1.628,
+  "pixelsOver2": 0.02711
+ },
+ {
+  "a": "artifacts/opt-0.8.0/ab/A-signal-rise.png",
+  "b": "artifacts/opt-0.8.0/ab/B-signal-rise.png",
+  "psnrDb": 55.18,
+  "deltaE2000Mean": 0.12,
+  "deltaE2000P95": 0.866,
+  "pixelsOver2": 0.00318
+ }
+]
