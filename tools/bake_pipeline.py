@@ -168,10 +168,16 @@ def export(cols,nav):
  for i,data in buffers.items():(OUT/g['buffers'][i]['uri']).write_bytes(data)
  (ART/'tangent-report.json').write_text(json.dumps({'degenerateCapFallbackVertices':repaired,'method':'unit vector orthogonal to geometric normal; unaffected MikkTSpace tangents retained'},indent=2)+'\n')
  # Lighting is manifest metadata. No fake Khronos extension or occlusion trick.
- lm=[];light_sampler=len(g['samplers']);g['samplers'].append({'magFilter':9729,'minFilter':9729,'wrapS':33071,'wrapT':33071})
+ # Groups whose bake gutters cover two mip levels (bake-report
+ # supportedMipLevels >= 2; not foliage) opt in to trilinear irradiance:
+ # core honours LINEAR_MIPMAP_LINEAR on lightmaps, capped at LOD 2.
+ mips={r['group']:r['supportedMipLevels'] for r in json.loads((ART/'bake-report.json').read_text())}
+ lm=[];light_sampler={}
+ for mipped in [False,True]:
+  light_sampler[mipped]=len(g['samplers']);g['samplers'].append({'magFilter':9729,'minFilter':9987 if mipped else 9729,'wrapS':33071,'wrapT':33071})
  for name,intensity in LIGHTMAPS.items():
   ii=len(g['images']);g['images'].append({'uri':'textures/lightmap-'+name+'.png'})
-  ti=len(g['textures']);g['textures'].append({'source':ii,'sampler':light_sampler})
+  ti=len(g['textures']);g['textures'].append({'source':ii,'sampler':light_sampler[mips.get(name,0)>=2]})
   for mi,m in enumerate(g['materials']):
    if m.get('name','').startswith(name+'--'):lm.append({'material':mi,'texture':ti,'texCoord':1,'encoding':'srgb','intensity':intensity})
  # Required base contract uses only core glTF PBR. Our metallics are deliberately matte.
