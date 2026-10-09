@@ -1,0 +1,456 @@
+{
+ "status": "PASS",
+ "package": "dist/com.hyprune.switchyard",
+ "world": "com.hyprune.switchyard",
+ "version": "0.1.2",
+ "method": "Recast/Detour navmesh audit of a world package's exported collision.\n\nBuilds two navmeshes from the collision triangles (recast-navigation-js,\ntools/navmesh/): a *design* mesh with the RFC-0004 route slope (0.4) that the\ngates use, and a *physical* mesh with core's walker support limit\n(normal.y > 0.65) that only reveals steep ground the walker can still climb.\nAgent: radius 0.3, height 1.8, eye 1.7, climb 0.35 (core player.step_height).\n\nGates (all against the default spawn's navmesh island):\n- every spawn and route node stands on the navmesh;\n- every route edge and every stair lane is a straight, unobstructed walk on\n  the navmesh surface (Detour raycast), endpoint to endpoint;\n- every screen anchor has a reachable approach floor in front of it within\n  its declared clearance, from which the eye sees it at <= 60 deg elevation;\n- clear width along routes >= DOOR (1.2 m) at every sample;\n- islands a player can enter on foot must be declared: roofs/ledges of\n  PROP_AREA or more reachable by a jump, and any pit a walker can drop into\n  but not jump out of (a trap). Smaller jump-up tops (desks, benches) and\n  islands reachable only by flying are reported, not gated;\n- reachable floor whose eye point lies outside every visibility area (core\n  then draws everything) must be declared.\nSteep ground the walker still climbs (0.4 < slope, normal.y > 0.65) is\nreported. Stair lanes sit 2 cells inside the flight's capsule limit so voxel\nrounding of the side walls does not read as a block.\n\nCollision only: render-only geometry (the 0.7.0 capped stair) is invisible\nhere by construction; tools/check-route-clearance.py covers that.",
+ "library": "recast-navigation-js 0.43.1 (Recast/Detour, zlib; wrapper MIT)",
+ "agent": {
+  "radius": 0.3,
+  "height": 1.8,
+  "eye": 1.7,
+  "climb": 0.35,
+  "designSlopeDeg": 21.8,
+  "physicalSlopeDeg": 49.46,
+  "jumpApex": 1.27
+ },
+ "voxel": {
+  "cell": 0.1,
+  "step": 0.05
+ },
+ "seconds": 0.8,
+ "navmesh": {
+  "polys": 335,
+  "islands": 6,
+  "mainArea": 1382.1,
+  "physicalPolys": 335
+ },
+ "counts": {
+  "spawns": 1,
+  "nodes": 10,
+  "edges": 9,
+  "stairLanes": 0,
+  "anchors": 6,
+  "widthSamples": 181
+ },
+ "failures": [],
+ "acceptedByAllowList": [
+  {
+   "kind": "undeclared-space",
+   "id": "main",
+   "area": 225.08,
+   "min": [
+    -19.5,
+    0.1,
+    -29.1
+   ],
+   "max": [
+    19.5,
+    0.1,
+    -0.7
+   ],
+   "polys": 79,
+   "examples": [
+    [
+     13.6,
+     0.0,
+     -26.2
+    ],
+    [
+     17.9,
+     0.0,
+     -25.0
+    ],
+    [
+     -10.8,
+     0.0,
+     -26.9
+    ],
+    [
+     1.3,
+     0.0,
+     -26.9
+    ],
+    [
+     -18.3,
+     0.0,
+     -25.7
+    ],
+    [
+     -17.5,
+     0.0,
+     -5.2
+    ]
+   ],
+   "reason": "Switchyard's visibility areas cover the concourse, the six dock rooms and the aisles only. The perimeter floor behind and beside the docks (about 225 m2, z < -26 and x beyond +/-17) uses core's draw-everything fallback, which is correct, just unculled."
+  }
+ ],
+ "islands": [
+  {
+   "island": 1,
+   "area": 0.12,
+   "min": [
+    3.4,
+    0.7,
+    -24.2
+   ],
+   "max": [
+    3.7,
+    0.7,
+    -23.8
+   ],
+   "reach": "jump-up",
+   "zone": "systems",
+   "at": [
+    3.71,
+    0.7,
+    -23.82
+   ]
+  },
+  {
+   "island": 2,
+   "area": 0.12,
+   "min": [
+    3.4,
+    0.7,
+    -10.2
+   ],
+   "max": [
+    3.7,
+    0.7,
+    -9.8
+   ],
+   "reach": "jump-up",
+   "zone": "research",
+   "at": [
+    3.71,
+    0.7,
+    -9.82
+   ]
+  },
+  {
+   "island": 3,
+   "area": 0.42,
+   "min": [
+    -6.7,
+    0.6,
+    5.6
+   ],
+   "max": [
+    -6.1,
+    0.6,
+    6.3
+   ],
+   "reach": "jump-up",
+   "zone": "concourse",
+   "at": [
+    -6.69,
+    0.55,
+    6.08
+   ]
+  },
+  {
+   "island": 4,
+   "area": 2.25,
+   "min": [
+    -5.2,
+    0.8,
+    -0.0
+   ],
+   "max": [
+    -3.7,
+    0.8,
+    1.5
+   ],
+   "reach": "jump-up",
+   "zone": null,
+   "at": [
+    -5.19,
+    0.75,
+    -0.03
+   ]
+  },
+  {
+   "island": 5,
+   "area": 0.42,
+   "min": [
+    6.1,
+    0.6,
+    5.6
+   ],
+   "max": [
+    6.7,
+    0.6,
+    6.3
+   ],
+   "reach": "jump-up",
+   "zone": "concourse",
+   "at": [
+    6.11,
+    0.55,
+    6.08
+   ]
+  }
+ ],
+ "approaches": [
+  {
+   "id": "build-dock",
+   "role": "window",
+   "depth": 4,
+   "reachableSamples": 7,
+   "approach": [
+    1.0,
+    0.05,
+    26.6
+   ],
+   "standback": [
+    4.0,
+    0.45,
+    1.4
+   ]
+  },
+  {
+   "id": "research-dock",
+   "role": "window",
+   "depth": 4,
+   "reachableSamples": 7,
+   "approach": [
+    1.0,
+    0.05,
+    26.6
+   ],
+   "standback": [
+    4.0,
+    0.45,
+    1.4
+   ]
+  },
+  {
+   "id": "commons-dock",
+   "role": "window",
+   "depth": 4,
+   "reachableSamples": 7,
+   "approach": [
+    1.0,
+    0.05,
+    26.6
+   ],
+   "standback": [
+    4.0,
+    0.45,
+    1.4
+   ]
+  },
+  {
+   "id": "studio-dock",
+   "role": "window",
+   "depth": 4,
+   "reachableSamples": 7,
+   "approach": [
+    1.0,
+    0.05,
+    26.6
+   ],
+   "standback": [
+    4.0,
+    0.45,
+    1.4
+   ]
+  },
+  {
+   "id": "systems-dock",
+   "role": "window",
+   "depth": 4,
+   "reachableSamples": 7,
+   "approach": [
+    1.0,
+    0.05,
+    26.6
+   ],
+   "standback": [
+    4.0,
+    0.45,
+    1.4
+   ]
+  },
+  {
+   "id": "archive-dock",
+   "role": "window",
+   "depth": 4,
+   "reachableSamples": 7,
+   "approach": [
+    1.0,
+    0.05,
+    26.6
+   ],
+   "standback": [
+    4.0,
+    0.45,
+    1.4
+   ]
+  }
+ ],
+ "chokepoints": [
+  {
+   "edge": "research>systems",
+   "min": 1.51,
+   "at": [
+    -2.67,
+    0.05,
+    -7.0
+   ],
+   "samples": 27,
+   "below": 0
+  },
+  {
+   "edge": "build>studio",
+   "min": 1.52,
+   "at": [
+    -14.67,
+    0.05,
+    -7.0
+   ],
+   "samples": 27,
+   "below": 0
+  },
+  {
+   "edge": "commons>archive",
+   "min": 1.52,
+   "at": [
+    9.33,
+    0.05,
+    -7.0
+   ],
+   "samples": 27,
+   "below": 0
+  },
+  {
+   "edge": "concourse>junction-1",
+   "min": 3.41,
+   "at": [
+    -5.52,
+    0.05,
+    4.5
+   ],
+   "samples": 20,
+   "below": 0
+  },
+  {
+   "edge": "junction-1>build",
+   "min": 7.1,
+   "at": [
+    -14.67,
+    0.07,
+    -3.5
+   ],
+   "samples": 18,
+   "below": 0
+  },
+  {
+   "edge": "junction-2>research",
+   "min": 7.1,
+   "at": [
+    -2.67,
+    0.07,
+    -3.5
+   ],
+   "samples": 18,
+   "below": 0
+  },
+  {
+   "edge": "junction-3>commons",
+   "min": 7.1,
+   "at": [
+    9.33,
+    0.07,
+    -3.5
+   ],
+   "samples": 18,
+   "below": 0
+  },
+  {
+   "edge": "concourse>junction-3",
+   "min": 8.77,
+   "at": [
+    7.28,
+    0.05,
+    4.5
+   ],
+   "samples": 25,
+   "below": 0
+  },
+  {
+   "edge": "concourse>junction-2",
+   "min": 9.7,
+   "at": [
+    -3.34,
+    0.05,
+    4.5
+   ],
+   "samples": 1,
+   "below": 0
+  }
+ ],
+ "walks": [
+  {
+   "id": "concourse>junction-1",
+   "clear": 1,
+   "straight": 10.67,
+   "path": 10.67
+  },
+  {
+   "id": "junction-1>build",
+   "clear": 1,
+   "straight": 9.5,
+   "path": 9.5
+  },
+  {
+   "id": "build>studio",
+   "clear": 1,
+   "straight": 14.0,
+   "path": 14.0
+  },
+  {
+   "id": "concourse>junction-2",
+   "clear": 1,
+   "straight": 1.33,
+   "path": 1.33
+  },
+  {
+   "id": "junction-2>research",
+   "clear": 1,
+   "straight": 9.5,
+   "path": 9.5
+  },
+  {
+   "id": "research>systems",
+   "clear": 1,
+   "straight": 14.0,
+   "path": 14.0
+  },
+  {
+   "id": "concourse>junction-3",
+   "clear": 1,
+   "straight": 13.33,
+   "path": 13.33
+  },
+  {
+   "id": "junction-3>commons",
+   "clear": 1,
+   "straight": 9.5,
+   "path": 9.5
+  },
+  {
+   "id": "commons>archive",
+   "clear": 1,
+   "straight": 14.0,
+   "path": 14.0
+  }
+ ],
+ "steepReachable": {
+  "polys": 0,
+  "area": 0,
+  "examples": []
+ },
+ "svg": "switchyard/reports/navmesh.svg"
+}

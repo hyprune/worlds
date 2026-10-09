@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "check": "tools/check-navmesh.py",
+  "reviewed": "2026-10-09",
+  "rules": "Each entry pins exact finding ids (and a maximum area for area findings). Any new id, growth or location still fails; an entry that no longer matches fails as stale. Reported, not hidden.",
+  "accept": [
+    {
+      "ids": ["undeclared-space:main"],
+      "maxArea": 240,
+      "status": "by design for the test world",
+      "reason": "Switchyard's visibility areas cover the concourse, the six dock rooms and the aisles only. The perimeter floor behind and beside the docks (about 225 m2, z < -26 and x beyond +/-17) uses core's draw-everything fallback, which is correct, just unculled."
+    }
+  ]
+}

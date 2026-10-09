@@ -22,6 +22,7 @@ validate:
 	python3 tools/check-texel-density.py $(PACKAGE)
 	python3 tools/check-coplanar.py $(PACKAGE)
 	python3 tools/check-routes.py $(PACKAGE) artifacts/switchyard/spatial-authoring.json
+	python3 tools/check-navmesh.py $(PACKAGE) --allow switchyard/navmesh-allow.json --output switchyard/reports/navmesh-check.json --svg switchyard/reports/navmesh.svg
 gallery:
 	mkdir -p $(GALLERY_DIR)/videos
 	cp artifacts/switchyard/world-switchyard.mp4 artifacts/switchyard/world-switchyard.json $(GALLERY_DIR)/videos/
@@ -64,6 +65,7 @@ lumen-validate:
 	python3 tools/check-package.py $(LUMEN_PACKAGE) > lumen-reach/reports/package-check.json
 	python3 tools/check-placement.py $(LUMEN_PACKAGE) --output lumen-reach/reports/placement-check.json
 	python3 tools/check-walking.py $(LUMEN_PACKAGE) > lumen-reach/reports/walking-check.json
+	python3 tools/check-navmesh.py $(LUMEN_PACKAGE) --allow lumen-reach/navmesh-allow.json --output $(LUMEN_REPORTS)/navmesh-check.json --svg $(LUMEN_REPORTS)/navmesh.svg
 	python3 tools/check-coplanar.py $(LUMEN_PACKAGE) --emissive --fixtures $(LUMEN_PACKAGE)/fixture-audit.json > $(LUMEN_REPORTS)/emissive-check.json
 	python3 -c "import json; assert json.load(open('$(LUMEN_PACKAGE)/decal-audit.json'))['status']=='PASS'"
 lumen-nested:
@@ -85,3 +87,10 @@ visibility-validate:
 	python3 tools/check-visibility.py $(PACKAGE)
 visibility-nested:
 	HYPRUNE_NESTED_4K=1 python3 tools/check-visibility-session.py --core $(VISIBILITY_CORE)
+
+# Recast/Detour (recast-navigation-js, pinned by package-lock.json) for check-navmesh.
+.PHONY: navmesh-deps navmesh-test
+navmesh-deps:
+	npm ci --prefix tools/navmesh --no-audit --no-fund
+navmesh-test:
+	python3 -m unittest tests/test_navmesh_check.py

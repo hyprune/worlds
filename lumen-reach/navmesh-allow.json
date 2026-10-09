@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "check": "tools/check-navmesh.py",
+  "reviewed": "2026-10-09",
+  "rules": "Each entry pins exact finding ids (and a maximum area for area findings). Any new id, growth or location still fails; an entry that no longer matches fails as stale. Reported, not hidden.",
+  "accept": [
+    {
+      "ids": [
+        "node:roof-start-west", "node:roof-start", "node:roof-final", "node:roof-bridge", "node:rooftop",
+        "edge:roof-upper>roof-start-west", "edge:roof-start-west>roof-start", "edge:roof-start>roof-final",
+        "edge:roof-final>roof-bridge", "edge:roof-bridge>rooftop",
+        "stair:roof-final-approach@-0.32", "stair:roof-final-approach@+0.00", "stair:roof-final-approach@+0.32"
+      ],
+      "status": "real layout defect, pre-existing (0.7.0 and 0.7.1 identical); candidate fix for the next release",
+      "reason": "The final roof ramp (CollisionWalk-25/26, x -13.2..-8.5) starts on the unguarded south lip (z -20) of the y=12 slab; its rails (CollisionWalk-27/28) start at z -20.5 and the slab under the ramp has no headroom. The only way on is a 0.5 m sideways gap between the rail ends and an 8 m drop, under the 0.6 m capsule. Core's walker stands with the capsule centre on the bevelled lip (support normal 0.71 > 0.65), so the nested route traversal passes; a navmesh agent cannot. roof-start-west/roof-start sit exactly on that lip; the roof above (roof-final, roof-bridge, rooftop) is therefore a separate island. Fix: extend the y=12 slab ~1.5 m south of z -20 with a parapet, or end the rails 1 m short of the foot."
+    },
+    {
+      "ids": ["undeclared-space:main"],
+      "maxArea": 0.5,
+      "status": "harmless",
+      "reason": "A 0.19 m2 sliver of vault floor at (49.5, -6.0, -75.3), just north of rime-vault's visibility bounds (z -75.5) and east of connector-descent (x 35.6). Core draws everything there (conservative)."
+    }
+  ]
+}
