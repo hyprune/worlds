@@ -64,6 +64,9 @@ def capture(client,children,args,shell_token,socketpath):
  # Real walk from default spawn, before any camera positioning.
  before=state()['movement']['position'];integration.keys('-P','w','-s','500','-p','w');time.sleep(.2);after=state()['movement']['position'];assert math.dist(before,after)>.3,(before,after);report['walk']={'before':before,'after':after}
  client.call('movement.set',{'modeId':'com.hyprune.fly'});time.sleep(1)
+ # Stills are authoring camera poses (one stands in the court guardrail line):
+ # hold noclip while placing them so collision does not move the camera.
+ integration.keys('-k','v');time.sleep(.2);assert session.camera()['noclip']
  report['views']=[];views=json.loads((a.output/'views.json').read_text())['views']
  for v in views:
   if a.record and v['id'].count('-')>2:continue # shell launch grant has a 30-second lifetime
@@ -78,6 +81,7 @@ def capture(client,children,args,shell_token,socketpath):
  if a.gallery:
   gallery=Path.home()/'workspace/rick-the-alien/worldshell-gallery/screenshots/release-world-v2';gallery.mkdir(parents=True,exist_ok=True)
   for v in report['views']:shutil.copy2(v['path'],gallery/Path(v['path']).name)
+ integration.keys('-k','v');time.sleep(.2);assert not session.camera()['noclip']
  if a.vault_clip:vault_clip(client,manifest)
  if a.routes:route_check(client,state,manifest)
  if a.record:record(client,children,state,shell_token,socketpath)
