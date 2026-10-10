@@ -1,0 +1,37 @@
+{
+  "title": "Lumen Reach 0.8.0 -> 0.8.1: Rime Vault ceiling slot closed",
+  "subtitle": "Exact poses, private Intel nested, Medium 0.5 scale, core 49c8408; release packages (format 0.7); columns differ only by package.",
+  "columns": [
+    "nested 0.8.0 (published)",
+    "nested 0.8.1"
+  ],
+  "rows": [
+    {
+      "id": "vault-north-up",
+      "title": "Rime Vault spawn, looking up at the north edge",
+      "caption": "0.8.0: the ceiling and side shells stopped 2 m short of the floor edge; day sky shows directly overhead (check-sky enclosure: 290 sky rays from 49 eyes). 0.8.1: ceiling and shells reach the edge; the opening is framed by the ceiling.",
+      "images": [
+        "artifacts/vault-slot/before-views/vault-north-up.png",
+        "artifacts/opt-0.8.1/sweep-hand/vault-north-up.png"
+      ]
+    },
+    {
+      "id": "vault-center-north",
+      "title": "Mid-vault, looking north through the designed opening",
+      "caption": "The wide north opening onto the vista is intended and unchanged; the strip above it is now ceiling.",
+      "images": [
+        "artifacts/vault-slot/before-views/vault-center-north.png",
+        "artifacts/opt-0.8.1/sweep-hand/vault-center-north.png"
+      ]
+    },
+    {
+      "id": "vault-walk-north",
+      "title": "Walking view toward the north threshold",
+      "caption": "Walking pitch: the slot itself was only visible looking up near the north edge; the extended west shell now frames the upper left, the vista through the opening is unchanged.",
+      "images": [
+        "artifacts/vault-slot/before-views/vault-walk-north.png",
+        "artifacts/opt-0.8.1/sweep-hand/vault-walk-north.png"
+      ]
+    }
+  ]
+}

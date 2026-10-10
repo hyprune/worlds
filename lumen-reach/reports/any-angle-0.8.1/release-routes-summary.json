@@ -1,0 +1,15 @@
+{
+  "status": "PASS",
+  "coreCommit": "49c84088871a836fa5f4d02493c80de09d288fbe",
+  "loadedPluginSHA256": "a98e051dc33f526d2417a50c4ab617869118b47ef4fd60efd38f27b101195973",
+  "manifestSHA256": "4f047839cbd663bad3de3534074942d885251e0ba9972071a830e9161ae87725",
+  "sceneSHA256": "38039ff7c091b1ec360c2074bbb3418e248b755043ba2d192b42bceed49c2f12",
+  "routeTraversal": {
+    "status": "PASS",
+    "nodes": 64,
+    "directedGraphTraversals": 126,
+    "alternateStairs": 14
+  },
+  "heroStills": 18,
+  "raw": "artifacts/opt-0.8.1/routes/"
+}

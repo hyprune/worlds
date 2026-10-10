@@ -1,0 +1,129 @@
+{
+  "status": "PASS",
+  "worldVersion": "0.8.1",
+  "coreCommit": "49c84088871a836fa5f4d02493c80de09d288fbe",
+  "pluginSHA256": "a98e051dc33f526d2417a50c4ab617869118b47ef4fd60efd38f27b101195973",
+  "manifestSHA256": "4f047839cbd663bad3de3534074942d885251e0ba9972071a830e9161ae87725",
+  "sceneSHA256": "38039ff7c091b1ec360c2074bbb3418e248b755043ba2d192b42bceed49c2f12",
+  "package": "dist-07/com.hyprune.lumen-reach (format 0.7)",
+  "views": 72,
+  "cullingPairs": 72,
+  "cullingLosses": [],
+  "maxCullingChangedPixelFraction": 8.409957389549226e-07,
+  "maxStreakCandidateFraction": 0.01088139281828074,
+  "boundaryProbes": [
+    {
+      "id": "court-east",
+      "start": [
+        25.2,
+        1.7,
+        0
+      ],
+      "end": [
+        25.63505744934082,
+        1.7002222537994385,
+        1.0013566679845098e-05
+      ],
+      "axis": 0,
+      "outwardSign": 1,
+      "limit": 26,
+      "inside": true
+    },
+    {
+      "id": "court-south",
+      "start": [
+        0,
+        1.7,
+        15.2
+      ],
+      "end": [
+        -2.8417459816409973e-06,
+        1.7002222537994385,
+        15.635148048400879
+      ],
+      "axis": 2,
+      "outwardSign": 1,
+      "limit": 16,
+      "inside": true
+    },
+    {
+      "id": "court-west",
+      "start": [
+        -23.2,
+        1.7,
+        10
+      ],
+      "end": [
+        -23.63487434387207,
+        1.7002222537994385,
+        10.0
+      ],
+      "axis": 0,
+      "outwardSign": -1,
+      "limit": -24,
+      "inside": true
+    },
+    {
+      "id": "hall-west",
+      "start": [
+        -12.2,
+        1.7,
+        -34
+      ],
+      "end": [
+        -12.635056495666504,
+        1.6997950077056885,
+        -34.0
+      ],
+      "axis": 0,
+      "outwardSign": -1,
+      "limit": -13,
+      "inside": true
+    },
+    {
+      "id": "rise-east",
+      "start": [
+        84.2,
+        1.7,
+        -120
+      ],
+      "end": [
+        84.63481140136719,
+        1.6996729373931885,
+        -120.0
+      ],
+      "axis": 0,
+      "outwardSign": 1,
+      "limit": 85,
+      "inside": true
+    },
+    {
+      "id": "rise-south",
+      "start": [
+        70,
+        1.7,
+        -112.8
+      ],
+      "end": [
+        70.0,
+        1.6996729373931885,
+        -112.36510467529297
+      ],
+      "axis": 2,
+      "outwardSign": 1,
+      "limit": -112,
+      "inside": true
+    }
+  ],
+  "jumpBoundaryWitness": [
+    25.63505744934082,
+    1.7504132986068726,
+    0.06106461212038994
+  ],
+  "flyBoundaryWitness": [
+    30.271564483642578,
+    6.0,
+    -3.828804722161294e-07
+  ],
+  "raw": "artifacts/opt-0.8.1/sweep-hand/"
+}

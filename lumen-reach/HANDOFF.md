@@ -1,4 +1,73 @@
-# Lumen Reach 0.8.0 handoff — 2026-10-10
+# Lumen Reach 0.8.1 handoff — 2026-10-10
+
+**Patch release candidate verified; not published, not pushed.** Published
+baseline: 0.8.0 (release package kept at `artifacts/opt-0.8.1/before/`,
+SHA-identical to `reports/release-0.8.0.json`; source at `before-src/`).
+
+## Release candidate
+
+- Release package `dist-07/com.hyprune.lumen-reach/` (format 0.7) from the
+  source `dist/` baked on 10.2.2.2 at `1f21028`.
+- Manifest SHA256 `4f047839cbd6…` (full hashes in `reports/release.json`).
+- Archive `artifacts/releases/com.hyprune.lumen-reach-0.8.1.tar.zst`,
+  39,736,290 bytes, SHA256
+  `d86878a981ed38ee851a6bc09aa545dcea781345d65cce604313c8fe71617766`.
+  76 extracted files identical to `dist-07/`; schema 0.7 VALID; core
+  world-check (`49c8408`) PASS. Built by `make lumen-release
+  LUMEN_PERF_BASELINE=artifacts/opt-0.8.1/before` end to end (38 min).
+- Gallery: `screenshots/optimise-2026-10/lumen-0.8.1-vault-slot-before-after.jpg`.
+
+## Fix
+
+**Rime Vault ceiling slot.** The vault ceiling and both side shells stopped at
+authoring y 76; the floor runs to 74. That left a 2 m strip open to the sky
+over the descent threshold and the north lip. It was visible from reachable
+positions: looking up from the vault spawn showed day sky overhead (nested
+`vault-north-up`). They now reach y 74. The wide north opening onto the vista
+is designed and unchanged.
+
+**Check extended.** `check-sky.py --enclosures lumen-reach/enclosures.json`
+(in `lumen-validate`): declared indoor rooms (rime-vault, connector-descent,
+entry-vestibule) with their designed open faces. From every walkable eye
+inside, an upper-hemisphere ray that reaches the sky must leave through an
+open face. 0.8.0 FAILS (rime-vault: 290 sky rays from 49 eyes, out through
+the roof and west side of the strip); 0.8.1 PASSES (0 leaks). Side effect:
+the 0.19 m2 walkable sliver outside the visibility areas was the east end of
+the same lip; `check-navmesh` flagged its pin as stale. Lumen now has no
+pinned navmesh findings.
+
+## Verified (0.8.1 release package unless noted)
+
+- `make lumen-validate` PASS on the source (all gates, enclosures included).
+- verify.mjs PASS (indices unchanged, collision within 2.1 mm).
+- Any-angle nested: 72 views (+3 vault views), 0 culling losses, 6/6 walking
+  probes inside, jump x=25.64, fly x=30.27.
+- Route traversal: 64 nodes, 126 directed traversals, 14 alternate stairs.
+- Perf gate vs 0.8.0, same session: p50 9.116 -> 9.132 ms (+0.2 %), p95
+  10.419 -> 10.496 ms (+0.7 %): PASS. Record `reports/perf/0.8.1.json`.
+
+## Derived visibility evaluation
+
+`reports/any-angle-0.8.1/visibility-evaluation.md`: hand-written vs
+`tools/derive-visibility.py` on the 0.8.1 release package, same 72 views.
+
+- Batches: 44.2 -> 40.4 (-8.6 %); some poses -45 %.
+- Identical frames: 72/72 for derived vs 71/72 for hand-written (the
+  hand-written vault region hides a real sub-pixel sight line).
+- GPU ms along the routes: unchanged (fill-bound).
+
+Recommendation: switch to derived visibility in 0.9.0 as a build step, for
+correctness and maintenance; 0.8.1 keeps the hand-written regions.
+
+## Next steps for the lead
+
+Review the sheet, then push `worlds` and publish `lumen-reach-v0.8.1` with the
+archive above. Update `hyprune/worlds/releases.json`. Decide on derived
+visibility for 0.9.0.
+
+---
+
+# (previous) Lumen Reach 0.8.0 handoff — 2026-10-10
 
 **Release candidate verified; not published, not pushed.** First release on
 world format 0.7. Published baseline: 0.7.2 (package kept at

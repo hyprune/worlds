@@ -1,18 +1,18 @@
 {
   "status": "PASS",
   "worldId": "com.hyprune.lumen-reach",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "formatVersion": "0.7",
-  "sourceCommit": "f5e8b82",
-  "sourceNote": "Source package (format 0.5) baked on 10.2.2.2 from build inputs at f5e8b82; release package = tools/remote-optimize.sh output (deterministic: two runs byte-identical).",
-  "sourcePackageManifestSHA256": "eb882679b71be0f057ef0b59fc82850735d8b461823a5fbd27acd51229db9c48",
-  "sceneSHA256": "50c03d10094d1a308cd1926a0c7bbf3db721aa9d8558a4c7f0a6b19a2b047679",
-  "manifestSHA256": "68632d462d9077efe65794228c735479361f55fbf1861515d29befd6335a733a",
+  "sourceCommit": "1f21028",
+  "sourceNote": "Source package (format 0.5) baked on 10.2.2.2 from build inputs at 1f21028; release package = tools/remote-optimize.sh output.",
+  "sourcePackageManifestSHA256": "f5a730b200cef0e7edc38e5ec6a3c4993fce10aa24990ea4ff958e6ae16cae9b",
+  "sceneSHA256": "38039ff7c091b1ec360c2074bbb3418e248b755043ba2d192b42bceed49c2f12",
+  "manifestSHA256": "4f047839cbd663bad3de3534074942d885251e0ba9972071a830e9161ae87725",
   "archive": {
     "status": "PASS",
-    "path": "artifacts/releases/com.hyprune.lumen-reach-0.8.0.tar.zst",
-    "sha256": "3b507f8ba151c99983496d82a413526b3090e0c38057a841b54ee2758dcb27e1",
-    "bytes": 39390230,
+    "path": "artifacts/releases/com.hyprune.lumen-reach-0.8.1.tar.zst",
+    "sha256": "d86878a981ed38ee851a6bc09aa545dcea781345d65cce604313c8fe71617766",
+    "bytes": 39736290,
     "identicalExtractedFiles": 76,
     "extractedChecks": [
       "sha256sum -c LUMEN-SHA256SUMS OK",
@@ -23,9 +23,8 @@
   "published": false,
   "coreCommit": "49c84088871a836fa5f4d02493c80de09d288fbe",
   "loadedPluginSHA256": "a98e051dc33f526d2417a50c4ab617869118b47ef4fd60efd38f27b101195973",
-  "changes": {
-    "formatVersion07": "KHR_texture_basisu (basisu 2.1.0 UASTC 4x4 + Zstandard, full mips) for 56 material textures; EXT_meshopt_compression + KHR_mesh_quantization (16-bit positions/texcoords); PNG lightmaps re-appended; every world.json index verified (verify.mjs)",
-    "lightmapMips": "LINEAR_MIPMAP_LINEAR on the six groups with 4 px gutters (core caps LOD 2); foliage LINEAR"
+  "fixes": {
+    "vaultCeilingSlot": "Rime Vault ceiling and side shells stopped 2 m short of the floor north edge (authoring y 76 vs 74), leaving a strip open to the sky over the descent threshold and the north lip, visible looking up from the vault spawn. Ceiling and shells now reach y 74. check-sky gains an enclosure test (lumen-reach/enclosures.json) that fails 0.8.0 (290 sky rays, 49 eyes) and passes 0.8.1; the 0.19 m2 navmesh vault-sliver pin is gone with it."
   },
   "verify": {
     "status": "PASS",
@@ -39,34 +38,56 @@
     },
     "maxCollisionErrorMeters": 0.002121,
     "packageMiB": {
-      "src": 70.46,
-      "dst": 41.37
+      "src": 70.77,
+      "dst": 41.67
     }
   },
-  "measuredVs072": {
-    "packageMiB": -41.3,
-    "gpuMiB": -44.6,
-    "loadReadyMsWarm": -23.1,
-    "uploadCpuMsWarm": -28.9,
-    "gpuMsMeanOfPoses": -0.3,
-    "worldShadingMsMedian": -3.5,
-    "unit": "percent change, 0.8.0 release vs 0.7.2",
-    "detail": "reports/optimise-0.8.0/ab-summary.json"
+  "checks": {
+    "enclosures": [
+      {
+        "room": "rime-vault",
+        "eyes": 87,
+        "rays": 7221,
+        "skyLeaks": 0
+      },
+      {
+        "room": "connector-descent",
+        "eyes": 33,
+        "rays": 2739,
+        "skyLeaks": 0
+      },
+      {
+        "room": "entry-vestibule",
+        "eyes": 5,
+        "rays": 415,
+        "skyLeaks": 0
+      }
+    ]
   },
   "perfGate": {
     "status": "PASS",
-    "baseline": "0.7.2 package, same session, 2 alternating rounds, 400 route poses",
+    "baseline": "0.8.0 package, same session",
+    "baselineGpuFrameMs": {
+      "p50": 9.116012999999999,
+      "p95": 10.419440049999997,
+      "n": 3200
+    },
+    "candidateGpuFrameMs": {
+      "p50": 9.131612,
+      "p95": 10.49560745,
+      "n": 3200
+    },
     "checks": [
       {
         "metric": "gpuFrameMs.p50",
-        "candidate": 9.0737,
-        "limit": 9.7619,
+        "candidate": 9.1316,
+        "limit": 9.8453,
         "pass": true
       },
       {
         "metric": "gpuFrameMs.p95",
-        "candidate": 10.5106,
-        "limit": 11.8142,
+        "candidate": 10.4956,
+        "limit": 11.6698,
         "pass": true
       },
       {
@@ -82,56 +103,35 @@
         "pass": true
       }
     ],
-    "baselineGpuFrameMs": {
-      "p50": 9.038773500000001,
-      "p95": 10.5484215,
-      "n": 3200
-    },
-    "candidateGpuFrameMs": {
-      "p50": 9.0736945,
-      "p95": 10.510589299999998,
-      "n": 3200
-    },
-    "record": "reports/perf/0.8.0.json"
+    "record": "reports/perf/0.8.1.json"
   },
   "budgets": {
-    "gltfTransform": {
-      "visibleTriangles": 245330,
-      "drawCalls": 99,
-      "gpuMiB": {
-        "total": 142.12,
-        "materialTextures": 39.46,
-        "lightmaps": 87.33,
-        "vertexBuffers": 13.69,
-        "indexBuffers": 1.63
-      },
-      "packageMiB": 41.37,
-      "collisionTriangles": 5194
+    "visibleTriangles": 245330,
+    "drawCalls": 99,
+    "gpuMiB": {
+      "total": 142.13,
+      "materialTextures": 39.46,
+      "lightmaps": 87.33,
+      "vertexBuffers": 13.7,
+      "indexBuffers": 1.63
     },
-    "coreUploadGpuMiB": 149.8,
-    "report": "reports/any-angle-0.8.0/budgets.json"
+    "packageMiB": 41.67,
+    "collisionTriangles": 5194
   },
-  "offlineChecks": [
-    "make lumen-validate PASS on the source package (geometry/sky topology, check-sky, check-route-clearance, check-navmesh, visibility, schema 0.5, package, placement, walking, emissive, decals)",
-    "verify.mjs PASS on the release package; schema 0.7 VALID; core world-check PASS",
-    "glTF validator: 0 errors (warnings only for KTX2/meshopt, which validator 2.0.0-dev.3.10 does not support)"
-  ],
   "nested": {
-    "anyAngle": "69 views, 0 culling losses, 6/6 walking probes inside, jump x=25.64, fly x=30.27, max streak 0.011",
-    "routes": "64 nodes, 126 directed traversals, 14 alternate stairs, 18 hero stills: PASS"
+    "anyAngle": "72 views (69 + vault-north-up, vault-center-north, vault-walk-north), 0 culling losses, 6/6 walking probes inside, jump x=25.64, fly x=30.27",
+    "routes": "64 nodes, 126 directed traversals, 14 alternate stairs: PASS"
   },
+  "visibilityEvaluation": "reports/any-angle-0.8.1/visibility-evaluation.md (recommend derived visibility for 0.9.0; 0.8.1 keeps hand-written)",
   "evidence": {
-    "optimise": "reports/optimise-0.8.0/README.md",
-    "anyAngle": "reports/any-angle-0.8.0/release-session-summary.json",
-    "routes": "reports/any-angle-0.8.0/release-routes-summary.json",
-    "perfGate": "reports/any-angle-0.8.0/perf-gate/perf-gate.json",
-    "verify": "reports/any-angle-0.8.0/release-verify.json",
-    "coreWorldCheck": "reports/any-angle-0.8.0/release-core-world-check.json",
-    "baseline072": "artifacts/opt-0.8.0/before/ (SHA-identical to the published 0.7.2 package)"
+    "beforeAfter": "reports/any-angle-0.8.1/before-after.json",
+    "sky": "reports/any-angle-0.8.1/sky-check.json",
+    "anyAngle": "reports/any-angle-0.8.1/release-session-summary.json",
+    "routes": "reports/any-angle-0.8.1/release-routes-summary.json",
+    "perfGate": "reports/any-angle-0.8.1/perf-gate/perf-gate.json",
+    "baseline080": "artifacts/opt-0.8.1/before/ (SHA-identical to the published 0.8.0 package)"
   },
   "gallery": {
-    "beforeAfter": "screenshots/optimise-2026-10/lumen-0.8.0-before-after.jpg",
-    "lightmapMips": "screenshots/optimise-2026-10/lumen-0.8.0-lightmap-mips-ab.jpg",
-    "anyAngle": "screenshots/optimise-2026-10/lumen-0.8.0-any-angle-contact-sheet.jpg"
+    "beforeAfter": "screenshots/optimise-2026-10/lumen-0.8.1-vault-slot-before-after.jpg"
   }
 }

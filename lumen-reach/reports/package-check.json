@@ -1,6 +1,6 @@
 {
   "status": "PASS",
-  "packageBytes": 73880629,
+  "packageBytes": 74210086,
   "decodedTextureBytes": 192806912,
   "conservativeGpuBytes": 390847752,
   "mippedTextureViewsBytes": 361408152,
@@ -43,7 +43,7 @@
     {
       "node": "Visual-rime-vault",
       "triangles": 44612,
-      "uv1Area": 0.19766,
+      "uv1Area": 0.19772,
       "overlapSamples": 0
     },
     {
