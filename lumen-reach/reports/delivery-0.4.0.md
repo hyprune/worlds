@@ -23,7 +23,7 @@ destination. Tool approaches reserve 4m and primary walls reserve 16m.
 Original generated masters, prompts and hashes are committed. Seam-healed PBR
 tiles, trim bands, physical screen frames and original UI use the shared bake
 pipeline; procedural geometry, UV1 lightmaps and Cycles renders ran exclusively
-on 10.2.2.2. No local Blender execution or owner-session control occurred.
+on the bake host. No local Blender execution or owner-session control occurred.
 
 | Delivery measurement | Result |
 | --- | --- |

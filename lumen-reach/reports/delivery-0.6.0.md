@@ -75,7 +75,7 @@ all mount approaches and free volumes, walking support and capsule checks pass.
 The isolated nested engine traversed **126 directed graph edges** and **14
 alternate stair flights**. The comparison uses freshly captured 0.5.0 and 0.6.0
 camera paths on the same test harness. Switchyard's complete validation suite
-passes unchanged. All Blender execution used 10.2.2.2 via the remote wrapper.
+passes unchanged. All Blender execution used the bake host via the remote wrapper.
 All engine sessions held `/tmp/worldshell-nested.lock`; the real session was
 never controlled, and the gallery autocommit process was never signaled.
 

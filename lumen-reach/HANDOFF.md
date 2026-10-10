@@ -26,7 +26,7 @@ playable volumes (format 0.6+) with maxFlyHeight 60 m; only walking backstops.
 ## Changes
 
 1. **Derived visibility** (`make lumen-build` runs `tools/derive-visibility.py
-   --in-place` after the bake, about 106 s with the kernel on 10.2.2.2).
+   --in-place` after the bake, about 106 s with the kernel on the bake host).
    - Result: 805 cells, 184 areas, 0 of 29,781 eye samples hide a
      sampled-visible unit.
    - `check-visibility --spec` verifies reproducibility. The hand-written
@@ -98,7 +98,7 @@ SHA-identical to `reports/release-0.8.0.json`; source at `before-src/`).
 ## Release candidate
 
 - Release package `dist-07/com.hyprune.lumen-reach/` (format 0.7) from the
-  source `dist/` baked on 10.2.2.2 at `1f21028`.
+  source `dist/` baked on the bake host at `1f21028`.
 - Manifest SHA256 `4f047839cbd6…` (full hashes in `reports/release.json`).
 - Archive `artifacts/releases/com.hyprune.lumen-reach-0.8.1.tar.zst`,
   39,736,290 bytes, SHA256
@@ -173,7 +173,7 @@ content changes beyond lightmap samplers. Full write-up with numbers:
 
 - Release package: `dist-07/com.hyprune.lumen-reach/` (format 0.7), the
   deterministic optimisation of the source package `dist/` (format 0.5, baked
-  on 10.2.2.2 from build inputs at `f5e8b82`).
+  on the bake host from build inputs at `f5e8b82`).
 - Manifest SHA256 `68632d462d9077ef…`, scene SHA256 `50c03d10094d1a30…`
   (full hashes in `reports/release.json`).
 - Archive `artifacts/releases/com.hyprune.lumen-reach-0.8.0.tar.zst`,

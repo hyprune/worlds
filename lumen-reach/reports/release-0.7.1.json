@@ -4,7 +4,7 @@
   "version": "0.7.1",
   "formatVersion": "0.5",
   "sourceCommit": "50ad2c0aae5d7c49af74024045ad9de36268159f",
-  "sourceNote": "Package bytes baked on 10.2.2.2 (fourth 0.7.1 bake) from the build inputs committed at 2dfd3dd; later commits change only harness, reports and docs.",
+  "sourceNote": "Package bytes baked on bake-host (fourth 0.7.1 bake) from the build inputs committed at 2dfd3dd; later commits change only harness, reports and docs.",
   "sceneSHA256": "ff8e95bf3f11ddf76b444b2764c4a7d73d82973b8d53a05c967894e88790ab73",
   "manifestSHA256": "15e18acc05200e6fb90bd9d084c8105ae0b165f6cd54972bb4667c34da8a6af2",
   "archive": {

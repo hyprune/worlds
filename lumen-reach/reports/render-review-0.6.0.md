@@ -52,5 +52,5 @@ additional interactive mounts or claims about live application state.
 
 See `reports/final-report.md` and `reports/polish-v3/` for budgets, shader/material
 coverage, lightmap evidence, full route traversal, engine hashes, archive and
-gallery paths. Blender ran only on 10.2.2.2. Engine testing held the nested lock;
+gallery paths. Blender ran only on the bake host. Engine testing held the nested lock;
 the owner's real session and gallery autocommit process were untouched.

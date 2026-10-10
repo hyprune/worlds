@@ -97,7 +97,7 @@ The sixteen engine stills include twelve unchanged comparison poses and four
 additional detail views. They are ungraded. The tour was encoded in `/tmp`,
 inspected, then copied to a staging file and atomically moved into the gallery.
 The gallery autocommit process was left untouched.
-All Blender execution used `tools/remote-blender.sh` on 10.2.2.2. The owner's
+All Blender execution used `tools/remote-blender.sh` on the bake host. The owner's
 real session was never controlled. Worlds commits remain local; no push,
 GitHub release or publication was performed by this work.
 
