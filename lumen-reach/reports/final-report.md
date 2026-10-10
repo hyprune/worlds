@@ -68,7 +68,7 @@ Delivered cadence stays at 60 Hz; GPU deltas include clock/host noise.
 
 ## Archive
 
-`/home/rick/workspace/hyprune/worlds/artifacts/releases/com.hyprune.lumen-reach-0.7.0.tar.zst`
+`artifacts/releases/com.hyprune.lumen-reach-0.7.0.tar.zst`
 (47,941,863 bytes)
 
 SHA256 `31a1449cb76ee2ed97cba33b0b55a3d6dcc91f23646fbe3ec7f3bdf679b0666d`

@@ -122,8 +122,8 @@
       27.5,
       35
     ],
-    "galleryPath": "/home/rick/workspace/rick-the-alien/worldshell-gallery/videos/world-switchyard.mp4",
-    "metadataPath": "/home/rick/workspace/rick-the-alien/worldshell-gallery/videos/world-switchyard.json",
+    "galleryPath": "gallery:videos/world-switchyard.mp4",
+    "metadataPath": "gallery:videos/world-switchyard.json",
     "visualReview": "PASS: both endpoints of all four shots; six decoded MP4 frames at 0, 8.8, 13.5, 22, 27.5 and 35 seconds"
   },
   "finalSourceCommit": "66b38b8062db03792af0dd0458f0615f56d5d78c",

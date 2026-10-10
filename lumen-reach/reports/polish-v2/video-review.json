@@ -9,6 +9,6 @@
   "shellStatus": "live",
   "shellProtocol": "0.7",
   "review": "Five-second frame contact sheet plus full-resolution primary-wall evidence inspected. All four workspace walls contain applications, four placed terminals are present, and actual keyboard input is verified. No grading or retouching.",
-  "path": "/home/rick/workspace/rick-the-alien/worldshell-gallery/videos/release-world-tour-v2.mp4",
+  "path": "gallery:videos/release-world-tour-v2.mp4",
   "sha256": "9285d163acc2f8db8ba6995809b1593fd2cd7e05bde777c57a60275b4dbccd49"
 }

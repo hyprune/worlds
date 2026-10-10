@@ -21,7 +21,7 @@
   },
   "comparisonSheet": "artifacts/switchyard/engine-blender-contact-sheet.png",
   "engineStills": "artifacts/switchyard/engine-*.png",
-  "engineFilm": "~/workspace/rick-the-alien/worldshell-gallery/videos/world-switchyard-engine.mp4",
+  "engineFilm": "gallery:videos/world-switchyard-engine.mp4",
   "blenderFilm": "Polished endpoint previews reviewed; full rerender canceled at owner request. Previously delivered gallery Blender film remains unchanged.",
   "distribution": "Generated binaries remain ignored; no new release archive produced.",
   "rfcFindings": "NOTES-rfc-gaps.md",

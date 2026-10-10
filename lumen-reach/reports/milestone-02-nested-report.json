@@ -50,7 +50,7 @@
         ]
       },
       "verticalFovDegrees": 60,
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/lumen-reach/engine-01-sun-court.png"
+      "path": "artifacts/lumen-reach/engine-01-sun-court.png"
     },
     {
       "id": "01-sun-court-terrace",
@@ -68,7 +68,7 @@
         ]
       },
       "verticalFovDegrees": 60,
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/lumen-reach/engine-01-sun-court-terrace.png"
+      "path": "artifacts/lumen-reach/engine-01-sun-court-terrace.png"
     },
     {
       "id": "01-sun-court-tools",
@@ -86,7 +86,7 @@
         ]
       },
       "verticalFovDegrees": 60,
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/lumen-reach/engine-01-sun-court-tools.png"
+      "path": "artifacts/lumen-reach/engine-01-sun-court-tools.png"
     },
     {
       "id": "02-array-hall",
@@ -104,7 +104,7 @@
         ]
       },
       "verticalFovDegrees": 60,
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/lumen-reach/engine-02-array-hall.png"
+      "path": "artifacts/lumen-reach/engine-02-array-hall.png"
     },
     {
       "id": "02-array-hall-balcony",
@@ -122,7 +122,7 @@
         ]
       },
       "verticalFovDegrees": 60,
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/lumen-reach/engine-02-array-hall-balcony.png"
+      "path": "artifacts/lumen-reach/engine-02-array-hall-balcony.png"
     },
     {
       "id": "02-array-hall-tools",
@@ -140,7 +140,7 @@
         ]
       },
       "verticalFovDegrees": 60,
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/lumen-reach/engine-02-array-hall-tools.png"
+      "path": "artifacts/lumen-reach/engine-02-array-hall-tools.png"
     }
   ],
   "status": "PASS",

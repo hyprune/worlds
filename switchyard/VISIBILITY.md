@@ -72,7 +72,7 @@ therefore use a separately built, clean checkout of published core
 `2494c136ab43c55f20084514e7ae3799ef75822a`; loaded plugin SHA256 is
 `c3a8c3d79933ade9a12d1a53b1ee3dc88b2f0d1b48fe1e61685cd0160a6cad1e`. Core's active checkout was not edited.
 
-Archive: `/home/rick/workspace/hyprune/worlds/artifacts/releases/com.hyprune.switchyard-0.1.2.tar.zst`
+Archive: `artifacts/releases/com.hyprune.switchyard-0.1.2.tar.zst`
 SHA256: `e041570442de717f3cbb36ca252977b47732ba873f014a8ba78c06ada370e7fd`
 Every extracted file matches the package; no release or push was performed.
 

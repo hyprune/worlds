@@ -97,7 +97,7 @@ therefore use a separately built, clean checkout of published core
 `2494c136ab43c55f20084514e7ae3799ef75822a`; loaded plugin SHA256 is
 `c3a8c3d79933ade9a12d1a53b1ee3dc88b2f0d1b48fe1e61685cd0160a6cad1e`. Core's active checkout was not edited.
 
-Archive: `/home/rick/workspace/hyprune/worlds/artifacts/releases/com.hyprune.lumen-reach-0.6.1.tar.zst`
+Archive: `artifacts/releases/com.hyprune.lumen-reach-0.6.1.tar.zst`
 SHA256: `f0bf4f25abe4db0bda0029128d75404da011be5cc7194a9c4e0e68306a39e616`
 Every extracted file matches the package; no release or push was performed.
 

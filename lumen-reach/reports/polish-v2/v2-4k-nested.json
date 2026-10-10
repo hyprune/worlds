@@ -23,7 +23,7 @@
     "active": true,
     "activeHandle": -1,
     "aim": "",
-    "captureDirectory": "/home/rick/workspace/hyprune/worlds/artifacts/lumen-reach/.nested-state/statehome/hyprune/captures",
+    "captureDirectory": "artifacts/lumen-reach/.nested-state/statehome/hyprune/captures",
     "captures": [],
     "childSurfaces": [],
     "children": 0,
@@ -362,7 +362,7 @@
         ]
       },
       "verticalFovDegrees": 60,
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/lumen-reach/v2-4k/engine-01-sun-court.png"
+      "path": "artifacts/lumen-reach/v2-4k/engine-01-sun-court.png"
     },
     {
       "renderer": {
@@ -458,7 +458,7 @@
         ]
       },
       "verticalFovDegrees": 60,
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/lumen-reach/v2-4k/engine-01-sun-court-terrace.png"
+      "path": "artifacts/lumen-reach/v2-4k/engine-01-sun-court-terrace.png"
     },
     {
       "renderer": {
@@ -554,7 +554,7 @@
         ]
       },
       "verticalFovDegrees": 60,
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/lumen-reach/v2-4k/engine-01-sun-court-tools.png"
+      "path": "artifacts/lumen-reach/v2-4k/engine-01-sun-court-tools.png"
     },
     {
       "renderer": {
@@ -650,7 +650,7 @@
         ]
       },
       "verticalFovDegrees": 60,
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/lumen-reach/v2-4k/engine-02-array-hall.png"
+      "path": "artifacts/lumen-reach/v2-4k/engine-02-array-hall.png"
     },
     {
       "renderer": {
@@ -746,7 +746,7 @@
         ]
       },
       "verticalFovDegrees": 60,
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/lumen-reach/v2-4k/engine-02-array-hall-balcony.png"
+      "path": "artifacts/lumen-reach/v2-4k/engine-02-array-hall-balcony.png"
     },
     {
       "renderer": {
@@ -842,7 +842,7 @@
         ]
       },
       "verticalFovDegrees": 60,
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/lumen-reach/v2-4k/engine-02-array-hall-tools.png"
+      "path": "artifacts/lumen-reach/v2-4k/engine-02-array-hall-tools.png"
     },
     {
       "renderer": {
@@ -938,7 +938,7 @@
         ]
       },
       "verticalFovDegrees": 60,
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/lumen-reach/v2-4k/engine-03-rime-vault.png"
+      "path": "artifacts/lumen-reach/v2-4k/engine-03-rime-vault.png"
     },
     {
       "renderer": {
@@ -1034,7 +1034,7 @@
         ]
       },
       "verticalFovDegrees": 60,
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/lumen-reach/v2-4k/engine-03-rime-vault-tools.png"
+      "path": "artifacts/lumen-reach/v2-4k/engine-03-rime-vault-tools.png"
     },
     {
       "renderer": {
@@ -1130,7 +1130,7 @@
         ]
       },
       "verticalFovDegrees": 60,
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/lumen-reach/v2-4k/engine-03-rime-vault-platform.png"
+      "path": "artifacts/lumen-reach/v2-4k/engine-03-rime-vault-platform.png"
     },
     {
       "renderer": {
@@ -1226,7 +1226,7 @@
         ]
       },
       "verticalFovDegrees": 60,
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/lumen-reach/v2-4k/engine-04-signal-rise.png"
+      "path": "artifacts/lumen-reach/v2-4k/engine-04-signal-rise.png"
     },
     {
       "renderer": {
@@ -1322,7 +1322,7 @@
         ]
       },
       "verticalFovDegrees": 60,
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/lumen-reach/v2-4k/engine-04-signal-rise-bench.png"
+      "path": "artifacts/lumen-reach/v2-4k/engine-04-signal-rise-bench.png"
     },
     {
       "renderer": {
@@ -1418,7 +1418,7 @@
         ]
       },
       "verticalFovDegrees": 60,
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/lumen-reach/v2-4k/engine-04-signal-rise-gantry.png"
+      "path": "artifacts/lumen-reach/v2-4k/engine-04-signal-rise-gantry.png"
     },
     {
       "renderer": {
@@ -1514,7 +1514,7 @@
         ]
       },
       "verticalFovDegrees": 60,
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/lumen-reach/v2-4k/engine-01-sun-court-entry-fixtures.png"
+      "path": "artifacts/lumen-reach/v2-4k/engine-01-sun-court-entry-fixtures.png"
     },
     {
       "renderer": {
@@ -1610,7 +1610,7 @@
         ]
       },
       "verticalFovDegrees": 60,
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/lumen-reach/v2-4k/engine-02-array-hall-vista.png"
+      "path": "artifacts/lumen-reach/v2-4k/engine-02-array-hall-vista.png"
     },
     {
       "renderer": {
@@ -1706,7 +1706,7 @@
         ]
       },
       "verticalFovDegrees": 60,
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/lumen-reach/v2-4k/engine-03-rime-vault-services.png"
+      "path": "artifacts/lumen-reach/v2-4k/engine-03-rime-vault-services.png"
     },
     {
       "renderer": {
@@ -1802,7 +1802,7 @@
         ]
       },
       "verticalFovDegrees": 60,
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/lumen-reach/v2-4k/engine-04-signal-rise-reflector.png"
+      "path": "artifacts/lumen-reach/v2-4k/engine-04-signal-rise-reflector.png"
     }
   ],
   "performanceViews": [

@@ -48,7 +48,7 @@
         ]
       },
       "verticalFovDegrees": 60,
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/lumen-reach/engine-01-sun-court.png"
+      "path": "artifacts/lumen-reach/engine-01-sun-court.png"
     },
     {
       "id": "01-sun-court-terrace",
@@ -66,7 +66,7 @@
         ]
       },
       "verticalFovDegrees": 60,
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/lumen-reach/engine-01-sun-court-terrace.png"
+      "path": "artifacts/lumen-reach/engine-01-sun-court-terrace.png"
     },
     {
       "id": "01-sun-court-tools",
@@ -84,7 +84,7 @@
         ]
       },
       "verticalFovDegrees": 60,
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/lumen-reach/engine-01-sun-court-tools.png"
+      "path": "artifacts/lumen-reach/engine-01-sun-court-tools.png"
     }
   ],
   "status": "PASS",

@@ -223,7 +223,7 @@
         ]
       },
       "verticalFovDegrees": 60,
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/switchyard/engine-01-concourse.png"
+      "path": "artifacts/switchyard/engine-01-concourse.png"
     },
     {
       "id": "02-arrival",
@@ -254,7 +254,7 @@
         ]
       },
       "verticalFovDegrees": 60,
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/switchyard/engine-02-arrival.png"
+      "path": "artifacts/switchyard/engine-02-arrival.png"
     },
     {
       "id": "03-build",
@@ -285,7 +285,7 @@
         ]
       },
       "verticalFovDegrees": 60,
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/switchyard/engine-03-build.png"
+      "path": "artifacts/switchyard/engine-03-build.png"
     },
     {
       "id": "04-route",
@@ -316,7 +316,7 @@
         ]
       },
       "verticalFovDegrees": 60,
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/switchyard/engine-04-route.png"
+      "path": "artifacts/switchyard/engine-04-route.png"
     },
     {
       "id": "05-vault",
@@ -347,11 +347,11 @@
         ]
       },
       "verticalFovDegrees": 60,
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/switchyard/engine-05-vault.png"
+      "path": "artifacts/switchyard/engine-05-vault.png"
     }
   ],
   "engineWalk": {
-    "path": "/home/rick/workspace/rick-the-alien/worldshell-gallery/videos/world-switchyard-engine.mp4",
+    "path": "gallery:videos/world-switchyard-engine.mp4",
     "bytes": 17607631,
     "distanceMeters": 38.67,
     "durationSeconds": 26.933333,

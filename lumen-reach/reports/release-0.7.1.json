@@ -9,7 +9,7 @@
   "manifestSHA256": "15e18acc05200e6fb90bd9d084c8105ae0b165f6cd54972bb4667c34da8a6af2",
   "archive": {
     "status": "PASS",
-    "path": "/home/rick/workspace/hyprune/worlds/artifacts/releases/com.hyprune.lumen-reach-0.7.1.tar.zst",
+    "path": "artifacts/releases/com.hyprune.lumen-reach-0.7.1.tar.zst",
     "sha256": "326406931e5b8c9cebb6e385cc1aed9303a0f7a47141048fdeec8eb0738e2549",
     "bytes": 46888010,
     "identicalExtractedFiles": 76,
@@ -83,5 +83,5 @@
     "beforeAfter": "reports/any-angle-0.7.1/before-after.json",
     "baseline070": "reports/any-angle-0.7.1/baseline-0.7.0/"
   },
-  "gallery": "/home/rick/workspace/rick-the-alien/worldshell-gallery/screenshots/release-world-v4/"
+  "gallery": "gallery:screenshots/release-world-v4/"
 }

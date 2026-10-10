@@ -176,14 +176,14 @@
     "rimeAfterTriangles": 44700
   },
   "archive": {
-    "path": "/home/rick/workspace/hyprune/worlds/artifacts/releases/com.hyprune.lumen-reach-0.6.0.tar.zst",
+    "path": "artifacts/releases/com.hyprune.lumen-reach-0.6.0.tar.zst",
     "sha256": "fe2f7b492cd21578964a7f4cd4ac5f799209c318f7350c506df04bb46be28dd4",
     "bytes": 45219398
   },
-  "stills": "/home/rick/workspace/rick-the-alien/worldshell-gallery/screenshots/release-world-v3",
+  "stills": "gallery:screenshots/release-world-v3",
   "video": {
-    "path": "/home/rick/workspace/rick-the-alien/worldshell-gallery/videos/rime-vault-v3.mp4",
-    "metadata": "/home/rick/workspace/rick-the-alien/worldshell-gallery/videos/rime-vault-v3.json",
+    "path": "gallery:videos/rime-vault-v3.mp4",
+    "metadata": "gallery:videos/rime-vault-v3.json",
     "durationSeconds": 42.0,
     "sha256": "44ef46a189b6a59d2661d749b9f5e9f6f277607d6693f4daa14e98d417a92ecc"
   },
