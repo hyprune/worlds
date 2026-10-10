@@ -233,6 +233,10 @@ def finish_export(B,g,m):
  for mat in g['materials']:
   if mat['name'].split('--')[-1] not in ['land-sun','land-mid','land-shade','land-snow']:continue
   pbr=mat['pbrMetallicRoughness'];mat['emissiveTexture']=pbr.pop('baseColorTexture');mat['emissiveFactor']=pbr['baseColorFactor'][:3];pbr['baseColorFactor']=[0,0,0,1]
+  # 0.9.1: never roughness 1. Core's specular exponent 2/r^2-2 is then 0 and
+  # pow(0.,0.) where N.H<=0 is undefined (NaN on Intel): the shell's
+  # silhouette faces turned black (owner's 'black thing' by the globe).
+  pbr['roughnessFactor']=.95
   mat.get('extensions',{}).pop('KHR_materials_unlit',None);mat['doubleSided']=False
  for t in g.get('textures',[]):
   im=g['images'][t['source']].get('uri','')

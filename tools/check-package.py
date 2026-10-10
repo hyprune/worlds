@@ -58,7 +58,10 @@ for ni,name in [(i,n.get('name','')) for i,n in enumerate(g['nodes']) if i in s.
    tris+=len(indices);continue
   assert 'TEXCOORD_0' in p['attributes']
   pbr=mat.get('pbrMetallicRoughness',{})
-  prelit=('emissiveTexture' in mat and any(mat.get('emissiveFactor',[])) and pbr.get('baseColorFactor')==[0,0,0,1] and 'baseColorTexture' not in pbr and pbr.get('metallicFactor')==0 and pbr.get('roughnessFactor')==1)
+  # Untextured roughness 1 makes core's specular exponent 0: pow(0.,0.) is
+  # NaN on Intel wherever N.H<=0, rendering black patches (0.9.0 vista).
+  assert 'metallicRoughnessTexture' in pbr or pbr.get('roughnessFactor',1)<.999,(name,mat.get('name'),'roughness 1 renders NaN in core specular')
+  prelit=('emissiveTexture' in mat and any(mat.get('emissiveFactor',[])) and pbr.get('baseColorFactor')==[0,0,0,1] and 'baseColorTexture' not in pbr and pbr.get('metallicFactor')==0 and pbr.get('roughnessFactor',1)>=.9)
   if prelit:
    assert material not in light,(name,'prelit emitter must not receive irradiance')
    assert mat['emissiveTexture'].get('texCoord',0)==0
