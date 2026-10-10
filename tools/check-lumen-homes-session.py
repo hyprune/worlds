@@ -6,7 +6,8 @@ For a package (e.g. the format 0.7 release in dist-07/): core's homes 21-24
 and the Director's locations; places, map and projected HUD map markers;
 anchors by mount role and data objects as core publishes them; a real
 window on each of workspaces 21-24 lands on that area's primary wall (frame
-at the primary anchor, aimable from in front, still per wall); and a real
+at the primary anchor, aimable from in front, still per wall) and fills its
+16:9 frame on both axes; and a real
 window placed on every tool mount (surface.place) sits at that anchor.
 Writes report.json and wall stills. Never live-session IPC.
 """
@@ -68,6 +69,11 @@ def acceptance(client,children,args,shell_token,socketpath):
   dd=max(8.0,an['size'][0]*.9);s.ctl('eval',f'hl.plugin.hyprune.camera({pp[0]+n[0]*dd},{pp[1]},{pp[2]+n[2]*dd},{yaw},0)');time.sleep(.6)
   shot=a.output/f'wall-{id}-{area}.png';subprocess.run([str(s.HERE/'ctl.py'),'shot',str(shot)],check=True,stdout=subprocess.DEVNULL)
   check(f'workspace {id} window on the {area} primary wall',math.dist(f['position'],pp)<.5 and aim is not None,{'frame':f,'anchor':an['id'],'aimDistance':aim,'still':str(shot)})
+  # 0.9.1: the 16:9 wall is filled by the (16:9 monitor's) tiled window on
+  # both axes alike, less the tiling gaps; a letterboxed frame fills one less.
+  c=next((c for c in s.camera()['captures'] if c['title']=='Home-'+str(id)),None)
+  fill=[round(c['size'][k]/an['size'][k],4) for k in (0,1)] if c else None
+  check(f'workspace {id} window fills the {area} 16:9 wall',fill is not None and min(fill)>=.9 and max(fill)<=1.001 and abs(fill[0]-fill[1])<=.03 and abs(an['size'][0]/an['size'][1]/(16/9)-1)<=.005,{'anchorSize':an['size'],'window':c,'fill':fill})
  # Tool mounts: a window can be placed only from a workspace with an area
  # home (core Layout::place), so each area's probe opens on its home (21-24)
  # and visits every tool mount of that area.

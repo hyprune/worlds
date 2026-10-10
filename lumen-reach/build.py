@@ -140,7 +140,7 @@ def label(word,pos,height=.32,mat='ivory'):
  plaque=box('Sign plaque '+word,(x,y+.018+depth/2,z),(w+.20,depth,height+.16),'metal',.006)
  if word in ['ARRAY HALL','02 ARRAY HALL']:
   # Entrance signs hang from the canopy; atrium plaque brackets meet the wall frame.
-  target=4.42 if word=='ARRAY HALL' else 14.15
+  target=4.42 if word=='ARRAY HALL' else 14.67
   for dx in [-w*.38,w*.38]:rod('Sign bracket',(x+dx,y+.07,z),(x+dx,y+.35,target),.035)
  elif word=='RIME VAULT':
   rod('Service direction sign mast',(x,y+.10,0),(x,y+.10,z+.2),.045)
@@ -166,7 +166,6 @@ def sign_audit():
   x0,x1=min(v.x for v in bb),max(v.x for v in bb);z0,z1=min(v.z for v in bb),max(v.z for v in bb)
   rows.append({'word':word,'min':up((x0,y+.012,z0)),'max':up((x1,y-.5,z1)),'letterPlane':up((0,y,0))[2],'material':mat})
  (ART/'sign-audit.json').write_text(json.dumps({'signs':rows},indent=2)+'\n')
-
 
 def sigil(pos,h=1,mat='ivory'):
  x,y,z=pos
@@ -318,8 +317,10 @@ def court():
  # Facade is a structure with a real central entrance under its giant wall.
  for x,w in [(-4,8),(19,10)]:box('Facade pier',(x,24,3),(w,1.5,6),'concrete',.045,solid=True)
  box('Facade lintel',(8,24,11),(32,1.5,10),'concrete',.045,solid=True)
- screen('facade-wall',(8,23.17,10.1),(18.8,9.3),'mounted-workspace',style='workspace')
- label('01 SUN COURT',(8,22.92,15.65),.46)
+ # 0.9.1: primary walls are 16:9 (3840x2160), so a workspace fills the frame;
+ # the sign sits between the frame and the roof deck overhang (z 15.68).
+ screen('facade-wall',(8,23.17,10.1),(16,9),'mounted-workspace',style='workspace')
+ label('01 SUN COURT',(8,22.92,15.22),.40)
  label('ARRAY HALL',(8,23.12,3.35),.35)
  for x in [2.8,13.2]:
   # Supported jamb from paving to canopy, with the lens seated into its backplate.
@@ -452,9 +453,9 @@ def hall():
  for x in [-6,-2,2,6,10,14,18,22,24]:rod('Panorama mullion',(x,60,0),(x,60,20.6),.06)
  box('Panorama parapet',(9,60,.5),(30,.35,1),'concrete',solid=True)
  # The main wall hangs above the travel floor, rather than turning the hall into a corridor.
- screen('hanging-wall',(8,48,10),(16,8),'mounted-workspace',style='workspace')
- for x in [.6,15.4]:rod('Workspace suspension',(x,48.3,14.17),(x,48.3,20.8),.09)
- label('02 ARRAY HALL',(8,47.67,15.2),.42)
+ screen('hanging-wall',(8,48,10),(16,9),'mounted-workspace',style='workspace')
+ for x in [.6,15.4]:rod('Workspace suspension',(x,48.3,14.67),(x,48.3,20.8),.09)
+ label('02 ARRAY HALL',(8,47.67,15.7),.42)
  banner(-3,43.65,11,3.5)
  for x in [-1,18]:
   cyl('Lectern base',(x,40,.14),.55,.28,'metal')
@@ -494,7 +495,7 @@ def hall():
  P.area('Hall warm skylight',(4,42,19),(8,46,0),9000,(1,.63,.30),12)
  P.area('Hall warm window',(12,59,14),(8,45,3),6500,(1,.73,.43),9)
  for x in [-4,22]:P.area('Hall service pool',(x,45,8),(x,45,0),650,(1,.40,.13),3)
- label('RIME VAULT',(23.7,49,4),.24)
+ label('RIME VAULT',(24.4,49,4),.24)
  point('hall-arrival',(8,33,0),'hall-entry');point('hall-center',(8,46,0),'hall-arrival');point('hall-exit',(20,50,0),'hall-center');point('service-entry',(30,50,0),'hall-exit')
  point('hall-annex-entry',(-10.5,36,0),'hall-arrival');point('hall-ramp-base',(-10.5,40,0),'hall-annex-entry');point('hall-balcony',(-10.5,56,4),'hall-ramp-base');point('hall-balcony-turn',(-10.5,59.2,4),'hall-balcony');point('hall-upper-door',(-3.5,59.2,4),'hall-balcony-turn');point('hall-upper-base',(-3.5,56,4),'hall-upper-door');point('hall-upper',(-3.5,40,8),'hall-upper-base')
  for off in [-.5,.5]:
@@ -549,9 +550,9 @@ def vault():
   box('Ceiling amber bar',(38,y,3.9),(5,.12,.05),'amber')
  # Main console is visibly recessed into a heavy service frame.
  box('Console backing',(39,100,-.5),(16,1.1,8.7),'frost',solid=True)
- screen('wall-inset-console',(39,99.37,-.1),(13.8,6.3),'mounted-workspace',style='workspace')
+ screen('wall-inset-console',(39,99.37,-.1),(11.2,6.3),'mounted-workspace',style='workspace')
  label('03 RIME VAULT',(39,99.03,3.45),.32)
- for x in [31,47]:box('Console amber side',(x,99.20,-.8),(.08,.06,6.9),'amber')
+ for x in [32.3,45.7]:box('Console amber side',(x,99.20,-.8),(.08,.06,6.9),'amber')
  for x,y in [(33.6,81),(45,82)]:
   box('Vault instrument desk',(x,y,-5),(3.8,1.15,.17),'metal',solid=True)
   for dx in [-1.5,1.5]:box('Vault desk support',(x+dx,y,-5.5),(.16,.85,1),'frost',solid=True)
@@ -646,7 +647,7 @@ def rise():
  for x in [49,52,74,79]:
   box('Fortress armor rib',(x,146.95,11),(.5,.45,19),'metal',solid=True)
   box('Fortress amber edge',(x+.28,146.65,10),(.07,.06,18),'amber')
- screen('blast-door-screen',(63,147.15,10.7),(18.5,10.4),'mounted-workspace',style='workspace')
+ screen('blast-door-screen',(63,147.15,10.7),(18.4,10.35),'mounted-workspace',style='workspace')
  label('04 SIGNAL RISE',(63,146.82,17),.45);box('Fortress identity plate',(78,147.075,18.2),(1.2,.35,1.2),'metal',.004);sigil((78,146.90,18),.7)
  # Outer facility layers are beyond every work floor and walking destination.
  for x,y,w,h in [(36,168,12,24),(85,171,12,30),(91,158,9,15)]:

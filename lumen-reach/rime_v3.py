@@ -116,11 +116,12 @@ def apply(B):
  for x,y,s in [(49.0,77.0,(.7,1.0,.3)),(49.1,101,(.6,.5,.25)),(26.6,99,(.32,.75,.22)),(31.1,100.8,(.7,.6,.28))]:snowbank(B,(x,y,-5.98),s)
 
  # Frozen condensation gathers on the perimeter of the wall-inset console.
- for x in [31.1,46.9]:
+ for x in [32.4,45.6]:
   plate('Console condensation cheek',(x,99.31,-.7),(.30,.18,7.25),'condensation')
   ice_fringe(x,99.18,2.82,7,.32,.58)
  plate('Console upper rime sill',(39,99.16,3.85),(15.8,.38,.16),'rime-crust')
- ice_fringe(39,98.99,3.79,56,15.5,.58)
+ # The fringe stops either side of the "03 RIME VAULT" sign (x 37.1..40.9).
+ for x in [34.075,43.925]:ice_fringe(x,98.99,3.79,20,5.65,.58)
  for y in [80,86,92,98]:
   for x in [26.65,49.35]:ice_fringe(x,y,1.9,10,2.0,.65,axis='y')
 
