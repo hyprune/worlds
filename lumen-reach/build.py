@@ -13,7 +13,7 @@ ANCHORS=[];OBJECTS=[];AREAS=[];ROUTES=[];EDGES=[];WALK=[];MOUNT_ROWS=[]
 NAMES=['sun-court','array-hall','rime-vault','signal-rise']
 TITLES=['SUN COURT','ARRAY HALL','RIME VAULT','SIGNAL RISE']
 AREA=0;BASE=0;G='sun-court';COUNT={};STAIR_ROUTES=[]
-UNLIT=set();VIEWS=[]
+UNLIT=set();VIEWS=[];SIGNS=[]
 LANDMARKS={'arrival': 'Sun Court', 'globe-platform': 'Instrument terrace', 'lookout': 'West lookout', 'cascade-bridge': 'Upper Cascade', 'rooftop': 'Rooftop shelter', 'hall-arrival': 'Array Hall', 'hall-upper': 'Upper balcony', 'vault-arrival': 'Rime Vault', 'vault-platform': 'Maintenance deck', 'rise-arrival': 'Signal Rise', 'fortress-room': 'Gate operator room', 'diagnostics-platform': 'Diagnostics deck', 'dish-platform': 'Dish terrace', 'gantry-west': 'Cable gantry'}
 
 def box(name,pos,size,mat='concrete',bevel=.025,solid=False,group=None):
@@ -137,7 +137,7 @@ def label(word,pos,height=.32,mat='ivory'):
  pitch=height/7;w=(len(word)*6-1)*pitch;verts=[];faces=[]
  x,y,z=pos
  depth={'01 SUN COURT':.38,'03 RIME VAULT':.47,'04 SIGNAL RISE':.50,'SEALED':.14,'CONTINUATION':.14}.get(word,.10)
- box('Sign plaque '+word,(x,y+.018+depth/2,z),(w+.20,depth,height+.16),'metal',.006)
+ plaque=box('Sign plaque '+word,(x,y+.018+depth/2,z),(w+.20,depth,height+.16),'metal',.006)
  if word in ['ARRAY HALL','02 ARRAY HALL']:
   # Entrance signs hang from the canopy; atrium plaque brackets meet the wall frame.
   target=4.42 if word=='ARRAY HALL' else 14.15
@@ -153,7 +153,20 @@ def label(word,pos,height=.32,mat='ivory'):
     if b!='1':continue
     x=pos[0]-w/2+(j*6+col+.5)*pitch;z=pos[2]+(3-row)*pitch;y=pos[1];q=len(verts);a=pitch*.42
     verts.extend([(x-a,y,z-a),(x+a,y,z-a),(x+a,y,z+a),(x-a,y,z+a)]);faces.append((q,q+1,q+2,q+3))
- return mesh('Lettering '+word,verts,faces,mat,group='vista')
+ letters=mesh('Lettering '+word,verts,faces,mat,group='vista');SIGNS.append((word,mat,plaque,letters))
+ return letters
+
+def sign_audit():
+ # The plaque face and 0.5 m of air in front of it must stay clear of other
+ # geometry (check-frames-signs.py). Letters face -Y and are read from the
+ # front. Measured after every kit, since some move signs (rime_v3).
+ bpy.context.view_layer.update();rows=[]
+ for word,mat,plaque,letters in SIGNS:
+  bb=[plaque.matrix_world@Vector(c) for c in plaque.bound_box];y=min((letters.matrix_world@v.co).y for v in letters.data.vertices)
+  x0,x1=min(v.x for v in bb),max(v.x for v in bb);z0,z1=min(v.z for v in bb),max(v.z for v in bb)
+  rows.append({'word':word,'min':up((x0,y+.012,z0)),'max':up((x1,y-.5,z1)),'letterPlane':up((0,y,0))[2],'material':mat})
+ (ART/'sign-audit.json').write_text(json.dumps({'signs':rows},indent=2)+'\n')
+
 
 def sigil(pos,h=1,mat='ivory'):
  x,y,z=pos
@@ -759,7 +772,7 @@ def manifest(g,lm,nodes,cols,count):
   area['primaryAnchor']=next(r['anchorId'] for r in MOUNT_ROWS if r['areaId']==area['id'] and r['role']=='mounted-workspace');area['toolAnchors']=[r['anchorId'] for r in MOUNT_ROWS if r['areaId']==area['id'] and r['role']=='tool'];area['dataAnchors']=[r['id'] for r in OBJECTS if r['areaId']==area['id']]
  spawns=[{'id':'arrival','pose':{'position':up(AREAS[0]['spawn']),'rotation':[0,0,0,1]}}]+[{'id':a['id'],'pose':{'position':up(a['spawn']),'rotation':[0,0,0,1]}} for a in AREAS]
  m={'formatVersion':'0.2','id':'com.hyprune.lumen-reach','version':('0.9.1' if count==4 else f'0.{count}.1'),'name':'Lumen Reach','description':f'{count} connected workspace homes on a mountain watershed. Original architecture, instruments and paths.','license':'CC-BY-4.0','scene':'scene.gltf','preview':'preview.png','defaultSpawn':'arrival','spawns':spawns,'anchors':ANCHORS,'zones':[{'id':a['id'],'name':a['name'],'bounds':a['bounds']} for a in AREAS],'navigation':{'kind':'mesh','node':nodes['Navigation'],'agentRadius':.3,'agentHeight':1.8},'collision':[{'node':nodes[o.name],'shape':'mesh','layer':'static'} for o in cols],'lightmaps':lm,'attribution':[{'path':'.','author':'Hyprune contributors','license':'CC-BY-4.0','source':'https://github.com/hyprune/worlds'}],'extensions':{'com.hyprune.lumen-reach.mounts':{'version':1,'areas':[{**{k:v for k,v in a.items() if k not in ['spawn','bounds','name','freePlacementZones']},'spawnId':a['id'],'freePlacementZones':[z['id'] for z in a['freePlacementZones']]} for a in AREAS],'mounts':MOUNT_ROWS,'objects':OBJECTS},'com.hyprune.lumen-reach.routes':{'version':1,'nodes':ROUTES,'edges':EDGES,'semantics':'bidirectional walking centerlines, feet positions in meters'},'com.hyprune.lumen-reach.stairs':{'version':1,'paths':STAIR_ROUTES,'semantics':'visible treads over continuous collision beds; alternate walkable flights'},'com.hyprune.lumen-reach.placement':{'version':1,'zones':[z for a in AREAS for z in a['freePlacementZones']]},'com.hyprune.map':{'version':'0.1','path':'map.svg','projection':'xz','north':[0,0,-1],'bounds':[-36,-162,86,16],'worldToMap':[4/520,0,0,4/780,160/520,690/780]}},'requiredExtensions':[]}
- for name in ['fixture-audit.json','decal-audit.json','playable-boundary-report.json']:shutil.copy2(ART/name,OUT/name)
+ for name in ['fixture-audit.json','decal-audit.json','playable-boundary-report.json','sign-audit.json']:shutil.copy2(ART/name,OUT/name)
  if count==4:
   # 0.9.0: canonical format 0.6 contract with per-area playable volumes
   # (contract.py). Visibility regions are derived from the package after the
@@ -826,7 +839,7 @@ if __name__=='__main__':
     selected=[o for o in objects if o.name.startswith(prefixes)]
     moved.extend(selected);P.GROUPS[group]=[o for o in objects if o not in selected]
    if moved:P.GROUPS[chunk]=moved;P.RESOLUTIONS[chunk]=768;P.MARGINS[chunk]=4
-  cols,nav=spatial();P.join_groups()
+  sign_audit();cols,nav=spatial();P.join_groups()
   # A dense detail kit can exhaust pack margins and collapse all lightmap islands.
   # Geometry/overlap validity alone does not catch the resulting nearly black bake.
   density=[]

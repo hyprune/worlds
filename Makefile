@@ -62,6 +62,7 @@ lumen-validate:
 	python3 tools/check-any-angle.py $(LUMEN_PACKAGE) --output $(LUMEN_REPORTS)/geometry-check.json
 	python3 tools/check-sky.py $(LUMEN_PACKAGE) --poses lumen-reach/review-poses-v7.json --enclosures lumen-reach/enclosures.json --output $(LUMEN_REPORTS)/sky-check.json
 	python3 tools/check-route-clearance.py $(LUMEN_PACKAGE) --output $(LUMEN_REPORTS)/route-clearance.json
+	python3 tools/check-frames-signs.py $(LUMEN_PACKAGE) --output $(LUMEN_REPORTS)/frames-signs.json
 	python3 tools/check-visibility.py $(LUMEN_PACKAGE) --spec $(LUMEN_PVS)/visibility.generated.json
 	cp $(LUMEN_PVS)/report.json $(LUMEN_REPORTS)/derived-visibility.json
 	node $(SCHEMA_DIR)/bin/validate.mjs world $(LUMEN_PACKAGE)/world.json - 0.6
