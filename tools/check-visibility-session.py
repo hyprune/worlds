@@ -86,7 +86,7 @@ def acceptance(client,children,args,shell_token,socketpath):
  client.call('runtime.exit',{});losses=[(v['world'],v['id'],v['changedPixelFraction']) for v in report['views'] if v['changedPixelFraction']>0.00005];report['visualLosses']=losses;assert not losses,('visible geometry changed',losses);report['status']='PASS';save();print('PASS paired visibility capture and region boundary/route membership',flush=True)
 authoring.acceptance=acceptance
 state=a.output/'.nested-state';session.STATE=state;os.environ['HYPRUNE_NESTED_STATE_DIR']=str(state);os.environ['HYPRUNE_NESTED_4K']='1'
-source=inspect.getsource(session.run);needle="STATE=HERE/'.m3b-state'";assert source.count(needle)==1;source=source.replace(needle,'STATE=pathlib.Path('+repr(str(state))+')');exec(compile(source,str(session.HERE/'session.py'),'exec'),session.__dict__)
+source=inspect.getsource(session.run);needle=next((n for n in ["STATE=STATE_ROOT/'.m3b-state'","STATE=HERE/'.m3b-state'"] if source.count(n)==1),None);assert needle;source=source.replace(needle,'STATE=pathlib.Path('+repr(str(state))+')');exec(compile(source,str(session.HERE/'session.py'),'exec'),session.__dict__)
 with open('/tmp/worldshell-nested.lock','a') as lock:
  fcntl.flock(lock,fcntl.LOCK_EX)
  try:session.run(SimpleNamespace(serve=False,record=False,m1=False,m2=False,m3a=False,m3b=False,live=False,integration=False,visible=False,authoring=True))

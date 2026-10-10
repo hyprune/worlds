@@ -278,8 +278,9 @@ hl.window_rule({name="lumen-bench-position",match={class="^lumen-.*-bench$"},cen
 source=inspect.getsource(session.run);needle="config=str(HERE/'hyprland.lua')";assert source.count(needle)==1
 source=source.replace(needle,'config='+repr(str(config)))
 # run() ordinarily replaces STATE for its stock integration fixtures.
-assert source.count("STATE=HERE/'.integration-state'")==1
-source=source.replace("STATE=HERE/'.integration-state'",'STATE='+repr(session.STATE))
+# core main since IPC 0.18 roots nested state at STATE_ROOT (was HERE).
+needle=next((n for n in ["STATE=STATE_ROOT/'.integration-state'","STATE=HERE/'.integration-state'"] if source.count(n)==1),None);assert needle
+source=source.replace(needle,'STATE='+repr(session.STATE))
 # Path repr requires pathlib in the imported harness namespace.
 source=source.replace('STATE=PosixPath(', 'STATE=pathlib.Path(')
 if a.record or a.release_review:source=source.replace('"0.3" if args.integration', '"0.4" if args.integration')

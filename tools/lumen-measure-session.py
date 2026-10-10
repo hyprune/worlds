@@ -138,7 +138,7 @@ def acceptance(client,children,args,shell_token,socketpath):
 authoring.acceptance=acceptance
 state=a.output/'.nested-state';session.STATE=state;os.environ['HYPRUNE_NESTED_STATE_DIR']=str(state);os.environ['HYPRUNE_NESTED_4K']='1';os.environ['HYPRUNE_CONTINUOUS_RENDER']='1'
 os.environ['HYPRUNE_NESTED_PLUGIN']=str(a.core/'build/hyprune-core.so')
-source=inspect.getsource(session.run);needle="STATE=HERE/'.m3b-state'";assert source.count(needle)==1;source=source.replace(needle,'STATE=pathlib.Path('+repr(str(state))+')');exec(compile(source,str(session.HERE/'session.py'),'exec'),session.__dict__)
+source=inspect.getsource(session.run);needle=next((n for n in ["STATE=STATE_ROOT/'.m3b-state'","STATE=HERE/'.m3b-state'"] if source.count(n)==1),None);assert needle;source=source.replace(needle,'STATE=pathlib.Path('+repr(str(state))+')');exec(compile(source,str(session.HERE/'session.py'),'exec'),session.__dict__)
 with open('/tmp/worldshell-nested.lock','a') as lock:
  print('Waiting for private nested lock',flush=True);fcntl.flock(lock,fcntl.LOCK_EX)
  try:session.run(SimpleNamespace(serve=False,record=False,m1=False,m2=False,m3a=False,m3b=False,live=False,integration=False,visible=False,authoring=True))
