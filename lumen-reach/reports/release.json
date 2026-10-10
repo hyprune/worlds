@@ -17,11 +17,11 @@
     "extractedChecks": [
       "sha256sum -c LUMEN-SHA256SUMS OK",
       "schema 0.7 VALID",
-      "core hyprune-world-check exit 0 (9e50dfb)"
+      "core hyprune-world-check exit 0 (a2d39f9, main IPC 0.19)"
     ]
   },
   "published": false,
-  "coreCommit": "9e50dfbb269737aca5f77d5a4120f988bb292b4e",
+  "coreCommit": "a2d39f91bb21479a0af8b929c92281151ec93d5c",
   "baseline": {
     "version": "0.9.0",
     "releasePackage": "artifacts/opt-0.9.1/before",
@@ -93,10 +93,12 @@
       ],
       "signs": 9
     },
-    "releaseVerify": "PASS (verify.mjs, schema 0.7, core world-check)",
+    "releaseVerify": "PASS (verify.mjs, schema 0.7 at f76922b, core world-check a2d39f9)",
     "perfGate": {
       "status": "PASS",
-      "log": "GATE A (0.9.0) p50 8.766 p95 10.189 ms; GATE B (0.9.1) p50 9.021 p95 10.386 ms; 2 alternating rounds, 3200 frames each; settled scale 0.5 both",
+      "core": "a2d39f9",
+      "log": "GATE A (0.9.0) p50 8.989 p95 10.465 ms; GATE B (0.9.1) p50 8.813 p95 10.258 ms; 2 alternating rounds, 3200 frames each; settled scale 0.5 both",
+      "previousRunOnCore9e50dfb": "A 8.766/10.189, B 9.021/10.386 (+2.9 %/+1.9 %), kept in perf-gate-core-9e50dfb/",
       "report": "lumen-reach/reports/any-angle-0.9.1/perf-gate"
     },
     "budgets": {
@@ -119,6 +121,7 @@
     },
     "nestedSweep": {
       "status": "PASS",
+      "core": "a2d39f9",
       "views": 84,
       "cullingLosses": 0,
       "flyBounded": true,
@@ -126,6 +129,7 @@
     },
     "routes": {
       "status": "PASS",
+      "core": "a2d39f9",
       "nodes": 64,
       "directedGraphTraversals": 126,
       "alternateStairs": 14,
@@ -133,9 +137,11 @@
     },
     "screens": {
       "status": "PASS",
+      "core": "a2d39f9",
       "checks": "15/15",
-      "workspaces": "21-24, real kitty windows; frames fill each 16:9 wall (fit 1.0 x 1.0); 20/20 tool mounts accept placement",
-      "manifestSHA256": "0162f1e62cfbab63d2be52a461758b2d55068d02fa4487591ed105700de72ed2"
+      "workspaces": "21-24, real kitty windows; frames fill each 16:9 wall (fit 1.0 x 1.0); 20/20 tool mounts placed from 2.5 m (within reach_mount 8 m / reach_placement 12 m)",
+      "manifestSHA256": "0162f1e62cfbab63d2be52a461758b2d55068d02fa4487591ed105700de72ed2",
+      "baseline0.9.0": "FAIL (12/15; the 16:9 fill check fails Sun Court, Array Hall, Rime Vault)"
     }
   },
   "sheets": [

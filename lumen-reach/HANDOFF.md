@@ -15,8 +15,12 @@ owner's live-test findings arrived, so they ship in 0.9.1 with the rails.
   `f8ed69867670192e0d027cc732c232f1d8e36a2ae51fe7f51de013c1d096396a`. 77
   extracted files identical to `dist-07/`; schema 0.7 VALID; core
   world-check exit 0.
-- Core for nested gates: `core-optimise` at main `9e50dfb` (the meta repo
-  still pins `35ace21`).
+- Core for nested gates: `core-optimise` at main `a2d39f9` (IPC 0.19, reach
+  limits; the meta repo still pins `35ace21`). The first full gate run on
+  `9e50dfb` also passed (perf `perf-gate-core-9e50dfb/`).
+- Harness updates for core main: nested state now roots at `STATE_ROOT`
+  (all session harnesses accept both forms); the screens check places each
+  tool-mount window from 2.5 m, within `reach_mount` 8 m.
 - Sheets (gallery `screenshots/optimise-2026-10/`):
   `lumen-0.9.1-owner-findings-before-after.jpg` (owner live | nested 0.9.0 |
   nested 0.9.1 at the four capture poses, plus the four walls with real
@@ -48,10 +52,10 @@ owner's live-test findings arrived, so they ship in 0.9.1 with the rails.
 
 ## Gates
 
-validate PASS; release verify PASS; perf gate PASS (p50 +2.9 %, p95 +1.9 %
-vs 0.9.0, same session); nested sweep PASS (84 views, 0 culling losses,
-fly bounded); routes PASS (64 nodes, 126 traversals, 14 stairs); screens
-15/15 PASS on 21-24.
+On core `a2d39f9`: validate PASS; release verify PASS; perf gate PASS
+(p50 -2.0 %, p95 -2.0 % vs 0.9.0, same session); nested sweep PASS (84
+views, 0 culling losses, fly bounded); routes PASS (64 nodes, 126
+traversals, 14 stairs); screens 15/15 PASS on 21-24 (0.9.0: 12/15).
 
 ## Previous: 0.9.0 (2026-10-10)
 

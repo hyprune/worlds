@@ -1,6 +1,6 @@
 {
   "title": "Lumen Reach 0.9.0 -> 0.9.1: guard rails on the rooftop walkway and raised landings",
-  "subtitle": "Exact poses, private Intel nested, Medium 0.5 scale, core 9e50dfb; release packages (format 0.7); columns differ only by package.",
+  "subtitle": "Exact poses, private Intel nested, Medium 0.5 scale, core a2d39f9 (main, IPC 0.19); release packages (format 0.7); columns differ only by package.",
   "columns": [
     "nested 0.9.0 (published)",
     "nested 0.9.1"
@@ -11,8 +11,8 @@
       "title": "16 m roof bridge, north edge",
       "caption": "0.9.0: the 1.5 m bridge had no rail on its north edge or ends (16 m drop). 0.9.1: rail along the north edge and both ends.",
       "images": [
-        "artifacts/opt-0.9.1/before-views/rail-bridge-north.png",
-        "artifacts/opt-0.9.1/sweep3/rail-bridge-north.png"
+        "artifacts/opt-0.9.1/before4-views/rail-bridge-north.png",
+        "artifacts/opt-0.9.1/sweep4/rail-bridge-north.png"
       ]
     },
     {
@@ -20,8 +20,8 @@
       "title": "16 m bridge run, east edge",
       "caption": "0.9.0: open from the facade rooftop to the bridge. 0.9.1: rail from the rooftop corner to the bridge end.",
       "images": [
-        "artifacts/opt-0.9.1/before-views/rail-run-east.png",
-        "artifacts/opt-0.9.1/sweep3/rail-run-east.png"
+        "artifacts/opt-0.9.1/before4-views/rail-run-east.png",
+        "artifacts/opt-0.9.1/sweep4/rail-run-east.png"
       ]
     },
     {
@@ -29,8 +29,8 @@
       "title": "16 m facade rooftop, north edge",
       "caption": "0.9.0: open (an invisible backstop stopped walkers on part of it). 0.9.1: visible rail along the north and east edges.",
       "images": [
-        "artifacts/opt-0.9.1/before-views/rail-rooftop-north.png",
-        "artifacts/opt-0.9.1/sweep3/rail-rooftop-north.png"
+        "artifacts/opt-0.9.1/before4-views/rail-rooftop-north.png",
+        "artifacts/opt-0.9.1/sweep4/rail-rooftop-north.png"
       ]
     },
     {
@@ -38,8 +38,8 @@
       "title": "12 m roof upper landing, west edge",
       "caption": "0.9.0: open to an 8-12 m drop. 0.9.1: west edge and open north end railed.",
       "images": [
-        "artifacts/opt-0.9.1/before-views/rail-landing12-west.png",
-        "artifacts/opt-0.9.1/sweep3/rail-landing12-west.png"
+        "artifacts/opt-0.9.1/before4-views/rail-landing12-west.png",
+        "artifacts/opt-0.9.1/sweep4/rail-landing12-west.png"
       ]
     },
     {
@@ -47,8 +47,8 @@
       "title": "8 m roof landing, north-west corner",
       "caption": "0.9.0: open on three sides (backstop only on part). 0.9.1: west, north and east edges and the upper ramp crest railed.",
       "images": [
-        "artifacts/opt-0.9.1/before-views/rail-landing8-corner.png",
-        "artifacts/opt-0.9.1/sweep3/rail-landing8-corner.png"
+        "artifacts/opt-0.9.1/before4-views/rail-landing8-corner.png",
+        "artifacts/opt-0.9.1/sweep4/rail-landing8-corner.png"
       ]
     },
     {
@@ -56,8 +56,8 @@
       "title": "8 m hall upper balcony, west edge",
       "caption": "0.9.0: open 8 m drop to the annex. 0.9.1: west edge past the atrium column, south edge and ramp-crest corners railed.",
       "images": [
-        "artifacts/opt-0.9.1/before-views/rail-balcony-west.png",
-        "artifacts/opt-0.9.1/sweep3/rail-balcony-west.png"
+        "artifacts/opt-0.9.1/before4-views/rail-balcony-west.png",
+        "artifacts/opt-0.9.1/sweep4/rail-balcony-west.png"
       ]
     },
     {
@@ -65,8 +65,8 @@
       "title": "Roof bridge at eye height (0.8.1 review view)",
       "caption": "The slot beside the ramp top is now closed by a short rail; the walkway itself is unchanged.",
       "images": [
-        "artifacts/opt-0.9.1/before-views/roof-bridge-eye.png",
-        "artifacts/opt-0.9.1/sweep3/roof-bridge-eye.png"
+        "artifacts/opt-0.9.1/before4-views/roof-bridge-eye.png",
+        "artifacts/opt-0.9.1/sweep4/roof-bridge-eye.png"
       ]
     }
   ]

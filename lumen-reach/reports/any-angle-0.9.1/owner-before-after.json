@@ -1,6 +1,6 @@
 {
   "title": "Lumen Reach 0.9.0 -> 0.9.1: owner live-test findings at the exact poses",
-  "subtitle": "Owner live 4K capture (0.9.0, their session) | private Intel nested 0.9.0 | nested 0.9.1; Medium 0.5 scale, core 9e50dfb, release packages (format 0.7).",
+  "subtitle": "Owner live 4K capture (0.9.0, their session) | private Intel nested 0.9.0 | nested 0.9.1; Medium 0.5 scale, core a2d39f9 (main, IPC 0.19), release packages (format 0.7).",
   "columns": [
     "owner live capture (0.9.0)",
     "nested 0.9.0 (published)",
@@ -13,8 +13,8 @@
       "caption": "The black slab left of the globe is the Signal mountain shell's silhouette ~150 m out: terrain had untextured roughness 1, so core's specular exponent is 0 and pow(0,0) gives NaN (black) where N.H<=0. 0.9.1: terrain roughness 0.95. The armillary rings (dark on one side from a 2-texel lightmap) now render unbaked ivory.",
       "images": [
         "/home/rick/.local/state/hyprune/captures/capture-1791643925093.png",
-        "artifacts/opt-0.9.1/owner-before/owner-1791643925093.png",
-        "artifacts/opt-0.9.1/sweep3/owner-1791643925093.png"
+        "artifacts/opt-0.9.1/before4-views/owner-1791643925093.png",
+        "artifacts/opt-0.9.1/sweep4/owner-1791643925093.png"
       ]
     },
     {
@@ -23,8 +23,8 @@
       "caption": "Same slab from a second pose (it moved with the view: a shading NaN, not an object). Gone in 0.9.1; rings read ivory all round.",
       "images": [
         "/home/rick/.local/state/hyprune/captures/capture-1791643941741.png",
-        "artifacts/opt-0.9.1/owner-before/owner-1791643941741.png",
-        "artifacts/opt-0.9.1/sweep3/owner-1791643941741.png"
+        "artifacts/opt-0.9.1/before4-views/owner-1791643941741.png",
+        "artifacts/opt-0.9.1/sweep4/owner-1791643941741.png"
       ]
     },
     {
@@ -33,8 +33,8 @@
       "caption": "0.9.0: 18.8x9.3 m wall (2.02:1) letterboxed the 16:9 workspace; the \"01 SUN COURT\" plaque (top z 15.96) ran into the roof deck overhang (z 15.68). 0.9.1: true 16:9 16x9 m wall; sign 0.40 m at z 15.22, 0.18 m under the deck.",
       "images": [
         "/home/rick/.local/state/hyprune/captures/capture-1791643948449.png",
-        "artifacts/opt-0.9.1/owner-before/owner-1791643948449.png",
-        "artifacts/opt-0.9.1/sweep3/owner-1791643948449.png"
+        "artifacts/opt-0.9.1/before4-views/owner-1791643948449.png",
+        "artifacts/opt-0.9.1/sweep4/owner-1791643948449.png"
       ]
     },
     {
@@ -43,8 +43,8 @@
       "caption": "0.9.0: 16x8 m (2:1). 0.9.1: 16x9 m, frame filled by the workspace; suspension rods and the \"02 ARRAY HALL\" plaque follow the taller frame.",
       "images": [
         "/home/rick/.local/state/hyprune/captures/capture-1791644156827.png",
-        "artifacts/opt-0.9.1/owner-before/owner-1791644156827.png",
-        "artifacts/opt-0.9.1/sweep3/owner-1791644156827.png"
+        "artifacts/opt-0.9.1/before4-views/owner-1791644156827.png",
+        "artifacts/opt-0.9.1/sweep4/owner-1791644156827.png"
       ]
     },
     {
@@ -53,8 +53,8 @@
       "caption": "Real kitty window on workspace 21. 0.9.0 wall 18.8x9.3 m; 0.9.1 16x9 m. Core fits its 16:9 frame into the anchor, so only a 16:9 wall is filled edge to edge.",
       "images": [
         null,
-        "artifacts/opt-0.9.1/homes/wall-21-sun-court.png",
-        "artifacts/opt-0.9.1/homes3/wall-21-sun-court.png"
+        "artifacts/opt-0.9.1/homes-before4/wall-21-sun-court.png",
+        "artifacts/opt-0.9.1/homes4/wall-21-sun-court.png"
       ]
     },
     {
@@ -63,8 +63,8 @@
       "caption": "Real kitty window on workspace 22. 0.9.0 wall 16x8 m; 0.9.1 16x9 m. Core fits its 16:9 frame into the anchor, so only a 16:9 wall is filled edge to edge.",
       "images": [
         null,
-        "artifacts/opt-0.9.1/homes/wall-22-array-hall.png",
-        "artifacts/opt-0.9.1/homes3/wall-22-array-hall.png"
+        "artifacts/opt-0.9.1/homes-before4/wall-22-array-hall.png",
+        "artifacts/opt-0.9.1/homes4/wall-22-array-hall.png"
       ]
     },
     {
@@ -73,8 +73,8 @@
       "caption": "Real kitty window on workspace 23. 0.9.0 wall 13.8x6.3 m; 0.9.1 11.2x6.3 m (the size of the 16:9 window it already showed); amber trims follow; the sill icicles no longer hang across the sign. Core fits its 16:9 frame into the anchor, so only a 16:9 wall is filled edge to edge.",
       "images": [
         null,
-        "artifacts/opt-0.9.1/homes/wall-23-rime-vault.png",
-        "artifacts/opt-0.9.1/homes3/wall-23-rime-vault.png"
+        "artifacts/opt-0.9.1/homes-before4/wall-23-rime-vault.png",
+        "artifacts/opt-0.9.1/homes4/wall-23-rime-vault.png"
       ]
     },
     {
@@ -83,8 +83,8 @@
       "caption": "Real kitty window on workspace 24. 0.9.0 wall 18.5x10.4 m; 0.9.1 exactly 18.4x10.35 m. Core fits its 16:9 frame into the anchor, so only a 16:9 wall is filled edge to edge.",
       "images": [
         null,
-        "artifacts/opt-0.9.1/homes/wall-24-signal-rise.png",
-        "artifacts/opt-0.9.1/homes3/wall-24-signal-rise.png"
+        "artifacts/opt-0.9.1/homes-before4/wall-24-signal-rise.png",
+        "artifacts/opt-0.9.1/homes4/wall-24-signal-rise.png"
       ]
     }
   ]

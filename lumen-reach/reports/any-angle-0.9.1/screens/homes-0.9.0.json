@@ -1,10 +1,10 @@
 {
- "status": "PASS",
- "package": "/home/rick/workspace/hyprune/worlds/dist-07/com.hyprune.lumen-reach",
- "version": "0.9.1",
+ "status": "FAIL",
+ "package": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/before",
+ "version": "0.9.0",
  "formatVersion": "0.7",
- "manifestSHA256": "b394c99493a5137319fd14c987c0d8ff6a2330bb0dcb8b9c3fd9b37ac3c84827",
- "coreCommit": "9e50dfbb269737aca5f77d5a4120f988bb292b4e",
+ "manifestSHA256": "375478640875af83e91567f497b484cd66b736f5220e1e715e6cdb1e8a9f2fe0",
+ "coreCommit": "a2d39f91bb21479a0af8b929c92281151ec93d5c",
  "checks": [
   {
    "name": "homes 21-24 from the world areas",
@@ -109,8 +109,8 @@
      "id": "globe-platform",
      "label": "Instrument terrace",
      "occluded": false,
-     "x": 0.5512778162956238,
-     "y": 0.44530364871025085
+     "x": 0.5464709401130676,
+     "y": 0.4504309892654419
     }
    }
   },
@@ -131,7 +131,26 @@
     },
     "anchor": "sun-court-slot-01-facade-wall-01",
     "aimDistance": 2.5,
-    "still": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/homes/wall-21-sun-court.png"
+    "still": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/homes-before4/wall-21-sun-court.png"
+   }
+  },
+  {
+   "name": "workspace 21 frame fills the sun-court 16:9 wall",
+   "passed": false,
+   "evidence": {
+    "anchorSize": [
+     18.8,
+     9.3
+    ],
+    "frameFill": [
+     0.8794,
+     1.0
+    ],
+    "windowPixels": [
+     1896,
+     1056
+    ],
+    "still": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/homes-before4/wall-21-sun-court.png"
    }
   },
   {
@@ -151,7 +170,26 @@
     },
     "anchor": "array-hall-slot-02-hanging-wall-01",
     "aimDistance": 2.5,
-    "still": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/homes/wall-22-array-hall.png"
+    "still": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/homes-before4/wall-22-array-hall.png"
+   }
+  },
+  {
+   "name": "workspace 22 frame fills the array-hall 16:9 wall",
+   "passed": false,
+   "evidence": {
+    "anchorSize": [
+     16,
+     8
+    ],
+    "frameFill": [
+     0.8889,
+     1.0
+    ],
+    "windowPixels": [
+     1896,
+     1056
+    ],
+    "still": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/homes-before4/wall-22-array-hall.png"
    }
   },
   {
@@ -171,7 +209,26 @@
     },
     "anchor": "rime-vault-slot-03-wall-inset-console-01",
     "aimDistance": 2.5,
-    "still": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/homes/wall-23-rime-vault.png"
+    "still": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/homes-before4/wall-23-rime-vault.png"
+   }
+  },
+  {
+   "name": "workspace 23 frame fills the rime-vault 16:9 wall",
+   "passed": false,
+   "evidence": {
+    "anchorSize": [
+     13.8,
+     6.3
+    ],
+    "frameFill": [
+     0.8116,
+     1.0
+    ],
+    "windowPixels": [
+     1896,
+     1056
+    ],
+    "still": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/homes-before4/wall-23-rime-vault.png"
    }
   },
   {
@@ -179,7 +236,7 @@
    "passed": true,
    "evidence": {
     "frame": {
-     "composed": 29,
+     "composed": 28,
      "id": "workspace-24",
      "position": [
       63.0,
@@ -191,11 +248,30 @@
     },
     "anchor": "signal-rise-slot-04-blast-door-screen-01",
     "aimDistance": 2.5,
-    "still": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/homes/wall-24-signal-rise.png"
+    "still": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/homes-before4/wall-24-signal-rise.png"
    }
   },
   {
-   "name": "tool mounts accept placement (20/20)",
+   "name": "workspace 24 frame fills the signal-rise 16:9 wall",
+   "passed": true,
+   "evidence": {
+    "anchorSize": [
+     18.5,
+     10.4
+    ],
+    "frameFill": [
+     0.9994,
+     1.0
+    ],
+    "windowPixels": [
+     1896,
+     1056
+    ],
+    "still": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/homes-before4/wall-24-signal-rise.png"
+   }
+  },
+  {
+   "name": "tool mounts accept placement within reach (20/20, max 2.5 m)",
    "passed": true,
    "evidence": {
     "placed": [
@@ -220,7 +296,31 @@
      "signal-rise-slot-04-terminal-bench-01",
      "signal-rise-slot-04-wall-inset-console-01"
     ],
-    "failed": []
+    "failed": [],
+    "placementDistances": [
+     2.5,
+     2.5,
+     2.49,
+     2.45,
+     2.45,
+     2.5,
+     2.5,
+     2.32,
+     2.32,
+     2.45,
+     2.45,
+     2.45,
+     2.45,
+     2.45,
+     2.44,
+     2.5,
+     2.48,
+     2.45,
+     2.28,
+     2.5
+    ],
+    "reachMount": 8,
+    "reachPlacement": 12
    }
   }
  ]
