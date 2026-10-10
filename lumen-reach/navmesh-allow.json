@@ -1,16 +1,7 @@
 {
   "version": 1,
   "check": "tools/check-navmesh.py",
-  "reviewed": "2026-10-09 (0.7.2)",
+  "reviewed": "2026-10-10 (0.8.1: vault sliver closed with the north lip)",
   "rules": "Each entry pins exact finding ids (and a maximum area for area findings). Any new id, growth or location still fails; an entry that no longer matches fails as stale. Reported, not hidden.",
-  "accept": [
-    {
-      "ids": [
-        "undeclared-space:main"
-      ],
-      "maxArea": 0.5,
-      "status": "harmless",
-      "reason": "A 0.19 m2 sliver of vault floor at (49.5, -6.0, -75.3), just north of rime-vault's visibility bounds (z -75.5) and east of connector-descent (x 35.6). Core draws everything there (conservative)."
-    }
-  ]
+  "accept": []
 }
