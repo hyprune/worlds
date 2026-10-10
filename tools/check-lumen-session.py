@@ -152,8 +152,7 @@ def record(client,children,state,shell_token,socketpath):
  import tempfile
  recording_dir=Path(tempfile.mkdtemp(prefix='lumen-tour-v2-',dir='/tmp'))
  output=recording_dir/'release-world-tour-v2.mp4';raw=recording_dir/'release-world-tour-v2.mkv'
- manifest=json.loads((a.package/'world.json').read_text());areas=manifest['extensions']['com.hyprune.lumen-reach.mounts']['areas']
- mounts=manifest['extensions']['com.hyprune.lumen-reach.mounts']['mounts'];terminals=[]
+ manifest=json.loads((a.package/'world.json').read_text());sys.path.insert(0,str(ROOT/'tools'));from world_contract import homes;areas,mounts,_=homes(manifest);terminals=[]
  def wait(check,timeout=20):return integration.wait_for(check,timeout)
  def pause(seconds):
   end=time.monotonic()+seconds

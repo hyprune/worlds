@@ -89,7 +89,8 @@ default=m.get('defaultSpawn',m['spawns'][0]['id'])
 routes=namespace('.routes');nodes={n['id']:np.array(n['position'],float) for n in routes.get('nodes',[])}
 edges=[(e['from'],e['to'],e.get('width',.6)) for e in routes.get('edges',[])]
 stairs=namespace('.stairs').get('paths',[])
-mounts={r['anchorId']:r for r in namespace('.mounts').get('mounts',[])}
+from world_contract import homes
+mounts={r['anchorId']:r for r in homes(m)[1]}
 anchors=[]
 for an in m['anchors']:
  r=mounts.get(an['id'],{});n=yaw_normal(an['pose']['rotation']);h=np.array([n[0],0,n[2]])

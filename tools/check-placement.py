@@ -9,7 +9,8 @@ from pathlib import Path
 import numpy as np
 from gltf_io import Scene
 p=argparse.ArgumentParser();p.add_argument('package',type=Path);p.add_argument('--output',type=Path);a=p.parse_args();s=Scene(a.package);m=s.manifest
-ext=m.get('extensions',{});mounts=ext.get('com.hyprune.lumen-reach.mounts',{});placement=ext.get('com.hyprune.lumen-reach.placement',{})
+from world_contract import homes
+areas_,rows_,zones_=homes(m);mounts={'areas':areas_,'mounts':rows_};placement={'zones':zones_}
 assert mounts.get('areas') and placement.get('zones'),'mounts and free-placement declarations required'
 triangles=[];labels=[]
 for ni,name,primitive,positions,indices in s.primitives():
