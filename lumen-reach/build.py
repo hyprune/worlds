@@ -286,7 +286,9 @@ def globe(pos,r=1.8):
   ids=list(face.vertices)
   for a,b in zip(ids,ids[1:]+ids[:1]):edges.add(tuple(sorted((a,b))))
  for a,b in edges:rod('Globe network',o.matrix_world@o.data.vertices[a].co,o.matrix_world@o.data.vertices[b].co,.012,'cyan')
- for i,rot in enumerate([(0,.45,0),(.8,0,.5),(1.2,.35,0)]):torus('Armillary orbit',center,r*(1.05+i*.07),.035,'ivory',rot)
+ # The 35 mm rings get under two lightmap texels around the tube and bake
+ # black on one side; like the lettering they stay unbaked ivory (vista).
+ for i,rot in enumerate([(0,.45,0),(.8,0,.5),(1.2,.35,0)]):torus('Armillary orbit',center,r*(1.05+i*.07),.035,'ivory',rot,group='vista')
  data('globe',center)
 
 
