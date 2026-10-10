@@ -173,6 +173,62 @@
       "fov": 60.0,
       "source": "capture-1791558632233.json",
       "release": "0.7.0 live walk (0.7.1 defects)"
+    },
+    {
+      "id": "owner-1791643925093",
+      "position": [
+        -8.0,
+        1.7002222537994385,
+        12.0
+      ],
+      "yaw": -0.026162248104810715,
+      "pitch": 0.169255793094635,
+      "fov": 60.0,
+      "source": "capture-1791643925093.json",
+      "release": "0.9.0 live walk (0.9.1 findings)",
+      "note": "sun court arrival: black object left of the globe"
+    },
+    {
+      "id": "owner-1791643941741",
+      "position": [
+        -8.384642601013184,
+        1.7002222537994385,
+        9.957907676696777
+      ],
+      "yaw": -0.17768500745296478,
+      "pitch": 0.10262490808963776,
+      "fov": 60.0,
+      "source": "capture-1791643941741.json",
+      "release": "0.9.0 live walk (0.9.1 findings)",
+      "note": "sun court: black object (second view)"
+    },
+    {
+      "id": "owner-1791643948449",
+      "position": [
+        -8.384642601013184,
+        1.7002222537994385,
+        9.957907676696777
+      ],
+      "yaw": 0.3735332190990448,
+      "pitch": 0.22174081206321716,
+      "fov": 60.0,
+      "source": "capture-1791643948449.json",
+      "release": "0.9.0 live walk (0.9.1 findings)",
+      "note": "sun court primary wall: aspect and sign in the roof"
+    },
+    {
+      "id": "owner-1791644156827",
+      "position": [
+        9.693887710571289,
+        1.6999170780181885,
+        -31.981725692749023
+      ],
+      "yaw": -0.12853986024856567,
+      "pitch": 0.46293380856513977,
+      "fov": 60.0,
+      "source": "capture-1791644156827.json",
+      "release": "0.9.0 live walk (0.9.1 findings)",
+      "note": "array hall primary wall: aspect"
     }
   ]
 }
