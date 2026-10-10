@@ -18,6 +18,10 @@ Catches the 0.7.0 owner defects without image judgement:
   texture under that triangle must be smooth (per-texel step <= SMOOTH_STEP
   levels), so bilinear magnification cannot show blocks, rings or streaks.
 - terrain: distant backdrop terrain stays TERRAIN_DIP below every eye.
+- enclosures (--enclosures): from every walkable eye inside a declared indoor
+  room, upper-hemisphere view rays that reach the sky (meet no world
+  geometry) must leave the room's box through a declared open face. A ceiling
+  that stops short of a wall (the 0.8.0 Rime Vault slot) fails.
 - poles: texture rows under the polar fans are uniform.
 """
 import argparse,json,math,sys
@@ -34,7 +38,7 @@ GHOST_MAX=.15
 SEAM_SOFT_STEP=12
 TERRAIN_DIP=6.0
 STREAK_MAX=2.0
-p=argparse.ArgumentParser(description=__doc__);p.add_argument('package',type=Path);p.add_argument('--poses',type=Path,action='append',default=[]);p.add_argument('--output',type=Path);a=p.parse_args()
+p=argparse.ArgumentParser(description=__doc__);p.add_argument('package',type=Path);p.add_argument('--poses',type=Path,action='append',default=[]);p.add_argument('--output',type=Path);p.add_argument('--enclosures',type=Path);a=p.parse_args()
 s=Scene(a.package);m=s.manifest;H=2160;PIX=2*math.tan(math.radians(30))/H
 
 # Walkable eyes: nav polygon centroids and corners pulled 0.35 m inside,
@@ -117,6 +121,26 @@ for e in eyes:
   if w is not None:continue
   if h['culled']:leaks.append({'eye':e.round(2).tolist(),'direction':d.round(3).tolist(),'culledShell':h['key'],'meters':round(700*h['t'],2)})
   elif h['key'].startswith('land-') and h['point'][1]>e[1]-1 and inside_closed(h['point']):rocks.append({'eye':e.round(2).tolist(),'direction':d.round(3).tolist(),'terrain':h['key'],'meters':round(700*h['t'],2),'sky':inside_closed(h['point'])})
+# Enclosures: 96 upper-hemisphere directions (elevation >= ~8 deg) from every
+# eye inside each declared room; a sky ray must exit through an open face.
+enclosure_rows=[]
+if a.enclosures:
+ n=192;k=np.arange(n)+.5;phi=np.arccos(1-2*k/n);th=math.pi*(1+5**.5)*k;up=np.stack([np.cos(th)*np.sin(phi),np.cos(phi),np.sin(th)*np.sin(phi)],1);up=up[up[:,1]>.14]
+ names=['-x','+x','-y','+y','-z','+z']
+ for room in json.loads(a.enclosures.read_text())['rooms']:
+  lo,hi=np.array(room['min'],float),np.array(room['max'],float);inside=eyes[np.all((eyes>lo)&(eyes<hi),axis=1)];bad=[]
+  for e in inside:
+   for d in up:
+    if world.first_hit(e,e+d*700) is not None:continue
+    # Exit face: the first box face the ray crosses.
+    with np.errstate(divide='ignore'):t=np.where(d>0,(hi-e)/d,np.where(d<0,(lo-e)/d,np.inf))
+    ax=int(np.argmin(t));face=names[2*ax+(d[ax]>0)]
+    if face not in room['openFaces']:bad.append({'eye':e.round(2).tolist(),'direction':d.round(3).tolist(),'exitFace':face,'exitPoint':(e+d*t[ax]).round(2).tolist()})
+  row={'room':room['id'],'eyes':int(len(inside)),'rays':int(len(inside)*len(up)),'skyLeaks':len(bad)}
+  if bad:
+   pts=np.array([b['exitPoint'] for b in bad]);row['leakExitBounds']=[pts.min(axis=0).round(2).tolist(),pts.max(axis=0).round(2).tolist()]
+   failures.append({'test':'enclosure','room':room['id'],'count':len(bad),'eyes':len({tuple(b['eye']) for b in bad}),'faces':sorted({b['exitFace'] for b in bad}),'exitBounds':row['leakExitBounds'],'examples':bad[:6]})
+  enclosure_rows.append(row)
 if rocks:failures.append({'test':'containment','count':len(rocks),'eyes':len({tuple(r['eye']) for r in rocks}),'examples':rocks[:8]})
 # Distant terrain (beyond 120 m of the outer sky's centre, outside every
 # closed sky's box) must sit >= TERRAIN_DIP below eye level from every eye so
@@ -214,7 +238,7 @@ for key,mat,prim,pos,idx,slot in skies:
   row['seamVisibleRays']=len(visible);row['seamRays']=len(eyes)*len(lats)
   if visible:failures.append({'test':'seam','material':key,'visibleRays':len(visible),'eyes':len({tuple(v['eye']) for v in visible}),'examples':visible[:6]})
  rows.append(row)
-report={'status':'FAIL' if failures else 'PASS','method':__doc__.strip(),'eyes':len(eyes),'distantTerrain':terrain,'thresholds':{'maxPaintedMagnification':MAX_PAINTED_MAGNIFICATION,'smoothStep':SMOOTH_STEP,'poleRange':POLE_RANGE,'ghostMirrorCorrelation':GHOST_MAX,'rowStreakRatio':STREAK_MAX,'terrainDipDegrees':TERRAIN_DIP,'screen':[3840,2160],'verticalFovDegrees':60},'skies':rows,'failures':failures}
+report={'status':'FAIL' if failures else 'PASS','method':__doc__.strip(),'eyes':len(eyes),'distantTerrain':terrain,'thresholds':{'maxPaintedMagnification':MAX_PAINTED_MAGNIFICATION,'smoothStep':SMOOTH_STEP,'poleRange':POLE_RANGE,'ghostMirrorCorrelation':GHOST_MAX,'rowStreakRatio':STREAK_MAX,'terrainDipDegrees':TERRAIN_DIP,'screen':[3840,2160],'verticalFovDegrees':60},'skies':rows,'enclosures':enclosure_rows,'failures':failures}
 text=json.dumps(report,indent=2)+'\n'
 if a.output:a.output.parent.mkdir(parents=True,exist_ok=True);a.output.write_text(text)
 print(json.dumps({'status':report['status'],'eyes':len(eyes),'distantTerrain':terrain,'skies':rows,'failures':[{k:v for k,v in f.items() if k!='examples'} for f in failures]},indent=2))

@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "coordinates": "glTF world metres (x, y up, z); authoring y = -z",
+  "semantics": "Indoor rooms for tools/check-sky.py's enclosure test. From every walkable eye inside a box, a view ray that reaches the sky (meets no world geometry) must leave the box through one of its openFaces (+x,-x,+y,-y,+z,-z). A sky ray through any other face is a leak, e.g. a ceiling that stops short of a wall.",
+  "rooms": [
+    {"id": "rime-vault", "min": [26.0, -6.0, -102.0], "max": [50.0, 4.425, -74.0], "openFaces": ["+z", "+x"],
+     "note": "North face (+z) is the designed wide opening onto the vista and the service-descent threshold; the east exit passage leaves through +x."},
+    {"id": "connector-descent", "min": [26.3, -6.0, -74.0], "max": [35.4, 5.0, -52.0], "openFaces": ["+z", "-z"],
+     "note": "Enclosed service descent under its sloping roof; open at both ends (hall service entry, vault threshold)."},
+    {"id": "entry-vestibule", "min": [0.0, 0.0, -32.0], "max": [16.0, 4.39, -26.0], "openFaces": ["+z", "-z"],
+     "note": "Covered passage from the Sun Court to the Array Hall, open at both ends."}
+  ]
+}

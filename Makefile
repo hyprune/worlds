@@ -58,7 +58,7 @@ lumen-build:
 	./tools/remote-lumen.sh --areas $(LUMEN_AREAS) --samples 64
 lumen-validate:
 	python3 tools/check-any-angle.py $(LUMEN_PACKAGE) --output $(LUMEN_REPORTS)/geometry-check.json
-	python3 tools/check-sky.py $(LUMEN_PACKAGE) --poses lumen-reach/review-poses-v7.json --output $(LUMEN_REPORTS)/sky-check.json
+	python3 tools/check-sky.py $(LUMEN_PACKAGE) --poses lumen-reach/review-poses-v7.json --enclosures lumen-reach/enclosures.json --output $(LUMEN_REPORTS)/sky-check.json
 	python3 tools/check-route-clearance.py $(LUMEN_PACKAGE) --output $(LUMEN_REPORTS)/route-clearance.json
 	python3 tools/check-visibility.py $(LUMEN_PACKAGE)
 	node $(SCHEMA_DIR)/bin/validate.mjs world $(LUMEN_PACKAGE)/world.json - 0.5
