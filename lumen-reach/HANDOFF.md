@@ -1,4 +1,95 @@
-# Lumen Reach 0.8.1 handoff — 2026-10-10
+# Lumen Reach 0.9.0 handoff — 2026-10-10
+
+**Release candidate verified; not published, not pushed.** Published
+baseline: 0.8.1 (release package at `artifacts/opt-0.9.0/before/`, source at
+`before-src/`; record `reports/release-0.8.1.json`).
+
+Lead decisions implemented: derived visibility as a build step; per-area
+playable volumes (format 0.6+) with maxFlyHeight 60 m; only walking backstops.
+
+## Release candidate
+
+- Release package `dist-07/com.hyprune.lumen-reach/` (format 0.7) from the
+  source `dist/` (format 0.6) built at `ff5e8d3`.
+- Manifest SHA256 `375478640875…` (full hashes in `reports/release.json`).
+- Archive `artifacts/releases/com.hyprune.lumen-reach-0.9.0.tar.zst`,
+  39,733,854 bytes, SHA256
+  `52fc38bf3ce95643ee26e7acdd9b216a7334f36b32b175cbe40bbedbc779dda2`.
+  76 extracted files identical to `dist-07/`; schema 0.7 VALID; core
+  world-check PASS.
+- Built by `make lumen-release LUMEN_PERF_BASELINE=artifacts/opt-0.9.0/before`
+  end to end (38.5 min).
+- Core: the meta repo's pin `35ace21`. My `core-optimise` worktree now sits
+  there (`OPTIMISE_CORE`).
+- Gallery: `screenshots/optimise-2026-10/lumen-0.9.0-perimeter-and-playable.png`.
+
+## Changes
+
+1. **Derived visibility** (`make lumen-build` runs `tools/derive-visibility.py
+   --in-place` after the bake, about 106 s with the kernel on 10.2.2.2).
+   - Result: 805 cells, 184 areas, 0 of 29,781 eye samples hide a
+     sampled-visible unit.
+   - `check-visibility --spec` verifies reproducibility. The hand-written
+     spec is `lumen-reach/visibility.hand-written.json` (fixture/reference).
+   - Fix found on the way: cells sampled a 3x3 grid per 4 m column, so small
+     raised floors (landings, platforms) got no cell and 49 m2 of walkable
+     floor sat outside every region (check-navmesh). Cells now also sample
+     every polygon's centroid and inset corners.
+2. **Canonical contract + playable volumes**.
+   - `lumen-reach/contract.py` writes canonical `areas[]`, anchor mounts,
+     `dataObjects` and `placementZones` (core reads area volumes only from
+     canonical areas and rejects mixing them with the legacy extension).
+   - The 13 `playable-volumes.json` footprints become 12 per-area boxes
+     (connectors join a neighbour), plus a world `maxFlyHeight` of 60. The
+     source is format 0.6.
+   - `tools/world_contract.py` lets the checks read either shape.
+3. **Walking backstops only**. Backstop heights now count only tops a walker
+   can reach (route/stair seeded, jump/drop expanded).
+
+   | | 0.8.1 | 0.9.0 |
+   |---|---|---|
+   | pieces over 15 m | 71 | 17 |
+   | max height | 24.1 m | 19.5 m |
+   | mean height | 9.5 m | 6.6 m |
+
+   The 17 left ring the facade rooftop, which the roof route reaches on foot.
+   Guard rails and walking collision are unchanged.
+
+## Verified
+
+- `make lumen-validate` PASS on the source: all gates; schema 0.6;
+  check-visibility against the generated spec; navmesh with an empty
+  allow-list.
+- verify.mjs PASS; schema 0.7; core world-check (`35ace21`): 4 areas, 24
+  anchors, 37 objects, 4 placement zones, 0 warnings.
+- Any-angle nested (core 35ace21): 72 views, 0 culling losses.
+  - 6/6 walking probes stop inside; jump x=25.64.
+  - Fly is now bounded: x=26.50 at the court's east bound (26 + 0.5
+    allowance), y=60.50 at the ceiling (60 + 0.5).
+- Route traversal: 64 nodes, 126 directed traversals, 14 alternate stairs,
+  18 stills.
+- Visibility vs 0.8.1 (same 72 poses): batches 44.2 -> 40.4. Culled vs
+  unculled identical 72/72 (0.8.1: 71/72).
+- Perf gate vs 0.8.1, same session: p50 8.923 -> 8.934 ms (+0.1 %), p95
+  10.264 -> 10.340 ms (+0.7 %): PASS. Record `reports/perf/0.9.0.json`.
+
+## Notes
+
+- The any-angle sweep expects bounded fly whenever a world declares
+  `playable`; worlds without it keep the old pass-over expectation.
+- Long jobs: `make lumen-release` takes about 40 min (the perf gate is about
+  26). A single foreground tool call is capped at 10 min here, so I ran it
+  detached and watched it in under-10-minute foreground chunks.
+
+## Next steps for the lead
+
+Review, then push `worlds` and publish `lumen-reach-v0.9.0`; update
+`hyprune/worlds/releases.json`. Requires a core that loads format 0.7 and
+honours 0.6 playable (the pinned `35ace21`).
+
+---
+
+# (previous) Lumen Reach 0.8.1 handoff — 2026-10-10
 
 **Patch release candidate verified; not published, not pushed.** Published
 baseline: 0.8.0 (release package kept at `artifacts/opt-0.8.1/before/`,

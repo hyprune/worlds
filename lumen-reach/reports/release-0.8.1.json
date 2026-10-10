@@ -1,0 +1,137 @@
+{
+  "status": "PASS",
+  "worldId": "com.hyprune.lumen-reach",
+  "version": "0.8.1",
+  "formatVersion": "0.7",
+  "sourceCommit": "1f21028",
+  "sourceNote": "Source package (format 0.5) baked on 10.2.2.2 from build inputs at 1f21028; release package = tools/remote-optimize.sh output.",
+  "sourcePackageManifestSHA256": "f5a730b200cef0e7edc38e5ec6a3c4993fce10aa24990ea4ff958e6ae16cae9b",
+  "sceneSHA256": "38039ff7c091b1ec360c2074bbb3418e248b755043ba2d192b42bceed49c2f12",
+  "manifestSHA256": "4f047839cbd663bad3de3534074942d885251e0ba9972071a830e9161ae87725",
+  "archive": {
+    "status": "PASS",
+    "path": "artifacts/releases/com.hyprune.lumen-reach-0.8.1.tar.zst",
+    "sha256": "d86878a981ed38ee851a6bc09aa545dcea781345d65cce604313c8fe71617766",
+    "bytes": 39736290,
+    "identicalExtractedFiles": 76,
+    "extractedChecks": [
+      "sha256sum -c LUMEN-SHA256SUMS OK",
+      "schema 0.7 VALID",
+      "core hyprune-world-check PASS (49c8408)"
+    ]
+  },
+  "published": false,
+  "coreCommit": "49c84088871a836fa5f4d02493c80de09d288fbe",
+  "loadedPluginSHA256": "a98e051dc33f526d2417a50c4ab617869118b47ef4fd60efd38f27b101195973",
+  "fixes": {
+    "vaultCeilingSlot": "Rime Vault ceiling and side shells stopped 2 m short of the floor north edge (authoring y 76 vs 74), leaving a strip open to the sky over the descent threshold and the north lip, visible looking up from the vault spawn. Ceiling and shells now reach y 74. check-sky gains an enclosure test (lumen-reach/enclosures.json) that fails 0.8.0 (290 sky rays, 49 eyes) and passes 0.8.1; the 0.19 m2 navmesh vault-sliver pin is gone with it."
+  },
+  "verify": {
+    "status": "PASS",
+    "counts": {
+      "nodes": 301,
+      "meshes": 301,
+      "materials": 106,
+      "primitives": 423,
+      "lightmaps": 78,
+      "ktx2Images": 56
+    },
+    "maxCollisionErrorMeters": 0.002121,
+    "packageMiB": {
+      "src": 70.77,
+      "dst": 41.67
+    }
+  },
+  "checks": {
+    "enclosures": [
+      {
+        "room": "rime-vault",
+        "eyes": 87,
+        "rays": 7221,
+        "skyLeaks": 0
+      },
+      {
+        "room": "connector-descent",
+        "eyes": 33,
+        "rays": 2739,
+        "skyLeaks": 0
+      },
+      {
+        "room": "entry-vestibule",
+        "eyes": 5,
+        "rays": 415,
+        "skyLeaks": 0
+      }
+    ]
+  },
+  "perfGate": {
+    "status": "PASS",
+    "baseline": "0.8.0 package, same session",
+    "baselineGpuFrameMs": {
+      "p50": 9.116012999999999,
+      "p95": 10.419440049999997,
+      "n": 3200
+    },
+    "candidateGpuFrameMs": {
+      "p50": 9.131612,
+      "p95": 10.49560745,
+      "n": 3200
+    },
+    "checks": [
+      {
+        "metric": "gpuFrameMs.p50",
+        "candidate": 9.1316,
+        "limit": 9.8453,
+        "pass": true
+      },
+      {
+        "metric": "gpuFrameMs.p95",
+        "candidate": 10.4956,
+        "limit": 11.6698,
+        "pass": true
+      },
+      {
+        "metric": "settledScale.p50",
+        "candidate": 0.5,
+        "limit": 0.45,
+        "pass": true
+      },
+      {
+        "metric": "settledScale.p05",
+        "candidate": 0.5,
+        "limit": 0.42,
+        "pass": true
+      }
+    ],
+    "record": "reports/perf/0.8.1.json"
+  },
+  "budgets": {
+    "visibleTriangles": 245330,
+    "drawCalls": 99,
+    "gpuMiB": {
+      "total": 142.13,
+      "materialTextures": 39.46,
+      "lightmaps": 87.33,
+      "vertexBuffers": 13.7,
+      "indexBuffers": 1.63
+    },
+    "packageMiB": 41.67,
+    "collisionTriangles": 5194
+  },
+  "nested": {
+    "anyAngle": "72 views (69 + vault-north-up, vault-center-north, vault-walk-north), 0 culling losses, 6/6 walking probes inside, jump x=25.64, fly x=30.27",
+    "routes": "64 nodes, 126 directed traversals, 14 alternate stairs: PASS"
+  },
+  "visibilityEvaluation": "reports/any-angle-0.8.1/visibility-evaluation.md (recommend derived visibility for 0.9.0; 0.8.1 keeps hand-written)",
+  "evidence": {
+    "beforeAfter": "reports/any-angle-0.8.1/before-after.json",
+    "sky": "reports/any-angle-0.8.1/sky-check.json",
+    "anyAngle": "reports/any-angle-0.8.1/release-session-summary.json",
+    "routes": "reports/any-angle-0.8.1/release-routes-summary.json",
+    "perfGate": "reports/any-angle-0.8.1/perf-gate/perf-gate.json",
+    "baseline080": "artifacts/opt-0.8.1/before/ (SHA-identical to the published 0.8.0 package)"
+  },
+  "gallery": {
+    "beforeAfter": "screenshots/optimise-2026-10/lumen-0.8.1-vault-slot-before-after.jpg"
+  }
+}
