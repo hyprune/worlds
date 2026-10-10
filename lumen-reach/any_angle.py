@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: MIT
 """Closed skies, three-dimensional watershed and exposed architectural finishes."""
-import math,json
+import math,json,sys
 from mathutils import Vector
 
 
@@ -268,12 +268,21 @@ def boundaries(B):
   w=[o.matrix_world@v.co for v in o.data.vertices]
   for p in o.data.polygons:
    c=[w[i] for i in p.vertices];n=(c[1]-c[0]).cross(c[2]-c[0])
-   if n.length>1e-9 and abs(n.z)/n.length>.65:tops.append((min(v.x for v in c),max(v.x for v in c),min(v.y for v in c),max(v.y for v in c),max(v.z for v in c)))
- tops+=[(lo[0],hi[0],lo[1],hi[1],hi[2]) for name,lo,hi in B.P.COLL]
+   if n.length>1e-9 and abs(n.z)/n.length>.65:tops.append((min(v.x for v in c),max(v.x for v in c),min(v.y for v in c),max(v.y for v in c),min(v.z for v in c),max(v.z for v in c)))
+ tops+=[(lo[0],hi[0],lo[1],hi[1],hi[2],hi[2]) for name,lo,hi in B.P.COLL]
+ # 0.9.0: only tops a walker can reach set backstop heights (fly is bounded
+ # by the world's playable volumes now). Seeds: route nodes, edge samples and
+ # stair flights (glTF feet -> Blender x, -z, y); contract.walk_reachable adds
+ # jump-up/drop-down neighbours. Fly-only roofs no longer raise 24 m walls.
+ sys.path.insert(0,str(B.HERE));from contract import walk_reachable
+ feet=lambda p:(p[0],-p[2],p[1]);look={r['id']:r['position'] for r in B.ROUTES};seeds=[feet(p) for p in look.values()]
+ for a,b in [(look[e['from']],look[e['to']]) for e in B.EDGES]+[(f['from'],f['to']) for f in B.STAIR_ROUTES]:
+  n=max(1,math.ceil(math.dist(a,b)/.5));seeds+=[feet([a[i]+(b[i]-a[i])*k/n for i in range(3)]) for k in range(n+1)]
+ reach=walk_reachable(tops,seeds);all_tops=len(tops);tops=[t for t,ok in zip(tops,reach) if ok]
  def highest(a,b,inward,depth):
   c=[a,b,[a[0]+inward[0]*depth,a[1]+inward[1]*depth],[b[0]+inward[0]*depth,b[1]+inward[1]*depth]]
   x0=min(v[0] for v in c)-.3;x1=max(v[0] for v in c)+.3;y0=min(v[1] for v in c)-.3;y1=max(v[1] for v in c)+.3
-  return max((t[4] for t in tops if t[0]<=x1 and t[1]>=x0 and t[2]<=y1 and t[3]>=y0),default=None)
+  return max((t[5] for t in tops if t[0]<=x1 and t[1]>=x0 and t[2]<=y1 and t[3]>=y0),default=None)
  vertices=[];faces=[];lo=spec['backstopBottom'];clear=spec['walkClearance'];pieces=[]
  for a,b,inward in edges:
   k=max(1,math.ceil(math.dist(a,b)/2))
@@ -283,9 +292,13 @@ def boundaries(B):
  # A piece with no walkable surface inside follows pieces within 3m of it.
  for piece in pieces:
   if piece[2] is None:piece[2]=max((o[2] for o in pieces if o[2] is not None and min(math.dist(u,v) for u in piece[:2] for v in o[:2])<3),default=None)
+ # No reachable surface near a piece: no walker gets there, so no wall.
+ skipped=sum(top is None for p,r,top in pieces);pieces=[x for x in pieces if x[2] is not None]
  for p,r,top in pieces:
-  hi=spec['backstopFallbackTop'] if top is None else top+clear
+  hi=top+clear
   q=len(vertices);vertices.extend([(p[0],p[1],lo),(r[0],r[1],lo),(r[0],r[1],hi),(p[0],p[1],hi)]);faces.append((q,q+1,q+2,q+3))
- pieces=[round(spec['backstopFallbackTop'] if top is None else top+clear,3) for p,r,top in pieces]
+ pieces=[round(top+clear,3) for p,r,top in pieces]
  me=B.bpy.data.meshes.new('Playable perimeter');me.from_pydata(vertices,[],faces);o=B.bpy.data.objects.new('Playable perimeter',me);B.bpy.context.collection.objects.link(o);o.hide_render=True;B.WALK.append(o)
- spec['collisionBoundarySegments']=len(edges);spec['collisionBackstopPieces']=len(pieces);spec['backstopTopRange']=[min(pieces),max(pieces)];(B.ART/'playable-boundary-report.json').write_text(json.dumps(spec,indent=2)+'\n')
+ spec['collisionBoundarySegments']=len(edges);spec['collisionBackstopPieces']=len(pieces);spec['backstopTopRange']=[min(pieces),max(pieces)]
+ spec['walkReachableTops']=[len(tops),all_tops];spec['piecesWithoutReachableSurface']=skipped
+ spec['runtimeContract']='World format 0.6: per-area playable volumes (lumen-reach/contract.py) bound ordinary fly; these collision-only perimeter pieces stop walking only, rising walkClearance above the highest walk-reachable top within 3 m inside (route-seeded, jump/drop expanded).';(B.ART/'playable-boundary-report.json').write_text(json.dumps(spec,indent=2)+'\n')

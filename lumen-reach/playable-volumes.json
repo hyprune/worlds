@@ -3,8 +3,7 @@
   "coordinates": "Blender authoring X/Y horizontal, Z vertical, meters",
   "backstopBottom": -20,
   "walkClearance": 2.5,
-  "backstopFallbackTop": 65,
-  "runtimeContract": "World format 0.5 has no playable-volume field. These authoring volumes generate collision-only perimeter backstops; they are not visibility regions. Each backstop piece rises only walkClearance above the highest walkable top within 3m inside it, so ordinary walking (including jumps) stops inside while ordinary fly passes overhead. No new required extension.",
+  "runtimeContract": "Since 0.9.0 these footprint rects are also the per-area playable volumes in world.json (format 0.6, lumen-reach/contract.py: boxes from backstopBottom to maxFlyHeight 60 m), which bound ordinary fly. The collision-only perimeter backstops only stop walking: each piece rises walkClearance above the highest walk-reachable top within 3 m inside it.",
   "areas": [
     {
       "id": "sun-court",
