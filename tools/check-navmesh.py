@@ -20,7 +20,13 @@ Gates (all against the default spawn's navmesh island):
   but not jump out of (a trap). Smaller jump-up tops (desks, benches) and
   islands reachable only by flying are reported, not gated;
 - reachable floor whose eye point lies outside every visibility area (core
-  then draws everything) must be declared.
+  then draws everything) must be declared;
+- unguarded drops: along every boundary edge of the reachable navmesh on a
+  deck at least DECK_GATE high, a drop of DROP_GATE or more just beyond the
+  edge needs a guard: collision at 0.5 or 0.9 m that is not an invisible
+  playable backstop (rails carry Guard collision; walls are visible).
+  'backstop-only' (a fall stopped by an invisible wall) fails like
+  'unguarded'. Lower decks and drops of DROP_REPORT..DROP_GATE are reported.
 Steep ground the walker still climbs (0.4 < slope, normal.y > 0.65) is
 reported. Stair lanes sit 2 cells inside the flight's capsule limit so voxel
 rounding of the side walls does not read as a block.
@@ -42,6 +48,7 @@ JUMP=5**2/(2*9.81)                        # core jumpSpeed 5 m/s: apex 1.27 m
 JUMP_REACH=1.5                            # horizontal gap a jump clears safely
 DOOR=1.2                                  # proposed door clear width (research doc §C)
 PROP_AREA=4.0                             # m2; smaller jump-up tops are furniture
+DROP_GATE=7.5;DECK_GATE=6.0;DROP_REPORT=2.0  # m: gated drops from raised decks (nominal 8 m+ measures ~7.9) / reported drops
 MAX_ELEVATION=60                          # deg from eye to screen centre
 CELL=.1;STEP=.05;SAMPLE=.5
 TOL=(.15,.5,.15)                          # point-on-mesh search half extents
@@ -58,6 +65,11 @@ if not (HELPER.parent/'node_modules'/'recast-navigation').exists():sys.exit('rec
 collision={c['node'] for c in m['collision']}
 tri=np.concatenate([pos[idx] for i,_,_,pos,idx in s.primitives(visible=False) if i in collision]).astype(float)
 C=object.__new__(Triangles);C._set(tri,np.array(['collision']*len(tri)),np.ones(len(tri),bool))
+# Guards: collision other than the invisible playable backstops (vertical
+# pieces down to playable-volumes.json's backstopBottom, -20 m). Every rail
+# carries its own Guard collision box; walls are visible by construction.
+backstop=(tri[:,:,1].min(axis=1)<=-19.99)&(np.abs(np.cross(tri[:,1]-tri[:,0],tri[:,2]-tri[:,0])[:,1])<1e-6)
+G=object.__new__(Triangles);G._set(tri[~backstop],np.array(['guard']*int((~backstop).sum())),np.ones(int((~backstop).sum()),bool))
 
 def build(slope,points=(),rays=(),widths=()):
  cfg=dict(cs=CELL,ch=STEP,tileSize=128,walkableSlopeAngle=slope,walkableHeight=math.ceil(HEIGHT/STEP-1e-6),
@@ -224,6 +236,40 @@ for k in sorted({q['island'] for q in polys}-{main}):
  if at is not None:row['at']=rnd(at)
  islands.append(row)
  if how=='drop-in' or (how=='jump-up' and area>=PROP_AREA):fail('island',f'{row["zone"] or "outside"}@{rnd((lo+hi)/2,0)}',**{k:row[k] for k in ('area','reach','at','min','max')})
+
+# Unguarded drops along the reachable navmesh boundary.
+samples=[]
+for q in polys:
+ if q['island']!=main:continue
+ v=q['v'];c=v.mean(axis=0);n=len(v)
+ for j in range(n):
+  if not q['open'][j]:continue
+  A,B=v[j],v[(j+1)%n];d=B-A;L=float(np.hypot(d[0],d[2]))
+  if L<.05:continue
+  out=np.array([d[2],0,-d[0]])/L
+  if np.dot(out[[0,2]],((A+B)/2-c)[[0,2]])<0:out=-out
+  for t in np.linspace(0,1,max(2,int(L/.5)+1)):
+   pt=A+d*t;probe=pt+out*.8;hit=C.first_hit(np.array([probe[0],pt[1]+.3,probe[2]]),np.array([probe[0],pt[1]-60,probe[2]]))
+   drop=60.0 if hit is None else pt[1]-hit['point'][1]
+   if drop<DROP_REPORT:continue
+   guard=any(G.first_hit(pt+[0,h,0],pt+[0,h,0]+out*1.1) for h in (.5,.9))
+   wall=guard or any(C.first_hit(pt+[0,h,0],pt+[0,h,0]+out*1.1) for h in (.5,.9))
+   kind='guarded' if guard else 'backstop-only' if wall else 'unguarded'
+   samples.append((pt,out,drop,kind))
+# Cluster unguarded samples into edge runs (same kind, same deck, within 1.2 m).
+runs=[]
+for pt,out,drop,kind in samples:
+ if kind=='guarded':continue
+ r=next((r for r in runs if r['kind']==kind and abs(r['deck']-pt[1])<.6 and min(np.hypot(*(np.array(x)-pt)[[0,2]]) for x in r['points'])<1.2),None)
+ if r is None:r={'kind':kind,'deck':float(pt[1]),'points':[],'drops':[]};runs.append(r)
+ r['points'].append(pt.round(2).tolist());r['drops'].append(round(float(drop),1))
+drops=[]
+for r in runs:
+ RP=np.array(r['points']);row={'kind':r['kind'],'deck':round(r['deck'],2),'drop':[min(r['drops']),max(r['drops'])],'min':RP.min(axis=0).round(1).tolist(),'max':RP.max(axis=0).round(1).tolist(),'samples':len(RP),'zone':zone_of(RP.mean(axis=0))}
+ drops.append(row)
+ if r['deck']>=DECK_GATE and max(r['drops'])>=DROP_GATE:fail('unguarded-drop',f"{row['zone'] or 'outside'}@{rnd(RP.mean(axis=0),0)}",guard=row['kind'],**{k:row[k] for k in ('deck','drop','min','max','samples')})
+info['unguardedDrops']=sorted(drops,key=lambda r:-r['drop'][1])
+info['dropSamples']={k:sum(1 for *_,x in samples if x==k) for k in ('guarded','backstop-only','unguarded')}
 
 # Reachable floor whose eye point is outside every visibility area.
 outside=[q for q in polys if q['island']==main and not declared(q['v'].mean(axis=0)+[0,EYE,0])]

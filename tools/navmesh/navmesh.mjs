@@ -29,7 +29,10 @@ for(let t=0;t<navMesh.getMaxTiles();t++){
  for(let p=0;p<header.polyCount();p++){
   const poly=tile.polys(p);const verts=[];
   for(let j=0;j<poly.vertCount();j++){const v=poly.verts(j);verts.push([tile.verts(3*v),tile.verts(3*v+1),tile.verts(3*v+2)].map(x=>Math.round(x*1000)/1000));}
-  const ref=base+p;index.set(ref,polys.length);parent.push(polys.length);polys.push({ref,verts});
+  // Edge j runs verts[j] -> verts[j+1]; true where Detour has no neighbour
+  // (a wall or ledge), false for internal and tile-portal edges.
+  const open=[];for(let j=0;j<poly.vertCount();j++)open.push(poly.neis(j)===0);
+  const ref=base+p;index.set(ref,polys.length);parent.push(polys.length);polys.push({ref,verts,open});
   for(let l=poly.firstLink();(l>>>0)!==NULL_LINK;){const link=tile.links(l);links.push([ref,link.ref()]);l=link.next();}
  }
 }
