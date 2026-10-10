@@ -1,7 +1,22 @@
-# Lumen Reach 0.6.1: authored visibility
+# Lumen Reach visibility
+
+**Since 0.9.0 the regions are derived, not authored.** `make lumen-build` runs
+`tools/derive-visibility.py --in-place` on the baked package (Recast cells over
+the collision navmesh, from-cell ray visibility on the bake host; see
+`tools/pvs/README.md`). `check-visibility.py --spec
+artifacts/lumen-reach/pvs/visibility.generated.json` checks reproducibility, and
+the any-angle sweep's culling on/off pairs check that no visible geometry is
+culled. The hand-written spec below is kept as
+[visibility.hand-written.json](visibility.hand-written.json): a reference and
+test fixture, no longer used by the build. Evaluation:
+`reports/any-angle-0.8.1/visibility-evaluation.md`.
+
+---
+
+## Before 0.9.0 (0.6.1-0.8.1): authored visibility
 
 The package adopts world format **0.5**. Camera bounds, exclusive glTF subtree
-ownership and directed visibility links are authored in [visibility.json](visibility.json).
+ownership and directed visibility links are authored in [visibility.hand-written.json](visibility.hand-written.json).
 The exporter resolves stable node names after every bake. The annotation tool can
 also update an existing package without rebaking.
 

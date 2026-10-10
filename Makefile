@@ -53,15 +53,18 @@ LUMEN_VERSION = $(shell python3 -c "import json; print(json.load(open('$(LUMEN_P
 LUMEN_REPORTS = lumen-reach/reports/any-angle-$(LUMEN_VERSION)
 VISIBILITY_CORE ?= ../core
 .PHONY: lumen-build lumen-validate lumen-nested lumen-tour lumen-release
+LUMEN_PVS := artifacts/lumen-reach/pvs
 lumen-build:
 	python3 lumen-reach/materials/prepare.py
 	./tools/remote-lumen.sh --areas $(LUMEN_AREAS) --samples 64
+	python3 tools/derive-visibility.py $(LUMEN_PACKAGE) --output $(LUMEN_PVS) --in-place
 lumen-validate:
 	python3 tools/check-any-angle.py $(LUMEN_PACKAGE) --output $(LUMEN_REPORTS)/geometry-check.json
 	python3 tools/check-sky.py $(LUMEN_PACKAGE) --poses lumen-reach/review-poses-v7.json --enclosures lumen-reach/enclosures.json --output $(LUMEN_REPORTS)/sky-check.json
 	python3 tools/check-route-clearance.py $(LUMEN_PACKAGE) --output $(LUMEN_REPORTS)/route-clearance.json
-	python3 tools/check-visibility.py $(LUMEN_PACKAGE)
-	node $(SCHEMA_DIR)/bin/validate.mjs world $(LUMEN_PACKAGE)/world.json - 0.5
+	python3 tools/check-visibility.py $(LUMEN_PACKAGE) --spec $(LUMEN_PVS)/visibility.generated.json
+	cp $(LUMEN_PVS)/report.json $(LUMEN_REPORTS)/derived-visibility.json
+	node $(SCHEMA_DIR)/bin/validate.mjs world $(LUMEN_PACKAGE)/world.json - 0.6
 	python3 tools/check-package.py $(LUMEN_PACKAGE) > lumen-reach/reports/package-check.json
 	python3 tools/check-placement.py $(LUMEN_PACKAGE) --output lumen-reach/reports/placement-check.json
 	python3 tools/check-walking.py $(LUMEN_PACKAGE) > lumen-reach/reports/walking-check.json
@@ -94,11 +97,11 @@ lumen-release: lumen-validate lumen-optimize lumen-release-check lumen-perf-gate
 	sha256sum artifacts/releases/com.hyprune.lumen-reach-$(LUMEN_VERSION).tar.zst > artifacts/releases/LUMEN-SHA256SUMS
 
 .PHONY: visibility-annotate visibility-validate visibility-nested
+# Lumen Reach derives its regions in lumen-build (since 0.9.0).
 visibility-annotate:
-	python3 tools/world_visibility.py $(LUMEN_PACKAGE)
 	python3 tools/world_visibility.py $(PACKAGE)
 visibility-validate:
-	python3 tools/check-visibility.py $(LUMEN_PACKAGE)
+	python3 tools/check-visibility.py $(LUMEN_PACKAGE) --spec $(LUMEN_PVS)/visibility.generated.json
 	python3 tools/check-visibility.py $(PACKAGE)
 visibility-nested:
 	HYPRUNE_NESTED_4K=1 python3 tools/check-visibility-session.py --core $(VISIBILITY_CORE)

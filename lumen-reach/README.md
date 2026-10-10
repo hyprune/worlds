@@ -119,10 +119,13 @@ and run `tools/check-lumen-session.py --vault-clip --package <package> --output
 JSON metadata. It encodes in `/tmp`; gallery delivery follows visual inspection.
 `tools/check-rime-v3.py` checks budget growth and unchanged mount/route contracts.
 
-## Authored visibility
+## Visibility
 
-`visibility.json` owns camera-region bounds, stable glTF subtree names and directed
-links. The exporter resolves names after every bake. To update an existing
+Since 0.9.0 the build derives visibility regions from geometry
+(`tools/derive-visibility.py --in-place` in `make lumen-build`; see
+`VISIBILITY.md`). Before that, `visibility.json` (now
+`visibility.hand-written.json`, kept as a reference fixture) owned camera-region
+bounds, stable glTF subtree names and directed links. The exporter resolves names after every bake. To update an existing
 package without rebaking or changing any asset:
 
 ```sh
