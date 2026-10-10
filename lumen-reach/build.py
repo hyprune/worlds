@@ -350,6 +350,26 @@ def court():
  slab('Roof upper landing',-20,-7.3,18.5,24,12,'concrete');ramp('Roof final approach',-13.2,-10.2,20,36,12,16,20)
  rail((-20,18.5,12),(-7.3,18.5,12));rail((-20,18.5,12),(-20,20,12));rail((-7.3,18.5,12),(-7.3,20,12))
  slab('Rooftop bridge',-13.2,-3,36,37.5,16,'concrete');slab('Rooftop bridge run',-7,-3,22,36,16,'concrete');rail((-7,22,16),(-7,35.5,16))
+ # 0.9.1 (owner): guard every open edge of the raised walkways (check-navmesh
+ # unguarded-drop). Same rail() as elsewhere; openings stay where ramps,
+ # stairs and routes continue.
+ def rails(*pts,z):
+  for a,b in zip(pts,pts[1:]):rail((a[0],a[1],z),(b[0],b[1],z))
+ # 16 m walkway: bridge ends and north edge, the slot beside the ramp top,
+ # the bridge run's east edge, the facade rooftop's north and east edges.
+ rails((-13.2,35.5),(-13.2,37.5),(-3,37.5),(-3,27),z=16)
+ rails((-8.5,35.5),(-8.5,36),(-7,36),(-7,35.5),z=16)
+ rails((-3,27),(25,27),(25,22),z=16)
+ # 12 m roof upper landing: west and east edges, open north edge ends.
+ rails((-20,20),(-20,24),(-18,24),z=12);rails((-8.5,24),(-7.3,24),(-7.3,20),z=12)
+ # 8 m roof landing: outer edges and the upper ramp/stair bed's open crest.
+ rails((-23,40),(-24,40),(-24,44),(-16,44),(-16,40),(-13.3,40),(-13.3,39.5),z=8)
+ # ramp() leaves 0.5 m side openings at each landing; where a landing edge is
+ # open they face the drop: lower ramp crest (west), upper ramp foot (both).
+ rails((-23,39.5),(-23,40),z=8);rails((-18,24),(-18,24.5),z=12);rails((-13.3,24),(-13.3,24.5),z=12)
+ # The upper flight is entered sideways from the ramp; its declared foot sat
+ # on the bed's open north end, now railed: start it 0.5 m along the flight.
+ flight=next(f for f in STAIR_ROUTES if f['id']=='roof-ascent-upper');flight['from']=up((-14.15,39.5,8+4*.5/16))
  slab('Cascade expansion bridge',-34,-24,12,16,4,'concrete');rail((-34,12,4),(-24,12,4));rail((-34,16,4),(-24,16,4))
  box('Cascade route gate',(-34,14,5),( .18,4,2),'metal',solid=True);box('Bridge route plaque',(-32,12.0,4.96),(1.2,.10,1.1),'metal',.008);sigil((-32,11.935,4.8),.7);label('UPPER CASCADE',(-28,11.93,5.25),.23)
  rail((-24,6,4),(-24,12,4));rail((-24,16,4),(-24,24,4));banner(-19,9,7,3.5);tree(-20,17,4,.8)
@@ -451,6 +471,10 @@ def hall():
  slab('Hall upper balcony',-6,0,32,40,8,'concrete')
  # Upper landing stops at the ramp crest; no slab crosses its rising clearance.
  rail((-.2,32,8),(-.2,39,8));rail((-2,57,4),(-2,60,4))
+ # 0.9.1: the upper balcony's other open edges (8 m drop); its west rail
+ # starts past the atrium column at y 33.
+ rail((-.2,39,8),(-.2,40,8));rail((-6,32,8),(-.2,32,8));rail((-5,40,8),(-5,40.5,8));rail((-.3,40,8),(-.3,40.5,8))
+ for a,b in [((-5,40),(-6,40)),((-6,40),(-6,33.6))]:rail((a[0],a[1],8),(b[0],b[1],8))
  for y in [32.5,58]:box('Hall balcony support',(-11,y,1.8),(.8,.8,3.6),'concrete',solid=True)
  P.area('Hall warm skylight',(4,42,19),(8,46,0),9000,(1,.63,.30),12)
  P.area('Hall warm window',(12,59,14),(8,45,3),6500,(1,.73,.43),9)
@@ -732,7 +756,7 @@ def manifest(g,lm,nodes,cols,count):
  for area in AREAS:
   area['primaryAnchor']=next(r['anchorId'] for r in MOUNT_ROWS if r['areaId']==area['id'] and r['role']=='mounted-workspace');area['toolAnchors']=[r['anchorId'] for r in MOUNT_ROWS if r['areaId']==area['id'] and r['role']=='tool'];area['dataAnchors']=[r['id'] for r in OBJECTS if r['areaId']==area['id']]
  spawns=[{'id':'arrival','pose':{'position':up(AREAS[0]['spawn']),'rotation':[0,0,0,1]}}]+[{'id':a['id'],'pose':{'position':up(a['spawn']),'rotation':[0,0,0,1]}} for a in AREAS]
- m={'formatVersion':'0.2','id':'com.hyprune.lumen-reach','version':('0.9.0' if count==4 else f'0.{count}.1'),'name':'Lumen Reach','description':f'{count} connected workspace homes on a mountain watershed. Original architecture, instruments and paths.','license':'CC-BY-4.0','scene':'scene.gltf','preview':'preview.png','defaultSpawn':'arrival','spawns':spawns,'anchors':ANCHORS,'zones':[{'id':a['id'],'name':a['name'],'bounds':a['bounds']} for a in AREAS],'navigation':{'kind':'mesh','node':nodes['Navigation'],'agentRadius':.3,'agentHeight':1.8},'collision':[{'node':nodes[o.name],'shape':'mesh','layer':'static'} for o in cols],'lightmaps':lm,'attribution':[{'path':'.','author':'Hyprune contributors','license':'CC-BY-4.0','source':'https://github.com/hyprune/worlds'}],'extensions':{'com.hyprune.lumen-reach.mounts':{'version':1,'areas':[{**{k:v for k,v in a.items() if k not in ['spawn','bounds','name','freePlacementZones']},'spawnId':a['id'],'freePlacementZones':[z['id'] for z in a['freePlacementZones']]} for a in AREAS],'mounts':MOUNT_ROWS,'objects':OBJECTS},'com.hyprune.lumen-reach.routes':{'version':1,'nodes':ROUTES,'edges':EDGES,'semantics':'bidirectional walking centerlines, feet positions in meters'},'com.hyprune.lumen-reach.stairs':{'version':1,'paths':STAIR_ROUTES,'semantics':'visible treads over continuous collision beds; alternate walkable flights'},'com.hyprune.lumen-reach.placement':{'version':1,'zones':[z for a in AREAS for z in a['freePlacementZones']]},'com.hyprune.map':{'version':'0.1','path':'map.svg','projection':'xz','north':[0,0,-1],'bounds':[-36,-162,86,16],'worldToMap':[4/520,0,0,4/780,160/520,690/780]}},'requiredExtensions':[]}
+ m={'formatVersion':'0.2','id':'com.hyprune.lumen-reach','version':('0.9.1' if count==4 else f'0.{count}.1'),'name':'Lumen Reach','description':f'{count} connected workspace homes on a mountain watershed. Original architecture, instruments and paths.','license':'CC-BY-4.0','scene':'scene.gltf','preview':'preview.png','defaultSpawn':'arrival','spawns':spawns,'anchors':ANCHORS,'zones':[{'id':a['id'],'name':a['name'],'bounds':a['bounds']} for a in AREAS],'navigation':{'kind':'mesh','node':nodes['Navigation'],'agentRadius':.3,'agentHeight':1.8},'collision':[{'node':nodes[o.name],'shape':'mesh','layer':'static'} for o in cols],'lightmaps':lm,'attribution':[{'path':'.','author':'Hyprune contributors','license':'CC-BY-4.0','source':'https://github.com/hyprune/worlds'}],'extensions':{'com.hyprune.lumen-reach.mounts':{'version':1,'areas':[{**{k:v for k,v in a.items() if k not in ['spawn','bounds','name','freePlacementZones']},'spawnId':a['id'],'freePlacementZones':[z['id'] for z in a['freePlacementZones']]} for a in AREAS],'mounts':MOUNT_ROWS,'objects':OBJECTS},'com.hyprune.lumen-reach.routes':{'version':1,'nodes':ROUTES,'edges':EDGES,'semantics':'bidirectional walking centerlines, feet positions in meters'},'com.hyprune.lumen-reach.stairs':{'version':1,'paths':STAIR_ROUTES,'semantics':'visible treads over continuous collision beds; alternate walkable flights'},'com.hyprune.lumen-reach.placement':{'version':1,'zones':[z for a in AREAS for z in a['freePlacementZones']]},'com.hyprune.map':{'version':'0.1','path':'map.svg','projection':'xz','north':[0,0,-1],'bounds':[-36,-162,86,16],'worldToMap':[4/520,0,0,4/780,160/520,690/780]}},'requiredExtensions':[]}
  for name in ['fixture-audit.json','decal-audit.json','playable-boundary-report.json']:shutil.copy2(ART/name,OUT/name)
  if count==4:
   # 0.9.0: canonical format 0.6 contract with per-area playable volumes
