@@ -80,18 +80,23 @@ def acceptance(client,children,args,shell_token,socketpath):
  # Tool mounts: a window can be placed only from a workspace with an area
  # home (core Layout::place), so each area's probe opens on its home (21-24)
  # and visits every tool mount of that area.
- placed=[];bad=[];tools=[x for x in m['anchors'] if x.get('mount',{}).get('role')=='tool-mount']
+ placed=[];bad=[];reach=[];tools=[x for x in m['anchors'] if x.get('mount',{}).get('role')=='tool-mount']
  for id,area in HOMES:
   title='Tool-'+str(id)
   s.ctl('eval','hl.window_rule({name="tool-'+str(id)+'",match={title="^'+title+'$"},workspace="'+str(id)+' silent"})')
   children.append(s.envrun('kitty','--title',title,'--override','cursor_blink_interval=0','sh','-c','echo tool probe; exec sleep 600',stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL))
   cap=wait(lambda:next((c for c in s.camera()['captures'] if c['title']==title and c['workspaceId']==id),None),timeout=30)
   for an in [x for x in tools if x['id'] in areas[area]['toolAnchors']]:
+   # IPC 0.19 enforces reach on gestures (mount 8 m, placement 12 m): place
+   # each window as a player would, standing 2.5 m in front of the mount.
+   x,y,z,w=an['pose']['rotation'];pp=an['pose']['position'];n=[2*(x*z+w*y),2*(y*z-w*x),1-2*(x*x+y*y)];yaw=math.atan2(-n[0],n[2])
+   s.ctl('eval',f'hl.plugin.hyprune.camera({pp[0]+n[0]*2.5},{pp[1]},{pp[2]+n[2]*2.5},{yaw},0)');time.sleep(.2)
+   reach.append(round(math.dist(s.camera()['position'],pp),2))
    try:
     client.call('surface.place',{'surfaceId':cap['id'],'anchorId':an['id']})
     wait(lambda:next((c for c in s.camera()['captures'] if c['id']==cap['id'] and math.dist(c['position'],an['pose']['position'])<.3),None),timeout=8);placed.append(an['id'])
    except Exception as e:bad.append({'anchor':an['id'],'error':repr(e)[:200],'capture':next((c for c in s.camera()['captures'] if c['id']==cap['id']),None)})
- check(f'tool mounts accept placement ({len(placed)}/{len(tools)})',not bad and len(placed)==len(tools)==20,{'placed':placed,'failed':bad})
+ check(f'tool mounts accept placement within reach ({len(placed)}/{len(tools)}, max {max(reach,default=0)} m)',not bad and len(placed)==len(tools)==20 and max(reach,default=99)<=8,{'placed':placed,'failed':bad,'placementDistances':reach,'reachMount':8,'reachPlacement':12})
  client.call('runtime.exit',{})
  report['status']='PASS' if all(c['passed'] for c in report['checks']) else 'FAIL';save()
 # Run under core's workspace-homes suite setup (IPC 0.15, fresh layout
