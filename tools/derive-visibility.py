@@ -118,10 +118,12 @@ def request(path,tri,owner,flags,targets,cells,forward):
   for pts in targets:f.write(struct.pack('<I',len(pts)));f.write(np.asarray(pts,np.float32).tobytes())
   for c in cells:e=np.asarray(c['eyes'],np.float32);f.write(struct.pack('<I',len(e)));f.write(e.tobytes())
 
-def run_kernel(req,res,local,host):
+def run_kernel(req,res,local,host,threads=2):
  if local:
-  exe=Path(tempfile.gettempdir())/'hyprune-pvs';subprocess.run(['g++','-O2','-std=c++20','-pthread',str(KERNEL),'-o',str(exe)],check=True)
-  out=subprocess.run([str(exe),str(req),str(res),'2'],check=True,capture_output=True,text=True).stdout
+  # --threads 0 = every core (running on the bake host itself); the default stays small for tests.
+  native=['-O3','-march=native'] if threads==0 else ['-O2']
+  exe=Path(tempfile.gettempdir())/'hyprune-pvs';subprocess.run(['g++',*native,'-std=c++20','-pthread',str(KERNEL),'-o',str(exe)],check=True)
+  out=subprocess.run([str(exe),str(req),str(res),str(threads or os.cpu_count() or 2)],check=True,capture_output=True,text=True).stdout
  else:
   remote='hyprune-bake/pvs';q=shlex.quote
   subprocess.run(['ssh','-o','BatchMode=yes',host,f'mkdir -p {remote}'],check=True)
@@ -150,7 +152,7 @@ def merge(cells,vis):
 def main():
  p=argparse.ArgumentParser(description=__doc__,formatter_class=argparse.RawDescriptionHelpFormatter)
  p.add_argument('package',type=Path);p.add_argument('--output',type=Path,required=True,help='directory for spec, report and request')
- p.add_argument('--local',action='store_true',help='run the kernel locally (small tests only)');p.add_argument('--host',default=os.environ.get('HYPRUNE_BAKE_HOST','10.2.2.2'))
+ p.add_argument('--local',action='store_true',help='run the kernel locally (small tests only)');p.add_argument('--threads',type=int,default=2,help='--local kernel threads; 0 = every core, -O3 -march=native (on the bake host itself)');p.add_argument('--host',default=os.environ.get('HYPRUNE_BAKE_HOST','10.2.2.2'))
  p.add_argument('--apply',type=Path,help='write a copy of the package with the derived regions here (never edits the input)')
  p.add_argument('--in-place',action='store_true',help='build step: write the derived regions into the package itself')
  p.add_argument('--targets',type=int,default=2048);p.add_argument('--forward',type=int,default=4096);p.add_argument('--seed',type=int,default=7009)
@@ -162,7 +164,7 @@ def main():
  units,tri,owner,flags,tris=units_and_triangles(s,collision)
  rng=np.random.default_rng(a.seed);targets=[surface_points(tris[u],a.targets,rng) for u in range(len(units))]
  req=a.output/'request.bin';request(req,tri,owner,flags,targets,cells,a.forward)
- stats,raw=run_kernel(req,a.output/'result.bin',a.local,a.host)
+ stats,raw=run_kernel(req,a.output/'result.bin',a.local,a.host,a.threads)
  vis=raw>0
  # Near rule and 26-neighbour dilation (same or adjacent level band).
  for k,c in enumerate(cells):
