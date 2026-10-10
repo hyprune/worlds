@@ -1,0 +1,30 @@
+{
+ "coreCommit": "9e50dfb",
+ "packages": {
+  "0.9.0": "dist-07/com.hyprune.lumen-reach (format 0.7, canonical areas)",
+  "0.8.1": "published release package (format 0.7, legacy mounts extension)"
+ },
+ "coreWorkspaceHomes": {
+  "0.9.0": "33/33 PASS (release package via tools/run-core-suite.py)",
+  "0.8.1": "33/33 PASS",
+  "0.9.0-source": "33/33 PASS (core run.sh, worlds/dist)",
+  "evidenceDiff": "none beyond composition counters"
+ },
+ "corePlacement": "36/36 PASS (core fixture org.hyprune.m3b; does not load Lumen)",
+ "lumenScreens": {
+  "0.9.0": "11/11 PASS",
+  "0.8.1": "11/11 PASS",
+  "evidenceDiff": "none (frame counters and still paths excluded)",
+  "checks": [
+   "homes 21-24 from the world areas",
+   "Director lists the four homes",
+   "anchors by role: 4 walls, 20 tool mounts",
+   "37 data objects published",
+   "Director places (14) and map present",
+   "HUD map markers projected (13)",
+   "workspaces 21-24 each on its area primary wall (frame at anchor, aimable)",
+   "tool mounts accept placement 20/20 (probe on each area home, core requires an area home)"
+  ]
+ },
+ "gallery": "screenshots/optimise-2026-10/lumen-0.9.0-home-walls.jpg"
+}

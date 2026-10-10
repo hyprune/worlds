@@ -1,0 +1,227 @@
+{
+ "status": "PASS",
+ "package": "/home/rick/workspace/hyprune/worlds/dist-07/com.hyprune.lumen-reach",
+ "version": "0.9.0",
+ "formatVersion": "0.7",
+ "manifestSHA256": "375478640875af83e91567f497b484cd66b736f5220e1e715e6cdb1e8a9f2fe0",
+ "coreCommit": "9e50dfbb269737aca5f77d5a4120f988bb292b4e",
+ "checks": [
+  {
+   "name": "homes 21-24 from the world areas",
+   "passed": true,
+   "evidence": [
+    {
+     "areaId": "sun-court",
+     "id": 21,
+     "worldId": "com.hyprune.lumen-reach"
+    },
+    {
+     "areaId": "array-hall",
+     "id": 22,
+     "worldId": "com.hyprune.lumen-reach"
+    },
+    {
+     "areaId": "rime-vault",
+     "id": 23,
+     "worldId": "com.hyprune.lumen-reach"
+    },
+    {
+     "areaId": "signal-rise",
+     "id": 24,
+     "worldId": "com.hyprune.lumen-reach"
+    }
+   ]
+  },
+  {
+   "name": "Director lists the four homes",
+   "passed": true,
+   "evidence": {
+    "21": "sun-court",
+    "22": "array-hall",
+    "23": "rime-vault",
+    "24": "signal-rise"
+   }
+  },
+  {
+   "name": "anchors by role: 4 walls, 20 tool mounts",
+   "passed": true,
+   "evidence": {
+    "tool-mount": 20,
+    "mounted-workspace": 4
+   }
+  },
+  {
+   "name": "37 data objects published",
+   "passed": true,
+   "evidence": {
+    "count": 37,
+    "keys": [
+     "anchors",
+     "areas",
+     "bindings",
+     "carriedSurfaceId",
+     "desktopWorkspaceId",
+     "instances",
+     "objects",
+     "placementZones",
+     "placements"
+    ]
+   }
+  },
+  {
+   "name": "Director places and map present",
+   "passed": true,
+   "evidence": {
+    "places": [
+     "arrival",
+     "globe-platform",
+     "lookout",
+     "cascade-bridge",
+     "rooftop",
+     "hall-arrival",
+     "hall-upper",
+     "vault-arrival",
+     "vault-platform",
+     "rise-arrival",
+     "fortress-room",
+     "diagnostics-platform",
+     "dish-platform",
+     "gantry-west"
+    ],
+    "map": [
+     "bounds",
+     "sha256",
+     "svg",
+     "worldToMap"
+    ]
+   }
+  },
+  {
+   "name": "HUD map markers projected",
+   "passed": true,
+   "evidence": {
+    "count": 13,
+    "kinds": {
+     "?": 13
+    },
+    "example": {
+     "distance": 19.142621994018555,
+     "id": "globe-platform",
+     "label": "Instrument terrace",
+     "occluded": false,
+     "x": 0.5512778162956238,
+     "y": 0.44530364871025085
+    }
+   }
+  },
+  {
+   "name": "workspace 21 window on the sun-court primary wall",
+   "passed": true,
+   "evidence": {
+    "frame": {
+     "composed": 3,
+     "id": "workspace-21",
+     "position": [
+      8.0,
+      10.100000381469727,
+      -23.114999771118164
+     ],
+     "title": "sun-court / workspace 21",
+     "workspaceId": 21
+    },
+    "anchor": "sun-court-slot-01-facade-wall-01",
+    "aimDistance": 2.5,
+    "still": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.0/homes-0.9.0/wall-21-sun-court.png"
+   }
+  },
+  {
+   "name": "workspace 22 window on the array-hall primary wall",
+   "passed": true,
+   "evidence": {
+    "frame": {
+     "composed": 29,
+     "id": "workspace-22",
+     "position": [
+      8.0,
+      10.0,
+      -47.94499969482422
+     ],
+     "title": "array-hall / workspace 22",
+     "workspaceId": 22
+    },
+    "anchor": "array-hall-slot-02-hanging-wall-01",
+    "aimDistance": 2.5,
+    "still": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.0/homes-0.9.0/wall-22-array-hall.png"
+   }
+  },
+  {
+   "name": "workspace 23 window on the rime-vault primary wall",
+   "passed": true,
+   "evidence": {
+    "frame": {
+     "composed": 30,
+     "id": "workspace-23",
+     "position": [
+      39.0,
+      -0.10000000149011612,
+      -99.31500244140625
+     ],
+     "title": "rime-vault / workspace 23",
+     "workspaceId": 23
+    },
+    "anchor": "rime-vault-slot-03-wall-inset-console-01",
+    "aimDistance": 2.5,
+    "still": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.0/homes-0.9.0/wall-23-rime-vault.png"
+   }
+  },
+  {
+   "name": "workspace 24 window on the signal-rise primary wall",
+   "passed": true,
+   "evidence": {
+    "frame": {
+     "composed": 29,
+     "id": "workspace-24",
+     "position": [
+      63.0,
+      10.699999809265137,
+      -147.09500122070312
+     ],
+     "title": "signal-rise / workspace 24",
+     "workspaceId": 24
+    },
+    "anchor": "signal-rise-slot-04-blast-door-screen-01",
+    "aimDistance": 2.5,
+    "still": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.0/homes-0.9.0/wall-24-signal-rise.png"
+   }
+  },
+  {
+   "name": "tool mounts accept placement (20/20)",
+   "passed": true,
+   "evidence": {
+    "placed": [
+     "sun-court-slot-01-field-rig-01",
+     "sun-court-slot-01-field-rig-02",
+     "sun-court-slot-01-kiosk-pillar-01",
+     "sun-court-slot-01-operator-desk-01",
+     "sun-court-slot-01-operator-desk-02",
+     "array-hall-slot-02-banner-01",
+     "array-hall-slot-02-banner-02",
+     "array-hall-slot-02-lectern-01",
+     "array-hall-slot-02-lectern-02",
+     "array-hall-slot-02-operator-desk-01",
+     "array-hall-slot-02-operator-desk-02",
+     "array-hall-slot-02-operator-desk-03",
+     "rime-vault-slot-03-operator-desk-01",
+     "rime-vault-slot-03-operator-desk-02",
+     "rime-vault-slot-03-terminal-bench-01",
+     "rime-vault-slot-03-wall-inset-console-02",
+     "signal-rise-slot-04-kiosk-pillar-01",
+     "signal-rise-slot-04-operator-desk-01",
+     "signal-rise-slot-04-terminal-bench-01",
+     "signal-rise-slot-04-wall-inset-console-01"
+    ],
+    "failed": []
+   }
+  }
+ ]
+}
