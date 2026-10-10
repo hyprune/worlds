@@ -81,9 +81,20 @@ def acceptance(client,children,args,shell_token,socketpath):
   client.call('movement.set',{'modeId':'com.hyprune.walk'});client.call('camera.set',{'position':[25.2,1.7,0],'orientation':q(math.pi/2,0)});time.sleep(.2)
   integration.keys('-P','w','-P','space','-s','1500','-p','space','-p','w');time.sleep(.6)
   report['jumpBoundaryWitness']=client.call('camera.get',{})['position'];save();assert report['jumpBoundaryWitness'][0]<25.8,report['jumpBoundaryWitness']
-  # Ordinary fly (collision on, not noclip) passes over it at 6m eye height.
+  # Ordinary fly (collision on, not noclip). Without playable volumes (format
+  # < 0.6) it passes over the walk-height backstop at 6 m eye height. With
+  # them (Lumen >= 0.9.0) core stops it at the court's east bound (x 26) plus
+  # its 0.5 m fly allowance, and at maxFlyHeight (+0.5 m) going up.
+  bounded=bool(manifest.get('playable') or any('playable' in x for x in manifest.get('areas',[])))
   client.call('movement.set',{'modeId':'com.hyprune.fly'});client.call('camera.set',{'position':[25.2,6,0],'orientation':q(math.pi/2,0)});integration.keys('-P','w','-s','1000','-p','w');time.sleep(.2)
-  report['flyBoundaryWitness']=client.call('camera.get',{})['position'];save();assert report['flyBoundaryWitness'][0]>26.5,report['flyBoundaryWitness']
+  report['flyBoundaryWitness']=client.call('camera.get',{})['position'];report['flyBounded']=bounded;save()
+  if bounded:
+   assert 25.6<report['flyBoundaryWitness'][0]<=26.55,report['flyBoundaryWitness']
+   cap=manifest.get('playable',{}).get('maxFlyHeight')
+   if cap is not None:
+    client.call('camera.set',{'position':[0,cap-3,0],'orientation':q(0,0)});integration.keys('-P','space','-s','1500','-p','space');time.sleep(.2)
+    report['flyCeilingWitness']=client.call('camera.get',{})['position'];save();assert cap-1.5<report['flyCeilingWitness'][1]<=cap+.55,report['flyCeilingWitness']
+  else:assert report['flyBoundaryWitness'][0]>26.5,report['flyBoundaryWitness']
  client.call('runtime.exit',{});sheet()
  report['cullingLosses']=[v['id'] for v in report['views'] if v.get('cullingChangedPixelFraction',0)>.00005]
  report['status']='PASS' if not report['cullingLosses'] else 'FAIL';save();assert report['status']=='PASS',report['cullingLosses']
