@@ -176,6 +176,8 @@ def portals(B):
   inside=lambda q,e=0:all((Vector(q)-Vector(co)).dot(Vector(no).normalized())>e for co,no in planes)
   zlo=f['z']+min(0,f['slope']*(y1-y0));zhi=c['z']+max(0,c['slope']*(y1-y0))
   for name in pt['objects']:
+   # --areas < 4 builds lack the later areas' shells; full builds require every one.
+   if name not in B.bpy.data.objects and getattr(B,'BUILD_AREAS',4)<4:continue
    o=B.bpy.data.objects[name];assert o.matrix_world.is_identity,(name,'portal cut assumes world-space mesh')
    bm=bmesh.new();bm.from_mesh(o.data);before=len(bm.faces)
    for co,no in planes:

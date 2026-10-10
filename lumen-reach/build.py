@@ -788,7 +788,8 @@ if __name__=='__main__':
  if a.preview:stills()
  else:
   # Shared pipeline keeps tiling UV0 distinct from atlas UV1 throughout bake/export.
-  for name,n in zip(NAMES[:a.areas],[2048,1536,2048,2048]):P.RESOLUTIONS[name]=n
+  # Shared boundary/vista pieces can reach later areas' groups in --areas < 4 builds.
+  for name,n in zip(NAMES,[2048,1536,2048,2048]):P.RESOLUTIONS[name]=n
   P.RESOLUTIONS['foliage']=1024
   P.MARGINS.update({'sun-court':4,'array-hall':4,'rime-vault':4,'signal-rise':4,'foliage':2})
   audit_fixtures()
