@@ -1,0 +1,52 @@
+{
+ "mode": "gate",
+ "status": "DONE",
+ "scale": 0.5,
+ "quality": "medium",
+ "rounds": 2,
+ "coreCommit": "9e50dfbb269737aca5f77d5a4120f988bb292b4e",
+ "packages": {
+  "A": {
+   "path": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/before",
+   "version": "0.9.0",
+   "formatVersion": "0.7",
+   "manifestSHA256": "375478640875af83e91567f497b484cd66b736f5220e1e715e6cdb1e8a9f2fe0"
+  },
+  "B": {
+   "path": "/home/rick/workspace/hyprune/worlds/dist-07/com.hyprune.lumen-reach",
+   "version": "0.9.1",
+   "formatVersion": "0.7",
+   "manifestSHA256": "0162f1e62cfbab63d2be52a461758b2d55068d02fa4487591ed105700de72ed2"
+  }
+ },
+ "pluginSHA256": "4a5fdd57e9cb7dfa10d4ef6c818e1fe2c4ea7ac8434fc1e8ed7488fa63678253",
+ "routePoses": 400,
+ "runs": {
+  "A": {
+   "gpuFrameMs": {
+    "p50": 8.765778000000001,
+    "p95": 10.189271049999999,
+    "n": 3200
+   },
+   "settledScale": {
+    "p50": 0.5,
+    "p05": 0.5,
+    "n": 252
+   },
+   "rounds": 2
+  },
+  "B": {
+   "gpuFrameMs": {
+    "p50": 9.0210125,
+    "p95": 10.386176049999998,
+    "n": 3200
+   },
+   "settledScale": {
+    "p50": 0.5,
+    "p05": 0.5,
+    "n": 252
+   },
+   "rounds": 2
+  }
+ }
+}

@@ -1,4 +1,59 @@
-# Lumen Reach 0.9.0 handoff — 2026-10-10
+# Lumen Reach 0.9.1 handoff — 2026-10-10
+
+**Release candidate verified; not published, not pushed.** Baseline: 0.9.0
+(release package `artifacts/opt-0.9.1/before/`, source `before-src/`;
+record `reports/release-0.9.0.json`). 0.9.1 had not been built when the
+owner's live-test findings arrived, so they ship in 0.9.1 with the rails.
+
+## Release candidate
+
+- `dist-07/com.hyprune.lumen-reach/` (format 0.7) from source `dist/`
+  (format 0.6) built at `e80c8d7` on 10.2.2.2.
+- Manifest SHA256 `0162f1e62cfb…`; all nested gates ran on it.
+- Archive `artifacts/releases/com.hyprune.lumen-reach-0.9.1.tar.zst`,
+  39,311,878 bytes, SHA256
+  `f8ed69867670192e0d027cc732c232f1d8e36a2ae51fe7f51de013c1d096396a`. 77
+  extracted files identical to `dist-07/`; schema 0.7 VALID; core
+  world-check exit 0.
+- Core for nested gates: `core-optimise` at main `9e50dfb` (the meta repo
+  still pins `35ace21`).
+- Sheets (gallery `screenshots/optimise-2026-10/`):
+  `lumen-0.9.1-owner-findings-before-after.jpg` (owner live | nested 0.9.0 |
+  nested 0.9.1 at the four capture poses, plus the four walls with real
+  windows) and `lumen-0.9.1-rails-before-after.jpg`.
+
+## Changes
+
+1. Guard rails on the rooftop walkway and raised landings (8-16 m drops);
+   `check-navmesh` gates unguarded drops >= 7.5 m from decks >= 6 m.
+2. Primary workspace walls are 16:9 (primary anchors only): Sun Court
+   18.8x9.3 -> 16x9, Array Hall 16x8 -> 16x9, Rime Vault 13.8x6.3 -> 11.2x6.3
+   (the 16:9 window it already showed), Signal Rise -> exact 18.4x10.35.
+   Core fits its 1280x720 workspace frame into the anchor (`min(w, h*16/9)`),
+   so the frame now fills each wall.
+3. Signs clear of roofs: Sun Court sign 0.40 m at z 15.22 under the roof
+   deck (z 15.68); Array Hall sign/rods follow the frame; hall exit sign
+   0.7 m east of the rack drawers; Rime Vault sill icicles split around the
+   sign.
+4. Black object by the Sun Court globe: NaN shading on the Signal mountain
+   shell's silhouette (untextured roughness 1 -> core specular `pow(0,0)`).
+   Terrain roughness 0.95; `check-package` rejects untextured roughness 1.
+   **Core bug to fix**: world shader `power=min(2/(r*r)-2,512)` is 0 at r=1;
+   `pow(nh,power)` with nh=0 is undefined (NaN on Intel). Clamp power (e.g.
+   `max(...,1e-3)`) or nh.
+5. Armillary rings: unbaked ivory (they baked black on one side).
+6. `tools/check-frames-signs.py` in `lumen-validate` (16:9 primary frames
+   with the placeholder filling them; sign plaque faces + 0.5 m clear).
+   The screens check also proves each home frame fills its 16:9 wall.
+
+## Gates
+
+validate PASS; release verify PASS; perf gate PASS (p50 +2.9 %, p95 +1.9 %
+vs 0.9.0, same session); nested sweep PASS (84 views, 0 culling losses,
+fly bounded); routes PASS (64 nodes, 126 traversals, 14 stairs); screens
+15/15 PASS on 21-24.
+
+## Previous: 0.9.0 (2026-10-10)
 
 **Release candidate verified; not published, not pushed.** Published
 baseline: 0.8.1 (release package at `artifacts/opt-0.9.0/before/`, source at

@@ -1,0 +1,304 @@
+{
+ "status": "FAIL",
+ "aspect": "16:9",
+ "aspectTolerance": 0.005,
+ "fillToleranceMeters": 0.01,
+ "primaryFrames": [
+  {
+   "area": "sun-court",
+   "anchor": "sun-court-slot-01-facade-wall-01",
+   "role": "mounted-workspace",
+   "size": [
+    18.8,
+    9.3
+   ],
+   "aspect": 2.02151,
+   "aspectError": 0.1371,
+   "placeholderSize": [
+    18.8,
+    9.3
+   ],
+   "placeholderCentre": [
+    0.0,
+    0.0
+   ],
+   "status": "FAIL"
+  },
+  {
+   "area": "array-hall",
+   "anchor": "array-hall-slot-02-hanging-wall-01",
+   "role": "mounted-workspace",
+   "size": [
+    16,
+    8
+   ],
+   "aspect": 2.0,
+   "aspectError": 0.125,
+   "placeholderSize": [
+    16.0,
+    8.0
+   ],
+   "placeholderCentre": [
+    0.0,
+    0.0
+   ],
+   "status": "FAIL"
+  },
+  {
+   "area": "rime-vault",
+   "anchor": "rime-vault-slot-03-wall-inset-console-01",
+   "role": "mounted-workspace",
+   "size": [
+    13.8,
+    6.3
+   ],
+   "aspect": 2.19048,
+   "aspectError": 0.23214,
+   "placeholderSize": [
+    13.8,
+    6.3
+   ],
+   "placeholderCentre": [
+    0.0,
+    0.0
+   ],
+   "status": "FAIL"
+  },
+  {
+   "area": "signal-rise",
+   "anchor": "signal-rise-slot-04-blast-door-screen-01",
+   "role": "mounted-workspace",
+   "size": [
+    18.5,
+    10.4
+   ],
+   "aspect": 1.77885,
+   "aspectError": 0.0006,
+   "placeholderSize": [
+    18.5,
+    10.4
+   ],
+   "placeholderCentre": [
+    0.0,
+    0.0
+   ],
+   "status": "PASS"
+  }
+ ],
+ "signs": [
+  {
+   "word": "01 SUN COURT",
+   "box": {
+    "min": [
+     5.567,
+     15.34,
+     -22.932
+    ],
+    "max": [
+     10.433,
+     15.96,
+     -22.42
+    ]
+   },
+   "intruding": 1,
+   "materials": [
+    "concrete"
+   ],
+   "intrusion": {
+    "min": [
+     -6.985,
+     15.68,
+     -26.985
+    ],
+    "max": [
+     24.985,
+     15.68,
+     -22.015
+    ]
+   },
+   "status": "FAIL"
+  },
+  {
+   "word": "ARRAY HALL",
+   "box": {
+    "min": [
+     6.425,
+     3.095,
+     -23.132
+    ],
+    "max": [
+     9.575,
+     3.605,
+     -22.62
+    ]
+   },
+   "intruding": 0,
+   "materials": [],
+   "status": "PASS"
+  },
+  {
+   "word": "02 ARRAY HALL",
+   "box": {
+    "min": [
+     5.59,
+     14.91,
+     -47.682
+    ],
+    "max": [
+     10.41,
+     15.49,
+     -47.17
+    ]
+   },
+   "intruding": 0,
+   "materials": [],
+   "status": "PASS"
+  },
+  {
+   "word": "RIME VAULT",
+   "box": {
+    "min": [
+     22.589,
+     3.8,
+     -49.012
+    ],
+    "max": [
+     24.811,
+     4.2,
+     -48.5
+    ]
+   },
+   "intruding": 15,
+   "materials": [
+    "black",
+    "frost"
+   ],
+   "intrusion": {
+    "min": [
+     23.005,
+     0.1,
+     -48.87
+    ],
+    "max": [
+     23.155,
+     4.9,
+     -47.35
+    ]
+   },
+   "status": "FAIL"
+  },
+  {
+   "word": "03 RIME VAULT",
+   "box": {
+    "min": [
+     37.14,
+     3.21,
+     -99.042
+    ],
+    "max": [
+     40.86,
+     3.69,
+     -98.53
+    ]
+   },
+   "intruding": 84,
+   "materials": [
+    "ice-body",
+    "ice-rim"
+   ],
+   "intrusion": {
+    "min": [
+     37.095,
+     3.237,
+     -99.054
+    ],
+    "max": [
+     40.784,
+     3.79,
+     -98.926
+    ]
+   },
+   "status": "FAIL"
+  },
+  {
+   "word": "SEALED",
+   "box": {
+    "min": [
+     27.275,
+     -2.005,
+     -99.332
+    ],
+    "max": [
+     28.725,
+     -1.595,
+     -98.82
+    ]
+   },
+   "intruding": 0,
+   "materials": [],
+   "status": "PASS"
+  },
+  {
+   "word": "CONTINUATION",
+   "box": {
+    "min": [
+     27.089,
+     -2.46,
+     -99.332
+    ],
+    "max": [
+     28.911,
+     -2.14,
+     -98.82
+    ]
+   },
+   "intruding": 0,
+   "materials": [],
+   "status": "PASS"
+  },
+  {
+   "word": "04 SIGNAL RISE",
+   "box": {
+    "min": [
+     60.232,
+     16.695,
+     -146.832
+    ],
+    "max": [
+     65.768,
+     17.305,
+     -146.32
+    ]
+   },
+   "intruding": 0,
+   "materials": [],
+   "status": "PASS"
+  },
+  {
+   "word": "UPPER CASCADE",
+   "box": {
+    "min": [
+     -29.365,
+     5.055,
+     -11.942
+    ],
+    "max": [
+     -26.635,
+     5.445,
+     -11.43
+    ]
+   },
+   "intruding": 0,
+   "materials": [],
+   "status": "PASS"
+  }
+ ],
+ "failures": [
+  "frame sun-court-slot-01-facade-wall-01: {'area': 'sun-court', 'anchor': 'sun-court-slot-01-facade-wall-01', 'role': 'mounted-workspace', 'size': [18.8, 9.3], 'aspect': 2.02151, 'aspectError': 0.1371, 'placeholderSize': [18.8, 9.3], 'placeholderCentre': [0.0, 0.0], 'status': 'FAIL'}",
+  "frame array-hall-slot-02-hanging-wall-01: {'area': 'array-hall', 'anchor': 'array-hall-slot-02-hanging-wall-01', 'role': 'mounted-workspace', 'size': [16, 8], 'aspect': 2.0, 'aspectError': 0.125, 'placeholderSize': [16.0, 8.0], 'placeholderCentre': [0.0, 0.0], 'status': 'FAIL'}",
+  "frame rime-vault-slot-03-wall-inset-console-01: {'area': 'rime-vault', 'anchor': 'rime-vault-slot-03-wall-inset-console-01', 'role': 'mounted-workspace', 'size': [13.8, 6.3], 'aspect': 2.19048, 'aspectError': 0.23214, 'placeholderSize': [13.8, 6.3], 'placeholderCentre': [0.0, 0.0], 'status': 'FAIL'}",
+  "sign '01 SUN COURT': 1 triangles (concrete) in its clear volume",
+  "sign 'RIME VAULT': 15 triangles (black,frost) in its clear volume",
+  "sign '03 RIME VAULT': 84 triangles (ice-body,ice-rim) in its clear volume"
+ ]
+}

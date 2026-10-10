@@ -1,0 +1,141 @@
+{
+ "tool": "glTF-Transform 4.5.1 inspect() + visible-scene traversal",
+ "method": "triangles/draws: visible scene primitives per node instance; GPU MiB: glTF-Transform VRAM estimate, full mip chains, lightmaps included, plus visible vertex/index buffers",
+ "world": "com.hyprune.lumen-reach",
+ "version": "0.9.1",
+ "formatVersion": "0.7",
+ "visibleTriangles": 251506,
+ "drawCalls": 99,
+ "materials": 106,
+ "collisionTriangles": 5518,
+ "textures": {
+  "count": 63,
+  "lightmaps": 7,
+  "ktx2": 56
+ },
+ "gpuMiB": {
+  "total": 142.46,
+  "materialTextures": 39.46,
+  "lightmaps": 87.33,
+  "vertexBuffers": 14,
+  "indexBuffers": 1.66
+ },
+ "packageMiB": 41.44,
+ "extensionsUsed": [
+  "EXT_meshopt_compression",
+  "KHR_materials_unlit",
+  "KHR_mesh_quantization",
+  "KHR_texture_basisu"
+ ],
+ "extensionsRequired": [
+  "EXT_meshopt_compression",
+  "KHR_mesh_quantization",
+  "KHR_texture_basisu"
+ ],
+ "largestTextures": [
+  {
+   "name": "textures/lightmap-sun-court.png",
+   "resolution": "2048x2048",
+   "mimeType": "image/png",
+   "lightmap": true,
+   "gpuMiB": 21.33
+  },
+  {
+   "name": "textures/lightmap-rime-vault.png",
+   "resolution": "2048x2048",
+   "mimeType": "image/png",
+   "lightmap": true,
+   "gpuMiB": 21.33
+  },
+  {
+   "name": "textures/lightmap-signal-rise.png",
+   "resolution": "2048x2048",
+   "mimeType": "image/png",
+   "lightmap": true,
+   "gpuMiB": 21.33
+  },
+  {
+   "name": "textures/lightmap-array-hall.png",
+   "resolution": "1536x1536",
+   "mimeType": "image/png",
+   "lightmap": true,
+   "gpuMiB": 12
+  },
+  {
+   "name": "textures/lightmap-foliage.png",
+   "resolution": "1024x1024",
+   "mimeType": "image/png",
+   "lightmap": true,
+   "gpuMiB": 5.33
+  },
+  {
+   "name": "textures/lightmap-connector-descent.png",
+   "resolution": "768x768",
+   "mimeType": "image/png",
+   "lightmap": true,
+   "gpuMiB": 3
+  },
+  {
+   "name": "textures/lightmap-connector-ascent.png",
+   "resolution": "768x768",
+   "mimeType": "image/png",
+   "lightmap": true,
+   "gpuMiB": 3
+  },
+  {
+   "name": "night-sky-v7-albedo",
+   "resolution": "2048x1024",
+   "mimeType": "image/ktx2",
+   "lightmap": false,
+   "gpuMiB": 2.67
+  }
+ ],
+ "largestMeshes": [
+  {
+   "name": "Guardrail post.389",
+   "triangles": 62624
+  },
+  {
+   "name": "Court paving",
+   "triangles": 50972
+  },
+  {
+   "name": "Guardrail post.336",
+   "triangles": 44452
+  },
+  {
+   "name": "sun-court-slot-01-facade-wall-01 placeholder",
+   "triangles": 36754
+  },
+  {
+   "name": "Atrium stone floor",
+   "triangles": 30504
+  },
+  {
+   "name": "Red canopy leaves",
+   "triangles": 20736
+  },
+  {
+   "name": "Service descent",
+   "triangles": 2798
+  },
+  {
+   "name": "Snow service ascent",
+   "triangles": 2666
+  }
+ ],
+ "inspectWarnings": [],
+ "baseline": {
+  "version": "0.9.0",
+  "visibleTriangles": 245330,
+  "drawCalls": 99,
+  "gpuMiB": 142.13,
+  "packageMiB": 41.73
+ },
+ "delta": {
+  "visibleTriangles": 6176,
+  "drawCalls": 0,
+  "gpuMiB": 0.33,
+  "packageMiB": -0.29
+ }
+}

@@ -1,6 +1,6 @@
 {
   "status": "PASS",
-  "visibleTriangles": 245330,
+  "visibleTriangles": 251506,
   "checks": [
     {
       "anchorId": "sun-court-slot-01-facade-wall-01",
@@ -29,8 +29,8 @@
     {
       "anchorId": "sun-court-slot-01-facade-wall-01",
       "windowSize": [
-        18.8,
-        9.3
+        16,
+        9
       ],
       "sweepMeters": [
         0.1,
@@ -246,7 +246,7 @@
       "anchorId": "array-hall-slot-02-hanging-wall-01",
       "windowSize": [
         16,
-        8
+        9
       ],
       "sweepMeters": [
         0.1,
@@ -533,7 +533,7 @@
     {
       "anchorId": "rime-vault-slot-03-wall-inset-console-01",
       "windowSize": [
-        13.8,
+        11.2,
         6.3
       ],
       "sweepMeters": [
@@ -713,8 +713,8 @@
     {
       "anchorId": "signal-rise-slot-04-blast-door-screen-01",
       "windowSize": [
-        18.5,
-        10.4
+        18.4,
+        10.35
       ],
       "sweepMeters": [
         0.1,

@@ -1,179 +1,145 @@
 {
   "status": "PASS",
   "worldId": "com.hyprune.lumen-reach",
-  "version": "0.9.0",
+  "version": "0.9.1",
   "formatVersion": "0.7",
   "sourceFormatVersion": "0.6",
-  "sourceCommit": "ff5e8d3",
-  "sourceNote": "Source package baked on 10.2.2.2 from build inputs at ff5e8d3, visibility derived in lumen-build; release package = tools/remote-optimize.sh output.",
-  "sceneSHA256": "a7e13ed46923382252f9e1d1b80df6395df9506d09a4915f0512a08c312f4b14",
-  "manifestSHA256": "375478640875af83e91567f497b484cd66b736f5220e1e715e6cdb1e8a9f2fe0",
+  "sourceCommit": "e80c8d7",
+  "sourceNote": "Source package baked on 10.2.2.2 from build inputs at this commit (lumen-build incl. derived visibility); release package = tools/remote-optimize.sh output. 0.9.1 was not built before the owner findings were folded in, so they ship in 0.9.1 (no 0.9.2).",
+  "sceneSHA256": "004e9af58661bac7f957ee8fa2d1cd0c7f548b2a80e6aa63f0ef5c0f360e131e",
+  "manifestSHA256": "0162f1e62cfbab63d2be52a461758b2d55068d02fa4487591ed105700de72ed2",
   "archive": {
     "status": "PASS",
-    "path": "artifacts/releases/com.hyprune.lumen-reach-0.9.0.tar.zst",
-    "sha256": "52fc38bf3ce95643ee26e7acdd9b216a7334f36b32b175cbe40bbedbc779dda2",
-    "bytes": 39733854,
-    "identicalExtractedFiles": 76,
+    "path": "artifacts/releases/com.hyprune.lumen-reach-0.9.1.tar.zst",
+    "sha256": "f8ed69867670192e0d027cc732c232f1d8e36a2ae51fe7f51de013c1d096396a",
+    "bytes": 39311878,
+    "identicalExtractedFiles": 77,
     "extractedChecks": [
       "sha256sum -c LUMEN-SHA256SUMS OK",
       "schema 0.7 VALID",
-      "core hyprune-world-check PASS (35ace21)"
+      "core hyprune-world-check exit 0 (9e50dfb)"
     ]
   },
   "published": false,
-  "coreCommit": "35ace211a6be4ea87de8305392a5f4a8b67f5337",
-  "loadedPluginSHA256": "8d3b812655ffe1862d240b12f474ec7cc17aa55adde475fbba5f5717680af476",
+  "coreCommit": "9e50dfbb269737aca5f77d5a4120f988bb292b4e",
+  "baseline": {
+    "version": "0.9.0",
+    "releasePackage": "artifacts/opt-0.9.1/before",
+    "sourcePackage": "artifacts/opt-0.9.1/before-src"
+  },
   "changes": {
-    "derivedVisibility": {
-      "regions": 177,
-      "areas": 184,
-      "cells": 805,
-      "eyeSamples": 29781,
-      "eyesWhereGeneratedHidesASampledVisibleUnit": 0,
-      "note": "tools/derive-visibility.py --in-place in lumen-build; hand-written spec kept as lumen-reach/visibility.hand-written.json (fixture)"
-    },
-    "canonicalContract": "format 0.6 source: canonical areas[], anchor mounts, dataObjects, placementZones (legacy mounts/placement extensions removed)",
-    "playable": {
-      "areaVolumes": {
-        "sun-court": 5,
-        "array-hall": 2,
-        "rime-vault": 3,
-        "signal-rise": 2
-      },
-      "maxFlyHeight": 60
-    },
-    "backstops": {
-      "pieces": 370,
-      "topRange": [
-        2.5,
-        19.5
+    "guardRails": "Rooftop walkway bridge north edge and ends, bridge run east edge, the gap beside the ramp top, the 12 m and 8 m landings and the upper hall balcony edges; rails consistent with the existing ones (1.0 m, posts every <=1.7 m, guard collision); openings kept where routes/stairs continue. check-navmesh gates unguarded drops >=7.5 m from raised decks.",
+    "primaryWalls16x9": {
+      "sun-court": [
+        "18.8x9.3",
+        "16x9"
       ],
-      "walkReachableTops": [
-        638,
-        664
+      "array-hall": [
+        "16x8",
+        "16x9"
       ],
-      "piecesOver15m": {
-        "0.8.1": 71,
-        "0.9.0": 17
+      "rime-vault": [
+        "13.8x6.3",
+        "11.2x6.3"
+      ],
+      "signal-rise": [
+        "18.5x10.4",
+        "18.4x10.35"
+      ],
+      "note": "Primary (mounted-workspace) anchors only; tool mounts, kiosks, lecterns and data screens keep their aspects. Placeholder screens fill each anchor exactly."
+    },
+    "signs": "01 SUN COURT 0.46->0.40 m at z 15.22 (clear of the roof deck overhang at z 15.68); 02 ARRAY HALL and its brackets/rods follow the taller frame; hall exit RIME VAULT sign 0.7 m east, clear of rack drawers; Rime Vault sill icicles stop either side of 03 RIME VAULT.",
+    "blackObjectByGlobe": "Signal mountain shell silhouette: vista terrain had untextured roughness 1, so core specular exponent 0 and pow(0,0)=NaN (black) where N.H<=0 on Intel. Terrain roughness 0.95; check-package rejects untextured roughness 1. Core shader fix reported to the lead.",
+    "armillaryRings": "Globe rings (35 mm) baked black on one side (sub-2-texel lightmap); now unbaked ivory (vista group).",
+    "newValidation": "tools/check-frames-signs.py in lumen-validate: primary anchors 16:9 within 0.5 % with the placeholder filling the anchor (1 cm); every label() sign plaque face plus 0.5 m in front clear of other visible triangles (sign-audit.json from the build). On 0.9.0 geometry it flags 3 walls and the Sun Court, hall exit and Rime Vault signs."
+  },
+  "gates": {
+    "validate": "PASS (geometry, sky, route clearance, frames-signs, derived visibility, schema 0.6, package, placement, walking, navmesh, emissive, decals)",
+    "frameSigns": {
+      "status": "PASS",
+      "frames": [
+        [
+          "sun-court",
+          [
+            16,
+            9
+          ],
+          0.0
+        ],
+        [
+          "array-hall",
+          [
+            16,
+            9
+          ],
+          0.0
+        ],
+        [
+          "rime-vault",
+          [
+            11.2,
+            6.3
+          ],
+          0.0
+        ],
+        [
+          "signal-rise",
+          [
+            18.4,
+            10.35
+          ],
+          0.0
+        ]
+      ],
+      "signs": 9
+    },
+    "releaseVerify": "PASS (verify.mjs, schema 0.7, core world-check)",
+    "perfGate": {
+      "status": "PASS",
+      "log": "GATE A (0.9.0) p50 8.766 p95 10.189 ms; GATE B (0.9.1) p50 9.021 p95 10.386 ms; 2 alternating rounds, 3200 frames each; settled scale 0.5 both",
+      "report": "lumen-reach/reports/any-angle-0.9.1/perf-gate"
+    },
+    "budgets": {
+      "visibleTriangles": 251506,
+      "drawCalls": 99,
+      "gpuMiB": {
+        "total": 142.46,
+        "materialTextures": 39.46,
+        "lightmaps": 87.33,
+        "vertexBuffers": 14,
+        "indexBuffers": 1.66
       },
-      "maxTop": {
-        "0.8.1": 24.1,
-        "0.9.0": 19.5
-      },
-      "meanTop": {
-        "0.8.1": 9.5,
-        "0.9.0": 6.63
+      "packageMiB": 41.44,
+      "delta": {
+        "visibleTriangles": 6176,
+        "drawCalls": 0,
+        "gpuMiB": 0.33,
+        "packageMiB": -0.29
       }
+    },
+    "nestedSweep": {
+      "status": "PASS",
+      "views": 84,
+      "cullingLosses": 0,
+      "flyBounded": true,
+      "manifestSHA256": "0162f1e62cfbab63d2be52a461758b2d55068d02fa4487591ed105700de72ed2"
+    },
+    "routes": {
+      "status": "PASS",
+      "nodes": 64,
+      "directedGraphTraversals": 126,
+      "alternateStairs": 14,
+      "manifestSHA256": "0162f1e62cfbab63d2be52a461758b2d55068d02fa4487591ed105700de72ed2"
+    },
+    "screens": {
+      "status": "PASS",
+      "checks": "15/15",
+      "workspaces": "21-24, real kitty windows; frames fill each 16:9 wall (fit 1.0 x 1.0); 20/20 tool mounts accept placement",
+      "manifestSHA256": "0162f1e62cfbab63d2be52a461758b2d55068d02fa4487591ed105700de72ed2"
     }
   },
-  "verify": {
-    "status": "PASS",
-    "counts": {
-      "nodes": 301,
-      "meshes": 301,
-      "materials": 106,
-      "primitives": 423,
-      "lightmaps": 78,
-      "ktx2Images": 56
-    },
-    "maxCollisionErrorMeters": 0.002031,
-    "packageMiB": {
-      "src": 70.83,
-      "dst": 41.73
-    }
-  },
-  "visibilityVs081": {
-    "views": 72,
-    "batchesTotal": 99,
-    "submittedMean": {
-      "A": 44.18,
-      "B": 40.36
-    },
-    "submittedMedian": {
-      "A": 34.5,
-      "B": 33.5
-    },
-    "regionCulledMean": {
-      "A": 3.36,
-      "B": 12.6
-    },
-    "viewsBFewer": 13,
-    "viewsEqual": 57,
-    "viewsBMore": 2,
-    "identicalCulledVsUnculled": {
-      "A": 71,
-      "B": 72
-    },
-    "identicalAvsB": 24,
-    "maxChangedAB": 6.167302085669432e-06
-  },
-  "perfGate": {
-    "status": "PASS",
-    "baseline": "0.8.1 package, same session",
-    "baselineGpuFrameMs": {
-      "p50": 8.922836499999999,
-      "p95": 10.2635634,
-      "n": 3200
-    },
-    "candidateGpuFrameMs": {
-      "p50": 8.933876999999999,
-      "p95": 10.339915799999996,
-      "n": 3200
-    },
-    "checks": [
-      {
-        "metric": "gpuFrameMs.p50",
-        "candidate": 8.9339,
-        "limit": 9.6367,
-        "pass": true
-      },
-      {
-        "metric": "gpuFrameMs.p95",
-        "candidate": 10.3399,
-        "limit": 11.4952,
-        "pass": true
-      },
-      {
-        "metric": "settledScale.p50",
-        "candidate": 0.5,
-        "limit": 0.45,
-        "pass": true
-      },
-      {
-        "metric": "settledScale.p05",
-        "candidate": 0.5,
-        "limit": 0.42,
-        "pass": true
-      }
-    ],
-    "record": "reports/perf/0.9.0.json"
-  },
-  "budgets": {
-    "visibleTriangles": 245330,
-    "drawCalls": 99,
-    "gpuMiB": {
-      "total": 142.13,
-      "materialTextures": 39.46,
-      "lightmaps": 87.33,
-      "vertexBuffers": 13.7,
-      "indexBuffers": 1.63
-    },
-    "packageMiB": 41.73,
-    "collisionTriangles": 5194
-  },
-  "nested": {
-    "anyAngle": "72 views, 0 culling losses, 6/6 walking probes inside, jump x=25.64, fly bounded at x=26.50 (bound 26 + 0.5 allowance), ceiling y=60.50 (cap 60 + 0.5)",
-    "routes": "64 nodes, 126 directed traversals, 14 alternate stairs: PASS"
-  },
-  "evidence": {
-    "anyAngle": "reports/any-angle-0.9.0/release-session-summary.json",
-    "routes": "reports/any-angle-0.9.0/release-routes-summary.json",
-    "perfGate": "reports/any-angle-0.9.0/perf-gate/perf-gate.json",
-    "derivedVisibility": "reports/any-angle-0.9.0/derived-visibility.json",
-    "visibilityVs081": "reports/any-angle-0.9.0/visibility-vs-0.8.1.json",
-    "baseline081": "artifacts/opt-0.9.0/before/ (SHA-identical to the published 0.8.1 package)"
-  },
-  "gallery": {
-    "perimeter": "screenshots/optimise-2026-10/lumen-0.9.0-perimeter-and-playable.png"
-  }
+  "sheets": [
+    "gallery screenshots/optimise-2026-10/lumen-0.9.1-owner-findings-before-after.jpg",
+    "gallery screenshots/optimise-2026-10/lumen-0.9.1-rails-before-after.jpg"
+  ]
 }
