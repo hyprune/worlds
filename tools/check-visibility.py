@@ -39,13 +39,16 @@ def visible_areas(areas, point):
     return {a['id'] for a in areas if not active or a['id'] in active or active.intersection(a['visibleFrom'])}
 
 
-def audit(package, baseline=None):
+def audit(package, baseline=None, spec_path=None):
     manifest = json.loads((package / 'world.json').read_text())
     scene = json.loads((package / manifest['scene']).read_text())
     owners = validate(manifest, scene)
-    assert annotate(copy.deepcopy(manifest), scene) == manifest, 'not reproducible from authored spec'
     name = manifest['id'].removeprefix('com.hyprune.')
-    spec = json.loads((ROOT / name / 'visibility.json').read_text())
+    # Authored spec by default; a generated spec (tools/derive-visibility.py)
+    # when the build derives regions from geometry (Lumen Reach >= 0.9.0).
+    spec_path = spec_path or ROOT / name / 'visibility.json'
+    assert annotate(copy.deepcopy(manifest), scene, spec_path) == manifest, 'not reproducible from the visibility spec'
+    spec = json.loads(spec_path.read_text())
     reachable = set()
     def visit(i):
         reachable.add(i)
@@ -55,7 +58,9 @@ def audit(package, baseline=None):
     assert not helpers.intersection(owners), 'helper assigned to visual region'
     assert set(owners) <= reachable, 'ownership points outside visual scene'
     shared = [n['name'] for i, n in enumerate(scene['nodes']) if i in reachable and 'mesh' in n and i not in owners]
-    assert sorted(shared) == sorted(spec['unassignedAlwaysVisible']), ('unexpected shared chunk', shared)
+    # A derived spec leaves every unowned chunk visible by construction (True).
+    if spec['unassignedAlwaysVisible'] is not True:
+        assert sorted(shared) == sorted(spec['unassignedAlwaysVisible']), ('unexpected shared chunk', shared)
     draws = {a['id']: 0 for a in manifest['visibility']['areas']}
     for i, owner in owners.items():
         if 'mesh' in scene['nodes'][i]: draws[owner] += len(scene['meshes'][scene['nodes'][i]['mesh']]['primitives'])
@@ -82,8 +87,9 @@ if __name__ == '__main__':
     p.add_argument('package', type=Path)
     p.add_argument('--baseline', type=Path)
     p.add_argument('--output', type=Path)
+    p.add_argument('--spec', type=Path, help='visibility spec the package was annotated from (default: <world>/visibility.json)')
     args = p.parse_args()
-    result = audit(args.package, args.baseline)
+    result = audit(args.package, args.baseline, args.spec)
     text = json.dumps(result, indent=2) + '\n'
     if args.output: args.output.write_text(text)
     else: print(text, end='')

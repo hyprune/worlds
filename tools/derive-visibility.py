@@ -67,10 +67,14 @@ def cells_from(polys):
   for x,z in grid:
    for k in ks:
     if inside(polys[k],x,z):floors.append((floor_at(polys[k],x,z),x,z))
-  if not floors:   # sliver: polygon centroids that fall in this column
-   for k in ks:
-    c=polys[k].mean(0)
-    if math.floor(c[0]/CELL)==i and math.floor(c[2]/CELL)==j:floors.append((float(c[1]),float(c[0]),float(c[2])))
+  # Every polygon also samples its centroid and its corners pulled 0.25 m
+  # inward wherever they fall in this column: a small raised surface (stair
+  # landing, platform) between the 3x3 grid points still gets its level, so
+  # no walkable floor is left outside every region (check-navmesh).
+  for k in ks:
+   c=polys[k].mean(0)
+   for v in [c]+[q+(c-q)*min(1,.25/max(float(np.linalg.norm((c-q)[[0,2]])),1e-6)) for q in polys[k]]:
+    if math.floor(v[0]/CELL)==i and math.floor(v[2]/CELL)==j:floors.append((floor_at(polys[k],float(v[0]),float(v[2])) if inside(polys[k],float(v[0]),float(v[2])) else float(v[1]),float(v[0]),float(v[2])))
   floors.sort()
   levels=[]
   for f in floors:
@@ -148,6 +152,7 @@ def main():
  p.add_argument('package',type=Path);p.add_argument('--output',type=Path,required=True,help='directory for spec, report and request')
  p.add_argument('--local',action='store_true',help='run the kernel locally (small tests only)');p.add_argument('--host',default=os.environ.get('HYPRUNE_BAKE_HOST','10.2.2.2'))
  p.add_argument('--apply',type=Path,help='write a copy of the package with the derived regions here (never edits the input)')
+ p.add_argument('--in-place',action='store_true',help='build step: write the derived regions into the package itself')
  p.add_argument('--targets',type=int,default=2048);p.add_argument('--forward',type=int,default=4096);p.add_argument('--seed',type=int,default=7009)
  a=p.parse_args();a.output.mkdir(parents=True,exist_ok=True);started=time.time()
  s=Scene(a.package);m=s.manifest
@@ -222,6 +227,10 @@ def main():
   'sampledTruthMean':round(float(rows[:,2].mean()),2),'generatedLessThanHand':int((rows[:,0]<rows[:,1]).sum()),'generatedMoreThanHand':int((rows[:,0]>rows[:,1]).sum())},
   'eyesWhereGeneratedHidesASampledVisibleUnit':loss}
  (a.output/'report.json').write_text(json.dumps(report,indent=1)+'\n')
+ if a.in_place:
+  import world_visibility
+  manifest=json.loads((a.package/'world.json').read_text());world_visibility.annotate(manifest,s.doc,a.output/'visibility.generated.json')
+  (a.package/'world.json').write_text(json.dumps(manifest,indent=2)+'\n');report['applied']=str(a.package)
  if a.apply:
   import shutil,world_visibility
   target=a.apply/a.package.name;assert target.resolve()!=a.package.resolve(),'refusing to edit the input package'
