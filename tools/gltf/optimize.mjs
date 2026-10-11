@@ -89,7 +89,9 @@ for(const l of world.lightmaps){
 fs.writeFileSync(path.join(dst,world.scene),JSON.stringify(out));
 const newWorld=structuredClone(world);
 newWorld.lightmaps.forEach(l=>{l.texture=remap[l.texture];});
-newWorld.formatVersion='0.7';
+// At least 0.7 (KTX2/meshopt/quantisation); a newer source format (0.8 objects) stays.
+const atLeast=(v,min)=>{const [a,b]=v.split('.').map(Number),[c,d]=min.split('.').map(Number);return a>c||(a===c&&b>=d)?v:min;};
+newWorld.formatVersion=atLeast(world.formatVersion,'0.7');
 fs.writeFileSync(path.join(dst,'world.json'),JSON.stringify(newWorld,null,2)+'\n');
 
 // Provenance travels with the encoded file.
@@ -99,4 +101,4 @@ if(fs.existsSync(prov)&&encoded.length){
  for(const r of rows){const e=by.get(r.path);if(e)Object.assign(r,{path:e.ktx2,encodedFrom:e.png,encoding:`basisu 2.1.0 UASTC LDR 4x4, Zstandard, full mips, ${e.mode}`});}
  fs.writeFileSync(prov,JSON.stringify(rows,null,2)+'\n');
 }
-process.stdout.write(JSON.stringify({src,dst,formatVersion:'0.7',encodedTextures:encoded.length,lightmapTextures:remap,extensionsRequired:out.extensionsRequired||[]},null,1)+'\n');
+process.stdout.write(JSON.stringify({src,dst,formatVersion:newWorld.formatVersion,encodedTextures:encoded.length,lightmapTextures:remap,extensionsRequired:out.extensionsRequired||[]},null,1)+'\n');

@@ -91,15 +91,15 @@ lumen-nested:
 
 lumen-tour:
 	python3 tools/check-lumen-session.py --record
-# Since 0.8.0 the release package is the world format 0.7 build of the
-# validated source package: KTX2 material textures, meshopt + quantised
+# Since 0.8.0 the release package is the optimised (world format 0.7 assets) build of the
+# validated source package, format 0.8 since 0.10.0 (placed objects): KTX2 material textures, meshopt + quantised
 # geometry, PNG lightmaps, every world.json index verified (verify.mjs).
 LUMEN_RELEASE_PACKAGE := dist-07/com.hyprune.lumen-reach
 OPTIMISE_CORE ?= ../core-optimise
 LUMEN_PERF_BASELINE ?=
 .PHONY: lumen-release-check lumen-perf-gate
 lumen-release-check:
-	node $(SCHEMA_DIR)/bin/validate.mjs world $(LUMEN_RELEASE_PACKAGE)/world.json - 0.7
+	node $(SCHEMA_DIR)/bin/validate.mjs world $(LUMEN_RELEASE_PACKAGE)/world.json - 0.8
 	python3 tools/check-blueprint.py $(LUMEN_RELEASE_PACKAGE) > $(LUMEN_REPORTS)/release-blueprint-check.json
 	$(OPTIMISE_CORE)/build/hyprune-world-check $(LUMEN_RELEASE_PACKAGE) > $(LUMEN_REPORTS)/release-core-world-check.json
 	cp $(LUMEN_RELEASE_PACKAGE).verify.json $(LUMEN_REPORTS)/release-verify.json
