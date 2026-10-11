@@ -1,0 +1,166 @@
+{
+ "worldId": "com.hyprune.machine-yard",
+ "manifests": {
+  "ci-conveyor": "objects/ci-conveyor/object.json",
+  "queue-stack": "objects/queue-stack/object.json",
+  "server-rack": "objects/server-rack/object.json",
+  "deploy-lift": "objects/deploy-lift/object.json",
+  "build-monitor": "objects/build-monitor/object.json",
+  "job-token": "objects/job-token/object.json",
+  "fx-spark": "objects/fx-spark/object.json"
+ },
+ "effectAsset": "fx-spark",
+ "staleMs": 8000,
+ "instances": {
+  "ci-1": {
+   "inputs": {
+    "stage": {
+     "source": "org.hyprune.nested.sheet",
+     "key": "stage.{n}"
+    },
+    "jobPassed": {
+     "source": "org.hyprune.nested.sheet",
+     "key": "passes",
+     "map": {
+      "counter": true
+     }
+    }
+   }
+  },
+  "queue-1": {
+   "inputs": {
+    "depth": {
+     "source": "com.hyprune.sources.queue",
+     "key": "depth"
+    },
+    "level": {
+     "source": "com.hyprune.sources.queue",
+     "key": "level",
+     "map": {
+      "cases": [
+       {
+        "equals": "ok",
+        "to": "ok"
+       },
+       {
+        "equals": "warn",
+        "to": "warn"
+       },
+       {
+        "in": [
+         "fail",
+         "critical"
+        ],
+        "to": "fail"
+       }
+      ],
+      "else": "ok"
+     }
+    }
+   }
+  },
+  "rack-1": {
+   "inputs": {
+    "health": {
+     "source": "com.hyprune.sources.rack",
+     "key": "health.{n}",
+     "map": {
+      "cases": [
+       {
+        "equals": "ok",
+        "to": "ok"
+       },
+       {
+        "equals": "warn",
+        "to": "warn"
+       },
+       {
+        "in": [
+         "fail",
+         "down"
+        ],
+        "to": "fail"
+       }
+      ],
+      "else": "off"
+     }
+    },
+    "load": {
+     "source": "com.hyprune.sources.rack",
+     "key": "load"
+    },
+    "name": {
+     "source": "com.hyprune.sources.rack",
+     "key": "name"
+    }
+   }
+  },
+  "deploy-1": {
+   "inputs": {
+    "status": {
+     "source": "com.hyprune.sources.deploy",
+     "key": "phase",
+     "map": {
+      "cases": [
+       {
+        "equals": "queued",
+        "to": "queued"
+       },
+       {
+        "equals": "building",
+        "to": "building"
+       },
+       {
+        "equals": "rolling",
+        "to": "rolling"
+       },
+       {
+        "equals": "live",
+        "to": "live"
+       },
+       {
+        "equals": "failed",
+        "to": "failed"
+       }
+      ],
+      "else": "idle"
+     }
+    },
+    "progress": {
+     "source": "com.hyprune.sources.deploy",
+     "key": "progress"
+    },
+    "environment": {
+     "source": "com.hyprune.sources.deploy",
+     "key": "environment"
+    },
+    "finished": {
+     "source": "com.hyprune.sources.deploy",
+     "key": "deploys",
+     "map": {
+      "counter": true
+     }
+    }
+   }
+  },
+  "build-1": {
+   "inputs": {
+    "status": {
+     "source": "org.hyprune.nested.sheet",
+     "key": "status"
+    },
+    "progress": {
+     "source": "org.hyprune.nested.sheet",
+     "key": "progress"
+    },
+    "succeeded": {
+     "source": "org.hyprune.nested.sheet",
+     "key": "passes",
+     "map": {
+      "counter": true
+     }
+    }
+   }
+  }
+ }
+}

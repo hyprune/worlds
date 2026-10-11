@@ -1,0 +1,274 @@
+{
+ "warmup": 12,
+ "stills": [
+  {
+   "position": [
+    0.9,
+    1.45,
+    3.3
+   ],
+   "target": [
+    0,
+    1.15,
+    1
+   ],
+   "name": "1-idle-monitor",
+   "publish": {
+    "sourceId": "org.hyprune.nested.sheet",
+    "values": {
+     "status": "idle",
+     "progress": 0,
+     "passes": 100,
+     "stage.1": "idle",
+     "stage.2": "idle",
+     "stage.3": "idle",
+     "stage.4": "idle"
+    }
+   },
+   "settle": 2
+  },
+  {
+   "position": [
+    2.0,
+    1.9,
+    -1.6
+   ],
+   "target": [
+    0,
+    1.2,
+    -6.8
+   ],
+   "name": "1-idle-conveyor",
+   "settle": 1
+  },
+  {
+   "position": [
+    0.9,
+    1.45,
+    3.3
+   ],
+   "target": [
+    0,
+    1.15,
+    1
+   ],
+   "name": "2-running-monitor",
+   "publish": {
+    "sourceId": "org.hyprune.nested.sheet",
+    "values": {
+     "status": "running",
+     "progress": 0.45,
+     "passes": 100,
+     "stage.1": "ok",
+     "stage.2": "running",
+     "stage.3": "idle",
+     "stage.4": "idle"
+    }
+   },
+   "settle": 2
+  },
+  {
+   "position": [
+    2.0,
+    1.9,
+    -1.6
+   ],
+   "target": [
+    0,
+    1.2,
+    -6.8
+   ],
+   "name": "2-running-conveyor",
+   "settle": 1
+  },
+  {
+   "position": [
+    0.9,
+    1.45,
+    3.3
+   ],
+   "target": [
+    0,
+    1.15,
+    1
+   ],
+   "name": "3-ok-monitor",
+   "publish": {
+    "sourceId": "org.hyprune.nested.sheet",
+    "values": {
+     "status": "ok",
+     "progress": 1,
+     "passes": 100,
+     "stage.1": "ok",
+     "stage.2": "ok",
+     "stage.3": "ok",
+     "stage.4": "ok"
+    }
+   },
+   "settle": 2
+  },
+  {
+   "position": [
+    2.0,
+    1.9,
+    -1.6
+   ],
+   "target": [
+    0,
+    1.2,
+    -6.8
+   ],
+   "name": "3-ok-conveyor",
+   "settle": 1
+  },
+  {
+   "position": [
+    0.9,
+    1.45,
+    3.3
+   ],
+   "target": [
+    0,
+    1.15,
+    1
+   ],
+   "name": "4-fail-monitor",
+   "publish": {
+    "sourceId": "org.hyprune.nested.sheet",
+    "values": {
+     "status": "fail",
+     "progress": 0.6,
+     "passes": 100,
+     "stage.1": "ok",
+     "stage.2": "fail",
+     "stage.3": "idle",
+     "stage.4": "idle"
+    }
+   },
+   "settle": 2
+  },
+  {
+   "position": [
+    2.0,
+    1.9,
+    -1.6
+   ],
+   "target": [
+    0,
+    1.2,
+    -6.8
+   ],
+   "name": "4-fail-conveyor",
+   "settle": 1
+  },
+  {
+   "position": [
+    0.9,
+    1.45,
+    3.3
+   ],
+   "target": [
+    0,
+    1.15,
+    1
+   ],
+   "name": "5-burst-monitor",
+   "publish": {
+    "sourceId": "org.hyprune.nested.sheet",
+    "values": {
+     "status": "ok",
+     "progress": 1,
+     "passes": 101,
+     "stage.1": "ok",
+     "stage.2": "ok",
+     "stage.3": "ok",
+     "stage.4": "ok"
+    }
+   },
+   "settle": 0.45
+  },
+  {
+   "position": [
+    2.0,
+    1.9,
+    -1.6
+   ],
+   "target": [
+    0,
+    1.2,
+    -6.8
+   ],
+   "name": "5-burst-conveyor",
+   "publish": {
+    "sourceId": "org.hyprune.nested.sheet",
+    "values": {
+     "status": "ok",
+     "progress": 1,
+     "passes": 102,
+     "stage.1": "ok",
+     "stage.2": "ok",
+     "stage.3": "ok",
+     "stage.4": "ok"
+    }
+   },
+   "settle": 0.45
+  },
+  {
+   "position": [
+    0.9,
+    1.45,
+    3.3
+   ],
+   "target": [
+    0,
+    1.15,
+    1
+   ],
+   "name": "6-stale-monitor",
+   "settle": 9.5
+  },
+  {
+   "position": [
+    2.0,
+    1.9,
+    -1.6
+   ],
+   "target": [
+    0,
+    1.2,
+    -6.8
+   ],
+   "name": "6-stale-conveyor",
+   "settle": 1
+  },
+  {
+   "position": [
+    0.9,
+    1.45,
+    3.3
+   ],
+   "target": [
+    0,
+    1.15,
+    1
+   ],
+   "name": "7-missing-monitor",
+   "remove": "org.hyprune.nested.sheet",
+   "settle": 2
+  },
+  {
+   "position": [
+    2.0,
+    1.9,
+    -1.6
+   ],
+   "target": [
+    0,
+    1.2,
+    -6.8
+   ],
+   "name": "7-missing-conveyor",
+   "settle": 1
+  }
+ ]
+}
