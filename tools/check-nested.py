@@ -50,7 +50,8 @@ def smoke(client,children,ignored):
 def record_walk(client,subscription,pose):
  """Real M1 collision-checked walking; only turns set the camera orientation."""
  import signal
- gallery=Path.home()/'workspace/rick-the-alien/worldshell-gallery/videos';gallery.mkdir(parents=True,exist_ok=True)
+ sys.path.insert(0,str(Path(__file__).resolve().parent));import devenv
+ gallery=devenv.video_dir()  # HYPRUNE_VIDEO_DIR (environment or dev.env); warns if unset
  output=gallery/'world-switchyard-engine.mp4';raw=args.output/'engine-walk-raw.mkv'
  client.call('movement.set',{'modeId':'com.hyprune.walk'})
  client.call('camera.set',pose([0,-10,1.7],[0,20,4.8]));time.sleep(.3)

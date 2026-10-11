@@ -1,6 +1,8 @@
 # SPDX-License-Identifier: MIT
 SCHEMA_DIR ?= ../schema
-GALLERY_DIR ?= ../../rick-the-alien/worldshell-gallery
+# Review videos: HYPRUNE_VIDEO_DIR from the environment or ~/.config/hyprune/dev.env
+# (tools/devenv.py warns and names its fallback when it isn't configured).
+VIDEO_DIR ?= $(shell tools/devenv.py --videos)
 VERSION := $(shell python3 -c "import json; print(json.load(open('switchyard/world.spec.json'))['version'])")
 PACKAGE := dist/com.hyprune.switchyard
 .PHONY: textures preview build stills film validate gallery release nested gltf-check compare engine-film film-start film-status film-fetch
@@ -24,8 +26,7 @@ validate:
 	python3 tools/check-routes.py $(PACKAGE) artifacts/switchyard/spatial-authoring.json
 	python3 tools/check-navmesh.py $(PACKAGE) --allow switchyard/navmesh-allow.json --output switchyard/reports/navmesh-check.json --svg switchyard/reports/navmesh.svg
 gallery:
-	mkdir -p $(GALLERY_DIR)/videos
-	cp artifacts/switchyard/world-switchyard.mp4 artifacts/switchyard/world-switchyard.json $(GALLERY_DIR)/videos/
+	cp artifacts/switchyard/world-switchyard.mp4 artifacts/switchyard/world-switchyard.json $(VIDEO_DIR)/
 release: validate budgets
 	mkdir -p artifacts/releases
 	tar --sort=name --mtime='UTC 2026-10-09' --owner=0 --group=0 --numeric-owner -I zstd -cf artifacts/releases/com.hyprune.switchyard-$(VERSION).tar.zst -C dist com.hyprune.switchyard
@@ -123,7 +124,7 @@ lumen-budgets:
 navmesh-deps:
 	npm ci --prefix tools/navmesh --no-audit --no-fund
 navmesh-test:
-	python3 -m unittest tests/test_navmesh_check.py
+	python3 -m unittest tests/test_navmesh_check.py tests/test_devenv.py
 
 # World format 0.7 optimisation (KHR_texture_basisu KTX2 + EXT_meshopt_compression
 # + KHR_mesh_quantization) on the bake host. Lumen's release build since 0.8.0;

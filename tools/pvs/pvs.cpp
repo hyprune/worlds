@@ -7,7 +7,7 @@
 // eye sample, first hits that unit. Occluders are opaque triangles; single-sided
 // back faces never occlude (the renderer culls them). Textbook median-split BVH and
 // Moller-Trumbore intersection; no third-party code. Batch work: run on the bake
-// host (AGENTS.md rule 3), e.g. `pvs request.bin result.bin $(nproc)`.
+// host (heavy batch work), e.g. `pvs request.bin result.bin $(nproc)`.
 //
 // request.bin (little endian):
 //   "HPVS1\0\0\0", u32 triangles, u32 units, u32 cells, u32 forwardRays

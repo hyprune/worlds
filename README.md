@@ -15,9 +15,27 @@ A package is a data-only directory containing `world.json`, glTF 2.0 geometry an
 
 Schema examples remain synthetic manifest fixtures, not playable packages.
 
+## Developer settings (`dev.env`)
+
+Machine-specific values never go into this repository. The tools read them from
+the environment, or from an optional `~/.config/hyprune/dev.env` (`$XDG_CONFIG_HOME`
+if set): one `KEY=VALUE` per line, `#` comments, `~` expanded. The environment wins.
+
+```sh
+# ~/.config/hyprune/dev.env
+HYPRUNE_BAKE_HOST=bakebox                  # SSH host with Blender; "local" on that host itself
+HYPRUNE_GALLERY_DIR=~/review/gallery       # stills for review (tools/check-lumen-session.py --gallery)
+HYPRUNE_VIDEO_DIR=~/review/gallery/videos  # review videos (make gallery, tools/check-nested.py)
+```
+
+`HYPRUNE_BAKE_HOST` has no default: the bake wrappers refuse to start without it,
+and refuse a host that resolves to the machine they run on (use `local` there).
+An unconfigured gallery or video directory prints one warning naming where the
+output went instead. `tools/devenv.py` prints the effective values.
+
 ## Build and distribution
 
-Run `make build`, `make validate`, and `make film`. Blender runs only on the remote mains-powered bake host through `tools/remote-blender.sh`; configure `HYPRUNE_BAKE_HOST` as needed. Generated worlds live in `dist/`, beauty stills and films in `artifacts/`. Sources, original texture master PNGs, provenance, build recipes and small validation reports belong in git. Generated glTF/BIN/PNG/BLEND/video files are ignored and produced for directory or `make release` tar.zst distribution; no automatic CI bake is configured yet. See [RFC gaps](NOTES-rfc-gaps.md) for the optional Map and route-graph proposals.
+Run `make build`, `make validate`, and `make film`. Blender runs only on the remote mains-powered bake host through `tools/remote-blender.sh`; set `HYPRUNE_BAKE_HOST` (see Developer settings below). Generated worlds live in `dist/`, beauty stills and films in `artifacts/`. Sources, original texture master PNGs, provenance, build recipes and small validation reports belong in git. Generated glTF/BIN/PNG/BLEND/video files are ignored and produced for directory or `make release` tar.zst distribution; no automatic CI bake is configured yet. See [RFC gaps](NOTES-rfc-gaps.md) for the optional Map and route-graph proposals.
 
 Validation also needs Node: run `make navmesh-deps` once (installs the pinned Recast/Detour build, `recast-navigation-js`, into `tools/navmesh/`). `tools/check-navmesh.py` builds a navmesh from each package's exported collision with the Hyprune agent (radius 0.3 m, height 1.8 m, climb 0.35 m, route slope 0.4). It checks that every spawn, route node and edge, stair lane and screen approach is reachable from the default spawn, and gates narrow routes, undeclared jump-up roofs, drop-in pits and walkable floor outside the visibility areas. It writes a JSON report and a top-down `navmesh.svg`. Reviewed exceptions live in each world's `navmesh-allow.json`, pinned by id and area. The check sees collision only: render-only obstructions are `check-route-clearance.py`'s job.
 

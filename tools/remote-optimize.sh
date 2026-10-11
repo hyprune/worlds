@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # SPDX-License-Identifier: MIT
-# World format 0.7 optimisation on the bake host (never locally: basisu and
-# meshopt encoding are heavy batch work, AGENTS.md rule 3).
+# World format 0.7 optimisation on the bake host (never on a laptop: basisu and
+# meshopt encoding are heavy batch work).
 #   tools/remote-optimize.sh <package-dir> <out-dir>
 # Builds basisu v2.1.0 (the commit core vendors as its transcoder) once in
 # ~/opt/hyprune on the host, encodes material textures to UASTC KTX2 with
@@ -10,15 +10,13 @@
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 SRC="$(cd "$1" && pwd)"; OUT="$2"; NAME="$(basename "$SRC")"
-HOST="${HYPRUNE_BAKE_HOST:-10.2.2.2}"
 REMOTE="${HYPRUNE_OPTIMIZE_DIR:-hyprune-bake/optimize}"
 BASISU_COMMIT=45d5f41015eecd9570d5a3f89ab9cc0037a25063
 BASISU_DIR='~/opt/hyprune/basisu-2.1.0'
-[[ "$HOST" != localhost && "$HOST" != 127.* && "$HOST" != ::1 ]] || { echo 'A remote bake host is required' >&2; exit 2; }
-[[ "$(ssh -o BatchMode=yes "$HOST" hostname)" != "$(hostname)" ]] || { echo 'Bake host resolves to this machine; refusing' >&2; exit 2; }
+source "$ROOT/tools/bake-host.sh"
 [[ "$NAME" =~ ^[a-zA-Z0-9_.-]+$ ]] || exit 2
 
-ssh -o BatchMode=yes "$HOST" bash -s <<EOF
+on_host_script <<EOF
 set -euo pipefail
 D=$BASISU_DIR
 if [[ ! -x \$D/src/bin/basisu || "\$(git -C \$D/src rev-parse HEAD)" != $BASISU_COMMIT ]]; then
@@ -28,9 +26,9 @@ if [[ ! -x \$D/src/bin/basisu || "\$(git -C \$D/src rev-parse HEAD)" != $BASISU_
 fi
 mkdir -p '$REMOTE/tools' '$REMOTE/work'
 EOF
-rsync -az --delete --exclude node_modules "$ROOT/tools/gltf/" "$HOST:$REMOTE/tools/gltf/"
-rsync -az --delete "$SRC/" "$HOST:$REMOTE/work/src-$NAME/"
-ssh -o BatchMode=yes "$HOST" bash -s <<EOF
+rsync -az --delete --exclude node_modules "$ROOT/tools/gltf/" "$(host_path "$REMOTE/tools/gltf/")"
+rsync -az --delete "$SRC/" "$(host_path "$REMOTE/work/src-$NAME/")"
+on_host_script <<EOF
 set -euo pipefail
 cd '$REMOTE'
 B=$BASISU_DIR/src/bin/basisu
@@ -48,7 +46,7 @@ node tools/gltf/optimize.mjs \$S \$O --ktx2 \$K
 node tools/gltf/verify.mjs \$S \$O --output \$W/verify-$NAME.json >/dev/null || { cat \$W/verify-$NAME.json; exit 1; }
 EOF
 mkdir -p "$OUT"
-rsync -az --delete "$HOST:$REMOTE/work/out-$NAME/" "$OUT/"
-rsync -az "$HOST:$REMOTE/work/verify-$NAME.json" "$OUT.verify.json"
-rsync -az "$HOST:$REMOTE/work/plan-$NAME.json" "$OUT.plan.json"
+rsync -az --delete "$(host_path "$REMOTE/work/out-$NAME/")" "$OUT/"
+rsync -az "$(host_path "$REMOTE/work/verify-$NAME.json")" "$OUT.verify.json"
+rsync -az "$(host_path "$REMOTE/work/plan-$NAME.json")" "$OUT.plan.json"
 python3 -c "import json,sys;r=json.load(open(sys.argv[1]));print(json.dumps({k:r[k] for k in ['status','formatVersion','extensionsRequired','counts','maxCollisionErrorMeters','packageMiB']},indent=1))" "$OUT.verify.json"

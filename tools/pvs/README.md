@@ -19,7 +19,7 @@
 
 ```
 tools/derive-visibility.py dist/com.hyprune.lumen-reach --output /tmp/pvs \
-  [--apply /tmp/pvs-package]      # kernel runs on $HYPRUNE_BAKE_HOST
+  [--apply /tmp/pvs-package]      # kernel runs on $HYPRUNE_BAKE_HOST (environment or dev.env)
 ```
 
 Outputs: `visibility.generated.json` (authored format), `report.json`

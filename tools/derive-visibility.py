@@ -10,7 +10,7 @@ Precomputed-visibility cells (as engines place them over walkable surfaces):
 - units: the rendered mesh nodes (exclusive glTF subtrees); occluders are opaque
   triangles, single-sided back faces never occlude.
 - from-cell visibility: tools/pvs/pvs.cpp (forward rays + segments to unit surface
-  samples), batch work on the bake host (AGENTS.md rule 3), or --local for tests.
+  samples), batch work on the bake host, or --local for tests.
 - conservative margin: each cell's set is unioned with its 26 neighbours'; units
   whose bounds come within NEAR m of a cell are visible from it.
 - output: camera regions (maximal boxes of cells with identical sets, unioned when
@@ -152,11 +152,16 @@ def merge(cells,vis):
 def main():
  p=argparse.ArgumentParser(description=__doc__,formatter_class=argparse.RawDescriptionHelpFormatter)
  p.add_argument('package',type=Path);p.add_argument('--output',type=Path,required=True,help='directory for spec, report and request')
- p.add_argument('--local',action='store_true',help='run the kernel locally (small tests only)');p.add_argument('--threads',type=int,default=2,help='--local kernel threads; 0 = every core, -O3 -march=native (on the bake host itself)');p.add_argument('--host',default=os.environ.get('HYPRUNE_BAKE_HOST','10.2.2.2'))
+ p.add_argument('--local',action='store_true',help='run the kernel locally (small tests only)');p.add_argument('--threads',type=int,default=2,help='--local kernel threads; 0 = every core, -O3 -march=native (on the bake host itself)');p.add_argument('--host',default=None,help='bake host (default HYPRUNE_BAKE_HOST from the environment or ~/.config/hyprune/dev.env; "local" = this machine is the bake host)')
  p.add_argument('--apply',type=Path,help='write a copy of the package with the derived regions here (never edits the input)')
  p.add_argument('--in-place',action='store_true',help='build step: write the derived regions into the package itself')
  p.add_argument('--targets',type=int,default=2048);p.add_argument('--forward',type=int,default=4096);p.add_argument('--seed',type=int,default=7009)
  a=p.parse_args();a.output.mkdir(parents=True,exist_ok=True);started=time.time()
+ if not a.local:
+  sys.path.insert(0,str(Path(__file__).resolve().parent));import devenv
+  a.host=a.host or devenv.get('HYPRUNE_BAKE_HOST')
+  if not a.host:sys.exit('derive-visibility: set HYPRUNE_BAKE_HOST (environment or ~/.config/hyprune/dev.env), or pass --host or --local')
+  a.local=a.host=='local'  # on the bake host itself: run the kernel here (--threads 0 = every core)
  s=Scene(a.package);m=s.manifest
  collision={c['node'] for c in m.get('collision',[])}|({m['navigation']['node']} if m.get('navigation') else set())
  coll=np.concatenate([pos[idx] for i,_,_,pos,idx in s.primitives(visible=False) if i in collision]).astype(float)

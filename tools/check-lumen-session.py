@@ -79,7 +79,8 @@ def capture(client,children,args,shell_token,socketpath):
    report.setdefault('performanceViews',[]).append({'id':v['id'],'samples':samples})
   path=a.output/('engine-'+v['id']+'.png');subprocess.run([str(session.HERE/'ctl.py'),'shot',str(path)],check=True);report['views'].append({'renderer':session.camera().get('timings',{}),'id':v['id'],'pose':actual,'verticalFovDegrees':60,'path':str(path)})
  if a.gallery:
-  gallery=Path.home()/'workspace/rick-the-alien/worldshell-gallery/screenshots/release-world-v2';gallery.mkdir(parents=True,exist_ok=True)
+  sys.path.insert(0,str(Path(__file__).resolve().parent));import devenv
+  gallery=devenv.gallery_dir('screenshots/release-world-v2')  # HYPRUNE_GALLERY_DIR; warns if unset
   for v in report['views']:shutil.copy2(v['path'],gallery/Path(v['path']).name)
  integration.keys('-k','v');time.sleep(.2);assert not session.camera()['noclip']
  if a.vault_clip:vault_clip(client,manifest)
