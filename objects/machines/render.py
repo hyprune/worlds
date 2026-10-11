@@ -406,8 +406,10 @@ def slot_points(m):
         objs = [o for o in m.nodes.values() if o.type == 'MESH' and any(BASE.sub('', ms.name) in s.get('materials', []) for ms in o.data.materials if ms)]
         for o in objs:
             out.append({'kind': 'states', 'id': s['id'], 'target': f"state:{s['id']}", 'p': centre(o)})
+    positions = {p['node'] for p in m.manifest.get('traits', {}).get('machine', {}).get('positions', [])}
     for node in m.anims:
-        out.append({'kind': 'animation', 'id': node, 'target': f'animation:{node}', 'p': centre(m.nodes[node])})
+        kind = 'position' if node in positions else 'animation'
+        out.append({'kind': 'animation', 'id': node, 'target': f'{kind}:{node}', 'p': centre(m.nodes[node])})
     for kind, prefix in (('labels', 'label'), ('spawns', 'spawn'), ('effects', 'effect')):
         for s in m.slots.get(kind, []):
             out.append({'kind': kind, 'id': s['id'], 'target': f"{prefix}:{s['id']}", 'p': m.world(g2b(s['pose']['position']))})
@@ -537,7 +539,7 @@ def mode_turntable(out, fps=30, seconds=10.0):
             t = f / fps
             sc = tt[min(int(t / (seconds / len(tt))), len(tt) - 1)]
             sc = scenarios.at_time(sc, t - int(t / (seconds / len(tt))) * (seconds / len(tt)))
-            if only and mid != only:
+            if (only and mid not in only.split(',')) or (out / f'{frame_no:05d}.png').exists():
                 frame_no += 1; continue
             m.apply(sc, token, t=t)
             frame(cam, corners, -40 + 360 * f / n, el, dist=dist)
