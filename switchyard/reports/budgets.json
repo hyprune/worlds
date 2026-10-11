@@ -20,7 +20,7 @@
   "vertexBuffers": 17.77,
   "indexBuffers": 1.15
  },
- "packageMiB": 72,
+ "packageMiB": 72.08,
  "extensionsUsed": [
   "KHR_texture_transform",
   "KHR_materials_unlit"

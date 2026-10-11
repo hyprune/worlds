@@ -3,7 +3,7 @@
  "package": "dist/com.hyprune.switchyard",
  "world": "com.hyprune.switchyard",
  "version": "0.1.2",
- "method": "Recast/Detour navmesh audit of a world package's exported collision.\n\nBuilds two navmeshes from the collision triangles (recast-navigation-js,\ntools/navmesh/): a *design* mesh with the RFC-0004 route slope (0.4) that the\ngates use, and a *physical* mesh with core's walker support limit\n(normal.y > 0.65) that only reveals steep ground the walker can still climb.\nAgent: radius 0.3, height 1.8, eye 1.7, climb 0.35 (core player.step_height).\n\nGates (all against the default spawn's navmesh island):\n- every spawn and route node stands on the navmesh;\n- every route edge and every stair lane is a straight, unobstructed walk on\n  the navmesh surface (Detour raycast), endpoint to endpoint;\n- every screen anchor has a reachable approach floor in front of it within\n  its declared clearance, from which the eye sees it at <= 60 deg elevation;\n- clear width along routes >= DOOR (1.2 m) at every sample;\n- islands a player can enter on foot must be declared: roofs/ledges of\n  PROP_AREA or more reachable by a jump, and any pit a walker can drop into\n  but not jump out of (a trap). Smaller jump-up tops (desks, benches) and\n  islands reachable only by flying are reported, not gated;\n- reachable floor whose eye point lies outside every visibility area (core\n  then draws everything) must be declared.\nSteep ground the walker still climbs (0.4 < slope, normal.y > 0.65) is\nreported. Stair lanes sit 2 cells inside the flight's capsule limit so voxel\nrounding of the side walls does not read as a block.\n\nCollision only: render-only geometry (the 0.7.0 capped stair) is invisible\nhere by construction; tools/check-route-clearance.py covers that.",
+ "method": "Recast/Detour navmesh audit of a world package's exported collision.\n\nBuilds two navmeshes from the collision triangles (recast-navigation-js,\ntools/navmesh/): a *design* mesh with the RFC-0004 route slope (0.4) that the\ngates use, and a *physical* mesh with core's walker support limit\n(normal.y > 0.65) that only reveals steep ground the walker can still climb.\nAgent: radius 0.3, height 1.8, eye 1.7, climb 0.35 (core player.step_height).\n\nGates (all against the default spawn's navmesh island):\n- every spawn and route node stands on the navmesh;\n- every route edge and every stair lane is a straight, unobstructed walk on\n  the navmesh surface (Detour raycast), endpoint to endpoint;\n- every screen anchor has a reachable approach floor in front of it within\n  its declared clearance, from which the eye sees it at <= 60 deg elevation;\n- clear width along routes >= DOOR (1.2 m) at every sample;\n- islands a player can enter on foot must be declared: roofs/ledges of\n  PROP_AREA or more reachable by a jump, and any pit a walker can drop into\n  but not jump out of (a trap). Smaller jump-up tops (desks, benches) and\n  islands reachable only by flying are reported, not gated;\n- reachable floor whose eye point lies outside every visibility area (core\n  then draws everything) must be declared;\n- unguarded drops: along every boundary edge of the reachable navmesh on a\n  deck at least DECK_GATE high, a drop of DROP_GATE or more just beyond the\n  edge needs a guard: collision at 0.5 or 0.9 m that is not an invisible\n  playable backstop (rails carry Guard collision; walls are visible).\n  'backstop-only' (a fall stopped by an invisible wall) fails like\n  'unguarded'. Lower decks and drops of DROP_REPORT..DROP_GATE are reported.\nSteep ground the walker still climbs (0.4 < slope, normal.y > 0.65) is\nreported. Stair lanes sit 2 cells inside the flight's capsule limit so voxel\nrounding of the side walls does not read as a block.\n\nCollision only: render-only geometry (the 0.7.0 capped stair) is invisible\nhere by construction; tools/check-route-clearance.py covers that.",
  "library": "recast-navigation-js 0.43.1 (Recast/Detour, zlib; wrapper MIT)",
  "agent": {
   "radius": 0.3,
@@ -18,7 +18,7 @@
   "cell": 0.1,
   "step": 0.05
  },
- "seconds": 0.8,
+ "seconds": 0.7,
  "navmesh": {
   "polys": 335,
   "islands": 6,
@@ -447,6 +447,53 @@
    "path": 14.0
   }
  ],
+ "unguardedDrops": [
+  {
+   "kind": "unguarded",
+   "deck": 0.05,
+   "drop": [
+    60.0,
+    60.0
+   ],
+   "min": [
+    -19.7,
+    0.0,
+    10.8
+   ],
+   "max": [
+    -19.7,
+    0.0,
+    11.3
+   ],
+   "samples": 2,
+   "zone": "concourse"
+  },
+  {
+   "kind": "unguarded",
+   "deck": 0.05,
+   "drop": [
+    60.0,
+    60.0
+   ],
+   "min": [
+    19.6,
+    0.0,
+    10.7
+   ],
+   "max": [
+    19.6,
+    0.0,
+    11.3
+   ],
+   "samples": 2,
+   "zone": "concourse"
+  }
+ ],
+ "dropSamples": {
+  "guarded": 247,
+  "backstop-only": 0,
+  "unguarded": 4
+ },
  "steepReachable": {
   "polys": 0,
   "area": 0,
