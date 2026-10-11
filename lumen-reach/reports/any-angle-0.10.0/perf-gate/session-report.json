@@ -7,13 +7,13 @@
  "coreCommit": "d66bb3f299cfc67d11db83275caf881754fa7872",
  "packages": {
   "A": {
-   "path": "/home/rick/hyprune-baselines/lumen-0.9.2/com.hyprune.lumen-reach",
+   "path": "baseline/lumen-0.9.2/com.hyprune.lumen-reach",
    "version": "0.9.2",
    "formatVersion": "0.7",
    "manifestSHA256": "c0b1880a997c09c92725036d31d2316e193d20b9c8ce1e559dab63cebf4b9a23"
   },
   "B": {
-   "path": "/home/rick/workspace/hyprune/worlds/dist-07/com.hyprune.lumen-reach",
+   "path": "dist-07/com.hyprune.lumen-reach",
    "version": "0.10.0",
    "formatVersion": "0.8",
    "manifestSHA256": "321d0efc60db0ae481e82bc2cb3810014128fef93905381fee4646c29f24e5c2"
