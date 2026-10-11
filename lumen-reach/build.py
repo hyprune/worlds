@@ -181,6 +181,13 @@ def rail(a,b,height=1.0):
   p=a+(b-a)*(i/n);rod('Guardrail post',p,p+Vector((0,0,height)),.045)
  for z in [height*.5,height]:rod('Guardrail run',a+Vector((0,0,z)),b+Vector((0,0,z)),.04)
 
+def void_guard(a,b,height=2.5):
+ # Collision-only, like rail()'s guard: walking and jumping (5 m/s reaches
+ # 1.27 m) stop at an edge over the void, ordinary fly passes over.
+ a,b=Vector(a),Vector(b);d=b-a;side=Vector((-d.y,d.x,0));side.normalize();side*=.065;upv=Vector((0,0,height))
+ verts=[a-side,a+side,b+side,b-side,a-side+upv,a+side+upv,b+side+upv,b-side+upv]
+ me=bpy.data.meshes.new('Void guard collision');me.from_pydata(verts,[],[(0,3,2,1),(0,1,5,4),(1,2,6,5),(2,3,7,6),(3,0,4,7),(4,5,6,7)]);o=bpy.data.objects.new('Void guard collision',me);bpy.context.collection.objects.link(o);o.hide_render=True;WALK.append(o)
+
 def slab(name,x0,x1,y0,y1,z,mat='stone'):
  o=box(name,((x0+x1)/2,(y0+y1)/2,z-.16),(x1-x0,y1-y0,.32),mat,.015);WALK.append(o)
  return o
@@ -375,6 +382,7 @@ def court():
  # 0.10.1: the 4 m upper landing's north edge either side of the lower roof
  # ramp and its stair bed (x -23..-18.3) dropped into the void.
  rails((-24,24),(-23,24),z=4);rails((-18.3,24),(-16,24),z=4)
+ void_guard((-24,24.1,4),(-23,24.1,4));void_guard((-18.3,24.1,4),(-16,24.1,4))
  rails((-8.5,35.5),(-8.5,36),(-7,36),(-7,35.5),z=16)
  rails((-3,27),(25,27),(25,22),z=16)
  # 12 m roof upper landing: west and east edges, open north edge ends.
@@ -474,12 +482,14 @@ def hall():
  # 0.10.1 walk-off fixes (nested capsule probes fell out of the world here):
  # the annex's south edge, the unfloored nook beside the service threshold
  # and the threshold's south edge, and the 4 m balconies' north edge.
- # Parapets over a void stand 1.4 m: above a 5 m/s jump (1.27 m).
+ # Parapets over a void stand 1.4 m; a 2.5 m guard collision behind each
+ # void edge also stops a running jump (nested probes cleared 1-1.4 m).
  box('Annex south parapet',(-9.75,31.7,.55),(6.5,.4,1.7),'concrete',solid=True)
  slab('Service passage floor',24,26.3,52,56,0,'metal')
  wall('Service passage end wall',24.25,26.3,55.75,56.15,-.3,5)
  box('Service threshold parapet',(28.625,47.8,.55),(8.75,.4,1.7),'concrete',solid=True)
  rail((-13,60,4),(-2,60,4))
+ void_guard((-13,31.7,0),(-6.5,31.7,0));void_guard((24.25,47.8,0),(33,47.8,0));void_guard((-13,60.1,4),(-2,60.1,4))
  # Balcony portal remains open at both ground and first floor.
  box('West portal sill',(-6,58,1.3),(.4,4,2.6),'concrete',solid=True)
  box('West portal crown',(-6,58,(7+top)/2),(.4,4,top-7),'concrete',solid=True)
@@ -494,9 +504,10 @@ def hall():
   cyl('Lectern base',(x,40,.14),.55,.28,'metal')
   box('Lectern stem',(x,40,.62),(.32,.36,1.2),'metal',solid=True)
   screen('lectern',(x,39.85,1.95),(1.8,1.1),tilt=.38)
- screen('banner',(-8,38,6.6),(1.55,4.2),style='banner')
+ # 0.10.1: 0.3 m west so its window volumes clear the annex bay wall.
+ screen('banner',(-8.3,38,6.6),(1.55,4.2),style='banner')
  screen('banner',(21,44,6.6),(1.55,4.2),style='banner')
- for x,y in [(-8,38),(21,44)]:rod('Banner mast',(x,y+.2,0),(x,y+.2,9.4),.055)
+ for x,y in [(-8.3,38),(21,44)]:rod('Banner mast',(x,y+.2,0),(x,y+.2,9.4),.055)
  for x in [-2,8,18]:
   box('Rear operator bench',(x,52.8,1),(3.8,1.1,.18),'wood',solid=True)
   for dx in [-1.5,1.5]:box('Rear bench leg',(x+dx,52.8,.5),(.12,.8,1),'metal',solid=True)
