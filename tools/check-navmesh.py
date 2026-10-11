@@ -34,12 +34,13 @@ rounding of the side walls does not read as a block.
 Collision only: render-only geometry (the 0.7.0 capped stair) is invisible
 here by construction; tools/check-route-clearance.py covers that.
 """
-import argparse,json,math,subprocess,sys,tempfile,time
+import argparse,json,math,sys,time
 from pathlib import Path
 import numpy as np
 sys.path.insert(0,str(Path(__file__).parent))
 from gltf_io import Scene
 from raycast import Triangles
+import navmesh_io
 
 RADIUS,HEIGHT,EYE,CLIMB=.3,1.8,1.7,.35   # RFC-0004 capsule; core Camera.hpp, Config.cpp step_height
 DESIGN_SLOPE=math.degrees(math.atan(.4))  # RFC-0004 / check-walking route slope
@@ -52,7 +53,6 @@ DROP_GATE=7.5;DECK_GATE=6.0;DROP_REPORT=2.0  # m: gated drops from raised decks 
 MAX_ELEVATION=60                          # deg from eye to screen centre
 CELL=.1;STEP=.05;SAMPLE=.5
 TOL=(.15,.5,.15)                          # point-on-mesh search half extents
-HELPER=Path(__file__).parent/'navmesh'/'navmesh.mjs'
 
 p=argparse.ArgumentParser(description=__doc__,formatter_class=argparse.RawDescriptionHelpFormatter)
 p.add_argument('package',type=Path);p.add_argument('--allow',type=Path,help='reviewed allow-list JSON')
@@ -60,10 +60,9 @@ p.add_argument('--output',type=Path);p.add_argument('--svg',type=Path);a=p.parse
 s=Scene(a.package);m=s.manifest;ext=m.get('extensions',{})
 def namespace(suffix):return next((v for k,v in ext.items() if k.endswith(suffix)),{})
 allow=json.loads(a.allow.read_text()) if a.allow else {}
-if not (HELPER.parent/'node_modules'/'recast-navigation').exists():sys.exit('recast-navigation missing: run `make navmesh-deps` (npm ci in tools/navmesh)')
+navmesh_io.require_helper()
 
-collision={c['node'] for c in m['collision']}
-tri=np.concatenate([pos[idx] for i,_,_,pos,idx in s.primitives(visible=False) if i in collision]).astype(float)
+tri=navmesh_io.collision_triangles(s)
 C=object.__new__(Triangles);C._set(tri,np.array(['collision']*len(tri)),np.ones(len(tri),bool))
 # Guards: collision other than the invisible playable backstops (vertical
 # pieces down to playable-volumes.json's backstopBottom, -20 m). Every rail
@@ -71,25 +70,7 @@ C=object.__new__(Triangles);C._set(tri,np.array(['collision']*len(tri)),np.ones(
 backstop=(tri[:,:,1].min(axis=1)<=-19.99)&(np.abs(np.cross(tri[:,1]-tri[:,0],tri[:,2]-tri[:,0])[:,1])<1e-6)
 G=object.__new__(Triangles);G._set(tri[~backstop],np.array(['guard']*int((~backstop).sum())),np.ones(int((~backstop).sum()),bool))
 
-def build(slope,points=(),rays=(),widths=()):
- cfg=dict(cs=CELL,ch=STEP,tileSize=128,walkableSlopeAngle=slope,walkableHeight=math.ceil(HEIGHT/STEP-1e-6),
-  walkableClimb=math.floor(CLIMB/STEP+1e-6),walkableRadius=math.ceil(RADIUS/CELL-1e-6),maxEdgeLen=int(12/CELL),
-  # Region sizes are side lengths in cells (the generator squares them):
-  # islands under 0.5 x 0.5 m are dropped.
-  maxSimplificationError=1.3,minRegionArea=round(.5/CELL),mergeRegionArea=round(2/CELL),maxVertsPerPoly=6,
-  detailSampleDist=1.0,detailSampleMaxError=STEP,
-  # Recast clips spans at the heightfield top: a walkable top exactly at the
-  # mesh's max height vanishes, so pad the bounds by the agent height.
-  bounds=[(tri.min(axis=(0,1))-1).tolist(),(tri.max(axis=(0,1))+[1,HEIGHT+1,1]).tolist()])
- with tempfile.NamedTemporaryFile('w',suffix='.json') as f:
-  json.dump({'positions':tri.reshape(-1).round(5).tolist(),'indices':list(range(len(tri)*3)),'config':cfg,
-   'points':list(points),'rays':list(rays),'widths':list(widths)},f);f.flush()
-  out=subprocess.run(['node',str(HELPER),f.name],capture_output=True,text=True)
- if out.returncode:sys.exit('navmesh helper failed: '+out.stderr[-2000:])
- r=json.loads(out.stdout);r['config']=cfg
- for q in r['polys']:
-  v=np.array(q['verts']);q['area']=.5*abs(np.dot(v[:,0],np.roll(v[:,2],1))-np.dot(v[:,2],np.roll(v[:,0],1)));q['v']=v
- return r
+def build(slope,points=(),rays=(),widths=()):return navmesh_io.build(tri,slope,points,rays,widths)
 
 def rnd(v,n=2):return [round(float(x),n) for x in v]
 def yaw_normal(q):
