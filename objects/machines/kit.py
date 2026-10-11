@@ -413,7 +413,7 @@ def states_slot(slot_id, materials=None):
 
 def base_manifest(id_, name, description, tags, version='0.1.0'):
     return {
-        'formatVersion': '0.11', 'id': id_, 'version': version, 'name': name, 'description': description,
+        'formatVersion': '0.10', 'id': id_, 'version': version, 'name': name, 'description': description,
         'category': 'machines', 'tags': tags, 'scene': 'object.gltf', 'license': 'CC-BY-4.0',
         'attribution': [{'path': '.', 'author': 'Hyprune contributors', 'license': 'CC-BY-4.0',
                          'source': 'https://github.com/hyprune/worlds'},
