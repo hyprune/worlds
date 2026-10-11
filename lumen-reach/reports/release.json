@@ -1,106 +1,111 @@
 {
+ "status": "PASS",
+ "worldId": "com.hyprune.lumen-reach",
+ "version": "0.10.2",
+ "formatVersion": "0.8",
+ "sourceFormatVersion": "0.8",
+ "sourceCommit": "aaca4ba",
+ "sourceNote": "lumen-build (objects, bake, derived visibility, blueprint) on the bake host; release package = tools/remote-optimize.sh output.",
+ "sceneSHA256": "e35b6a61adb43cc9131a04328a1c8bb4757fc7265996a8738f3588cab1922ed2",
+ "manifestSHA256": "d46bc6f1e8b59c243c2acb29e8580708d4f98c4ca28abfe1d8e1c3dc65ed11d9",
+ "archive": {
   "status": "PASS",
-  "worldId": "com.hyprune.lumen-reach",
+  "path": "artifacts/releases/com.hyprune.lumen-reach-0.10.2.tar.zst",
+  "sha256": "b538dab06b8768b2b944a920a4f2a9205758ad4d4eaf72ccc7d8b2b4edee77a6",
+  "bytes": 39503047,
+  "identicalExtractedFiles": "83/83",
+  "extractedChecks": [
+   "schema 0.8 VALID (lumen-release-check)",
+   "core hyprune-world-check exit 0, no warnings (7f3c2e8)",
+   "blueprint check PASS",
+   "no build-machine paths in any PNG metadata"
+  ],
+  "reproducible": "second archive build byte-identical",
+  "url": "https://github.com/hyprune/worlds/releases/download/lumen-reach-v0.10.2/com.hyprune.lumen-reach-0.10.2.tar.zst"
+ },
+ "published": true,
+ "coreCommit": "7f3c2e8c0f259cab9ebae6f1d26a2e1047576fbb",
+ "baseline": {
   "version": "0.10.1",
-  "formatVersion": "0.8",
-  "sourceFormatVersion": "0.8",
-  "sourceCommit": "45aa4d4",
-  "sourceNote": "lumen-build (objects, bake, derived visibility, blueprint) on the bake host; release package = tools/remote-optimize.sh output.",
-  "sceneSHA256": "44846daec5f30ba9eb32602910936fd4d7d689b22be6bc669bd1c31cf11e9a2d",
-  "manifestSHA256": "4cee8a6000b6d2cb6716fc27d5d772bf22c9a71545f16b936c50a87dd5c442d9",
-  "archive": {
-    "status": "PASS",
-    "path": "artifacts/releases/com.hyprune.lumen-reach-0.10.1.tar.zst",
-    "sha256": "c6dbf79a3647097644aed06b719d526ae404f9966132022de314ef8ae0aef78c",
-    "bytes": 39507969,
-    "identicalExtractedFiles": "83/83",
-    "extractedChecks": [
-      "schema 0.8 VALID (lumen-release-check)",
-      "core hyprune-world-check exit 0, no warnings (31708f8)",
-      "blueprint check PASS",
-      "no build-machine paths in any PNG metadata"
-    ],
-    "url": "https://github.com/hyprune/worlds/releases/download/lumen-reach-v0.10.1/com.hyprune.lumen-reach-0.10.1.tar.zst"
+  "releasePackage": "published lumen-reach-v0.10.1 archive (extracted)"
+ },
+ "changes": {
+  "arrayHall": "Enclosure walls detailed in the hall's own vocabulary: high clerestory glazing on the south and east walls (glass panes with collision, metal mullions every 2 m, head and sill rails, amber sill light) between a solid lower wall and a header; south wall secondary ribs with pier inset collars and service lintels; the 16 m approach faces a recessed screen bay; the outer seam at 16.5 m is gone. check-sky enclosure array-hall: 0 sky leaks (94 eyes, 7802 rays)."
+ },
+ "gates": {
+  "validate": "PASS (lumen-validate: geometry/any-angle, sky incl. enclosures, route clearance, frames-signs, derived visibility, schema 0.8, package, placement, walking, navmesh, emissive, decals, blueprint)",
+  "releaseVerify": "PASS (verify.mjs, schema 0.8, blueprint, core world-check 7f3c2e8)",
+  "derivedVisibility": {
+   "regions": 168,
+   "eyesWhereGeneratedHidesASampledVisibleUnit": 0,
+   "submittedPrimitivesMean": 71.87,
+   "all": 98
   },
-  "published": true,
-  "coreCommit": "31708f8be9efbc97fc6c9a7dd1670a6904f1cf27",
-  "baseline": {
-    "version": "0.10.0",
-    "releasePackage": "published lumen-reach-v0.10.0 archive (extracted)"
+  "budgets": {
+   "visibleTriangles": 246554,
+   "drawCalls": 98,
+   "collisionTriangles": 6014,
+   "gpuMiB": 142.07,
+   "packageMiB": 41.79,
+   "delta": {
+    "visibleTriangles": 972,
+    "drawCalls": 0,
+    "gpuMiB": 0.05,
+    "packageMiB": 0.02
+   }
   },
-  "changes": {
-    "arrayHall": "Enclosed on east, south and west with walls into the roof beams; doors at the vestibule, annex, 4 m balcony portal, 5 m service passage and the 16 m walkway; north panorama stays open. Roof margin slabs and 7.9 m skylight panes close the roof sky strips and slits. check-sky enclosure: 878 sky leaks in 0.9.2, 0 now.",
-    "walkOff": "Edges where nested walk probes left the world in 0.10.0 are guarded: hall SW corner (south wall), annex south edge, service nook and threshold, 4 m balcony north edge, Sun Court 4 m landing north edge, Signal Rise ascent shell slot. Void guards are collision-only and rise 2.5 m above the parapet or rail top.",
-    "floating": "Light-ring hangers removed; rib over the roof bridge seated; ribs over new openings start at the opening head; archive rack internals on the racks; Sun Court facade drains seated. Offline floating audit, non-foliage pieces: 97 (0.9.2) -> 33.",
-    "tools": "check-sky enclosure rooms accept door openings; enclosures.json declares array-hall."
+  "skyEnclosure": {
+   "room": "array-hall",
+   "eyes": 94,
+   "rays": 7802,
+   "skyLeaks": 0
   },
-  "gates": {
-    "validate": "PASS (lumen-validate: geometry/any-angle, sky incl. enclosures, route clearance, frames-signs, derived visibility, schema 0.8, package, placement, walking, navmesh, emissive, decals, blueprint)",
-    "releaseVerify": "PASS (verify.mjs, schema 0.8, blueprint, core world-check 31708f8)",
-    "derivedVisibility": {
-      "regions": 169,
-      "eyesWhereGeneratedHidesASampledVisibleUnit": 0,
-      "submittedPrimitivesMean": 72.04,
-      "all": 98
+  "placementAndWalking": "PASS (check-placement: 16x9 window sweeps 0.1-16 m clear of the new ribs and lintels; walking-check PASS)",
+  "nestedRenders": "nested --playable: 15 scenes PASS; 8 Array Hall poses at 4K High, 0.10.1 vs 0.10.2 before/after",
+  "perfGate": {
+   "status": "PASS",
+   "report": "lumen-reach/reports/any-angle-0.10.2/perf-gate",
+   "limits": {
+    "p50": 0.08,
+    "p95": 0.12,
+    "scaleDrop": 0.05,
+    "scaleDropP05": 0.08
+   },
+   "baseline": {
+    "gpuFrameMs": {
+     "p50": 3.724288,
+     "p95": 6.514892799999999,
+     "n": 3200
     },
-    "budgets": {
-      "visibleTriangles": 245582,
-      "drawCalls": 98,
-      "collisionTriangles": 5906,
-      "gpuMiB": 142.02,
-      "packageMiB": 41.77,
-      "delta": {
-        "visibleTriangles": 1164,
-        "drawCalls": 0,
-        "gpuMiB": 0.06,
-        "packageMiB": 0.36
-      }
+    "settledScale": {
+     "p50": 0.5,
+     "p05": 0.5,
+     "n": 252
     },
-    "walkProbes": {
-      "status": "PASS",
-      "probes": 71,
-      "leftWorld": 3,
-      "note": "71 nested capsule probes (63 open-edge walks, the start of a recorded fall, 7 walk-and-jump at the new guards): 0.10.0 leaves the world in 28, 0.10.1 in 3; the 3 are setup artefacts present in 0.10.0 too (start not on the floor, or the facade top outside the 16 m rail, not reachable by walking)."
+    "rounds": 2,
+    "version": "0.10.1",
+    "source": "same session"
+   },
+   "candidate": {
+    "version": "0.10.2",
+    "coreCommit": "7f3c2e8c0f259cab9ebae6f1d26a2e1047576fbb",
+    "pluginSHA256": "3eb5af83c2f9155bf9ae8350e09bd799e89ea132a793f265568dcab1e336dfb1",
+    "scale": 0.5,
+    "quality": "medium",
+    "routePoses": 400,
+    "manifestSHA256": "d46bc6f1e8b59c243c2acb29e8580708d4f98c4ca28abfe1d8e1c3dc65ed11d9",
+    "gpuFrameMs": {
+     "p50": 3.534848,
+     "p95": 5.767014399999989,
+     "n": 3200
     },
-    "nestedRenders": "21 poses at 4K High with culling on/off: culling hides no world geometry; the Sun Court armillary (placed object) is culled from the annex and the hall west view in both 0.10.0 and 0.10.1 on core main (object visibility, core side)",
-    "perfGate": {
-      "status": "PASS",
-      "report": "lumen-reach/reports/any-angle-0.10.1/perf-gate",
-      "baseline": {
-        "gpuFrameMs": {
-          "p50": 3.6904959999999996,
-          "p95": 6.605875200000001,
-          "n": 3200
-        },
-        "settledScale": {
-          "p50": 0.5,
-          "p05": 0.5,
-          "n": 252
-        },
-        "rounds": 2,
-        "version": "0.10.0",
-        "source": "same session"
-      },
-      "candidate": {
-        "version": "0.10.1",
-        "coreCommit": "31708f8be9efbc97fc6c9a7dd1670a6904f1cf27",
-        "pluginSHA256": "7f1d7887bcefc50eee21c91cf4faaad93b59891780a851ebbf3de760f6ae980b",
-        "scale": 0.5,
-        "quality": "medium",
-        "routePoses": 400,
-        "manifestSHA256": "4cee8a6000b6d2cb6716fc27d5d772bf22c9a71545f16b936c50a87dd5c442d9",
-        "gpuFrameMs": {
-          "p50": 3.7150719999999997,
-          "p95": 6.551705599999999,
-          "n": 3200
-        },
-        "settledScale": {
-          "p50": 0.5,
-          "p05": 0.5,
-          "n": 252
-        },
-        "rounds": 2
-      }
-    }
+    "settledScale": {
+     "p50": 0.5,
+     "p05": 0.5,
+     "n": 252
+    },
+    "rounds": 2
+   }
   }
+ }
 }
