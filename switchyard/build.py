@@ -361,6 +361,8 @@ def compositor():
 
 def stills():
  s=bpy.context.scene;s.render.engine='CYCLES';s.cycles.samples=32;compositor()
+ # No build-machine paths or hostnames in the shipped PNG metadata.
+ s.render.use_stamp_filename=False;s.render.use_stamp_hostname=False
  views=json.loads((Path(__file__).parent/'views.json').read_text())
  lens=36/(2*math.tan(math.radians(views['verticalFovDegrees'])/2)*(1920/1080))
  for v in views['views']:

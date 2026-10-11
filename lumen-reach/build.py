@@ -808,6 +808,8 @@ def manifest(g,lm,nodes,cols,count):
 
 def stills():
  s=bpy.context.scene;s.cycles.samples=32
+ # No build-machine paths or hostnames in the shipped PNG metadata.
+ s.render.use_stamp_filename=False;s.render.use_stamp_hostname=False
  for v in VIEWS:
   c=s.camera;c.location=v['position'];c.rotation_euler=(Vector(v['target'])-c.location).to_track_quat('-Z','Y').to_euler();s.render.filepath=str(ART/(v['id']+'.png'));bpy.ops.render.render(write_still=True)
  shutil.copy2(ART/'01-sun-court.png',OUT/'preview.png')
