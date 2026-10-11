@@ -459,11 +459,30 @@ def hall():
  # balcony portal, the service passage and the 16 m rooftop walkway.
  top=20.45
  def wall(name,x0,x1,y0,y1,z0,z1):box(name,((x0+x1)/2,(y0+y1)/2,(z0+z1)/2),(x1-x0,y1-y0,z1-z0),'concrete',solid=True)
+ # 0.10.2: a band of high clerestory glazing on the south and east walls keeps
+ # light and sky in the enclosed hall. Real glass with collision (the skylight
+ # panes' material), so the enclosure check still counts it as closed; metal
+ # mullions every 2 m, a metal sill rail and an amber strip below it.
+ SILL,HEAD=15.6,19.4
+ def glazing(name,c,a0,a1,axis):
+  mid,span,h,zc=(a0+a1)/2,a1-a0,HEAD-SILL,(SILL+HEAD)/2
+  if axis=='x':
+   box(name+' pane',(c,mid,zc),(.08,span,h),'glass',0,solid=True)
+   for a in [a0+2*i for i in range(1,int(span//2)+1) if a0+2*i<a1-.2]:box(name+' mullion',(c,a,zc),(.16,.09,h),'metal',0)
+   box(name+' head rail',(c,mid,HEAD-.05),(.18,span,.1),'metal',0);box(name+' sill rail',(c,mid,SILL+.05),(.2,span,.1),'metal',0)
+   box(name+' sill light',(c-.27,mid,SILL-.18),(.05,span-.4,.06),'amber',0)
+  else:
+   box(name+' pane',(mid,c,zc),(span,.08,h),'glass',0,solid=True)
+   for a in [a0+2*i for i in range(1,int(span//2)+1) if a0+2*i<a1-.2]:box(name+' mullion',(a,c,zc),(.09,.16,h),'metal',0)
+   box(name+' head rail',(mid,c,HEAD-.05),(span,.18,.1),'metal',0);box(name+' sill rail',(mid,c,SILL+.05),(span,.2,.1),'metal',0)
+   box(name+' sill light',(mid,c+.27,SILL-.18),(span-.4,.05,.06),'amber',0)
  for x in [-6,24]:
   spans=[(42,56)] if x<0 else [(32,48),(56,60)]
-  for ya,yb in spans:box('Service wall',(x,(ya+yb)/2,top/2),(.5,yb-ya,top),'concrete',solid=True)
+  for ya,yb in spans:
+   if x<0:box('Service wall',(x,(ya+yb)/2,top/2),(.5,yb-ya,top),'concrete',solid=True)
+   else:wall('Service wall',23.75,24.25,ya,yb,0,SILL);glazing('East clerestory',24,ya,yb,'x');wall('Service wall header',23.75,24.25,ya,yb,HEAD,top)
  # East: the service passage keeps a 5 m opening under a crown.
- wall('Service passage crown',23.75,24.25,48,56,5,top)
+ wall('Service passage crown',23.75,24.25,48,56,5,SILL);glazing('East clerestory',24,48,56,'x');wall('Service passage crown header',23.75,24.25,48,56,HEAD,top)
  # West bay (y 33-44) beside the annex: a door at grade, walled up to the
  # rooftop walkway (z 16), then the walkway's own door and a head over it.
  wall('Annex bay wall',-6.5,-6.1,31.5,34,-.3,15.6);wall('Annex bay wall',-6.5,-6.1,40,44,-.3,15.6)
@@ -474,13 +493,31 @@ def hall():
  # The bay stands outside the roof ring: a cap closes it up to the beam top.
  box('Walkway bay cap',(-6.8,34.55,21.025),(1.3,6.1,1.15),'concrete',solid=True)
  # South: above the vestibule, beside it, and around the walkway's door.
- wall('South hall wall',-6.5,0,31.5,31.9,-.3,15.6);wall('South hall wall',16,24.25,31.5,32.05,-.3,top)
- wall('South hall clerestory',0,16,31.5,31.9,4.39,top);wall('South hall clerestory',-2.85,0,31.5,31.9,15.6,top)
+ wall('South hall wall',-6.5,0,31.5,31.9,-.3,15.6);wall('South hall wall',16,24.25,31.5,32.05,-.3,SILL)
+ wall('South hall wall',0,16,31.5,31.7,4.39,SILL);wall('South hall wall',-2.85,0,31.5,31.9,15.6,top)
+ glazing('South clerestory',31.7,0,23.75,'y')
+ wall('South hall header',0,23.75,31.5,31.9,HEAD,top);wall('South hall header',23.75,24.25,31.5,32.05,SILL,top)
  wall('South walkway jamb',-7.45,-7.1,31.5,31.9,15.6,top);wall('South walkway door head',-7.1,-2.85,31.5,31.9,18.3,top)
  # The south wall faces the Sun Court rooftop: facade ribs and seams on its
  # outer face, clear of the walkway door (x -7.1..-2.85).
  for x in [1,8,15,21.5]:box('Hall south rib',(x,31.37,12.53),(.3,.26,15.85),'concrete',.015)
- for z in [10.5,16.5,19.6]:box('Hall south seam',(11.25,31.47,z),(22.5,.06,.055),'metal',0)
+ for z in [10.5,19.6]:box('Hall south seam',(11.25,31.47,z),(22.5,.06,.055),'metal',0)
+ # 0.10.2: the south wall's inner face takes the side walls' vocabulary
+ # (polish.py): pale secondary ribs (0.30 m wide) at their ~4.7 m rhythm with
+ # trim collars, and dark metal service lintels. The main workspace's 16 m
+ # approach (check-placement: its 16 x 9 rectangle swept to y 31.945 over x
+ # 0-16, z 5.5-14.5) ends 4.5 cm in front of this wall, so the screen bay is
+ # recessed instead: its face sits at y 31.7 and the ribs and collars stand
+ # out of the recess to y 31.93. The lintels (4.95 and 15 m) frame the bay.
+ # Over the vestibule the ribs start at its head, as on the sides.
+ for x in [1.0,5.7,10.3,15.0,19.7]:
+  inbay=0<x<16
+  base=4.6 if inbay else 2.75
+  back,front=(31.69,31.93) if inbay else (31.89,32.14)
+  box('Atrium secondary rib',(x,(back+front)/2,(base+20.45)/2),(.30,front-back,20.45-base),'concrete',0)
+  for z in [4.7,9.2,15.3]:
+   if z>base:box('Pier inset collar',(x,(back+front+.01)/2,z),(.50,front-back+.01,.13),'trim',0)
+ for z in [4.95,15.0]:box('Hall service lintel',(8.95,31.9,z),(28.9,.75,.24),'metal',0)
  # Roof margins between the edge beams and the skylight panes.
  for x0,x1 in [(-5.45,-3.7),(19.7,23.45)]:box('Roof margin slab',((x0+x1)/2,46,21.37),(x1-x0,28,.16),'concrete',.01)
  # 0.10.1 walk-off fixes (nested capsule probes fell out of the world here):
@@ -824,7 +861,7 @@ def manifest(g,lm,nodes,cols,count):
  for area in AREAS:
   area['primaryAnchor']=next(r['anchorId'] for r in MOUNT_ROWS if r['areaId']==area['id'] and r['role']=='mounted-workspace');area['toolAnchors']=[r['anchorId'] for r in MOUNT_ROWS if r['areaId']==area['id'] and r['role']=='tool'];area['dataAnchors']=[r['id'] for r in OBJECTS if r['areaId']==area['id']]
  spawns=[{'id':'arrival','pose':{'position':up(AREAS[0]['spawn']),'rotation':[0,0,0,1]}}]+[{'id':a['id'],'pose':{'position':up(a['spawn']),'rotation':[0,0,0,1]}} for a in AREAS]
- m={'formatVersion':'0.2','id':'com.hyprune.lumen-reach','version':('0.10.1' if count==4 else f'0.{count}.1'),'name':'Lumen Reach','description':f'{count} connected workspace homes on a mountain watershed. Original architecture, instruments and paths.','license':'CC-BY-4.0','scene':'scene.gltf','preview':'preview.png','defaultSpawn':'arrival','spawns':spawns,'anchors':ANCHORS,'zones':[{'id':a['id'],'name':a['name'],'bounds':a['bounds']} for a in AREAS],'navigation':{'kind':'mesh','node':nodes['Navigation'],'agentRadius':.3,'agentHeight':1.8},'collision':[{'node':nodes[o.name],'shape':'mesh','layer':'static'} for o in cols],'lightmaps':lm,'attribution':[{'path':'.','author':'Hyprune contributors','license':'CC-BY-4.0','source':'https://github.com/hyprune/worlds'}],'extensions':{'com.hyprune.lumen-reach.mounts':{'version':1,'areas':[{**{k:v for k,v in a.items() if k not in ['spawn','bounds','name','freePlacementZones']},'spawnId':a['id'],'freePlacementZones':[z['id'] for z in a['freePlacementZones']]} for a in AREAS],'mounts':MOUNT_ROWS,'objects':OBJECTS},'com.hyprune.lumen-reach.routes':{'version':1,'nodes':ROUTES,'edges':EDGES,'semantics':'bidirectional walking centerlines, feet positions in meters'},'com.hyprune.lumen-reach.stairs':{'version':1,'paths':STAIR_ROUTES,'semantics':'visible treads over continuous collision beds; alternate walkable flights'},'com.hyprune.lumen-reach.placement':{'version':1,'zones':[z for a in AREAS for z in a['freePlacementZones']]},'com.hyprune.map':{'version':'0.1','path':'map.svg','projection':'xz','north':[0,0,-1],'bounds':[-36,-162,86,16],'worldToMap':[4/520,0,0,4/780,160/520,690/780]}},'requiredExtensions':[]}
+ m={'formatVersion':'0.2','id':'com.hyprune.lumen-reach','version':('0.10.2' if count==4 else f'0.{count}.1'),'name':'Lumen Reach','description':f'{count} connected workspace homes on a mountain watershed. Original architecture, instruments and paths.','license':'CC-BY-4.0','scene':'scene.gltf','preview':'preview.png','defaultSpawn':'arrival','spawns':spawns,'anchors':ANCHORS,'zones':[{'id':a['id'],'name':a['name'],'bounds':a['bounds']} for a in AREAS],'navigation':{'kind':'mesh','node':nodes['Navigation'],'agentRadius':.3,'agentHeight':1.8},'collision':[{'node':nodes[o.name],'shape':'mesh','layer':'static'} for o in cols],'lightmaps':lm,'attribution':[{'path':'.','author':'Hyprune contributors','license':'CC-BY-4.0','source':'https://github.com/hyprune/worlds'}],'extensions':{'com.hyprune.lumen-reach.mounts':{'version':1,'areas':[{**{k:v for k,v in a.items() if k not in ['spawn','bounds','name','freePlacementZones']},'spawnId':a['id'],'freePlacementZones':[z['id'] for z in a['freePlacementZones']]} for a in AREAS],'mounts':MOUNT_ROWS,'objects':OBJECTS},'com.hyprune.lumen-reach.routes':{'version':1,'nodes':ROUTES,'edges':EDGES,'semantics':'bidirectional walking centerlines, feet positions in meters'},'com.hyprune.lumen-reach.stairs':{'version':1,'paths':STAIR_ROUTES,'semantics':'visible treads over continuous collision beds; alternate walkable flights'},'com.hyprune.lumen-reach.placement':{'version':1,'zones':[z for a in AREAS for z in a['freePlacementZones']]},'com.hyprune.map':{'version':'0.1','path':'map.svg','projection':'xz','north':[0,0,-1],'bounds':[-36,-162,86,16],'worldToMap':[4/520,0,0,4/780,160/520,690/780]}},'requiredExtensions':[]}
  for name in ['fixture-audit.json','decal-audit.json','playable-boundary-report.json','sign-audit.json']:shutil.copy2(ART/name,OUT/name)
  if count==4:
   # 0.9.0: canonical format 0.6 contract with per-area playable volumes

@@ -1,0 +1,121 @@
+{
+  "status": "PASS",
+  "method": "Deterministic sky/backdrop audit from every walkable eye position.\n\nCatches the 0.7.0 owner defects without image judgement:\n- layers: every enclosing sky is opaque and single sided; no large blended\n  backdrop card can double-expose a sky.\n- ghost: seam processing must not superimpose mirrored or row-shifted copies\n  of the painting (mirror correlation across the longitude seam, coherent\n  per-row offsets near the seam versus the image centre).\n- seam: every texture row whose seam step exceeds SEAM_SOFT_STEP must be\n  hidden behind opaque geometry from every eye at that latitude.\n- leaks: no view ray from a walkable eye first meets the culled back of a sky\n  or terrain shell (standing outside a closed sky and seeing past it), and\n  no terrain shell stands inside a closed sky at walking level.\n- magnification: screen pixels per sky texel at 3840x2160, 60 deg vertical\n  fov, nearest approach from any eye. Above MAX_PAINTED_MAGNIFICATION the\n  texture under that triangle must be smooth (per-texel step <= SMOOTH_STEP\n  levels), so bilinear magnification cannot show blocks, rings or streaks.\n- terrain: distant backdrop terrain stays TERRAIN_DIP below every eye.\n- enclosures (--enclosures): from every walkable eye inside a declared indoor\n  room, upper-hemisphere view rays that reach the sky (meet no world\n  geometry) must leave the room's box through a declared open face or a\n  declared opening (a door box on a closed face). A ceiling that stops short\n  of a wall (the 0.8.0 Rime Vault slot) or a missing wall (the 0.9.2 Array\n  Hall sides) fails.\n- poles: texture rows under the polar fans are uniform.",
+  "eyes": 958,
+  "distantTerrain": {
+    "farVertices": 2799,
+    "maxElevationDegrees": -13.9,
+    "eye": [
+      79.42,
+      1.77,
+      -130.34
+    ],
+    "vertex": [
+      -259.43,
+      -88.0,
+      -0.58
+    ]
+  },
+  "thresholds": {
+    "maxPaintedMagnification": 12.0,
+    "smoothStep": 4,
+    "poleRange": 3,
+    "ghostMirrorCorrelation": 0.15,
+    "rowStreakRatio": 2.0,
+    "terrainDipDegrees": 6.0,
+    "screen": [
+      3840,
+      2160
+    ],
+    "verticalFovDegrees": 60
+  },
+  "skies": [
+    {
+      "material": "night-sky-v7",
+      "alphaMode": "OPAQUE",
+      "doubleSided": false,
+      "seamMirrorCorrelation": 0.903,
+      "centreMirrorCorrelation": 0.903,
+      "seamRowStreakRatio": 0.984,
+      "seamColumnStepMax": 1.0,
+      "maxScreenPixelsPerTexel": 671.6,
+      "worstEye": [
+        76.56,
+        1.7,
+        -112.03
+      ],
+      "magnifiedTriangles": 611,
+      "blockyMagnifiedTriangles": 0,
+      "poleBandRange": 0.0,
+      "seamHardRows": 0,
+      "seamSoftRowsStepMax": 1.0
+    },
+    {
+      "material": "sky-v7",
+      "alphaMode": "OPAQUE",
+      "doubleSided": false,
+      "seamMirrorCorrelation": 0.042,
+      "centreMirrorCorrelation": 0.003,
+      "seamRowStreakRatio": 0.864,
+      "seamColumnStepMax": 136.0,
+      "maxScreenPixelsPerTexel": 8.8,
+      "worstEye": [
+        80.15,
+        7.7,
+        -153.14
+      ],
+      "magnifiedTriangles": 0,
+      "blockyMagnifiedTriangles": 0,
+      "poleBandRange": 0.0,
+      "seamHardRows": 340,
+      "seamSoftRowsStepMax": 12.0,
+      "seamAzimuthDegrees": 19.41,
+      "seamOccludedLatitudes": [
+        -45,
+        -40,
+        -35,
+        -30,
+        -25,
+        -20,
+        -15,
+        -10,
+        -5,
+        0,
+        5,
+        10,
+        15,
+        20,
+        25
+      ],
+      "seamVisibleRays": 0,
+      "seamRays": 14370
+    }
+  ],
+  "enclosures": [
+    {
+      "room": "rime-vault",
+      "eyes": 87,
+      "rays": 7221,
+      "skyLeaks": 0
+    },
+    {
+      "room": "connector-descent",
+      "eyes": 33,
+      "rays": 2739,
+      "skyLeaks": 0
+    },
+    {
+      "room": "entry-vestibule",
+      "eyes": 6,
+      "rays": 498,
+      "skyLeaks": 0
+    },
+    {
+      "room": "array-hall",
+      "eyes": 94,
+      "rays": 7802,
+      "skyLeaks": 0
+    }
+  ],
+  "failures": []
+}
