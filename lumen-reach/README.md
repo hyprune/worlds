@@ -41,8 +41,8 @@ compositor lock, socket and display. Recording binds four actual compositor
 workspaces to the authored homes and places real kitty windows on owned mounts.
 Core performs capsule-checked auto-drive; camera turns happen while stationary.
 The recording includes Quickshell's actual leased HUD. Captures are staged in
-`artifacts/lumen-reach` for review before copying to the gallery. Build host Blender is
-never launched by validation or nested capture.
+`artifacts/lumen-reach` for review. Build host Blender is never launched by
+validation or nested capture.
 
 `reports/` contains milestone evidence, exact package/core hashes, two-size
 window sweeps, free-volume checks, all route branches, UV1 and GPU allocation
@@ -96,8 +96,7 @@ The script uses core's effective Medium preset when available and records the
 loaded plugin hash. The current tour uses shell protocol 0.7, explicitly returns
 home applications to workspace composites and checks that the HUD stays live.
 Tour encoding happens in a unique `/tmp/lumen-tour-v2-*`
-directory before moving the finished MP4 and JSON into artifacts. Gallery files
-are copied only after review; its autocommit service is never controlled.
+directory before moving the finished MP4 and JSON into artifacts.
 
 `make lumen-validate` now includes named mechanical fixture checks and thin
 emissive triangle probes. `tests/test_emissive_check.py` covers 2cm-wide lenses
@@ -118,7 +117,7 @@ For a matched short camera clip, prepare an output directory with `views.json`
 and run `tools/check-lumen-session.py --vault-clip --package <package> --output
 <directory>` once for each version. `tools/package-rime-clip.py <before-dir>
 <after-dir> <output-dir>` alternates the same three views and writes string-only
-JSON metadata. It encodes in `/tmp`; gallery delivery follows visual inspection.
+JSON metadata. It encodes in `/tmp`; inspect the clip before publishing it.
 `tools/check-rime-v3.py` checks budget growth and unchanged mount/route contracts.
 
 ## Visibility
@@ -152,8 +151,8 @@ Sun Court and Signal Rise now use 2048px lightmaps to keep exposed faces readabl
 python3 tools/check-any-angle-session.py --core ../core-visibility-bench --output artifacts/any-angle-0.7.0/final
 ```
 
-The script takes core's shared nested flock internally. It replays the owner's
-sanitized poses, samples route positions and elevated views with seed 7009,
+The script takes core's shared nested flock internally. It replays the
+sanitized review poses, samples route positions and elevated views with seed 7009,
 checks culling pairs, and tests walking barriers plus a free-flight witness.
 `make lumen-validate` checks sky topology, mapping, seams and the far-clip
 margin as well as existing placement/walking/material contracts. The finite

@@ -1,7 +1,7 @@
 # Lumen Reach 0.8.0: proven third-party optimisations (2026-10-10)
 
 Source: `core/docs/research/2026-10-proven-techniques.md` (A.3, A.5, B, C).
-All measurements are private nested (native 3840x2160, Intel, quality medium,
+All measurements are isolated nested sessions (native 3840x2160, Intel, quality medium,
 fixed render scale 0.5, continuous rendering) on core `49c8408` (the commit the
 meta repo pins), packages alternating in one compositor. Raw sessions live
 under `artifacts/opt-0.8.0/`.
@@ -35,7 +35,7 @@ package size, not frame time. Visual (`stills-compare.json`, CIEDE2000):
 2.8-6.6 % of pixels over dE 2; the worst 64 px blocks (UI placeholder text,
 a vista card, stone) are indistinguishable at 1:1. Compression alone (0.8.0
 source -> release) accounts for nearly all of it; mips + rebake alone are
-48-55 dB. Sheet: gallery `screenshots/optimise-2026-10/lumen-0.8.0-before-after.jpg`.
+48-55 dB. A before/after comparison sheet was reviewed (not included here).
 
 Nested on the release package: any-angle sweep 69 views, 0 culling losses,
 6/6 walking probes inside, jump x=25.64, fly x=30.27; route traversal 64
@@ -52,7 +52,7 @@ Sun Court, -0.5 % on the Rise, +0.2 % in the Hall. No memory cost (core
 already allocates the lightmap mip chain: 270.54 MiB either way), mean visual
 change < 0.25/255. Included in 0.8.0: a small win, never a loss. Most residual
 shimmer comes from material textures and thin geometry, which lightmap mips
-cannot touch. Sheet: `lumen-0.8.0-lightmap-mips-ab.jpg`.
+cannot touch. An A/B comparison sheet was reviewed (not included here).
 
 ## 3. xatlas
 

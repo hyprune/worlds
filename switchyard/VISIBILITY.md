@@ -64,7 +64,7 @@ and `nested.json` beside it.
   counts. Regression tests cover directed links, overlap, outside fallback and
   conflicting subtree assignments.
 - All nested runs hold `/tmp/worldshell-nested.lock` and use verified disposable
-  PID/socket/config identities. The real session was never controlled. No Blender
+  PID/socket/config identities. The host session was never controlled. No Blender
   process was needed for this metadata-only pass.
 
 A shared in-progress core binary initially failed shader compilation. Measurements
@@ -74,7 +74,7 @@ therefore use a separately built, clean checkout of published core
 
 Archive: `artifacts/releases/com.hyprune.switchyard-0.1.2.tar.zst`
 SHA256: `e041570442de717f3cbb36ca252977b47732ba873f014a8ba78c06ada370e7fd`
-Every extracted file matches the package; no release or push was performed.
+Every extracted file matches the package.
 
 To reproduce with the retained isolated build:
 

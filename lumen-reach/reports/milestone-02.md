@@ -1,6 +1,6 @@
 # Array Hall evidence
 
-Warm suspended wall, open floor, rear operator stations and raised service balconies. Three unmodified matched-camera engine frames delivered. Corrected ramp headroom and piers interfering with the walking branches. Open placement and both window sizes pass for all 14 anchors. All routes, package/UV1 and schema pass; Khronos zero errors/warnings; nested real walk and exit pass.
+Warm suspended wall, open floor, rear operator stations and raised service balconies. Three unmodified matched-camera engine frames were captured for review. Corrected ramp headroom and piers interfering with the walking branches. Open placement and both window sizes pass for all 14 anchors. All routes, package/UV1 and schema pass; Khronos zero errors/warnings; nested real walk and exit pass.
 
 Combined package: 55445700 bytes. Conservative GPU estimate: 392626708 bytes.
 

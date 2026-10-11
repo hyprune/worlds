@@ -89,7 +89,7 @@ and `nested.json` beside it.
   counts. Regression tests cover directed links, overlap, outside fallback and
   conflicting subtree assignments.
 - All nested runs hold `/tmp/worldshell-nested.lock` and use verified disposable
-  PID/socket/config identities. The real session was never controlled. No Blender
+  PID/socket/config identities. The host session was never controlled. No Blender
   process was needed for this metadata-only pass.
 
 A shared in-progress core binary initially failed shader compilation. Measurements
@@ -99,7 +99,7 @@ therefore use a separately built, clean checkout of published core
 
 Archive: `artifacts/releases/com.hyprune.lumen-reach-0.6.1.tar.zst`
 SHA256: `f0bf4f25abe4db0bda0029128d75404da011be5cc7194a9c4e0e68306a39e616`
-Every extracted file matches the package; no release or push was performed.
+Every extracted file matches the package.
 
 To reproduce with the retained isolated build:
 

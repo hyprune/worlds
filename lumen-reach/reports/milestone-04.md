@@ -17,13 +17,13 @@ visible treads remain above continuous stair collision beds.
 
 Package: 57805450 bytes (55.13 MiB). Conservative
 world GPU: 285688380 bytes (272.45 MiB),
-including mip levels, texture views and expanded geometry. The subsequent
-release report records full process peak with live applications and the tour.
+including mip levels, texture views and expanded geometry. The later release
+records track full process peak with live applications and the tour.
 
-Twelve raw engine stills are delivered to the release-world gallery folder,
-including updates to the earlier homes. RENDER-REVIEW.md describes the actual
+Twelve raw engine review stills were captured, including updates to the
+earlier homes. RENDER-REVIEW.md describes the actual
 engine/Cycles/concept differences. The live workspace compositor diagnosis and
 final tour are a separate closing step; no black live-wall take is delivered.
 
 Switchyard remains an unchanged walkable test world. Its existing validation
-passed; its source and remote entrypoint remain intact. No pushes.
+passed; its source and remote entrypoint remain intact.

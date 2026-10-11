@@ -58,7 +58,7 @@ Default original content license: **CC-BY-4.0** (see LICENSE). Scripts and tooli
 - [Machine-readable schemas and fixtures](https://github.com/hyprune/schema)
 - [Roadmap M0–M3](https://hyprune.com/roadmap/)
 
-RFCs are proposed implementation targets pending owner review. Read them now in [the docs source](https://github.com/hyprune/docs/tree/main/src/content/docs/rfcs) if the site is not deployed. Each core release must publish its exact Hyprland compatibility target and supported contract versions. Hyprune is new code; Hypr3D is a lessons-only historical reference.
+RFCs are proposed implementation targets pending review. Read them now in [the docs source](https://github.com/hyprune/docs/tree/main/src/content/docs/rfcs) if the site is not deployed. Each core release must publish its exact Hyprland compatibility target and supported contract versions. Hyprune is new code; Hypr3D is a lessons-only historical reference.
 
 ## Contributing
 

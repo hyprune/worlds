@@ -1,6 +1,6 @@
 # Lumen Reach 0.5.0 render review
 
-The owner’s four concepts establish composition, material density and mood.
+Four concept sketches establish composition, material density and mood.
 The delivery keeps the original twelve inspection poses and adds four close
 views for the entrance fixtures, hall vista, vault services and reflector.
 Final raw engine captures are in `artifacts/lumen-reach/v2-4k/`, taken with
@@ -57,8 +57,8 @@ Clearances take priority over filling the work approaches. Automated checks
 cover 24 mounts, four reserved volumes, support and capsule clearance; the
 engine checks every directed route and alternate stair flight. The final tour
 uses real mounted application content, placed terminals, actual keyboard input
-and the shell HUD. Recording and encoding occur outside the gallery before the
-finished files are moved in; its autocommit process is untouched.
+and the shell HUD. Recording and encoding happen in `/tmp` before the finished
+files are moved into place.
 
 The renderer supplies global atmosphere and static environment reflections.
 Distinct area moods come from baked lighting and opaque vista separation.

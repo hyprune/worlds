@@ -4,7 +4,7 @@ Both variants are the 0.8.1 release package (format 0.7, core `49c8408`),
 identical except `world.json` `visibility`: the hand-written
 `lumen-reach/visibility.json` (13 areas), or `tools/derive-visibility.py`
 output for the 0.8.1 source (144 regions + 7 owner areas; 52 s, 243 M rays on
-the bake host; deterministic). Private nested, native 4K Intel, Medium, fixed
+the bake host; deterministic). Isolated nested session, native 4K Intel, Medium, fixed
 0.5 scale.
 
 | measure | hand-written | derived |
@@ -21,7 +21,7 @@ the bake host; deterministic). Private nested, native 4K Intel, Medium, fixed
 | world.json | 100 KB | 155 KB |
 
 Per view (`visibility-hand-vs-derived.json`): the derived regions cut the
-Sun Court home view 94 -> 78 batches, three owner poses 92 -> 50, 89 -> 53 and
+Sun Court home view 94 -> 78 batches, three review poses 92 -> 50, 89 -> 53 and
 58 -> 36, `rise-corner-se` 63 -> 27. They cost more at `03-rime-vault`
 (35 -> 51): the hand-written region hides Signal Rise from the whole vault,
 but a real sight line through the stair-door frame reaches it. That is why the

@@ -16,7 +16,7 @@ Contract reviewed: RFC-0004 including its **M1 format 0.2 amendment**, RFC-0005,
 11. **Alpha and atmosphere still need a renderer contract.** Core M1 renders world alpha as opaque. The polish replaces glazing with open opaque ceramic slats and removes haze cards, giving both renderers the same visible geometry. Original opaque city layers and a continuous procedural gradient sky sphere provide the fallback. Propose an optional atmosphere/sky profile specifying alpha modes/sorting, camera-relative fog, palette/color space and an opaque fallback. Core's current fixed fog depends on distance from the world origin, not distance from the camera, and also affects unlit sky art; the package cannot tune its density/color. The matched images preserve this difference instead of grading it away.
 12. **Glossy reflection/environment profile is absent.** M1's analytic key/sky specular produces useful roughness detail, but cannot reflect the warm practical lights or architectural surroundings as Cycles does. Prioritise an environment/IBL or bounded reflection probe contract with color space, orientation, diffuse/specular separation and resource budgets. Switchyard's low-energy original pane/bronze sheen maps are explicit emissive approximations, separate from base color and irradiance. They remain fixed as the camera moves. Geometry-specific contact shadows are baked; SSAO/contact darkening remains a measured core quality/budget decision.
 13. **Tone mapping, bloom and HDR emission need measurable parity fixtures.** Cycles beauty/film use AgX Medium High Contrast plus restrained Fog Glow; the inspected M1 renderer uses a fixed ACES-style curve and display encoding. Lightmap intensity retains measured linear irradiance normalization, with no display curve baked into UV1. Matched views show the remaining highlight/floor/wood differences. The inspected tone pass has no spatial glow kernel, so practicals are sharper than Cycles; define supported bloom/exposure behavior and reference images before promising visual parity. Core also ignores `KHR_materials_emissive_strength`: Switchyard now keeps practicals within ordinary glTF emissive range and exports no strength extension. Future HDR emission support should honor the standard extension rather than changing lightmap energy or painting highlights into albedo.
-14. **Camera/presentation controls are not a package capability.** IPC 0.2 exposes camera pose but no lens/FOV. Core's fixed 60-degree vertical FOV forced shared authoring camera/lens changes for a valid comparison. Propose explicit camera FOV and capture/reticle presentation controls outside the immutable world manifest. The comparison images are unretouched captures, including core's center reticle. A private nested config suppresses the start-hyprland debug banner and hides the idle native pointer; core sources and the owner's session remain untouched.
+14. **Camera/presentation controls are not a package capability.** IPC 0.2 exposes camera pose but no lens/FOV. Core's fixed 60-degree vertical FOV forced shared authoring camera/lens changes for a valid comparison. Propose explicit camera FOV and capture/reticle presentation controls outside the immutable world manifest. The comparison images are unretouched captures, including core's center reticle. A nested-only config suppresses the start-hyprland debug banner and hides the idle native pointer; core sources and the host session remain untouched.
 
 Current evidence: five identical-pose 1920×1080 comparisons, a 27-second collision-checked core walk, all three-axis coplanar probes, independent exported UV0 density/UV1 overlap checks, v0.2 schema and Khronos validation. GPU accounting now mirrors M1's expanded visible vertices, **all mip levels** and separate linear/sRGB texture views inside 512 MiB; lightmaps retain clamp/linear sampling even though the current core allocates their mip chains. See `switchyard/RENDER-REVIEW.md` and `switchyard/reports/` for measured results.
 
@@ -63,7 +63,7 @@ workspace. Pulled-out tools retain that ownership when placed on its mounts.
 Data objects should expose data bindings separately from window capture. Unknown
 extension metadata remains ignored; the base package stays schema-valid.
 See `lumen-reach/IDENTITY.md`; the reference brief's working titles and lettering
-are not shipped identity. Coordination has been sent to the active core agent.
+are not shipped identity. This proposal was shared with core development.
 
 Lumen Reach also reserves open work space per home. Optional
 `com.hyprune.lumen-reach.placement` version 1 declares `zones` with stable ID,
@@ -79,9 +79,9 @@ windows without a requested operation.
 
 Core M2 (world 0.3 / IPC 0.4) now implements the normalized typed contract and
 accepts these optional 0.2 namespaces. The final package deliberately retains
-format 0.2 as requested. `areas.freePlacementZones` contains IDs; the separate
-placement namespace owns the volumes. Core's adapter was coordinated with the
-implementing agent and its real ramp auto-drive acceptance passed.
+format 0.2. `areas.freePlacementZones` contains IDs; the separate
+placement namespace owns the volumes. Core's adapter was developed against this
+package and its real ramp auto-drive acceptance passed.
 
 `com.hyprune.lumen-reach.routes` v1 contains feet-position `nodes` (`id`,
 `position`) and bidirectional `edges` (`from`, `to`, `width`). These are actual
@@ -158,7 +158,7 @@ and declare camera bounds plus directed `visibleFrom` links. Source-of-truth
 specs are `<world>/visibility.json`; `tools/world_visibility.py` runs after export
 or patches an existing package without rebaking. It preserves every asset and
 all non-visibility manifest contracts. The shipped packages now require a core
-that accepts world format 0.5. Earlier 0.2 delivery reports remain historical.
+that accepts world format 0.5. Earlier format 0.2 milestone reports remain historical.
 
 Region bounds select camera membership, not geometry containment. Doorway and
 connector overlaps intentionally union visibility. Links are not transitive;

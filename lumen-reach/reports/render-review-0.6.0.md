@@ -1,16 +1,16 @@
 # Lumen Reach 0.6.0 render review
 
-This pass focuses on Rime Vault against the owner's `03-frozen-bunker.png`.
+This pass focuses on Rime Vault against its concept sketch (not included).
 The sixteen previous camera poses remain unchanged; two additional poses inspect
 its console row and sealed continuation. Eighteen raw 3840×2160 Medium captures
-are in `artifacts/lumen-reach-v3/after-4k/` and the v3 gallery folder. Dynamic
+are in `artifacts/lumen-reach-v3/after-4k/`. Dynamic
 internal resolution is recorded separately from native output size.
 
 The before/after comparison uses freshly captured 0.5.0 and 0.6.0 views at the
 same 1920×1080 output, pose and 60° vertical FOV. Three identical seven-second
 camera paths alternate before/after in the video. Only labels and cuts are
 added. Engine stills are ungraded; thumbnail comparison sheets preserve aspect
-ratio. The owner concept is a composition/mood reference, not a matched camera.
+ratio. The concept is a composition/mood reference, not a matched camera.
 Run `python3 tools/compare-rime-v3.py` for the linked raw-image review in
 `artifacts/lumen-reach-v3/render-review.html`.
 
