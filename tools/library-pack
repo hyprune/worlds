@@ -1,0 +1,149 @@
+#!/usr/bin/env python3
+# SPDX-License-Identifier: MIT
+"""Build an RFC-0011 object library from a spec, check it, archive it and write its release record.
+
+  tools/library-pack NAME [--version X.Y.Z] [--out build/libraries] [--dry-run]
+
+NAME is libraries/NAME.json: {"id", "name", "description", "license", "attribution", "tag",
+"objects": [{"dir": "objects/armillary"}, ...]} (catalog order). Steps:
+1. every object directory passes tools/object-check;
+2. the library is staged as <id>/{library.json, LICENSE, ATTRIBUTION.md, objects/<id>/...}:
+   object files only (build sources stay behind), formatVersion = the newest object format;
+3. the staged tree passes the library check (validate('library') with every object and file);
+4. <id>-<version>.tar.zst: one root directory named by the id, sorted entries, fixed time,
+   numeric owner 0, ustar, zstd; extracted again and re-checked, with the same file digest;
+5. <id>-<version>.release.json: the record for the meta repository's libraries/releases.json
+   (url of the GitHub release <tag>-v<version> on hyprune/worlds, sha256, nixHash,
+   published: false), checked with validate('library-releases').
+--dry-run is the only mode so far: nothing is tagged, uploaded or written outside --out.
+"""
+import argparse, base64, hashlib, io, json, os, pathlib, shutil, subprocess, sys, tarfile, tempfile
+
+ROOT = pathlib.Path(__file__).resolve().parents[1]
+SCHEMA_DIR = os.environ.get('SCHEMA_DIR', str(ROOT.parent / 'schema'))
+ENV = {**os.environ, 'SCHEMA_DIR': SCHEMA_DIR}
+
+
+def node(*args):
+    return subprocess.run(['node', str(ROOT / 'tools/gltf/object.mjs'), *args, '--json'], capture_output=True, text=True, env=ENV)
+
+
+def fmt_key(v):
+    return tuple(int(x) for x in v.split('.'))
+
+
+def digest(tree):
+    h = hashlib.sha256()
+    for f in sorted(p for p in tree.rglob('*') if p.is_file()):
+        rel = f.relative_to(tree).as_posix()
+        h.update(f'{rel}\0{f.stat().st_size}\0'.encode()); h.update(f.read_bytes())
+    return h.hexdigest()
+
+
+def attribution_md(spec, manifests, shipped, notes):
+    lines = [f'# {spec["name"]}: attribution', '',
+             f'Library `{spec["id"]}`. Each object directory carries its own `object.json` with its licence and',
+             'attribution; this file lists them together. Retain attribution and document changes when',
+             'redistributing modified content.', '', '| Object | Author | Licence | Source |', '| --- | --- | --- | --- |']
+    for m in manifests:
+        for a in m['attribution']:
+            if a['path'] != '.' and not any(p == a['path'] or p.startswith(a['path'] + '/') for p in shipped[m['id']]):
+                continue  # a build source that stays in the repository
+            where = m['id'] if a['path'] == '.' else f'{m["id"]}/{a["path"]}'
+            lines.append(f'| `{where}` | {a["author"]} | {a["license"]} | {a.get("source", "")} |')
+    lines += ['', 'Library files (`library.json`, this file): ' + ', '.join(f'{a["author"]}, {a["license"]}' for a in spec['attribution']) + '.', '']
+    # Provenance and modification notes kept beside the sources (for example characters/ATTRIBUTION.md).
+    for source, text in notes:
+        lines += [f'## Notes from {source}', '', *[l for l in text.strip().splitlines() if not l.startswith('# ')], '']
+    return '\n'.join(lines)
+
+
+def main():
+    ap = argparse.ArgumentParser(description=__doc__.split('\n')[0])
+    ap.add_argument('name'); ap.add_argument('--version'); ap.add_argument('--out', default=str(ROOT / 'build/libraries'))
+    ap.add_argument('--dry-run', action='store_true', required=True, help='required until publishing is a reviewed step')
+    a = ap.parse_args()
+    spec = json.loads((ROOT / 'libraries' / f'{a.name}.json').read_text())
+    version = a.version or spec['version']
+    out = pathlib.Path(a.out); out.mkdir(parents=True, exist_ok=True)
+    report = {'library': spec['id'], 'version': version, 'objects': []}
+    # 1. Objects.
+    manifests, checks = [], []
+    for entry in spec['objects']:
+        r = node('check', str(ROOT / entry['dir']))
+        result = json.loads(r.stdout)
+        if result['status'] != 'PASS':
+            sys.exit(f'LIBRARY: {entry["dir"]} fails tools/object-check:\n  ' + '\n  '.join(result['errors']))
+        checks.append((entry, result)); manifests.append(json.loads((ROOT / entry['dir'] / 'object.json').read_text()))
+    ids = [m['id'] for m in manifests]
+    if len(set(ids)) != len(ids):
+        sys.exit(f'LIBRARY: duplicate object ids {ids}')
+    fv = max((m['formatVersion'] for m in manifests), key=fmt_key)
+    # 2. Stage.
+    stage_root = out / f'{spec["id"]}-{version}.stage'
+    shutil.rmtree(stage_root, ignore_errors=True)
+    stage = stage_root / spec['id']; (stage / 'objects').mkdir(parents=True)
+    library = {'formatVersion': fv, 'id': spec['id'], 'version': version, 'name': spec['name']}
+    if spec.get('description'):
+        library['description'] = spec['description']
+    library.update({'license': spec['license'], 'attribution': spec['attribution'], 'objects': ids})
+    (stage / 'library.json').write_text(json.dumps(library, indent=1) + '\n')
+    shutil.copyfile(ROOT / spec.get('licenseFile', 'LICENSE'), stage / 'LICENSE')
+    notes = []
+    for entry, _ in checks:
+        note = (ROOT / entry['dir']).parent / 'ATTRIBUTION.md'
+        if note.exists() and note.relative_to(ROOT).as_posix() not in [n for n, _ in notes]:
+            notes.append((note.relative_to(ROOT).as_posix(), note.read_text()))
+    shipped = {m['id']: result['paths'] for (_, result), m in zip(checks, manifests)}
+    (stage / 'ATTRIBUTION.md').write_text(attribution_md(spec, manifests, shipped, notes))
+    for (entry, result), m in zip(checks, manifests):
+        for rel in result['paths']:
+            dst = stage / 'objects' / m['id'] / rel; dst.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(ROOT / entry['dir'] / rel, dst)
+        report['objects'].append({'id': m['id'], 'from': entry['dir'], 'formatVersion': m['formatVersion'], 'traits': sorted(m['traits']),
+                                  'triangles': result['triangles'], 'bytes': result['bytes'], 'ignoredSources': result['ignored']})
+    for p in stage.rglob('*'):
+        os.chmod(p, 0o755 if p.is_dir() else 0o644)
+    # 3. Library check.
+    lib = json.loads(node('library', str(stage)).stdout)
+    if lib['status'] != 'PASS':
+        sys.exit('LIBRARY: the staged library fails:\n  ' + '\n  '.join(lib['errors']))
+    # 4. Archive, then extract and re-check.
+    archive = out / f'{spec["id"]}-{version}.tar.zst'
+    archive.unlink(missing_ok=True)
+    subprocess.run(['tar', '--sort=name', '--mtime=@0', '--owner=0', '--group=0', '--numeric-owner', '--format=ustar', '--zstd',
+                    '-cf', str(archive), '-C', str(stage_root), '--', spec['id']], check=True)
+    sha = hashlib.sha256(archive.read_bytes()).hexdigest()
+    with tempfile.TemporaryDirectory() as tmp:
+        subprocess.run(['tar', '--zstd', '-xf', str(archive), '-C', tmp, '--no-same-owner'], check=True)
+        members = os.listdir(tmp)
+        if members != [spec['id']]:
+            sys.exit(f'LIBRARY: archive root is {members}')
+        raw = subprocess.run(['zstd', '-dc', str(archive)], capture_output=True, check=True).stdout
+        with tarfile.open(fileobj=io.BytesIO(raw)) as t:
+            bad = [m.name for m in t.getmembers() if not (m.isfile() or m.isdir()) or m.name.startswith('/') or '..' in m.name.split('/')]
+        if bad:
+            sys.exit(f'LIBRARY: archive has links, devices or unsafe names: {bad}')
+        again = json.loads(node('library', str(pathlib.Path(tmp) / spec['id'])).stdout)
+        if again['status'] != 'PASS' or digest(pathlib.Path(tmp) / spec['id']) != digest(stage):
+            sys.exit('LIBRARY: the extracted archive differs from the staged library')
+    # 5. Release record.
+    tag = f'{spec.get("tag", a.name)}-v{version}'
+    record = {f'{spec["id"]}@{version}': {'id': spec['id'], 'version': version, 'formatVersion': fv,
+              'url': f'https://github.com/hyprune/worlds/releases/download/{tag}/{archive.name}',
+              'sha256': sha, 'nixHash': 'sha256-' + base64.b64encode(bytes.fromhex(sha)).decode(), 'published': False}}
+    record_path = out / f'{spec["id"]}-{version}.release.json'
+    record_path.write_text(json.dumps(record, indent=2) + '\n')
+    check = subprocess.run(['node', f'{SCHEMA_DIR}/bin/validate.mjs', 'library-releases', str(record_path)], capture_output=True, text=True)
+    if check.returncode:
+        sys.exit('LIBRARY: release record invalid: ' + check.stderr)
+    report.update({'formatVersion': fv, 'tag': tag, 'archive': archive.name, 'archiveBytes': archive.stat().st_size, 'sha256': sha,
+                   'expandedBytes': lib['bytes'], 'files': lib['files'], 'packageDigest': digest(stage), 'record': record,
+                   'published': False, 'dryRun': True})
+    (out / f'{spec["id"]}-{version}.report.json').write_text(json.dumps(report, indent=1) + '\n')
+    print(f'LIBRARY {spec["id"]}@{version} (format {fv}): {len(ids)} objects, {lib["files"]} files, {lib["bytes"]} bytes -> {archive} '
+          f'({archive.stat().st_size} bytes, sha256 {sha[:12]}…); record {record_path}; dry run, nothing published')
+
+
+if __name__ == '__main__':
+    main()

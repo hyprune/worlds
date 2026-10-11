@@ -15,7 +15,7 @@ A package is a data-only directory containing `world.json`, glTF 2.0 geometry an
 - **[Lumen Reach](lumen-reach/README.md)** (release world): Sun Court, Array Hall, Rime Vault and Signal Rise are four connected workspace homes, with physical tool mounts, open work zones, mountain vistas and paths to terraces, a rooftop, lower rooms and a cable gantry.
 - **[Switchyard](switchyard/README.md)** (test world): Hyprune's first original world, an original blue-hour terminal with a bronze vault, six timber-canopied docks, a concourse, labeled cargo, a rail-city vista, surface anchors, collision, navigation and UV1 lightmaps. Kept as a walkable test map for paths, navigation, docking and renderer parity, and as a record of how the worlds evolved.
 
-Reusable assets: [world objects](objects/README.md) (format 0.8) and [NPC characters](characters/README.md) (RFC-0010 draft; four residents, CC-BY-4.0).
+Reusable assets: [world objects](objects/README.md) (format 0.8; RFC-0011 object directories, live machines) and [NPC characters](characters/README.md) (RFC-0010 draft; four residents, CC-BY-4.0). [tools/object](tools/object/README.md) imports, checks and packs object directories into libraries.
 
 Schema examples remain synthetic manifest fixtures, not playable packages.
 

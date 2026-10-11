@@ -1,0 +1,22 @@
+{
+  "id": "com.hyprune.starter",
+  "tag": "hyprune-starter",
+  "version": "0.1.0",
+  "name": "Hyprune starter kit",
+  "description": "Official starter objects: the armillary, four ambient residents and five live machines with the item they move.",
+  "license": "CC-BY-4.0",
+  "attribution": [{"path": ".", "author": "Hyprune contributors", "license": "CC-BY-4.0", "source": "https://github.com/hyprune/worlds"}],
+  "objects": [
+    {"dir": "objects/armillary"},
+    {"dir": "characters/resident-blue"},
+    {"dir": "characters/resident-crimson"},
+    {"dir": "characters/resident-desert"},
+    {"dir": "characters/resident-ember"},
+    {"dir": "objects/machines/ci-conveyor"},
+    {"dir": "objects/machines/job-token"},
+    {"dir": "objects/machines/queue-stack"},
+    {"dir": "objects/machines/server-rack"},
+    {"dir": "objects/machines/deploy-lift"},
+    {"dir": "objects/machines/build-monitor"}
+  ]
+}
