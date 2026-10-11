@@ -1,12 +1,68 @@
 {
-  "idle": ["idle", "breathing idle", "standing idle", "idle 01", "idle loop", "happy idle"],
-  "walk": ["walk", "walking", "walk forward", "walking in place", "casual walk", "walk loop"],
-  "run": ["run", "running", "run forward", "jog", "jogging", "fast run"],
-  "turn_left": ["turn left", "left turn", "turn left 90", "left turn 90", "turning left"],
-  "turn_right": ["turn right", "right turn", "turn right 90", "right turn 90", "turning right"],
-  "look_around": ["look around", "looking around", "idle look around", "searching"],
-  "wave": ["wave", "waving", "wave hello", "greeting"],
-  "nod": ["nod", "nodding", "head nod", "yes"],
-  "sit": ["sit", "sit down", "sitting down", "stand to sit"],
-  "sit_idle": ["sit idle", "sitting idle", "sitting", "seated idle"]
+  "idle": [
+    "Idle_03",
+    "idle",
+    "breathing idle",
+    "standing idle",
+    "idle loop",
+    "happy idle"
+  ],
+  "walk": [
+    "walking_2_inplace",
+    "Walking",
+    "walk",
+    "walk forward",
+    "walking in place",
+    "casual walk"
+  ],
+  "run": [
+    "Running",
+    "run",
+    "run forward",
+    "jog",
+    "jogging"
+  ],
+  "turn_left": [
+    "Walk_Turn_Left",
+    "turn left",
+    "left turn",
+    "turn left 90",
+    "turning left"
+  ],
+  "turn_right": [
+    "Walk_Turn_Right",
+    "turn right",
+    "right turn",
+    "turn right 90",
+    "turning right"
+  ],
+  "look_around": [
+    "look around",
+    "looking around",
+    "idle look around"
+  ],
+  "wave": [
+    "Big_Wave_Hello",
+    "wave",
+    "waving",
+    "wave hello"
+  ],
+  "nod": [
+    "nod",
+    "nodding",
+    "head nod"
+  ],
+  "sit": [
+    "Look_Back_and_Sit",
+    "sit",
+    "sit down",
+    "sitting down",
+    "stand to sit"
+  ],
+  "sit_idle": [
+    "Chair_Sit_Idle_M",
+    "sit idle",
+    "sitting idle",
+    "seated idle"
+  ]
 }

@@ -14,7 +14,7 @@ speed it had is kept as extras.speed), 30 fps, at most 4 weights per vertex, dec
 over the triangle budget. tools/npc/compress.mjs then applies meshopt + KTX2.
 """
 import bpy, json, math, os, re, sys
-from mathutils import Vector, Matrix
+from mathutils import Vector, Matrix, Quaternion
 
 argv = sys.argv[sys.argv.index('--') + 1:]
 def arg(name, default=None):
@@ -23,6 +23,8 @@ SRC, OUT, REPORT = arg('--in'), arg('--out'), arg('--report')
 MAP = arg('--map', os.path.join(os.path.dirname(__file__), 'clip-map.json'))
 CLIPS_FROM, MAX_TRIS = arg('--clips-from'), int(arg('--max-tris', '8000'))
 STRIP, KEEP_SWAY = '--strip-fingers' in argv, '--keep-sway' in argv
+KEEP_OWN = [n for n in (arg('--keep-own', '') or '').split(',') if n]  # with --clips-from: keep these own clips
+MAX_TEXTURE = int(arg('--max-texture', '1024'))
 FPS = 30
 report = {'source': os.path.basename(SRC), 'steps': [], 'warnings': [], 'clips': {}}
 def step(text):
@@ -58,7 +60,7 @@ def assign(arm, action):
 
 
 def load(path):
-    before = set(bpy.data.objects)
+    before, before_actions = set(bpy.data.objects), set(bpy.data.actions)
     if path.lower().endswith('.fbx'):
         bpy.ops.import_scene.fbx(filepath=path, automatic_bone_orientation=False, ignore_leaf_bones=True)
     else:
@@ -77,8 +79,8 @@ def load(path):
             for s in t.strips:
                 if s.action:
                     actions.add(s.action)
-    for a in bpy.data.actions:  # importers keep the others as stashed or fake-user actions
-        if any(bone_of(fc)[0] and bone_of(fc)[0] in arm.data.bones for fc in fcurves(a)):
+    for a in bpy.data.actions:  # importers keep the others as stashed or fake-user actions (this import's only)
+        if a not in before_actions and any(bone_of(fc)[0] and bone_of(fc)[0] in arm.data.bones for fc in fcurves(a)):
             actions.add(a)
     dropped = 0
     for a in actions:  # object-level transform keys (FBX bakes the armature's): core moves the NPC
@@ -212,56 +214,170 @@ def strip_fingers(arm, meshes):
     step(f'stripped {len(names)} finger bones (weights moved to the hands)')
 
 
+# --- pose maths on bone hierarchies (armature space = world: transforms are applied) ---
+def order(arm):
+    out, todo = [], [b for b in arm.data.bones if b.parent is None]
+    while todo:
+        b = todo.pop(0); out.append(b.name); todo += list(b.children)
+    return out
+def rest(arm):
+    return {b.name: (b.matrix_local.to_quaternion(), b.head_local.copy(), b.parent.name if b.parent else None) for b in arm.data.bones}
+def curve_map(action):
+    m = {}
+    for fc in fcurves(action):
+        bone, prop = bone_of(fc)
+        if bone:
+            m[(bone, prop, fc.array_index)] = fc
+    return m
+def basis(curves, bone, f):
+    q = [curves[(bone, 'rotation_quaternion', i)].evaluate(f) if (bone, 'rotation_quaternion', i) in curves else (1, 0, 0, 0)[i] for i in range(4)]
+    l = [curves[(bone, 'location', i)].evaluate(f) if (bone, 'location', i) in curves else 0 for i in range(3)]
+    return Quaternion(q).normalized(), Vector(l)
+def fk(names, R, curves, f, world=None, loc=None):
+    """World rotations P and head positions H. world: fixed world rotations for some bones
+    (others take their basis from `curves`, or rest when curves is None); loc: hips basis."""
+    P, H = {}, {}
+    for b in names:
+        rb, hb, p = R[b]
+        B, L = basis(curves, b, f) if curves is not None else (Quaternion(), Vector())
+        if loc and b in loc:
+            L = loc[b]
+        Q = P[p] @ R[p][0].inverted() if p else Quaternion()
+        P[b] = world[b] if world and b in world else Q @ rb @ B
+        H[b] = (H[p] + Q @ (hb - R[p][1]) if p else hb.copy()) + Q @ rb @ L
+    return P, H
+def to_basis(names, R, P):
+    out = {}
+    for b in names:
+        rb, hb, p = R[b]
+        Q = P[p] @ R[p][0].inverted() if p else Quaternion()
+        out[b] = (rb.inverted() @ Q.inverted() @ P[b]).normalized()
+    return out
+def leg_ik(P, H, R, side, target):
+    """Two-bone IK: UpLeg/Leg reach the ankle target; the foot keeps its world rotation."""
+    u, k, f = (f'mixamorig:{side}UpLeg', f'mixamorig:{side}Leg', f'mixamorig:{side}Foot')
+    if not all(n in H for n in (u, k, f)):
+        return 0
+    hu, kk, ff = H[u], H[k], H[f]
+    l1, l2 = (kk - hu).length, (ff - kk).length
+    d = target - hu
+    dist = min(max(d.length, abs(l1 - l2) + 1e-4), l1 + l2 - 1e-4)
+    a, b = hu - kk, ff - kk
+    n = a.cross(b)
+    if n.length < 1e-6:
+        n = P[u] @ Vector((1, 0, 0))
+    n.normalize()
+    cur = a.angle(b)
+    want = math.acos(max(-1, min(1, (l1 * l1 + l2 * l2 - dist * dist) / (2 * l1 * l2))))
+    bend = Quaternion(n, want - cur)
+    P[k] = bend @ P[k]
+    ff2 = kk + bend @ b
+    swing = (ff2 - hu).rotation_difference(d)
+    P[u] = swing @ P[u]
+    P[k] = swing @ P[k]
+    return math.degrees(abs(want - cur)) + math.degrees(swing.angle)
+
+
 def transfer_clips(target, source, actions):
-    """Copy clips by bone name: rotations as they are, Hips translation scaled by hip height."""
+    """Retarget by bone name: rest-relative world rotations on the shared mixamorig bones
+    (delta from the source's rest in world space applied to the target's rest), other bones
+    at rest; Hips translation x hip-height ratio; walk/run clips get a two-bone leg IK onto the
+    source's ankle path (scaled about the target's own stance) so feet plant like the source."""
+    Rt, Rs, nt, ns = rest(target), rest(source), order(target), order(source)
     th, sh = hips_bone(target), hips_bone(source)
     ratio = th.head_local.z / sh.head_local.z if th and sh and sh.head_local.z > 1e-4 else 1
-    tnames, snames = {b.name for b in target.data.bones}, {b.name for b in source.data.bones}
-    missing, extra = sorted(snames - tnames), sorted(tnames - snames - {'root'})
-    twisted = []
-    for name in sorted(snames & tnames):  # same template: rest orientations should agree
-        a, b = target.data.bones[name].matrix_local.to_quaternion(), source.data.bones[name].matrix_local.to_quaternion()
-        if math.degrees(a.rotation_difference(b).angle) > 5:
-            twisted.append(name)
-    copied = []
+    shared = [b for b in nt if b in Rs and b.startswith('mixamorig') and not any(x in b.split(':')[-1].lower() for x in FINGERS)]
+    missing = sorted(b for b in Rs if b not in Rt and b.startswith('mixamorig'))
+    extra = sorted(b for b in Rt if b not in shared and b != 'root')
+    twist = {b: round(math.degrees(Rt[b][0].rotation_difference(Rs[b][0]).angle), 1) for b in shared}
+    copied, ik = [], {}
+    target.animation_data_create()
     for act in actions:
-        name = act.name
-        act.name = name + ' (source)'  # frees the name for the copy
-        new = act.copy(); new.name = name
-        for fc in fcurves(new):
-            bone, prop = bone_of(fc)
-            if bone is None:
-                continue
-            if bone not in tnames or prop == 'scale' or (prop == 'location' and (not th or bone != th.name)):
-                remove_fcurve(new, fc); continue
-            if prop == 'location':
-                for k in fc.keyframe_points:
-                    k.co.y *= ratio; k.handle_left.y *= ratio; k.handle_right.y *= ratio
+        name = re.sub(r'\.\d{3}$', '', act.name)  # Blender's suffix when the target had the same clip name
+        act.name = name + ' (source)'
+        curves = curve_map(act)
+        new = bpy.data.actions.new(name)
+        assign(target, new)
+        f0, f1 = int(round(act.frame_range[0])), int(round(act.frame_range[1]))
+        # Experimental: measured against the rigs' own Meshy clips it adds sliding, so it's opt-in.
+        legs = re.search(r'walk|run', name, re.I) is not None and '--leg-ik' in argv
+        prev, worst = {}, 0
+        for f in range(f0, f1 + 1):
+            Ps, Hs = fk(ns, Rs, curves, f)
+            world = {b: (Ps[b] @ Rs[b][0].inverted() @ Rt[b][0]).normalized() for b in shared}
+            loc = {}
+            if th and sh:
+                hips = Rt[th.name][1] + (Hs[sh.name] - Rs[sh.name][1]) * ratio
+                loc[th.name] = Rt[th.name][0].inverted() @ (hips - Rt[th.name][1])
+            P, H = fk(nt, Rt, None, f, world, loc)
+            if legs:
+                for side in ('Left', 'Right'):
+                    foot = f'mixamorig:{side}Foot'
+                    if foot in Hs and foot in Rt:
+                        goal = Rt[foot][1] + (Hs[foot] - Rs[foot][1]) * ratio
+                        worst = max(worst, leg_ik(P, H, Rt, side, goal))
+                        P, H = fk(nt, Rt, None, f, P, loc)
+            B = to_basis(nt, Rt, P)
+            for b in nt:
+                pb = target.pose.bones[b]
+                pb.rotation_mode = 'QUATERNION'
+                q = B[b]
+                if b in prev and prev[b].dot(q) < 0:
+                    q = -q
+                prev[b] = q
+                pb.rotation_quaternion = q
+                pb.keyframe_insert('rotation_quaternion', frame=f)
+                if b in loc:
+                    pb.location = loc[b]
+                    pb.keyframe_insert('location', frame=f)
+        if legs:
+            ik[name] = round(worst, 1)
+        target.animation_data.action = None
         copied.append(new)
-    report['clipsFrom'] = {'source': os.path.basename(CLIPS_FROM), 'hipHeightRatio': round(ratio, 4), 'clips': [a.name for a in copied],
-                           'missingBones': missing, 'extraBones': extra, 'restOrientationDiffers': twisted}
-    step(f'copied {len(copied)} clips from {os.path.basename(CLIPS_FROM)} (hips x{ratio:.3f})')
+    report['clipsFrom'] = {'source': os.path.basename(CLIPS_FROM), 'method': 'rest-relative world-space rotations on shared mixamorig bones',
+                           'hipHeightRatio': round(ratio, 4), 'sharedBones': len(shared), 'clips': [a.name for a in copied],
+                           'missingBones': missing, 'boneNotRetargeted': extra, 'restDifferenceDeg': twist, 'legIkMaxCorrectionDeg': ik}
+    step(f'retargeted {len(copied)} clips from {os.path.basename(CLIPS_FROM)} on {len(shared)} shared bones (hips x{ratio:.3f}, leg IK on {len(ik)})')
     if missing:
-        warn(f'bones in the animated rig but not here (their keys are dropped): {", ".join(missing)}')
+        warn(f'mixamorig bones in the animated rig but not here: {", ".join(missing)}')
     if extra:
-        warn(f'bones here but not animated by the source (they keep their rest pose): {", ".join(extra)}')
-    if twisted:
-        warn(f'rest orientation differs by more than 5 deg (rotations may twist): {", ".join(twisted)}')
+        step(f'at rest in retargeted clips (not shared): {", ".join(extra)}')
     return copied
 
 
-def clip_name(name, mapping):
-    clean = name
-    while re.match(r'^(armature|mixamo\.com)\|', clean, flags=re.I):
-        clean = re.sub(r'^(armature|mixamo\.com)\|', '', clean, flags=re.I)
-    while re.search(r'\|(baselayer|mixamo\.com)$', clean, flags=re.I):
-        clean = re.sub(r'\|(baselayer|mixamo\.com)$', '', clean, flags=re.I)
-    clean = clean.strip()
-    key = re.sub(r'[^a-z0-9]+', ' ', clean.lower()).strip()
+def clean_channels(arm, actions):
+    """Rotations on every bone; translation on the Hips only; no scale (Meshy keys all three)."""
+    hips = hips_bone(arm)
+    dropped = 0
+    for a in actions:
+        for fc in fcurves(a):
+            bone, prop = bone_of(fc)
+            if prop == 'scale' or (prop == 'location' and (not hips or bone != hips.name)):
+                remove_fcurve(a, fc); dropped += 1
+    if dropped:
+        step(f'dropped {dropped} translation/scale channels (translation kept on the Hips only)')
+
+
+def map_clips(actions, mapping):
+    """Each canonical name takes the first of its aliases present (priority order); every
+    other clip keeps its own name, cleaned and lowercased."""
+    def key(n):
+        n = re.sub(r'^((armature|mixamo\.com)\|)+', '', n, flags=re.I)
+        n = re.sub(r'(\|(baselayer|mixamo\.com))+$', '', n, flags=re.I)
+        return re.sub(r'[^a-z0-9]+', '_', n.lower()).strip('_')
+    names, taken = {}, set()
     for canonical, aliases in mapping.items():
-        if key == canonical.replace('_', ' ') or key in [re.sub(r'[^a-z0-9]+', ' ', a.lower()).strip() for a in aliases]:
-            return canonical
-    return clean
+        for alias in aliases:
+            hit = next((a for a in actions if a.name not in names and key(a.name) == key(alias)), None)
+            if hit:
+                names[hit.name] = canonical; taken.add(canonical); break
+    for a in actions:
+        if a.name not in names:
+            n = key(a.name)
+            while n in taken or n in names.values():
+                n += '_2'
+            names[a.name] = n
+    return names
 
 
 def in_place(arm, actions):
@@ -300,6 +416,32 @@ def in_place(arm, actions):
                 curves[i].keyframe_points.insert(f, local[i], options={'FAST'}).interpolation = 'LINEAR'
         if drift.length > .05:
             step(f'clip `{act.name}`: removed {drift.length:.2f} m of root motion ({act.get("speed", 0)} m/s kept as extras.speed)')
+    # In-place locomotion clips: the speed is how fast the planted foot moves back.
+    R, names = rest(arm), order(arm)
+    fps = bpy.context.scene.render.fps
+    for act in actions:
+        if act.name in report.get('speeds', {}) or not re.match(r'(walk|run)', act.name):
+            continue
+        curves = curve_map(act)
+        f0, f1 = int(round(act.frame_range[0])), int(round(act.frame_range[1]))
+        feet = [n for n in (f'mixamorig:{s}ToeBase' for s in ('Left', 'Right')) if n in R] or \
+               [n for n in (f'mixamorig:{s}Foot' for s in ('Left', 'Right')) if n in R]
+        if len(feet) < 2 or f1 - f0 < 4:
+            continue
+        track = [fk(names, R, curves, f)[1] for f in range(f0, f1 + 1)]
+        low = min(h[n].z for h in track for n in feet)
+        v = []
+        for i in range(len(track) - 1):
+            n = min(feet, key=lambda n: track[i][n].z)
+            if track[i][n].z < low + .03:
+                d = track[i + 1][n] - track[i][n]
+                v.append(math.hypot(d.x, d.y) * fps)
+        if v:
+            v.sort()
+            speed = round(v[len(v) // 2], 3)
+            if speed > .2:
+                report.setdefault('speeds', {})[act.name] = speed
+                step(f'clip `{act.name}`: in place; planted-foot speed {speed} m/s (extras.speed)')
 
 
 def limit_weights(meshes):
@@ -320,12 +462,24 @@ mapping = json.load(open(MAP))
 arm, meshes, actions, objs = load(SRC)
 report['bonesIn'], report['trianglesIn'] = len(arm.data.bones), triangles(meshes)
 report['height'] = round(normalise(arm, meshes, actions, 'model'), 3)
+clean_channels(arm, actions)
+for img in bpy.data.images:  # textures at most MAX_TEXTURE px (KTX2 follows in compress.mjs)
+    if img.size[0] > MAX_TEXTURE or img.size[1] > MAX_TEXTURE:
+        old = tuple(img.size); f = MAX_TEXTURE / max(img.size)
+        img.scale(max(1, int(img.size[0] * f)), max(1, int(img.size[1] * f)))
+        step(f'texture {img.name}: {old[0]}x{old[1]} -> {img.size[0]}x{img.size[1]}')
 if CLIPS_FROM:
     sarm, smeshes, sactions, sobjs = load(CLIPS_FROM)
     normalise(sarm, smeshes, sactions, 'clip source')
-    for a in actions:  # the target's own default clips give way to the shared set
-        bpy.data.actions.remove(a)
-    actions = transfer_clips(arm, sarm, sactions)
+    clean_channels(sarm, sactions)
+    own = [a for a in actions if a.name in KEEP_OWN]
+    for a in actions:  # the target's own clips give way to the shared set (except --keep-own)
+        if a not in own:
+            bpy.data.actions.remove(a)
+    shared_set = transfer_clips(arm, sarm, [a for a in sactions if a.name not in KEEP_OWN or not own])
+    actions = own + shared_set
+    if own:
+        step('kept own clips: ' + ', '.join(a.name for a in own))
     for o in sobjs:
         bpy.data.objects.remove(o, do_unlink=True)
     for a in sactions:
@@ -333,14 +487,11 @@ if CLIPS_FROM:
 if STRIP:
     strip_fingers(arm, meshes)
 add_root(arm)
-names = {}
+names = map_clips(actions, mapping)
 for act in actions:
-    name = clip_name(act.name, mapping)
-    if name in names.values():
-        warn(f'clip `{act.name}` maps to `{name}` again: kept as `{act.name}`'); name = act.name
-    names[act.name] = name
+    act.name = names[act.name] + ' (renaming)'
 for act in actions:
-    act.name = names[act.name]
+    act.name = act.name[:-len(' (renaming)')]
 report['clips'] = {old: new for old, new in names.items()}
 step('clips: ' + ', '.join(f'{o} -> {n}' if o != n else o for o, n in names.items()))
 in_place(arm, actions)
