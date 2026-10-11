@@ -1,0 +1,49 @@
+# Lumen Reach changelog
+
+Measured figures, gates and archive hashes for each release are in the
+release records (`reports/release*.json`).
+
+## 0.10.1
+
+Array Hall is an enclosed hall, and no walkable edge near a route drops out
+of the world.
+
+- **Array Hall enclosure.** The hall's sides were open from 0.4.0 onward: the
+  west wall covered only y 42-56, the east wall stopped 1.4 m below the roof
+  beams, and the south side above the vestibule had no wall at all. Open sky
+  showed between the structures from the hall floor. The hall now has walls on
+  the east, south and west sides, running up into the roof beams, with
+  openings only where routes pass:
+  - the vestibule;
+  - an annex door at grade;
+  - the 4 m balcony portal;
+  - a 5 m service passage under a crown;
+  - the 16 m rooftop walkway's west and south doors.
+
+  The north panorama stays open as the designed vista. Roof margin slabs close
+  the strips between the edge beams and the skylight, and 7.9 m panes close
+  the slits beside the mullions.
+- **Enclosure gate.** `enclosures.json` declares the hall, and the
+  `check-sky.py` enclosure test accepts per-room door `openings`. On the 0.9.2
+  package the test reports 878 sky leaks from the hall; on 0.10.1 it reports
+  none.
+- **Walk-off fixes.** In nested walk probes on 0.9.2, a walker fell out of the
+  world at the hall's south-west corner. That is where the hall's south wall
+  now stands. Walkers also fell out at these edges, which now have guards:
+  - the annex's south edge (parapet);
+  - beside the service threshold (a floor and end wall for the unfloored nook,
+    and a parapet on the threshold's south edge);
+  - the 4 m balconies' north edge (rail);
+  - the Sun Court 4 m landing's north edge, either side of the roof ramp and
+    its stair (rails);
+  - beside the Signal Rise ascent shell (a snow verge over the 0.75 m slot).
+- **Floating pieces.**
+  - The old light-ring hangers touched nothing and are removed (the radial
+    suspensions carry the ring).
+  - The rib above the roof bridge now rests on the walkway door head.
+  - Ribs over the annex door and the service passage start at the opening
+    head.
+  - The archive rack drawers now sit on the racks. They had been 5 cm proud,
+    and two sets had no rack behind them.
+  - The Sun Court facade service drains reach the paving (they hung 0.25 m
+    up).
