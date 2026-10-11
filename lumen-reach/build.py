@@ -296,7 +296,8 @@ def globe(pos,r=1.8):
  x,y,z=pos;cyl('Globe plinth',(x,y,z+.25),r*.75,.5,'concrete');cyl('Globe pedestal',(x,y,z+.8),.28,1.0,'metal')
  assert r==1.8,'objects/armillary is built at the Sun Court radius (1.8 m)'
  center=(x,y,z+1.9+r*.6)
- WORLD_OBJECTS.append({'id':'sun-court-armillary','asset':'armillary','pose':{'position':up(center),'rotation':[0,0,0,1]}})
+ # ambient 0.11: matched to the baked 0.9.2 globe (CIEDE2000 < 1 per region at two court poses).
+ WORLD_OBJECTS.append({'id':'sun-court-armillary','asset':'armillary','pose':{'position':up(center),'rotation':[0,0,0,1]},'ambient':[0.11,0.11,0.11]})
  data('globe',center)
 
 

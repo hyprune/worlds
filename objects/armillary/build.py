@@ -29,6 +29,18 @@ RINGS = [  # (Blender XYZ Euler of the torus, period s, phase, direction) - the 
 ]
 
 
+UNLIT = set()
+
+
+def unlit(name, color):
+    """Emission-only in Blender; written as KHR_materials_unlit after export (like the 0.9 rings)."""
+    UNLIT.add(name)
+    m = bpy.data.materials.new(name); m.use_nodes = True; nt = m.node_tree
+    e = nt.nodes.new('ShaderNodeEmission'); e.inputs['Color'].default_value = (*color, 1); e.inputs['Strength'].default_value = 1
+    nt.links.new(e.outputs[0], nt.nodes.get('Material Output').inputs['Surface'])
+    return m
+
+
 def material(name, color, rough, metal=0.0, emit=0.0):
     m = bpy.data.materials.new(name); m.use_nodes = True; p = m.node_tree.nodes.get('Principled BSDF')
     p.inputs['Base Color'].default_value = (*color, 1); p.inputs['Roughness'].default_value = rough; p.inputs['Metallic'].default_value = metal
@@ -62,11 +74,12 @@ def main():
     if OUT.exists():
         shutil.rmtree(OUT)
     OUT.mkdir(parents=True)
-    # Near-black glossy shell: the globe is lit at runtime (sun + probe ambient), and a
-    # bright plaza lifts mid-tones far more than the old baked lightmap did.
-    dark = material('armillary-globe', (.035, .045, .055), .32, .25)
-    cyan = material('armillary-network', (.11, .48, .68), .4, 0, emit=1.0)
-    ivory = material('armillary-ring', (.7, .66, .54), .45, .25)
+    # Matched to the baked 0.9.2 Sun Court globe at two poses (per-region CIEDE2000
+    # < 1 with the Lumen placement's ambient 0.11): a near-black matte shell lit at
+    # runtime; the cyan network and the champagne rings unlit, as the 0.9 rings were.
+    dark = material('armillary-globe', (.004, .005, .007), .95, 0)
+    cyan = unlit('armillary-network', (.114, .496, .685))
+    ivory = unlit('armillary-ring', (.421, .337, .222))
 
     bpy.ops.mesh.primitive_ico_sphere_add(subdivisions=2, radius=R * .9, location=(0, 0, 0))
     globe = link(bpy.context.object, dark); globe.name = 'globe'
@@ -97,6 +110,15 @@ def main():
     bpy.ops.export_scene.gltf(filepath=str(OUT / 'armillary.gltf'), export_format='GLTF_SEPARATE', use_selection=True, export_yup=True,
                               export_apply=True, export_animations=False, export_cameras=False, export_lights=False, export_extras=False,
                               export_materials='EXPORT')
+    # The exporter writes an emission-only material as black base + emissive; make it
+    # KHR_materials_unlit with that colour as base (what core draws unlit, as measured).
+    g = json.loads((OUT / 'armillary.gltf').read_text())
+    for m in g['materials']:
+        if m['name'] in UNLIT:
+            m['pbrMetallicRoughness'] = {'baseColorFactor': [*m.pop('emissiveFactor'), 1], 'metallicFactor': 0, 'roughnessFactor': 1}
+            m['extensions'] = {'KHR_materials_unlit': {}}
+    g['extensionsUsed'] = sorted(set(g.get('extensionsUsed', [])) | {'KHR_materials_unlit'})
+    (OUT / 'armillary.gltf').write_text(json.dumps(g, indent=1) + '\n')
     outer = R * (1.05 + 2 * .07) + .035
     descriptor = {
         'id': 'armillary', 'version': '1.0.0', 'scene': 'armillary.gltf',
