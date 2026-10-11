@@ -5,8 +5,9 @@ A paved terrace yard in the Lumen Reach language: pale stone, warm timber, dark 
 cyan/mint/amber practical light. Two timber roof wings on columns frame an open court;
 the north parapet and the east colonnade look over a valley to the mountains. Five machine
 bays stand on low plinths around a paved walking loop, each with at least 3 m clear around
-it and 4 m in front. The machines are placed object assets (machines.py), so the prototype
-in core can drive them from data through machines.bindings.json.
+it and 4 m in front. The machines are the object assets in objects/machines/ (format 0.10
+manifests), placed as world 0.8 objects, so the machines prototype in core can drive them
+from data through machines.bindings.json. Blender reads decoded copies (decode-objects.mjs).
 
     make machine-yard      (Blender through tools/remote-blender.sh, like the other worlds)
 
@@ -24,7 +25,7 @@ from mathutils import Vector
 
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
-import kit, machines
+import kit, effects
 from kit import Part, bl, MATS, CYAN, AMBER
 
 ROOT = HERE.parent
@@ -41,13 +42,16 @@ SKY = {'zenith': (.16, .30, .62), 'horizon': (.55, .64, .74), 'ground': (.07, .0
 Q_EAST = [0, .70711, 0, .70711]    # asset front (+Z) turned to +X
 Q_WEST = [0, -.70711, 0, .70711]   # asset front turned to -X
 INSTANCES = [  # id, asset, position (plinth top), rotation, plinth centre (x, z) and size (x, z)
-    ('ci-1', 'ci-conveyor', (0, .15, -7.0), [0, 0, 0, 1], (0, -7.0), (7.0, 2.8)),
-    ('queue-1', 'queue-stack', (-10.5, .15, -3.5), Q_EAST, (-10.5, -3.5), (2.0, 3.6)),
-    ('rack-1', 'server-rack', (-10.5, .15, 4.5), Q_EAST, (-10.5, 4.5), (2.0, 2.0)),
-    ('deploy-1', 'deploy-lift', (10.5, .15, -3.0), Q_WEST, (10.5, -3.0), (3.2, 3.2)),
+    ('ci-1', 'ci-conveyor', (0, .15, -6.8), [0, 0, 0, 1], (0, -6.8), (9.0, 3.2)),
+    ('queue-1', 'queue-stack', (-10.5, .15, -3.5), Q_EAST, (-10.5, -3.5), (2.8, 3.4)),
+    ('rack-1', 'server-rack', (-10.5, .15, 4.5), Q_EAST, (-10.5, 4.5), (2.2, 2.2)),
+    ('deploy-1', 'deploy-lift', (10.5, .15, -3.0), Q_WEST, (10.5, -3.0), (3.6, 3.6)),
     ('build-1', 'build-monitor', (0, .15, 1.0), [0, 0, 0, 1], (0, 1.0), (2.2, 2.2)),
 ]
+MACHINES = ROOT / 'objects/machines'   # the machine object assets (format 0.10 manifests)
+DECODED = HERE / 'import'              # plain copies for Blender (decode-objects.mjs)
 ITEM_ASSETS = ['job-token', 'fx-spark']
+SCENES = {}  # asset id -> package-relative glTF
 SPAWN = (0, 0, 8.6)
 SCREEN = {'id': 'yard-screen', 'position': (11.25, 2.9, 10.97), 'size': (4.8, 2.7)}
 COLUMNS = [(x, z) for x in (-7.5, 7.5) for z in (-10.4, .4, 10.4)]
@@ -117,7 +121,7 @@ def ground():
 
 
 def walls():
-    H = 5.6
+    H = 6.4
     # West wall with a timber dado, sconces and a cyan strip under the roof.
     solid('walls', 'stone', (-15.5, 0, -11.5), (-15.0, H, 11.5))
     part('walls').box('timber', (-14.97, .75, 0), (.06, 1.3, 22.0), bevel=.01)
@@ -155,11 +159,11 @@ def walls():
     part('walls').box('timber', (15.25, 1.04, 0), (.62, .08, 22.0), bevel=.01)
     for z in PIERS:
         solid('walls', 'stone', (14.95, 0, z - .35), (15.55, H, z + .35), bevel=.03)
-    part('walls').box('strip-cyan', (-14.93, 5.05, 0), (.02, .03, 22.0))
+    part('walls').box('strip-cyan', (-14.93, 5.85, 0), (.02, .03, 22.0))
     # Timber columns on stone bases.
     for x, z in COLUMNS:
         solid('walls', 'stone', (x - .32, 0, z - .32), (x + .32, .5, z + .32), bevel=.03)
-        solid('walls', 'timber', (x - .2, .5, z - .2), (x + .2, 5.3, z + .2), bevel=.02)
+        solid('walls', 'timber', (x - .2, .5, z - .2), (x + .2, 6.1, z + .2), bevel=.02)
         part('walls').box('metal-black', (x, .53, z), (.46, .06, .46), bevel=.01)
 
 
@@ -167,22 +171,22 @@ def roof():
     for side in (-1, 1):
         x0, x1 = (-15.5, -7.1) if side < 0 else (7.1, 15.5)
         cx = (x0 + x1) / 2
-        solid('roof', 'stone', (x0, 5.6, -11.5), (x1, 5.8, 11.5), block=False)
-        part('roof').box('timber', (cx, 5.57, 0), (x1 - x0, .06, 23.0))
+        solid('roof', 'stone', (x0, 6.4, -11.5), (x1, 6.6, 11.5), block=False)
+        part('roof').box('timber', (cx, 6.37, 0), (x1 - x0, .06, 23.0))
         for z in (-10.4, .4, 10.4):
-            part('roof').box('timber', (cx, 5.3, z), (x1 - x0 - .1, .5, .3), bevel=.02)
+            part('roof').box('timber', (cx, 6.1, z), (x1 - x0 - .1, .5, .3), bevel=.02)
         z = -11.0
         while z < 11.1:
-            part('roof').box('timber-dark', (cx, 5.42, z), (x1 - x0 - .2, .2, .1), bevel=.01)
+            part('roof').box('timber-dark', (cx, 6.22, z), (x1 - x0 - .2, .2, .1), bevel=.01)
             z += 1.1
         bays = [(-10.5, -3.5), (-10.5, 4.5)] if side < 0 else [(10.5, -3.0), (12.5, 5.5)]
         for bx, bz in bays:
             for dx in (-.45, .45):
-                part('roof').box('metal-black', (bx + dx, 5.28, bz), (.16, .08, 1.9), bevel=.01)
-                part('roof').box('sconce', (bx + dx, 5.235, bz), (.1, .012, 1.8))
+                part('roof').box('metal-black', (bx + dx, 6.08, bz), (.16, .08, 1.9), bevel=.01)
+                part('roof').box('sconce', (bx + dx, 6.035, bz), (.1, .012, 1.8))
         edge = x1 if side < 0 else x0
-        part('roof').box('metal-black', (edge, 5.55, 0), (.14, .5, 23.0), bevel=.02)
-        part('roof').box('strip-cyan', (edge - side * .08, 5.33, 0), (.02, .03, 23.0))
+        part('roof').box('metal-black', (edge, 6.35, 0), (.14, .5, 23.0), bevel=.02)
+        part('roof').box('strip-cyan', (edge - side * .08, 6.13, 0), (.02, .03, 23.0))
 
 
 def props():
@@ -216,7 +220,7 @@ def props():
         COLLISION.append(([x - .1, 0, z - .1], [x + .1, .9, z + .1])); BLOCKS.append(((x - .1, z - .1), (x + .1, z + .1)))
 
     bench(13.6, 3.5, math.pi / 2); bench(13.6, -8.5, math.pi / 2)
-    for x, z in [(-4.2, 9.6), (4.2, 9.6), (-6.6, -9.2), (6.6, -9.2)]:
+    for x, z in [(-4.2, 9.6), (4.2, 9.6), (-9.6, -9.6), (9.6, -9.6)]:
         planter(x, z)
     for x, z in [(-1.7, 7.6), (1.7, 7.6), (-7.7, 7.7), (7.7, 7.7), (-7.7, -5.2), (7.7, -5.2)]:
         bollard(x, z)
@@ -283,7 +287,7 @@ def atmosphere_blender():
     # Warm pools under the roof wings over the bays (baked; the fixtures above are the visible source).
     for x, z in [(-10.5, -3.5), (-10.5, 4.5), (10.5, -3.0), (12.5, 5.5)]:
         a = bpy.data.lights.new('Bay pool', 'AREA'); a.energy = 900; a.color = (1, .74, .48); a.shape = 'RECTANGLE'; a.size = 1.9; a.size_y = 2.4
-        lo = bpy.data.objects.new('Bay pool', a); s.collection.objects.link(lo); lo.location = bl((x, 5.2, z))
+        lo = bpy.data.objects.new('Bay pool', a); s.collection.objects.link(lo); lo.location = bl((x, 6, z))
 
 
 def render_settings(samples):
@@ -300,21 +304,38 @@ def render_settings(samples):
     s.render.use_stamp_filename = False; s.render.use_stamp_hostname = False
 
 
+def copy_machines():
+    """The machine assets and the job token, as published in objects/machines/ (data files only),
+    plus the fx-spark effect piece built here."""
+    reports = []
+    for asset in [i[1] for i in INSTANCES] + ['job-token']:
+        shutil.copytree(MACHINES / asset, OUT / 'objects' / asset, ignore=shutil.ignore_patterns('*.py', '__pycache__'))
+        assert (DECODED / f'{asset}.glb').exists(), f'run decode-objects.mjs first (make machine-yard): {asset}'
+        reports.append({'id': asset, 'source': f'objects/machines/{asset}'})
+    reports.append(effects.build(OUT / 'objects'))
+    (ART / 'objects-report.json').write_text(json.dumps(reports, indent=1) + '\n')
+
+
+def import_glb(path):
+    before = set(bpy.data.objects)
+    bpy.ops.import_scene.gltf(filepath=str(path))
+    new = [o for o in bpy.data.objects if o not in before]
+    for o in new:
+        if o.name.split('.')[0] == 'proxy':
+            o.hide_render = True; o.hide_viewport = True
+    return new
+
+
 def import_machines():
-    """Placed instances of the built assets, for the bake (occluders) and the stills."""
+    """Placed instances of the machine assets (decoded copies), for the bake (occluders) and the stills."""
     roots = []
     for oid, asset, pos, q, _, _ in INSTANCES:
-        before = set(bpy.data.objects)
-        bpy.ops.import_scene.gltf(filepath=str(OUT / 'objects' / asset / f'{asset}.gltf'))
-        new = [o for o in bpy.data.objects if o not in before]
+        new = import_glb(DECODED / f'{asset}.glb')
         holder = bpy.data.objects.new('Instance-' + oid, None); bpy.context.scene.collection.objects.link(holder)
         for o in new:
-            if o.name.startswith('proxy'):
-                o.hide_render = True; o.hide_viewport = True
             if o.parent is None:
                 o.parent = holder
         holder.location = bl(pos); holder.rotation_euler = (0, 0, 2 * math.atan2(q[1], q[3]))
-        holder['machine'] = True
         roots.append(holder)
     bpy.context.view_layer.update()
     return roots
@@ -334,51 +355,67 @@ def machine_emission(roots, on):
                     p.inputs['Emission Strength'].default_value = m['yard_emit'] if on else 0
 
 
-DEMO_STATES = {  # review stills only: a plausible running moment (the package rests in the first palette state)
-    'ci-1': {'stage_1_lamp': 'ok', 'stage_2_lamp': 'ok', 'stage_3_lamp': 'running', 'stage_4_lamp': 'idle'},
-    'queue-1': {'age_lamp': 'warn'},
-    'rack-1': {**{f'unit_{n}_light': 'ok' for n in range(1, 9)}, 'unit_3_light': 'warn', 'unit_6_light': 'fail'},
-    'deploy-1': {'phase_lamp_1': 'done', 'phase_lamp_2': 'done', 'phase_lamp_3': 'active', 'beacon': 'active'},
-    'build-1': {'face': 'running'},
+# Review stills only: a plausible running moment. The package rests in each palette's first state.
+DEMO_STATES = {
+    'ci-1': {'stage-1-lamp': 'ok', 'stage-2-lamp': 'ok', 'stage-3-lamp': 'running', 'stage-4-lamp': 'idle'},
+    'queue-1': {'level': 'warn'},
+    'rack-1': {**{f'unit-{n}-light': 'ok' for n in range(1, 9)}, 'unit-3-light': 'warn', 'unit-6-light': 'fail'},
+    'deploy-1': {'phase-lamp-1': 'done', 'phase-lamp-2': 'done', 'phase-lamp-3': 'active', 'beacon': 'active'},
+    'build-1': {'face': 'running', 'ring-glow': 'running'},
 }
+DEMO_COUNTS = {('ci-1', 'waiting'): 5, ('ci-1', 'progress'): 6, ('queue-1', 'crates'): 20}
+DEMO_HIDDEN = {'build-1': ['glyph-ok', 'glyph-fail'], 'queue-1': ['alarm-flag']}
+DEMO_TOKENS = [1, 2, 3]  # ci-1 track points with a token
 
 
 def demo_population(roots):
-    """Paint review states and add the runtime's copies (tokens, crates) for the stills."""
+    """Paint review states and add the runtime's copies (tokens, stacked crates) for the stills."""
     def base(o):
         return o.name.split('.')[0]
-    palettes = {}
-    for _, asset, *_ in INSTANCES:
-        for st in json.loads((OUT / 'objects' / asset / 'object.json').read_text())['slots'].get('states', []):
-            palettes[st['id']] = {e['id']: e for e in st['palette']}
-    for h in roots:
-        oid = h.name.removeprefix('Instance-'); kids = {base(o): o for o in h.children_recursive}
-        for slot, state in DEMO_STATES.get(oid, {}).items():
-            e = palettes[slot][state]
-            for ms in kids[slot].material_slots:
+
+    def paint(objs, entry):
+        for o in objs:
+            for ms in o.material_slots:
                 m = ms.material.copy(); ms.material = m; p = m.node_tree.nodes.get('Principled BSDF')
-                p.inputs['Base Color'].default_value = (*e['colour'], 1)
-                p.inputs['Emission Color'].default_value = (*e['colour'], 1); p.inputs['Emission Strength'].default_value = e['emission']
-        def copies(node, offsets):
-            src = kids[node]
-            for d in offsets:
-                c = src.copy(); bpy.context.scene.collection.objects.link(c); c.parent = h
-                c.location = src.location + Vector((d[0], -d[2], d[1]))
-        if oid == 'queue-1':
-            copies('crate', [((i % 6) * .41, (i // 6) * .52, 0) for i in range(1, 15)])
+                p.inputs['Base Color'].default_value = (*entry['colour'], 1)
+                p.inputs['Emission Color'].default_value = (*entry['colour'], 1); p.inputs['Emission Strength'].default_value = entry['emission']
+
+    def clone(src, parent, loc):
+        c = src.copy(); bpy.context.scene.collection.objects.link(c); c.parent = parent; c.location = loc
+        for k in src.children:
+            clone(k, c, k.location.copy())
+        return c
+
+    for h in roots:
+        oid = h.name.removeprefix('Instance-'); asset = next(i[1] for i in INSTANCES if i[0] == oid)
+        slots = json.loads((MACHINES / asset / 'object.json').read_text())['slots']
+        kids = {base(o): o for o in h.children_recursive}
+        for st in slots.get('states', []):
+            state = DEMO_STATES.get(oid, {}).get(st['id'])
+            entry = next((e for e in st['palette'] if e['id'] == state), None)
+            if not entry:
+                continue
+            objs = [kids[n] for n in st.get('nodes', [])] + [o for o in h.children_recursive if o.type == 'MESH' and any(
+                ms.material and ms.material.name.split('.')[0] in st.get('materials', []) for ms in o.material_slots)]
+            paint(objs, entry)
+        for name in DEMO_HIDDEN.get(oid, []):
+            kids[name].hide_render = True
+        for st in slots.get('stacks', []):
+            n = DEMO_COUNTS.get((oid, st['id']), 1); lay = st['layout']; gx, gy, gz = lay['grid']; sx, sy, sz = lay['spacing']
+            src = kids[st['node']]
+            for i in range(1, min(n, st['cap'])):
+                ix, iz, iy = i % gx, (i // gx) % gz, i // (gx * gz)
+                clone(src, src.parent, src.location + bl((ix * sx, iy * sy, iz * sz)))
         if oid == 'ci-1':
-            copies('waiting_crate', [(.3, 0, 0), (0, 0, .3), (.3, 0, .3), (0, .3, 0)])
-            before = set(bpy.data.objects)
-            bpy.ops.import_scene.gltf(filepath=str(OUT / 'objects/job-token/job-token.gltf'))
-            token = [o for o in bpy.data.objects if o not in before][0]; token.parent = h
-            for ms in token.material_slots:
-                if ms.material.name.startswith('job-token'):
-                    p = ms.material.node_tree.nodes.get('Principled BSDF'); e = {'colour': (.11, .48, .68), 'emission': 2}
-                    p.inputs['Base Color'].default_value = (*e['colour'], 1); p.inputs['Emission Color'].default_value = (*e['colour'], 1); p.inputs['Emission Strength'].default_value = 2
-            spots = [(-1.5, .952, 0), (-.45, .952, 0), (.6, .952, 0), (1.1, .952, 0)]
-            token.location = bl(spots[0]); token.rotation_euler = (0, 0, math.pi / 2)
-            for sp in spots[1:]:
-                c = token.copy(); bpy.context.scene.collection.objects.link(c); c.parent = h; c.location = bl(sp)
+            track = slots['tracks'][0]['points']
+            token = import_glb(DECODED / 'job-token.glb')
+            root = next(o for o in token if o.parent is None)
+            band = json.loads((MACHINES / 'job-token/object.json').read_text())['slots']['states'][0]
+            paint([o for o in token if o.type == 'MESH' and any(ms.material and ms.material.name.split('.')[0] in band.get('materials', []) for ms in o.material_slots)],
+                  next(e for e in band['palette'] if e['id'] == 'running'))
+            root.parent = h; root.location = bl(track[DEMO_TOKENS[0]]['position']); root.rotation_euler = (0, 0, math.pi / 2)
+            for k in DEMO_TOKENS[1:]:
+                c = clone(root, h, bl(track[k]['position'])); c.rotation_euler = root.rotation_euler
     bpy.context.view_layer.update()
 
 
@@ -492,7 +529,7 @@ def manifest(g, nodes, lightmaps, col_nodes, nav_node):
     assets = []
     for asset in [i[1] for i in INSTANCES] + ITEM_ASSETS:
         obj = json.loads((OUT / 'objects' / asset / 'object.json').read_text())
-        entry = {'id': asset, 'scene': f'objects/{asset}/{asset}.gltf'}
+        entry = {'id': asset, 'scene': f'objects/{asset}/{obj["scene"]}'}
         anims = obj['traits'].get('decorative', {}).get('animations', [])
         if anims:
             entry['animations'] = anims
@@ -512,7 +549,7 @@ def manifest(g, nodes, lightmaps, col_nodes, nav_node):
         'anchors': [{'id': SCREEN['id'], 'pose': {'position': [sx, sy, sz], 'rotation': [0, 1, 0, 0]}, 'size': list(SCREEN['size']),
                      'screenType': 'com.hyprune.window', 'mount': {'type': 'facade-wall', 'role': 'mounted-workspace', 'interaction': 'focus-in'}}],
         'areas': [{'id': 'yard', 'workspaceSlot': '01', 'primaryAnchor': SCREEN['id'], 'toolAnchors': [], 'dataAnchors': [], 'theme': 'machine-yard', 'spawnId': 'entrance'}],
-        'zones': [{'id': 'yard', 'name': 'Machine Yard', 'bounds': {'min': [-15, -.5, -11], 'max': [15, 6, 11]}}],
+        'zones': [{'id': 'yard', 'name': 'Machine Yard', 'bounds': {'min': [-15, -.5, -11], 'max': [15, 7, 11]}}],
         'navigation': {'kind': 'mesh', 'node': nav_node, 'agentRadius': .3, 'agentHeight': 1.8},
         'collision': [{'node': n, 'shape': 'mesh', 'layer': 'static'} for n in col_nodes],
         'lightmaps': lightmaps,
@@ -520,8 +557,8 @@ def manifest(g, nodes, lightmaps, col_nodes, nav_node):
                        'sky': {'zenith': list(SKY['zenith']), 'horizon': list(SKY['horizon']), 'ground': list(SKY['ground']),
                                'sun': {'direction': [round(v, 4) for v in SUN_DIR], 'color': list(SUN_COLOUR), 'intensity': 3, 'angularRadius': .025}},
                        'exposure': 1, 'toneMapping': 'aces', 'bloom': {'strength': .12, 'threshold': 1, 'radius': 3}},
-        'visibility': {'areas': [{'id': 'yard', 'bounds': {'min': [-15.5, -1, -11.5], 'max': [15.5, 7, 11.5]}, 'nodes': visual, 'visibleFrom': []}]},
-        'playable': {'volumes': [{'type': 'box', 'min': [-15, -1, -11], 'max': [15, 7, 11]}], 'maxFlyHeight': 7},
+        'visibility': {'areas': [{'id': 'yard', 'bounds': {'min': [-15.5, -1, -11.5], 'max': [15.5, 8, 11.5]}, 'nodes': visual, 'visibleFrom': []}]},
+        'playable': {'volumes': [{'type': 'box', 'min': [-15, -1, -11], 'max': [15, 8, 11]}], 'maxFlyHeight': 8},
         'objectAssets': assets, 'objects': objects,
         'extensions': {'com.hyprune.lumen-reach.routes': {'version': 1,
             'nodes': [{'id': i, 'position': list(p), 'waypoint': lbl is not None, **({'label': lbl} if lbl else {})} for i, p, lbl in ROUTE],
@@ -545,7 +582,7 @@ def manifest(g, nodes, lightmaps, col_nodes, nav_node):
 VIEWS = [  # id, eye, target, lens (mm), hide roof
     ('01-entrance', (0, 1.7, 9.6), (0, 1.3, -4), 22, False),
     ('02-overview', (2.0, 13.0, 15.5), (0, 0, -2), 20, False),
-    ('03-conveyor', (3.4, 1.65, -2.2), (-.4, 1.0, -7), 26, False),
+    ('03-conveyor', (4.6, 1.7, -1.6), (-.6, 1.0, -6.8), 22, False),
     ('04-west-bays', (-4.0, 1.7, 8.0), (-10.5, 1.3, -.5), 24, False),
     ('05-lift', (4.2, 1.7, -.6), (10.5, 2.0, -3.4), 24, False),
     ('06-plan', (0, 45, 0), (0, 0, 0), 0, True),
@@ -609,14 +646,12 @@ if __name__ == '__main__':
     ART.mkdir(parents=True, exist_ok=True)
     if a.stage == 'objects':
         (OUT / 'objects').mkdir(parents=True, exist_ok=True)
-        reports = machines.build_all(OUT / 'objects')
-        (ART / 'objects-report.json').write_text(json.dumps(reports, indent=1) + '\n')
+        reports = [effects.build(OUT / 'objects')]
     elif a.stage == 'build':
         if OUT.exists():
             shutil.rmtree(OUT)
         (OUT / 'objects').mkdir(parents=True)
-        reports = machines.build_all(OUT / 'objects')
-        (ART / 'objects-report.json').write_text(json.dumps(reports, indent=1) + '\n')
+        copy_machines()
         build(a.samples)
         stills(a.still_samples, only=a.only)
     else:

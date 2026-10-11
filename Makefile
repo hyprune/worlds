@@ -175,12 +175,17 @@ optimize:
 YARD_PACKAGE := dist/com.hyprune.machine-yard
 YARD_BLENDER := HYPRUNE_BAKE_DIR=hyprune-bake/worlds-machine-yard HYPRUNE_BAKE_PROJECT=machine-yard ./tools/remote-blender.sh -b --python-exit-code 1 -P machine-yard/build.py
 YARD_CORE ?= ../core
+# The machines prototype's checker (a core build with HYPRUNE_MACHINES_PROTOTYPE support), if present.
+YARD_MACHINES_CHECK ?= $(YARD_CORE)/build/machines-check
 .PHONY: machine-yard machine-yard-stills machine-yard-check
+YARD_MACHINES := ci-conveyor queue-stack server-rack deploy-lift build-monitor job-token
 machine-yard:
 	python3 lumen-reach/materials/prepare.py
+	node machine-yard/decode-objects.mjs objects/machines machine-yard/import $(YARD_MACHINES)
 	$(YARD_BLENDER) -- --stage build
 machine-yard-stills:
 	$(YARD_BLENDER) -- --stage stills
 machine-yard-check:
 	node $(SCHEMA_DIR)/bin/validate.mjs world $(YARD_PACKAGE)/world.json - 0.8
 	$(YARD_CORE)/build/hyprune-world-check $(YARD_PACKAGE) > artifacts/machine-yard/world-check.json
+	@if [ -x "$(YARD_MACHINES_CHECK)" ]; then $(YARD_MACHINES_CHECK) $(YARD_PACKAGE) $(YARD_PACKAGE)/machines.bindings.json > artifacts/machine-yard/machines-check.json; fi

@@ -12,7 +12,7 @@ North is -Z. The spawn `entrance` stands inside the south doors, looking north.
 | Instance | Asset | Position (plinth top) | Facing |
 | --- | --- | --- | --- |
 | `build-1` | `build-monitor` | (0, 0.15, 1) | south (+Z), centre of the court |
-| `ci-1` | `ci-conveyor` | (0, 0.15, -7) | south, along the north parapet |
+| `ci-1` | `ci-conveyor` | (0, 0.15, -6.8) | south, along the north parapet |
 | `queue-1` | `queue-stack` | (-10.5, 0.15, -3.5) | east, under the west roof |
 | `rack-1` | `server-rack` | (-10.5, 0.15, 4.5) | east, under the west roof |
 | `deploy-1` | `deploy-lift` | (10.5, 0.15, -3) | west, under the east roof |
@@ -28,31 +28,32 @@ North is -Z. The spawn `entrance` stands inside the south doors, looking north.
   box proxy (`proxy`, outside the drawn scene). A grid navigation mesh, one visibility area,
   a playable box and the walking loop as `com.hyprune.lumen-reach.routes` nodes (the route
   adapter core reads today) complete the package.
-- Lightmaps: Cycles diffuse bakes on UV1 (four groups), OIDN denoised. The machines are
-  placed objects, lit by core's probes, never baked; they are present as occluders in the bake.
+- Lightmaps: Cycles diffuse bakes on UV1 (four groups), OIDN denoised, with warm pools under
+  the roof wings. The machines are placed objects, lit by core's probes, never baked; Blender
+  imports decoded copies (`decode-objects.mjs`: meshopt decoded, KTX2 swapped for the PNG
+  tiles they encode) as occluders in the bake and for the stills.
 
 ## Machines
 
-The machine assets in `objects/<id>/` are **placeholders** built from primitives
-(`machines.py`) with the slot names of the machines prototype: a states slot owns one node, one
-mesh and one material named like the slot (`stage_1_lamp`, `unit_3_light`, `face`...).
-Each directory carries an RFC-0011/RFC-0013 `object.json` (format **0.10** manifests: the
-`machine` trait with typed inputs and drives, and `states`, `labels`, `tracks`, `spawns`,
-`stacks`, `toggles` and `effects` slots). The world's `objectAssets[]` entries stay world
-format 0.8 (inline `scene`, `animations`, `collision`), so today's core loads the package;
-the 0.10 manifests are read only by the machines prototype. The package becomes a world
-format 0.10 package (`objectAssets[].dir`) once core supports it.
+The machines are the object assets in [`objects/machines/`](../objects/machines/README.md),
+copied into the package's `objects/<id>/` (data files only): RFC-0011/RFC-0013 format
+**0.10** manifests (`object.json` with the `machine` trait: typed inputs, drives and slots)
+next to optimised glTF (meshopt, KTX2). The world's `objectAssets[]` entries stay world
+format 0.8 (inline `scene`, the decorative `animations` and the `proxy` collision node), so
+today's core loads the package; the 0.10 manifests are read only by the machines prototype.
+The package becomes a world format 0.10 package (`objectAssets[].dir`) once core supports it.
 
-`job-token` (the conveyor's item) and `fx-spark` (the stand-in effect piece) are listed in
+`job-token` (the conveyor's item) and `fx-spark` (the stand-in effect piece built here by
+`effects.py`, a small unlit diamond painted with the effect colour at runtime) are listed in
 `objectAssets` without placed instances.
 
 | Asset | Inputs | Slots |
 | --- | --- | --- |
-| `ci-conveyor` | `status`, `stage` x4, `jobStarted`, `jobPassed`, `jobFailed`, `queued`, `lastJob` | 4 lamp states, 4 spinner animations, `belt` track with 4 station stops, `item_spawn`, `waiting` stack, `alarm` toggle, `success_fx`, `fail_fx`, `label_title` |
-| `queue-stack` | `depth`, `level` | `crates` stack (24 on four shelves), `age_lamp`, `label_count` |
-| `server-rack` | `health` x8, `load` x8 | 8 light states, 8 fan animations |
-| `deploy-lift` | `status`, `progress`, `environment`, `finished` | `platform` (value-driven `bob`), 4 phase lamps, `beacon` (states + spin, on the mast), `gate_closed` toggle, `burst_fx`, `label_env` |
-| `build-monitor` | `status`, `progress`, `passed`, `lastJob` | `face` state, `ring` animation, `burst_fx`, `label_title` |
+| `ci-conveyor` | `stage` x4, `jobStarted`, `jobPassed`, `jobFailed`, `progress`, `queued`, `pipeline` | states `stage-1-lamp`, `stage-2-lamp`, `stage-3-lamp`, `stage-4-lamp`; labels `label-title`; tracks `track`, `reject`; spawns `item-spawn`, `reject-in`; effects `success-fx`, `fail-fx`; stacks `waiting`, `progress` |
+| `queue-stack` | `depth`, `level`, `name` | states `level`; labels `label-count`, `label-name`; stacks `crates`; toggles `alarm-flag` |
+| `server-rack` | `health` x8, `load`, `name` | states `unit-1-light`, `unit-2-light`, `unit-3-light`, `unit-4-light`, `unit-5-light`, `unit-6-light`, `unit-7-light`, `unit-8-light`; labels `label-name` |
+| `deploy-lift` | `status`, `progress`, `environment`, `finished` | states `phase-lamp-1`, `phase-lamp-2`, `phase-lamp-3`, `phase-lamp-4`, `beacon`; labels `label-env`; effects `burst-fx`; toggles `gate` |
+| `build-monitor` | `status`, `progress`, `succeeded` | states `face`, `ring-glow`; effects `burst-fx`; toggles `glyph-ok`, `glyph-fail`, `glyph-run` |
 
 ## Bindings
 
@@ -63,17 +64,20 @@ inputs to the simulated sources `com.hyprune.sources.{ci,queue,rack,deploy,build
 HYPRUNE_MACHINES_PROTOTYPE=<package>/machines.bindings.json
 ```
 
-It maps the sources' API-like words onto the machines' inputs (`success` -> `ok`, deploy
-`phase` -> `deploying`/`done`/`failed`), turns counters into events and binds repeated inputs
-once with `{n}` in the key. Without the prototype the world loads as an ordinary 0.8 world:
+It maps the sources' API-like words onto the machines' inputs (`success` -> `ok`,
+`failed` -> `fail`, anything else -> `idle`), turns counters into events
+(`jobsStarted` -> `jobStarted`, `successes` -> `succeeded`, `deploys` -> `finished`) and binds
+repeated inputs once with `{n}` in the key (`health.{n}`, `stage.{n}`). `queue-1`'s `name`
+has no source key and keeps its default. Without the prototype the world loads as an ordinary 0.8 world:
 machines rest in their first palette state and spin at their authored speed.
 
 ## Build
 
 ```sh
-make machine-yard          # objects, scene, bake, export, review stills (Blender on the bake host)
+make machine-yard          # decode the machines for Blender, then scene, bake, export, review stills
 make machine-yard-stills   # re-render the stills from the saved .blend
-make machine-yard-check    # schema 0.8 and core's hyprune-world-check
+make machine-yard-check    # schema 0.8, core's hyprune-world-check, and machines-check if built
+                           # (YARD_MACHINES_CHECK=<core build>/machines-check)
 ```
 
 Output: `dist/com.hyprune.machine-yard/`; stills and reports in `artifacts/machine-yard/`.

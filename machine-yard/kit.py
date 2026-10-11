@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: MIT
 """Machine Yard authoring kit: primitives in glTF coordinates, materials from specs,
-glTF post-processing. Imported by build.py and machines.py inside Blender.
+glTF post-processing. Imported by build.py and effects.py inside Blender.
 
 All positions and sizes here are glTF asset/world space: metres, +Y up, front +Z.
 The kit converts to Blender (Z up) internally:
@@ -120,6 +120,7 @@ class Part:
     def _take(self, src, mat, matrix=None):
         if matrix is not None:
             bmesh.ops.transform(src, matrix=matrix, verts=src.verts)
+        src.normal_update()  # faces built by hand have no normal yet (UV0 picks its plane from it)
         mi = self._mi(mat); tile = MATS[mat].get('tile', 1.0)
         vmap = {v: self.bm.verts.new(v.co) for v in src.verts}
         for f in src.faces:

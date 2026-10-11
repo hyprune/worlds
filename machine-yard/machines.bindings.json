@@ -14,27 +14,6 @@
   "instances": {
     "ci-1": {
       "inputs": {
-        "status": {
-          "source": "com.hyprune.sources.ci",
-          "key": "status",
-          "map": {
-            "cases": [
-              {
-                "equals": "success",
-                "to": "ok"
-              },
-              {
-                "equals": "failed",
-                "to": "fail"
-              },
-              {
-                "equals": "running",
-                "to": "running"
-              }
-            ],
-            "else": "idle"
-          }
-        },
         "stage": {
           "source": "com.hyprune.sources.ci",
           "key": "stage.{n}",
@@ -81,7 +60,11 @@
           "source": "com.hyprune.sources.ci",
           "key": "queued"
         },
-        "lastJob": {
+        "progress": {
+          "source": "com.hyprune.sources.ci",
+          "key": "progress"
+        },
+        "pipeline": {
           "source": "com.hyprune.sources.ci",
           "key": "lastJob"
         }
@@ -95,7 +78,27 @@
         },
         "level": {
           "source": "com.hyprune.sources.queue",
-          "key": "level"
+          "key": "level",
+          "map": {
+            "cases": [
+              {
+                "equals": "ok",
+                "to": "ok"
+              },
+              {
+                "equals": "warn",
+                "to": "warn"
+              },
+              {
+                "in": [
+                  "fail",
+                  "critical"
+                ],
+                "to": "fail"
+              }
+            ],
+            "else": "ok"
+          }
         }
       }
     },
@@ -103,11 +106,35 @@
       "inputs": {
         "health": {
           "source": "com.hyprune.sources.rack",
-          "key": "health.{n}"
+          "key": "health.{n}",
+          "map": {
+            "cases": [
+              {
+                "equals": "ok",
+                "to": "ok"
+              },
+              {
+                "equals": "warn",
+                "to": "warn"
+              },
+              {
+                "in": [
+                  "fail",
+                  "down"
+                ],
+                "to": "fail"
+              }
+            ],
+            "else": "off"
+          }
         },
         "load": {
           "source": "com.hyprune.sources.rack",
-          "key": "load.{n}"
+          "key": "load"
+        },
+        "name": {
+          "source": "com.hyprune.sources.rack",
+          "key": "name"
         }
       }
     },
@@ -119,16 +146,20 @@
           "map": {
             "cases": [
               {
-                "in": [
-                  "queued",
-                  "building",
-                  "rolling"
-                ],
-                "to": "deploying"
+                "equals": "queued",
+                "to": "queued"
+              },
+              {
+                "equals": "building",
+                "to": "building"
+              },
+              {
+                "equals": "rolling",
+                "to": "rolling"
               },
               {
                 "equals": "live",
-                "to": "done"
+                "to": "live"
               },
               {
                 "equals": "failed",
@@ -182,16 +213,12 @@
           "source": "com.hyprune.sources.build",
           "key": "progress"
         },
-        "passed": {
+        "succeeded": {
           "source": "com.hyprune.sources.build",
           "key": "successes",
           "map": {
             "counter": true
           }
-        },
-        "lastJob": {
-          "source": "com.hyprune.sources.build",
-          "key": "lastJob"
         }
       }
     }
