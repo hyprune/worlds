@@ -7,13 +7,13 @@
  "coreCommit": "9e50dfbb269737aca5f77d5a4120f988bb292b4e",
  "packages": {
   "A": {
-   "path": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/before",
+   "path": "$WORKSPACE/worlds/artifacts/opt-0.9.1/before",
    "version": "0.9.0",
    "formatVersion": "0.7",
    "manifestSHA256": "375478640875af83e91567f497b484cd66b736f5220e1e715e6cdb1e8a9f2fe0"
   },
   "B": {
-   "path": "/home/rick/workspace/hyprune/worlds/dist-07/com.hyprune.lumen-reach",
+   "path": "$WORKSPACE/worlds/dist-07/com.hyprune.lumen-reach",
    "version": "0.9.1",
    "formatVersion": "0.7",
    "manifestSHA256": "0162f1e62cfbab63d2be52a461758b2d55068d02fa4487591ed105700de72ed2"

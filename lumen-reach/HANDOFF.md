@@ -8,7 +8,7 @@ owner's live-test findings arrived, so they ship in 0.9.1 with the rails.
 ## Release candidate
 
 - `dist-07/com.hyprune.lumen-reach/` (format 0.7) from source `dist/`
-  (format 0.6) built at `e80c8d7` on 10.2.2.2.
+  (format 0.6) built at `e80c8d7` on the bake host.
 - Manifest SHA256 `0162f1e62cfb…`; all nested gates ran on it.
 - Archive `artifacts/releases/com.hyprune.lumen-reach-0.9.1.tar.zst`,
   39,311,878 bytes, SHA256

@@ -42,7 +42,7 @@
         "renderScale": 0.5,
         "roll": 0.0
       },
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/owner-1791547507663.png",
+      "path": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/owner-1791547507663.png",
       "timings": {
         "captureMs": 0.040579,
         "collisionTriangles": 5518,
@@ -170,7 +170,7 @@
       },
       "verticalStreakCandidateFraction": 0.0,
       "cullingChangedPixelFraction": 0.0,
-      "unculledPath": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/owner-1791547507663-unculled.png"
+      "unculledPath": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/owner-1791547507663-unculled.png"
     },
     {
       "id": "owner-1791547755306",
@@ -207,7 +207,7 @@
         "renderScale": 0.5,
         "roll": 0.0
       },
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/owner-1791547755306.png",
+      "path": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/owner-1791547755306.png",
       "timings": {
         "captureMs": 0.039165,
         "collisionTriangles": 5518,
@@ -335,7 +335,7 @@
       },
       "verticalStreakCandidateFraction": 0.002176278563656148,
       "cullingChangedPixelFraction": 0.0,
-      "unculledPath": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/owner-1791547755306-unculled.png"
+      "unculledPath": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/owner-1791547755306-unculled.png"
     },
     {
       "id": "owner-1791547761094",
@@ -372,7 +372,7 @@
         "renderScale": 0.5,
         "roll": -3.7252894102834944e-09
       },
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/owner-1791547761094.png",
+      "path": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/owner-1791547761094.png",
       "timings": {
         "captureMs": 0.021739,
         "collisionTriangles": 5518,
@@ -500,7 +500,7 @@
       },
       "verticalStreakCandidateFraction": 0.002176278563656148,
       "cullingChangedPixelFraction": 0.0,
-      "unculledPath": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/owner-1791547761094-unculled.png"
+      "unculledPath": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/owner-1791547761094-unculled.png"
     },
     {
       "id": "owner-1791547776428",
@@ -537,7 +537,7 @@
         "renderScale": 0.5,
         "roll": 2.9802322387695312e-08
       },
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/owner-1791547776428.png",
+      "path": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/owner-1791547776428.png",
       "timings": {
         "captureMs": 0.023466,
         "collisionTriangles": 5518,
@@ -665,7 +665,7 @@
       },
       "verticalStreakCandidateFraction": 0.0,
       "cullingChangedPixelFraction": 0.0,
-      "unculledPath": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/owner-1791547776428-unculled.png"
+      "unculledPath": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/owner-1791547776428-unculled.png"
     },
     {
       "id": "owner-1791547781479",
@@ -702,7 +702,7 @@
         "renderScale": 0.5,
         "roll": -1.4901159417490817e-08
       },
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/owner-1791547781479.png",
+      "path": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/owner-1791547781479.png",
       "timings": {
         "captureMs": 0.037452,
         "collisionTriangles": 5518,
@@ -830,7 +830,7 @@
       },
       "verticalStreakCandidateFraction": 0.0,
       "cullingChangedPixelFraction": 0.0,
-      "unculledPath": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/owner-1791547781479-unculled.png"
+      "unculledPath": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/owner-1791547781479-unculled.png"
     },
     {
       "id": "owner-1791547802616",
@@ -867,7 +867,7 @@
         "renderScale": 0.5,
         "roll": -1.4901162970204496e-08
       },
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/owner-1791547802616.png",
+      "path": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/owner-1791547802616.png",
       "timings": {
         "captureMs": 0.034624,
         "collisionTriangles": 5518,
@@ -995,7 +995,7 @@
       },
       "verticalStreakCandidateFraction": 0.0,
       "cullingChangedPixelFraction": 0.0,
-      "unculledPath": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/owner-1791547802616-unculled.png"
+      "unculledPath": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/owner-1791547802616-unculled.png"
     },
     {
       "id": "owner-1791547819687",
@@ -1032,7 +1032,7 @@
         "renderScale": 0.5,
         "roll": 1.862645149230957e-09
       },
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/owner-1791547819687.png",
+      "path": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/owner-1791547819687.png",
       "timings": {
         "captureMs": 0.034309,
         "collisionTriangles": 5518,
@@ -1160,7 +1160,7 @@
       },
       "verticalStreakCandidateFraction": 0.00544069640914037,
       "cullingChangedPixelFraction": 0.0,
-      "unculledPath": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/owner-1791547819687-unculled.png"
+      "unculledPath": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/owner-1791547819687-unculled.png"
     },
     {
       "id": "owner-1791547839640",
@@ -1197,7 +1197,7 @@
         "renderScale": 0.5,
         "roll": 2.980232594040899e-08
       },
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/owner-1791547839640.png",
+      "path": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/owner-1791547839640.png",
       "timings": {
         "captureMs": 0.025757,
         "collisionTriangles": 5518,
@@ -1325,7 +1325,7 @@
       },
       "verticalStreakCandidateFraction": 0.0,
       "cullingChangedPixelFraction": 0.0,
-      "unculledPath": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/owner-1791547839640-unculled.png"
+      "unculledPath": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/owner-1791547839640-unculled.png"
     },
     {
       "id": "owner-1791547849421",
@@ -1362,7 +1362,7 @@
         "renderScale": 0.5,
         "roll": 2.6822095833267667e-07
       },
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/owner-1791547849421.png",
+      "path": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/owner-1791547849421.png",
       "timings": {
         "captureMs": 0.027975,
         "collisionTriangles": 5518,
@@ -1490,7 +1490,7 @@
       },
       "verticalStreakCandidateFraction": 0.0,
       "cullingChangedPixelFraction": 0.0,
-      "unculledPath": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/owner-1791547849421-unculled.png"
+      "unculledPath": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/owner-1791547849421-unculled.png"
     },
     {
       "id": "owner-1791554896814",
@@ -1527,7 +1527,7 @@
         "renderScale": 0.5,
         "roll": -9.313225746154785e-09
       },
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/owner-1791554896814.png",
+      "path": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/owner-1791554896814.png",
       "timings": {
         "captureMs": 0.030283,
         "collisionTriangles": 5518,
@@ -1655,7 +1655,7 @@
       },
       "verticalStreakCandidateFraction": 0.0,
       "cullingChangedPixelFraction": 0.0,
-      "unculledPath": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/owner-1791554896814-unculled.png"
+      "unculledPath": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/owner-1791554896814-unculled.png"
     },
     {
       "id": "owner-1791558572827",
@@ -1692,7 +1692,7 @@
         "renderScale": 0.5,
         "roll": 0.0
       },
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/owner-1791558572827.png",
+      "path": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/owner-1791558572827.png",
       "timings": {
         "captureMs": 0.039448,
         "collisionTriangles": 5518,
@@ -1820,7 +1820,7 @@
       },
       "verticalStreakCandidateFraction": 0.0,
       "cullingChangedPixelFraction": 0.0,
-      "unculledPath": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/owner-1791558572827-unculled.png"
+      "unculledPath": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/owner-1791558572827-unculled.png"
     },
     {
       "id": "owner-1791558584009",
@@ -1857,7 +1857,7 @@
         "renderScale": 0.5,
         "roll": 1.862645149230957e-09
       },
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/owner-1791558584009.png",
+      "path": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/owner-1791558584009.png",
       "timings": {
         "captureMs": 0.043282,
         "collisionTriangles": 5518,
@@ -1985,7 +1985,7 @@
       },
       "verticalStreakCandidateFraction": 0.0,
       "cullingChangedPixelFraction": 0.0,
-      "unculledPath": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/owner-1791558584009-unculled.png"
+      "unculledPath": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/owner-1791558584009-unculled.png"
     },
     {
       "id": "owner-1791558599880",
@@ -2022,7 +2022,7 @@
         "renderScale": 0.5,
         "roll": 4.470348713425665e-08
       },
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/owner-1791558599880.png",
+      "path": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/owner-1791558599880.png",
       "timings": {
         "captureMs": 0.021426,
         "collisionTriangles": 5518,
@@ -2150,7 +2150,7 @@
       },
       "verticalStreakCandidateFraction": 0.0,
       "cullingChangedPixelFraction": 0.0,
-      "unculledPath": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/owner-1791558599880-unculled.png"
+      "unculledPath": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/owner-1791558599880-unculled.png"
     },
     {
       "id": "owner-1791558632233",
@@ -2187,7 +2187,7 @@
         "renderScale": 0.5,
         "roll": 9.313223525708736e-10
       },
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/owner-1791558632233.png",
+      "path": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/owner-1791558632233.png",
       "timings": {
         "captureMs": 0.027405,
         "collisionTriangles": 5518,
@@ -2315,7 +2315,7 @@
       },
       "verticalStreakCandidateFraction": 0.003264417845484222,
       "cullingChangedPixelFraction": 0.0,
-      "unculledPath": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/owner-1791558632233-unculled.png"
+      "unculledPath": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/owner-1791558632233-unculled.png"
     },
     {
       "id": "owner-1791643925093",
@@ -2352,7 +2352,7 @@
         "renderScale": 0.5,
         "roll": -9.313225746154785e-10
       },
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/owner-1791643925093.png",
+      "path": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/owner-1791643925093.png",
       "timings": {
         "captureMs": 0.033324,
         "collisionTriangles": 5518,
@@ -2480,7 +2480,7 @@
       },
       "verticalStreakCandidateFraction": 0.0,
       "cullingChangedPixelFraction": 0.0,
-      "unculledPath": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/owner-1791643925093-unculled.png"
+      "unculledPath": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/owner-1791643925093-unculled.png"
     },
     {
       "id": "owner-1791643941741",
@@ -2517,7 +2517,7 @@
         "renderScale": 0.5,
         "roll": 0.0
       },
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/owner-1791643941741.png",
+      "path": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/owner-1791643941741.png",
       "timings": {
         "captureMs": 0.054483,
         "collisionTriangles": 5518,
@@ -2645,7 +2645,7 @@
       },
       "verticalStreakCandidateFraction": 0.002176278563656148,
       "cullingChangedPixelFraction": 0.0,
-      "unculledPath": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/owner-1791643941741-unculled.png"
+      "unculledPath": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/owner-1791643941741-unculled.png"
     },
     {
       "id": "owner-1791643948449",
@@ -2682,7 +2682,7 @@
         "renderScale": 0.5,
         "roll": 7.450580596923828e-09
       },
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/owner-1791643948449.png",
+      "path": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/owner-1791643948449.png",
       "timings": {
         "captureMs": 0.021578,
         "collisionTriangles": 5518,
@@ -2810,7 +2810,7 @@
       },
       "verticalStreakCandidateFraction": 0.0,
       "cullingChangedPixelFraction": 0.0,
-      "unculledPath": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/owner-1791643948449-unculled.png"
+      "unculledPath": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/owner-1791643948449-unculled.png"
     },
     {
       "id": "owner-1791644156827",
@@ -2847,7 +2847,7 @@
         "renderScale": 0.5,
         "roll": 3.725290298461914e-09
       },
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/owner-1791644156827.png",
+      "path": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/owner-1791644156827.png",
       "timings": {
         "captureMs": 0.037536,
         "collisionTriangles": 5518,
@@ -2975,7 +2975,7 @@
       },
       "verticalStreakCandidateFraction": 0.00544069640914037,
       "cullingChangedPixelFraction": 0.0,
-      "unculledPath": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/owner-1791644156827-unculled.png"
+      "unculledPath": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/owner-1791644156827-unculled.png"
     },
     {
       "id": "01-sun-court",
@@ -3012,7 +3012,7 @@
         "renderScale": 0.5,
         "roll": 3.725290298461914e-09
       },
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/01-sun-court.png",
+      "path": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/01-sun-court.png",
       "timings": {
         "captureMs": 0.019998,
         "collisionTriangles": 5518,
@@ -3140,7 +3140,7 @@
       },
       "verticalStreakCandidateFraction": 0.0,
       "cullingChangedPixelFraction": 0.0,
-      "unculledPath": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/01-sun-court-unculled.png",
+      "unculledPath": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/01-sun-court-unculled.png",
       "performanceSamples": [
         {
           "captureMs": 0.022325,
@@ -7184,7 +7184,7 @@
         "renderScale": 0.5,
         "roll": 0.0
       },
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/02-array-hall.png",
+      "path": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/02-array-hall.png",
       "timings": {
         "captureMs": 0.04593,
         "collisionTriangles": 5518,
@@ -7312,7 +7312,7 @@
       },
       "verticalStreakCandidateFraction": 0.006528835690968444,
       "cullingChangedPixelFraction": 0.0,
-      "unculledPath": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/02-array-hall-unculled.png",
+      "unculledPath": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/02-array-hall-unculled.png",
       "performanceSamples": [
         {
           "captureMs": 0.015226,
@@ -11356,7 +11356,7 @@
         "renderScale": 0.5,
         "roll": 3.725290742551124e-09
       },
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/03-rime-vault.png",
+      "path": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/03-rime-vault.png",
       "timings": {
         "captureMs": 0.070113,
         "collisionTriangles": 5518,
@@ -11484,7 +11484,7 @@
       },
       "verticalStreakCandidateFraction": 0.004352557127312296,
       "cullingChangedPixelFraction": 0.0,
-      "unculledPath": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/03-rime-vault-unculled.png",
+      "unculledPath": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/03-rime-vault-unculled.png",
       "performanceSamples": [
         {
           "captureMs": 0.025789,
@@ -15528,7 +15528,7 @@
         "renderScale": 0.5,
         "roll": -7.450580596923828e-09
       },
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/04-signal-rise.png",
+      "path": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/04-signal-rise.png",
       "timings": {
         "captureMs": 0.022403,
         "collisionTriangles": 5518,
@@ -15656,7 +15656,7 @@
       },
       "verticalStreakCandidateFraction": 0.002176278563656148,
       "cullingChangedPixelFraction": 0.0,
-      "unculledPath": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/04-signal-rise-unculled.png",
+      "unculledPath": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/04-signal-rise-unculled.png",
       "performanceSamples": [
         {
           "captureMs": 0.04153,
@@ -19700,7 +19700,7 @@
         "renderScale": 0.5,
         "roll": 0.0
       },
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/court-60-down.png",
+      "path": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/court-60-down.png",
       "timings": {
         "captureMs": 0.020912,
         "collisionTriangles": 5518,
@@ -19828,7 +19828,7 @@
       },
       "verticalStreakCandidateFraction": 0.0,
       "cullingChangedPixelFraction": 0.0,
-      "unculledPath": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/court-60-down-unculled.png"
+      "unculledPath": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/court-60-down-unculled.png"
     },
     {
       "id": "court-60-north",
@@ -19865,7 +19865,7 @@
         "renderScale": 0.5,
         "roll": 7.450580596923828e-09
       },
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/court-60-north.png",
+      "path": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/court-60-north.png",
       "timings": {
         "captureMs": 0.033396,
         "collisionTriangles": 5518,
@@ -19993,7 +19993,7 @@
       },
       "verticalStreakCandidateFraction": 0.0,
       "cullingChangedPixelFraction": 0.0,
-      "unculledPath": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/court-60-north-unculled.png"
+      "unculledPath": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/court-60-north-unculled.png"
     },
     {
       "id": "sky-seam",
@@ -20030,7 +20030,7 @@
         "renderScale": 0.5,
         "roll": -4.043020140898079e-09
       },
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/sky-seam.png",
+      "path": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/sky-seam.png",
       "timings": {
         "captureMs": 0.024139,
         "collisionTriangles": 5518,
@@ -20158,7 +20158,7 @@
       },
       "verticalStreakCandidateFraction": 0.0,
       "cullingChangedPixelFraction": 0.0,
-      "unculledPath": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/sky-seam-unculled.png"
+      "unculledPath": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/sky-seam-unculled.png"
     },
     {
       "id": "sky-zenith",
@@ -20195,7 +20195,7 @@
         "renderScale": 0.5,
         "roll": 0.0
       },
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/sky-zenith.png",
+      "path": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/sky-zenith.png",
       "timings": {
         "captureMs": 0.029613,
         "collisionTriangles": 5518,
@@ -20323,7 +20323,7 @@
       },
       "verticalStreakCandidateFraction": 0.0,
       "cullingChangedPixelFraction": 0.0,
-      "unculledPath": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/sky-zenith-unculled.png"
+      "unculledPath": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/sky-zenith-unculled.png"
     },
     {
       "id": "hall-roof",
@@ -20360,7 +20360,7 @@
         "renderScale": 0.5,
         "roll": -2.980232238769531e-07
       },
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/hall-roof.png",
+      "path": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/hall-roof.png",
       "timings": {
         "captureMs": 0.023112,
         "collisionTriangles": 5518,
@@ -20488,7 +20488,7 @@
       },
       "verticalStreakCandidateFraction": 0.0,
       "cullingChangedPixelFraction": 0.0,
-      "unculledPath": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/hall-roof-unculled.png"
+      "unculledPath": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/hall-roof-unculled.png"
     },
     {
       "id": "vault-roof",
@@ -20525,7 +20525,7 @@
         "renderScale": 0.5,
         "roll": 5.960464477539063e-08
       },
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/vault-roof.png",
+      "path": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/vault-roof.png",
       "timings": {
         "captureMs": 0.023494,
         "collisionTriangles": 5518,
@@ -20653,7 +20653,7 @@
       },
       "verticalStreakCandidateFraction": 0.0,
       "cullingChangedPixelFraction": 0.0,
-      "unculledPath": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/vault-roof-unculled.png"
+      "unculledPath": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/vault-roof-unculled.png"
     },
     {
       "id": "rise-60",
@@ -20690,7 +20690,7 @@
         "renderScale": 0.5,
         "roll": 0.0
       },
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/rise-60.png",
+      "path": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/rise-60.png",
       "timings": {
         "captureMs": 0.011284,
         "collisionTriangles": 5518,
@@ -20818,7 +20818,7 @@
       },
       "verticalStreakCandidateFraction": 0.002176278563656148,
       "cullingChangedPixelFraction": 0.0,
-      "unculledPath": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/rise-60-unculled.png"
+      "unculledPath": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/rise-60-unculled.png"
     },
     {
       "id": "rise-exterior",
@@ -20855,7 +20855,7 @@
         "renderScale": 0.5,
         "roll": -2.9802318834981634e-08
       },
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/rise-exterior.png",
+      "path": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/rise-exterior.png",
       "timings": {
         "captureMs": 0.017631,
         "collisionTriangles": 5518,
@@ -20983,7 +20983,7 @@
       },
       "verticalStreakCandidateFraction": 0.0,
       "cullingChangedPixelFraction": 0.0,
-      "unculledPath": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/rise-exterior-unculled.png"
+      "unculledPath": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/rise-exterior-unculled.png"
     },
     {
       "id": "stair-soffit",
@@ -21020,7 +21020,7 @@
         "renderScale": 0.5,
         "roll": -2.9802322387695312e-08
       },
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/stair-soffit.png",
+      "path": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/stair-soffit.png",
       "timings": {
         "captureMs": 0.032588,
         "collisionTriangles": 5518,
@@ -21148,7 +21148,7 @@
       },
       "verticalStreakCandidateFraction": 0.0,
       "cullingChangedPixelFraction": 0.0,
-      "unculledPath": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/stair-soffit-unculled.png"
+      "unculledPath": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/stair-soffit-unculled.png"
     },
     {
       "id": "cascade-model",
@@ -21185,7 +21185,7 @@
         "renderScale": 0.5,
         "roll": 7.450580596923828e-09
       },
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/cascade-model.png",
+      "path": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/cascade-model.png",
       "timings": {
         "captureMs": 0.025645,
         "collisionTriangles": 5518,
@@ -21313,7 +21313,7 @@
       },
       "verticalStreakCandidateFraction": 0.0,
       "cullingChangedPixelFraction": 0.0,
-      "unculledPath": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/cascade-model-unculled.png"
+      "unculledPath": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/cascade-model-unculled.png"
     },
     {
       "id": "spire-model",
@@ -21350,7 +21350,7 @@
         "renderScale": 0.5,
         "roll": 0.0
       },
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/spire-model.png",
+      "path": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/spire-model.png",
       "timings": {
         "captureMs": 0.019042,
         "collisionTriangles": 5518,
@@ -21478,7 +21478,7 @@
       },
       "verticalStreakCandidateFraction": 0.0,
       "cullingChangedPixelFraction": 0.0,
-      "unculledPath": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/spire-model-unculled.png"
+      "unculledPath": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/spire-model-unculled.png"
     },
     {
       "id": "rise-zenith",
@@ -21515,7 +21515,7 @@
         "renderScale": 0.5,
         "roll": 0.0
       },
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/rise-zenith.png",
+      "path": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/rise-zenith.png",
       "timings": {
         "captureMs": 0.02119,
         "collisionTriangles": 5518,
@@ -21643,7 +21643,7 @@
       },
       "verticalStreakCandidateFraction": 0.0,
       "cullingChangedPixelFraction": 0.0,
-      "unculledPath": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/rise-zenith-unculled.png"
+      "unculledPath": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/rise-zenith-unculled.png"
     },
     {
       "id": "rise-corner-se",
@@ -21680,7 +21680,7 @@
         "renderScale": 0.5,
         "roll": 0.0
       },
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/rise-corner-se.png",
+      "path": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/rise-corner-se.png",
       "timings": {
         "captureMs": 0.03781,
         "collisionTriangles": 5518,
@@ -21808,7 +21808,7 @@
       },
       "verticalStreakCandidateFraction": 0.002176278563656148,
       "cullingChangedPixelFraction": 0.0,
-      "unculledPath": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/rise-corner-se-unculled.png"
+      "unculledPath": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/rise-corner-se-unculled.png"
     },
     {
       "id": "rise-corner-sw",
@@ -21845,7 +21845,7 @@
         "renderScale": 0.5,
         "roll": 0.0
       },
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/rise-corner-sw.png",
+      "path": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/rise-corner-sw.png",
       "timings": {
         "captureMs": 0.030957,
         "collisionTriangles": 5518,
@@ -21973,7 +21973,7 @@
       },
       "verticalStreakCandidateFraction": 0.011969532100108813,
       "cullingChangedPixelFraction": 0.0,
-      "unculledPath": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/rise-corner-sw-unculled.png"
+      "unculledPath": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/rise-corner-sw-unculled.png"
     },
     {
       "id": "stair-tunnel-up",
@@ -22010,7 +22010,7 @@
         "renderScale": 0.5,
         "roll": 0.0
       },
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/stair-tunnel-up.png",
+      "path": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/stair-tunnel-up.png",
       "timings": {
         "captureMs": 0.035019,
         "collisionTriangles": 5518,
@@ -22138,7 +22138,7 @@
       },
       "verticalStreakCandidateFraction": 0.0,
       "cullingChangedPixelFraction": 0.0,
-      "unculledPath": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/stair-tunnel-up-unculled.png"
+      "unculledPath": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/stair-tunnel-up-unculled.png"
     },
     {
       "id": "court-day-seam",
@@ -22175,7 +22175,7 @@
         "renderScale": 0.5,
         "roll": 0.0
       },
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/court-day-seam.png",
+      "path": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/court-day-seam.png",
       "timings": {
         "captureMs": 0.038717,
         "collisionTriangles": 5518,
@@ -22303,7 +22303,7 @@
       },
       "verticalStreakCandidateFraction": 0.0,
       "cullingChangedPixelFraction": 0.0,
-      "unculledPath": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/court-day-seam-unculled.png"
+      "unculledPath": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/court-day-seam-unculled.png"
     },
     {
       "id": "roof-ramp-foot",
@@ -22340,7 +22340,7 @@
         "renderScale": 0.5,
         "roll": 0.0
       },
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/roof-ramp-foot.png",
+      "path": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/roof-ramp-foot.png",
       "timings": {
         "captureMs": 0.051464,
         "collisionTriangles": 5518,
@@ -22468,7 +22468,7 @@
       },
       "verticalStreakCandidateFraction": 0.0,
       "cullingChangedPixelFraction": 0.0,
-      "unculledPath": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/roof-ramp-foot-unculled.png"
+      "unculledPath": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/roof-ramp-foot-unculled.png"
     },
     {
       "id": "roof-ramp-foot-eye",
@@ -22505,7 +22505,7 @@
         "renderScale": 0.5,
         "roll": -5.587935891782081e-09
       },
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/roof-ramp-foot-eye.png",
+      "path": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/roof-ramp-foot-eye.png",
       "timings": {
         "captureMs": 0.031037,
         "collisionTriangles": 5518,
@@ -22633,7 +22633,7 @@
       },
       "verticalStreakCandidateFraction": 0.001088139281828074,
       "cullingChangedPixelFraction": 0.0,
-      "unculledPath": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/roof-ramp-foot-eye-unculled.png"
+      "unculledPath": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/roof-ramp-foot-eye-unculled.png"
     },
     {
       "id": "roof-bridge-eye",
@@ -22670,7 +22670,7 @@
         "renderScale": 0.5,
         "roll": 0.0
       },
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/roof-bridge-eye.png",
+      "path": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/roof-bridge-eye.png",
       "timings": {
         "captureMs": 0.029699,
         "collisionTriangles": 5518,
@@ -22798,7 +22798,7 @@
       },
       "verticalStreakCandidateFraction": 0.002176278563656148,
       "cullingChangedPixelFraction": 0.0,
-      "unculledPath": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/roof-bridge-eye-unculled.png"
+      "unculledPath": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/roof-bridge-eye-unculled.png"
     },
     {
       "id": "vault-north-up",
@@ -22835,7 +22835,7 @@
         "renderScale": 0.5,
         "roll": -7.889739350730451e-08
       },
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/vault-north-up.png",
+      "path": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/vault-north-up.png",
       "timings": {
         "captureMs": 0.042439,
         "collisionTriangles": 5518,
@@ -22963,7 +22963,7 @@
       },
       "verticalStreakCandidateFraction": 0.0,
       "cullingChangedPixelFraction": 0.0,
-      "unculledPath": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/vault-north-up-unculled.png"
+      "unculledPath": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/vault-north-up-unculled.png"
     },
     {
       "id": "vault-center-north",
@@ -23000,7 +23000,7 @@
         "renderScale": 0.5,
         "roll": -3.0012486718078435e-08
       },
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/vault-center-north.png",
+      "path": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/vault-center-north.png",
       "timings": {
         "captureMs": 0.02463,
         "collisionTriangles": 5518,
@@ -23128,7 +23128,7 @@
       },
       "verticalStreakCandidateFraction": 0.001088139281828074,
       "cullingChangedPixelFraction": 0.0,
-      "unculledPath": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/vault-center-north-unculled.png"
+      "unculledPath": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/vault-center-north-unculled.png"
     },
     {
       "id": "vault-walk-north",
@@ -23165,7 +23165,7 @@
         "renderScale": 0.5,
         "roll": 3.725290742551124e-09
       },
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/vault-walk-north.png",
+      "path": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/vault-walk-north.png",
       "timings": {
         "captureMs": 0.03043,
         "collisionTriangles": 5518,
@@ -23293,7 +23293,7 @@
       },
       "verticalStreakCandidateFraction": 0.0,
       "cullingChangedPixelFraction": 0.0,
-      "unculledPath": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/vault-walk-north-unculled.png"
+      "unculledPath": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/vault-walk-north-unculled.png"
     },
     {
       "id": "rail-bridge-north",
@@ -23330,7 +23330,7 @@
         "renderScale": 0.5,
         "roll": -7.450580596923828e-09
       },
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/rail-bridge-north.png",
+      "path": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/rail-bridge-north.png",
       "timings": {
         "captureMs": 0.022766,
         "collisionTriangles": 5518,
@@ -23458,7 +23458,7 @@
       },
       "verticalStreakCandidateFraction": 0.0,
       "cullingChangedPixelFraction": 0.0,
-      "unculledPath": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/rail-bridge-north-unculled.png"
+      "unculledPath": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/rail-bridge-north-unculled.png"
     },
     {
       "id": "rail-run-east",
@@ -23495,7 +23495,7 @@
         "renderScale": 0.5,
         "roll": 1.303851426825986e-08
       },
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/rail-run-east.png",
+      "path": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/rail-run-east.png",
       "timings": {
         "captureMs": 0.020313,
         "collisionTriangles": 5518,
@@ -23623,7 +23623,7 @@
       },
       "verticalStreakCandidateFraction": 0.002176278563656148,
       "cullingChangedPixelFraction": 0.0,
-      "unculledPath": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/rail-run-east-unculled.png"
+      "unculledPath": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/rail-run-east-unculled.png"
     },
     {
       "id": "rail-rooftop-north",
@@ -23660,7 +23660,7 @@
         "renderScale": 0.5,
         "roll": -1.4901162970204496e-08
       },
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/rail-rooftop-north.png",
+      "path": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/rail-rooftop-north.png",
       "timings": {
         "captureMs": 0.046951,
         "collisionTriangles": 5518,
@@ -23788,7 +23788,7 @@
       },
       "verticalStreakCandidateFraction": 0.001088139281828074,
       "cullingChangedPixelFraction": 0.0,
-      "unculledPath": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/rail-rooftop-north-unculled.png"
+      "unculledPath": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/rail-rooftop-north-unculled.png"
     },
     {
       "id": "rail-landing12-west",
@@ -23825,7 +23825,7 @@
         "renderScale": 0.5,
         "roll": -2.7939677238464355e-08
       },
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/rail-landing12-west.png",
+      "path": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/rail-landing12-west.png",
       "timings": {
         "captureMs": 0.046367,
         "collisionTriangles": 5518,
@@ -23953,7 +23953,7 @@
       },
       "verticalStreakCandidateFraction": 0.0,
       "cullingChangedPixelFraction": 0.0,
-      "unculledPath": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/rail-landing12-west-unculled.png"
+      "unculledPath": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/rail-landing12-west-unculled.png"
     },
     {
       "id": "rail-landing8-corner",
@@ -23990,7 +23990,7 @@
         "renderScale": 0.5,
         "roll": 0.0
       },
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/rail-landing8-corner.png",
+      "path": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/rail-landing8-corner.png",
       "timings": {
         "captureMs": 0.0201,
         "collisionTriangles": 5518,
@@ -24118,7 +24118,7 @@
       },
       "verticalStreakCandidateFraction": 0.0,
       "cullingChangedPixelFraction": 0.0,
-      "unculledPath": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/rail-landing8-corner-unculled.png"
+      "unculledPath": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/rail-landing8-corner-unculled.png"
     },
     {
       "id": "rail-balcony-west",
@@ -24155,7 +24155,7 @@
         "renderScale": 0.5,
         "roll": -2.421438694000244e-08
       },
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/rail-balcony-west.png",
+      "path": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/rail-balcony-west.png",
       "timings": {
         "captureMs": 0.066295,
         "collisionTriangles": 5518,
@@ -24283,7 +24283,7 @@
       },
       "verticalStreakCandidateFraction": 0.001088139281828074,
       "cullingChangedPixelFraction": 0.0,
-      "unculledPath": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/rail-balcony-west-unculled.png"
+      "unculledPath": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/rail-balcony-west-unculled.png"
     },
     {
       "id": "globe-ring-near",
@@ -24320,7 +24320,7 @@
         "renderScale": 0.5,
         "roll": 0.0
       },
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/globe-ring-near.png",
+      "path": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/globe-ring-near.png",
       "timings": {
         "captureMs": 0.021426,
         "collisionTriangles": 5518,
@@ -24448,7 +24448,7 @@
       },
       "verticalStreakCandidateFraction": 0.002176278563656148,
       "cullingChangedPixelFraction": 0.0,
-      "unculledPath": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/globe-ring-near-unculled.png"
+      "unculledPath": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/globe-ring-near-unculled.png"
     },
     {
       "id": "globe-ring-side",
@@ -24485,7 +24485,7 @@
         "renderScale": 0.5,
         "roll": -1.862645149230957e-09
       },
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/globe-ring-side.png",
+      "path": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/globe-ring-side.png",
       "timings": {
         "captureMs": 0.03925,
         "collisionTriangles": 5518,
@@ -24613,7 +24613,7 @@
       },
       "verticalStreakCandidateFraction": 0.003264417845484222,
       "cullingChangedPixelFraction": 0.0,
-      "unculledPath": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/globe-ring-side-unculled.png"
+      "unculledPath": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/globe-ring-side-unculled.png"
     },
     {
       "id": "random-00",
@@ -24655,7 +24655,7 @@
         "renderScale": 0.5,
         "roll": 4.470348358154297e-08
       },
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/random-00.png",
+      "path": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/random-00.png",
       "timings": {
         "captureMs": 0.026492,
         "collisionTriangles": 5518,
@@ -24783,7 +24783,7 @@
       },
       "verticalStreakCandidateFraction": 0.0,
       "cullingChangedPixelFraction": 0.0,
-      "unculledPath": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/random-00-unculled.png"
+      "unculledPath": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/random-00-unculled.png"
     },
     {
       "id": "random-01",
@@ -24825,7 +24825,7 @@
         "renderScale": 0.5,
         "roll": -5.960465188081798e-08
       },
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/random-01.png",
+      "path": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/random-01.png",
       "timings": {
         "captureMs": 0.041995,
         "collisionTriangles": 5518,
@@ -24953,7 +24953,7 @@
       },
       "verticalStreakCandidateFraction": 0.0,
       "cullingChangedPixelFraction": 0.0,
-      "unculledPath": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/random-01-unculled.png"
+      "unculledPath": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/random-01-unculled.png"
     },
     {
       "id": "random-02",
@@ -24995,7 +24995,7 @@
         "renderScale": 0.5,
         "roll": 2.9802322387695312e-08
       },
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/random-02.png",
+      "path": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/random-02.png",
       "timings": {
         "captureMs": 0.037594,
         "collisionTriangles": 5518,
@@ -25123,7 +25123,7 @@
       },
       "verticalStreakCandidateFraction": 0.0,
       "cullingChangedPixelFraction": 0.0,
-      "unculledPath": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/random-02-unculled.png"
+      "unculledPath": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/random-02-unculled.png"
     },
     {
       "id": "random-03",
@@ -25165,7 +25165,7 @@
         "renderScale": 0.5,
         "roll": 5.960465188081798e-08
       },
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/random-03.png",
+      "path": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/random-03.png",
       "timings": {
         "captureMs": 0.01836,
         "collisionTriangles": 5518,
@@ -25293,7 +25293,7 @@
       },
       "verticalStreakCandidateFraction": 0.0,
       "cullingChangedPixelFraction": 0.0,
-      "unculledPath": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/random-03-unculled.png"
+      "unculledPath": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/random-03-unculled.png"
     },
     {
       "id": "random-04",
@@ -25335,7 +25335,7 @@
         "renderScale": 0.5,
         "roll": 2.7939675018018306e-09
       },
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/random-04.png",
+      "path": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/random-04.png",
       "timings": {
         "captureMs": 0.032099,
         "collisionTriangles": 5518,
@@ -25463,7 +25463,7 @@
       },
       "verticalStreakCandidateFraction": 0.007616974972796518,
       "cullingChangedPixelFraction": 0.0,
-      "unculledPath": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/random-04-unculled.png"
+      "unculledPath": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/random-04-unculled.png"
     },
     {
       "id": "random-05",
@@ -25505,7 +25505,7 @@
         "renderScale": 0.5,
         "roll": -1.6763808119435453e-08
       },
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/random-05.png",
+      "path": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/random-05.png",
       "timings": {
         "captureMs": 0.021758,
         "collisionTriangles": 5518,
@@ -25633,7 +25633,7 @@
       },
       "verticalStreakCandidateFraction": 0.0,
       "cullingChangedPixelFraction": 0.0,
-      "unculledPath": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/random-05-unculled.png"
+      "unculledPath": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/random-05-unculled.png"
     },
     {
       "id": "random-06",
@@ -25675,7 +25675,7 @@
         "renderScale": 0.5,
         "roll": 5.960464477539063e-08
       },
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/random-06.png",
+      "path": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/random-06.png",
       "timings": {
         "captureMs": 0.031422,
         "collisionTriangles": 5518,
@@ -25803,7 +25803,7 @@
       },
       "verticalStreakCandidateFraction": 0.0,
       "cullingChangedPixelFraction": 0.0,
-      "unculledPath": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/random-06-unculled.png"
+      "unculledPath": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/random-06-unculled.png"
     },
     {
       "id": "random-07",
@@ -25845,7 +25845,7 @@
         "renderScale": 0.5,
         "roll": 7.450580596923828e-09
       },
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/random-07.png",
+      "path": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/random-07.png",
       "timings": {
         "captureMs": 0.067401,
         "collisionTriangles": 5518,
@@ -25973,7 +25973,7 @@
       },
       "verticalStreakCandidateFraction": 0.002176278563656148,
       "cullingChangedPixelFraction": 0.0,
-      "unculledPath": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/random-07-unculled.png"
+      "unculledPath": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/random-07-unculled.png"
     },
     {
       "id": "random-08",
@@ -26015,7 +26015,7 @@
         "renderScale": 0.5,
         "roll": -2.9802322387695312e-08
       },
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/random-08.png",
+      "path": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/random-08.png",
       "timings": {
         "captureMs": 0.031266,
         "collisionTriangles": 5518,
@@ -26143,7 +26143,7 @@
       },
       "verticalStreakCandidateFraction": 0.0,
       "cullingChangedPixelFraction": 0.0,
-      "unculledPath": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/random-08-unculled.png"
+      "unculledPath": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/random-08-unculled.png"
     },
     {
       "id": "random-09",
@@ -26185,7 +26185,7 @@
         "renderScale": 0.5,
         "roll": 8.940696716308594e-08
       },
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/random-09.png",
+      "path": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/random-09.png",
       "timings": {
         "captureMs": 0.020185,
         "collisionTriangles": 5518,
@@ -26313,7 +26313,7 @@
       },
       "verticalStreakCandidateFraction": 0.0,
       "cullingChangedPixelFraction": 0.0,
-      "unculledPath": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/random-09-unculled.png"
+      "unculledPath": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/random-09-unculled.png"
     },
     {
       "id": "random-10",
@@ -26355,7 +26355,7 @@
         "renderScale": 0.5,
         "roll": 1.7881393432617188e-07
       },
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/random-10.png",
+      "path": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/random-10.png",
       "timings": {
         "captureMs": 0.018728,
         "collisionTriangles": 5518,
@@ -26483,7 +26483,7 @@
       },
       "verticalStreakCandidateFraction": 0.0,
       "cullingChangedPixelFraction": 0.0,
-      "unculledPath": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/random-10-unculled.png"
+      "unculledPath": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/random-10-unculled.png"
     },
     {
       "id": "random-11",
@@ -26525,7 +26525,7 @@
         "renderScale": 0.5,
         "roll": 0.0
       },
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/random-11.png",
+      "path": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/random-11.png",
       "timings": {
         "captureMs": 0.020628,
         "collisionTriangles": 5518,
@@ -26653,7 +26653,7 @@
       },
       "verticalStreakCandidateFraction": 0.001088139281828074,
       "cullingChangedPixelFraction": 0.0,
-      "unculledPath": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/random-11-unculled.png"
+      "unculledPath": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/random-11-unculled.png"
     },
     {
       "id": "random-12",
@@ -26695,7 +26695,7 @@
         "renderScale": 0.5,
         "roll": 4.0978189730367376e-08
       },
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/random-12.png",
+      "path": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/random-12.png",
       "timings": {
         "captureMs": 0.024609,
         "collisionTriangles": 5518,
@@ -26823,7 +26823,7 @@
       },
       "verticalStreakCandidateFraction": 0.0,
       "cullingChangedPixelFraction": 0.0,
-      "unculledPath": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/random-12-unculled.png"
+      "unculledPath": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/random-12-unculled.png"
     },
     {
       "id": "random-13",
@@ -26865,7 +26865,7 @@
         "renderScale": 0.5,
         "roll": 0.0
       },
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/random-13.png",
+      "path": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/random-13.png",
       "timings": {
         "captureMs": 0.033631,
         "collisionTriangles": 5518,
@@ -26993,7 +26993,7 @@
       },
       "verticalStreakCandidateFraction": 0.0,
       "cullingChangedPixelFraction": 0.0,
-      "unculledPath": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/random-13-unculled.png"
+      "unculledPath": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/random-13-unculled.png"
     },
     {
       "id": "random-14",
@@ -27035,7 +27035,7 @@
         "renderScale": 0.5,
         "roll": 4.470347292340193e-08
       },
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/random-14.png",
+      "path": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/random-14.png",
       "timings": {
         "captureMs": 0.022669,
         "collisionTriangles": 5518,
@@ -27163,7 +27163,7 @@
       },
       "verticalStreakCandidateFraction": 0.0,
       "cullingChangedPixelFraction": 0.0,
-      "unculledPath": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/random-14-unculled.png"
+      "unculledPath": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/random-14-unculled.png"
     },
     {
       "id": "random-15",
@@ -27205,7 +27205,7 @@
         "renderScale": 0.5,
         "roll": 2.9802315282267955e-08
       },
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/random-15.png",
+      "path": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/random-15.png",
       "timings": {
         "captureMs": 0.02227,
         "collisionTriangles": 5518,
@@ -27333,7 +27333,7 @@
       },
       "verticalStreakCandidateFraction": 0.0,
       "cullingChangedPixelFraction": 0.0,
-      "unculledPath": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/random-15-unculled.png"
+      "unculledPath": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/random-15-unculled.png"
     },
     {
       "id": "random-16",
@@ -27375,7 +27375,7 @@
         "renderScale": 0.5,
         "roll": -5.960464477539063e-08
       },
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/random-16.png",
+      "path": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/random-16.png",
       "timings": {
         "captureMs": 0.044547,
         "collisionTriangles": 5518,
@@ -27503,7 +27503,7 @@
       },
       "verticalStreakCandidateFraction": 0.0,
       "cullingChangedPixelFraction": 0.0,
-      "unculledPath": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/random-16-unculled.png"
+      "unculledPath": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/random-16-unculled.png"
     },
     {
       "id": "random-17",
@@ -27545,7 +27545,7 @@
         "renderScale": 0.5,
         "roll": 1.862644971595273e-08
       },
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/random-17.png",
+      "path": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/random-17.png",
       "timings": {
         "captureMs": 0.019774,
         "collisionTriangles": 5518,
@@ -27673,7 +27673,7 @@
       },
       "verticalStreakCandidateFraction": 0.0,
       "cullingChangedPixelFraction": 0.0,
-      "unculledPath": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/random-17-unculled.png"
+      "unculledPath": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/random-17-unculled.png"
     },
     {
       "id": "random-18",
@@ -27715,7 +27715,7 @@
         "renderScale": 0.5,
         "roll": 0.0
       },
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/random-18.png",
+      "path": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/random-18.png",
       "timings": {
         "captureMs": 0.029448,
         "collisionTriangles": 5518,
@@ -27843,7 +27843,7 @@
       },
       "verticalStreakCandidateFraction": 0.0,
       "cullingChangedPixelFraction": 0.0,
-      "unculledPath": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/random-18-unculled.png"
+      "unculledPath": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/random-18-unculled.png"
     },
     {
       "id": "random-19",
@@ -27885,7 +27885,7 @@
         "renderScale": 0.5,
         "roll": -1.7881393432617188e-07
       },
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/random-19.png",
+      "path": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/random-19.png",
       "timings": {
         "captureMs": 0.019064,
         "collisionTriangles": 5518,
@@ -28013,7 +28013,7 @@
       },
       "verticalStreakCandidateFraction": 0.0,
       "cullingChangedPixelFraction": 0.0,
-      "unculledPath": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/random-19-unculled.png"
+      "unculledPath": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/random-19-unculled.png"
     },
     {
       "id": "random-20",
@@ -28055,7 +28055,7 @@
         "renderScale": 0.5,
         "roll": 7.4505797087454084e-09
       },
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/random-20.png",
+      "path": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/random-20.png",
       "timings": {
         "captureMs": 0.047102,
         "collisionTriangles": 5518,
@@ -28183,7 +28183,7 @@
       },
       "verticalStreakCandidateFraction": 0.0,
       "cullingChangedPixelFraction": 0.0,
-      "unculledPath": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/random-20-unculled.png"
+      "unculledPath": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/random-20-unculled.png"
     },
     {
       "id": "random-21",
@@ -28225,7 +28225,7 @@
         "renderScale": 0.5,
         "roll": -6.70552182668871e-08
       },
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/random-21.png",
+      "path": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/random-21.png",
       "timings": {
         "captureMs": 0.050012,
         "collisionTriangles": 5518,
@@ -28353,7 +28353,7 @@
       },
       "verticalStreakCandidateFraction": 0.0,
       "cullingChangedPixelFraction": 0.0,
-      "unculledPath": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/random-21-unculled.png"
+      "unculledPath": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/random-21-unculled.png"
     },
     {
       "id": "random-22",
@@ -28395,7 +28395,7 @@
         "renderScale": 0.5,
         "roll": 1.303851426825986e-08
       },
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/random-22.png",
+      "path": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/random-22.png",
       "timings": {
         "captureMs": 0.019079,
         "collisionTriangles": 5518,
@@ -28523,7 +28523,7 @@
       },
       "verticalStreakCandidateFraction": 0.0,
       "cullingChangedPixelFraction": 0.0,
-      "unculledPath": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/random-22-unculled.png"
+      "unculledPath": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/random-22-unculled.png"
     },
     {
       "id": "random-23",
@@ -28565,7 +28565,7 @@
         "renderScale": 0.5,
         "roll": 1.4901159417490817e-08
       },
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/random-23.png",
+      "path": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/random-23.png",
       "timings": {
         "captureMs": 0.029852,
         "collisionTriangles": 5518,
@@ -28693,7 +28693,7 @@
       },
       "verticalStreakCandidateFraction": 0.0,
       "cullingChangedPixelFraction": 0.0,
-      "unculledPath": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/random-23-unculled.png"
+      "unculledPath": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/random-23-unculled.png"
     },
     {
       "id": "random-24",
@@ -28735,7 +28735,7 @@
         "renderScale": 0.5,
         "roll": -1.4551916616145633e-10
       },
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/random-24.png",
+      "path": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/random-24.png",
       "timings": {
         "captureMs": 0.025788,
         "collisionTriangles": 5518,
@@ -28863,7 +28863,7 @@
       },
       "verticalStreakCandidateFraction": 0.0,
       "cullingChangedPixelFraction": 0.0,
-      "unculledPath": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/random-24-unculled.png"
+      "unculledPath": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/random-24-unculled.png"
     },
     {
       "id": "random-25",
@@ -28905,7 +28905,7 @@
         "renderScale": 0.5,
         "roll": 8.940696716308594e-08
       },
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/random-25.png",
+      "path": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/random-25.png",
       "timings": {
         "captureMs": 0.029903,
         "collisionTriangles": 5518,
@@ -29033,7 +29033,7 @@
       },
       "verticalStreakCandidateFraction": 0.0,
       "cullingChangedPixelFraction": 0.0,
-      "unculledPath": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/random-25-unculled.png"
+      "unculledPath": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/random-25-unculled.png"
     },
     {
       "id": "random-26",
@@ -29075,7 +29075,7 @@
         "renderScale": 0.5,
         "roll": -7.450580596923828e-08
       },
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/random-26.png",
+      "path": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/random-26.png",
       "timings": {
         "captureMs": 0.024308,
         "collisionTriangles": 5518,
@@ -29203,7 +29203,7 @@
       },
       "verticalStreakCandidateFraction": 0.0,
       "cullingChangedPixelFraction": 0.0,
-      "unculledPath": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/random-26-unculled.png"
+      "unculledPath": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/random-26-unculled.png"
     },
     {
       "id": "random-27",
@@ -29245,7 +29245,7 @@
         "renderScale": 0.5,
         "roll": -2.9802322387695312e-08
       },
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/random-27.png",
+      "path": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/random-27.png",
       "timings": {
         "captureMs": 0.023822,
         "collisionTriangles": 5518,
@@ -29373,7 +29373,7 @@
       },
       "verticalStreakCandidateFraction": 0.0,
       "cullingChangedPixelFraction": 0.0,
-      "unculledPath": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/random-27-unculled.png"
+      "unculledPath": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/random-27-unculled.png"
     },
     {
       "id": "random-28",
@@ -29415,7 +29415,7 @@
         "renderScale": 0.5,
         "roll": 4.470348358154297e-08
       },
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/random-28.png",
+      "path": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/random-28.png",
       "timings": {
         "captureMs": 0.036348,
         "collisionTriangles": 5518,
@@ -29543,7 +29543,7 @@
       },
       "verticalStreakCandidateFraction": 0.0,
       "cullingChangedPixelFraction": 0.0,
-      "unculledPath": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/random-28-unculled.png"
+      "unculledPath": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/random-28-unculled.png"
     },
     {
       "id": "random-29",
@@ -29585,7 +29585,7 @@
         "renderScale": 0.5,
         "roll": 0.0
       },
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/random-29.png",
+      "path": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/random-29.png",
       "timings": {
         "captureMs": 0.031527,
         "collisionTriangles": 5518,
@@ -29713,7 +29713,7 @@
       },
       "verticalStreakCandidateFraction": 0.0,
       "cullingChangedPixelFraction": 0.0,
-      "unculledPath": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/random-29-unculled.png"
+      "unculledPath": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/random-29-unculled.png"
     },
     {
       "id": "random-30",
@@ -29755,7 +29755,7 @@
         "renderScale": 0.5,
         "roll": 5.960464477539063e-08
       },
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/random-30.png",
+      "path": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/random-30.png",
       "timings": {
         "captureMs": 0.040603,
         "collisionTriangles": 5518,
@@ -29883,7 +29883,7 @@
       },
       "verticalStreakCandidateFraction": 0.0,
       "cullingChangedPixelFraction": 0.0,
-      "unculledPath": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/random-30-unculled.png"
+      "unculledPath": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/random-30-unculled.png"
     },
     {
       "id": "random-31",
@@ -29925,7 +29925,7 @@
         "renderScale": 0.5,
         "roll": 0.0
       },
-      "path": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/random-31.png",
+      "path": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/random-31.png",
       "timings": {
         "captureMs": 0.019166,
         "collisionTriangles": 5518,
@@ -30053,7 +30053,7 @@
       },
       "verticalStreakCandidateFraction": 0.0,
       "cullingChangedPixelFraction": 0.0,
-      "unculledPath": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/sweep4/random-31-unculled.png"
+      "unculledPath": "$WORKSPACE/worlds/artifacts/opt-0.9.1/sweep4/random-31-unculled.png"
     }
   ],
   "pluginSHA256": "203f8a3b3672777ba37d657bac43be4216a3aa04a9922be192ba5f45b86fee7c",

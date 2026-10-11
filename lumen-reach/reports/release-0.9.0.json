@@ -5,7 +5,7 @@
   "formatVersion": "0.7",
   "sourceFormatVersion": "0.6",
   "sourceCommit": "ff5e8d3",
-  "sourceNote": "Source package baked on 10.2.2.2 from build inputs at ff5e8d3, visibility derived in lumen-build; release package = tools/remote-optimize.sh output.",
+  "sourceNote": "Source package baked on the bake host from build inputs at ff5e8d3, visibility derived in lumen-build; release package = tools/remote-optimize.sh output.",
   "sceneSHA256": "a7e13ed46923382252f9e1d1b80df6395df9506d09a4915f0512a08c312f4b14",
   "manifestSHA256": "375478640875af83e91567f497b484cd66b736f5220e1e715e6cdb1e8a9f2fe0",
   "archive": {

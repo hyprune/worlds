@@ -13,7 +13,7 @@
     "activeHandle": -1,
     "aim": "",
     "backdrops": [],
-    "captureDirectory": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.1/routes4/.nested-state/statehome/hyprune/captures",
+    "captureDirectory": "$WORKSPACE/worlds/artifacts/opt-0.9.1/routes4/.nested-state/statehome/hyprune/captures",
     "captures": [],
     "childSurfaces": [],
     "children": 0,
