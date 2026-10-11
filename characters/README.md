@@ -1,0 +1,24 @@
+# NPC characters
+
+Ambient characters for worlds (RFC-0010 draft, "Ambient characters (NPCs)"; the author's
+spec is the docs page "NPC characters"). Each file is the canonical output of
+`tools/npc-import` (metres, +Y up, facing +Z, a `root` bone at the feet, clips in place
+at 30 fps, at most 4 weights, meshopt geometry and KTX2 textures at 1024 px), published
+under its public name by `tools/npc/publish.py`. `characters.json` lists each file's size,
+hash, budget, measured walk/run speed and clips. Worlds can't place characters yet; core's
+nested NPC test walks one through Switchyard.
+
+| Character | Size | Triangles | Bones | Walk / run | Clips |
+| --- | --- | --- | --- | --- | --- |
+| `resident-blue` | 2.79 MB | 8,000 | 38 | 0.87 / 3.05 m/s | shared (hips x1.049) |
+| `resident-crimson` | 2.82 MB | 8,000 | 37 | 1.01 / 3.59 m/s | shared (hips x1.157) |
+| `resident-desert` | 2.72 MB | 7,999 | 33 | 0.75 / 3.41 m/s | own |
+| `resident-ember` | 2.72 MB | 8,000 | 37 | 0.80 / 3.10 m/s | shared (hips x1.085) |
+
+All four share one skeleton template. `resident-desert` carries its authored clip set;
+the others take the same clips through `tools/npc-import --clips-from` (rest-relative
+retarget, hips scaled by hip height). `idle` is the calmest of the authored idles (least
+arm motion); a livelier one is `idle_fidget`, which core plays rarely when the player is
+near. Each has a single baked material, so colour variants are separate characters.
+
+Content: CC-BY-4.0, Hyprune contributors (see ATTRIBUTION.md and LICENSE). Scripts: MIT.

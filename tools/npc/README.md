@@ -1,6 +1,6 @@
 # NPC characters: import tooling
 
-`tools/npc-import` turns a Meshy Pro export (GLB, Mixamo skeleton template, skin, 30 fps;
+`tools/npc-import` turns an auto-rigged character export (GLB, `mixamorig:` skeleton template, skin, 30 fps;
 FBX as a fallback) into the canonical NPC character core loads (RFC-0010 draft; spec in
 the docs page "NPC characters"). Blender runs only on the bake host.
 

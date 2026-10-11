@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # SPDX-License-Identifier: MIT
-# Normalise a Meshy/Mixamo NPC export into the canonical NPC character (RFC-0010 draft).
+# Normalise an auto-rigged NPC export (mixamorig: skeleton template) into the canonical NPC character (RFC-0010 draft).
 #   tools/npc-import SOURCE.glb|.fbx OUT.glb [--clips-from ANIMATED.glb] [--strip-fingers]
 #                    [--max-tris N] [--keep-sway] [--map clip-map.json] [--render DIR] [--no-compress]
 # Requires a PROVENANCE note beside SOURCE (tools/npc/provenance.py). Blender runs only on

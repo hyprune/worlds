@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: MIT
-"""Blender (bake host only): normalise a Meshy/Mixamo NPC export to the canonical NPC .glb.
+"""Blender (bake host only): normalise an auto-rigged NPC export to the canonical NPC .glb.
 
     blender --background --factory-startup --python tools/npc/npc_import.py -- \
         --in SRC.glb|.fbx --out OUT.glb --report REPORT.json [--map clip-map.json]
@@ -299,7 +299,7 @@ def transfer_clips(target, source, actions):
         new = bpy.data.actions.new(name)
         assign(target, new)
         f0, f1 = int(round(act.frame_range[0])), int(round(act.frame_range[1]))
-        # Experimental: measured against the rigs' own Meshy clips it adds sliding, so it's opt-in.
+        # Experimental: measured against the rigs' own authored clips it adds sliding, so it's opt-in.
         legs = re.search(r'walk|run', name, re.I) is not None and '--leg-ik' in argv
         prev, worst = {}, 0
         for f in range(f0, f1 + 1):
@@ -346,7 +346,7 @@ def transfer_clips(target, source, actions):
 
 
 def clean_channels(arm, actions):
-    """Rotations on every bone; translation on the Hips only; no scale (Meshy keys all three)."""
+    """Rotations on every bone; translation on the Hips only; no scale (some exporters key all three)."""
     hips = hips_bone(arm)
     dropped = 0
     for a in actions:
@@ -443,7 +443,7 @@ def in_place(arm, actions):
             u = (f - frames[0]) / (frames[-1] - frames[0])
             if KEEP_SWAY:  # remove only the travel (linear trend), keep the sway
                 h = Vector((v.x - drift.x * u - vals[0].x, v.y - drift.y * u - vals[0].y, v.z))
-            else:  # owner's rule: zero the horizontal Hips translation
+            else:  # default: zero the horizontal Hips translation
                 h = Vector((0, 0, v.z))
             local = Ri @ h
             for i in range(3):

@@ -5,9 +5,9 @@
     tools/npc/provenance.py SOURCE.glb|.fbx  ->  exit 0 and the parsed note, or exit 2 with what is missing
 
 Looked up as PROVENANCE, PROVENANCE.md in the source's directory or <stem>.PROVENANCE.md.
-Required lines (`Key: value`): Source (e.g. "Meshy Pro, generated from the owner's own
-concept"), Author, Licence (CC-BY-4.0 or CC0-1.0), Animations (e.g. "Meshy preset library"
-or "owner-made"), Resemblance check (a human statement that the character resembles no
+Required lines (`Key: value`): Source (e.g. "AI 3D tool, generated from the author's own
+concept"), Author, Licence (CC-BY-4.0 or CC0-1.0), Animations (e.g. "the tool's preset library"
+or "hand-animated"), Resemblance check (a human statement that the character resembles no
 third-party/game character). Public assets must not resemble third-party characters: the
 tool can't judge that, so it requires the statement and prints it for review.
 """
