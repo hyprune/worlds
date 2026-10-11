@@ -42,8 +42,8 @@ this immutable package declares slot membership, not compositor configuration.
 
 All geometry is authored procedurally in Blender Python. All material masters
 are generated for this settlement, with recorded prompts/hashes and seam healing.
-The owner's reference compositions inform architecture, props and illumination;
-reference lettering and marks are excluded. No imported game models, textures,
+Private concept sketches inform architecture, props and illumination; no concept
+imagery, lettering or marks are included. No imported game models, textures,
 names, logos, fonts or audio are used.
 
 ## Theme kits
