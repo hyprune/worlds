@@ -24,14 +24,14 @@ if set): one `KEY=VALUE` per line, `#` comments, `~` expanded. The environment w
 ```sh
 # ~/.config/hyprune/dev.env
 HYPRUNE_BAKE_HOST=bakebox                  # SSH host with Blender; "local" on that host itself
-HYPRUNE_GALLERY_DIR=~/review/gallery       # stills for review (tools/check-lumen-session.py --gallery)
-HYPRUNE_VIDEO_DIR=~/review/gallery/videos  # review videos (make gallery, tools/check-nested.py)
+HYPRUNE_GALLERY_DIR=~/review/stills        # stills for review (tools/check-lumen-session.py --gallery)
+HYPRUNE_VIDEO_DIR=~/review/videos          # review videos (make gallery, tools/check-nested.py)
 HYPRUNE_CONCEPT_DIR=~/concepts/release-world  # private concept sheets for tools/compare-*.py (not in this repo)
 ```
 
 `HYPRUNE_BAKE_HOST` has no default: the bake wrappers refuse to start without it,
 and refuse a host that resolves to the machine they run on (use `local` there).
-An unconfigured gallery or video directory prints one warning naming where the
+An unconfigured stills or video directory prints one warning naming where the
 output went instead. `tools/devenv.py` prints the effective values.
 
 ## Build and distribution
