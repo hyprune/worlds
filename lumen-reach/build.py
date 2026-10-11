@@ -382,7 +382,7 @@ def court():
  # 0.10.1: the 4 m upper landing's north edge either side of the lower roof
  # ramp and its stair bed (x -23..-18.3) dropped into the void.
  rails((-24,24),(-23,24),z=4);rails((-18.3,24),(-16,24),z=4)
- void_guard((-24,24.1,4),(-23,24.1,4));void_guard((-18.3,24.1,4),(-16,24.1,4))
+ void_guard((-24,24.1,4),(-23,24.1,4),3.5);void_guard((-18.3,24.1,4),(-16,24.1,4),3.5)
  rails((-8.5,35.5),(-8.5,36),(-7,36),(-7,35.5),z=16)
  rails((-3,27),(25,27),(25,22),z=16)
  # 12 m roof upper landing: west and east edges, open north edge ends.
@@ -486,14 +486,15 @@ def hall():
  # 0.10.1 walk-off fixes (nested capsule probes fell out of the world here):
  # the annex's south edge, the unfloored nook beside the service threshold
  # and the threshold's south edge, and the 4 m balconies' north edge.
- # Parapets over a void stand 1.4 m; a 2.5 m guard collision behind each
- # void edge also stops a running jump (nested probes cleared 1-1.4 m).
+ # Parapets over a void stand 1.4 m. A collision-only guard rises 2.5 m above
+ # the parapet or rail top, which a walker can jump and step onto (nested
+ # probes went over a 2.5 m guard from the parapet top).
  box('Annex south parapet',(-9.75,31.7,.55),(6.5,.4,1.7),'concrete',solid=True)
  slab('Service passage floor',24,26.3,52,56,0,'metal')
  wall('Service passage end wall',24.25,26.3,55.75,56.15,-.3,5)
  box('Service threshold parapet',(28.625,47.8,.55),(8.75,.4,1.7),'concrete',solid=True)
  rail((-13,60,4),(-2,60,4))
- void_guard((-13,31.7,0),(-6.5,31.7,0));void_guard((24.25,47.8,0),(33,47.8,0));void_guard((-13,60.1,4),(-2,60.1,4))
+ void_guard((-13,31.7,0),(-6.5,31.7,0),3.9);void_guard((24.25,47.8,0),(33,47.8,0),3.9);void_guard((-13,60.1,4),(-2,60.1,4),3.5)
  # Balcony portal remains open at both ground and first floor.
  box('West portal sill',(-6,58,1.3),(.4,4,2.6),'concrete',solid=True)
  box('West portal crown',(-6,58,(7+top)/2),(.4,4,top-7),'concrete',solid=True)
