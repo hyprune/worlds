@@ -1,0 +1,58 @@
+{
+ "formatVersion": "0.9",
+ "id": "resident-desert",
+ "version": "1.0.0",
+ "name": "Resident (desert)",
+ "description": "An ambient resident with a wide sun hat and a long sand-coloured coat: walks routes, idles and waves (RFC-0010 character).",
+ "category": "characters",
+ "tags": [
+  "resident",
+  "npc"
+ ],
+ "scene": "object.glb",
+ "license": "CC-BY-4.0",
+ "attribution": [
+  {
+   "path": ".",
+   "author": "Hyprune contributors",
+   "license": "CC-BY-4.0",
+   "source": "https://github.com/hyprune/worlds/tree/main/characters"
+  }
+ ],
+ "bounds": {
+  "min": [
+   -0.8912,
+   -0.0056,
+   -0.4799
+  ],
+  "max": [
+   0.8827,
+   1.6942,
+   0.4868
+  ]
+ },
+ "thumbnail": "thumbnail.png",
+ "lighting": {
+  "mode": "probe"
+ },
+ "traits": {
+  "character": {
+   "clips": {
+    "idle": {},
+    "walk": {
+     "speed": 0.747
+    },
+    "run": {
+     "speed": 3.412
+    },
+    "idle_fidget": {},
+    "turn_left": {},
+    "turn_right": {},
+    "wave": {},
+    "sit": {},
+    "sit_idle": {}
+   },
+   "height": 1.69
+  }
+ }
+}

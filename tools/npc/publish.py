@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: MIT
 """Publish an imported NPC character (tools/npc-import output) under a public name.
 
-  tools/npc/publish.py IMPORTED.glb IMPORT.report.json characters/NAME.glb
+  tools/npc/publish.py IMPORTED.glb IMPORT.report.json characters/NAME/object.glb
 
 Rewrites only the glTF JSON chunk (the binary chunk is untouched): the armature node and
 skin take NAME, a single material becomes `base`, and the asset records the licence and
@@ -11,7 +11,10 @@ without the source file name or tool-specific step text."""
 import hashlib, json, pathlib, struct, sys
 
 src, report_path, out = map(pathlib.Path, sys.argv[1:4])
-name = out.stem
+# characters/NAME/object.glb is an RFC-0011 object directory (tools/object-import --adopt adds
+# object.json and the thumbnail); characters/NAME.glb is the flat layout.
+in_dir = out.name == 'object.glb'
+name = out.parent.name if in_dir else out.stem
 data = src.read_bytes()
 magic, version, _ = struct.unpack('<4sII', data[:12])
 assert magic == b'glTF' and version == 2, 'not a GLB'
@@ -41,10 +44,10 @@ body = struct.pack('<I4s', len(payload), b'JSON') + payload + rest
 out.write_bytes(struct.pack('<4sII', b'glTF', 2, 12 + len(body)) + body)
 
 report = json.loads(report_path.read_text())
-manifest_path = out.parent / 'characters.json'
+manifest_path = (out.parent.parent if in_dir else out.parent) / 'characters.json'
 manifest = json.loads(manifest_path.read_text()) if manifest_path.exists() else {'characters': []}
 entry = {
-    'id': name, 'file': out.name, 'bytes': out.stat().st_size,
+    'id': name, 'file': f'{name}/object.glb' if in_dir else out.name, 'bytes': out.stat().st_size,
     'sha256': hashlib.sha256(out.read_bytes()).hexdigest(),
     'licence': 'CC-BY-4.0', 'author': 'Hyprune contributors',
     'heightMetres': report.get('height'), 'triangles': report.get('trianglesOut'), 'bones': report.get('bonesOut'),

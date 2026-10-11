@@ -1,0 +1,58 @@
+{
+ "formatVersion": "0.9",
+ "id": "resident-ember",
+ "version": "1.0.0",
+ "name": "Resident (ember)",
+ "description": "An ambient resident with a dark hooded cloak with amber trim: walks routes, idles and waves (RFC-0010 character).",
+ "category": "characters",
+ "tags": [
+  "resident",
+  "npc"
+ ],
+ "scene": "object.glb",
+ "license": "CC-BY-4.0",
+ "attribution": [
+  {
+   "path": ".",
+   "author": "Hyprune contributors",
+   "license": "CC-BY-4.0",
+   "source": "https://github.com/hyprune/worlds/tree/main/characters"
+  }
+ ],
+ "bounds": {
+  "min": [
+   -0.8715,
+   -0.0135,
+   -0.3908
+  ],
+  "max": [
+   0.8794,
+   1.6865,
+   0.2669
+  ]
+ },
+ "thumbnail": "thumbnail.png",
+ "lighting": {
+  "mode": "probe"
+ },
+ "traits": {
+  "character": {
+   "clips": {
+    "idle": {},
+    "walk": {
+     "speed": 0.795
+    },
+    "run": {
+     "speed": 3.101
+    },
+    "idle_fidget": {},
+    "turn_left": {},
+    "turn_right": {},
+    "wave": {},
+    "sit": {},
+    "sit_idle": {}
+   },
+   "height": 1.69
+  }
+ }
+}

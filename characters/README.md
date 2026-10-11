@@ -1,12 +1,16 @@
 # NPC characters
 
 Ambient characters for worlds (RFC-0010 draft, "Ambient characters (NPCs)"; the author's
-spec is the docs page "NPC characters"). Each file is the canonical output of
-`tools/npc-import` (metres, +Y up, facing +Z, a `root` bone at the feet, clips in place
-at 30 fps, at most 4 weights, meshopt geometry and KTX2 textures at 1024 px), published
-under its public name by `tools/npc/publish.py`. `characters.json` lists each file's size,
-hash, budget, measured walk/run speed and clips. Worlds can't place characters yet; core's
-nested NPC test walks one through Switchyard.
+spec is the docs page "NPC characters"). Each character is an RFC-0011 object directory,
+`characters/<id>/` with `object.json` (the `character` trait: measured clips, walk and run
+speeds, height), `object.glb` and `thumbnail.png`, checked by `tools/object-check`.
+`object.glb` is the canonical output of `tools/npc-import` (metres, +Y up, facing +Z, a
+`root` bone at the feet, clips in place at 30 fps, at most 4 weights, meshopt geometry and
+KTX2 textures at 1024 px), published under its public name by `tools/npc/publish.py`;
+`tools/object-import --adopt` wrote the manifest and the thumbnail. `characters/<id>.glb`
+links to `<id>/object.glb` for tools that use the flat paths. `characters.json` lists each
+file's size, hash, budget, measured walk/run speed and clips. Worlds can't place
+characters yet; core's nested NPC test walks one through Switchyard.
 
 | Character | Size | Triangles | Bones | Walk / run | Clips |
 | --- | --- | --- | --- | --- | --- |
@@ -20,5 +24,9 @@ the others take the same clips through `tools/npc-import --clips-from` (rest-rel
 retarget, hips scaled by hip height). `idle` is the calmest of the authored idles (least
 arm motion); a livelier one is `idle_fidget`, which core plays rarely when the player is
 near. Each has a single baked material, so colour variants are separate characters.
+
+The `sit` clips end with the thighs below the root plane (a seat height under 0 m by the
+RFC-0011 measure), so their manifests list `sit` and `sit_idle` without a `seatHeight`:
+these characters do not sit at seat anchors.
 
 Content: CC-BY-4.0, Hyprune contributors (see ATTRIBUTION.md and LICENSE). Scripts: MIT.

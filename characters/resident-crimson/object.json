@@ -1,0 +1,58 @@
+{
+ "formatVersion": "0.9",
+ "id": "resident-crimson",
+ "version": "1.0.0",
+ "name": "Resident (crimson)",
+ "description": "An ambient resident with a red scarf and tabard over a white suit: walks routes, idles and waves (RFC-0010 character).",
+ "category": "characters",
+ "tags": [
+  "resident",
+  "npc"
+ ],
+ "scene": "object.glb",
+ "license": "CC-BY-4.0",
+ "attribution": [
+  {
+   "path": ".",
+   "author": "Hyprune contributors",
+   "license": "CC-BY-4.0",
+   "source": "https://github.com/hyprune/worlds/tree/main/characters"
+  }
+ ],
+ "bounds": {
+  "min": [
+   -0.9218,
+   -0.0175,
+   -0.2966
+  ],
+  "max": [
+   0.9176,
+   1.6836,
+   0.3224
+  ]
+ },
+ "thumbnail": "thumbnail.png",
+ "lighting": {
+  "mode": "probe"
+ },
+ "traits": {
+  "character": {
+   "clips": {
+    "idle": {},
+    "walk": {
+     "speed": 1.012
+    },
+    "run": {
+     "speed": 3.587
+    },
+    "idle_fidget": {},
+    "turn_left": {},
+    "turn_right": {},
+    "wave": {},
+    "sit": {},
+    "sit_idle": {}
+   },
+   "height": 1.68
+  }
+ }
+}

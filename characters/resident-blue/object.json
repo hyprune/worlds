@@ -1,0 +1,58 @@
+{
+ "formatVersion": "0.9",
+ "id": "resident-blue",
+ "version": "1.0.0",
+ "name": "Resident (blue)",
+ "description": "An ambient resident with a white helmet with an antenna and a navy scarf: walks routes, idles and waves (RFC-0010 character).",
+ "category": "characters",
+ "tags": [
+  "resident",
+  "npc"
+ ],
+ "scene": "object.glb",
+ "license": "CC-BY-4.0",
+ "attribution": [
+  {
+   "path": ".",
+   "author": "Hyprune contributors",
+   "license": "CC-BY-4.0",
+   "source": "https://github.com/hyprune/worlds/tree/main/characters"
+  }
+ ],
+ "bounds": {
+  "min": [
+   -0.8915,
+   0.0267,
+   -0.3679
+  ],
+  "max": [
+   0.8745,
+   1.7266,
+   0.3339
+  ]
+ },
+ "thumbnail": "thumbnail.png",
+ "lighting": {
+  "mode": "probe"
+ },
+ "traits": {
+  "character": {
+   "clips": {
+    "idle": {},
+    "walk": {
+     "speed": 0.873
+    },
+    "run": {
+     "speed": 3.054
+    },
+    "idle_fidget": {},
+    "turn_left": {},
+    "turn_right": {},
+    "wave": {},
+    "sit": {},
+    "sit_idle": {}
+   },
+   "height": 1.73
+  }
+ }
+}
