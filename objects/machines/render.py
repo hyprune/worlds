@@ -363,13 +363,21 @@ def camera(name='cam', lens=50, ortho=None):
     return o
 
 
-def frame(cam, corners, azimuth, elevation, margin=1.12, target=None):
+def frame(cam, corners, azimuth, elevation, margin=1.12, target=None, dist=None):
     """Place cam looking at the corners' centre from azimuth/elevation (degrees; azimuth 0 = front, -Y),
     distance chosen so every corner fits."""
-    c = target if target is not None else sum(corners, Vector()) / len(corners)
+    if target is None:
+        lo = Vector((min(p.x for p in corners), min(p.y for p in corners), min(p.z for p in corners)))
+        hi = Vector((max(p.x for p in corners), max(p.y for p in corners), max(p.z for p in corners)))
+        target = (lo + hi) / 2
+    c = target
     az, el = math.radians(azimuth), math.radians(elevation)
     d = Vector((math.sin(az) * math.cos(el), -math.cos(az) * math.cos(el), math.sin(el)))
     sc = bpy.context.scene
+    if dist is not None:
+        cam.location = c + d * dist; cam.rotation_euler = (-d).to_track_quat('-Z', 'Y').to_euler()
+        bpy.context.view_layer.update()
+        return dist
     dist = 10.0
     for _ in range(12):
         cam.location = c + d * dist
@@ -405,7 +413,7 @@ def slot_points(m):
             out.append({'kind': kind, 'id': s['id'], 'target': f"{prefix}:{s['id']}", 'p': m.world(g2b(s['pose']['position']))})
     for s in m.slots.get('tracks', []):
         pts = [m.world(g2b(p['position'])) for p in s['points']]
-        out.append({'kind': 'tracks', 'id': s['id'], 'target': f"track {s['id']}", 'p': pts[len(pts) // 2], 'path': pts})
+        out.append({'kind': 'tracks', 'id': s['id'], 'target': f"track:{s['id']}", 'p': pts[len(pts) // 2], 'path': pts})
     for s in m.slots.get('stacks', []):
         out.append({'kind': 'stacks', 'id': s['id'], 'target': f"count:{s['id']}", 'p': centre(m.nodes[s['node']])})
     for s in m.slots.get('toggles', []):
@@ -434,15 +442,16 @@ def mode_sheet(mid, out):
     frame(cam, corners, *spec.get('hero_view', (-32, 16)), margin=spec.get('margin', 1.08))
     render(out / 'hero.png')
     # states
-    bpy.context.scene.render.resolution_x, bpy.context.scene.render.resolution_y = 1100, 900
+    bpy.context.scene.render.resolution_x, bpy.context.scene.render.resolution_y = spec.get('tile', (1100, 900))
     for k, st in enumerate(spec['states']):
         m.apply(st, token, t=st.get('t', 1.3))
-        frame(cam, corners, *spec.get('state_view', spec.get('hero_view', (-32, 16))), margin=spec.get('margin', 1.08))
+        frame(cam, corners, *st.get('view', spec.get('state_view', spec.get('hero_view', (-32, 16)))), margin=spec.get('tile_margin', 1.04))
         render(out / f'state-{k}.png')
     # callout view
-    bpy.context.scene.render.resolution_x, bpy.context.scene.render.resolution_y = 1920, 1280
+    bpy.context.scene.render.resolution_x, bpy.context.scene.render.resolution_y = spec.get('callout_res', (1500, 1170))
     m.apply(spec.get('callout', spec['hero']), token, t=1.3)
-    frame(cam, corners, *spec.get('callout_view', (-24, 20)), margin=spec.get('callout_margin', 1.3))
+    anchors = [p['p'] for p in slot_points(m)]
+    frame(cam, corners + anchors, *spec.get('callout_view', (-24, 20)), margin=spec.get('callout_margin', 1.3))
     render(out / 'callout.png')
     pts = [{**{k: v for k, v in p.items() if k not in ('p', 'path')}, 'xy': project(cam, p['p']),
             **({'path': [project(cam, q) for q in p['path']]} if 'path' in p else {})} for p in slot_points(m)]
@@ -459,7 +468,7 @@ def mode_sheet(mid, out):
 
 def mode_lineup(out):
     out.mkdir(parents=True, exist_ok=True)
-    setup_scene(res=(3200, 1300), samples=96)
+    setup_scene(res=(3600, 1250), samples=96)
     token = Token()
     x = 0.0; machines = []
     order = scenarios.LINEUP
@@ -477,7 +486,7 @@ def mode_lineup(out):
     figure((fig_x, 0, 0))
     cam = camera(lens=60)
     corners = [c for m in machines for c in bounds_world(m)] + [Vector((fig_x - .3, -.3, 0)), Vector((fig_x + .3, .3, 1.7))]
-    frame(cam, corners, 0, 6, margin=1.04)
+    frame(cam, corners, -8, 7, margin=1.03)
     render(out / 'lineup.png')
     bpy.context.view_layer.update()
     marks = {'figure': [project(cam, Vector((fig_x, 0, 1.7))), project(cam, Vector((fig_x, 0, 0)))]}
@@ -522,6 +531,8 @@ def mode_turntable(out, fps=30, seconds=10.0):
         tt = spec['turntable']
         n = int(seconds * fps)
         corners = bounds_world(m)
+        el = spec.get('turntable_elevation', 14); mg = spec.get('turntable_margin', 1.12)
+        dist = max(frame(cam, corners, az, el, margin=mg) for az in range(0, 360, 30))
         for f in range(n):
             t = f / fps
             sc = tt[min(int(t / (seconds / len(tt))), len(tt) - 1)]
@@ -529,8 +540,7 @@ def mode_turntable(out, fps=30, seconds=10.0):
             if only and mid != only:
                 frame_no += 1; continue
             m.apply(sc, token, t=t)
-            frame(cam, corners, -40 + 360 * f / n, spec.get('turntable_elevation', 14), margin=spec.get('turntable_margin', 1.18),
-                  target=sum(corners, Vector()) / len(corners) + Vector((0, 0, -.1)))
+            frame(cam, corners, -40 + 360 * f / n, el, dist=dist)
             render(out / f'{frame_no:05d}.png')
             frame_no += 1
         m.clear_extra()

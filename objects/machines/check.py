@@ -103,6 +103,14 @@ def draft_checks(mid):
             for o in outs:
                 if o not in pal:
                     errs.append(f'drive {dr["input"]} -> {dr["target"]}: state {o} not in the palette')
+    th = d / m.get('thumbnail', 'thumbnail.png')
+    if th.exists():
+        head = th.read_bytes()[:24]
+        w, h = struct.unpack('>II', head[16:24])
+        if head[:8] != b'\x89PNG\r\n\x1a\n' or (w, h) != (256, 256) or th.stat().st_size > 256 * 1024:
+            errs.append(f'thumbnail: {w}x{h}, {th.stat().st_size} bytes (want a 256 x 256 PNG <= 256 KiB)')
+    elif 'thumbnail' in m:
+        errs.append('thumbnail missing')
     b = m['bounds']
     if abs(b['min'][1]) > .01:
         errs.append(f'bounds min Y {b["min"][1]} (floor objects start at 0)')

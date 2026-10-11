@@ -64,7 +64,7 @@ PALETTES = {
     'health': [('off', (.05, .06, .07), 0.0), ('ok', MINT, 1.4), ('warn', AMBER, 1.6), ('fail', RED, 2.2)],
     'level':  [('ok', MINT, 1.3), ('warn', AMBER, 1.8), ('fail', RED, 2.2)],
     'glow':   [('idle', (.16, .2, .24), .4), ('running', CYAN, 2.0), ('ok', MINT, 1.8), ('fail', RED, 2.2)],
-    'phase':  [('off', SLATE, .15), ('active', CYAN, 1.8), ('done', MINT, 1.3), ('fail', RED, 2.2)],
+    'phase':  [('off', SLATE, .15), ('active', CYAN, 2.0), ('done', ICE, .7), ('fail', RED, 2.2)],
     'beacon': [('off', SLATE, .15), ('active', AMBER, 2.0), ('live', MINT, 2.2), ('fail', RED, 2.4)],
     'face':   [('idle', (.16, .2, .24), .35), ('running', CYAN, 1.2), ('ok', MINT, 1.1), ('fail', RED, 1.4)],
     'token':  [('queued', IVORY, .3), ('running', CYAN, 1.2), ('ok', MINT, 1.1), ('fail', RED, 1.4)],

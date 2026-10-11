@@ -13,5 +13,7 @@ honour reduced motion.
 | --- | --- | --- |
 | `armillary` | `objects/armillary/build.py` | Instrument globe with a cyan network inside three nested rings. Each ring spins about an axis in its own plane (its own path around the sphere); the globe turns slowly. First placed at the Lumen Reach Sun Court instrument terrace. |
 
+| `machines/*` | `make machines`, `make machines-install` | Five starter machines (CI conveyor, queue stack, server rack, deploy lift, build monitor) and the job token item, as RFC-0011 object directories with RFC-0013 machine traits (drafts). See [machines/README.md](machines/README.md). |
+
 `make objects` builds them on the bake host into `dist/objects/<id>/`.
 Original procedural geometry, CC-BY-4.0, Hyprune contributors.

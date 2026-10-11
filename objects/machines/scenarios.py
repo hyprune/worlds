@@ -41,11 +41,13 @@ CONVEYOR_OK = {'states': stages('ok', 'ok', 'ok', 'ok'), 'speeds': {'*': 0}, 'co
                'caption': 'stage.1-4 = ok · progress 1 · jobPassed → success-fx'}
 CONVEYOR_FAIL = {'states': stages('ok', 'ok', 'fail', 'idle'), 'speeds': {'*': 0}, 'counts': {'progress': 6, 'waiting': 3},
                  'labels': {'label-title': 'main #5113'}, 'items': [('reject', .92, 'fail'), ('track', .2, 'running')], 'effects': ['fail-fx'],
+                 'view': (145, 24),
                  'caption': 'stage.3 fail · jobFailed → reject-in + fail-fx'}
 
 SHEETS = {
     'ci-conveyor': {
-        'token': True, 'lens': 40, 'hero_view': (-30, 15), 'callout_view': (-18, 24), 'margin': 1.06, 'callout_margin': 1.22,
+        'token': True, 'lens': 40, 'hero_view': (-30, 15), 'callout_view': (-18, 24), 'margin': 1.06, 'callout_margin': 1.1,
+        'tile': (1500, 820), 'callout_res': (1700, 1100),
         'hero': {**CONVEYOR_RUN, 't': 0.6},
         'states': [CONVEYOR_IDLE, CONVEYOR_RUN, CONVEYOR_OK, CONVEYOR_FAIL],
         'callout': CONVEYOR_RUN,
@@ -105,11 +107,14 @@ def monitor(status, progress=0.0):
 MONITOR = [monitor('idle'), monitor('running', .5), monitor('ok', 1.0), monitor('fail')]
 
 SHEETS.update({
-    'queue-stack': {'hero': QUEUE[2], 'states': QUEUE, 'callout': QUEUE[2], 'turntable': QUEUE, 'hero_view': (-30, 14), 'callout_view': (-22, 16)},
-    'server-rack': {'hero': RACK[2], 'states': RACK, 'callout': RACK[2], 'turntable': RACK, 'hero_view': (-34, 10), 'callout_view': (-18, 10),
+    'queue-stack': {'tile': (1000, 950), 'hero': QUEUE[2], 'states': QUEUE, 'callout': QUEUE[2], 'turntable': QUEUE, 'hero_view': (-30, 14), 'callout_view': (-22, 16)},
+    'server-rack': {'tile': (900, 1100), 'hero': RACK[2], 'states': RACK, 'callout': RACK[2], 'turntable': RACK, 'hero_view': (-34, 10), 'callout_view': (-18, 10),
                     'lens': 50},
-    'deploy-lift': {'hero': lift('rolling', .66), 'states': LIFT, 'callout': lift('building', .33), 'turntable': LIFT, 'hero_view': (-32, 12),
+    'deploy-lift': {'tile': (900, 1200), 'hero': lift('rolling', .66), 'states': LIFT, 'callout': lift('building', .33), 'turntable': LIFT, 'hero_view': (-32, 12),
                     'callout_view': (-24, 12)},
-    'build-monitor': {'hero': monitor('running', .6), 'states': MONITOR, 'callout': monitor('running', .6), 'turntable': MONITOR,
+    'build-monitor': {'tile': (900, 1000), 'hero': monitor('running', .6), 'states': MONITOR, 'callout': monitor('running', .6), 'turntable': MONITOR,
                       'hero_view': (-30, 8), 'callout_view': (-20, 8), 'lens': 50},
 })
+
+TOKEN = [{'states': {'band': s}, 'caption': f'band {s}'} for s in ('queued', 'running', 'ok', 'fail')]
+SHEETS['job-token'] = {'hero': TOKEN[1], 'states': TOKEN, 'callout': TOKEN[1], 'turntable': TOKEN, 'hero_view': (-35, 25), 'lens': 70, 'margin': 1.3}

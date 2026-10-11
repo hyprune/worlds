@@ -362,16 +362,16 @@
        0.48,
        0.68
       ],
-      "emission": 1.8
+      "emission": 2.0
      },
      {
       "id": "done",
       "colour": [
-       0.2,
-       0.85,
-       0.35
+       0.62,
+       0.73,
+       0.82
       ],
-      "emission": 1.3
+      "emission": 0.7
      },
      {
       "id": "fail",
@@ -406,16 +406,16 @@
        0.48,
        0.68
       ],
-      "emission": 1.8
+      "emission": 2.0
      },
      {
       "id": "done",
       "colour": [
-       0.2,
-       0.85,
-       0.35
+       0.62,
+       0.73,
+       0.82
       ],
-      "emission": 1.3
+      "emission": 0.7
      },
      {
       "id": "fail",
@@ -450,16 +450,16 @@
        0.48,
        0.68
       ],
-      "emission": 1.8
+      "emission": 2.0
      },
      {
       "id": "done",
       "colour": [
-       0.2,
-       0.85,
-       0.35
+       0.62,
+       0.73,
+       0.82
       ],
-      "emission": 1.3
+      "emission": 0.7
      },
      {
       "id": "fail",
@@ -494,16 +494,16 @@
        0.48,
        0.68
       ],
-      "emission": 1.8
+      "emission": 2.0
      },
      {
       "id": "done",
       "colour": [
-       0.2,
-       0.85,
-       0.35
+       0.62,
+       0.73,
+       0.82
       ],
-      "emission": 1.3
+      "emission": 0.7
      },
      {
       "id": "fail",
