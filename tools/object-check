@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# SPDX-License-Identifier: MIT
+# Check RFC-0011 object directories with the shared validator (schema repository's
+# validate('object'), SCHEMA_DIR, default ../schema): manifest, glTF cross-checks, decoded
+# bounds (1 cm), budgets, thumbnail, files and attribution. Build sources (build.py,
+# PROVENANCE, README.md, *.report.json) are listed as ignored, never as object files.
+#   tools/object-check DIR... [--format 0.9] [--json] [--schema DIR]
+set -euo pipefail
+ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+[[ -d "$ROOT/tools/gltf/node_modules" ]] || npm ci --prefix "$ROOT/tools/gltf" --no-audit --no-fund >/dev/null
+export SCHEMA_DIR="${SCHEMA_DIR:-$ROOT/../schema}"
+exec node "$ROOT/tools/gltf/object.mjs" check "$@"

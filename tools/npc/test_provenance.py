@@ -3,7 +3,7 @@
 """python3 tools/npc/test_provenance.py: the PROVENANCE rules."""
 import pathlib, sys, tempfile
 sys.path.insert(0, str(pathlib.Path(__file__).parent))
-from provenance import check
+from provenance import check, OBJECT_REQUIRED
 GOOD = '''Source: AI 3D tool, generated from the author's own concept
 Author: Hyprune contributors
 Licence: CC-BY-4.0
@@ -18,4 +18,7 @@ with tempfile.TemporaryDirectory() as d:
     (pathlib.Path(d) / 'PROVENANCE').write_text(GOOD.replace('CC-BY-4.0', 'All rights reserved')); assert any('licence' in p for p in check(src)[1])
     (pathlib.Path(d) / 'PROVENANCE').write_text(GOOD.replace('Animations: the tool\'s preset library\n', '')); assert any('Animations' in p for p in check(src)[1])
     (pathlib.Path(d) / 'PROVENANCE').write_text(GOOD.replace('original design, resembles no third-party character', 'looks like a famous game hero')); assert check(src)[1]
+    # Objects (tools/object-import): no animation or resemblance lines needed.
+    (pathlib.Path(d) / 'PROVENANCE').write_text('Source: modelled by the author\nAuthor: Hyprune contributors\nLicence: CC0-1.0\n')
+    assert check(src, OBJECT_REQUIRED)[1] == [] and check(src)[1]
 print('PASS provenance rules')

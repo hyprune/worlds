@@ -1,0 +1,139 @@
+#!/usr/bin/env bash
+# SPDX-License-Identifier: MIT
+# Normalise any glTF/GLB into an RFC-0011 object directory: object.json, the glTF (meshopt +
+# quantised geometry, KTX2 textures), thumbnail.png; then tools/object-check.
+#   tools/object-import SOURCE.glb|.gltf OUT_DIR --name NAME [--id ID] [manifest flags] [import flags]
+#   tools/object-import SOURCE.glb|.fbx OUT_DIR --character --name NAME [npc-import flags] [manifest flags]
+#   tools/object-import --adopt OUT_DIR --name NAME [manifest flags]     (already normalised: thumbnail, manifest, check)
+# Import flags: --units m|cm|mm, --up y|z, --forward +z|-z|+x|-x, --max-tris N, --max-texture PX,
+#   --collision none|box|convex, --keep NODE, --no-compress, --no-thumbnail.
+# Manifest flags (tools/object/manifest.py): --base PARTIAL.json (traits, slots, tags an author
+#   wrote), --category, --version, --format, --description, --tags, --license/--author/--source
+#   (default: the PROVENANCE note), --surface S (repeatable; also the import origin), --fixed,
+#   --free-rotation, --scale-range MIN,MAX, --accent, --radius R.
+# Trait steps: static and movable objects get the origin of their surface; --collision adds the
+#   `collidable` proxy; --item (a mover item, format 0.10) caps 2,000 triangles and 512 px;
+#   --character runs tools/npc-import (rig, clips, extras.speed, budget, compression) and records
+#   the measured clips, height and seat height in the `character` trait.
+# Needs a PROVENANCE note beside SOURCE (tools/npc/provenance.py). Blender runs only on the bake
+# host (HYPRUNE_BAKE_HOST, tools/bake-host.sh); compression uses tools/remote-optimize.sh.
+set -euo pipefail
+ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+usage() { sed -n '3,20p' "$0" >&2; exit 2; }
+[[ $# -ge 2 ]] || usage
+MODE=import; SRC=""
+if [[ "$1" == --adopt ]]; then MODE=adopt; OUT="$(realpath -m "$2")"; shift 2
+else SRC="$(realpath "$1")"; OUT="$(realpath -m "$2")"; shift 2; fi
+CHARACTER=0; NAME=""; ID=""; LICENSE=""; AUTHOR=""; SOURCE_URL=""; SURFACES=(); COLLISION=none; COMPRESS=1; THUMB=1
+IMPORT=(); MANIFEST=(); NPC=(); MAX_TRIS=""; MAX_TEX=""; ITEM=0
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    --name) NAME="$2"; shift 2 ;;
+    --id) ID="$2"; shift 2 ;;
+    --character) CHARACTER=1; shift ;;
+    --item) ITEM=1; shift ;;
+    --license) LICENSE="$2"; shift 2 ;;
+    --author) AUTHOR="$2"; shift 2 ;;
+    --source) SOURCE_URL="$2"; shift 2 ;;
+    --surface) SURFACES+=("$2"); MANIFEST+=(--surface "$2"); shift 2 ;;
+    --collision) COLLISION="$2"; shift 2 ;;
+    --max-tris) MAX_TRIS="$2"; shift 2 ;;
+    --max-texture) MAX_TEX="$2"; shift 2 ;;
+    --units|--up|--forward|--keep) IMPORT+=("$1" "$2"); shift 2 ;;
+    --no-compress) COMPRESS=0; shift ;;
+    --no-thumbnail) THUMB=0; shift ;;
+    --base) MANIFEST+=(--base "$(realpath "$2")"); shift 2 ;;
+    --category|--version|--format|--description|--tags|--scale-range|--radius) MANIFEST+=("$1" "$2"); shift 2 ;;
+    --fixed|--free-rotation|--accent) MANIFEST+=("$1"); shift ;;
+    --clips-from|--map|--render) NPC+=("$1" "$2"); shift 2 ;;
+    --strip-fingers|--keep-sway) NPC+=("$1"); shift ;;
+    *) echo "unknown option $1" >&2; exit 2 ;;
+  esac
+done
+[[ -n "$NAME" ]] || { echo '--name is required' >&2; exit 2; }
+[[ $CHARACTER == 0 || $MODE == adopt ]] || MODE=character
+ID="${ID:-$(basename "$OUT")}"
+[[ "$ID" =~ ^[a-z][a-z0-9-]{0,63}$ && "$(basename "$OUT")" == "$ID" ]] || { echo "the object id ($ID) must be a slug and the output directory's name" >&2; exit 2; }
+# Licence and author default to the PROVENANCE note (rule: original or CC0/CC-BY with provenance).
+if [[ -n "$SRC" ]]; then
+  KIND=--object; [[ $MODE == character ]] && KIND=""
+  NOTE="$(python3 "$ROOT/tools/npc/provenance.py" $KIND "$SRC")"
+  [[ -n "$LICENSE" ]] || LICENSE="$(python3 -c 'import json,sys;d=json.loads(sys.argv[1]);print(d.get("licence") or d.get("license"))' "$NOTE")"
+  [[ -n "$AUTHOR" ]] || AUTHOR="$(python3 -c 'import json,sys;print(json.loads(sys.argv[1])["author"])' "$NOTE")"
+fi
+[[ $ITEM == 0 ]] || { MAX_TRIS="${MAX_TRIS:-2000}"; MAX_TEX="${MAX_TEX:-512}"; MANIFEST+=(--fixed --format 0.10); }
+[[ $CHARACTER == 0 ]] || MANIFEST+=(--character)
+[[ -z "$LICENSE" ]] || MANIFEST+=(--license "$LICENSE")
+[[ -z "$AUTHOR" ]] || MANIFEST+=(--author "$AUTHOR")
+[[ -z "$SOURCE_URL" ]] || MANIFEST+=(--source "$SOURCE_URL")
+[[ $COLLISION == none ]] || MANIFEST+=(--collision proxy)
+SURFACE="${SURFACES[0]:-floor}"; [[ ${#SURFACES[@]} -le 1 ]] || SURFACE=keep
+
+BUILD="$ROOT/build/object-import/$ID"; rm -rf "$BUILD"; mkdir -p "$BUILD" "$OUT"
+REMOTE="${HYPRUNE_OBJECT_DIR:-hyprune-bake/object-import}"
+source "$ROOT/tools/bake-host.sh"
+on_host "mkdir -p '$REMOTE/tools' '$REMOTE/work/$ID'"
+rsync -az --delete --exclude node_modules --exclude __pycache__ "$ROOT/tools/object" "$ROOT/tools/gltf" "$(host_path "$REMOTE/tools/")"
+on_host "cd '$REMOTE/tools/gltf' && { [[ -d node_modules ]] || npm ci --no-audit --no-fund >/dev/null; }"
+# blender_thumbnail SCENE: prepare (decode meshopt, unpack KTX2) and render OUT/thumbnail.png on the bake host.
+blender_thumbnail() {
+  rsync -az "$1" "$(host_path "$REMOTE/work/$ID/thumb-src.${1##*.}")"
+  [[ "${1##*.}" == glb ]] || rsync -az --exclude object.json --exclude 'thumbnail.png' "$(dirname "$1")/" "$(host_path "$REMOTE/work/$ID/")"
+  on_host_script <<SCRIPT
+set -euo pipefail
+cd '$REMOTE'
+node tools/gltf/object-prep.mjs work/$ID/thumb-src.${1##*.} work/$ID/thumb-prep.glb >/dev/null
+HYPRUNE_REMOTE_BLENDER=1 flock .blender.lock blender -b --factory-startup -P tools/object/thumbnail.py -- work/$ID/thumb-prep.glb work/$ID/thumbnail.png 2>&1 | grep -E '^THUMBNAIL|Error|Traceback' || true
+test -s work/$ID/thumbnail.png
+SCRIPT
+  rsync -az "$(host_path "$REMOTE/work/$ID/thumbnail.png")" "$OUT/thumbnail.png"
+}
+
+case $MODE in
+  import)
+    rsync -az "$SRC" "$(host_path "$REMOTE/work/$ID/")"
+    [[ "${SRC##*.}" != gltf ]] || rsync -az --exclude 'PROVENANCE*' "$(dirname "$SRC")/" "$(host_path "$REMOTE/work/$ID/")"
+    ARGS="--in work/$ID/prep.glb --out work/$ID/export/object.gltf --report work/$ID/import.report.json --surface $SURFACE --collision $COLLISION"
+    [[ -z "$MAX_TRIS" ]] || ARGS+=" --max-tris $MAX_TRIS"; [[ -z "$MAX_TEX" ]] || ARGS+=" --max-texture $MAX_TEX"
+    for x in "${IMPORT[@]+"${IMPORT[@]}"}"; do ARGS+=" $(printf '%q' "$x")"; done
+    on_host_script <<SCRIPT
+set -euo pipefail
+cd '$REMOTE'
+rm -rf work/$ID/export
+node tools/gltf/object-prep.mjs work/$ID/$(basename "$SRC") work/$ID/prep.glb >/dev/null
+HYPRUNE_REMOTE_BLENDER=1 flock .blender.lock blender -b --factory-startup --python-exit-code 1 -P tools/object/object_import.py -- $ARGS 2>&1 | grep -E '^OBJECT-IMPORT|Error|Traceback' || true
+test -s work/$ID/export/object.gltf
+SCRIPT
+    rsync -az --delete "$(host_path "$REMOTE/work/$ID/export/")" "$BUILD/export/"
+    rsync -az "$(host_path "$REMOTE/work/$ID/import.report.json")" "$BUILD/"
+    find "$OUT" -maxdepth 1 -type f ! -name 'PROVENANCE*' ! -name build.py ! -name README.md -delete
+    if [[ $COMPRESS == 1 ]]; then
+      # tools/remote-optimize.sh works on packages: stage the asset as a minimal one (no lightmaps).
+      STAGE="$BUILD/stage/object-$ID"; mkdir -p "$STAGE"; cp -r "$BUILD/export/." "$STAGE/"
+      printf '{"formatVersion": "0.8", "scene": "object.gltf", "lightmaps": [], "collision": []}\n' > "$STAGE/world.json"
+      "$ROOT/tools/remote-optimize.sh" "$STAGE" "$BUILD/opt" > /dev/null
+      python3 -c "import json,sys; r=json.load(open(sys.argv[1])); assert r['status']=='PASS', r" "$BUILD/opt.verify.json"
+      (cd "$BUILD/opt" && find . -maxdepth 1 -type f ! -name world.json -exec cp {} "$OUT/" \;)
+    else
+      cp -r "$BUILD/export/." "$OUT/"
+    fi
+    [[ $THUMB == 0 ]] || blender_thumbnail "$BUILD/export/object.gltf"
+    SCENE=object.gltf ;;
+  character)
+    "$ROOT/tools/npc-import" "$SRC" "$BUILD/object.glb" "${NPC[@]+"${NPC[@]}"}" ${MAX_TRIS:+--max-tris $MAX_TRIS}
+    find "$OUT" -maxdepth 1 -type f ! -name 'PROVENANCE*' ! -name README.md -delete
+    cp "$BUILD/object.glb" "$OUT/object.glb"
+    [[ $THUMB == 0 ]] || blender_thumbnail "$OUT/object.glb"
+    SCENE=object.glb ;;
+  adopt)
+    [[ -f "$OUT/object.json" ]] && cp "$OUT/object.json" "$BUILD/base.json" && MANIFEST=(--base "$BUILD/base.json" "${MANIFEST[@]+"${MANIFEST[@]}"}")
+    SCENE="$(python3 -c 'import json,sys;print(json.load(open(sys.argv[1])).get("scene",""))' "$BUILD/base.json" 2>/dev/null || true)"
+    for f in object.glb object.gltf; do [[ -n "$SCENE" || ! -f "$OUT/$f" ]] || SCENE=$f; done
+    [[ -n "$SCENE" && -f "$OUT/$SCENE" ]] || { echo "no scene in $OUT" >&2; exit 2; }
+    [[ $THUMB == 0 ]] || blender_thumbnail "$OUT/$SCENE" ;;
+esac
+node "$ROOT/tools/gltf/object.mjs" measure "$OUT/$SCENE" > "$BUILD/measured.json"
+THUMBNAIL=(); [[ ! -f "$OUT/thumbnail.png" ]] || THUMBNAIL=(--thumbnail thumbnail.png)
+python3 "$ROOT/tools/object/manifest.py" "$OUT/object.json" --measured "$BUILD/measured.json" --id "$ID" --name "$NAME" --scene "$SCENE" \
+  "${THUMBNAIL[@]+"${THUMBNAIL[@]}"}" "${MANIFEST[@]+"${MANIFEST[@]}"}"
+"$ROOT/tools/object-check" "$OUT"
