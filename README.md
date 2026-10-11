@@ -1,6 +1,8 @@
 # Hyprune worlds
 
-Official, original places for your desktop. **Early, building in the open.**
+> **Hyprune** is an explorable, world-driven desktop environment for Hyprland: your workspaces become places you can walk through, with live windows on the walls. This repository holds the official **worlds** (Lumen Reach, Switchyard): sources, build pipeline and provenance; packages are published as GitHub releases. Install Hyprune through the [hyprune](https://github.com/hyprune/hyprune) repository (starter kits, Nix, Arch); learn more at [hyprune.com](https://hyprune.com). Licence: world content CC-BY-4.0, scripts MIT.
+
+Official, original places for your desktop. **Early preview, building in the open.**
 
 > What if the computer itself were an explorable world?
 
