@@ -1,0 +1,199 @@
+{
+  "worldId": "com.hyprune.machine-yard",
+  "manifests": {
+    "ci-conveyor": "objects/ci-conveyor/object.json",
+    "queue-stack": "objects/queue-stack/object.json",
+    "server-rack": "objects/server-rack/object.json",
+    "deploy-lift": "objects/deploy-lift/object.json",
+    "build-monitor": "objects/build-monitor/object.json",
+    "job-token": "objects/job-token/object.json",
+    "fx-spark": "objects/fx-spark/object.json"
+  },
+  "effectAsset": "fx-spark",
+  "staleMs": 8000,
+  "instances": {
+    "ci-1": {
+      "inputs": {
+        "status": {
+          "source": "com.hyprune.sources.ci",
+          "key": "status",
+          "map": {
+            "cases": [
+              {
+                "equals": "success",
+                "to": "ok"
+              },
+              {
+                "equals": "failed",
+                "to": "fail"
+              },
+              {
+                "equals": "running",
+                "to": "running"
+              }
+            ],
+            "else": "idle"
+          }
+        },
+        "stage": {
+          "source": "com.hyprune.sources.ci",
+          "key": "stage.{n}",
+          "map": {
+            "cases": [
+              {
+                "equals": "success",
+                "to": "ok"
+              },
+              {
+                "equals": "failed",
+                "to": "fail"
+              },
+              {
+                "equals": "running",
+                "to": "running"
+              }
+            ],
+            "else": "idle"
+          }
+        },
+        "jobStarted": {
+          "source": "com.hyprune.sources.ci",
+          "key": "jobsStarted",
+          "map": {
+            "counter": true
+          }
+        },
+        "jobPassed": {
+          "source": "com.hyprune.sources.ci",
+          "key": "jobsSucceeded",
+          "map": {
+            "counter": true
+          }
+        },
+        "jobFailed": {
+          "source": "com.hyprune.sources.ci",
+          "key": "jobsFailed",
+          "map": {
+            "counter": true
+          }
+        },
+        "queued": {
+          "source": "com.hyprune.sources.ci",
+          "key": "queued"
+        },
+        "lastJob": {
+          "source": "com.hyprune.sources.ci",
+          "key": "lastJob"
+        }
+      }
+    },
+    "queue-1": {
+      "inputs": {
+        "depth": {
+          "source": "com.hyprune.sources.queue",
+          "key": "depth"
+        },
+        "level": {
+          "source": "com.hyprune.sources.queue",
+          "key": "level"
+        }
+      }
+    },
+    "rack-1": {
+      "inputs": {
+        "health": {
+          "source": "com.hyprune.sources.rack",
+          "key": "health.{n}"
+        },
+        "load": {
+          "source": "com.hyprune.sources.rack",
+          "key": "load.{n}"
+        }
+      }
+    },
+    "deploy-1": {
+      "inputs": {
+        "status": {
+          "source": "com.hyprune.sources.deploy",
+          "key": "phase",
+          "map": {
+            "cases": [
+              {
+                "in": [
+                  "queued",
+                  "building",
+                  "rolling"
+                ],
+                "to": "deploying"
+              },
+              {
+                "equals": "live",
+                "to": "done"
+              },
+              {
+                "equals": "failed",
+                "to": "failed"
+              }
+            ],
+            "else": "idle"
+          }
+        },
+        "progress": {
+          "source": "com.hyprune.sources.deploy",
+          "key": "progress"
+        },
+        "environment": {
+          "source": "com.hyprune.sources.deploy",
+          "key": "environment"
+        },
+        "finished": {
+          "source": "com.hyprune.sources.deploy",
+          "key": "deploys",
+          "map": {
+            "counter": true
+          }
+        }
+      }
+    },
+    "build-1": {
+      "inputs": {
+        "status": {
+          "source": "com.hyprune.sources.build",
+          "key": "status",
+          "map": {
+            "cases": [
+              {
+                "equals": "success",
+                "to": "ok"
+              },
+              {
+                "equals": "failed",
+                "to": "fail"
+              },
+              {
+                "equals": "running",
+                "to": "running"
+              }
+            ],
+            "else": "idle"
+          }
+        },
+        "progress": {
+          "source": "com.hyprune.sources.build",
+          "key": "progress"
+        },
+        "passed": {
+          "source": "com.hyprune.sources.build",
+          "key": "successes",
+          "map": {
+            "counter": true
+          }
+        },
+        "lastJob": {
+          "source": "com.hyprune.sources.build",
+          "key": "lastJob"
+        }
+      }
+    }
+  }
+}

@@ -170,3 +170,17 @@ optimize:
 	@[ "$(HYPRUNE_FORMAT_07)" = 1 ] || { echo 'world format 0.7 is not merged yet; HYPRUNE_FORMAT_07=1 builds a test package in dist-07/' >&2; exit 2; }
 	tools/remote-optimize.sh $(PACKAGE) dist-07/com.hyprune.switchyard
 	node tools/gltf/budgets.mjs dist-07/com.hyprune.switchyard --baseline $(PACKAGE) --output dist-07/com.hyprune.switchyard.budgets.json > /dev/null
+
+# Machine Yard: the test world for live machines (not part of build or release).
+YARD_PACKAGE := dist/com.hyprune.machine-yard
+YARD_BLENDER := HYPRUNE_BAKE_DIR=hyprune-bake/worlds-machine-yard HYPRUNE_BAKE_PROJECT=machine-yard ./tools/remote-blender.sh -b --python-exit-code 1 -P machine-yard/build.py
+YARD_CORE ?= ../core
+.PHONY: machine-yard machine-yard-stills machine-yard-check
+machine-yard:
+	python3 lumen-reach/materials/prepare.py
+	$(YARD_BLENDER) -- --stage build
+machine-yard-stills:
+	$(YARD_BLENDER) -- --stage stills
+machine-yard-check:
+	node $(SCHEMA_DIR)/bin/validate.mjs world $(YARD_PACKAGE)/world.json - 0.8
+	$(YARD_CORE)/build/hyprune-world-check $(YARD_PACKAGE) > artifacts/machine-yard/world-check.json
