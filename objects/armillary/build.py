@@ -62,7 +62,9 @@ def main():
     if OUT.exists():
         shutil.rmtree(OUT)
     OUT.mkdir(parents=True)
-    dark = material('armillary-globe', (.16, .20, .24), .55, .35)
+    # Near-black glossy shell: the globe is lit at runtime (sun + probe ambient), and a
+    # bright plaza lifts mid-tones far more than the old baked lightmap did.
+    dark = material('armillary-globe', (.035, .045, .055), .32, .25)
     cyan = material('armillary-network', (.11, .48, .68), .4, 0, emit=1.0)
     ivory = material('armillary-ring', (.7, .66, .54), .45, .25)
 
