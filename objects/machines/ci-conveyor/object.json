@@ -1,0 +1,799 @@
+{
+ "formatVersion": "0.11",
+ "id": "ci-conveyor",
+ "version": "0.1.0",
+ "name": "CI conveyor",
+ "description": "A CI pipeline as a conveyor: jobs drop from a hopper, pass four lit stations (build, test, package, deploy) and land in the output or the reject bin.",
+ "category": "machines",
+ "tags": [
+  "ci",
+  "pipeline",
+  "jobs",
+  "build"
+ ],
+ "scene": "object.gltf",
+ "license": "CC-BY-4.0",
+ "attribution": [
+  {
+   "path": ".",
+   "author": "Hyprune contributors",
+   "license": "CC-BY-4.0",
+   "source": "https://github.com/hyprune/worlds"
+  },
+  {
+   "path": "build.py",
+   "author": "Hyprune contributors",
+   "license": "MIT",
+   "source": "https://github.com/hyprune/worlds"
+  }
+ ],
+ "thumbnail": "thumbnail.png",
+ "lighting": {
+  "mode": "probe"
+ },
+ "traits": {
+  "decorative": {
+   "animations": [
+    {
+     "node": "stage-1-spinner",
+     "type": "spin",
+     "axis": [
+      0.0,
+      0.0,
+      -1.0
+     ],
+     "pivot": [
+      -1.175,
+      1.75,
+      0.375
+     ],
+     "period": 2.4
+    },
+    {
+     "node": "stage-2-spinner",
+     "type": "spin",
+     "axis": [
+      0.0,
+      0.0,
+      -1.0
+     ],
+     "pivot": [
+      -0.075,
+      1.75,
+      0.375
+     ],
+     "period": 2.4,
+     "phase": 0.17
+    },
+    {
+     "node": "stage-3-spinner",
+     "type": "spin",
+     "axis": [
+      0.0,
+      0.0,
+      -1.0
+     ],
+     "pivot": [
+      1.025,
+      1.75,
+      0.375
+     ],
+     "period": 2.4,
+     "phase": 0.34
+    },
+    {
+     "node": "stage-4-spinner",
+     "type": "spin",
+     "axis": [
+      0.0,
+      0.0,
+      -1.0
+     ],
+     "pivot": [
+      2.125,
+      1.75,
+      0.375
+     ],
+     "period": 2.4,
+     "phase": 0.51
+    }
+   ]
+  },
+  "collidable": {
+   "node": "proxy"
+  },
+  "movable": {
+   "surfaces": [
+    "floor"
+   ],
+   "upright": true
+  },
+  "machine": {
+   "primary": "stage",
+   "inputs": [
+    {
+     "id": "stage",
+     "type": "enum",
+     "values": [
+      "idle",
+      "running",
+      "ok",
+      "fail"
+     ],
+     "default": "idle",
+     "repeat": 4,
+     "label": "Stage status",
+     "explain": "Stations 1-4 (build, test, package, deploy): the lamp shows the stage state and its gears turn while it runs."
+    },
+    {
+     "id": "jobStarted",
+     "type": "event",
+     "label": "Job started",
+     "explain": "Each started job drops a crate from the hopper onto the belt."
+    },
+    {
+     "id": "jobPassed",
+     "type": "event",
+     "label": "Job passed",
+     "explain": "A passed job lands in the output bin with a burst."
+    },
+    {
+     "id": "jobFailed",
+     "type": "event",
+     "label": "Job failed",
+     "explain": "A failed job is pushed into the reject bin under the red flag."
+    },
+    {
+     "id": "progress",
+     "type": "number",
+     "min": 0,
+     "max": 1,
+     "default": 0,
+     "label": "Progress",
+     "explain": "The pip rail along the belt: one pip per tenth of the pipeline."
+    },
+    {
+     "id": "queued",
+     "type": "int",
+     "min": 0,
+     "max": 18,
+     "default": 0,
+     "label": "Queued jobs",
+     "explain": "Crates waiting on the pallet beside the hopper, one per queued job."
+    },
+    {
+     "id": "pipeline",
+     "type": "text",
+     "maxLength": 24,
+     "label": "Pipeline name",
+     "explain": "The board above the hopper."
+    }
+   ],
+   "drives": [
+    {
+     "input": "stage.1",
+     "target": "state:stage-1-lamp"
+    },
+    {
+     "input": "stage.1",
+     "target": "animation:stage-1-spinner",
+     "map": {
+      "cases": [
+       {
+        "equals": "running",
+        "to": 1
+       }
+      ],
+      "else": 0
+     }
+    },
+    {
+     "input": "stage.2",
+     "target": "state:stage-2-lamp"
+    },
+    {
+     "input": "stage.2",
+     "target": "animation:stage-2-spinner",
+     "map": {
+      "cases": [
+       {
+        "equals": "running",
+        "to": 1
+       }
+      ],
+      "else": 0
+     }
+    },
+    {
+     "input": "stage.3",
+     "target": "state:stage-3-lamp"
+    },
+    {
+     "input": "stage.3",
+     "target": "animation:stage-3-spinner",
+     "map": {
+      "cases": [
+       {
+        "equals": "running",
+        "to": 1
+       }
+      ],
+      "else": 0
+     }
+    },
+    {
+     "input": "stage.4",
+     "target": "state:stage-4-lamp"
+    },
+    {
+     "input": "stage.4",
+     "target": "animation:stage-4-spinner",
+     "map": {
+      "cases": [
+       {
+        "equals": "running",
+        "to": 1
+       }
+      ],
+      "else": 0
+     }
+    },
+    {
+     "input": "jobStarted",
+     "target": "spawn:item-spawn"
+    },
+    {
+     "input": "jobPassed",
+     "target": "effect:success-fx"
+    },
+    {
+     "input": "jobFailed",
+     "target": "spawn:reject-in"
+    },
+    {
+     "input": "jobFailed",
+     "target": "effect:fail-fx"
+    },
+    {
+     "input": "progress",
+     "target": "count:progress",
+     "map": {
+      "scale": {
+       "from": [
+        0,
+        1
+       ],
+       "to": [
+        0,
+        10
+       ]
+      },
+      "clamp": true,
+      "round": "floor"
+     }
+    },
+    {
+     "input": "queued",
+     "target": "count:waiting"
+    },
+    {
+     "input": "pipeline",
+     "target": "label:label-title"
+    }
+   ],
+   "recipes": [
+    {
+     "name": "Pipeline summary JSON",
+     "fields": {
+      "stage.1": "/stages/0/status",
+      "stage.2": "/stages/1/status",
+      "stage.3": "/stages/2/status",
+      "stage.4": "/stages/3/status",
+      "jobStarted": "/counters/started",
+      "jobPassed": "/counters/passed",
+      "jobFailed": "/counters/failed",
+      "progress": "/progress",
+      "queued": {
+       "countWhere": {
+        "array": "/jobs",
+        "pointer": "/status",
+        "equals": "queued"
+       }
+      },
+      "pipeline": "/name"
+     }
+    }
+   ]
+  }
+ },
+ "slots": {
+  "states": [
+   {
+    "id": "stage-1-lamp",
+    "materials": [
+     "stage-1-lamp"
+    ],
+    "palette": [
+     {
+      "id": "idle",
+      "colour": [
+       0.1,
+       0.12,
+       0.14
+      ],
+      "emission": 0.25
+     },
+     {
+      "id": "running",
+      "colour": [
+       0.11,
+       0.48,
+       0.68
+      ],
+      "emission": 1.8
+     },
+     {
+      "id": "ok",
+      "colour": [
+       0.2,
+       0.85,
+       0.35
+      ],
+      "emission": 1.6
+     },
+     {
+      "id": "fail",
+      "colour": [
+       0.9,
+       0.06,
+       0.02
+      ],
+      "emission": 2.2
+     }
+    ]
+   },
+   {
+    "id": "stage-2-lamp",
+    "materials": [
+     "stage-2-lamp"
+    ],
+    "palette": [
+     {
+      "id": "idle",
+      "colour": [
+       0.1,
+       0.12,
+       0.14
+      ],
+      "emission": 0.25
+     },
+     {
+      "id": "running",
+      "colour": [
+       0.11,
+       0.48,
+       0.68
+      ],
+      "emission": 1.8
+     },
+     {
+      "id": "ok",
+      "colour": [
+       0.2,
+       0.85,
+       0.35
+      ],
+      "emission": 1.6
+     },
+     {
+      "id": "fail",
+      "colour": [
+       0.9,
+       0.06,
+       0.02
+      ],
+      "emission": 2.2
+     }
+    ]
+   },
+   {
+    "id": "stage-3-lamp",
+    "materials": [
+     "stage-3-lamp"
+    ],
+    "palette": [
+     {
+      "id": "idle",
+      "colour": [
+       0.1,
+       0.12,
+       0.14
+      ],
+      "emission": 0.25
+     },
+     {
+      "id": "running",
+      "colour": [
+       0.11,
+       0.48,
+       0.68
+      ],
+      "emission": 1.8
+     },
+     {
+      "id": "ok",
+      "colour": [
+       0.2,
+       0.85,
+       0.35
+      ],
+      "emission": 1.6
+     },
+     {
+      "id": "fail",
+      "colour": [
+       0.9,
+       0.06,
+       0.02
+      ],
+      "emission": 2.2
+     }
+    ]
+   },
+   {
+    "id": "stage-4-lamp",
+    "materials": [
+     "stage-4-lamp"
+    ],
+    "palette": [
+     {
+      "id": "idle",
+      "colour": [
+       0.1,
+       0.12,
+       0.14
+      ],
+      "emission": 0.25
+     },
+     {
+      "id": "running",
+      "colour": [
+       0.11,
+       0.48,
+       0.68
+      ],
+      "emission": 1.8
+     },
+     {
+      "id": "ok",
+      "colour": [
+       0.2,
+       0.85,
+       0.35
+      ],
+      "emission": 1.6
+     },
+     {
+      "id": "fail",
+      "colour": [
+       0.9,
+       0.06,
+       0.02
+      ],
+      "emission": 2.2
+     }
+    ]
+   }
+  ],
+  "labels": [
+   {
+    "id": "label-title",
+    "pose": {
+     "position": [
+      -2.375,
+      2.35,
+      -0.173
+     ],
+     "rotation": [
+      0,
+      0,
+      0,
+      1
+     ]
+    },
+    "size": [
+     1.18,
+     0.3
+    ],
+    "maxChars": 24,
+    "font": "mono"
+   }
+  ],
+  "tracks": [
+   {
+    "id": "track",
+    "speed": 0.6,
+    "points": [
+     {
+      "position": [
+       -2.375,
+       0.8,
+       0.375
+      ],
+      "type": "line"
+     },
+     {
+      "position": [
+       -1.175,
+       0.8,
+       0.375
+      ],
+      "type": "line"
+     },
+     {
+      "position": [
+       -0.075,
+       0.8,
+       0.375
+      ],
+      "type": "line"
+     },
+     {
+      "position": [
+       1.025,
+       0.8,
+       0.375
+      ],
+      "type": "line"
+     },
+     {
+      "position": [
+       2.125,
+       0.8,
+       0.375
+      ],
+      "type": "line"
+     },
+     {
+      "position": [
+       2.475,
+       0.8,
+       0.375
+      ],
+      "type": "line"
+     },
+     {
+      "position": [
+       2.725,
+       0.8,
+       0.375
+      ],
+      "type": "line"
+     },
+     {
+      "position": [
+       2.925,
+       0.7,
+       0.375
+      ],
+      "type": "curve"
+     },
+     {
+      "position": [
+       3.225,
+       0.5,
+       0.375
+      ],
+      "type": "curve"
+     },
+     {
+      "position": [
+       3.475,
+       0.24,
+       0.375
+      ],
+      "type": "line"
+     }
+    ],
+    "items": {
+     "assets": [
+      "job-token"
+     ],
+     "max": 24,
+     "spacing": 0.45,
+     "overflow": "drop-oldest"
+    },
+    "sink": true
+   },
+   {
+    "id": "reject",
+    "speed": 0.8,
+    "points": [
+     {
+      "position": [
+       2.475,
+       0.8,
+       0.375
+      ],
+      "type": "line"
+     },
+     {
+      "position": [
+       2.475,
+       0.8,
+       0.015
+      ],
+      "type": "line"
+     },
+     {
+      "position": [
+       2.475,
+       0.46,
+       -0.605
+      ],
+      "type": "line"
+     },
+     {
+      "position": [
+       2.475,
+       0.24,
+       -0.755
+      ],
+      "type": "line"
+     }
+    ],
+    "items": {
+     "assets": [
+      "job-token"
+     ],
+     "max": 8,
+     "spacing": 0.4,
+     "overflow": "drop-oldest"
+    },
+    "sink": true
+   }
+  ],
+  "spawns": [
+   {
+    "id": "item-spawn",
+    "pose": {
+     "position": [
+      -2.375,
+      0.8,
+      0.375
+     ],
+     "rotation": [
+      0,
+      0.70711,
+      0,
+      0.70711
+     ]
+    },
+    "track": "track",
+    "items": [
+     "job-token"
+    ],
+    "maxRate": 2
+   },
+   {
+    "id": "reject-in",
+    "pose": {
+     "position": [
+      2.475,
+      0.8,
+      0.375
+     ],
+     "rotation": [
+      0,
+      -1,
+      0,
+      0.0
+     ]
+    },
+    "track": "reject",
+    "items": [
+     "job-token"
+    ],
+    "maxRate": 2
+   }
+  ],
+  "effects": [
+   {
+    "id": "success-fx",
+    "pose": {
+     "position": [
+      3.475,
+      1.05,
+      0.375
+     ],
+     "rotation": [
+      0,
+      0,
+      0,
+      1
+     ]
+    },
+    "kind": "burst",
+    "colour": [
+     0.2,
+     0.85,
+     0.35
+    ],
+    "durationMs": 1500
+   },
+   {
+    "id": "fail-fx",
+    "pose": {
+     "position": [
+      2.475,
+      1.05,
+      -0.755
+     ],
+     "rotation": [
+      0,
+      0,
+      0,
+      1
+     ]
+    },
+    "kind": "flash",
+    "colour": [
+     0.9,
+     0.06,
+     0.02
+    ],
+    "durationMs": 900
+   }
+  ],
+  "stacks": [
+   {
+    "id": "waiting",
+    "node": "waiting-crate",
+    "cap": 18,
+    "layout": {
+     "grid": [
+      3,
+      2,
+      3
+     ],
+     "spacing": [
+      0.3,
+      0.28,
+      0.3
+     ],
+     "fill": "xzy"
+    }
+   },
+   {
+    "id": "progress",
+    "node": "progress-pip",
+    "cap": 10,
+    "layout": {
+     "grid": [
+      10,
+      1,
+      1
+     ],
+     "spacing": [
+      0.45,
+      0,
+      0
+     ],
+     "fill": "xzy"
+    }
+   }
+  ]
+ },
+ "bounds": {
+  "min": [
+   -3.925,
+   0.0,
+   -1.025
+  ],
+  "max": [
+   3.925,
+   2.6,
+   1.025
+  ]
+ }
+}
