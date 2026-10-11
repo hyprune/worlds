@@ -461,6 +461,8 @@ bpy.context.scene.render.fps = FPS  # importers convert times with the scene rat
 mapping = json.load(open(MAP))
 arm, meshes, actions, objs = load(SRC)
 report['bonesIn'], report['trianglesIn'] = len(arm.data.bones), triangles(meshes)
+if len(meshes) == 1 and meshes[0].name.lower() not in ('body', 'head', 'visor'):  # one mesh: it's the body
+    step(f'mesh `{meshes[0].name}` named `body`'); meshes[0].name = 'body'; meshes[0].data.name = 'body'
 report['height'] = round(normalise(arm, meshes, actions, 'model'), 3)
 clean_channels(arm, actions)
 for img in bpy.data.images:  # textures at most MAX_TEXTURE px (KTX2 follows in compress.mjs)

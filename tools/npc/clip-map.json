@@ -8,8 +8,8 @@
     "happy idle"
   ],
   "walk": [
-    "walking_2_inplace",
     "Walking",
+    "walking_2_inplace",
     "walk",
     "walk forward",
     "walking in place",
