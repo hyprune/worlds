@@ -875,7 +875,9 @@ def manifest(g,lm,nodes,cols,count):
    for o in WORLD_OBJECTS:
     src=ROOT/'dist/objects'/o['asset'];d=json.loads((src/'object.json').read_text());(OUT/'objects').mkdir(exist_ok=True)
     for f in [d['scene'],Path(d['scene']).with_suffix('.bin').name]:shutil.copy2(src/f,OUT/'objects'/f)
-    assets[o['asset']]={'id':d['id'],'scene':'objects/'+d['scene'],'animations':d['animations'],'lighting':d['lighting']}
+    # An RFC-0011 manifest (traits.decorative) or the older objectAssets-shaped descriptor.
+    anim=d['traits']['decorative']['animations'] if 'traits' in d else d['animations']
+    assets[o['asset']]={'id':d['id'],'scene':'objects/'+d['scene'],'animations':anim,'lighting':d['lighting']}
    m['objectAssets']=list(assets.values());m['objects']=WORLD_OBJECTS;m['formatVersion']='0.8'
   import any_angle
   any_angle.finish_export(sys.modules[__name__],g,m)

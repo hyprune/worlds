@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: MIT
-"""Armillary: a reusable world object (world format 0.8 objectAssets).
+"""Armillary: a reusable world object (RFC-0011 object directory; world format 0.8 objectAssets).
 
 A dark instrument globe wrapped in a cyan network, inside three nested ivory
 rings. Each ring turns on its own axis, which lies in the ring's own plane, so it
@@ -8,9 +8,12 @@ Original procedural geometry (the Lumen Reach Sun Court globe, made reusable).
 
     make objects            (Blender on the bake host, like the worlds)
 
-Writes dist/objects/armillary/: armillary.gltf + .bin and object.json, the
-objectAssets entry a world copies (with "scene" made package-relative).
-Asset space: glTF (+Y up), origin at the globe centre, metres.
+Writes dist/objects/armillary/: armillary.gltf + .bin and object.json, the RFC-0011
+object manifest (a world 0.8 objectAssets entry is its scene, made package-relative,
+traits.decorative.animations and lighting). make objects then renders thumbnail.png
+(tools/object/thumbnail.py), checks the directory (tools/object-check) and copies it to
+objects/armillary/. Asset space: glTF (+Y up), origin at the globe centre, metres; it
+floats (movable surfaces "any"), so the origin needs no support point.
 """
 import json, math, os, shutil, sys
 from pathlib import Path
@@ -119,16 +122,22 @@ def main():
             m['extensions'] = {'KHR_materials_unlit': {}}
     g['extensionsUsed'] = sorted(set(g.get('extensionsUsed', [])) | {'KHR_materials_unlit'})
     (OUT / 'armillary.gltf').write_text(json.dumps(g, indent=1) + '\n')
-    outer = R * (1.05 + 2 * .07) + .035
-    descriptor = {
-        'id': 'armillary', 'version': '1.0.0', 'scene': 'armillary.gltf',
+    # Rest-pose bounds of the exported geometry, in glTF axes.
+    dg = bpy.context.evaluated_depsgraph_get(); pts = []
+    for o in bpy.context.scene.objects:
+        if o.type == 'MESH':
+            ev = o.evaluated_get(dg); me = ev.to_mesh(); pts += [blender_to_gltf(ev.matrix_world @ v.co) for v in me.vertices]; ev.to_mesh_clear()
+    bounds = {'min': [round(min(p[i] for p in pts), 4) for i in range(3)], 'max': [round(max(p[i] for p in pts), 4) for i in range(3)]}
+    manifest = {
+        'formatVersion': '0.9', 'id': 'armillary', 'version': '1.0.0', 'name': 'Armillary',
         'description': 'Instrument globe with a cyan network inside three nested rings; each ring spins about its own in-plane axis, the globe turns slowly.',
-        'animations': animations, 'lighting': {'mode': 'probe'},
-        'boundsRadius': round(outer, 4), 'license': 'CC-BY-4.0',
+        'category': 'decor', 'tags': ['globe', 'instrument', 'animated'], 'scene': 'armillary.gltf', 'license': 'CC-BY-4.0',
         'attribution': [{'path': '.', 'author': 'Hyprune contributors', 'license': 'CC-BY-4.0', 'source': 'https://github.com/hyprune/worlds'}],
+        'bounds': bounds, 'thumbnail': 'thumbnail.png', 'lighting': {'mode': 'probe'},
+        'traits': {'decorative': {'animations': animations}, 'movable': {'surfaces': ['any'], 'upright': True, 'scale': [0.25, 1.5]}},
     }
-    (OUT / 'object.json').write_text(json.dumps(descriptor, indent=1) + '\n')
-    print('ARMILLARY', json.dumps({'nodes': ['globe', 'globe-network'] + [f'ring-{i + 1}' for i in range(3)], 'boundsRadius': descriptor['boundsRadius']}))
+    (OUT / 'object.json').write_text(json.dumps(manifest, indent=1) + '\n')
+    print('ARMILLARY', json.dumps({'nodes': ['globe', 'globe-network'] + [f'ring-{i + 1}' for i in range(3)], 'bounds': bounds}))
 
 
 main()

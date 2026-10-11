@@ -1,0 +1,118 @@
+{
+ "formatVersion": "0.9",
+ "id": "armillary",
+ "version": "1.0.0",
+ "name": "Armillary",
+ "description": "Instrument globe with a cyan network inside three nested rings; each ring spins about its own in-plane axis, the globe turns slowly.",
+ "category": "decor",
+ "tags": [
+  "globe",
+  "instrument",
+  "animated"
+ ],
+ "scene": "armillary.gltf",
+ "license": "CC-BY-4.0",
+ "attribution": [
+  {
+   "path": ".",
+   "author": "Hyprune contributors",
+   "license": "CC-BY-4.0",
+   "source": "https://github.com/hyprune/worlds"
+  }
+ ],
+ "bounds": {
+  "min": [
+   -2.1589,
+   -2.0466,
+   -1.925
+  ],
+  "max": [
+   2.1589,
+   2.0466,
+   1.925
+  ]
+ },
+ "thumbnail": "thumbnail.png",
+ "lighting": {
+  "mode": "probe"
+ },
+ "traits": {
+  "decorative": {
+   "animations": [
+    {
+     "node": "globe",
+     "type": "spin",
+     "axis": [
+      0,
+      1,
+      0
+     ],
+     "pivot": [
+      0,
+      0,
+      0
+     ],
+     "period": 90
+    },
+    {
+     "node": "ring-1",
+     "type": "spin",
+     "axis": [
+      0.900447,
+      -0.434966,
+      -0.0
+     ],
+     "pivot": [
+      0,
+      0,
+      0
+     ],
+     "period": 23,
+     "phase": 0.0
+    },
+    {
+     "node": "ring-2",
+     "type": "spin",
+     "axis": [
+      -0.877583,
+      -0.0,
+      0.479426
+     ],
+     "pivot": [
+      0,
+      0,
+      0
+     ],
+     "period": 31,
+     "phase": 0.35
+    },
+    {
+     "node": "ring-3",
+     "type": "spin",
+     "axis": [
+      0.939373,
+      -0.342898,
+      -0.0
+     ],
+     "pivot": [
+      0,
+      0,
+      0
+     ],
+     "period": 41,
+     "phase": 0.7
+    }
+   ]
+  },
+  "movable": {
+   "surfaces": [
+    "any"
+   ],
+   "upright": true,
+   "scale": [
+    0.25,
+    1.5
+   ]
+  }
+ }
+}

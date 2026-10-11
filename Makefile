@@ -5,12 +5,20 @@ SCHEMA_DIR ?= ../schema
 VIDEO_DIR ?= $(shell tools/devenv.py --videos)
 VERSION := $(shell python3 -c "import json; print(json.load(open('switchyard/world.spec.json'))['version'])")
 PACKAGE := dist/com.hyprune.switchyard
-.PHONY: machines machines-install objects textures preview build blueprint stills film validate gallery release nested gltf-check compare engine-film film-start film-status film-fetch
+.PHONY: machines machines-install objects objects-check textures preview build blueprint stills film validate gallery release nested gltf-check compare engine-film film-start film-status film-fetch
 textures:
 	python3 switchyard/materials/prepare.py
 # Reusable world objects (world format 0.8 objectAssets) in dist/objects/<id>/.
+# Each is an RFC-0011 object directory: make objects renders its thumbnail, checks it with
+# the shared validator (tools/object-check) and installs it into objects/<id>/.
 objects:
 	HYPRUNE_BAKE_DIR=hyprune-bake/worlds-objects HYPRUNE_BAKE_PROJECT=objects ./tools/remote-blender.sh -b --python-exit-code 1 -P objects/armillary/build.py
+	HYPRUNE_BAKE_DIR=hyprune-bake/worlds-objects HYPRUNE_BAKE_PROJECT=objects ./tools/remote-blender.sh -b --factory-startup --python-exit-code 1 -P tools/object/thumbnail.py -- dist/objects/armillary/armillary.gltf dist/objects/armillary/thumbnail.png
+	SCHEMA_DIR=$(SCHEMA_DIR) ./tools/object-check dist/objects/armillary
+	cp dist/objects/armillary/armillary.gltf dist/objects/armillary/armillary.bin dist/objects/armillary/object.json dist/objects/armillary/thumbnail.png objects/armillary/
+# Every committed object directory (objects/, objects/machines/, characters/).
+objects-check:
+	SCHEMA_DIR=$(SCHEMA_DIR) ./tools/object-check objects/armillary objects/machines/*/ characters/resident-*/
 # Machine objects (RFC-0011/0013 drafts): build on the bake host into
 # dist/objects/machines/<id>/, then optimise (KTX2 + meshopt) into objects/machines/<id>/.
 MACHINES := job-token ci-conveyor queue-stack server-rack deploy-lift build-monitor
