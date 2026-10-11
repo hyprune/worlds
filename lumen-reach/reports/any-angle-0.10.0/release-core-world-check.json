@@ -1,0 +1,356 @@
+{
+  "anchors": 24,
+  "areas": [
+    {
+      "dataAnchors": [
+        "sun-court-slot-01-globe-01",
+        "sun-court-slot-01-crate-01",
+        "sun-court-slot-01-crate-02",
+        "sun-court-slot-01-crate-03",
+        "sun-court-slot-01-crate-04",
+        "sun-court-slot-01-crate-05",
+        "sun-court-slot-01-crate-06",
+        "sun-court-slot-01-crate-07",
+        "sun-court-slot-01-crate-08",
+        "sun-court-slot-01-crate-09",
+        "sun-court-slot-01-crate-10"
+      ],
+      "freePlacementZones": [
+        "sun-court-open-work"
+      ],
+      "id": "sun-court",
+      "playable": {
+        "volumes": [
+          {
+            "max": [
+              26,
+              60,
+              16
+            ],
+            "min": [
+              -24,
+              -20,
+              -27
+            ],
+            "type": "box"
+          },
+          {
+            "max": [
+              -7,
+              60,
+              -20
+            ],
+            "min": [
+              -24,
+              -20,
+              -44
+            ],
+            "type": "box"
+          },
+          {
+            "max": [
+              -24,
+              60,
+              -12
+            ],
+            "min": [
+              -34,
+              -20,
+              -16
+            ],
+            "type": "box"
+          },
+          {
+            "max": [
+              -3,
+              60,
+              -22
+            ],
+            "min": [
+              -13.2,
+              -20,
+              -37.5
+            ],
+            "type": "box"
+          },
+          {
+            "max": [
+              16,
+              60,
+              -26
+            ],
+            "min": [
+              0,
+              -20,
+              -32
+            ],
+            "type": "box"
+          }
+        ]
+      },
+      "primaryAnchor": "sun-court-slot-01-facade-wall-01",
+      "spawnId": "sun-court",
+      "theme": "sun-court",
+      "toolAnchors": [
+        "sun-court-slot-01-operator-desk-01",
+        "sun-court-slot-01-operator-desk-02",
+        "sun-court-slot-01-field-rig-01",
+        "sun-court-slot-01-field-rig-02",
+        "sun-court-slot-01-kiosk-pillar-01"
+      ],
+      "workspaceSlot": "01"
+    },
+    {
+      "dataAnchors": [
+        "array-hall-slot-02-crate-01",
+        "array-hall-slot-02-crate-02",
+        "array-hall-slot-02-crate-03",
+        "array-hall-slot-02-crate-04"
+      ],
+      "freePlacementZones": [
+        "array-hall-open-work"
+      ],
+      "id": "array-hall",
+      "playable": {
+        "volumes": [
+          {
+            "max": [
+              27,
+              60,
+              -32
+            ],
+            "min": [
+              -13,
+              -20,
+              -62
+            ],
+            "type": "box"
+          },
+          {
+            "max": [
+              33,
+              60,
+              -48
+            ],
+            "min": [
+              24,
+              -20,
+              -52
+            ],
+            "type": "box"
+          }
+        ]
+      },
+      "primaryAnchor": "array-hall-slot-02-hanging-wall-01",
+      "spawnId": "array-hall",
+      "theme": "array-hall",
+      "toolAnchors": [
+        "array-hall-slot-02-lectern-01",
+        "array-hall-slot-02-lectern-02",
+        "array-hall-slot-02-banner-01",
+        "array-hall-slot-02-banner-02",
+        "array-hall-slot-02-operator-desk-01",
+        "array-hall-slot-02-operator-desk-02",
+        "array-hall-slot-02-operator-desk-03"
+      ],
+      "workspaceSlot": "02"
+    },
+    {
+      "dataAnchors": [
+        "rime-vault-slot-03-crate-01",
+        "rime-vault-slot-03-crate-02",
+        "rime-vault-slot-03-crate-03",
+        "rime-vault-slot-03-crate-04",
+        "rime-vault-slot-03-crate-05",
+        "rime-vault-slot-03-crate-06",
+        "rime-vault-slot-03-crate-07",
+        "rime-vault-slot-03-crate-08",
+        "rime-vault-slot-03-crate-09",
+        "rime-vault-slot-03-crate-10"
+      ],
+      "freePlacementZones": [
+        "rime-vault-open-work"
+      ],
+      "id": "rime-vault",
+      "playable": {
+        "volumes": [
+          {
+            "max": [
+              35.4,
+              60,
+              -51.4
+            ],
+            "min": [
+              26.3,
+              -20,
+              -77
+            ],
+            "type": "box"
+          },
+          {
+            "max": [
+              50,
+              60,
+              -74
+            ],
+            "min": [
+              26,
+              -20,
+              -102
+            ],
+            "type": "box"
+          },
+          {
+            "max": [
+              56,
+              60,
+              -96
+            ],
+            "min": [
+              50,
+              -20,
+              -103
+            ],
+            "type": "box"
+          }
+        ]
+      },
+      "primaryAnchor": "rime-vault-slot-03-wall-inset-console-01",
+      "spawnId": "rime-vault",
+      "theme": "rime-vault",
+      "toolAnchors": [
+        "rime-vault-slot-03-operator-desk-01",
+        "rime-vault-slot-03-operator-desk-02",
+        "rime-vault-slot-03-wall-inset-console-02",
+        "rime-vault-slot-03-terminal-bench-01"
+      ],
+      "workspaceSlot": "03"
+    },
+    {
+      "dataAnchors": [
+        "signal-rise-slot-04-radar-dish-01",
+        "signal-rise-slot-04-crate-01",
+        "signal-rise-slot-04-crate-02",
+        "signal-rise-slot-04-crate-03",
+        "signal-rise-slot-04-crate-04",
+        "signal-rise-slot-04-crate-05",
+        "signal-rise-slot-04-crate-06",
+        "signal-rise-slot-04-crate-07",
+        "signal-rise-slot-04-crate-08",
+        "signal-rise-slot-04-crate-09",
+        "signal-rise-slot-04-crate-10",
+        "signal-rise-slot-04-crate-11"
+      ],
+      "freePlacementZones": [
+        "signal-rise-open-work"
+      ],
+      "id": "signal-rise",
+      "playable": {
+        "volumes": [
+          {
+            "max": [
+              59.3,
+              60,
+              -99.4
+            ],
+            "min": [
+              50.4,
+              -20,
+              -125
+            ],
+            "type": "box"
+          },
+          {
+            "max": [
+              85,
+              60,
+              -112
+            ],
+            "min": [
+              29,
+              -20,
+              -160
+            ],
+            "type": "box"
+          }
+        ]
+      },
+      "primaryAnchor": "signal-rise-slot-04-blast-door-screen-01",
+      "spawnId": "signal-rise",
+      "theme": "signal-rise",
+      "toolAnchors": [
+        "signal-rise-slot-04-terminal-bench-01",
+        "signal-rise-slot-04-kiosk-pillar-01",
+        "signal-rise-slot-04-wall-inset-console-01",
+        "signal-rise-slot-04-operator-desk-01"
+      ],
+      "workspaceSlot": "04"
+    }
+  ],
+  "blueprintLevels": [
+    {
+      "bytes": 7581,
+      "id": "lower-1",
+      "maxY": -3.8,
+      "minY": -7.0
+    },
+    {
+      "bytes": 17348,
+      "id": "ground",
+      "maxY": 3.2,
+      "minY": -3.8
+    },
+    {
+      "bytes": 9594,
+      "id": "level-1",
+      "maxY": 10.0,
+      "minY": 3.2
+    },
+    {
+      "bytes": 5182,
+      "id": "level-2",
+      "maxY": 18.9,
+      "minY": 10.0
+    }
+  ],
+  "collisionTriangles": 5518,
+  "estimatedGpuBytes": 281375400,
+  "objects": 37,
+  "placementZones": 4,
+  "warnings": [],
+  "worldId": "com.hyprune.lumen-reach",
+  "worldObjects": {
+    "assets": [
+      {
+        "animations": 4,
+        "id": "armillary",
+        "meshes": 5,
+        "proxyTriangles": 0,
+        "sweptRadius": 2.1770002841949463,
+        "triangles": 5552,
+        "unlit": false
+      }
+    ],
+    "instances": [
+      {
+        "ambientDown": [
+          0.7564312219619751,
+          0.5972059965133667,
+          0.4809124767780304
+        ],
+        "ambientUp": [
+          0.290833443403244,
+          0.37884461879730225,
+          0.5261068940162659
+        ],
+        "asset": "armillary",
+        "id": "sun-court-armillary",
+        "regions": [
+          175,
+          178
+        ],
+        "sun": 1.375481128692627
+      }
+    ]
+  }
+}
