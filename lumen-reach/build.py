@@ -371,6 +371,9 @@ def court():
  # 16 m walkway: bridge ends and north edge, the slot beside the ramp top,
  # the bridge run's east edge, the facade rooftop's north and east edges.
  rails((-13.2,35.5),(-13.2,37.5),(-3,37.5),(-3,27),z=16)
+ # 0.10.1: the 4 m upper landing's north edge either side of the lower roof
+ # ramp and its stair bed (x -23..-18.3) dropped into the void.
+ rails((-24,24),(-23,24),z=4);rails((-18.3,24),(-16,24),z=4)
  rails((-8.5,35.5),(-8.5,36),(-7,36),(-7,35.5),z=16)
  rails((-3,27),(25,27),(25,22),z=16)
  # 12 m roof upper landing: west and east edges, open north edge ends.
@@ -468,6 +471,15 @@ def hall():
  wall('South walkway jamb',-7.45,-7.1,31.5,31.9,15.6,top);wall('South walkway door head',-7.1,-2.85,31.5,31.9,18.3,top)
  # Roof margins between the edge beams and the skylight panes.
  for x0,x1 in [(-5.45,-3.7),(19.7,23.45)]:box('Roof margin slab',((x0+x1)/2,46,21.37),(x1-x0,28,.16),'concrete',.01)
+ # 0.10.1 walk-off fixes (nested capsule probes fell out of the world here):
+ # the annex's south edge, the unfloored nook beside the service threshold
+ # and the threshold's south edge, and the 4 m balconies' north edge.
+ # Parapets over a void stand 1.4 m: above a 5 m/s jump (1.27 m).
+ box('Annex south parapet',(-9.75,31.7,.55),(6.5,.4,1.7),'concrete',solid=True)
+ slab('Service passage floor',24,26.3,52,56,0,'metal')
+ wall('Service passage end wall',24.25,26.3,55.75,56.15,-.3,5)
+ box('Service threshold parapet',(28.625,47.8,.55),(8.75,.4,1.7),'concrete',solid=True)
+ rail((-13,60,4),(-2,60,4))
  # Balcony portal remains open at both ground and first floor.
  box('West portal sill',(-6,58,1.3),(.4,4,2.6),'concrete',solid=True)
  box('West portal crown',(-6,58,(7+top)/2),(.4,4,top-7),'concrete',solid=True)
@@ -647,6 +659,9 @@ def rise():
  set_area(3,(29,85,100,160,-6.4,28),(54,125,0),(52,62,125,130,.15,4.8))
  ramp('Snow service ascent',51,57,100,124,-6,0,30,'grating')
  for x in [50.7,59]:box('Snow ascent shell',(x,112,-1.8),(.5,24,12),'metal',solid=True)
+ # 0.10.1: the yard paving starts at x 60; a walker fell through the 0.75 m
+ # slot beside the shell into the void. A snow verge closes it.
+ slab('Ascent shell verge',59.2,60.05,112,124,0,'snow')
  mesh('Snow ascent ceiling',[(50.4,100,-1),(59.3,100,-1),(59.3,124,5),(50.4,124,5)],[(0,1,2,3)],'metal',True)
  # The alternate flight's foot ends on the perimeter apron. Close its south
  # and east sides and roof it, so the opened stair never looks outside.
