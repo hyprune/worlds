@@ -65,8 +65,8 @@ Distinct area moods come from baked lighting and opaque vista separation.
 Lighting, steam and distant artwork are static. These limits and the remaining
 stylization are visible in the raw delivery, not concealed by postprocessing.
 
-See `reports/final-report.md` for before/after budgets, measured 4K observations,
-validation results, archive and gallery paths. Exact engine binaries, core
-working-tree hashes and timing samples are in `reports/polish-v2/`; the core
+Before/after budgets, measured 4K observations, validation results, archive
+hashes, exact engine binaries, core working-tree hashes and timing samples are
+in `reports/polish-v2/`; the core
 was being developed concurrently. World GPU estimates and nested process
 residency measure different scopes and are reported separately.

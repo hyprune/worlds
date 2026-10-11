@@ -24,7 +24,8 @@ UV0 remains physically tiled, separate from UV1 irradiance. Architectural
 atlases use 4px gutters; the shared leaf-card atlas uses 2px. Four home chunks,
 two connector chunks, foliage and distant artwork retain independent spatial
 organization; the current renderer has no runtime LOD selection or chunk
-visibility contract. See `NOTES-rfc-gaps.md` and the final report for budgets.
+visibility contract. See `NOTES-rfc-gaps.md` and the release records in
+`reports/` for budgets.
 
 ## Rime Vault 0.6.0
 

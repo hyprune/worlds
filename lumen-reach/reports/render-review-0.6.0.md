@@ -50,7 +50,7 @@ All 24 interactive anchors, route/stair graphs and free-placement volumes keep
 their original contracts. New fixed consoles are authored process artwork, not
 additional interactive mounts or claims about live application state.
 
-See `reports/final-report.md` and `reports/polish-v3/` for budgets, shader/material
-coverage, lightmap evidence, full route traversal, engine hashes, archive and
-gallery paths. Blender ran only on the bake host. Engine testing held the nested lock;
-the owner's real session and gallery autocommit process were untouched.
+See `reports/polish-v3/` and `reports/release-0.6.0.json` for budgets,
+shader/material coverage, lightmap evidence, full route traversal, engine hashes
+and the archive. Blender ran only on the bake host. Engine testing held the
+nested lock; the host session was untouched.

@@ -50,7 +50,8 @@ accounting. Package figures include every file; conservative GPU figures include
 all mip levels, color/data views and expanded visible geometry. Process DRM
 memory, when exposed by the kernel, is recorded separately from this estimate.
 
-The current candidate is version 0.7.0; see HANDOFF.md for unfinished checks. `make lumen-release` produces its sorted,
+The latest release record is `reports/release.json`; earlier ones are
+`reports/release-<version>.json`. `make lumen-release` produces a sorted,
 fixed-date tar.zst archive and checksum without a network publication. Core M2
 is required for the transparent steam cards and typed workspace/tool behavior;
 the manifest remains schema-valid world 0.5 through the coordinated adapter.
@@ -68,13 +69,14 @@ Lightmap atlases are independent per architectural area; the leaf-card atlas
 uses 2px gutters at 1024, and the architectural atlases use 4px gutters. Their
 samplers clamp and filter linearly at the base level. Generated PBR tiles use
 640px periodic derivatives, verified matching edge pixels, to leave headroom
-for captured applications. See the final render review and reports for the
-measured differences between Cycles, the engine and the owner's concepts.
+for captured applications. See [RENDER-REVIEW.md](RENDER-REVIEW.md) and the
+render reviews in `reports/` for the measured differences between Cycles, the
+engine and the concept references.
 
-The delivered tour, local archive and measured figures are indexed in
-[reports/final-report.md](reports/final-report.md). The original milestone
-delivery remains in [reports/delivery-0.4.0.md](reports/delivery-0.4.0.md). The
-primary-wall capture requires core commit d20d7fe or later: this corrects sampling
+Measured figures and archive hashes for each release are in the release
+records above. The original milestones are summarized in
+[reports/milestone-01.md](reports/milestone-01.md) through
+[reports/milestone-04.md](reports/milestone-04.md). The primary-wall capture requires core commit d20d7fe or later: this corrects sampling
 of client buffers with no mip chain. `--diagnose` is a short real four-wall check;
 run it in a fresh locked session separately from the complete route audit.
 
@@ -103,14 +105,14 @@ on all three axes. Source decals have explicit backplates; authoring evidence
 ships as `fixture-audit.json` and `decal-audit.json`. The material-factor audit
 prevents generated textures from losing their authored color tints on export.
 See [materials/README.md](materials/README.md) for texture reuse and provenance,
-and [reports/final-report.md](reports/final-report.md) for the delivery numbers.
+and the release records in `reports/` for the delivery numbers.
 
 
 Rime Vault v3 adds a directional frost/ice material set, console banks, overhead
 pipe racks, grated cable channels, purge vents and a lit pressure-door kit.
 The original 24 interactive mounts and all walking/placement contracts remain
-unchanged. See `reports/delivery-0.5.0.md` for the preceding release and
-`reports/final-report.md` for 0.6.1 evidence and delivery paths.
+unchanged. See [reports/render-review-0.6.0.md](reports/render-review-0.6.0.md)
+for the Vault review and `reports/release-0.6.1.json` for 0.6.1 evidence.
 
 For a matched short camera clip, prepare an output directory with `views.json`
 and run `tools/check-lumen-session.py --vault-clip --package <package> --output
@@ -156,8 +158,8 @@ checks culling pairs, and tests walking barriers plus a free-flight witness.
 `make lumen-validate` checks sky topology, mapping, seams and the far-clip
 margin as well as existing placement/walking/material contracts. The finite
 image sweep complements these structural checks; it is not an exhaustive proof
-of every possible view. Gallery contact sheets and raw image paths are indexed
-in the final report.
+of every possible view. Contact sheets and raw images are written to the
+`--output` directory; per-release sweep records are in `reports/any-angle-*/`.
 
 `playable-volumes.json` is authoring metadata. Its footprint union generates
 static collision backstops because world format 0.5 has no movement-volume
