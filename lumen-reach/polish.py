@@ -76,13 +76,16 @@ def apply(area,B):
    for y in [33,44,58]:
     for dy in [-.7,.7]:plate('Atrium pier metal fillet',(x,y+dy,10),(.19,.16,19.5),'metal')
     for z in [1.1,4.5,8.5,16,19.3]:plate('Atrium pier collar',(x+side*.04,y,z),(.75,1.8,.17),'trim')
-   for y in [45,48,55,57]:
+   # 0.10.1: on the archive racks themselves (build.py, y 44/47/57). They sat
+   # 5 cm proud of the racks at y 45/48/55/57; two had no rack behind them
+   # (on the east, in the service passage) and floated.
+   for y in [44,47,57]:
     # Rack internals on the inside-facing plane; alternating drawers and vents.
-    face=x+side*.52
+    face=x+side*.47
     for z in [.55,1.15,1.75,2.35,2.95,3.55,4.15]:
      plate('Archive rack drawer',(face,y,z),(.14,1.30,.45),'frost')
      for dy in [-.43,.43]:plate('Drawer handle',(face+side*.085,y+dy,z),(.10,.13,.05),'metal')
-     plate('Drawer indicator',(face+side*.13,y-.25,z+.12),(.025,.14,.035),'cyan')
+     plate('Drawer indicator',(face+side*.08,y-.25,z+.12),(.025,.14,.035),'cyan')
     plate('Rack cable spine',(face,y+.82,2.5),(.15,.10,4.8),'black')
    for ya,yb in [(34,42),(49,57)]:
     for z in [6,12,17]:

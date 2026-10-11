@@ -330,7 +330,8 @@ def court():
    box('Facade maintenance plate',(x,23.145,z),(1.45,.22,2.25),'concrete',.025)
    for dx in [-.58,.58]:
     for dz in [-.9,.9]:box('Plate captive fixing',(x+dx,23.008,z+dz),(.055,.06,.055),'metal',0)
-  box('Facade service drain',(x,22.96,1.0),(.15,.12,1.5),'metal')
+  # 0.10.1: down to the paving and back against the facade (it floated 0.25 m up).
+  box('Facade service drain',(x,22.99,.875),(.15,.12,1.75),'metal')
 
  for x in [-7,-5,-3,21,24]:
   box('Facade vertical rib',(x,23.12,9.2),(.16,.26,13.1),'concrete',.015)
@@ -441,7 +442,6 @@ def hall():
  for x in [-6,24]:box('Roof edge beam',(x,46,21),(1.1,28,1.2),'concrete',solid=True)
  for x in [-4,4,12,20]:box('Skylight mullion',(x,46,21.35),(.18,28,.18),'metal')
  torus('Atrium suspended light ring',(8,46,19.8),8.5,.065,'amber')
- for x in [-3,19]:rod('Light ring hanger',(x,46,20),(x,46,21.4),.025)
  # Opaque window panes only at the small upper skylight. The rear is an open vista.
  # 0.10.1: 7.9 m wide panes close the 6 cm sky slits beside each mullion.
  for x in [-.0,8,16]:box('Skylight pane',(x,46,21.50),(7.9,27,.08),'glass')
