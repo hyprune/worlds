@@ -15,7 +15,8 @@ Content (top-down XZ, one SVG per level band of feet heights):
   islands a spawn or route node stands on, rasterised at 0.1 m, grown back
   by the agent radius, traced and simplified (Douglas-Peucker);
 - stair: navmesh polygons steeper than STAIR_GRADIENT, grouped, outlined,
-  hatched across the climb (tread lines every TREAD m) with an arrow up the
+  hatched across the climb (a line every 0.5 m, at most 20 per flight;
+  flights crossing a band edge show on both levels) with an arrow up the
   slope; stair lanes of a `*.stairs` extension the navmesh did not show are
   drawn as hatched rectangles;
 - wall: a plan cut. Near-vertical collision triangles are intersected with
@@ -36,13 +37,17 @@ Content (top-down XZ, one SVG per level band of feet heights):
 - mount: tool-mount (circle) and data-object (diamond) anchors;
 - area/label: each zone (or area) with floor on the level: its floor's
   bounding rectangle, and its name at the free floor spot nearest the
-  area's floor centre where the text box clears walls, stairs, routes,
-  marks, the title block and other labels (shrunk to 65 %, then allowed to
-  cross routes, else omitted on that level);
+  area's floor centre where the text box clears floor edges, walls,
+  stairs, routes, marks, the title block and other labels (then may cross
+  floor edges, shrinks to 65 %, may cross routes, then area outlines, else
+  is omitted on that level);
 - route/waypoint: walking-graph edges touching the band, named places;
 - grid (10 m), outline (border, title block: world, level, height band,
-  scale bar, north arrow placed in the emptiest corner).
-Themed elements carry `class` and no fill/stroke.
+  scale bar, north arrow placed in the emptiest corner);
+- void: reserved, not drawn yet (drops show as the floor's edge).
+Themed elements carry `class` and no fill/stroke colours; every role has a
+stroke-width sized for the plan at fit (STROKE_PX) and stroke-only roles
+carry fill="none" (see STROKE_ONLY).
 
 Levels: flat floor heights of the navmesh are split greedily wherever floor
 lies above other floor (> HEADROOM m apart, overlapping in plan by more than
@@ -74,7 +79,7 @@ CELL = .1                          # m, plan raster
 RADIUS, HEIGHT = .3, 1.8           # RFC-0004 capsule (navmesh erosion, headroom)
 PHYSICAL_SLOPE = math.degrees(math.acos(.65))  # core walker support limit
 STAIR_GRADIENT = .2                # rise/run above which a navmesh polygon is a stair or ramp
-TREAD = .35                        # m between hatch lines
+TREAD, MAX_TREADS = .5, 20         # m between hatch lines, at most per flight
 CUT = .9                           # m above each floor: wall cut plane (catches guard rails)
 TALL = 2.0                         # m above the floor: a wall rather than furniture (openings)
 OPEN_MIN, OPEN_MAX = .6, 16.0      # m: opening widths looked for
@@ -378,6 +383,25 @@ def paths(cls, subpaths, extra=''):
     return out
 
 
+# Line weight per role in screen pixels at fit (viewBox max side / 1000 per
+# pixel); stroke-only roles carry fill="none" so a theme never fills their
+# open polylines. Colours stay with the consumer's theme.
+STROKE_PX = {'grid': .5, 'floor': .6, 'stair': .8, 'wall': 2.0, 'opening': 2.0, 'screen': 3.5, 'mount': .8,
+             'area': .8, 'route': 1.6, 'waypoint': .8, 'outline': 1.2, 'void': 0}
+STROKE_ONLY = {'grid', 'stair', 'wall', 'opening', 'screen', 'area', 'route', 'outline'}
+
+
+def role_attrs(cls, px):
+    if cls == 'label' or not STROKE_PX.get(cls):
+        return ''
+    out = f' stroke-width="{num(max(1, round(STROKE_PX[cls] * px * 10)))}"'
+    if cls in STROKE_ONLY:
+        out = ' fill="none"' + out
+    if cls in ('wall', 'route', 'screen', 'opening', 'stair'):
+        out += ' stroke-linecap="round" stroke-linejoin="round"'
+    return out
+
+
 def text_safe(s):
     return re.sub(r'[<>"]', '', s.replace('&', 'and')).strip()[:64]
 
@@ -437,6 +461,43 @@ class World:
         L = np.linalg.norm(n, axis=1)
         ny = np.abs(n[:, 1]) / np.maximum(L, 1e-12)
         self.vertical = self.tri[(L > 1e-9) & (ny < .5) & (self.tri[:, :, 1].min(1) > self.lo[1] - 10)]
+
+    def stair_groups(self):
+        """Steep navmesh polygons grouped by shared vertices (1 cm): flights
+        and ramps of >= 1 m2 with their height range and uphill direction
+        (one plane fitted to all their vertices)."""
+        if hasattr(self, '_stairs'):
+            return self._stairs
+        steep = [p for p in self.polys if p['slope'] >= STAIR_GRADIENT]
+        parent = list(range(len(steep)))
+
+        def find(i):
+            while parent[i] != i:
+                parent[i] = parent[parent[i]]
+                i = parent[i]
+            return i
+        seen = {}
+        for i, p in enumerate(steep):
+            for v in np.round(p['v'] / .01).astype(int):
+                k = tuple(v)
+                if k in seen:
+                    a, b = find(i), find(seen[k])
+                    parent[max(a, b)] = min(a, b)
+                else:
+                    seen[k] = i
+        groups = {}
+        for i in range(len(steep)):
+            groups.setdefault(find(i), []).append(steep[i])
+        self._stairs = []
+        for grp in groups.values():
+            if sum(p['area'] for p in grp) < 1.0:
+                continue
+            v = np.concatenate([p['v'] for p in grp])
+            gr = np.array(gradient(v))
+            if np.linalg.norm(gr) < 1e-6:
+                gr = np.sum([np.array(p['grad']) * p['area'] for p in grp], axis=0)
+            self._stairs.append(dict(polys=grp, ylo=float(v[:, 1].min()), yhi=float(v[:, 1].max()), up=gr / (np.linalg.norm(gr) or 1)))
+        return self._stairs
 
     def floor_below(self, xz, y):
         """Highest navmesh floor at XZ not above y (or None)."""
@@ -563,8 +624,6 @@ class Plan:
         nav = g.fill([p['v'][:, [0, 2]] for p in self.polys])
         self.floor = dilate(nav, round(RADIUS / g.cell))
         self.floor = erode(dilate(self.floor, 1), 1)
-        steep = [p for p in self.polys if p['slope'] >= STAIR_GRADIENT]
-        self.steep = steep
         self.busy = g.empty()              # label keep-out
         # Feet height per cell (highest floor), grown like the floor.
         img = Image.new('F', (g.W, g.H), float('nan'))
@@ -603,43 +662,19 @@ class Plan:
         return paths('floor', [subpath(p, True) for p in loops])
 
     def stairs(self):
+        """Stair/ramp groups overlapping the band (a flight between two
+        levels shows on both plans), then undrawn `*.stairs` lanes."""
         g = self.w.grid
-        steep = self.steep
-        # Group steep polygons sharing vertices (1 cm).
-        parent = list(range(len(steep)))
-
-        def find(i):
-            while parent[i] != i:
-                parent[i] = parent[parent[i]]
-                i = parent[i]
-            return i
-        seen = {}
-        for i, p in enumerate(steep):
-            for v in np.round(p['v'] / .01).astype(int):
-                k = tuple(v)
-                if k in seen:
-                    a, b = find(i), find(seen[k])
-                    parent[max(a, b)] = min(a, b)
-                else:
-                    seen[k] = i
-        groups = {}
-        for i in range(len(steep)):
-            groups.setdefault(find(i), []).append(steep[i])
         outlines, hatch, arrows = [], [], []
         regions = g.empty()
-        for grp in groups.values():
-            m2 = sum(p['area'] for p in grp)
-            if m2 < 1.0:
+        for grp in self.w.stair_groups():
+            if grp['yhi'] < self.lo or grp['ylo'] >= self.hi:
                 continue
-            mask = dilate(g.fill([p['v'][:, [0, 2]] for p in grp]), round(RADIUS / g.cell)) & self.floor
-            if not mask.any():
-                continue
+            mask = dilate(g.fill([p['v'][:, [0, 2]] for p in grp['polys']]), round(RADIUS / g.cell))
             regions |= mask
-            gr = np.sum([np.array(p['grad']) * p['area'] for p in grp], axis=0) / m2
-            up = gr / (np.linalg.norm(gr) or 1)
             outlines += self.loops_xy(mask, .5, max(self.tol, .12 * self.f.scale))
-            hatch += self.hatch(mask, up)
-            arrows += self.arrow(mask, up)
+            hatch += self.hatch(mask, grp['up'])
+            arrows += self.arrow(mask, grp['up'])
         for lane in self.w.stair_lanes:
             a, b = np.array(lane['from'], float), np.array(lane['to'], float)
             if max(a[1], b[1]) < self.lo or min(a[1], b[1]) >= self.hi:
@@ -672,7 +707,8 @@ class Plan:
         s, t = pts @ up, pts @ side
         out = []
         step = g.cell / 2
-        for k in np.arange(math.ceil(s.min() / TREAD) * TREAD, s.max(), TREAD):
+        tread = max(TREAD, (s.max() - s.min()) / MAX_TREADS)
+        for k in np.arange(math.ceil(s.min() / tread) * tread, s.max(), tread):
             ts = np.arange(t.min() - g.cell, t.max() + g.cell, step)
             q = up * k + np.outer(ts, side)
             inside = g.sample(mask, q)
@@ -921,7 +957,8 @@ class Plan:
         if not zones and self.w.spawns:
             for sid, p in self.w.spawns.items():
                 zones.append((sid, pretty(sid), p - [8, 2, 8], p + [8, 4, 8]))
-        outlines, labels = [], []
+        outlines, labels, todo, ring = [], [], [], []
+        edges = dilate(self.floor, 2) & ~erode(self.floor, 2)
         size = max(self.f.viewbox[2], self.f.viewbox[3]) * .02
         for zid, name, lo, hi in zones:
             if hi[1] < self.lo or lo[1] >= self.hi:
@@ -940,15 +977,24 @@ class Plan:
             bhi = np.minimum(bhi, hi[[0, 2]])
             rect = np.array([blo, [bhi[0], blo[1]], bhi, [blo[0], bhi[1]]])
             outlines.append(self.f.xy(rect))
+            todo.append((name, (r0, r1, c0, c1), np.array([cc.mean() + c0, rr.mean() + r0])))
+            ring.extend(zip(rect, np.roll(rect, -1, axis=0)))
+        line = g.lines(ring, width=3) if ring else g.empty()
+        self.busy |= line
+        self.hard |= line
+        for name, window, centre in todo:
+            r0, r1, c0, c1 = window
             # Label: the free floor spot nearest the area's floor centre
-            # where the whole text box clears walls, stairs, routes, marks
-            # and earlier labels; else the most open floor point.
-            centre = np.array([cc.mean() + c0, rr.mean() + r0])
+            # where the whole text box clears the drawing and earlier labels.
             spot, fs = None, size
             # Relax step by step: smaller text, then text may cross routes.
-            for scale, keep_out in ((1, self.busy), (.8, self.busy), (.65, self.busy), (.8, self.hard), (.65, self.hard)):
+            # A clear margin around the text first (towards the pole of
+            # inaccessibility), then a tight fit.
+            tidy = self.busy | edges          # also off floor edges and obstacles
+            for scale, keep_out, pad in ((1, tidy, 1.8), (1, tidy, 1), (.8, tidy, 1), (1, self.busy, 1), (.8, self.busy, 1),
+                                         (.65, self.busy, 1), (.8, self.hard, 1), (.65, self.hard, 1), (.65, self.hard & ~line, 1)):
                 fs = size * scale
-                spot = self.label_spot(name, fs, (r0, r1, c0, c1), centre, keep_out)
+                spot = self.label_spot(name, fs, (r0, r1, c0, c1), centre, keep_out, pad)
                 if spot is not None:
                     break
             if spot is None:
@@ -977,11 +1023,12 @@ class Plan:
         for keep_out in (self.busy, self.hard):
             keep_out[R0:R1, C0:C1] = True
 
-    def label_spot(self, name, fs, window, centre, keep_out):
-        """Box centre on the area's floor, box clear of `keep_out`."""
+    def label_spot(self, name, fs, window, centre, keep_out, pad=1.0):
+        """Box centre on the area's floor, box (grown by `pad`) clear of
+        `keep_out`, nearest the area's floor centre."""
         g = self.w.grid
         r0, r1, c0, c1 = window
-        hc, hr = self.text_box(name, fs)
+        hc, hr = np.ceil(self.text_box(name, fs) * pad).astype(int)
         R0, R1, C0, C1 = max(r0 - hr, 0), min(r1 + hr, g.H), max(c0 - hc, 0), min(c1 + hc, g.W)
         free = ~keep_out[R0:R1, C0:C1]
         if free.shape[0] <= 2 * hr or free.shape[1] <= 2 * hc:
@@ -1053,21 +1100,21 @@ class Plan:
         x0, y0, W, H = self.f.viewbox
         g = self.w.grid
         inset = min(W, H) * .015
-        bw, bh = W * .40, H * .12
-        bw = max(bw, min(W, H) * .38)
-        bh = max(bh, bw * .30)
         best = None
-        for cx, cy in ((x0 + W - inset - bw, y0 + H - inset - bh), (x0 + inset, y0 + H - inset - bh),
-                       (x0 + W - inset - bw, y0 + inset), (x0 + inset, y0 + inset)):
-            box = self.f.world(np.array([[cx, cy], [cx + bw, cy + bh]]))
-            lo, hi = box.min(0), box.max(0)
-            xs = np.linspace(lo[0], hi[0], 24)
-            zs = np.linspace(lo[1], hi[1], 12)
-            pts = np.array([[x, z] for x in xs for z in zs])
-            cover = g.sample(self.floor, pts).mean()
-            if best is None or cover < best[0] - 1e-9:
-                best = (cover, cx, cy)
-        _, bx, by = best
+        for shrink in (1, .7, .5):           # smaller block when every corner has floor
+            bw = max(W * .40, min(W, H) * .38) * shrink
+            bh = max(H * .12 * shrink, bw * .30)
+            for cx, cy in ((x0 + W - inset - bw, y0 + H - inset - bh), (x0 + inset, y0 + H - inset - bh),
+                           (x0 + W - inset - bw, y0 + inset), (x0 + inset, y0 + inset)):
+                box = self.f.world(np.array([[cx, cy], [cx + bw, cy + bh]]))
+                lo, hi = box.min(0), box.max(0)
+                pts = np.array([[x, z] for x in np.linspace(lo[0], hi[0], 24) for z in np.linspace(lo[1], hi[1], 12)])
+                cover = g.sample(self.floor, pts).mean()
+                if best is None or cover < best[0] - 1e-9:
+                    best = (cover, cx, cy, bw, bh)
+            if best[0] <= .03:
+                break
+        _, bx, by, bw, bh = best
         r, c = g.index(self.f.world(np.array([[bx, by], [bx + bw, by + bh]])))
         R0, R1 = np.clip([min(r), max(r) + 1], 0, g.H)
         C0, C1 = np.clip([min(c), max(c) + 1], 0, g.W)
@@ -1120,6 +1167,8 @@ class Plan:
         title = self.title(world_name)
         areas, labels = self.area_parts()
         body += floors + stairs + areas + walls + openings + anchors + routes + labels + title
+        px = max(W, H) / 1000              # about one screen pixel at fit
+        body = [re.sub(r' class="([a-z]+)"', lambda m: m.group(0) + role_attrs(m.group(1), px), e, count=1) for e in body]
         vb = ' '.join(f'{v:g}' for v in self.f.viewbox)
         return f'<svg xmlns="{SVG_NS}" viewBox="{vb}">\n' + '\n'.join(body) + '\n</svg>\n'
 
@@ -1174,29 +1223,31 @@ def new_frame(world):
 
 
 # Baked colours of the overview map.svg written with --create-map (the
-# plain map SVG subset has no class): fill, stroke, stroke width in metres.
-BAKED = {'grid': (None, '#1d3a58', .04), 'floor': ('#173b5c', '#3d6d98', .05), 'stair': ('#22507a', '#9cc9ee', .04),
-         'void': ('#05101c', None, 0), 'wall': (None, '#eef5fc', .12), 'opening': (None, '#f3b24a', .12),
-         'screen': (None, '#4fe3cf', .35), 'mount': ('#f3b24a', '#0b1e33', .05), 'area': (None, '#7fa6cc', .06),
-         'label': ('#dbe9f7', None, 0), 'route': (None, '#ffcf5a', .18), 'waypoint': ('#ffcf5a', '#0b1e33', .08),
-         'outline': (None, '#a9c8e6', .08)}
+# plain map SVG subset has no class): (fill, stroke), applied where missing.
+BAKED = {'grid': (None, '#1d3a58'), 'floor': ('#173b5c', '#3d6d98'), 'stair': (None, '#9cc9ee'), 'void': ('#05101c', None),
+         'wall': (None, '#eef5fc'), 'opening': (None, '#f3b24a'), 'screen': (None, '#4fe3cf'), 'mount': ('#f3b24a', '#0b1e33'),
+         'area': (None, '#7fa6cc'), 'label': ('#dbe9f7', None), 'route': (None, '#ffcf5a'), 'waypoint': ('#ffcf5a', '#0b1e33'),
+         'outline': (None, '#a9c8e6')}
 INK = '#0b1e33'
 
 
 def bake(svg, frame):
     """Class-themed SVG -> plain map SVG with the blueprint palette."""
-    floor_px = min(frame.viewbox[2], frame.viewbox[3]) / 1000
-
-    def attrs(m):
-        fill, stroke, width = BAKED[m.group(1)]
-        out = f' fill="{fill or "none"}"'
-        if stroke:
-            out += f' stroke="{stroke}" stroke-width="{num(round(max(width * frame.scale, floor_px) * 10))}"'
-            out += ' stroke-linecap="round" stroke-linejoin="round"'
-        return out
+    def element(m):
+        tag = m.group(0)
+        cm = re.search(r' class="([a-z]+)"', tag)
+        if not cm:
+            return tag
+        fill, stroke = BAKED[cm.group(1)]
+        add = ''
+        if fill and ' fill="' not in tag:
+            add += f' fill="{fill}"'
+        if stroke and ' stroke="' not in tag:
+            add += f' stroke="{stroke}"'
+        return tag.replace(cm.group(0), add, 1)
     x0, y0, W, H = frame.viewbox
     head, rest = svg.split('>', 1)
-    body = re.sub(r' class="([a-z]+)"', attrs, rest)
+    body = re.sub(r'<[a-z]+ [^>]*>', element, rest)
     return f'{head}>\n<rect x="{x0:g}" y="{y0:g}" width="{W:g}" height="{H:g}" fill="{INK}"/>{body}'
 
 
