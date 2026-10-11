@@ -19,7 +19,7 @@
 
 ```
 tools/derive-visibility.py dist/com.hyprune.lumen-reach --output /tmp/pvs \
-  [--apply /tmp/pvs-package]      # default kernel host: 10.2.2.2
+  [--apply /tmp/pvs-package]      # kernel runs on $HYPRUNE_BAKE_HOST
 ```
 
 Outputs: `visibility.generated.json` (authored format), `report.json`

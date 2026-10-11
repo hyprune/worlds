@@ -12,7 +12,7 @@
       "title": "Sun Court edge, day panorama (defect 1)",
       "caption": "0.7.0: two semi-transparent, mirrored copies of the painting plus row streaks (seam processing in materials/sky.py, seam facing due south), and grey wavy valley-shelf crests across the painted valley. 0.7.1: single clean painting (its seam now faces the Signal massif), no shelves in front; the outer terrain bowl stays >=6 deg below every walkable eye.",
       "images": [
-        "/home/rick/.local/state/hyprune/captures/capture-1791554896814.png",
+        "~/.local/state/hyprune/captures/capture-1791554896814.png",
         "artifacts/any-angle-0.7.1/nested-before/owner-1791554896814.png",
         "artifacts/any-angle-0.7.1/sweep/owner-1791554896814.png"
       ]
@@ -22,7 +22,7 @@
       "title": "Snow-service stair from the top (defect 2)",
       "caption": "0.7.0: Rise rock foundation top capped the stair; the closed night sky closed its end (blue rectangle). 0.7.1: portal cut through foundation, mountain shell and basin sky; treads, rails and the Vault lower passage visible at the bottom.",
       "images": [
-        "/home/rick/.local/state/hyprune/captures/capture-1791558572827.png",
+        "~/.local/state/hyprune/captures/capture-1791558572827.png",
         "artifacts/any-angle-0.7.1/nested-before/owner-1791558572827.png",
         "artifacts/any-angle-0.7.1/sweep/owner-1791558572827.png"
       ]
@@ -32,7 +32,7 @@
       "title": "Snow-service stair from below (defect 2)",
       "caption": "0.7.0: foundation south slope and mountain shell filled the opening with a rock wall. 0.7.1: the passage runs up to the Signal Rise gate screen; walkable both ways (route traversal PASS incl. the alternate flight).",
       "images": [
-        "/home/rick/.local/state/hyprune/captures/capture-1791558584009.png",
+        "~/.local/state/hyprune/captures/capture-1791558584009.png",
         "artifacts/any-angle-0.7.1/nested-before/owner-1791558584009.png",
         "artifacts/any-angle-0.7.1/sweep/owner-1791558584009.png"
       ]
@@ -42,7 +42,7 @@
       "title": "Signal Rise night sky looking up (defect 3)",
       "caption": "0.7.0: painted night master magnified up to ~930 screen px per texel on a basin wall 1-20 m away: blocks, streaks and concentric rings. 0.7.1: band-limited procedural gradient (every texel step <= 4 levels): smooth. Honest note: the painted night mountains are gone from the basin sky.",
       "images": [
-        "/home/rick/.local/state/hyprune/captures/capture-1791558599880.png",
+        "~/.local/state/hyprune/captures/capture-1791558599880.png",
         "artifacts/any-angle-0.7.1/nested-before/owner-1791558599880.png",
         "artifacts/any-angle-0.7.1/sweep/owner-1791558599880.png"
       ]
@@ -52,7 +52,7 @@
       "title": "Stair enclosure from outside, night (defects 2+3)",
       "caption": "0.7.0: rock floor inside the enclosure, blocky sky. 0.7.1: stair visible inside, smooth sky. Nested renders at Medium 0.5 scale; the live column is the owner session at their settings.",
       "images": [
-        "/home/rick/.local/state/hyprune/captures/capture-1791558632233.png",
+        "~/.local/state/hyprune/captures/capture-1791558632233.png",
         "artifacts/any-angle-0.7.1/nested-before/owner-1791558632233.png",
         "artifacts/any-angle-0.7.1/sweep/owner-1791558632233.png"
       ]

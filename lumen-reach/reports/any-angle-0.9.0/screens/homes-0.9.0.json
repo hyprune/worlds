@@ -1,6 +1,6 @@
 {
  "status": "PASS",
- "package": "/home/rick/workspace/hyprune/worlds/dist-07/com.hyprune.lumen-reach",
+ "package": "dist-07/com.hyprune.lumen-reach",
  "version": "0.9.0",
  "formatVersion": "0.7",
  "manifestSHA256": "375478640875af83e91567f497b484cd66b736f5220e1e715e6cdb1e8a9f2fe0",
@@ -131,7 +131,7 @@
     },
     "anchor": "sun-court-slot-01-facade-wall-01",
     "aimDistance": 2.5,
-    "still": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.0/homes-0.9.0/wall-21-sun-court.png"
+    "still": "artifacts/opt-0.9.0/homes-0.9.0/wall-21-sun-court.png"
    }
   },
   {
@@ -151,7 +151,7 @@
     },
     "anchor": "array-hall-slot-02-hanging-wall-01",
     "aimDistance": 2.5,
-    "still": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.0/homes-0.9.0/wall-22-array-hall.png"
+    "still": "artifacts/opt-0.9.0/homes-0.9.0/wall-22-array-hall.png"
    }
   },
   {
@@ -171,7 +171,7 @@
     },
     "anchor": "rime-vault-slot-03-wall-inset-console-01",
     "aimDistance": 2.5,
-    "still": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.0/homes-0.9.0/wall-23-rime-vault.png"
+    "still": "artifacts/opt-0.9.0/homes-0.9.0/wall-23-rime-vault.png"
    }
   },
   {
@@ -191,7 +191,7 @@
     },
     "anchor": "signal-rise-slot-04-blast-door-screen-01",
     "aimDistance": 2.5,
-    "still": "/home/rick/workspace/hyprune/worlds/artifacts/opt-0.9.0/homes-0.9.0/wall-24-signal-rise.png"
+    "still": "artifacts/opt-0.9.0/homes-0.9.0/wall-24-signal-rise.png"
    }
   },
   {

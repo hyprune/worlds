@@ -5,7 +5,7 @@
   "formatVersion": "0.7",
   "sourceFormatVersion": "0.6",
   "sourceCommit": "e80c8d7",
-  "sourceNote": "Source package baked on 10.2.2.2 from build inputs at this commit (lumen-build incl. derived visibility); release package = tools/remote-optimize.sh output. 0.9.1 was not built before the owner findings were folded in, so they ship in 0.9.1 (no 0.9.2).",
+  "sourceNote": "Source package baked on the bake host from build inputs at this commit (lumen-build incl. derived visibility); release package = tools/remote-optimize.sh output. 0.9.1 was not built before the owner findings were folded in, so they ship in 0.9.1 (no 0.9.2).",
   "sceneSHA256": "004e9af58661bac7f957ee8fa2d1cd0c7f548b2a80e6aa63f0ef5c0f360e131e",
   "manifestSHA256": "0162f1e62cfbab63d2be52a461758b2d55068d02fa4487591ed105700de72ed2",
   "archive": {

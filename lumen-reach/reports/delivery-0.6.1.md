@@ -37,7 +37,7 @@ contract. 30 paired engine views and 134
 region/route probes pass. Testing was nested only under the global flock; no
 Blender bake, owner-session control or gallery-process action occurred.
 
-Archive: `/home/rick/workspace/hyprune/worlds/artifacts/releases/com.hyprune.lumen-reach-0.6.1.tar.zst`
+Archive: `artifacts/releases/com.hyprune.lumen-reach-0.6.1.tar.zst`
 Archive SHA256: `f0bf4f25abe4db0bda0029128d75404da011be5cc7194a9c4e0e68306a39e616`
 Extracted files all match the final package. New engine comparison evidence is
 under `artifacts/visibility-0.6.1/verified/`; the existing v3 gallery art delivery

@@ -1,6 +1,6 @@
 {
   "status": "PASS",
-  "directory": "/home/rick/workspace/rick-the-alien/worldshell-gallery/screenshots/release-world-v3",
+  "directory": "gallery:screenshots/release-world-v3",
   "resolution": [
     3840,
     2160

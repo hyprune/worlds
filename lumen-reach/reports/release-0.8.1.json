@@ -4,7 +4,7 @@
   "version": "0.8.1",
   "formatVersion": "0.7",
   "sourceCommit": "1f21028",
-  "sourceNote": "Source package (format 0.5) baked on 10.2.2.2 from build inputs at 1f21028; release package = tools/remote-optimize.sh output.",
+  "sourceNote": "Source package (format 0.5) baked on bake-host from build inputs at 1f21028; release package = tools/remote-optimize.sh output.",
   "sourcePackageManifestSHA256": "f5a730b200cef0e7edc38e5ec6a3c4993fce10aa24990ea4ff958e6ae16cae9b",
   "sceneSHA256": "38039ff7c091b1ec360c2074bbb3418e248b755043ba2d192b42bceed49c2f12",
   "manifestSHA256": "4f047839cbd663bad3de3534074942d885251e0ba9972071a830e9161ae87725",

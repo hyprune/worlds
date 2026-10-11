@@ -84,10 +84,10 @@ and its complete validation suite passed.
 
 ## Delivery paths
 
-- Stills: `/home/rick/workspace/rick-the-alien/worldshell-gallery/screenshots/release-world-v2`
-- Tour: `/home/rick/workspace/rick-the-alien/worldshell-gallery/videos/release-world-tour-v2.mp4`
-- Metadata: `/home/rick/workspace/rick-the-alien/worldshell-gallery/videos/release-world-tour-v2.json`
-- Installable archive: `/home/rick/workspace/hyprune/worlds/artifacts/releases/com.hyprune.lumen-reach-0.5.0.tar.zst`
+- Stills: `gallery:screenshots/release-world-v2`
+- Tour: `gallery:videos/release-world-tour-v2.mp4`
+- Metadata: `gallery:videos/release-world-tour-v2.json`
+- Installable archive: `artifacts/releases/com.hyprune.lumen-reach-0.5.0.tar.zst`
 - Archive SHA256: `d730d3867bc3a89bfb88a0540458999a22206b7c6f9891ed3f1a36cf54b9181c`
 - Archive size: **36.70 MiB**
 - Tour: **83.50s, 1920×1080, 30 fps**, real placed terminals and mounted
@@ -97,7 +97,7 @@ The sixteen engine stills include twelve unchanged comparison poses and four
 additional detail views. They are ungraded. The tour was encoded in `/tmp`,
 inspected, then copied to a staging file and atomically moved into the gallery.
 The gallery autocommit process was left untouched.
-All Blender execution used `tools/remote-blender.sh` on 10.2.2.2. The owner's
+All Blender execution used `tools/remote-blender.sh` on the bake host. The owner's
 real session was never controlled. Worlds commits remain local; no push,
 GitHub release or publication was performed by this work.
 

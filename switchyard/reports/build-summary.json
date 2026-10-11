@@ -78,7 +78,7 @@
     "switchyard/world.spec.json": "6c2fe43d115b9cc87b12c75e478566e7285b6f3afeef98d8892cd1b4a52c01e6",
     "switchyard/materials/prepare.py": "ebefa7e4cf641790a4125e01fac107fba75fb388e4f9cbbbd79a58fabe056126"
   },
-  "bakeHost": "10.2.2.2",
+  "bakeHost": "bake-host",
   "blenderVersion": "5.2.0 LTS",
   "renderer": "Cycles / OptiX, two RTX 3090s",
   "validation": {
@@ -122,10 +122,10 @@
       27.5,
       35
     ],
-    "galleryPath": "/home/rick/workspace/rick-the-alien/worldshell-gallery/videos/world-switchyard.mp4",
-    "metadataPath": "/home/rick/workspace/rick-the-alien/worldshell-gallery/videos/world-switchyard.json",
+    "galleryPath": "gallery:videos/world-switchyard.mp4",
+    "metadataPath": "gallery:videos/world-switchyard.json",
     "visualReview": "PASS: both endpoints of all four shots; six decoded MP4 frames at 0, 8.8, 13.5, 22, 27.5 and 35 seconds"
   },
   "finalSourceCommit": "66b38b8062db03792af0dd0458f0615f56d5d78c",
-  "remoteLaunchGuardCheck": "PASS: unmarked Python entry exits before bpy import; localhost wrapper rejected; marked launch confirmed on 10.2.2.2"
+  "remoteLaunchGuardCheck": "PASS: unmarked Python entry exits before bpy import; localhost wrapper rejected; marked launch confirmed on bake-host"
 }

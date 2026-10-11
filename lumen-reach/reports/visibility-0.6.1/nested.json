@@ -70643,8 +70643,8 @@
       "changedPixelFraction": 0.0,
       "meanAbsoluteChannelDifference": 0.0,
       "paths": {
-        "off": "/home/rick/workspace/hyprune/worlds/artifacts/visibility-0.6.1/final/lumen-reach-01-sun-court-off.png",
-        "on": "/home/rick/workspace/hyprune/worlds/artifacts/visibility-0.6.1/final/lumen-reach-01-sun-court-on.png"
+        "off": "artifacts/visibility-0.6.1/final/lumen-reach-01-sun-court-off.png",
+        "on": "artifacts/visibility-0.6.1/final/lumen-reach-01-sun-court-on.png"
       },
       "measuredManifestSHA256": "e027a96907ec8f62580b53a007fe247c56f9b8fc1d3e95740afd3741ed7e1bd1",
       "measurementPhase": "base",
@@ -70688,8 +70688,8 @@
       "changedPixelFraction": 0.0,
       "meanAbsoluteChannelDifference": 0.0,
       "paths": {
-        "off": "/home/rick/workspace/hyprune/worlds/artifacts/visibility-0.6.1/final/lumen-reach-01-sun-court-terrace-off.png",
-        "on": "/home/rick/workspace/hyprune/worlds/artifacts/visibility-0.6.1/final/lumen-reach-01-sun-court-terrace-on.png"
+        "off": "artifacts/visibility-0.6.1/final/lumen-reach-01-sun-court-terrace-off.png",
+        "on": "artifacts/visibility-0.6.1/final/lumen-reach-01-sun-court-terrace-on.png"
       },
       "measuredManifestSHA256": "e027a96907ec8f62580b53a007fe247c56f9b8fc1d3e95740afd3741ed7e1bd1",
       "measurementPhase": "base",
@@ -70732,8 +70732,8 @@
       "changedPixelFraction": 0.0,
       "meanAbsoluteChannelDifference": 0.0,
       "paths": {
-        "off": "/home/rick/workspace/hyprune/worlds/artifacts/visibility-0.6.1/final/lumen-reach-01-sun-court-tools-off.png",
-        "on": "/home/rick/workspace/hyprune/worlds/artifacts/visibility-0.6.1/final/lumen-reach-01-sun-court-tools-on.png"
+        "off": "artifacts/visibility-0.6.1/final/lumen-reach-01-sun-court-tools-off.png",
+        "on": "artifacts/visibility-0.6.1/final/lumen-reach-01-sun-court-tools-on.png"
       },
       "measuredManifestSHA256": "e027a96907ec8f62580b53a007fe247c56f9b8fc1d3e95740afd3741ed7e1bd1",
       "measurementPhase": "base",
@@ -70776,8 +70776,8 @@
       "changedPixelFraction": 0.0,
       "meanAbsoluteChannelDifference": 0.0,
       "paths": {
-        "off": "/home/rick/workspace/hyprune/worlds/artifacts/visibility-0.6.1/final/lumen-reach-02-array-hall-off.png",
-        "on": "/home/rick/workspace/hyprune/worlds/artifacts/visibility-0.6.1/final/lumen-reach-02-array-hall-on.png"
+        "off": "artifacts/visibility-0.6.1/final/lumen-reach-02-array-hall-off.png",
+        "on": "artifacts/visibility-0.6.1/final/lumen-reach-02-array-hall-on.png"
       },
       "measuredManifestSHA256": "e027a96907ec8f62580b53a007fe247c56f9b8fc1d3e95740afd3741ed7e1bd1",
       "measurementPhase": "base",
@@ -70820,8 +70820,8 @@
       "changedPixelFraction": 0.0,
       "meanAbsoluteChannelDifference": 0.0,
       "paths": {
-        "off": "/home/rick/workspace/hyprune/worlds/artifacts/visibility-0.6.1/final/lumen-reach-02-array-hall-balcony-off.png",
-        "on": "/home/rick/workspace/hyprune/worlds/artifacts/visibility-0.6.1/final/lumen-reach-02-array-hall-balcony-on.png"
+        "off": "artifacts/visibility-0.6.1/final/lumen-reach-02-array-hall-balcony-off.png",
+        "on": "artifacts/visibility-0.6.1/final/lumen-reach-02-array-hall-balcony-on.png"
       },
       "measuredManifestSHA256": "e027a96907ec8f62580b53a007fe247c56f9b8fc1d3e95740afd3741ed7e1bd1",
       "measurementPhase": "base",
@@ -70863,8 +70863,8 @@
       "changedPixelFraction": 0.0,
       "meanAbsoluteChannelDifference": 0.0,
       "paths": {
-        "off": "/home/rick/workspace/hyprune/worlds/artifacts/visibility-0.6.1/final/lumen-reach-02-array-hall-tools-off.png",
-        "on": "/home/rick/workspace/hyprune/worlds/artifacts/visibility-0.6.1/final/lumen-reach-02-array-hall-tools-on.png"
+        "off": "artifacts/visibility-0.6.1/final/lumen-reach-02-array-hall-tools-off.png",
+        "on": "artifacts/visibility-0.6.1/final/lumen-reach-02-array-hall-tools-on.png"
       },
       "measuredManifestSHA256": "e027a96907ec8f62580b53a007fe247c56f9b8fc1d3e95740afd3741ed7e1bd1",
       "measurementPhase": "base",
@@ -70906,8 +70906,8 @@
       "changedPixelFraction": 0.0,
       "meanAbsoluteChannelDifference": 6.167302085669432e-06,
       "paths": {
-        "off": "/home/rick/workspace/hyprune/worlds/artifacts/visibility-0.6.1/final/lumen-reach-03-rime-vault-off.png",
-        "on": "/home/rick/workspace/hyprune/worlds/artifacts/visibility-0.6.1/final/lumen-reach-03-rime-vault-on.png"
+        "off": "artifacts/visibility-0.6.1/final/lumen-reach-03-rime-vault-off.png",
+        "on": "artifacts/visibility-0.6.1/final/lumen-reach-03-rime-vault-on.png"
       },
       "measuredManifestSHA256": "e027a96907ec8f62580b53a007fe247c56f9b8fc1d3e95740afd3741ed7e1bd1",
       "measurementPhase": "base",
@@ -70949,8 +70949,8 @@
       "changedPixelFraction": 0.0,
       "meanAbsoluteChannelDifference": 0.0,
       "paths": {
-        "off": "/home/rick/workspace/hyprune/worlds/artifacts/visibility-0.6.1/final/lumen-reach-03-rime-vault-tools-off.png",
-        "on": "/home/rick/workspace/hyprune/worlds/artifacts/visibility-0.6.1/final/lumen-reach-03-rime-vault-tools-on.png"
+        "off": "artifacts/visibility-0.6.1/final/lumen-reach-03-rime-vault-tools-off.png",
+        "on": "artifacts/visibility-0.6.1/final/lumen-reach-03-rime-vault-tools-on.png"
       },
       "measuredManifestSHA256": "e027a96907ec8f62580b53a007fe247c56f9b8fc1d3e95740afd3741ed7e1bd1",
       "measurementPhase": "base",
@@ -70992,8 +70992,8 @@
       "changedPixelFraction": 0.0,
       "meanAbsoluteChannelDifference": 0.0,
       "paths": {
-        "off": "/home/rick/workspace/hyprune/worlds/artifacts/visibility-0.6.1/final/lumen-reach-03-rime-vault-platform-off.png",
-        "on": "/home/rick/workspace/hyprune/worlds/artifacts/visibility-0.6.1/final/lumen-reach-03-rime-vault-platform-on.png"
+        "off": "artifacts/visibility-0.6.1/final/lumen-reach-03-rime-vault-platform-off.png",
+        "on": "artifacts/visibility-0.6.1/final/lumen-reach-03-rime-vault-platform-on.png"
       },
       "measuredManifestSHA256": "e027a96907ec8f62580b53a007fe247c56f9b8fc1d3e95740afd3741ed7e1bd1",
       "measurementPhase": "base",
@@ -71035,8 +71035,8 @@
       "changedPixelFraction": 0.0,
       "meanAbsoluteChannelDifference": 0.0,
       "paths": {
-        "off": "/home/rick/workspace/hyprune/worlds/artifacts/visibility-0.6.1/final/lumen-reach-04-signal-rise-off.png",
-        "on": "/home/rick/workspace/hyprune/worlds/artifacts/visibility-0.6.1/final/lumen-reach-04-signal-rise-on.png"
+        "off": "artifacts/visibility-0.6.1/final/lumen-reach-04-signal-rise-off.png",
+        "on": "artifacts/visibility-0.6.1/final/lumen-reach-04-signal-rise-on.png"
       },
       "measuredManifestSHA256": "e027a96907ec8f62580b53a007fe247c56f9b8fc1d3e95740afd3741ed7e1bd1",
       "measurementPhase": "base",
@@ -71078,8 +71078,8 @@
       "changedPixelFraction": 0.0,
       "meanAbsoluteChannelDifference": 0.0,
       "paths": {
-        "off": "/home/rick/workspace/hyprune/worlds/artifacts/visibility-0.6.1/final/lumen-reach-04-signal-rise-bench-off.png",
-        "on": "/home/rick/workspace/hyprune/worlds/artifacts/visibility-0.6.1/final/lumen-reach-04-signal-rise-bench-on.png"
+        "off": "artifacts/visibility-0.6.1/final/lumen-reach-04-signal-rise-bench-off.png",
+        "on": "artifacts/visibility-0.6.1/final/lumen-reach-04-signal-rise-bench-on.png"
       },
       "measuredManifestSHA256": "e027a96907ec8f62580b53a007fe247c56f9b8fc1d3e95740afd3741ed7e1bd1",
       "measurementPhase": "base",
@@ -71121,8 +71121,8 @@
       "changedPixelFraction": 0.0,
       "meanAbsoluteChannelDifference": 0.0,
       "paths": {
-        "off": "/home/rick/workspace/hyprune/worlds/artifacts/visibility-0.6.1/final/lumen-reach-04-signal-rise-gantry-off.png",
-        "on": "/home/rick/workspace/hyprune/worlds/artifacts/visibility-0.6.1/final/lumen-reach-04-signal-rise-gantry-on.png"
+        "off": "artifacts/visibility-0.6.1/final/lumen-reach-04-signal-rise-gantry-off.png",
+        "on": "artifacts/visibility-0.6.1/final/lumen-reach-04-signal-rise-gantry-on.png"
       },
       "measuredManifestSHA256": "e027a96907ec8f62580b53a007fe247c56f9b8fc1d3e95740afd3741ed7e1bd1",
       "measurementPhase": "base",
@@ -71165,8 +71165,8 @@
       "changedPixelFraction": 0.0,
       "meanAbsoluteChannelDifference": 0.0,
       "paths": {
-        "off": "/home/rick/workspace/hyprune/worlds/artifacts/visibility-0.6.1/final/lumen-reach-01-sun-court-entry-fixtures-off.png",
-        "on": "/home/rick/workspace/hyprune/worlds/artifacts/visibility-0.6.1/final/lumen-reach-01-sun-court-entry-fixtures-on.png"
+        "off": "artifacts/visibility-0.6.1/final/lumen-reach-01-sun-court-entry-fixtures-off.png",
+        "on": "artifacts/visibility-0.6.1/final/lumen-reach-01-sun-court-entry-fixtures-on.png"
       },
       "measuredManifestSHA256": "e027a96907ec8f62580b53a007fe247c56f9b8fc1d3e95740afd3741ed7e1bd1",
       "measurementPhase": "base",
@@ -71208,8 +71208,8 @@
       "changedPixelFraction": 0.0,
       "meanAbsoluteChannelDifference": 0.0,
       "paths": {
-        "off": "/home/rick/workspace/hyprune/worlds/artifacts/visibility-0.6.1/final/lumen-reach-02-array-hall-vista-off.png",
-        "on": "/home/rick/workspace/hyprune/worlds/artifacts/visibility-0.6.1/final/lumen-reach-02-array-hall-vista-on.png"
+        "off": "artifacts/visibility-0.6.1/final/lumen-reach-02-array-hall-vista-off.png",
+        "on": "artifacts/visibility-0.6.1/final/lumen-reach-02-array-hall-vista-on.png"
       },
       "measuredManifestSHA256": "e027a96907ec8f62580b53a007fe247c56f9b8fc1d3e95740afd3741ed7e1bd1",
       "measurementPhase": "base",
@@ -71251,8 +71251,8 @@
       "changedPixelFraction": 2.5229872168647677e-06,
       "meanAbsoluteChannelDifference": 0.0004205445914629588,
       "paths": {
-        "off": "/home/rick/workspace/hyprune/worlds/artifacts/visibility-0.6.1/final/lumen-reach-03-rime-vault-services-off.png",
-        "on": "/home/rick/workspace/hyprune/worlds/artifacts/visibility-0.6.1/final/lumen-reach-03-rime-vault-services-on.png"
+        "off": "artifacts/visibility-0.6.1/final/lumen-reach-03-rime-vault-services-off.png",
+        "on": "artifacts/visibility-0.6.1/final/lumen-reach-03-rime-vault-services-on.png"
       },
       "measuredManifestSHA256": "e027a96907ec8f62580b53a007fe247c56f9b8fc1d3e95740afd3741ed7e1bd1",
       "measurementPhase": "base",
@@ -71294,8 +71294,8 @@
       "changedPixelFraction": 0.0,
       "meanAbsoluteChannelDifference": 0.0,
       "paths": {
-        "off": "/home/rick/workspace/hyprune/worlds/artifacts/visibility-0.6.1/final/lumen-reach-04-signal-rise-reflector-off.png",
-        "on": "/home/rick/workspace/hyprune/worlds/artifacts/visibility-0.6.1/final/lumen-reach-04-signal-rise-reflector-on.png"
+        "off": "artifacts/visibility-0.6.1/final/lumen-reach-04-signal-rise-reflector-off.png",
+        "on": "artifacts/visibility-0.6.1/final/lumen-reach-04-signal-rise-reflector-on.png"
       },
       "measuredManifestSHA256": "e027a96907ec8f62580b53a007fe247c56f9b8fc1d3e95740afd3741ed7e1bd1",
       "measurementPhase": "base",
@@ -71337,8 +71337,8 @@
       "changedPixelFraction": 0.0,
       "meanAbsoluteChannelDifference": 0.0,
       "paths": {
-        "off": "/home/rick/workspace/hyprune/worlds/artifacts/visibility-0.6.1/final/lumen-reach-03-rime-vault-sealed-door-off.png",
-        "on": "/home/rick/workspace/hyprune/worlds/artifacts/visibility-0.6.1/final/lumen-reach-03-rime-vault-sealed-door-on.png"
+        "off": "artifacts/visibility-0.6.1/final/lumen-reach-03-rime-vault-sealed-door-off.png",
+        "on": "artifacts/visibility-0.6.1/final/lumen-reach-03-rime-vault-sealed-door-on.png"
       },
       "measuredManifestSHA256": "e027a96907ec8f62580b53a007fe247c56f9b8fc1d3e95740afd3741ed7e1bd1",
       "measurementPhase": "base",
@@ -71380,8 +71380,8 @@
       "changedPixelFraction": 0.0,
       "meanAbsoluteChannelDifference": 0.0,
       "paths": {
-        "off": "/home/rick/workspace/hyprune/worlds/artifacts/visibility-0.6.1/final/lumen-reach-03-rime-vault-console-row-off.png",
-        "on": "/home/rick/workspace/hyprune/worlds/artifacts/visibility-0.6.1/final/lumen-reach-03-rime-vault-console-row-on.png"
+        "off": "artifacts/visibility-0.6.1/final/lumen-reach-03-rime-vault-console-row-off.png",
+        "on": "artifacts/visibility-0.6.1/final/lumen-reach-03-rime-vault-console-row-on.png"
       },
       "measuredManifestSHA256": "e027a96907ec8f62580b53a007fe247c56f9b8fc1d3e95740afd3741ed7e1bd1",
       "measurementPhase": "base",
@@ -71424,8 +71424,8 @@
       "changedPixelFraction": 0.0,
       "meanAbsoluteChannelDifference": 0.0,
       "paths": {
-        "off": "/home/rick/workspace/hyprune/worlds/artifacts/visibility-0.6.1/edge-fix/lumen-reach-court-east-off.png",
-        "on": "/home/rick/workspace/hyprune/worlds/artifacts/visibility-0.6.1/edge-fix/lumen-reach-court-east-on.png"
+        "off": "artifacts/visibility-0.6.1/edge-fix/lumen-reach-court-east-off.png",
+        "on": "artifacts/visibility-0.6.1/edge-fix/lumen-reach-court-east-on.png"
       },
       "measuredManifestSHA256": "1aad59bcc7064cb3bb080add9b31bb6bf186b8e2e0ce28dad1f41cdf147cc0ac",
       "measurementPhase": "correction"
@@ -71467,8 +71467,8 @@
       "changedPixelFraction": 0.0,
       "meanAbsoluteChannelDifference": 0.0,
       "paths": {
-        "off": "/home/rick/workspace/hyprune/worlds/artifacts/visibility-0.6.1/edge-fix/lumen-reach-court-east-north-off.png",
-        "on": "/home/rick/workspace/hyprune/worlds/artifacts/visibility-0.6.1/edge-fix/lumen-reach-court-east-north-on.png"
+        "off": "artifacts/visibility-0.6.1/edge-fix/lumen-reach-court-east-north-off.png",
+        "on": "artifacts/visibility-0.6.1/edge-fix/lumen-reach-court-east-north-on.png"
       },
       "measuredManifestSHA256": "1aad59bcc7064cb3bb080add9b31bb6bf186b8e2e0ce28dad1f41cdf147cc0ac",
       "measurementPhase": "correction"
@@ -71510,8 +71510,8 @@
       "changedPixelFraction": 0.0,
       "meanAbsoluteChannelDifference": 0.0,
       "paths": {
-        "off": "/home/rick/workspace/hyprune/worlds/artifacts/visibility-0.6.1/edge-fix/lumen-reach-court-east-service-sightline-off.png",
-        "on": "/home/rick/workspace/hyprune/worlds/artifacts/visibility-0.6.1/edge-fix/lumen-reach-court-east-service-sightline-on.png"
+        "off": "artifacts/visibility-0.6.1/edge-fix/lumen-reach-court-east-service-sightline-off.png",
+        "on": "artifacts/visibility-0.6.1/edge-fix/lumen-reach-court-east-service-sightline-on.png"
       },
       "measuredManifestSHA256": "1aad59bcc7064cb3bb080add9b31bb6bf186b8e2e0ce28dad1f41cdf147cc0ac",
       "measurementPhase": "correction"
@@ -71554,8 +71554,8 @@
       "changedPixelFraction": 0.0,
       "meanAbsoluteChannelDifference": 0.0,
       "paths": {
-        "off": "/home/rick/workspace/hyprune/worlds/artifacts/visibility-0.6.1/final/lumen-reach-court-roof-north-off.png",
-        "on": "/home/rick/workspace/hyprune/worlds/artifacts/visibility-0.6.1/final/lumen-reach-court-roof-north-on.png"
+        "off": "artifacts/visibility-0.6.1/final/lumen-reach-court-roof-north-off.png",
+        "on": "artifacts/visibility-0.6.1/final/lumen-reach-court-roof-north-on.png"
       },
       "measuredManifestSHA256": "e027a96907ec8f62580b53a007fe247c56f9b8fc1d3e95740afd3741ed7e1bd1",
       "measurementPhase": "base",
@@ -71599,8 +71599,8 @@
       "changedPixelFraction": 0.0,
       "meanAbsoluteChannelDifference": 0.0,
       "paths": {
-        "off": "/home/rick/workspace/hyprune/worlds/artifacts/visibility-0.6.1/final/lumen-reach-entry-through-off.png",
-        "on": "/home/rick/workspace/hyprune/worlds/artifacts/visibility-0.6.1/final/lumen-reach-entry-through-on.png"
+        "off": "artifacts/visibility-0.6.1/final/lumen-reach-entry-through-off.png",
+        "on": "artifacts/visibility-0.6.1/final/lumen-reach-entry-through-on.png"
       },
       "measuredManifestSHA256": "e027a96907ec8f62580b53a007fe247c56f9b8fc1d3e95740afd3741ed7e1bd1",
       "measurementPhase": "base",
@@ -71643,8 +71643,8 @@
       "changedPixelFraction": 0.0,
       "meanAbsoluteChannelDifference": 0.0,
       "paths": {
-        "off": "/home/rick/workspace/hyprune/worlds/artifacts/visibility-0.6.1/final/lumen-reach-descent-top-off.png",
-        "on": "/home/rick/workspace/hyprune/worlds/artifacts/visibility-0.6.1/final/lumen-reach-descent-top-on.png"
+        "off": "artifacts/visibility-0.6.1/final/lumen-reach-descent-top-off.png",
+        "on": "artifacts/visibility-0.6.1/final/lumen-reach-descent-top-on.png"
       },
       "measuredManifestSHA256": "e027a96907ec8f62580b53a007fe247c56f9b8fc1d3e95740afd3741ed7e1bd1",
       "measurementPhase": "base",
@@ -71686,8 +71686,8 @@
       "changedPixelFraction": 4.204978694774613e-07,
       "meanAbsoluteChannelDifference": 0.00019314868804664722,
       "paths": {
-        "off": "/home/rick/workspace/hyprune/worlds/artifacts/visibility-0.6.1/final/lumen-reach-descent-bottom-off.png",
-        "on": "/home/rick/workspace/hyprune/worlds/artifacts/visibility-0.6.1/final/lumen-reach-descent-bottom-on.png"
+        "off": "artifacts/visibility-0.6.1/final/lumen-reach-descent-bottom-off.png",
+        "on": "artifacts/visibility-0.6.1/final/lumen-reach-descent-bottom-on.png"
       },
       "measuredManifestSHA256": "e027a96907ec8f62580b53a007fe247c56f9b8fc1d3e95740afd3741ed7e1bd1",
       "measurementPhase": "base",
@@ -71729,8 +71729,8 @@
       "changedPixelFraction": 0.0,
       "meanAbsoluteChannelDifference": 0.0,
       "paths": {
-        "off": "/home/rick/workspace/hyprune/worlds/artifacts/visibility-0.6.1/final/lumen-reach-vault-looking-out-off.png",
-        "on": "/home/rick/workspace/hyprune/worlds/artifacts/visibility-0.6.1/final/lumen-reach-vault-looking-out-on.png"
+        "off": "artifacts/visibility-0.6.1/final/lumen-reach-vault-looking-out-off.png",
+        "on": "artifacts/visibility-0.6.1/final/lumen-reach-vault-looking-out-on.png"
       },
       "measuredManifestSHA256": "e027a96907ec8f62580b53a007fe247c56f9b8fc1d3e95740afd3741ed7e1bd1",
       "measurementPhase": "base",
@@ -71772,8 +71772,8 @@
       "changedPixelFraction": 0.0,
       "meanAbsoluteChannelDifference": 0.0,
       "paths": {
-        "off": "/home/rick/workspace/hyprune/worlds/artifacts/visibility-0.6.1/final/lumen-reach-vault-center-out-off.png",
-        "on": "/home/rick/workspace/hyprune/worlds/artifacts/visibility-0.6.1/final/lumen-reach-vault-center-out-on.png"
+        "off": "artifacts/visibility-0.6.1/final/lumen-reach-vault-center-out-off.png",
+        "on": "artifacts/visibility-0.6.1/final/lumen-reach-vault-center-out-on.png"
       },
       "measuredManifestSHA256": "e027a96907ec8f62580b53a007fe247c56f9b8fc1d3e95740afd3741ed7e1bd1",
       "measurementPhase": "base",
@@ -71816,8 +71816,8 @@
       "changedPixelFraction": 0.0,
       "meanAbsoluteChannelDifference": 0.0,
       "paths": {
-        "off": "/home/rick/workspace/hyprune/worlds/artifacts/visibility-0.6.1/final/lumen-reach-ascent-bottom-off.png",
-        "on": "/home/rick/workspace/hyprune/worlds/artifacts/visibility-0.6.1/final/lumen-reach-ascent-bottom-on.png"
+        "off": "artifacts/visibility-0.6.1/final/lumen-reach-ascent-bottom-off.png",
+        "on": "artifacts/visibility-0.6.1/final/lumen-reach-ascent-bottom-on.png"
       },
       "measuredManifestSHA256": "e027a96907ec8f62580b53a007fe247c56f9b8fc1d3e95740afd3741ed7e1bd1",
       "measurementPhase": "base",
@@ -71860,8 +71860,8 @@
       "changedPixelFraction": 0.0,
       "meanAbsoluteChannelDifference": 0.0,
       "paths": {
-        "off": "/home/rick/workspace/hyprune/worlds/artifacts/visibility-0.6.1/final/lumen-reach-ascent-top-off.png",
-        "on": "/home/rick/workspace/hyprune/worlds/artifacts/visibility-0.6.1/final/lumen-reach-ascent-top-on.png"
+        "off": "artifacts/visibility-0.6.1/final/lumen-reach-ascent-top-off.png",
+        "on": "artifacts/visibility-0.6.1/final/lumen-reach-ascent-top-on.png"
       },
       "measuredManifestSHA256": "e027a96907ec8f62580b53a007fe247c56f9b8fc1d3e95740afd3741ed7e1bd1",
       "measurementPhase": "base",
@@ -71901,8 +71901,8 @@
       "changedPixelFraction": 0.0,
       "meanAbsoluteChannelDifference": 0.0,
       "paths": {
-        "off": "/home/rick/workspace/hyprune/worlds/artifacts/visibility-0.6.1/final/lumen-reach-outside-fallback-off.png",
-        "on": "/home/rick/workspace/hyprune/worlds/artifacts/visibility-0.6.1/final/lumen-reach-outside-fallback-on.png"
+        "off": "artifacts/visibility-0.6.1/final/lumen-reach-outside-fallback-off.png",
+        "on": "artifacts/visibility-0.6.1/final/lumen-reach-outside-fallback-on.png"
       },
       "measuredManifestSHA256": "e027a96907ec8f62580b53a007fe247c56f9b8fc1d3e95740afd3741ed7e1bd1",
       "measurementPhase": "base",

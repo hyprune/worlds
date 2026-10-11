@@ -27,5 +27,5 @@ from above, soft distant panorama at 4K (1774×887 master), and angular joints
 in the aqueduct arch blocks (they read as joints, not holes, in the sweep).
 
 Contact sheets and selected raw stills:
-`~/workspace/rick-the-alien/worldshell-gallery/screenshots/release-world-v4/`.
-Blender ran only on 10.2.2.2. Engine testing was nested only.
+`gallery:screenshots/release-world-v4/`.
+Blender ran only on the bake host. Engine testing was nested only.

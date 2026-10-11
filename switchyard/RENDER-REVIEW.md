@@ -2,7 +2,7 @@
 
 ## Initial flagship 0.1.0
 
-The owner's feedback changed the target from a functional transit maquette to a flagship original environment. The owner's earlier original prototype scripts and original images were reviewed, together with the Switchyard concept and an earlier prototype's walkthrough video. The resulting direction is a warm bronze/timber transit terminal against a blue-hour city, with a strong arrival silhouette and deliberate human-scale furnishings.
+The owner's feedback changed the target from a functional transit maquette to a flagship original environment. The owner's earlier original prototype scripts and images were reviewed, together with the Switchyard concept and an earlier prototype's walkthrough video. The resulting direction is a warm bronze/timber transit terminal against a blue-hour city, with a strong arrival silhouette and deliberate human-scale furnishings.
 
 Review passes retained locally in ignored artifacts and logs:
 

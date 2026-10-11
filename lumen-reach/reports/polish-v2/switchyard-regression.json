@@ -1,7 +1,7 @@
 {
   "status": "PASS",
   "version": "0.1.1",
-  "remoteHost": "10.2.2.2",
+  "remoteHost": "bake-host",
   "command": "tools/remote-blender.sh -b -t 12 --python-exit-code 1 -P switchyard/build.py -- --stage build --samples 96",
   "validation": "make validate",
   "sceneSHA256": "698b7297f35ec4dd20020a9d70c0f87560c6c445dc9844d9f18094cd48993f4a",

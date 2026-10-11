@@ -4,7 +4,7 @@
   "version": "0.7.2",
   "formatVersion": "0.5",
   "sourceCommit": "b0ad62d",
-  "sourceNote": "Package bytes baked on 10.2.2.2 (third 0.7.2 bake) from the build inputs committed at b0ad62d.",
+  "sourceNote": "Package bytes baked on bake-host (third 0.7.2 bake) from the build inputs committed at b0ad62d.",
   "sceneSHA256": "12c587d4dda1f87e5fe4d561fcaee3c8c62f72f747f789edfefd114b033f9d40",
   "manifestSHA256": "9ce52ac96e5fd1ffce5c77b5fa2461ef82233505f5ba6983a0f1fdf2fc414f03",
   "archive": {

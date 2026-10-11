@@ -4,12 +4,12 @@
   "version": "0.7.0",
   "formatVersion": "0.5",
   "sourceCommit": "50a62b08270c878d35188d8e8b113e672a998d6f",
-  "sourceNote": "Package bytes baked at 141be25 (sixth bake, 10.2.2.2); later commits change only harness, reports and docs.",
+  "sourceNote": "Package bytes baked at 141be25 (sixth bake, bake-host); later commits change only harness, reports and docs.",
   "sceneSHA256": "00f8a83249ab16f73ae45fbe145b1924f2bec81cdb7aa32a3cd61afa40758a18",
   "manifestSHA256": "f7b536749fd85ae8d677fd0339a49b7b539477633ab09129c9e1468e20b6f34d",
   "archive": {
     "status": "PASS",
-    "path": "/home/rick/workspace/hyprune/worlds/artifacts/releases/com.hyprune.lumen-reach-0.7.0.tar.zst",
+    "path": "artifacts/releases/com.hyprune.lumen-reach-0.7.0.tar.zst",
     "sha256": "31a1449cb76ee2ed97cba33b0b55a3d6dcc91f23646fbe3ec7f3bdf679b0666d",
     "bytes": 47941863,
     "identicalExtractedFiles": 76,
@@ -48,5 +48,5 @@
     "gltf": "reports/any-angle-0.7.0/release-gltf-validation.json",
     "coreWorldCheck": "reports/any-angle-0.7.0/release-core-world-check.json"
   },
-  "gallery": "/home/rick/workspace/rick-the-alien/worldshell-gallery/screenshots/release-world-v4/"
+  "gallery": "gallery:screenshots/release-world-v4/"
 }

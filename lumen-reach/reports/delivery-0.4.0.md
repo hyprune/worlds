@@ -23,7 +23,7 @@ destination. Tool approaches reserve 4m and primary walls reserve 16m.
 Original generated masters, prompts and hashes are committed. Seam-healed PBR
 tiles, trim bands, physical screen frames and original UI use the shared bake
 pipeline; procedural geometry, UV1 lightmaps and Cycles renders ran exclusively
-on 10.2.2.2. No local Blender execution or owner-session control occurred.
+on the bake host. No local Blender execution or owner-session control occurred.
 
 | Delivery measurement | Result |
 | --- | --- |
@@ -49,13 +49,13 @@ authenticated Quickshell HUD. A separate four-wall diagnostic verifies useful
 live btop content on every primary wall.
 
 The gallery has twelve raw matched engine compositions, additional live primary
-and tool views, and [the reviewed tour](/home/rick/workspace/rick-the-alien/worldshell-gallery/videos/release-world-tour.mp4)
+and tool views, and the reviewed tour (gallery `videos/release-world-tour.mp4`)
 with its title/tag/notes JSON. Files are local. The gallery autocommit/push
 service is stopped; the gallery server remains available. Worlds was pulled
 before every milestone and closing commit; no worlds push was made.
 
 The local installable archive is
-[com.hyprune.lumen-reach-0.4.0.tar.zst](/home/rick/workspace/hyprune/worlds/artifacts/releases/com.hyprune.lumen-reach-0.4.0.tar.zst); its SHA256 is
+`artifacts/releases/com.hyprune.lumen-reach-0.4.0.tar.zst`; its SHA256 is
 `4e6fcabf7c01db1f7a2947cd84092cbb2c0a12bd46be337640505ee73733e6ef`. Build and verification commands are in [README.md](../README.md).
 Core d20d7fe or later is needed for correct primary capture sampling;
 shell ee66bff supplies the visible Overview terminology. Switchyard remains

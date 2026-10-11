@@ -75,16 +75,16 @@ all mount approaches and free volumes, walking support and capsule checks pass.
 The isolated nested engine traversed **126 directed graph edges** and **14
 alternate stair flights**. The comparison uses freshly captured 0.5.0 and 0.6.0
 camera paths on the same test harness. Switchyard's complete validation suite
-passes unchanged. All Blender execution used 10.2.2.2 via the remote wrapper.
+passes unchanged. All Blender execution used the bake host via the remote wrapper.
 All engine sessions held `/tmp/worldshell-nested.lock`; the real session was
 never controlled, and the gallery autocommit process was never signaled.
 
-- Eighteen raw 4K stills: `/home/rick/workspace/rick-the-alien/worldshell-gallery/screenshots/release-world-v3`
-- Before/after clip: `/home/rick/workspace/rick-the-alien/worldshell-gallery/videos/rime-vault-v3.mp4`
-- String-only metadata: `/home/rick/workspace/rick-the-alien/worldshell-gallery/videos/rime-vault-v3.json`
+- Eighteen raw 4K stills: `gallery:screenshots/release-world-v3`
+- Before/after clip: `gallery:videos/rime-vault-v3.mp4`
+- String-only metadata: `gallery:videos/rime-vault-v3.json`
 - Clip: **42.00s, 1920×1080, 30 fps**; three
   matched views alternate before/after with labels, no grading or retouching.
-- Archive: `/home/rick/workspace/hyprune/worlds/artifacts/releases/com.hyprune.lumen-reach-0.6.0.tar.zst`
+- Archive: `artifacts/releases/com.hyprune.lumen-reach-0.6.0.tar.zst`
 - Archive size: **43.12 MiB**
 - Archive SHA256: `fe2f7b492cd21578964a7f4cd4ac5f799209c318f7350c506df04bb46be28dd4`
 

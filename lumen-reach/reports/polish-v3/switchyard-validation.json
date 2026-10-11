@@ -1,7 +1,7 @@
 {
   "status": "PASS",
   "command": "make validate",
-  "log": "/home/rick/workspace/hyprune/worlds/artifacts/lumen-reach-v3/switchyard-validation.log",
+  "log": "artifacts/lumen-reach-v3/switchyard-validation.log",
   "logSHA256": "a6c1babedc775a9f95f5f5aee499a464f4b0e7cdb77ac9d4a3a20812ab3fdb10",
   "sceneSHA256": "698b7297f35ec4dd20020a9d70c0f87560c6c445dc9844d9f18094cd48993f4a",
   "sourceChanges": "none"

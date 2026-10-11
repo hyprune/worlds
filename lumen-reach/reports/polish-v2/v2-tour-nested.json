@@ -38,7 +38,7 @@
     "active": true,
     "activeHandle": -1,
     "aim": "",
-    "captureDirectory": "/home/rick/workspace/hyprune/worlds/artifacts/lumen-reach/v2-tour/.nested-state/statehome/hyprune/captures",
+    "captureDirectory": "artifacts/lumen-reach/v2-tour/.nested-state/statehome/hyprune/captures",
     "captures": [],
     "childSurfaces": [],
     "children": 0,

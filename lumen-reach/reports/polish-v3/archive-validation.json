@@ -1,7 +1,7 @@
 {
   "status": "PASS",
   "version": "0.6.0",
-  "archive": "/home/rick/workspace/hyprune/worlds/artifacts/releases/com.hyprune.lumen-reach-0.6.0.tar.zst",
+  "archive": "artifacts/releases/com.hyprune.lumen-reach-0.6.0.tar.zst",
   "sha256": "fe2f7b492cd21578964a7f4cd4ac5f799209c318f7350c506df04bb46be28dd4",
   "identicalFiles": 75,
   "bytes": 45219398

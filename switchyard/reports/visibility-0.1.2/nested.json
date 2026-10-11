@@ -42402,8 +42402,8 @@
       "changedPixelFraction": 0.0,
       "meanAbsoluteChannelDifference": 0.0,
       "paths": {
-        "off": "/home/rick/workspace/hyprune/worlds/artifacts/visibility-0.6.1/final/switchyard-01-concourse-off.png",
-        "on": "/home/rick/workspace/hyprune/worlds/artifacts/visibility-0.6.1/final/switchyard-01-concourse-on.png"
+        "off": "artifacts/visibility-0.6.1/final/switchyard-01-concourse-off.png",
+        "on": "artifacts/visibility-0.6.1/final/switchyard-01-concourse-on.png"
       },
       "measuredManifestSHA256": "8947d9d178a1c4e65258ccf4db5e3aa0f8731cb4d9423b5552c8f86902c3abb0",
       "measurementPhase": "base",
@@ -42445,8 +42445,8 @@
       "changedPixelFraction": 0.0,
       "meanAbsoluteChannelDifference": 0.0,
       "paths": {
-        "off": "/home/rick/workspace/hyprune/worlds/artifacts/visibility-0.6.1/final/switchyard-02-arrival-off.png",
-        "on": "/home/rick/workspace/hyprune/worlds/artifacts/visibility-0.6.1/final/switchyard-02-arrival-on.png"
+        "off": "artifacts/visibility-0.6.1/final/switchyard-02-arrival-off.png",
+        "on": "artifacts/visibility-0.6.1/final/switchyard-02-arrival-on.png"
       },
       "measuredManifestSHA256": "8947d9d178a1c4e65258ccf4db5e3aa0f8731cb4d9423b5552c8f86902c3abb0",
       "measurementPhase": "base",
@@ -42488,8 +42488,8 @@
       "changedPixelFraction": 0.0,
       "meanAbsoluteChannelDifference": 0.0,
       "paths": {
-        "off": "/home/rick/workspace/hyprune/worlds/artifacts/visibility-0.6.1/final/switchyard-03-build-off.png",
-        "on": "/home/rick/workspace/hyprune/worlds/artifacts/visibility-0.6.1/final/switchyard-03-build-on.png"
+        "off": "artifacts/visibility-0.6.1/final/switchyard-03-build-off.png",
+        "on": "artifacts/visibility-0.6.1/final/switchyard-03-build-on.png"
       },
       "measuredManifestSHA256": "8947d9d178a1c4e65258ccf4db5e3aa0f8731cb4d9423b5552c8f86902c3abb0",
       "measurementPhase": "base",
@@ -42532,8 +42532,8 @@
       "changedPixelFraction": 0.0,
       "meanAbsoluteChannelDifference": 0.0,
       "paths": {
-        "off": "/home/rick/workspace/hyprune/worlds/artifacts/visibility-0.6.1/final/switchyard-04-route-off.png",
-        "on": "/home/rick/workspace/hyprune/worlds/artifacts/visibility-0.6.1/final/switchyard-04-route-on.png"
+        "off": "artifacts/visibility-0.6.1/final/switchyard-04-route-off.png",
+        "on": "artifacts/visibility-0.6.1/final/switchyard-04-route-on.png"
       },
       "measuredManifestSHA256": "8947d9d178a1c4e65258ccf4db5e3aa0f8731cb4d9423b5552c8f86902c3abb0",
       "measurementPhase": "base",
@@ -42573,8 +42573,8 @@
       "changedPixelFraction": 0.0,
       "meanAbsoluteChannelDifference": 0.0,
       "paths": {
-        "off": "/home/rick/workspace/hyprune/worlds/artifacts/visibility-0.6.1/final/switchyard-05-vault-off.png",
-        "on": "/home/rick/workspace/hyprune/worlds/artifacts/visibility-0.6.1/final/switchyard-05-vault-on.png"
+        "off": "artifacts/visibility-0.6.1/final/switchyard-05-vault-off.png",
+        "on": "artifacts/visibility-0.6.1/final/switchyard-05-vault-on.png"
       },
       "measuredManifestSHA256": "8947d9d178a1c4e65258ccf4db5e3aa0f8731cb4d9423b5552c8f86902c3abb0",
       "measurementPhase": "base",
@@ -42617,8 +42617,8 @@
       "changedPixelFraction": 0.0,
       "meanAbsoluteChannelDifference": 0.0,
       "paths": {
-        "off": "/home/rick/workspace/hyprune/worlds/artifacts/visibility-0.6.1/final/switchyard-build-dock-off.png",
-        "on": "/home/rick/workspace/hyprune/worlds/artifacts/visibility-0.6.1/final/switchyard-build-dock-on.png"
+        "off": "artifacts/visibility-0.6.1/final/switchyard-build-dock-off.png",
+        "on": "artifacts/visibility-0.6.1/final/switchyard-build-dock-on.png"
       },
       "measuredManifestSHA256": "8947d9d178a1c4e65258ccf4db5e3aa0f8731cb4d9423b5552c8f86902c3abb0",
       "measurementPhase": "base",
@@ -42661,8 +42661,8 @@
       "changedPixelFraction": 0.0,
       "meanAbsoluteChannelDifference": 0.0,
       "paths": {
-        "off": "/home/rick/workspace/hyprune/worlds/artifacts/visibility-0.6.1/final/switchyard-research-dock-off.png",
-        "on": "/home/rick/workspace/hyprune/worlds/artifacts/visibility-0.6.1/final/switchyard-research-dock-on.png"
+        "off": "artifacts/visibility-0.6.1/final/switchyard-research-dock-off.png",
+        "on": "artifacts/visibility-0.6.1/final/switchyard-research-dock-on.png"
       },
       "measuredManifestSHA256": "8947d9d178a1c4e65258ccf4db5e3aa0f8731cb4d9423b5552c8f86902c3abb0",
       "measurementPhase": "base",
@@ -42705,8 +42705,8 @@
       "changedPixelFraction": 0.0,
       "meanAbsoluteChannelDifference": 0.0,
       "paths": {
-        "off": "/home/rick/workspace/hyprune/worlds/artifacts/visibility-0.6.1/final/switchyard-commons-dock-off.png",
-        "on": "/home/rick/workspace/hyprune/worlds/artifacts/visibility-0.6.1/final/switchyard-commons-dock-on.png"
+        "off": "artifacts/visibility-0.6.1/final/switchyard-commons-dock-off.png",
+        "on": "artifacts/visibility-0.6.1/final/switchyard-commons-dock-on.png"
       },
       "measuredManifestSHA256": "8947d9d178a1c4e65258ccf4db5e3aa0f8731cb4d9423b5552c8f86902c3abb0",
       "measurementPhase": "base",
@@ -42749,8 +42749,8 @@
       "changedPixelFraction": 0.0,
       "meanAbsoluteChannelDifference": 0.0,
       "paths": {
-        "off": "/home/rick/workspace/hyprune/worlds/artifacts/visibility-0.6.1/final/switchyard-studio-dock-off.png",
-        "on": "/home/rick/workspace/hyprune/worlds/artifacts/visibility-0.6.1/final/switchyard-studio-dock-on.png"
+        "off": "artifacts/visibility-0.6.1/final/switchyard-studio-dock-off.png",
+        "on": "artifacts/visibility-0.6.1/final/switchyard-studio-dock-on.png"
       },
       "measuredManifestSHA256": "8947d9d178a1c4e65258ccf4db5e3aa0f8731cb4d9423b5552c8f86902c3abb0",
       "measurementPhase": "base",
@@ -42793,8 +42793,8 @@
       "changedPixelFraction": 0.0,
       "meanAbsoluteChannelDifference": 0.0,
       "paths": {
-        "off": "/home/rick/workspace/hyprune/worlds/artifacts/visibility-0.6.1/final/switchyard-systems-dock-off.png",
-        "on": "/home/rick/workspace/hyprune/worlds/artifacts/visibility-0.6.1/final/switchyard-systems-dock-on.png"
+        "off": "artifacts/visibility-0.6.1/final/switchyard-systems-dock-off.png",
+        "on": "artifacts/visibility-0.6.1/final/switchyard-systems-dock-on.png"
       },
       "measuredManifestSHA256": "8947d9d178a1c4e65258ccf4db5e3aa0f8731cb4d9423b5552c8f86902c3abb0",
       "measurementPhase": "base",
@@ -42837,8 +42837,8 @@
       "changedPixelFraction": 0.0,
       "meanAbsoluteChannelDifference": 0.0,
       "paths": {
-        "off": "/home/rick/workspace/hyprune/worlds/artifacts/visibility-0.6.1/final/switchyard-archive-dock-off.png",
-        "on": "/home/rick/workspace/hyprune/worlds/artifacts/visibility-0.6.1/final/switchyard-archive-dock-on.png"
+        "off": "artifacts/visibility-0.6.1/final/switchyard-archive-dock-off.png",
+        "on": "artifacts/visibility-0.6.1/final/switchyard-archive-dock-on.png"
       },
       "measuredManifestSHA256": "8947d9d178a1c4e65258ccf4db5e3aa0f8731cb4d9423b5552c8f86902c3abb0",
       "measurementPhase": "base",
