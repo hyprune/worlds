@@ -7,7 +7,7 @@ REMOTE="${HYPRUNE_BAKE_DIR:-hyprune-bake/worlds-switchyard}"
 [[ "$REMOTE" =~ ^[a-zA-Z0-9_./-]+$ && "$REMOTE" != /* && "$REMOTE" != *..* ]] || exit 2
 source "$ROOT/tools/bake-host.sh"
 on_host "mkdir -p '$REMOTE'"
-rsync -az --exclude '__pycache__' --exclude node_modules "$ROOT/lumen-reach" "$ROOT/switchyard" "$ROOT/objects" "$ROOT/tools" "$ROOT/LICENSE" "$(host_path "$REMOTE")/"
+rsync -az --exclude '__pycache__' --exclude node_modules "$ROOT/lumen-reach" "$ROOT/switchyard" "$ROOT/objects" "$ROOT/machine-yard" "$ROOT/tools" "$ROOT/LICENSE" "$(host_path "$REMOTE")/"
 ARGS=""
 for arg in "$@"; do ARGS+=" $(printf '%q' "$arg")"; done
 status=0
@@ -16,6 +16,12 @@ mkdir -p "$ROOT/dist" "$ROOT/artifacts"
 if [[ "${HYPRUNE_BAKE_PROJECT:-switchyard}" == objects ]]; then
   mkdir -p "$ROOT/dist/objects"
   if [[ "$status" -eq 0 ]]; then rsync -az --delete "$(host_path "$REMOTE/dist/objects/")" "$ROOT/dist/objects/"; fi
+  exit "$status"
+fi
+if [[ "${HYPRUNE_BAKE_PROJECT:-switchyard}" == machine-yard ]]; then
+  mkdir -p "$ROOT/dist/com.hyprune.machine-yard" "$ROOT/artifacts/machine-yard"
+  if [[ "$status" -eq 0 ]]; then rsync -az --delete "$(host_path "$REMOTE/dist/com.hyprune.machine-yard/")" "$ROOT/dist/com.hyprune.machine-yard/"; fi
+  rsync -az "$(host_path "$REMOTE/artifacts/machine-yard/")" "$ROOT/artifacts/machine-yard/" || true
   exit "$status"
 fi
 if [[ "${HYPRUNE_BAKE_PROJECT:-switchyard}" == lumen-reach ]]; then
