@@ -1,0 +1,66 @@
+#!/usr/bin/env bash
+# SPDX-License-Identifier: MIT
+# Normalise a Meshy/Mixamo NPC export into the canonical NPC character (RFC-0010 draft).
+#   tools/npc-import SOURCE.glb|.fbx OUT.glb [--clips-from ANIMATED.glb] [--strip-fingers]
+#                    [--max-tris N] [--keep-sway] [--map clip-map.json] [--render DIR] [--no-compress]
+# Requires a PROVENANCE note beside SOURCE (tools/npc/provenance.py). Blender runs only on
+# the bake host (HYPRUNE_BAKE_HOST, tools/bake-host.sh), never here. Steps there:
+# tools/npc/npc_import.py (units, axes, root, fingers, shared clips, clip names, in place,
+# 30 fps, weights, budget), tools/npc/compress.mjs (meshopt + KTX2, extras.speed) and with
+# --render a turntable + walk-cycle check video (tools/npc/npc_render.py). Fetches OUT.glb,
+# OUT.report.json (+ OUT.check.mp4) and runs hyprune-npc-check on the result when found
+# (HYPRUNE_NPC_CHECK, else ../core/build/hyprune-npc-check).
+set -euo pipefail
+ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+[[ $# -ge 2 ]] || { sed -n '3,6p' "$0" >&2; exit 2; }
+SRC="$(realpath "$1")"; OUT="$(realpath -m "$2")"; shift 2
+CLIPS=""; RENDER=""; COMPRESS=1; PASS=()
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    --clips-from) CLIPS="$(realpath "$2")"; shift 2 ;;
+    --render) RENDER="$(realpath -m "$2")"; shift 2 ;;
+    --no-compress) COMPRESS=0; shift ;;
+    --map) PASS+=(--map "tools/npc/$(basename "$2")"); cp -n "$2" "$ROOT/tools/npc/" 2>/dev/null || true; shift 2 ;;
+    --max-tris) PASS+=(--max-tris "$2"); shift 2 ;;
+    --strip-fingers|--keep-sway) PASS+=("$1"); shift ;;
+    *) echo "unknown option $1" >&2; exit 2 ;;
+  esac
+done
+python3 "$ROOT/tools/npc/provenance.py" "$SRC" >/dev/null
+[[ -z "$CLIPS" ]] || python3 "$ROOT/tools/npc/provenance.py" "$CLIPS" >/dev/null
+NAME="$(basename "${SRC%.*}")"; [[ "$NAME" =~ ^[a-zA-Z0-9_.-]+$ ]] || { echo "source name must be [a-zA-Z0-9_.-]" >&2; exit 2; }
+REMOTE="${HYPRUNE_NPC_DIR:-hyprune-bake/npc-import}"
+source "$ROOT/tools/bake-host.sh"
+on_host "mkdir -p '$REMOTE/tools/npc' '$REMOTE/in/$NAME' '$REMOTE/out'"
+rsync -az --exclude node_modules "$ROOT/tools/npc/" "$(host_path "$REMOTE/tools/npc/")"
+rsync -az "$ROOT/tools/gltf/package.json" "$ROOT/tools/gltf/package-lock.json" "$(host_path "$REMOTE/tools/npc/")"
+rsync -az "$SRC" "$(host_path "$REMOTE/in/$NAME/")"
+REMOTE_CLIPS=""
+if [[ -n "$CLIPS" ]]; then rsync -az "$CLIPS" "$(host_path "$REMOTE/in/$NAME/clips-$(basename "$CLIPS")")"; REMOTE_CLIPS="in/$NAME/clips-$(basename "$CLIPS")"; fi
+ARGS="--in in/$NAME/$(basename "$SRC") --out out/$NAME.glb --report out/$NAME.report.json"
+[[ -z "$REMOTE_CLIPS" ]] || ARGS+=" --clips-from $REMOTE_CLIPS"
+for a in "${PASS[@]+"${PASS[@]}"}"; do ARGS+=" $(printf '%q' "$a")"; done
+on_host_script <<SCRIPT
+set -euo pipefail
+cd '$REMOTE'
+flock .blender.lock blender --background --factory-startup --python tools/npc/npc_import.py -- $ARGS 2>&1 | grep -E '^NPC-IMPORT|Error|Traceback' || true
+test -s out/$NAME.glb
+if [[ $COMPRESS == 1 ]]; then
+  (cd tools/npc && npm ci --no-audit --no-fund >/dev/null 2>&1)
+  node tools/npc/compress.mjs out/$NAME.glb out/$NAME.min.glb --report out/$NAME.report.json --basisu ~/opt/hyprune/basisu-2.1.0/src/bin/basisu
+else
+  cp out/$NAME.glb out/$NAME.min.glb
+fi
+if [[ -n '$RENDER' ]]; then
+  rm -rf out/render-$NAME
+  SPEED=\$(python3 -c 'import json,sys;print(json.load(open(sys.argv[1])).get("speeds",{}).get("walk",1.3))' out/$NAME.report.json)
+  flock .blender.lock blender --background --factory-startup --python tools/npc/npc_render.py -- out/$NAME.glb out/render-$NAME --speed \$SPEED 2>&1 | grep -E '^NPC-RENDER|Error|Traceback' || true
+  ffmpeg -v error -y -framerate 30 -i out/render-$NAME/f%04d.png -c:v libx264 -pix_fmt yuv420p -crf 20 out/$NAME.check.mp4
+fi
+SCRIPT
+mkdir -p "$(dirname "$OUT")"
+rsync -az "$(host_path "$REMOTE/out/$NAME.min.glb")" "$OUT"
+rsync -az "$(host_path "$REMOTE/out/$NAME.report.json")" "${OUT%.glb}.report.json"
+if [[ -n "$RENDER" ]]; then mkdir -p "$RENDER"; rsync -az "$(host_path "$REMOTE/out/$NAME.check.mp4")" "$RENDER/"; fi
+CHECK="${HYPRUNE_NPC_CHECK:-$ROOT/../core/build/hyprune-npc-check}"
+if [[ -x "$CHECK" ]]; then "$CHECK" "$OUT"; else echo "hyprune-npc-check not found (HYPRUNE_NPC_CHECK): check $OUT with it" >&2; fi

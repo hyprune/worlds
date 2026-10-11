@@ -1,0 +1,12 @@
+{
+  "idle": ["idle", "breathing idle", "standing idle", "idle 01", "idle loop", "happy idle"],
+  "walk": ["walk", "walking", "walk forward", "walking in place", "casual walk", "walk loop"],
+  "run": ["run", "running", "run forward", "jog", "jogging", "fast run"],
+  "turn_left": ["turn left", "left turn", "turn left 90", "left turn 90", "turning left"],
+  "turn_right": ["turn right", "right turn", "turn right 90", "right turn 90", "turning right"],
+  "look_around": ["look around", "looking around", "idle look around", "searching"],
+  "wave": ["wave", "waving", "wave hello", "greeting"],
+  "nod": ["nod", "nodding", "head nod", "yes"],
+  "sit": ["sit", "sit down", "sitting down", "stand to sit"],
+  "sit_idle": ["sit idle", "sitting idle", "sitting", "seated idle"]
+}
