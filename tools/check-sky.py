@@ -20,8 +20,10 @@ Catches the 0.7.0 owner defects without image judgement:
 - terrain: distant backdrop terrain stays TERRAIN_DIP below every eye.
 - enclosures (--enclosures): from every walkable eye inside a declared indoor
   room, upper-hemisphere view rays that reach the sky (meet no world
-  geometry) must leave the room's box through a declared open face. A ceiling
-  that stops short of a wall (the 0.8.0 Rime Vault slot) fails.
+  geometry) must leave the room's box through a declared open face or a
+  declared opening (a door box on a closed face). A ceiling that stops short
+  of a wall (the 0.8.0 Rime Vault slot) or a missing wall (the 0.9.2 Array
+  Hall sides) fails.
 - poles: texture rows under the polar fans are uniform.
 """
 import argparse,json,math,sys
@@ -134,7 +136,9 @@ if a.enclosures:
     if world.first_hit(e,e+d*700) is not None:continue
     # Exit face: the first box face the ray crosses.
     with np.errstate(divide='ignore'):t=np.where(d>0,(hi-e)/d,np.where(d<0,(lo-e)/d,np.inf))
-    ax=int(np.argmin(t));face=names[2*ax+(d[ax]>0)]
+    ax=int(np.argmin(t));face=names[2*ax+(d[ax]>0)];exit=e+d*t[ax]
+    # Doors: a declared opening box on a closed face also lets sky through.
+    if any(np.all((exit>=o['min'])&(exit<=o['max'])) for o in room.get('openings',[])):continue
     if face not in room['openFaces']:bad.append({'eye':e.round(2).tolist(),'direction':d.round(3).tolist(),'exitFace':face,'exitPoint':(e+d*t[ax]).round(2).tolist()})
   row={'room':room['id'],'eyes':int(len(inside)),'rays':int(len(inside)*len(up)),'skyLeaks':len(bad)}
   if bad:
