@@ -26,6 +26,7 @@ if set): one `KEY=VALUE` per line, `#` comments, `~` expanded. The environment w
 HYPRUNE_BAKE_HOST=bakebox                  # SSH host with Blender; "local" on that host itself
 HYPRUNE_GALLERY_DIR=~/review/gallery       # stills for review (tools/check-lumen-session.py --gallery)
 HYPRUNE_VIDEO_DIR=~/review/gallery/videos  # review videos (make gallery, tools/check-nested.py)
+HYPRUNE_CONCEPT_DIR=~/concepts/release-world  # private concept sheets for tools/compare-*.py (not in this repo)
 ```
 
 `HYPRUNE_BAKE_HOST` has no default: the bake wrappers refuse to start without it,

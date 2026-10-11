@@ -5,7 +5,13 @@ import html
 from pathlib import Path
 from PIL import Image,ImageDraw,ImageOps
 ROOT=Path(__file__).resolve().parents[1];ART=ROOT/'artifacts/lumen-reach-v3'
-reference=ROOT/'concept/release-world/03-frozen-bunker.png'
+def concept_dir():
+ """Private concept sheets: HYPRUNE_CONCEPT_DIR (environment or ~/.config/hyprune/dev.env)."""
+ import sys;sys.path.insert(0,str(Path(__file__).resolve().parent));import devenv
+ value=devenv.get('HYPRUNE_CONCEPT_DIR')
+ if not value:sys.exit('Set HYPRUNE_CONCEPT_DIR (environment or ~/.config/hyprune/dev.env) to the private concept sheets; they are not in this repository.')
+ return Path(value)
+reference=concept_dir()/'03-frozen-bunker.png'
 body=['<!doctype html><meta charset="utf-8"><title>Rime Vault v3 review</title><style>body{background:#101820;color:#eee;font:16px sans-serif;margin:24px}img{max-width:100%}a{color:#efbc80}</style><h1>Rime Vault — 0.5.0 to 0.6.0</h1><p>Owner artwork is a mood/composition reference. Both engine columns use identical poses, 60° FOV and 1080p output at Medium. Raw captures are ungraded; these thumbnails only resize and label.</p>']
 for ident in ['03-rime-vault','03-rime-vault-tools','03-rime-vault-platform','03-rime-vault-services']:
  paths=[reference,ART/'before-engine'/('engine-'+ident+'.png'),ART/'after-engine'/('engine-'+ident+'.png')]

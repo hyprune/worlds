@@ -6,7 +6,13 @@ from pathlib import Path
 from PIL import Image,ImageDraw,ImageOps
 ROOT=Path(__file__).resolve().parents[1];ART=ROOT/'artifacts/lumen-reach'
 p=argparse.ArgumentParser();p.add_argument('--engine',type=Path,default=ART/'v2-4k');a=p.parse_args()
-views=json.loads((ART/'views.json').read_text())['views'];references=sorted((ROOT/'concept/release-world').glob('0[1-4]-*.png'))
+def concept_dir():
+ """Private concept sheets: HYPRUNE_CONCEPT_DIR (environment or ~/.config/hyprune/dev.env)."""
+ import sys;sys.path.insert(0,str(Path(__file__).resolve().parent));import devenv
+ value=devenv.get('HYPRUNE_CONCEPT_DIR')
+ if not value:sys.exit('Set HYPRUNE_CONCEPT_DIR (environment or ~/.config/hyprune/dev.env) to the private concept sheets; they are not in this repository.')
+ return Path(value)
+views=json.loads((ART/'views.json').read_text())['views'];references=sorted(concept_dir().glob('0[1-4]-*.png'))
 rows=[]
 for i,reference in enumerate(references):
  primary=next(v['id'] for v in views if v['id'].startswith(f'{i+1:02d}-') and v['id'].count('-')==2)
