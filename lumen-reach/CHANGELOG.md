@@ -20,7 +20,9 @@ of the world.
   - a 5 m service passage under a crown;
   - the 16 m rooftop walkway's west and south doors.
 
-  The north panorama stays open as the designed vista. Roof margin slabs close
+  The north panorama stays open as the designed vista. The south wall's outer
+  face carries facade ribs and seams toward the Sun Court rooftop, and the
+  annex banner moves 0.3 m west, clear of the annex wall. Roof margin slabs close
   the strips between the edge beams and the skylight, and 7.9 m panes close
   the slits beside the mullions.
 - **Enclosure gate.** `enclosures.json` declares the hall, and the
@@ -37,6 +39,10 @@ of the world.
   - the Sun Court 4 m landing's north edge, either side of the roof ramp and
     its stair (rails);
   - beside the Signal Rise ascent shell (a snow verge over the 0.75 m slot).
+
+  A 5 m/s jump reaches 1.27 m, so each void edge also has a 2.5 m
+  collision-only guard behind its parapet or rail (walk-and-jump probes had
+  cleared them).
 - **Floating pieces.**
   - The old light-ring hangers touched nothing and are removed (the radial
     suspensions carry the ring).
