@@ -477,6 +477,10 @@ def hall():
  wall('South hall wall',-6.5,0,31.5,31.9,-.3,15.6);wall('South hall wall',16,24.25,31.5,32.05,-.3,top)
  wall('South hall clerestory',0,16,31.5,31.9,4.39,top);wall('South hall clerestory',-2.85,0,31.5,31.9,15.6,top)
  wall('South walkway jamb',-7.45,-7.1,31.5,31.9,15.6,top);wall('South walkway door head',-7.1,-2.85,31.5,31.9,18.3,top)
+ # The south wall faces the Sun Court rooftop: facade ribs and seams on its
+ # outer face, clear of the walkway door (x -7.1..-2.85).
+ for x in [1,8,15,21.5]:box('Hall south rib',(x,31.37,12.53),(.3,.26,15.85),'concrete',.015)
+ for z in [10.5,16.5,19.6]:box('Hall south seam',(11.25,31.47,z),(22.5,.06,.055),'metal',0)
  # Roof margins between the edge beams and the skylight panes.
  for x0,x1 in [(-5.45,-3.7),(19.7,23.45)]:box('Roof margin slab',((x0+x1)/2,46,21.37),(x1-x0,28,.16),'concrete',.01)
  # 0.10.1 walk-off fixes (nested capsule probes fell out of the world here):
