@@ -1,0 +1,18 @@
+{
+ "status": "PASS",
+ "package": "dist/com.hyprune.switchyard",
+ "world": "com.hyprune.switchyard",
+ "version": "0.1.2",
+ "errors": [],
+ "frame": "com.hyprune.switchyard.map",
+ "note": "frame from the legacy com.hyprune.switchyard.map adapter (RFC-0004); no com.hyprune.map 0.1",
+ "levels": [
+  {
+   "id": "ground",
+   "minY": -1.0,
+   "maxY": 3.0,
+   "bytes": 9920
+  }
+ ],
+ "totalBytes": 9920
+}
