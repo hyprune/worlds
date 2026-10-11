@@ -92,12 +92,15 @@ def apply(area,B):
      plate('Hall service lintel',(x,(ya+yb)/2,z),(.75,yb-ya,.24),'metal')
   for x in [-5.8,23.8]:
    for y in [36.8,41.5,50,54.8]:
+    # 0.10.1: ribs run up into the roof beam, and over a door or the service
+    # passage they start at its head instead of hanging into the opening.
+    z0=4.6 if x<0 and y==36.8 else 5 if x>0 and y in (50,54.8) else 2.75
     if x<0 and y==36.8:
      # 0.7.2: the roof bridge (z 16, y 36..37.5) crosses this rib, which stood
      # render-only in the walkway; it now stops under the deck and resumes
-     # 2.6 m above it.
-     for z0,z1 in [(2.75,15.8),(18.6,20.25)]:plate('Atrium secondary rib',(x,y,(z0+z1)/2),(.58,.30,z1-z0),'concrete')
-    else:plate('Atrium secondary rib',(x,y,11.5),(.58,.30,17.5),'concrete')
+     # above it (0.10.1: on the walkway door's head, no longer floating).
+     for z0,z1 in [(z0,15.8),(18.3,20.45)]:plate('Atrium secondary rib',(x,y,(z0+z1)/2),(.58,.30,z1-z0),'concrete')
+    else:plate('Atrium secondary rib',(x,y,(z0+20.45)/2),(.58,.30,20.45-z0),'concrete')
     for z in [4.7,9.2,15.3]:plate('Pier inset collar',(x,y,z),(.66,.50,.13),'trim')
   # A visible housing, radial braces and properly hung ceiling ring.
   B.torus('Light ring structural rim',(8,46,19.93),8.5,.14,'metal')

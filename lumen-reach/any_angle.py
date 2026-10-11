@@ -196,7 +196,7 @@ def architecture(B):
  for group,objects in list(B.P.GROUPS.items()):
   if group in ['vista','foliage']:continue
   for o in list(objects):
-   if o.name.startswith(('Facade rooftop','Vestibule ceiling','Roof transverse beam','Roof edge beam','Fortress room roof','Sloping service roof','Snow ascent ceiling','West lookout','Upper landing','Roof landing','Roof upper landing','Rooftop bridge','Lookout seat terrace')):
+   if o.name.startswith(('Facade rooftop','Vestibule ceiling','Roof transverse beam','Roof edge beam','Fortress room roof','Sloping service roof','Snow ascent ceiling','West lookout','Upper landing','Roof landing','Roof upper landing','Rooftop bridge','Lookout seat terrace','Roof margin slab')):
     o.data.materials.append(B.P.MATS['roofing']);idx=len(o.data.materials)-1
     for p in o.data.polygons:
      if p.normal.z>.6:p.material_index=idx

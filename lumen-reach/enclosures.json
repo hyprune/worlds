@@ -1,13 +1,22 @@
 {
   "version": 1,
   "coordinates": "glTF world metres (x, y up, z); authoring y = -z",
-  "semantics": "Indoor rooms for tools/check-sky.py's enclosure test. From every walkable eye inside a box, a view ray that reaches the sky (meets no world geometry) must leave the box through one of its openFaces (+x,-x,+y,-y,+z,-z). A sky ray through any other face is a leak, e.g. a ceiling that stops short of a wall.",
+  "semantics": "Indoor rooms for tools/check-sky.py's enclosure test. From every walkable eye inside a box, a view ray that reaches the sky (meets no world geometry) must leave the box through one of its openFaces (+x,-x,+y,-y,+z,-z). A sky ray through any other face is a leak, e.g. a ceiling that stops short of a wall. Optional openings are boxes (glTF metres) on closed faces: a sky ray whose exit point lies in one leaves through a door, not a leak.",
   "rooms": [
     {"id": "rime-vault", "min": [26.0, -6.0, -102.0], "max": [50.0, 4.425, -74.0], "openFaces": ["+z", "+x"],
      "note": "North face (+z) is the designed wide opening onto the vista and the service-descent threshold; the east exit passage leaves through +x."},
     {"id": "connector-descent", "min": [26.3, -6.0, -74.0], "max": [35.4, 5.0, -52.0], "openFaces": ["+z", "-z"],
      "note": "Enclosed service descent under its sloping roof; open at both ends (hall service entry, vault threshold)."},
     {"id": "entry-vestibule", "min": [0.0, 0.0, -32.0], "max": [16.0, 4.39, -26.0], "openFaces": ["+z", "-z"],
-     "note": "Covered passage from the Sun Court to the Array Hall, open at both ends."}
+     "note": "Covered passage from the Sun Court to the Array Hall, open at both ends."},
+    {"id": "array-hall", "min": [-6.0, 0.0, -60.0], "max": [24.0, 21.4, -32.0], "openFaces": ["-z"],
+     "openings": [
+      {"id": "vestibule", "min": [-0.1, -0.5, -32.1], "max": [16.1, 4.5, -31.4]},
+      {"id": "annex-door", "min": [-6.1, -0.5, -40.1], "max": [-5.9, 4.7, -33.9]},
+      {"id": "balcony-portal", "min": [-6.1, 2.5, -60.1], "max": [-5.9, 7.1, -55.9]},
+      {"id": "service-passage", "min": [23.9, -0.5, -56.1], "max": [24.1, 5.1, -47.9]},
+      {"id": "walkway-west-door", "min": [-6.1, 15.5, -37.7], "max": [-5.9, 18.4, -31.9]},
+      {"id": "walkway-south-door", "min": [-6.1, 15.5, -32.1], "max": [-2.8, 18.4, -31.9]}],
+     "note": "0.10.1: enclosed on three sides, walls up into the roof beams. The north panorama (-z) is the designed open vista. Doors: vestibule, annex door, balcony portal (4 m), service passage, and the 16 m rooftop walkway's west and south doors."}
   ]
 }

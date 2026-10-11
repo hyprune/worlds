@@ -440,13 +440,37 @@ def hall():
  torus('Atrium suspended light ring',(8,46,19.8),8.5,.065,'amber')
  for x in [-3,19]:rod('Light ring hanger',(x,46,20),(x,46,21.4),.025)
  # Opaque window panes only at the small upper skylight. The rear is an open vista.
- for x in [-.0,8,16]:box('Skylight pane',(x,46,21.50),(7.7,27,.08),'glass')
+ # 0.10.1: 7.9 m wide panes close the 6 cm sky slits beside each mullion.
+ for x in [-.0,8,16]:box('Skylight pane',(x,46,21.50),(7.9,27,.08),'glass')
+ # 0.10.1: the hall is enclosed on three sides. Walls rise into the roof
+ # beams (underside 20.4 m); only the north panorama stays open to the vista.
+ # Openings are the walking routes: the vestibule, the annex door, the
+ # balcony portal, the service passage and the 16 m rooftop walkway.
+ top=20.45
+ def wall(name,x0,x1,y0,y1,z0,z1):box(name,((x0+x1)/2,(y0+y1)/2,(z0+z1)/2),(x1-x0,y1-y0,z1-z0),'concrete',solid=True)
  for x in [-6,24]:
   spans=[(42,56)] if x<0 else [(32,48),(56,60)]
-  for ya,yb in spans:box('Service wall',(x,(ya+yb)/2,9.5),(.5,yb-ya,19),'concrete',solid=True)
+  for ya,yb in spans:box('Service wall',(x,(ya+yb)/2,top/2),(.5,yb-ya,top),'concrete',solid=True)
+ # East: the service passage keeps a 5 m opening under a crown.
+ wall('Service passage crown',23.75,24.25,48,56,5,top)
+ # West bay (y 33-44) beside the annex: a door at grade, walled up to the
+ # rooftop walkway (z 16), then the walkway's own door and a head over it.
+ wall('Annex bay wall',-6.5,-6.1,31.5,34,-.3,15.6);wall('Annex bay wall',-6.5,-6.1,40,44,-.3,15.6)
+ wall('Annex door head',-6.5,-6.1,34,40,4.6,15.6)
+ wall('Annex bay upper wall',-6.5,-6.1,37.6,44,15.6,top)
+ wall('Walkway bay upper wall',-7.45,-7.15,31.5,35.4,15.6,top)
+ wall('Walkway door head',-7.45,-6.1,35.4,37.6,18.3,top)
+ # The bay stands outside the roof ring: a cap closes it up to the beam top.
+ box('Walkway bay cap',(-6.8,34.55,21.025),(1.3,6.1,1.15),'concrete',solid=True)
+ # South: above the vestibule, beside it, and around the walkway's door.
+ wall('South hall wall',-6.5,0,31.5,31.9,-.3,15.6);wall('South hall wall',16,24.25,31.5,32.05,-.3,top)
+ wall('South hall clerestory',0,16,31.5,31.9,4.39,top);wall('South hall clerestory',-2.85,0,31.5,31.9,15.6,top)
+ wall('South walkway jamb',-7.45,-7.1,31.5,31.9,15.6,top);wall('South walkway door head',-7.1,-2.85,31.5,31.9,18.3,top)
+ # Roof margins between the edge beams and the skylight panes.
+ for x0,x1 in [(-5.45,-3.7),(19.7,23.45)]:box('Roof margin slab',((x0+x1)/2,46,21.37),(x1-x0,28,.16),'concrete',.01)
  # Balcony portal remains open at both ground and first floor.
  box('West portal sill',(-6,58,1.3),(.4,4,2.6),'concrete',solid=True)
- box('West portal crown',(-6,58,13),(.4,4,12),'concrete',solid=True)
+ box('West portal crown',(-6,58,(7+top)/2),(.4,4,top-7),'concrete',solid=True)
  for x in [-6,-2,2,6,10,14,18,22,24]:rod('Panorama mullion',(x,60,0),(x,60,20.6),.06)
  box('Panorama parapet',(9,60,.5),(30,.35,1),'concrete',solid=True)
  # The main wall hangs above the travel floor, rather than turning the hall into a corridor.
