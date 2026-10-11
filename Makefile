@@ -5,9 +5,12 @@ SCHEMA_DIR ?= ../schema
 VIDEO_DIR ?= $(shell tools/devenv.py --videos)
 VERSION := $(shell python3 -c "import json; print(json.load(open('switchyard/world.spec.json'))['version'])")
 PACKAGE := dist/com.hyprune.switchyard
-.PHONY: textures preview build blueprint stills film validate gallery release nested gltf-check compare engine-film film-start film-status film-fetch
+.PHONY: objects textures preview build blueprint stills film validate gallery release nested gltf-check compare engine-film film-start film-status film-fetch
 textures:
 	python3 switchyard/materials/prepare.py
+# Reusable world objects (world format 0.8 objectAssets) in dist/objects/<id>/.
+objects:
+	HYPRUNE_BAKE_DIR=hyprune-bake/worlds-objects HYPRUNE_BAKE_PROJECT=objects ./tools/remote-blender.sh -b --python-exit-code 1 -P objects/armillary/build.py
 preview: textures
 	./tools/remote-blender.sh -b --python-exit-code 1 -P switchyard/build.py -- --stage preview
 build: textures
