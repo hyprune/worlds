@@ -5,13 +5,18 @@ SCHEMA_DIR ?= ../schema
 VIDEO_DIR ?= $(shell tools/devenv.py --videos)
 VERSION := $(shell python3 -c "import json; print(json.load(open('switchyard/world.spec.json'))['version'])")
 PACKAGE := dist/com.hyprune.switchyard
-.PHONY: textures preview build stills film validate gallery release nested gltf-check compare engine-film film-start film-status film-fetch
+.PHONY: textures preview build blueprint stills film validate gallery release nested gltf-check compare engine-film film-start film-status film-fetch
 textures:
 	python3 switchyard/materials/prepare.py
 preview: textures
 	./tools/remote-blender.sh -b --python-exit-code 1 -P switchyard/build.py -- --stage preview
 build: textures
 	./tools/remote-blender.sh -b --python-exit-code 1 -P switchyard/build.py -- --stage build
+	$(MAKE) blueprint
+# Per-level blueprint plans (com.hyprune.blueprint) from the built package;
+# needs `make navmesh-deps`. Report and copies in artifacts/.
+blueprint:
+	python3 tools/derive-blueprint.py $(PACKAGE) --in-place --output artifacts/switchyard/blueprint > /dev/null
 stills:
 	./tools/remote-blender.sh -b --python-exit-code 1 -P switchyard/build.py -- --stage stills
 film:
@@ -25,6 +30,7 @@ validate:
 	python3 tools/check-coplanar.py $(PACKAGE)
 	python3 tools/check-routes.py $(PACKAGE) artifacts/switchyard/spatial-authoring.json
 	python3 tools/check-navmesh.py $(PACKAGE) --allow switchyard/navmesh-allow.json --output switchyard/reports/navmesh-check.json --svg switchyard/reports/navmesh.svg
+	python3 tools/check-blueprint.py $(PACKAGE) --output switchyard/reports/blueprint-check.json > /dev/null
 gallery:
 	cp artifacts/switchyard/world-switchyard.mp4 artifacts/switchyard/world-switchyard.json $(VIDEO_DIR)/
 release: validate budgets
@@ -55,10 +61,12 @@ LUMEN_REPORTS = lumen-reach/reports/any-angle-$(LUMEN_VERSION)
 VISIBILITY_CORE ?= ../core
 .PHONY: lumen-build lumen-validate lumen-nested lumen-tour lumen-release
 LUMEN_PVS := artifacts/lumen-reach/pvs
+LUMEN_BLUEPRINT := artifacts/lumen-reach/blueprint
 lumen-build:
 	python3 lumen-reach/materials/prepare.py
 	./tools/remote-lumen.sh --areas $(LUMEN_AREAS) --samples 64
 	python3 tools/derive-visibility.py $(LUMEN_PACKAGE) --output $(LUMEN_PVS) --in-place
+	python3 tools/derive-blueprint.py $(LUMEN_PACKAGE) --in-place --output $(LUMEN_BLUEPRINT) > /dev/null
 lumen-validate:
 	python3 tools/check-any-angle.py $(LUMEN_PACKAGE) --output $(LUMEN_REPORTS)/geometry-check.json
 	python3 tools/check-sky.py $(LUMEN_PACKAGE) --poses lumen-reach/review-poses-v7.json --enclosures lumen-reach/enclosures.json --output $(LUMEN_REPORTS)/sky-check.json
@@ -71,6 +79,7 @@ lumen-validate:
 	python3 tools/check-placement.py $(LUMEN_PACKAGE) --output lumen-reach/reports/placement-check.json
 	python3 tools/check-walking.py $(LUMEN_PACKAGE) > lumen-reach/reports/walking-check.json
 	python3 tools/check-navmesh.py $(LUMEN_PACKAGE) --allow lumen-reach/navmesh-allow.json --output $(LUMEN_REPORTS)/navmesh-check.json --svg $(LUMEN_REPORTS)/navmesh.svg
+	python3 tools/check-blueprint.py $(LUMEN_PACKAGE) --output $(LUMEN_REPORTS)/blueprint-check.json > /dev/null
 	python3 tools/check-coplanar.py $(LUMEN_PACKAGE) --emissive --fixtures $(LUMEN_PACKAGE)/fixture-audit.json > $(LUMEN_REPORTS)/emissive-check.json
 	python3 -c "import json; assert json.load(open('$(LUMEN_PACKAGE)/decal-audit.json'))['status']=='PASS'"
 lumen-nested:
@@ -87,6 +96,7 @@ LUMEN_PERF_BASELINE ?=
 .PHONY: lumen-release-check lumen-perf-gate
 lumen-release-check:
 	node $(SCHEMA_DIR)/bin/validate.mjs world $(LUMEN_RELEASE_PACKAGE)/world.json - 0.7
+	python3 tools/check-blueprint.py $(LUMEN_RELEASE_PACKAGE) > $(LUMEN_REPORTS)/release-blueprint-check.json
 	$(OPTIMISE_CORE)/build/hyprune-world-check $(LUMEN_RELEASE_PACKAGE) > $(LUMEN_REPORTS)/release-core-world-check.json
 	cp $(LUMEN_RELEASE_PACKAGE).verify.json $(LUMEN_REPORTS)/release-verify.json
 	python3 -c "import json; assert json.load(open('$(LUMEN_REPORTS)/release-verify.json'))['status']=='PASS'"
@@ -120,11 +130,14 @@ lumen-budgets:
 	node tools/gltf/budgets.mjs $(LUMEN_RELEASE_PACKAGE) $(if $(LUMEN_BASELINE),--baseline $(LUMEN_BASELINE)) --output $(LUMEN_REPORTS)/budgets.json > /dev/null
 
 # Recast/Detour (recast-navigation-js, pinned by package-lock.json) for check-navmesh.
-.PHONY: navmesh-deps navmesh-test
+.PHONY: navmesh-deps navmesh-test blueprint-test
 navmesh-deps:
 	npm ci --prefix tools/navmesh --no-audit --no-fund
 navmesh-test:
 	python3 -m unittest tests/test_navmesh_check.py tests/test_devenv.py
+# derive-blueprint.py / check-blueprint.py on synthetic packages (navmesh-deps).
+blueprint-test:
+	python3 -m unittest tests/test_blueprint.py
 
 # World format 0.7 optimisation (KHR_texture_basisu KTX2 + EXT_meshopt_compression
 # + KHR_mesh_quantization) on the bake host. Lumen's release build since 0.8.0;
