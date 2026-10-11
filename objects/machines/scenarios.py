@@ -52,3 +52,64 @@ SHEETS = {
         'turntable': [CONVEYOR_IDLE, CONVEYOR_RUN, CONVEYOR_OK, CONVEYOR_FAIL],
     },
 }
+
+
+def queue(depth, level, name='ingest'):
+    import math
+    return {'states': {'level': level}, 'counts': {'crates': min(48, math.ceil(depth / 10))}, 'toggles': {'alarm-flag': level != 'ok'},
+            'labels': {'label-count': f'{depth}', 'label-name': name}, 'caption': f'depth {depth} · level {level}'}
+
+
+QUEUE = [queue(0, 'ok'), queue(64, 'ok'), queue(230, 'warn'), queue(500, 'fail')]
+
+
+def rack(health, load, name='rack-a'):
+    h = {f'unit-{i}-light': s for i, s in enumerate(health, 1)}
+    off = all(s == 'off' for s in health)
+    return {'states': h, 'speeds': {'*': 0 if off else .15 + load * 3.85}, 'labels': {'label-name': name},
+            'caption': ('health.1-8 off' if off else 'health ' + ' '.join(s[0] for s in health)) + f' · load {load}'}
+
+
+RACK = [rack(['off'] * 8, 0), rack(['ok'] * 8, .25), rack(['ok', 'ok', 'warn', 'ok', 'ok', 'fail', 'ok', 'ok'], .7),
+        rack(['ok', 'ok', 'ok', 'ok', 'warn', 'ok', 'ok', 'ok'], 1.0)]
+
+
+def lift(status, progress, env='production'):
+    order = ['queued', 'building', 'rolling', 'live']
+    st = {}
+    for k, p in enumerate(order, 1):
+        if status == 'idle':
+            st[f'phase-lamp-{k}'] = 'off'
+        elif status == 'failed':
+            st[f'phase-lamp-{k}'] = 'fail'
+        else:
+            j = order.index(status) + 1
+            st[f'phase-lamp-{k}'] = 'active' if j == k else ('done' if j > k else 'off')
+    st['beacon'] = {'queued': 'active', 'building': 'active', 'rolling': 'active', 'live': 'live', 'failed': 'fail'}.get(status, 'off')
+    return {'states': st, 'positions': {'platform': progress}, 'toggles': {'gate': status != 'live'},
+            'speeds': {'*': 1 if status in ('building', 'rolling') else (2 if status == 'failed' else 0)},
+            'labels': {'label-env': env}, 'effects': ['burst-fx'] if status == 'live' else [],
+            'caption': f'status {status} · progress {progress}'}
+
+
+LIFT = [lift('queued', 0), lift('building', .33), lift('rolling', .66), lift('live', 1.0), lift('failed', .45)]
+
+
+def monitor(status, progress=0.0):
+    return {'states': {'face': status, 'ring-glow': status}, 'emission': {'ring-glow': .35 + progress * 1.25},
+            'speeds': {'*': 1 if status == 'running' else 0},
+            'toggles': {'glyph-ok': status == 'ok', 'glyph-fail': status == 'fail', 'glyph-run': status == 'running'},
+            'effects': ['burst-fx'] if status == 'ok' else [], 'caption': f'status {status}' + (f' · progress {progress}' if status == 'running' else '')}
+
+
+MONITOR = [monitor('idle'), monitor('running', .5), monitor('ok', 1.0), monitor('fail')]
+
+SHEETS.update({
+    'queue-stack': {'hero': QUEUE[2], 'states': QUEUE, 'callout': QUEUE[2], 'turntable': QUEUE, 'hero_view': (-30, 14), 'callout_view': (-22, 16)},
+    'server-rack': {'hero': RACK[2], 'states': RACK, 'callout': RACK[2], 'turntable': RACK, 'hero_view': (-34, 10), 'callout_view': (-18, 10),
+                    'lens': 50},
+    'deploy-lift': {'hero': lift('rolling', .66), 'states': LIFT, 'callout': lift('building', .33), 'turntable': LIFT, 'hero_view': (-32, 12),
+                    'callout_view': (-24, 12)},
+    'build-monitor': {'hero': monitor('running', .6), 'states': MONITOR, 'callout': monitor('running', .6), 'turntable': MONITOR,
+                      'hero_view': (-30, 8), 'callout_view': (-20, 8), 'lens': 50},
+})

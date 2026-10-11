@@ -1,0 +1,794 @@
+{
+ "formatVersion": "0.11",
+ "id": "server-rack",
+ "version": "0.1.0",
+ "name": "Server rack",
+ "description": "Hosts as a rack of eight units: a health light bar per unit and fans whose speed follows load.",
+ "category": "machines",
+ "tags": [
+  "servers",
+  "hosts",
+  "health",
+  "rack"
+ ],
+ "scene": "object.gltf",
+ "license": "CC-BY-4.0",
+ "attribution": [
+  {
+   "path": ".",
+   "author": "Hyprune contributors",
+   "license": "CC-BY-4.0",
+   "source": "https://github.com/hyprune/worlds"
+  },
+  {
+   "path": "build.py",
+   "author": "Hyprune contributors",
+   "license": "MIT",
+   "source": "https://github.com/hyprune/worlds"
+  }
+ ],
+ "thumbnail": "thumbnail.png",
+ "lighting": {
+  "mode": "probe"
+ },
+ "traits": {
+  "decorative": {
+   "animations": [
+    {
+     "node": "unit-1-fan",
+     "type": "spin",
+     "axis": [
+      0.0,
+      0.0,
+      -1.0
+     ],
+     "pivot": [
+      -0.24,
+      0.36,
+      0.54
+     ],
+     "period": 1.6
+    },
+    {
+     "node": "unit-2-fan",
+     "type": "spin",
+     "axis": [
+      0.0,
+      0.0,
+      -1.0
+     ],
+     "pivot": [
+      -0.24,
+      0.56,
+      0.54
+     ],
+     "period": 1.6,
+     "phase": 0.37
+    },
+    {
+     "node": "unit-3-fan",
+     "type": "spin",
+     "axis": [
+      0.0,
+      0.0,
+      -1.0
+     ],
+     "pivot": [
+      -0.24,
+      0.76,
+      0.54
+     ],
+     "period": 1.6,
+     "phase": 0.74
+    },
+    {
+     "node": "unit-4-fan",
+     "type": "spin",
+     "axis": [
+      0.0,
+      0.0,
+      -1.0
+     ],
+     "pivot": [
+      -0.24,
+      0.96,
+      0.54
+     ],
+     "period": 1.6,
+     "phase": 0.10999999999999988
+    },
+    {
+     "node": "unit-5-fan",
+     "type": "spin",
+     "axis": [
+      0.0,
+      0.0,
+      -1.0
+     ],
+     "pivot": [
+      -0.24,
+      1.16,
+      0.54
+     ],
+     "period": 1.6,
+     "phase": 0.48
+    },
+    {
+     "node": "unit-6-fan",
+     "type": "spin",
+     "axis": [
+      0.0,
+      0.0,
+      -1.0
+     ],
+     "pivot": [
+      -0.24,
+      1.36,
+      0.54
+     ],
+     "period": 1.6,
+     "phase": 0.8500000000000001
+    },
+    {
+     "node": "unit-7-fan",
+     "type": "spin",
+     "axis": [
+      0.0,
+      0.0,
+      -1.0
+     ],
+     "pivot": [
+      -0.24,
+      1.56,
+      0.54
+     ],
+     "period": 1.6,
+     "phase": 0.21999999999999975
+    },
+    {
+     "node": "unit-8-fan",
+     "type": "spin",
+     "axis": [
+      0.0,
+      0.0,
+      -1.0
+     ],
+     "pivot": [
+      -0.24,
+      1.76,
+      0.54
+     ],
+     "period": 1.6,
+     "phase": 0.5899999999999999
+    }
+   ]
+  },
+  "collidable": {
+   "node": "proxy"
+  },
+  "movable": {
+   "surfaces": [
+    "floor"
+   ],
+   "upright": true
+  },
+  "machine": {
+   "primary": "health",
+   "inputs": [
+    {
+     "id": "health",
+     "type": "enum",
+     "values": [
+      "off",
+      "ok",
+      "warn",
+      "fail"
+     ],
+     "default": "off",
+     "repeat": 8,
+     "label": "Unit health",
+     "explain": "Units 1-8 from the bottom: each light bar shows its host (dark = no data or off)."
+    },
+    {
+     "id": "load",
+     "type": "number",
+     "min": 0,
+     "max": 1,
+     "default": 0,
+     "label": "Load",
+     "explain": "Fan speed: the fans idle slowly at no load and race at full load."
+    },
+    {
+     "id": "name",
+     "type": "text",
+     "maxLength": 20,
+     "label": "Rack name",
+     "explain": "The plate above the units."
+    }
+   ],
+   "drives": [
+    {
+     "input": "health.1",
+     "target": "state:unit-1-light"
+    },
+    {
+     "input": "health.2",
+     "target": "state:unit-2-light"
+    },
+    {
+     "input": "health.3",
+     "target": "state:unit-3-light"
+    },
+    {
+     "input": "health.4",
+     "target": "state:unit-4-light"
+    },
+    {
+     "input": "health.5",
+     "target": "state:unit-5-light"
+    },
+    {
+     "input": "health.6",
+     "target": "state:unit-6-light"
+    },
+    {
+     "input": "health.7",
+     "target": "state:unit-7-light"
+    },
+    {
+     "input": "health.8",
+     "target": "state:unit-8-light"
+    },
+    {
+     "input": "load",
+     "target": "animation:unit-1-fan",
+     "map": {
+      "scale": {
+       "from": [
+        0,
+        1
+       ],
+       "to": [
+        0.15,
+        4
+       ]
+      },
+      "clamp": true
+     }
+    },
+    {
+     "input": "load",
+     "target": "animation:unit-2-fan",
+     "map": {
+      "scale": {
+       "from": [
+        0,
+        1
+       ],
+       "to": [
+        0.15,
+        4
+       ]
+      },
+      "clamp": true
+     }
+    },
+    {
+     "input": "load",
+     "target": "animation:unit-3-fan",
+     "map": {
+      "scale": {
+       "from": [
+        0,
+        1
+       ],
+       "to": [
+        0.15,
+        4
+       ]
+      },
+      "clamp": true
+     }
+    },
+    {
+     "input": "load",
+     "target": "animation:unit-4-fan",
+     "map": {
+      "scale": {
+       "from": [
+        0,
+        1
+       ],
+       "to": [
+        0.15,
+        4
+       ]
+      },
+      "clamp": true
+     }
+    },
+    {
+     "input": "load",
+     "target": "animation:unit-5-fan",
+     "map": {
+      "scale": {
+       "from": [
+        0,
+        1
+       ],
+       "to": [
+        0.15,
+        4
+       ]
+      },
+      "clamp": true
+     }
+    },
+    {
+     "input": "load",
+     "target": "animation:unit-6-fan",
+     "map": {
+      "scale": {
+       "from": [
+        0,
+        1
+       ],
+       "to": [
+        0.15,
+        4
+       ]
+      },
+      "clamp": true
+     }
+    },
+    {
+     "input": "load",
+     "target": "animation:unit-7-fan",
+     "map": {
+      "scale": {
+       "from": [
+        0,
+        1
+       ],
+       "to": [
+        0.15,
+        4
+       ]
+      },
+      "clamp": true
+     }
+    },
+    {
+     "input": "load",
+     "target": "animation:unit-8-fan",
+     "map": {
+      "scale": {
+       "from": [
+        0,
+        1
+       ],
+       "to": [
+        0.15,
+        4
+       ]
+      },
+      "clamp": true
+     }
+    },
+    {
+     "input": "name",
+     "target": "label:label-name"
+    }
+   ],
+   "recipes": [
+    {
+     "name": "Host list JSON",
+     "fields": {
+      "health.1": "/hosts/0/status",
+      "health.2": "/hosts/1/status",
+      "health.3": "/hosts/2/status",
+      "health.4": "/hosts/3/status",
+      "health.5": "/hosts/4/status",
+      "health.6": "/hosts/5/status",
+      "health.7": "/hosts/6/status",
+      "health.8": "/hosts/7/status",
+      "load": "/load",
+      "name": "/name"
+     }
+    }
+   ]
+  }
+ },
+ "slots": {
+  "states": [
+   {
+    "id": "unit-1-light",
+    "materials": [
+     "unit-1-light"
+    ],
+    "palette": [
+     {
+      "id": "off",
+      "colour": [
+       0.05,
+       0.06,
+       0.07
+      ],
+      "emission": 0.0
+     },
+     {
+      "id": "ok",
+      "colour": [
+       0.2,
+       0.85,
+       0.35
+      ],
+      "emission": 1.4
+     },
+     {
+      "id": "warn",
+      "colour": [
+       1.0,
+       0.42,
+       0.085
+      ],
+      "emission": 1.6
+     },
+     {
+      "id": "fail",
+      "colour": [
+       0.9,
+       0.06,
+       0.02
+      ],
+      "emission": 2.2
+     }
+    ]
+   },
+   {
+    "id": "unit-2-light",
+    "materials": [
+     "unit-2-light"
+    ],
+    "palette": [
+     {
+      "id": "off",
+      "colour": [
+       0.05,
+       0.06,
+       0.07
+      ],
+      "emission": 0.0
+     },
+     {
+      "id": "ok",
+      "colour": [
+       0.2,
+       0.85,
+       0.35
+      ],
+      "emission": 1.4
+     },
+     {
+      "id": "warn",
+      "colour": [
+       1.0,
+       0.42,
+       0.085
+      ],
+      "emission": 1.6
+     },
+     {
+      "id": "fail",
+      "colour": [
+       0.9,
+       0.06,
+       0.02
+      ],
+      "emission": 2.2
+     }
+    ]
+   },
+   {
+    "id": "unit-3-light",
+    "materials": [
+     "unit-3-light"
+    ],
+    "palette": [
+     {
+      "id": "off",
+      "colour": [
+       0.05,
+       0.06,
+       0.07
+      ],
+      "emission": 0.0
+     },
+     {
+      "id": "ok",
+      "colour": [
+       0.2,
+       0.85,
+       0.35
+      ],
+      "emission": 1.4
+     },
+     {
+      "id": "warn",
+      "colour": [
+       1.0,
+       0.42,
+       0.085
+      ],
+      "emission": 1.6
+     },
+     {
+      "id": "fail",
+      "colour": [
+       0.9,
+       0.06,
+       0.02
+      ],
+      "emission": 2.2
+     }
+    ]
+   },
+   {
+    "id": "unit-4-light",
+    "materials": [
+     "unit-4-light"
+    ],
+    "palette": [
+     {
+      "id": "off",
+      "colour": [
+       0.05,
+       0.06,
+       0.07
+      ],
+      "emission": 0.0
+     },
+     {
+      "id": "ok",
+      "colour": [
+       0.2,
+       0.85,
+       0.35
+      ],
+      "emission": 1.4
+     },
+     {
+      "id": "warn",
+      "colour": [
+       1.0,
+       0.42,
+       0.085
+      ],
+      "emission": 1.6
+     },
+     {
+      "id": "fail",
+      "colour": [
+       0.9,
+       0.06,
+       0.02
+      ],
+      "emission": 2.2
+     }
+    ]
+   },
+   {
+    "id": "unit-5-light",
+    "materials": [
+     "unit-5-light"
+    ],
+    "palette": [
+     {
+      "id": "off",
+      "colour": [
+       0.05,
+       0.06,
+       0.07
+      ],
+      "emission": 0.0
+     },
+     {
+      "id": "ok",
+      "colour": [
+       0.2,
+       0.85,
+       0.35
+      ],
+      "emission": 1.4
+     },
+     {
+      "id": "warn",
+      "colour": [
+       1.0,
+       0.42,
+       0.085
+      ],
+      "emission": 1.6
+     },
+     {
+      "id": "fail",
+      "colour": [
+       0.9,
+       0.06,
+       0.02
+      ],
+      "emission": 2.2
+     }
+    ]
+   },
+   {
+    "id": "unit-6-light",
+    "materials": [
+     "unit-6-light"
+    ],
+    "palette": [
+     {
+      "id": "off",
+      "colour": [
+       0.05,
+       0.06,
+       0.07
+      ],
+      "emission": 0.0
+     },
+     {
+      "id": "ok",
+      "colour": [
+       0.2,
+       0.85,
+       0.35
+      ],
+      "emission": 1.4
+     },
+     {
+      "id": "warn",
+      "colour": [
+       1.0,
+       0.42,
+       0.085
+      ],
+      "emission": 1.6
+     },
+     {
+      "id": "fail",
+      "colour": [
+       0.9,
+       0.06,
+       0.02
+      ],
+      "emission": 2.2
+     }
+    ]
+   },
+   {
+    "id": "unit-7-light",
+    "materials": [
+     "unit-7-light"
+    ],
+    "palette": [
+     {
+      "id": "off",
+      "colour": [
+       0.05,
+       0.06,
+       0.07
+      ],
+      "emission": 0.0
+     },
+     {
+      "id": "ok",
+      "colour": [
+       0.2,
+       0.85,
+       0.35
+      ],
+      "emission": 1.4
+     },
+     {
+      "id": "warn",
+      "colour": [
+       1.0,
+       0.42,
+       0.085
+      ],
+      "emission": 1.6
+     },
+     {
+      "id": "fail",
+      "colour": [
+       0.9,
+       0.06,
+       0.02
+      ],
+      "emission": 2.2
+     }
+    ]
+   },
+   {
+    "id": "unit-8-light",
+    "materials": [
+     "unit-8-light"
+    ],
+    "palette": [
+     {
+      "id": "off",
+      "colour": [
+       0.05,
+       0.06,
+       0.07
+      ],
+      "emission": 0.0
+     },
+     {
+      "id": "ok",
+      "colour": [
+       0.2,
+       0.85,
+       0.35
+      ],
+      "emission": 1.4
+     },
+     {
+      "id": "warn",
+      "colour": [
+       1.0,
+       0.42,
+       0.085
+      ],
+      "emission": 1.6
+     },
+     {
+      "id": "fail",
+      "colour": [
+       0.9,
+       0.06,
+       0.02
+      ],
+      "emission": 2.2
+     }
+    ]
+   }
+  ],
+  "labels": [
+   {
+    "id": "label-name",
+    "pose": {
+     "position": [
+      0,
+      2,
+      0.512
+     ],
+     "rotation": [
+      0,
+      0,
+      0,
+      1
+     ]
+    },
+    "size": [
+     0.74,
+     0.1
+    ],
+    "maxChars": 20,
+    "font": "mono"
+   }
+  ]
+ },
+ "bounds": {
+  "min": [
+   -0.62,
+   0.0,
+   -0.65
+  ],
+  "max": [
+   0.62,
+   2.16,
+   0.65
+  ]
+ }
+}

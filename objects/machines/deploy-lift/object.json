@@ -1,0 +1,634 @@
+{
+ "formatVersion": "0.11",
+ "id": "deploy-lift",
+ "version": "0.1.0",
+ "name": "Deploy lift",
+ "description": "A deploy as a platform lift: the release crate rises past queued, building and rolling stops to the live deck.",
+ "category": "machines",
+ "tags": [
+  "deploy",
+  "release",
+  "environment",
+  "lift"
+ ],
+ "scene": "object.gltf",
+ "license": "CC-BY-4.0",
+ "attribution": [
+  {
+   "path": ".",
+   "author": "Hyprune contributors",
+   "license": "CC-BY-4.0",
+   "source": "https://github.com/hyprune/worlds"
+  },
+  {
+   "path": "build.py",
+   "author": "Hyprune contributors",
+   "license": "MIT",
+   "source": "https://github.com/hyprune/worlds"
+  }
+ ],
+ "thumbnail": "thumbnail.png",
+ "lighting": {
+  "mode": "probe"
+ },
+ "traits": {
+  "decorative": {
+   "animations": [
+    {
+     "node": "platform",
+     "type": "bob",
+     "axis": [
+      0,
+      1,
+      0
+     ],
+     "amplitude": 1.44,
+     "period": 16
+    },
+    {
+     "node": "beacon",
+     "type": "spin",
+     "axis": [
+      0.0,
+      1.0,
+      -0.0
+     ],
+     "pivot": [
+      1.0,
+      4.69,
+      -1.0035
+     ],
+     "period": 1.5
+    }
+   ]
+  },
+  "collidable": {
+   "node": "proxy"
+  },
+  "movable": {
+   "surfaces": [
+    "floor"
+   ],
+   "upright": true
+  },
+  "machine": {
+   "primary": "status",
+   "inputs": [
+    {
+     "id": "status",
+     "type": "enum",
+     "values": [
+      "idle",
+      "queued",
+      "building",
+      "rolling",
+      "live",
+      "failed"
+     ],
+     "default": "idle",
+     "label": "Deploy phase",
+     "explain": "The lamp at each stop: queued, building, rolling, live. Live opens the deck gate; failed turns every lamp and the beacon red."
+    },
+    {
+     "id": "progress",
+     "type": "number",
+     "min": 0,
+     "max": 1,
+     "default": 0,
+     "label": "Progress",
+     "explain": "The platform height: the release crate rides from the base (0) to the live deck (1)."
+    },
+    {
+     "id": "environment",
+     "type": "text",
+     "maxLength": 20,
+     "label": "Environment",
+     "explain": "The header above the shaft."
+    },
+    {
+     "id": "finished",
+     "type": "event",
+     "label": "Deploy finished",
+     "explain": "A burst over the live deck."
+    }
+   ],
+   "drives": [
+    {
+     "input": "progress",
+     "target": "position:platform"
+    },
+    {
+     "input": "status",
+     "target": "state:phase-lamp-1",
+     "map": {
+      "cases": [
+       {
+        "equals": "idle",
+        "to": "off"
+       },
+       {
+        "equals": "failed",
+        "to": "fail"
+       },
+       {
+        "equals": "queued",
+        "to": "active"
+       },
+       {
+        "equals": "building",
+        "to": "done"
+       },
+       {
+        "equals": "rolling",
+        "to": "done"
+       },
+       {
+        "equals": "live",
+        "to": "done"
+       }
+      ],
+      "else": "off"
+     }
+    },
+    {
+     "input": "status",
+     "target": "state:phase-lamp-2",
+     "map": {
+      "cases": [
+       {
+        "equals": "idle",
+        "to": "off"
+       },
+       {
+        "equals": "failed",
+        "to": "fail"
+       },
+       {
+        "equals": "queued",
+        "to": "off"
+       },
+       {
+        "equals": "building",
+        "to": "active"
+       },
+       {
+        "equals": "rolling",
+        "to": "done"
+       },
+       {
+        "equals": "live",
+        "to": "done"
+       }
+      ],
+      "else": "off"
+     }
+    },
+    {
+     "input": "status",
+     "target": "state:phase-lamp-3",
+     "map": {
+      "cases": [
+       {
+        "equals": "idle",
+        "to": "off"
+       },
+       {
+        "equals": "failed",
+        "to": "fail"
+       },
+       {
+        "equals": "queued",
+        "to": "off"
+       },
+       {
+        "equals": "building",
+        "to": "off"
+       },
+       {
+        "equals": "rolling",
+        "to": "active"
+       },
+       {
+        "equals": "live",
+        "to": "done"
+       }
+      ],
+      "else": "off"
+     }
+    },
+    {
+     "input": "status",
+     "target": "state:phase-lamp-4",
+     "map": {
+      "cases": [
+       {
+        "equals": "idle",
+        "to": "off"
+       },
+       {
+        "equals": "failed",
+        "to": "fail"
+       },
+       {
+        "equals": "queued",
+        "to": "off"
+       },
+       {
+        "equals": "building",
+        "to": "off"
+       },
+       {
+        "equals": "rolling",
+        "to": "off"
+       },
+       {
+        "equals": "live",
+        "to": "active"
+       }
+      ],
+      "else": "off"
+     }
+    },
+    {
+     "input": "status",
+     "target": "state:beacon",
+     "map": {
+      "cases": [
+       {
+        "in": [
+         "queued",
+         "building",
+         "rolling"
+        ],
+        "to": "active"
+       },
+       {
+        "equals": "live",
+        "to": "live"
+       },
+       {
+        "equals": "failed",
+        "to": "fail"
+       }
+      ],
+      "else": "off"
+     }
+    },
+    {
+     "input": "status",
+     "target": "animation:beacon",
+     "map": {
+      "cases": [
+       {
+        "in": [
+         "building",
+         "rolling"
+        ],
+        "to": 1
+       },
+       {
+        "equals": "failed",
+        "to": 2
+       }
+      ],
+      "else": 0
+     }
+    },
+    {
+     "input": "status",
+     "target": "visible:gate",
+     "map": {
+      "cases": [
+       {
+        "equals": "live",
+        "to": false
+       }
+      ],
+      "else": true
+     }
+    },
+    {
+     "input": "finished",
+     "target": "effect:burst-fx"
+    },
+    {
+     "input": "environment",
+     "target": "label:label-env"
+    }
+   ],
+   "positions": [
+    {
+     "node": "platform",
+     "range": [
+      0.75,
+      1.25
+     ]
+    }
+   ],
+   "recipes": [
+    {
+     "name": "Deployment JSON",
+     "fields": {
+      "status": "/deployment/status",
+      "progress": "/deployment/progress",
+      "environment": "/deployment/environment",
+      "finished": "/deployment/finished_count"
+     }
+    }
+   ]
+  }
+ },
+ "slots": {
+  "states": [
+   {
+    "id": "phase-lamp-1",
+    "materials": [
+     "phase-lamp-1"
+    ],
+    "palette": [
+     {
+      "id": "off",
+      "colour": [
+       0.1,
+       0.12,
+       0.14
+      ],
+      "emission": 0.15
+     },
+     {
+      "id": "active",
+      "colour": [
+       0.11,
+       0.48,
+       0.68
+      ],
+      "emission": 1.8
+     },
+     {
+      "id": "done",
+      "colour": [
+       0.2,
+       0.85,
+       0.35
+      ],
+      "emission": 1.3
+     },
+     {
+      "id": "fail",
+      "colour": [
+       0.9,
+       0.06,
+       0.02
+      ],
+      "emission": 2.2
+     }
+    ]
+   },
+   {
+    "id": "phase-lamp-2",
+    "materials": [
+     "phase-lamp-2"
+    ],
+    "palette": [
+     {
+      "id": "off",
+      "colour": [
+       0.1,
+       0.12,
+       0.14
+      ],
+      "emission": 0.15
+     },
+     {
+      "id": "active",
+      "colour": [
+       0.11,
+       0.48,
+       0.68
+      ],
+      "emission": 1.8
+     },
+     {
+      "id": "done",
+      "colour": [
+       0.2,
+       0.85,
+       0.35
+      ],
+      "emission": 1.3
+     },
+     {
+      "id": "fail",
+      "colour": [
+       0.9,
+       0.06,
+       0.02
+      ],
+      "emission": 2.2
+     }
+    ]
+   },
+   {
+    "id": "phase-lamp-3",
+    "materials": [
+     "phase-lamp-3"
+    ],
+    "palette": [
+     {
+      "id": "off",
+      "colour": [
+       0.1,
+       0.12,
+       0.14
+      ],
+      "emission": 0.15
+     },
+     {
+      "id": "active",
+      "colour": [
+       0.11,
+       0.48,
+       0.68
+      ],
+      "emission": 1.8
+     },
+     {
+      "id": "done",
+      "colour": [
+       0.2,
+       0.85,
+       0.35
+      ],
+      "emission": 1.3
+     },
+     {
+      "id": "fail",
+      "colour": [
+       0.9,
+       0.06,
+       0.02
+      ],
+      "emission": 2.2
+     }
+    ]
+   },
+   {
+    "id": "phase-lamp-4",
+    "materials": [
+     "phase-lamp-4"
+    ],
+    "palette": [
+     {
+      "id": "off",
+      "colour": [
+       0.1,
+       0.12,
+       0.14
+      ],
+      "emission": 0.15
+     },
+     {
+      "id": "active",
+      "colour": [
+       0.11,
+       0.48,
+       0.68
+      ],
+      "emission": 1.8
+     },
+     {
+      "id": "done",
+      "colour": [
+       0.2,
+       0.85,
+       0.35
+      ],
+      "emission": 1.3
+     },
+     {
+      "id": "fail",
+      "colour": [
+       0.9,
+       0.06,
+       0.02
+      ],
+      "emission": 2.2
+     }
+    ]
+   },
+   {
+    "id": "beacon",
+    "materials": [
+     "beacon"
+    ],
+    "palette": [
+     {
+      "id": "off",
+      "colour": [
+       0.1,
+       0.12,
+       0.14
+      ],
+      "emission": 0.15
+     },
+     {
+      "id": "active",
+      "colour": [
+       1.0,
+       0.42,
+       0.085
+      ],
+      "emission": 2.0
+     },
+     {
+      "id": "live",
+      "colour": [
+       0.2,
+       0.85,
+       0.35
+      ],
+      "emission": 2.2
+     },
+     {
+      "id": "fail",
+      "colour": [
+       0.9,
+       0.06,
+       0.02
+      ],
+      "emission": 2.4
+     }
+    ]
+   }
+  ],
+  "labels": [
+   {
+    "id": "label-env",
+    "pose": {
+     "position": [
+      0,
+      3.95,
+      1.1285
+     ],
+     "rotation": [
+      0,
+      0,
+      0,
+      1
+     ]
+    },
+    "size": [
+     1.44,
+     0.26
+    ],
+    "maxChars": 20,
+    "font": "mono"
+   }
+  ],
+  "effects": [
+   {
+    "id": "burst-fx",
+    "pose": {
+     "position": [
+      0,
+      4.2,
+      -0.0035
+     ],
+     "rotation": [
+      0,
+      0,
+      0,
+      1
+     ]
+    },
+    "kind": "burst",
+    "colour": [
+     0.2,
+     0.85,
+     0.35
+    ],
+    "durationMs": 1800
+   }
+  ],
+  "toggles": [
+   {
+    "id": "gate",
+    "nodes": [
+     "gate"
+    ]
+   }
+  ]
+ },
+ "bounds": {
+  "min": [
+   -1.35,
+   0.0,
+   -1.3535
+  ],
+  "max": [
+   1.35,
+   5.0,
+   1.3535
+  ]
+ }
+}
