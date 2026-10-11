@@ -358,17 +358,51 @@ def clean_channels(arm, actions):
         step(f'dropped {dropped} translation/scale channels (translation kept on the Hips only)')
 
 
+ARM_BONES = ('shoulder', 'arm', 'forearm', 'hand')
+
+
+def arm_motion(act):
+    """Mean angular speed of the arm chains (shoulder, arm, forearm, hand; both sides), deg/s:
+    how busy the arms are, to pick the calmest idle."""
+    quats = {}
+    for fc in fcurves(act):
+        bone, prop = bone_of(fc)
+        if prop == 'rotation_quaternion' and re.sub(r'^.*:', '', bone).lower().removeprefix('left').removeprefix('right') in ARM_BONES:
+            quats.setdefault(bone, {})[fc.array_index] = fc
+    start, end = act.frame_range
+    frames = [start + i for i in range(int(end - start) + 1)]
+    seconds = max((end - start) / bpy.context.scene.render.fps, 1e-3)
+    total = 0.0
+    for curves in quats.values():
+        q = [Quaternion([curves[i].evaluate(f) if i in curves else (1, 0, 0, 0)[i] for i in range(4)]).normalized() for f in frames]
+        total += sum(math.degrees(a.rotation_difference(b).angle) for a, b in zip(q, q[1:]))
+    return total / seconds
+
+
 def map_clips(actions, mapping):
     """Each canonical name takes the first of its aliases present (priority order); every
-    other clip keeps its own name, cleaned and lowercased."""
+    other clip keeps its own name, cleaned and lowercased. A canonical entry may instead be
+    {"calmest": [...], "then": [...]}: the candidate present with the least arm motion,
+    else the first of `then`."""
     def key(n):
         n = re.sub(r'^((armature|mixamo\.com)\|)+', '', n, flags=re.I)
         n = re.sub(r'(\|(baselayer|mixamo\.com))+$', '', n, flags=re.I)
         return re.sub(r'[^a-z0-9]+', '_', n.lower()).strip('_')
     names, taken = {}, set()
+    def find(alias):
+        return next((a for a in actions if a.name not in names and key(a.name) == key(alias)), None)
     for canonical, aliases in mapping.items():
+        if isinstance(aliases, dict):
+            candidates = [a for a in map(find, aliases.get('calmest', [])) if a]
+            if candidates:
+                motion = {a.name: round(arm_motion(a), 1) for a in candidates}
+                hit = min(candidates, key=lambda a: motion[a.name])
+                report.setdefault('calmest', {})[canonical] = {'chosen': hit.name, 'armMotionDegPerSecond': motion}
+                step(f'{canonical}: calmest of {motion} is {hit.name}')
+                names[hit.name] = canonical; taken.add(canonical); continue
+            aliases = aliases.get('then', [])
         for alias in aliases:
-            hit = next((a for a in actions if a.name not in names and key(a.name) == key(alias)), None)
+            hit = find(alias)
             if hit:
                 names[hit.name] = canonical; taken.add(canonical); break
     for a in actions:

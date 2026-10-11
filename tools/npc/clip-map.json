@@ -1,11 +1,22 @@
 {
-  "idle": [
+  "idle": {
+    "calmest": [
+      "Idle_11",
+      "Idle_12",
+      "Idle_15"
+    ],
+    "then": [
+      "idle",
+      "breathing idle",
+      "standing idle",
+      "idle loop",
+      "happy idle"
+    ]
+  },
+  "idle_fidget": [
     "Idle_03",
-    "idle",
-    "breathing idle",
-    "standing idle",
-    "idle loop",
-    "happy idle"
+    "idle fidget",
+    "fidget"
   ],
   "walk": [
     "Walking",
