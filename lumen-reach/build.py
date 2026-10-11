@@ -9,7 +9,7 @@ ROOT=Path(__file__).resolve().parents[1];HERE=Path(__file__).parent
 sys.path.insert(0,str(ROOT/'tools'));import bake_pipeline as P
 OUT=ROOT/'dist/com.hyprune.lumen-reach';ART=ROOT/'artifacts/lumen-reach'
 P.OUT=OUT;P.ART=ART;P.BEVEL_SEGMENTS=1
-ANCHORS=[];OBJECTS=[];AREAS=[];ROUTES=[];EDGES=[];WALK=[];MOUNT_ROWS=[]
+WORLD_OBJECTS=[];ANCHORS=[];OBJECTS=[];AREAS=[];ROUTES=[];EDGES=[];WALK=[];MOUNT_ROWS=[]
 NAMES=['sun-court','array-hall','rime-vault','signal-rise']
 TITLES=['SUN COURT','ARRAY HALL','RIME VAULT','SIGNAL RISE']
 AREA=0;BASE=0;G='sun-court';COUNT={};STAIR_ROUTES=[]
@@ -290,17 +290,13 @@ def canopy(x,y,z,w=6,d=5,base=None):
 
 
 def globe(pos,r=1.8):
+ # The instrument globe and its three rings are a placed world object (world
+ # format 0.8, objects/armillary): the globe turns and each ring spins on its own
+ # axis around it. Only the plinth and pedestal are baked into the base map.
  x,y,z=pos;cyl('Globe plinth',(x,y,z+.25),r*.75,.5,'concrete');cyl('Globe pedestal',(x,y,z+.8),.28,1.0,'metal')
+ assert r==1.8,'objects/armillary is built at the Sun Court radius (1.8 m)'
  center=(x,y,z+1.9+r*.6)
- bpy.ops.mesh.primitive_ico_sphere_add(subdivisions=2,radius=r*.9,location=center);o=bpy.context.object;P.add(o,'Instrument globe','black',G)
- edges=set()
- for face in o.data.polygons:
-  ids=list(face.vertices)
-  for a,b in zip(ids,ids[1:]+ids[:1]):edges.add(tuple(sorted((a,b))))
- for a,b in edges:rod('Globe network',o.matrix_world@o.data.vertices[a].co,o.matrix_world@o.data.vertices[b].co,.012,'cyan')
- # The 35 mm rings get under two lightmap texels around the tube and bake
- # black on one side; like the lettering they stay unbaked ivory (vista).
- for i,rot in enumerate([(0,.45,0),(.8,0,.5),(1.2,.35,0)]):torus('Armillary orbit',center,r*(1.05+i*.07),.035,'ivory',rot,group='vista')
+ WORLD_OBJECTS.append({'id':'sun-court-armillary','asset':'armillary','pose':{'position':up(center),'rotation':[0,0,0,1]}})
  data('globe',center)
 
 
@@ -780,6 +776,14 @@ def manifest(g,lm,nodes,cols,count):
   # bake (make lumen-build: tools/derive-visibility.py --in-place).
   import contract
   contract.canonical(m)
+  if WORLD_OBJECTS:
+   # Placed world objects (format 0.8): package-local copies of dist/objects.
+   assets={}
+   for o in WORLD_OBJECTS:
+    src=ROOT/'dist/objects'/o['asset'];d=json.loads((src/'object.json').read_text());(OUT/'objects').mkdir(exist_ok=True)
+    for f in [d['scene'],Path(d['scene']).with_suffix('.bin').name]:shutil.copy2(src/f,OUT/'objects'/f)
+    assets[o['asset']]={'id':d['id'],'scene':'objects/'+d['scene'],'animations':d['animations'],'lighting':d['lighting']}
+   m['objectAssets']=list(assets.values());m['objects']=WORLD_OBJECTS;m['formatVersion']='0.8'
   import any_angle
   any_angle.finish_export(sys.modules[__name__],g,m)
  (OUT/'world.json').write_text(json.dumps(m,indent=2)+'\n')

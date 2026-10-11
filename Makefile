@@ -67,6 +67,7 @@ LUMEN_PVS := artifacts/lumen-reach/pvs
 LUMEN_BLUEPRINT := artifacts/lumen-reach/blueprint
 lumen-build:
 	python3 lumen-reach/materials/prepare.py
+	HYPRUNE_BAKE_DIR=hyprune-bake/worlds-lumen-reach HYPRUNE_BAKE_PROJECT=objects ./tools/remote-blender.sh -b --python-exit-code 1 -P objects/armillary/build.py
 	./tools/remote-lumen.sh --areas $(LUMEN_AREAS) --samples 64
 	python3 tools/derive-visibility.py $(LUMEN_PACKAGE) --output $(LUMEN_PVS) --in-place
 	python3 tools/derive-blueprint.py $(LUMEN_PACKAGE) --in-place --output $(LUMEN_BLUEPRINT) > /dev/null
@@ -77,7 +78,7 @@ lumen-validate:
 	python3 tools/check-frames-signs.py $(LUMEN_PACKAGE) --output $(LUMEN_REPORTS)/frames-signs.json
 	python3 tools/check-visibility.py $(LUMEN_PACKAGE) --spec $(LUMEN_PVS)/visibility.generated.json
 	cp $(LUMEN_PVS)/report.json $(LUMEN_REPORTS)/derived-visibility.json
-	node $(SCHEMA_DIR)/bin/validate.mjs world $(LUMEN_PACKAGE)/world.json - 0.6
+	node $(SCHEMA_DIR)/bin/validate.mjs world $(LUMEN_PACKAGE)/world.json - 0.8
 	python3 tools/check-package.py $(LUMEN_PACKAGE) > lumen-reach/reports/package-check.json
 	python3 tools/check-placement.py $(LUMEN_PACKAGE) --output lumen-reach/reports/placement-check.json
 	python3 tools/check-walking.py $(LUMEN_PACKAGE) > lumen-reach/reports/walking-check.json
