@@ -55,6 +55,12 @@ MATS = {
     'strip-amber': dict(color=AMBER, emit=1.0),
     'strip-mint':  dict(color=MINT, emit=1.0),
     'glow-ivory':  dict(color=ICE, emit=.8),
+    # Gauges: dark plinth, light top, white halo, thin tinted glass (alpha blended).
+    'plinth':      dict(color=(.06, .065, .072), rough=.45, metal=.55, tex='metal', tile=1.0),
+    'steel':       dict(color=(.62, .64, .66), rough=.3, metal=.85),
+    'label-face':  dict(color=(.012, .016, .022), rough=.3, metal=.1),
+    'halo':        dict(color=(.95, .95, .92), emit=1.4),
+    'glass':       dict(color=(.30, .38, .42), rough=.05, alpha=.14),
 }
 
 # State palettes: (state, linear colour, emission). Emission > 1 is written
@@ -68,6 +74,10 @@ PALETTES = {
     'beacon': [('off', SLATE, .15), ('active', AMBER, 2.0), ('live', MINT, 2.2), ('fail', RED, 2.4)],
     'face':   [('idle', (.16, .2, .24), .35), ('running', CYAN, 1.2), ('ok', MINT, 1.1), ('fail', RED, 1.4)],
     'token':  [('queued', IVORY, .3), ('running', CYAN, 1.2), ('ok', MINT, 1.1), ('fail', RED, 1.4)],
+    # A large lit fill: emission well below the lamps' so the hue survives tone mapping in
+    # daylight (amber, orange, red rather than pale lemon).
+    'gauge':  [('ok', (1.0, .55, .08), .45), ('warn', (1.0, .30, .04), .5), ('fail', (.85, .06, .03), .6),
+               ('stale', (.35, .33, .3), .05)],
 }
 
 _bmats = {}
@@ -99,6 +109,8 @@ def bmat(name, spec=None):
     if spec.get('tex'):
         t = nt.nodes.new('ShaderNodeTexImage'); t.image = _image(spec['tex'])
         nt.links.new(t.outputs['Color'], p.inputs['Base Color'])
+    if spec.get('alpha') is not None:
+        p.inputs['Alpha'].default_value = spec['alpha']
     if spec.get('emit'):
         p.inputs['Emission Color'].default_value = (*spec['color'], 1); p.inputs['Emission Strength'].default_value = spec['emit']
     m['spec'] = json.dumps(spec)
@@ -208,13 +220,55 @@ class Part:
         m = Matrix.Translation(Vector(center)) @ Euler(rot).to_matrix().to_4x4()
         return self._take(b, mat, 'z', matrix=m)
 
-    def finish(self, smooth_angle=None, collection=None):
+    def disc(self, mat, center, r, seg=32):
+        """A flat disc facing +Z (one n-gon, fan-triangulated on export)."""
+        b = bmesh.new()
+        vs = [b.verts.new((r * math.cos(2 * math.pi * i / seg), r * math.sin(2 * math.pi * i / seg), 0)) for i in range(seg)]
+        b.faces.new(vs)
+        return self._take(b, mat, matrix=Matrix.Translation(Vector(center)))
+
+    def lathe(self, mat, profile, center=(0, 0, 0), seg=32):
+        """Revolve a (radius, z) profile about the Z axis through `center`. Faces point to
+        the side t x d (t: around the axis, d: along the profile), so walk the outside of a
+        solid upward; a closed profile repeats its first point. Rows at radius 0 collapse."""
+        b = bmesh.new(); cx, cy, cz = center
+        rows = []
+        for r, z in profile:
+            if r == 0:
+                v = b.verts.new((cx, cy, cz + z)); rows.append([v] * seg)
+            else:
+                rows.append([b.verts.new((cx + r * math.cos(2 * math.pi * j / seg), cy + r * math.sin(2 * math.pi * j / seg), cz + z)) for j in range(seg)])
+        for i in range(len(rows) - 1):
+            for j in range(seg):
+                q = [rows[i][j], rows[i][(j + 1) % seg], rows[i + 1][(j + 1) % seg], rows[i + 1][j]]
+                q = [v for k, v in enumerate(q) if v not in q[:k]]
+                if len(q) >= 3 and not b.faces.get(q):
+                    b.faces.new(q)
+        bmesh.ops.remove_doubles(b, verts=b.verts, dist=1e-6)
+        return self._take(b, mat)
+
+    def stadium(self, mat, z0, z1, half, r, seg=12):
+        """A rounded slab: two half-cylinders of radius r at x = +-half joined by flat sides."""
+        pts = []
+        for sx, a0 in ((1, -math.pi / 2), (-1, math.pi / 2)):
+            for i in range(seg + 1):
+                a = a0 + math.pi * i / seg
+                pts.append((sx * half + r * math.cos(a), r * math.sin(a)))
+        return self.prism(mat, pts, z1 - z0, plane='xy', offset=(z0 + z1) / 2)
+
+    def finish(self, smooth_angle=None, collection=None, rot=None):
+        """Make the node. `rot` (Euler) gives the node a rotation; the mesh, built in
+        asset space, is stored in the node's rotated frame."""
         bmesh.ops.remove_doubles(self.bm, verts=self.bm.verts, dist=1e-5)
         bmesh.ops.translate(self.bm, vec=-self.origin, verts=self.bm.verts)
+        if rot is not None:
+            bmesh.ops.transform(self.bm, matrix=Euler(rot).to_matrix().to_4x4().inverted(), verts=self.bm.verts)
         me = bpy.data.meshes.new(self.name); self.bm.to_mesh(me); self.bm.free()
         for mname in self.mats:
             me.materials.append(bmat(mname))
         o = bpy.data.objects.new(self.name, me); o.location = self.origin
+        if rot is not None:
+            o.rotation_euler = rot
         (collection or bpy.context.scene.collection).objects.link(o)
         if smooth_angle:
             for p in me.polygons:
@@ -267,6 +321,9 @@ def b2g(v):
 def _gltf_material(name, spec):
     m = {'name': name, 'pbrMetallicRoughness': {'baseColorFactor': [*[round(c, 4) for c in spec['color']], 1],
                                                  'metallicFactor': spec.get('metal', 0), 'roughnessFactor': spec.get('rough', .5)}}
+    if spec.get('alpha') is not None:
+        m['pbrMetallicRoughness']['baseColorFactor'][3] = spec['alpha']
+        m['alphaMode'] = 'BLEND'
     e = spec.get('emit', 0)
     if e:
         m['emissiveFactor'] = [round(c * min(e, 1), 4) for c in spec['color']]
@@ -425,3 +482,104 @@ def base_manifest(id_, name, description, tags, version='0.1.0'):
 
 def out_dir(id_):
     return ROOT / 'dist/objects/machines' / id_
+
+
+# Gauges (gauge-tube, gauge-abacus, gauge-cube) ------------------------------
+# Shared language: a dark plinth with a light top, a warm fill in the `fill`
+# states slot, a white emissive halo for the running average (a `levels` slide)
+# and a tilted dark label plate on the plinth front with two label slots.
+
+GAUGE_H = .30                       # plinth height
+GAUGE_TOP = GAUGE_H + .012          # top of the light disc (where the gauge stands)
+PLATE_TILT = math.radians(15)       # the label plate leans back toward a standing viewer
+PLATE_W, PLATE_HH, PLATE_ZC = .42, .132, .14   # face from z .013 to .268, under the plinth's chamfer
+LABEL_SIZE, DISPLAY_SIZE = (.36, .095), (.36, .14)   # cap heights ~3.7 cm and ~5.4 cm in core's layout
+LABEL_INK, DISPLAY_INK = (.80, .75, .60), (1.0, .80, .42)
+
+
+def gauge_plinth(p, r, seg=48):
+    """A round plinth of radius r: dark body, chamfered rim, light top disc (top at GAUGE_TOP)."""
+    p.cyl('plinth', (0, 0, 0), (0, 0, GAUGE_H - .02), r, seg=seg)
+    p.cyl('plinth', (0, 0, GAUGE_H - .02), (0, 0, GAUGE_H), r, r2=r - .015, seg=seg)
+    p.cyl('stone', (0, 0, GAUGE_H - .01), (0, 0, GAUGE_TOP), r - .025, seg=seg)
+    return p
+
+
+def gauge_stadium(p, half, r, seg=12):
+    """A rounded (stadium) plinth for wide gauges: flat front at y = -r."""
+    p.stadium('plinth', 0, GAUGE_H - .02, half, r, seg=seg)
+    p.stadium('plinth', GAUGE_H - .021, GAUGE_H, half, r - .012, seg=seg)
+    p.stadium('stone', GAUGE_H - .01, GAUGE_TOP, half, r - .025, seg=seg)
+    return p
+
+
+def gauge_plate(p, front_y, back_y):
+    """The label plate: a wedge whose face (centre at y = front_y, z = PLATE_ZC) leans back
+    by PLATE_TILT. Returns the face centre, its up and its normal (Blender axes)."""
+    up = Vector((0, math.sin(PLATE_TILT), math.cos(PLATE_TILT)))
+    n = Vector((0, -math.cos(PLATE_TILT), math.sin(PLATE_TILT)))
+    c = Vector((0, front_y, PLATE_ZC))
+    bot, top = c - up * PLATE_HH, c + up * PLATE_HH
+    p.prism('panel', [(bot.y, 0), (bot.y, bot.z), (top.y, top.z), (back_y, top.z), (back_y, 0)], PLATE_W, plane='yz')
+    return c, up, n
+
+
+def gauge_labels(c, up, n):
+    """Two label quads 3 mm proud of the plate face: `label` above, `display` below."""
+    rot = (-PLATE_TILT, 0, 0)
+    gap = .012
+    s_label = PLATE_HH - gap - LABEL_SIZE[1] / 2
+    s_display = -PLATE_HH + gap + DISPLAY_SIZE[1] / 2
+    for name, s, (w, h) in (('label', s_label, LABEL_SIZE), ('display', s_display, DISPLAY_SIZE)):
+        o = c + up * s + n * .003
+        Part(name, o).quad('label-face', o, w, h, rot=rot).finish(rot=rot)
+
+
+def gauge_halo(name, center, R, r=.011, seg=48, sseg=10, rot=(0, 0, 0)):
+    """The running-average halo: a white emissive torus whose node origin is its centre."""
+    return Part(name, center).torus('halo', center, R, r, seg=seg, sseg=sseg, rot=rot).finish(smooth_angle=60)
+
+
+def level_slot(id_, node, mode, length, axis=(0, 0, 1), surface=None, settle=None):
+    """A RFC-0013 `levels` slot (axis in Blender axes, written in asset space)."""
+    s = {'id': id_, 'node': node, 'mode': mode, 'axis': [round(x, 5) + 0.0 for x in b2g(Vector(axis).normalized())], 'length': round(length, 4)}
+    if surface:
+        s['surface'] = surface
+    if settle:
+        s['settle'] = settle
+    return s
+
+
+def gauge_manifest(id_, name, description, tags, explain, drives, slots, recipes=None):
+    """The shared gauge manifest: inputs value/display/label/level/average, `fill` states,
+    `label`/`display` labels, the `level:average-ring` average drive; `drives` and `slots`
+    add the gauge's own."""
+    inputs = [
+        {'id': 'value', 'type': 'number', 'min': 0, 'max': 100, 'default': 0, 'label': 'Value', 'explain': explain['value']},
+        {'id': 'display', 'type': 'text', 'maxLength': 12, 'label': 'Display',
+         'explain': 'The large text on the plate, as the source formats it (for example 71% or 12.3 GB).'},
+        {'id': 'label', 'type': 'text', 'maxLength': 16, 'label': 'Label', 'explain': 'What the gauge measures, on the plate above the display (for example RAM).'},
+        {'id': 'level', 'type': 'enum', 'values': ['ok', 'warn', 'fail'], 'default': 'ok', 'label': 'Level',
+         'explain': explain['level']},
+        {'id': 'average', 'type': 'number', 'min': 0, 'max': 100, 'label': 'Average (optional)',
+         'explain': 'A running average the source computes itself. Without it the halo shows the average of Value over the last minute.'},
+    ]
+    common = [
+        {'input': 'level', 'target': 'state:fill'},
+        {'input': 'label', 'target': 'label:label'},
+        {'input': 'display', 'target': 'label:display'},
+        {'input': 'value', 'target': 'level:average-ring',
+         'map': {'average': {'windowS': 60, 'override': 'average'}, 'scale': {'from': [0, 100], 'to': [0, 1]}}},
+    ]
+    m = base_manifest(id_, name, description, tags)
+    machine = {'primary': 'level', 'inputs': inputs, 'drives': drives + common}
+    if recipes:
+        machine['recipes'] = recipes
+    m['traits'] = {'collidable': {'node': 'proxy'}, 'movable': {'surfaces': ['floor'], 'upright': True}, 'machine': machine}
+    m['slots'] = {
+        'states': [states_slot('fill')],
+        'labels': [{'id': 'label', 'pose': {'pose@': 'label'}, 'size': list(LABEL_SIZE), 'maxChars': 16, 'font': 'mono', 'colour': list(LABEL_INK)},
+                   {'id': 'display', 'pose': {'pose@': 'display'}, 'size': list(DISPLAY_SIZE), 'maxChars': 12, 'font': 'mono', 'colour': list(DISPLAY_INK)}],
+        **slots,
+    }
+    return m
