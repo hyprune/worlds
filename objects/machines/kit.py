@@ -75,10 +75,10 @@ PALETTES = {
     'face':   [('idle', (.16, .2, .24), .35), ('running', CYAN, 1.2), ('ok', MINT, 1.1), ('fail', RED, 1.4)],
     'token':  [('queued', IVORY, .3), ('running', CYAN, 1.2), ('ok', MINT, 1.1), ('fail', RED, 1.4)],
     # A large lit fill: tone mapping lifts green on bright warm surfaces, so the colours sit
-    # well to the red of their on-screen hue and the emission stays low. Measured in-engine
-    # (Lumen Reach daylight and Array Hall): ok 26-34 deg amber, warn ~14 deg orange,
-    # fail ~0 deg red.
-    'gauge':  [('ok', (1.0, .182, .075), .08), ('warn', (1.0, .07, .03), .12), ('fail', (.8, .015, .015), .3),
+    # to the red of their on-screen hue and the emission stays low. Measured in-engine
+    # (Lumen Reach daylight and Array Hall): ok a saturated gold at 42-47 deg, warn orange
+    # at 20-30 deg, fail red at 0-3 deg (per gauge, 3 m views).
+    'gauge':  [('ok', (1.0, .31, .06), .12), ('warn', (1.0, .145, .065), .08), ('fail', (.8, .015, .015), .3),
                ('stale', (.35, .33, .3), .05)],
 }
 

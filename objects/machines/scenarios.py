@@ -145,7 +145,7 @@ def gauge_states(mid):
 # The fill palette is set for core's ACES tone curve, which lifts green on bright warm
 # surfaces; these Standard-view renders show the fill in the colour core puts on screen
 # (measured in Lumen Reach daylight and Array Hall, linear), not the raw palette.
-GAUGE_DISPLAY = {'fill': {'ok': (.887, .356, .080), 'warn': (.871, .114, .028), 'fail': (.855, .014, .013)}}
+GAUGE_DISPLAY = {'fill': {'ok': (.879, .540, .065), 'warn': (.879, .287, .068), 'fail': (.863, .014, .010)}}
 
 for _g in GAUGES:
     SHEETS[_g] = {'tile': (900, 1150), 'hero': gauge(_g, 64, 52, 'ok', 'CPU'), 'states': gauge_states(_g),
