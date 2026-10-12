@@ -6,6 +6,7 @@ if os.environ.get('HYPRUNE_REMOTE_BLENDER')!='1': raise SystemExit('Use tools/re
 import bpy,bmesh,numpy as np
 from mathutils import Vector,Matrix
 ROOT=Path(__file__).resolve().parents[1];HERE=Path(__file__).parent
+RESIDENTS=json.loads((HERE/'residents.json').read_text())
 sys.path.insert(0,str(ROOT/'tools'));import bake_pipeline as P
 OUT=ROOT/'dist/com.hyprune.lumen-reach';ART=ROOT/'artifacts/lumen-reach'
 P.OUT=OUT;P.ART=ART;P.BEVEL_SEGMENTS=1
@@ -308,6 +309,20 @@ def globe(pos,r=1.8):
  data('globe',center)
 
 
+def benches(area):
+ # 0.11.0: seat-height benches from lumen-reach/residents.json (seats[] anchors
+ # come from the same table). Seats are 0.40 m: the residents' sit clip lifts
+ # onto at most ~0.41 m (core's seat fit keeps the feet within 0.45 m).
+ for b in RESIDENTS['benches']:
+  if b['area']!=area:continue
+  x,y,z=b['centre'];L,D,h,t=b['length'],b['depth'],b['height'],b['thickness'];leg=b['legs']
+  along=b['along']=='x';c=(x,-z,y)
+  box(b['name'],(c[0],c[1],c[2]+h-t/2),(L,D,t) if along else (D,L,t),b['top'],.04 if t>.1 else .02,solid=True)
+  for s in [-1,1]:
+   off=s*(L/2-leg['inset']);p=(c[0]+off,c[1],c[2]+(h-t)/2) if along else (c[0],c[1]+off,c[2]+(h-t)/2)
+   box(b['supportName'],p,(leg['width'],D-.1,h-t) if along else (D-.1,leg['width'],h-t),leg['material'],solid=True)
+
+
 def set_area(i,bounds,spawn,free,area_id=None,title=None,slot=None):
  global AREA,G,BASE
  AREA=i;G=area_id or NAMES[i];BASE=spawn[2];slot=slot or f'{i+1:02d}'
@@ -421,9 +436,8 @@ def court():
  banner(24,20,10,6);banner(-4,24,10,6)
  slab('Lookout seat terrace',-16,-13,16,20,4,'concrete')
  # Seats and perimeter ledges give the court scale while preserving work pockets.
- for x,y in [(20,12),(-16,17)]:
-  box('Court seat',(x,y,.53 if x>0 else 4.53),(3.4,.8,.16),'wood',.04,solid=True)
-  for dx in [-1.35,1.35]:box('Seat support',(x+dx,y,.25 if x>0 else 4.25),(.25,.7,.5),'metal',solid=True)
+ # 0.11.0: the two court seats are 0.40 m benches with seat anchors (residents.json).
+ benches('sun-court')
  rail((-24,-16,0),(26,-16,0));rail((26,-16,0),(26,22,0))
  # 0.10.3 (owner): the plaza paving is plain. Its bent inset rails and seven
  # expansion seams read as stray black lines from eye height and were removed.
@@ -584,6 +598,7 @@ def hall():
  for off in [-.5,.5]:
   pts=[(8+off,32,.015),(8+off,46,.015),(20+off,50,.015),(27+off,52,.015)]
   for a,b in zip(pts,pts[1:]):rod('Hall inset route rail',a,b,.022,'metal')
+ benches('array-hall')
 
 
 def steam(pos,scale=1):
@@ -661,6 +676,7 @@ def vault():
  point('vault-maintenance-base',(28.5,76,-6),'vault-door');point('vault-maintenance',(28.5,92,-2),'vault-maintenance-base');point('vault-platform',(28.5,94,-2),'vault-maintenance')
  for off in [-.45,.45]:
   for a,b in zip([(38+off,78,-5.975),(38+off,89,-5.975),(48+off,98,-5.975)],[(38+off,89,-5.975),(48+off,98,-5.975),(54+off,100,-5.975)]):rod('Vault inset route rail',a,b,.018,'metal')
+ benches('rime-vault')
 
 
 def dish(pos,r=5):
@@ -816,6 +832,7 @@ def rise():
  point('gantry-road',(63,124,0),'rise-arrival');point('gantry-south',(76,113,0),'gantry-road');point('gantry-base',(80.5,114,0),'gantry-south');point('gantry-top',(80.5,138,6),'gantry-base');point('gantry-east',(80.5,152,6),'gantry-top');point('gantry-west',(44,152,6),'gantry-east')
  for off in [-.5,.5]:
   for a,b in zip([(54+off,124,.03),(57+off,132,.03),(63+off,136,.03)],[(57+off,132,.03),(63+off,136,.03),(63+off,146,2.43)]):rod('Snow inset route rail',a,b,.020,'metal')
+ benches('signal-rise')
 
 
 def vista():
@@ -858,7 +875,7 @@ def manifest(g,lm,nodes,cols,count):
  for area in AREAS:
   area['primaryAnchor']=next(r['anchorId'] for r in MOUNT_ROWS if r['areaId']==area['id'] and r['role']=='mounted-workspace');area['toolAnchors']=[r['anchorId'] for r in MOUNT_ROWS if r['areaId']==area['id'] and r['role']=='tool'];area['dataAnchors']=[r['id'] for r in OBJECTS if r['areaId']==area['id']]
  spawns=[{'id':'arrival','pose':{'position':up(AREAS[0]['spawn']),'rotation':[0,0,0,1]}}]+[{'id':a['id'],'pose':{'position':up(a['spawn']),'rotation':[0,0,0,1]}} for a in AREAS]
- m={'formatVersion':'0.2','id':'com.hyprune.lumen-reach','version':('0.10.3' if count==4 else f'0.{count}.1'),'name':'Lumen Reach','description':f'{count} connected workspace homes on a mountain watershed. Original architecture, instruments and paths.','license':'CC-BY-4.0','scene':'scene.gltf','preview':'preview.png','defaultSpawn':'arrival','spawns':spawns,'anchors':ANCHORS,'zones':[{'id':a['id'],'name':a['name'],'bounds':a['bounds']} for a in AREAS],'navigation':{'kind':'mesh','node':nodes['Navigation'],'agentRadius':.3,'agentHeight':1.8},'collision':[{'node':nodes[o.name],'shape':'mesh','layer':'static'} for o in cols],'lightmaps':lm,'attribution':[{'path':'.','author':'Hyprune contributors','license':'CC-BY-4.0','source':'https://github.com/hyprune/worlds'}],'extensions':{'com.hyprune.lumen-reach.mounts':{'version':1,'areas':[{**{k:v for k,v in a.items() if k not in ['spawn','bounds','name','freePlacementZones']},'spawnId':a['id'],'freePlacementZones':[z['id'] for z in a['freePlacementZones']]} for a in AREAS],'mounts':MOUNT_ROWS,'objects':OBJECTS},'com.hyprune.lumen-reach.routes':{'version':1,'nodes':ROUTES,'edges':EDGES,'semantics':'bidirectional walking centerlines, feet positions in meters'},'com.hyprune.lumen-reach.stairs':{'version':1,'paths':STAIR_ROUTES,'semantics':'visible treads over continuous collision beds; alternate walkable flights'},'com.hyprune.lumen-reach.placement':{'version':1,'zones':[z for a in AREAS for z in a['freePlacementZones']]},'com.hyprune.map':{'version':'0.1','path':'map.svg','projection':'xz','north':[0,0,-1],'bounds':[-36,-162,86,16],'worldToMap':[4/520,0,0,4/780,160/520,690/780]}},'requiredExtensions':[]}
+ m={'formatVersion':'0.2','id':'com.hyprune.lumen-reach','version':('0.11.0' if count==4 else f'0.{count}.1'),'name':'Lumen Reach','description':f'{count} connected workspace homes on a mountain watershed. Original architecture, instruments and paths.','license':'CC-BY-4.0','scene':'scene.gltf','preview':'preview.png','defaultSpawn':'arrival','spawns':spawns,'anchors':ANCHORS,'zones':[{'id':a['id'],'name':a['name'],'bounds':a['bounds']} for a in AREAS],'navigation':{'kind':'mesh','node':nodes['Navigation'],'agentRadius':.3,'agentHeight':1.8},'collision':[{'node':nodes[o.name],'shape':'mesh','layer':'static'} for o in cols],'lightmaps':lm,'attribution':[{'path':'.','author':'Hyprune contributors','license':'CC-BY-4.0','source':'https://github.com/hyprune/worlds'}],'extensions':{'com.hyprune.lumen-reach.mounts':{'version':1,'areas':[{**{k:v for k,v in a.items() if k not in ['spawn','bounds','name','freePlacementZones']},'spawnId':a['id'],'freePlacementZones':[z['id'] for z in a['freePlacementZones']]} for a in AREAS],'mounts':MOUNT_ROWS,'objects':OBJECTS},'com.hyprune.lumen-reach.routes':{'version':1,'nodes':ROUTES,'edges':EDGES,'semantics':'bidirectional walking centerlines, feet positions in meters'},'com.hyprune.lumen-reach.stairs':{'version':1,'paths':STAIR_ROUTES,'semantics':'visible treads over continuous collision beds; alternate walkable flights'},'com.hyprune.lumen-reach.placement':{'version':1,'zones':[z for a in AREAS for z in a['freePlacementZones']]},'com.hyprune.map':{'version':'0.1','path':'map.svg','projection':'xz','north':[0,0,-1],'bounds':[-36,-162,86,16],'worldToMap':[4/520,0,0,4/780,160/520,690/780]}},'requiredExtensions':[]}
  for name in ['fixture-audit.json','decal-audit.json','playable-boundary-report.json','sign-audit.json']:shutil.copy2(ART/name,OUT/name)
  if count==4:
   # 0.9.0: canonical format 0.6 contract with per-area playable volumes
@@ -876,6 +893,9 @@ def manifest(g,lm,nodes,cols,count):
     anim=d['traits']['decorative']['animations'] if 'traits' in d else d['animations']
     assets[o['asset']]={'id':d['id'],'scene':'objects/'+d['scene'],'animations':anim,'lighting':d['lighting']}
    m['objectAssets']=list(assets.values());m['objects']=WORLD_OBJECTS;m['formatVersion']='0.8'
+  # 0.11.0: residents (world format 0.9): characters, routes, seats, keepClear.
+  import residents
+  residents.apply(m,OUT,ROOT)
   import any_angle
   any_angle.finish_export(sys.modules[__name__],g,m)
  (OUT/'world.json').write_text(json.dumps(m,indent=2)+'\n')
