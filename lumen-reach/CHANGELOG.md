@@ -3,6 +3,23 @@
 Measured figures, gates and archive hashes for each release are in the
 release records (`reports/release*.json`).
 
+## 0.10.3
+
+The Sun Court plaza paving is plain: the bent pair of inset route rails (with
+their amber edge) and the seven metal expansion seams across the plaza are
+gone. From eye height they read as stray black lines across the floor. The
+paving under them was continuous, so nothing else changes; the hall, vault
+and terrace inset rails stay.
+
+## 0.10.2
+
+Array Hall's enclosure walls are detailed in the hall's own vocabulary: high
+clerestory glazing on the south and east walls (glass with collision, metal
+mullions every 2 m, head and sill rails, an amber sill light) between a solid
+lower wall and a header; secondary ribs, collars and service lintels on the
+south wall; a recessed screen bay facing the 16 m approach; no outer seam at
+16.5 m. The enclosure keeps 0 sky leaks.
+
 ## 0.10.1
 
 Array Hall is an enclosed hall, and no walkable edge near a route drops out
