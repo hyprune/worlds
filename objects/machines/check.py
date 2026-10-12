@@ -16,7 +16,7 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
-IDS = ['job-token', 'ci-conveyor', 'queue-stack', 'server-rack', 'deploy-lift', 'build-monitor']
+IDS = ['job-token', 'ci-conveyor', 'queue-stack', 'server-rack', 'deploy-lift', 'build-monitor', 'gauge-tube', 'gauge-abacus', 'gauge-cube']
 
 
 def floor_gltf(out, size=40.0):
@@ -60,8 +60,49 @@ def draft_checks(mid):
     for s in slots.get('stacks', []):
         node(s['node'], f'stacks {s["id"]}')
         nx, ny, nz = s['layout']['grid']
-        if s['cap'] > 64 or s['cap'] > nx * ny * nz:
-            errs.append(f'stacks {s["id"]}: cap {s["cap"]} over 64 or the grid')
+        if s['cap'] > 100 or s['cap'] > nx * ny * nz:
+            errs.append(f'stacks {s["id"]}: cap {s["cap"]} over 100 or the grid')
+        # Draft: spacing may be negative (a stack that fills right to left or top down), never 0 across cells.
+        for n_, sp in zip(s['layout']['grid'], s['layout']['spacing']):
+            if n_ > 1 and not sp:
+                errs.append(f'stacks {s["id"]}: zero spacing across {n_} cells')
+        if not 0 <= s.get('rate', 0) <= 1000:
+            errs.append(f'stacks {s["id"]}: rate {s["rate"]} outside 0-1000')
+    # Draft: levels slots (fill / slide). The surface rides beside the fill (never inside its
+    # subtree), no node is moved by two levels, and the collision proxy never moves.
+    children = {g['nodes'][i].get('name'): [g['nodes'][c].get('name') for c in g['nodes'][i].get('children', [])] for i in range(len(g['nodes']))}
+    def subtree(n):
+        out = {n}
+        for c in children.get(n, []):
+            out |= subtree(c)
+        return out
+    moved = []
+    proxy = m.get('traits', {}).get('collidable', {}).get('node')
+    for s in slots.get('levels', []):
+        node(s['node'], f'levels {s["id"]}')
+        if s.get('mode') not in ('fill', 'slide'):
+            errs.append(f'levels {s["id"]}: mode {s.get("mode")}')
+        if not 0 < s.get('length', 0) <= 10:
+            errs.append(f'levels {s["id"]}: length {s.get("length")} outside (0, 10]')
+        ax = s.get('axis', [0, 1, 0])
+        if abs(sum(x * x for x in ax) - 1) > 1e-3:
+            errs.append(f'levels {s["id"]}: axis {ax} is not a unit vector')
+        sub = subtree(s['node'])
+        fn = next((n_ for n_ in g['nodes'] if n_.get('name') == s['node']), {})
+        if s.get('mode') == 'fill' and 'mesh' in fn:
+            errs.append(f'levels {s["id"]}: fill node {s["node"]} carries a mesh (quantisation moves mesh node origins; use an empty parent)')
+        if 'surface' in s:
+            node(s['surface'], f'levels {s["id"]} surface')
+            if s.get('mode') != 'fill':
+                errs.append(f'levels {s["id"]}: surface on a {s.get("mode")}')
+            if s['surface'] in sub:
+                errs.append(f'levels {s["id"]}: surface {s["surface"]} inside the fill subtree')
+            sub = sub | subtree(s['surface'])
+        if proxy in sub:
+            errs.append(f'levels {s["id"]}: moves the collision proxy')
+        for n_ in sub & set(moved):
+            errs.append(f'levels {s["id"]}: node {n_} moved by two levels slots')
+        moved += sorted(sub)
     for s in slots.get('toggles', []):
         for n in s['nodes']:
             node(n, f'toggles {s["id"]}')
@@ -84,7 +125,8 @@ def draft_checks(mid):
     if len(mach.get('drives', [])) > 32:
         errs.append('machine: drives > 32')
     by_kind = {k: {s['id'] for s in v} for k, v in slots.items()}
-    kinds = {'state': 'states', 'emission': 'states', 'label': 'labels', 'visible': 'toggles', 'count': 'stacks', 'spawn': 'spawns', 'effect': 'effects'}
+    kinds = {'state': 'states', 'emission': 'states', 'label': 'labels', 'visible': 'toggles', 'count': 'stacks', 'spawn': 'spawns', 'effect': 'effects',
+             'level': 'levels'}
     for dr in mach.get('drives', []):
         if dr['input'] not in inputs:
             errs.append(f'drive input {dr["input"]} undeclared')
@@ -94,6 +136,23 @@ def draft_checks(mid):
                 errs.append(f'drive target {dr["target"]}: no such animation')
         elif name not in by_kind.get(kinds.get(kind, '?'), set()):
             errs.append(f'drive target {dr["target"]}: no such slot')
+        mp = dr.get('map', {})
+        itype = inputs.get(dr['input'], {}).get('type')
+        if 'average' in mp:  # draft: running-average modifier
+            av = mp['average']
+            if not 1 <= av.get('windowS', 60) <= 3600:
+                errs.append(f'drive {dr["input"]} -> {dr["target"]}: average windowS {av.get("windowS")}')
+            if itype not in ('int', 'number') or {'becomes', 'counter'} & set(mp):
+                errs.append(f'drive {dr["input"]} -> {dr["target"]}: average needs a numeric input and no becomes/counter')
+            ov = av.get('override')
+            if ov is not None and (ov not in inputs or ov == dr['input'] or inputs[ov]['type'] == 'event'):
+                errs.append(f'drive {dr["input"]} -> {dr["target"]}: average override {ov} is not another non-event input')
+        if kind == 'level':
+            outs = mp.get('scale', {}).get('to', [inputs.get(dr['input'], {}).get('min', 0), inputs.get(dr['input'], {}).get('max', 1)])
+            if not all(0 <= o <= 1 for o in outs):
+                errs.append(f'drive {dr["input"]} -> {dr["target"]}: level output {outs} outside 0-1')
+        if kind == 'count' and itype == 'number' and not ('scale' in mp and 'round' in mp):
+            errs.append(f'drive {dr["input"]} -> {dr["target"]}: count from a number needs a rounded scale')
         if kind == 'state':
             pal = {e['id'] for s in slots['states'] if s['id'] == name for e in s['palette']}
             mp = dr.get('map', {})
