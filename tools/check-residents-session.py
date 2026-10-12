@@ -87,9 +87,9 @@ def acceptance(client, children, args, shell_token, socketpath):
         sib = next((v for k, v in SEATS.items() if k != name and k.rsplit('-', 1)[0] == name.rsplit('-', 1)[0]), None)
         sgn = 1.
         if sib: sgn = 1. if sum((sp[i]-sib['pose']['position'][i])*r[i] for i in (0, 2)) >= 0 else -1.
-        look([q[0]+f[0]*2.2+r[0]*sgn*1.1, sp[1]+1.15, q[2]+f[2]*2.2+r[2]*sgn*1.1], [q[0], sp[1]+.55, q[2]]); time.sleep(.6)
+        look([q[0]+f[0]*2.4-r[0]*sgn*.8, sp[1]+1.3, q[2]+f[2]*2.4-r[2]*sgn*.8], [q[0], sp[1]+.6, q[2]]); time.sleep(.6)
         shot(f'seated-{AREA[id_]}-front.png')
-        look([q[0]+r[0]*sgn*1.9+f[0]*.2, sp[1]+.62, q[2]+r[2]*sgn*1.9+f[2]*.2], [q[0], sp[1]+.45, q[2]]); time.sleep(.6)
+        look([q[0]+r[0]*sgn*2.6+f[0]*.3, sp[1]+.8, q[2]+r[2]*sgn*2.6+f[2]*.3], [q[0], sp[1]+.55, q[2]]); time.sleep(.6)
         shot(f'seated-{AREA[id_]}-side.png')
 
     s.ctl('eval', 'hl.config({misc={disable_watchdog_warning=true},cursor={inactive_timeout=1}})')
@@ -140,7 +140,7 @@ def acceptance(client, children, args, shell_token, socketpath):
     # Poses with no resident in sight; the first two have residents of later areas inside
     # the view frustum behind walls (they must still cost nothing).
     away = {'sun-court-wall': ([8, 1.7, -12], [8, 6, -23]), 'rime-vault-console': ([38, -4.3, -90], [38, -4.3, -110]),
-            'sun-court-east': ([22, 1.7, 10], [40, 1.7, 10]), 'array-hall-east': ([20, 1.7, -45], [24, 1.7, -45]),
+            'sun-court-east': ([22, 1.7, 10], [40, 1.7, 10]), 'array-hall-ceiling': ([8, 1.7, -46], [8.2, 21, -46.5]),
             'signal-rise-east': ([60, 1.7, -128], [90, 1.7, -128])}
     rows = {}
     for area, (eye, target) in away.items():
