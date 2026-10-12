@@ -10,8 +10,9 @@ KTX2 textures at 1024 px: UASTC + zstd for base colour and normal map, ETC1S for
 metallic-roughness), published under its public name by `tools/npc/publish.py`;
 `tools/object-import --adopt` wrote the manifest and the thumbnail. `characters/<id>.glb`
 links to `<id>/object.glb` for tools that use the flat paths. `characters.json` lists each
-file's size, hash, budget, measured walk/run speed and clips. Worlds can't place
-characters yet; core's nested NPC test walks one through Switchyard.
+file's size, hash, budget, measured walk/run speed and clips. Lumen Reach 0.11.0
+(world format 0.9) places all four, one per area; core's nested NPC test walks two
+through Switchyard.
 
 | Character | Size | Triangles | Bones | Walk / run | Clips |
 | --- | --- | --- | --- | --- | --- |
@@ -37,7 +38,9 @@ block edges on faces and scarves are gone. 512 px maps were measurably worse at 
 the maps stay at 1024 px.
 
 The `sit` clips end with the thighs below the root plane (a seat height under 0 m by the
-RFC-0011 measure), so their manifests list `sit` and `sit_idle` without a `seatHeight`:
-these characters do not sit at seat anchors.
+RFC-0011 measure), so their manifests list `sit` and `sit_idle` without a `seatHeight`.
+Core seats them by lifting the root (anchor height minus the measured seat height) and
+accepts an anchor while the feet then hang at most 0.45 m: seats up to about 0.41 m
+(desert), 0.47 m (ember), 0.48 m (crimson) and 0.52 m (blue). Lumen Reach uses 0.40 m.
 
 Content: CC-BY-4.0, Hyprune contributors (see ATTRIBUTION.md and LICENSE). Scripts: MIT.

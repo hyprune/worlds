@@ -87,10 +87,10 @@
    "centre": [
     -5.5,
     0,
-    -49.7
+    -49.1
    ],
    "along": "z",
-   "length": 2.6,
+   "length": 2.0,
    "depth": 0.45,
    "height": 0.4,
    "thickness": 0.08,
@@ -103,12 +103,12 @@
    "anchors": [
     {
      "id": "south",
-     "offset": 0.65,
+     "offset": 0.5,
      "facing": "+x"
     },
     {
      "id": "north",
-     "offset": -0.65,
+     "offset": -0.5,
      "facing": "+x"
     }
    ]
@@ -490,9 +490,17 @@
     },
     {
      "position": [
-      -4.3,
+      3.0,
       0,
-      -56.0
+      -51.4
+     ],
+     "type": "curve"
+    },
+    {
+     "position": [
+      -1.0,
+      0,
+      -49.6
      ],
      "type": "curve"
     },
@@ -500,13 +508,13 @@
      "position": [
       -4.355,
       0,
-      -50.35
+      -49.6
      ],
      "type": "line"
     },
     {
      "position": [
-      -4.3,
+      -4.5,
       0,
       -45.5
      ],
@@ -514,7 +522,15 @@
     },
     {
      "position": [
-      -3.0,
+      -4.5,
+      0,
+      -42.8
+     ],
+     "type": "line"
+    },
+    {
+     "position": [
+      -2.6,
       0,
       -41.6
      ],
@@ -549,7 +565,7 @@
      }
     },
     {
-     "point": 7,
+     "point": 8,
      "seconds": 16,
      "seat": "hall-west-bench-north"
     }
@@ -689,11 +705,35 @@
    "points": [
     {
      "position": [
-      39.5,
+      40.2,
       4,
-      -145.2
+      -148.2
      ],
      "type": "line"
+    },
+    {
+     "position": [
+      39.6,
+      4,
+      -152.4
+     ],
+     "type": "curve"
+    },
+    {
+     "position": [
+      31.6,
+      4,
+      -152.4
+     ],
+     "type": "line"
+    },
+    {
+     "position": [
+      31.2,
+      4,
+      -147.0
+     ],
+     "type": "curve"
     },
     {
      "position": [
@@ -723,6 +763,14 @@
      "position": [
       36.645,
       0,
+      -128.4
+     ],
+     "type": "curve"
+    },
+    {
+     "position": [
+      36.645,
+      0,
       -129.8
      ],
      "type": "line"
@@ -743,12 +791,12 @@
      "clip": "look_around"
     },
     {
-     "point": 4,
+     "point": 8,
      "seconds": 20,
      "seat": "rise-terrace-bench-south"
     },
     {
-     "point": 5,
+     "point": 9,
      "seconds": 5,
      "face": {
       "anchor": "signal-rise-slot-04-operator-desk-01"
@@ -843,6 +891,11 @@
    "asset": "resident-blue",
    "path": "signal-rise-lookout",
    "phase": 0.2,
+   "ambient": [
+    0.25,
+    0.3,
+    0.45
+   ],
    "interactions": [
     {
      "id": "talk",

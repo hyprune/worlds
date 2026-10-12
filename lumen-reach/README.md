@@ -120,6 +120,50 @@ and run `tools/check-lumen-session.py --vault-clip --package <package> --output
 JSON metadata. It encodes in `/tmp`; inspect the clip before publishing it.
 `tools/check-rime-v3.py` checks budget growth and unchanged mount/route contracts.
 
+## Residents
+
+Since 0.11.0 (world format 0.9) four residents live in the world, one per area:
+Desert in Sun Court, Crimson in Array Hall, Ember in Rime Vault and Blue in
+Signal Rise. `residents.json` is the source: the characters, the bench table,
+the keepClear volumes, the routes (`paths[]` with stops) and the residents with
+their interactions. `build.py` builds the benches from the table and calls
+`residents.py` while it writes world.json; `python3 lumen-reach/residents.py
+PACKAGE --in-place` re-applies the data to a built package without a bake.
+
+- **Characters.** The starter-kit residents (`characters/<id>/`, the same bytes
+  as `com.hyprune.starter@0.1.0`) ship inside the package as directory assets.
+  Official worlds stay self-contained: core resolves a library asset only
+  against an installed `id@version` and refuses activation otherwise, and
+  installers do not install a world's library dependencies.
+- **Routes.** Each resident walks a calm route with three stops: a vista, a spot
+  beside a tool screen (outside its approach zone) and a bench seat. Crimson
+  sets a waypoint to Rime Vault; Ember guides the player to Signal Rise's home
+  (`to-signal-rise`, from the vault's south edge, which every point of Ember's
+  route reaches in a straight line).
+- **Seats.** 0.40 m benches (both Sun Court seats, and new ones in Array Hall's
+  west aisle, at Rime Vault's south edge and on Signal Rise's west terrace) with
+  two `seats[]` anchors each, 0.32 m in front of the seat edge so the walker's
+  body clears the bench. The residents' `sit` clip fits anchors up to 0.41 m
+  (Desert) to 0.52 m (Blue) by core's seat fit.
+- **keepClear.** In front of the four primary walls and at the doors between
+  areas: no stop or seat approach lies in one.
+- **Lighting.** Residents take core's probe light. Blue carries an authored
+  ambient (moonlit, like the Sun Court armillary's): at night the probe sees
+  only the dark sky dome while the baked snow is lit by area lights.
+- **Stops facing an anchor** are written as positions: core 0.5.0 checks path
+  anchor references before it loads the anchors.
+
+Checks: `tools/check-residents.py` (in `make lumen-validate` and
+`lumen-release-check`; `NPC_CHECK` names core's `hyprune-npc-check` for the
+seat fit) applies core's walkability rules every 0.25 m (floor, ledge, body
+clear of collision, playable volume, screen approach zones), keeps the body
+clear of render-only props too, and gates the navmesh island, 1.2 m clear
+width, stops outside keepClear and at least 0.5 m from approach zones, seat
+legs, seat surface and fit, and the guide's join leg from every route sample.
+`make lumen-residents-session` runs the nested check: bound routes, walking
+speed, every seat taken, every stop reached, say, waypoint and guide, and
+frames with no resident in view.
+
 ## Visibility
 
 Since 0.9.0 the build derives visibility regions from geometry
