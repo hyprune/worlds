@@ -1,7 +1,7 @@
 {
   "id": "com.hyprune.starter",
   "tag": "hyprune-starter",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "name": "Hyprune starter kit",
   "description": "Official starter objects: the armillary, four ambient residents and five live machines with the item they move.",
   "license": "CC-BY-4.0",

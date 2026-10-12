@@ -1,7 +1,7 @@
 {
  "formatVersion": "0.9",
  "id": "resident-desert",
- "version": "1.0.0",
+ "version": "1.0.1",
  "name": "Resident (desert)",
  "description": "An ambient resident with a wide sun hat and a long sand-coloured coat: walks routes, idles and waves (RFC-0010 character).",
  "category": "characters",

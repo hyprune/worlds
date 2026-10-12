@@ -1,7 +1,7 @@
 {
  "formatVersion": "0.9",
  "id": "resident-crimson",
- "version": "1.0.0",
+ "version": "1.0.1",
  "name": "Resident (crimson)",
  "description": "An ambient resident with a red scarf and tabard over a white suit: walks routes, idles and waves (RFC-0010 character).",
  "category": "characters",

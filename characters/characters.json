@@ -3,8 +3,8 @@
     {
       "id": "resident-blue",
       "file": "resident-blue/object.glb",
-      "bytes": 2794672,
-      "sha256": "091de8ab8793474ba97913a79526762bca013d4ad88999dc8e7578612aeee853",
+      "bytes": 3793776,
+      "sha256": "5d2e496fa6e29cbba71d7223c305deb623e913a370ed2a60dfd97ccc1bd039ad",
       "licence": "CC-BY-4.0",
       "author": "Hyprune contributors",
       "heightMetres": 1.685,
@@ -40,8 +40,8 @@
     {
       "id": "resident-crimson",
       "file": "resident-crimson/object.glb",
-      "bytes": 2816332,
-      "sha256": "2fe4fa473a5e73826a2bf7002172884b3f9ac4625beaea2cfdee96965f946965",
+      "bytes": 3796784,
+      "sha256": "1dcbeecf9619f64b44ea14568a80e44b52d28e766e6403f54479862aa7d583c4",
       "licence": "CC-BY-4.0",
       "author": "Hyprune contributors",
       "heightMetres": 1.645,
@@ -77,8 +77,8 @@
     {
       "id": "resident-desert",
       "file": "resident-desert/object.glb",
-      "bytes": 2719292,
-      "sha256": "c2fbd1ef9b2945ffb3817e7b7492383c20443b198f6fca7300ddc6c9bbb789e3",
+      "bytes": 3724440,
+      "sha256": "c05e1c943f93c2a913d1329047d7df8e256ef86375abe7a24b7066d1c94d2926",
       "licence": "CC-BY-4.0",
       "author": "Hyprune contributors",
       "heightMetres": 1.654,
@@ -113,8 +113,8 @@
     {
       "id": "resident-ember",
       "file": "resident-ember/object.glb",
-      "bytes": 2723292,
-      "sha256": "100534e064d882e4e0bbba45eea0cb69e7fdecbe00138288f460b7567d37ac03",
+      "bytes": 3691664,
+      "sha256": "2794dde176a82791b84289fa028901d5f102db0162e7588b727fee809810dc60",
       "licence": "CC-BY-4.0",
       "author": "Hyprune contributors",
       "heightMetres": 1.649,
