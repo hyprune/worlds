@@ -1,0 +1,254 @@
+{
+ "status": "PASS",
+ "worldId": "com.hyprune.lumen-reach",
+ "version": "0.11.0",
+ "formatVersion": "0.9",
+ "sourceFormatVersion": "0.9",
+ "sourceCommit": "decec75",
+ "sourceNote": "lumen-build (objects, bake, derived visibility, blueprint) on the bake host; residents applied from residents.json; release package = tools/remote-optimize.sh output.",
+ "sceneSHA256": "e6d9f0fa3a7dae8ffa6053a89628d5d4e6e948dd7e5b49c47eb0ca9cab669474",
+ "manifestSHA256": "ca1ea0219af6882aa8229db483271bffda7f674200855d13ec19ade805e8418c",
+ "archive": {
+  "status": "PASS",
+  "path": "artifacts/releases/com.hyprune.lumen-reach-0.11.0.tar.zst",
+  "sha256": "84534a3d1fa872d21d5fade7a5d6b3e688d0e10a4fa9fe377f425ccf4afc2fd2",
+  "bytes": 49401789,
+  "nixHash": "sha256-hFNKPR+octIdX63npdaz5ojQ4QpPqf43f0Jcz0r8L9I=",
+  "url": "https://github.com/hyprune/worlds/releases/download/lumen-reach-v0.11.0/com.hyprune.lumen-reach-0.11.0.tar.zst",
+  "identicalExtractedFiles": "95/95",
+  "reproducible": "second archive build byte-identical",
+  "extractedChecks": [
+   "schema 0.9 VALID (lumen-release-check)",
+   "core hyprune-world-check exit 0 (09abc14): 5 routes walkable",
+   "check-residents PASS on the release package",
+   "blueprint check PASS",
+   "no build-machine paths in any file"
+  ]
+ },
+ "published": false,
+ "coreCommit": "09abc148a0508c22de89c33df3d1d674dfdf458e",
+ "baseline": {
+  "version": "0.10.3",
+  "releasePackage": "published lumen-reach-v0.10.3 archive (extracted; sha256 17e1bca6...c23c verified against the release)"
+ },
+ "changes": {
+  "residents": "Four starter-kit residents (world format 0.9), one per area: Desert (Sun Court), Crimson (Array Hall), Ember (Rime Vault), Blue (Signal Rise). Each walks an authored route with a vista, a stop beside a tool screen and a bench seat; a short say each; Crimson sets a waypoint to Rime Vault; Ember guides to the Signal Rise home.",
+  "characters": "Package directory assets characters/<id>/ (object.json, object.glb, thumbnail.png), byte-identical to com.hyprune.starter@0.1.0; self-contained because core resolves library assets only against an installed id@version and installers do not install world library dependencies yet.",
+  "benches": "Sun Court seats lowered from 0.61 to 0.40 m; new 0.40 m benches in Array Hall (west aisle), Rime Vault (south edge) and Signal Rise (west terrace); 10 seat anchors.",
+  "keepClear": "11 volumes: in front of the four primary walls and at the doors between areas."
+ },
+ "gates": {
+  "validate": "PASS (lumen-validate: geometry/any-angle, sky incl. enclosures, route clearance, frames-signs, derived visibility, schema 0.9, residents, package, placement, walking, navmesh, blueprint, emissive, decals)",
+  "releaseVerify": "PASS (verify.mjs, schema 0.9, residents, blueprint, core world-check 09abc14: 5 routes walkable)",
+  "derivedVisibility": {
+   "regions": 168,
+   "eyesWhereGeneratedHidesASampledVisibleUnit": 0,
+   "submittedPrimitivesMean": 71.88,
+   "all": 98
+  },
+  "budgets": {
+   "visibleTriangles": 245458,
+   "drawCalls": 98,
+   "collisionTriangles": 6122,
+   "gpuMiB": 142,
+   "packageMiB": 53.01,
+   "delta": {
+    "visibleTriangles": 396,
+    "drawCalls": 0,
+    "gpuMiB": 0.03,
+    "packageMiB": 11.3
+   },
+   "characters": {
+    "count": 4,
+    "trianglesEach": 8000,
+    "gpuTextureMiB": 64.0,
+    "note": "not in the scene budgets: 4 x 3 textures (base colour, normal, metallic-roughness) 1024 px, transcoded to RGBA8 with mips by core"
+   }
+  },
+  "skyEnclosure": [
+   {
+    "room": "rime-vault",
+    "eyes": 87,
+    "rays": 7221,
+    "skyLeaks": 0
+   },
+   {
+    "room": "connector-descent",
+    "eyes": 33,
+    "rays": 2739,
+    "skyLeaks": 0
+   },
+   {
+    "room": "entry-vestibule",
+    "eyes": 6,
+    "rays": 498,
+    "skyLeaks": 0
+   },
+   {
+    "room": "array-hall",
+    "eyes": 94,
+    "rays": 7802,
+    "skyLeaks": 0
+   }
+  ],
+  "residents": {
+   "status": "PASS",
+   "routes": [
+    {
+     "id": "sun-court-stroll",
+     "length": 49.44,
+     "walkable": true,
+     "minClearWidth": 5.0,
+     "offMainIsland": 0
+    },
+    {
+     "id": "array-hall-round",
+     "length": 79.43,
+     "walkable": true,
+     "minClearWidth": 6.2,
+     "offMainIsland": 0
+    },
+    {
+     "id": "rime-vault-watch",
+     "length": 17.26,
+     "walkable": true,
+     "minClearWidth": 5.06,
+     "offMainIsland": 0
+    },
+    {
+     "id": "to-signal-rise",
+     "length": 54.23,
+     "walkable": true,
+     "minClearWidth": 4.16,
+     "offMainIsland": 0
+    },
+    {
+     "id": "signal-rise-lookout",
+     "length": 51.22,
+     "walkable": true,
+     "minClearWidth": 4.57,
+     "offMainIsland": 0
+    }
+   ],
+   "guides": [
+    {
+     "resident": "rime-vault-resident",
+     "path": "to-signal-rise",
+     "joinSamples": 18,
+     "joinBlocked": 0
+    }
+   ]
+  },
+  "perfGate": {
+   "status": "PASS",
+   "limits": {
+    "p50": 0.08,
+    "p95": 0.12,
+    "scaleDrop": 0.05,
+    "scaleDropP05": 0.08
+   },
+   "checks": [
+    {
+     "metric": "gpuFrameMs.p50",
+     "candidate": 3.7448,
+     "limit": 4.062,
+     "pass": true
+    },
+    {
+     "metric": "gpuFrameMs.p95",
+     "candidate": 6.5015,
+     "limit": 7.3393,
+     "pass": true
+    },
+    {
+     "metric": "settledScale.p50",
+     "candidate": 0.5,
+     "limit": 0.45,
+     "pass": true
+    },
+    {
+     "metric": "settledScale.p05",
+     "candidate": 0.5,
+     "limit": 0.42,
+     "pass": true
+    }
+   ],
+   "baseline": {
+    "version": "0.10.3",
+    "source": "same session",
+    "gpuFrameMs": {
+     "p50": 3.7612,
+     "p95": 6.553
+    },
+    "settledScale": {
+     "p50": 0.5,
+     "p05": 0.5
+    }
+   },
+   "candidate": {
+    "version": "0.11.0",
+    "gpuFrameMs": {
+     "p50": 3.7448,
+     "p95": 6.5015
+    },
+    "settledScale": {
+     "p50": 0.5,
+     "p05": 0.5
+    }
+   },
+   "note": "route capture at native 4K, medium, scale 0.5, continuous rendering, 2 rounds x 400 poses; residents drawn (npc_motion auto, paused on this host: power unknown), so the figure is their draw cost, not animation",
+   "report": "lumen-reach/reports/any-angle-0.11.0/perf-gate"
+  },
+  "residentsSession": {
+   "status": "FAIL",
+   "checks": 28,
+   "failed": [
+    "out of view: residents cost no frames (npc_motion always vs off)"
+   ],
+   "seatedGuide": {
+    "resident": "rime-vault-resident",
+    "result": "{'code': -32007, 'data': {'retryable': False, 'rule': 'walkable'}, 'message': \"resident-ember can't walk there\"}",
+    "after": {
+     "mode": 6,
+     "activity": "sitting",
+     "clip": "sit_idle",
+     "position": [
+      42.20000076293945,
+      -6.0,
+      -76.3540267944336
+     ]
+    }
+   },
+   "note": "nested, core 09abc14: 27/28. Fails only the out-of-view frame check: with residents in the frustum but behind walls core 0.5.0 still renders frames (61 fps facing the Sun Court wall and the Rime console; 0 with npc_motion off; 0 at three other away poses). Core culls characters by frustum only; remote/npc-region-culling 213df71 adds region culling (Sun Court wall: 3 -> 2 residents drawn; still ~61 fps where derived regions call the hall/vault visible). On 09abc14 residents also shade black where their probe sees no sun (Array Hall, Signal Rise at night); fixed by 04c3558 (character normal/metallic-roughness textures). Seated guide refused (-32007), recorded.",
+   "report": "lumen-reach/reports/any-angle-0.11.0/residents-session/residents-session.json",
+   "frames": {
+    "sun-court-wall": {
+     "alwaysFps": 61.33,
+     "offFps": 0.0,
+     "drawn": 3
+    },
+    "rime-vault-console": {
+     "alwaysFps": 61.0,
+     "offFps": 0.0,
+     "drawn": 1
+    },
+    "sun-court-east": {
+     "alwaysFps": 0.0,
+     "offFps": 0.0,
+     "drawn": 0
+    },
+    "array-hall-east": {
+     "alwaysFps": 0.0,
+     "offFps": 0.0,
+     "drawn": 0
+    },
+    "signal-rise-east": {
+     "alwaysFps": 0.0,
+     "offFps": 0.0,
+     "drawn": 0
+    }
+   }
+  }
+ },
+ "notes": "Release gates PASS. Core-side findings (not world defects) are in gates.residentsSession: occluded residents keep frames coming, and on core 09abc14 residents shade black where their probe sees no sun; core remote/npc-region-culling 04c3558 addresses both (the frame one partly)."
+}

@@ -1,0 +1,70 @@
+{
+ "status": "PASS",
+ "limits": {
+  "p50": 0.08,
+  "p95": 0.12,
+  "scaleDrop": 0.05,
+  "scaleDropP05": 0.08
+ },
+ "baseline": {
+  "gpuFrameMs": {
+   "p50": 3.761152,
+   "p95": 6.552985599999998,
+   "n": 3200
+  },
+  "settledScale": {
+   "p50": 0.5,
+   "p05": 0.5,
+   "n": 252
+  },
+  "rounds": 2,
+  "version": "0.10.3",
+  "source": "same session"
+ },
+ "candidate": {
+  "version": "0.11.0",
+  "coreCommit": "09abc148a0508c22de89c33df3d1d674dfdf458e",
+  "pluginSHA256": "cb66966c828bb77333aee4ba8fb3925daf371bbea0740c0e9fcb250bcfb31c2d",
+  "scale": 0.5,
+  "quality": "medium",
+  "routePoses": 400,
+  "manifestSHA256": "ca1ea0219af6882aa8229db483271bffda7f674200855d13ec19ade805e8418c",
+  "gpuFrameMs": {
+   "p50": 3.744768,
+   "p95": 6.5015296,
+   "n": 3200
+  },
+  "settledScale": {
+   "p50": 0.5,
+   "p05": 0.5,
+   "n": 252
+  },
+  "rounds": 2
+ },
+ "checks": [
+  {
+   "metric": "gpuFrameMs.p50",
+   "candidate": 3.7448,
+   "limit": 4.062,
+   "pass": true
+  },
+  {
+   "metric": "gpuFrameMs.p95",
+   "candidate": 6.5015,
+   "limit": 7.3393,
+   "pass": true
+  },
+  {
+   "metric": "settledScale.p50",
+   "candidate": 0.5,
+   "limit": 0.45,
+   "pass": true
+  },
+  {
+   "metric": "settledScale.p05",
+   "candidate": 0.5,
+   "limit": 0.42,
+   "pass": true
+  }
+ ]
+}
