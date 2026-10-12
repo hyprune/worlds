@@ -1,14 +1,14 @@
 {
   "status": "PASS",
-  "packageBytes": 74286473,
+  "packageBytes": 74022806,
   "decodedTextureBytes": 192806912,
-  "conservativeGpuBytes": 390994632,
+  "conservativeGpuBytes": 390815592,
   "mippedTextureViewsBytes": 361408152,
-  "expandedGeometryBytes": 29586480,
+  "expandedGeometryBytes": 29407440,
   "colorTextureViews": 28,
   "textureObjects": 63,
   "textureProvenanceEntries": 63,
-  "visualTriangles": 246554,
+  "visualTriangles": 245062,
   "drawCallEstimate": 98,
   "drawCallScope": "one draw per visible glTF primitive, world geometry only; excludes postprocessing, applications and HUD",
   "untexturedPhysicalMaterials": [],
@@ -54,8 +54,8 @@
     },
     {
       "node": "Visual-sun-court",
-      "triangles": 45964,
-      "uv1Area": 0.18027,
+      "triangles": 44472,
+      "uv1Area": 0.19813,
       "overlapSamples": 0
     },
     {

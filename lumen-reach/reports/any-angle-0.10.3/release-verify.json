@@ -1,0 +1,26 @@
+{
+ "status": "PASS",
+ "src": "work/src-com.hyprune.lumen-reach",
+ "dst": "work/out-com.hyprune.lumen-reach",
+ "formatVersion": "0.8",
+ "extensionsRequired": [
+  "EXT_meshopt_compression",
+  "KHR_mesh_quantization",
+  "KHR_texture_basisu"
+ ],
+ "counts": {
+  "nodes": 364,
+  "meshes": 364,
+  "materials": 105,
+  "primitives": 486,
+  "lightmaps": 77,
+  "ktx2Images": 56
+ },
+ "maxCollisionErrorMeters": 0.002027,
+ "maxWorldBoundsErrorMeters": 0.004721,
+ "packageMiB": {
+  "src": 70.59,
+  "dst": 41.71
+ },
+ "failures": []
+}
