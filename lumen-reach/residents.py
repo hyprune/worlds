@@ -11,8 +11,13 @@ and installers do not install world library dependencies yet.
 
 Seat anchors come from the benches build.py makes from the same table, so the
 anchors and the geometry cannot drift apart. A seat anchor stands `frontGap`
-in front of the seat edge (the walker's body clears the bench there) and faces
-away from it.
+in front of the seat's front edge, at the middle of its half of the bench, and
+faces away from it. Core sits a resident down by moving its root back from the
+anchor by the sit clip's travel (0.36-0.42 m for these residents) with the
+hips over the root, so the pelvis lands 0.20-0.26 m inside the front edge.
+The bench's collision stops `collisionSetback` short of the seat front, so the
+walker's body (0.30 m across its centre) is clear of collision at the anchor,
+which core requires of the seat approach.
 
   residents.py PACKAGE --in-place   apply to an exported package (iteration)
 build.py calls apply() while it writes world.json.
@@ -56,14 +61,11 @@ def apply(m, package, source=ROOT):
     m['objectAssets'] = assets + [{'id': cid, 'dir': f'characters/{cid}'} for cid in DATA['characters']]
     ids = {r['id'] for r in DATA['residents']}
     m['objects'] = [o for o in m.get('objects', []) if o['id'] not in ids] + DATA['residents']
-    # Stops that face an anchor are written as {position} (the anchor's pose,
-    # which is what core faces at runtime): core 0.5.0 checks path anchor
-    # references before it loads the anchors, so {anchor} fails activation.
-    anchors = {an['id']: an['pose']['position'] for an in m['anchors']}
+    anchors = {an['id'] for an in m['anchors']}
     m['paths'] = json.loads(json.dumps(DATA['paths']))
     for path in m['paths']:
         for st in path.get('stops', []):
-            if 'anchor' in st.get('face', {}): st['face'] = {'position': anchors[st['face']['anchor']]}
+            assert st.get('face', {}).get('anchor', next(iter(anchors))) in anchors, (path['id'], st)
     m['seats'] = seats(); m['keepClear'] = DATA['keepClear']
     m['formatVersion'] = '0.9'
     return m

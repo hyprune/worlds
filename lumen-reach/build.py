@@ -317,10 +317,22 @@ def benches(area):
   if b['area']!=area:continue
   x,y,z=b['centre'];L,D,h,t=b['length'],b['depth'],b['height'],b['thickness'];leg=b['legs']
   along=b['along']=='x';c=(x,-z,y)
-  box(b['name'],(c[0],c[1],c[2]+h-t/2),(L,D,t) if along else (D,L,t),b['top'],.04 if t>.1 else .02,solid=True)
+  # The seat top renders full depth; its collision stops collisionSetback short of
+  # each front the anchors face, so a walker's body clears it at the sit anchor.
+  box(b['name'],(c[0],c[1],c[2]+h-t/2),(L,D,t) if along else (D,L,t),b['top'],.04 if t>.1 else .02)
+  back=RESIDENTS['seatAnchor']['collisionSetback'];half=[L/2,D/2] if along else [D/2,L/2];lo=[-half[0],-half[1]];hi=list(half)
+  for an in b['anchors']:
+   axis,sign={'+x':(0,1),'-x':(0,-1),'+z':(1,-1),'-z':(1,1)}[an['facing']]  # world +z is Blender -y
+   if sign>0:hi[axis]=half[axis]-back
+   else:lo[axis]=-half[axis]+back
+  P.COLL.append((b['name']+' collision',[c[0]+lo[0],c[1]+lo[1],c[2]+h-t],[c[0]+hi[0],c[1]+hi[1],c[2]+h]))
+  P.BLOCKS.append(([c[0]+lo[0],c[1]+lo[1],c[2]+h-t],[c[0]+hi[0],c[1]+hi[1],c[2]+h]))
+  # Supports stand under the collision footprint (the seat overhangs them at the front).
+  d=1 if along else 0;dlo,dhi=lo[d]+.05,hi[d]-.05
   for s in [-1,1]:
-   off=s*(L/2-leg['inset']);p=(c[0]+off,c[1],c[2]+(h-t)/2) if along else (c[0],c[1]+off,c[2]+(h-t)/2)
-   box(b['supportName'],p,(leg['width'],D-.1,h-t) if along else (D-.1,leg['width'],h-t),leg['material'],solid=True)
+   off=s*(L/2-leg['inset']);p=[c[0]+off,c[1],c[2]+(h-t)/2] if along else [c[0],c[1]+off,c[2]+(h-t)/2]
+   p[d]=c[d]+(dlo+dhi)/2;size=[leg['width'],dhi-dlo,h-t] if along else [dhi-dlo,leg['width'],h-t]
+   box(b['supportName'],tuple(p),tuple(size),leg['material'],solid=True)
 
 
 def set_area(i,bounds,spawn,free,area_id=None,title=None,slot=None):

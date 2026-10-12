@@ -21,7 +21,12 @@ rules offline and adds the release gates the tooling owns:
 - stops: not in keepClear volumes, and at least STOP_MARGIN from every approach
   zone, so a resident never waits in front of a screen;
 - seats: each seat stop's legs (route point -> approach point -> anchor) pass
-  the walkability rules, the anchor's seat is backed by collision at its height,
+  the walkability rules (the last step, into the seat, against collision only),
+  the seated pelvis (core moves the root back from the anchor by the sit clip's
+  travel, hips over the root) has seat top under it with at least SEAT_MARGIN to
+  the seat's front edge and to both ends, the bench clears all other geometry
+  (render and collision, stairs and rails included) by BENCH_CLEARANCE from its
+  floor to SITTER_HEIGHT above the seat,
   and with --npc-check (core's hyprune-npc-check) the character fits the anchor
   (feet clearance = height - seatHeight - ankle sink within [-0.03, 0.45] m,
   core's seat fit; otherwise core turns the stop into a plain stop);
@@ -42,6 +47,7 @@ from raycast import Triangles
 import navmesh_io
 
 STEP, MAX_STEP, NAV_SAMPLE, DOOR, STOP_MARGIN, CAPTION = .25, .35, .5, 1.2, .5, 38
+SEAT_MARGIN, BENCH_CLEARANCE, SITTER_HEIGHT = .15, .3, 1.3
 DESIGN_SLOPE = math.degrees(math.atan(.4))
 TOL = (.15, .5, .15)
 
@@ -167,13 +173,13 @@ def zone_gap(feet, radius=.35):
     return best
 
 
-def check_spot(root, body, keep=None):
+def check_spot(root, body, keep=None, render=True):
     fl = floor_at(root)
     if fl is None: return ('floor', root)
     feet = np.array([root[0], fl, root[2]])
     bottom, top = MAX_STEP*.6, body['height']; half = np.array([body['radius']*.85, (top-bottom)/2, body['radius']*.85])
     if aabb_hits(feet+[0, (bottom+top)/2, 0], half): return ('walls', feet)
-    if aabb_hits(feet+[0, (bottom+top)/2, 0], half, R): return ('render', feet)
+    if render and aabb_hits(feet+[0, (bottom+top)/2, 0], half, R): return ('render', feet)
     if not in_playable(feet+[0, .05, 0]): return ('playable', feet)
     probe_c, probe_h = feet+[0, .6, 0], [body['radius']*.5, .4, body['radius']*.5]
     for z in ZONES:
@@ -183,12 +189,12 @@ def check_spot(root, body, keep=None):
     return None
 
 
-def check_samples(pts, body, limit=8):
+def check_samples(pts, body, limit=8, render=True):
     out = []; previous = None
     for p0 in pts:
         p = np.array(p0, float)
         if previous is not None: p[1] = previous
-        prob = check_spot(p, body)
+        prob = check_spot(p, body, render=render)
         if prob:
             rule = 'ledge' if prob[0] == 'floor' and previous is not None else prob[0]
             out.append({'rule': rule, 'at': rnd(prob[1])}); previous = None
@@ -203,9 +209,43 @@ def walk(samples, dist, body, limit=8):
     return check_samples([at(samples, dist, s) for s in along], body, limit)
 
 
-def leg(a_, b_, body):
+def leg(a_, b_, body, render=True):
     a_, b_ = np.asarray(a_, float), np.asarray(b_, float); L = float(np.linalg.norm(b_-a_))
-    return check_samples([a_+(b_-a_)*(s/L if L > 0 else 0) for s in list(np.arange(0, L, STEP))+[L]], body, 1)
+    return check_samples([a_+(b_-a_)*(s/L if L > 0 else 0) for s in list(np.arange(0, L, STEP))+[L]], body, 1, render)
+
+
+# ---- seats: where the pelvis lands, and room around the bench ---------------
+def seat_top(p, top):
+    """Is there seat surface (render geometry) at p, at height `top` (within 4 cm)?"""
+    hit = R.first_hit(np.array([p[0], top+.25, p[2]]), np.array([p[0], top-.25, p[2]]))
+    return bool(hit) and abs(hit['point'][1]-top) <= .04
+
+
+def march(p, d, top, reach=3.0):
+    """Distance from p along d to where the seat top ends (0: no seat at p)."""
+    if not seat_top(p, top): return 0.
+    for k in range(1, int(reach/.01)+1):
+        if not seat_top(p+d*(k*.01), top): return round((k-1)*.01, 3)
+    return reach
+
+
+def bench_obstacles(rect, top, floor):
+    """Geometry within BENCH_CLEARANCE of a seat rectangle, other than the bench."""
+    c, fwd, right, (f0, f1), (r0, r1) = rect
+    out = []
+    for T, kind in [(R, 'render'), (C, 'collision')]:
+        g0, g1 = f0-BENCH_CLEARANCE, f1+BENCH_CLEARANCE; h0, h1 = r0-BENCH_CLEARANCE, r1+BENCH_CLEARANCE
+        corners = [c+fwd*f+right*r for f in (g0, g1) for r in (h0, h1)]
+        lo = np.min(corners, 0); hi = np.max(corners, 0); lo[1] = floor+.05; hi[1] = top+SITTER_HEIGHT
+        for i in T.near(lo, hi):
+            v = T.tri[i]; lf = (v-c)@fwd; lr = (v-c)@right
+            if v[:, 1].max() <= floor+.05: continue                               # the floor
+            if lf.min() >= f0-.05 and lf.max() <= f1+.05 and lr.min() >= r0-.05 and lr.max() <= r1+.05 and v[:, 1].max() <= top+.02:
+                continue                                                           # the bench itself
+            if lf.max() < g0 or lf.min() > g1 or lr.max() < h0 or lr.min() > h1 or v[:, 1].max() < floor+.05 or v[:, 1].min() > top+SITTER_HEIGHT:
+                continue
+            out.append({'kind': kind, 'key': str(T.keys[i]), 'at': rnd(v.mean(0))})
+    return out
 
 
 # ---- clear width (check-navmesh.py's metric) --------------------------------
@@ -233,7 +273,9 @@ for o in m.get('objects', []):
     fit = None
     if a.npc_check and 'dir' in assets[o['asset']]:
         r = json.loads(subprocess.run([str(a.npc_check), str(a.package/assets[o['asset']]['dir']/om['scene']), '--json'], capture_output=True, text=True, check=True).stdout)
-        fit = {'seatHeight': r.get('seatHeight'), 'sink': r.get('sitSink')}
+        sit = next((x for x in r.get('clips', []) if x['name'] == 'sit'), None)
+        fit = {'seatHeight': r.get('seatHeight'), 'sink': r.get('sitSink'),
+               'travel': min(.8, max(0., sit['speed']*sit['seconds'])) if sit else None}
         if 'sit' in om['traits']['character']['clips'] and om['traits']['character']['clips']['sit'].get('seatHeight') is not None:
             fit['seatHeight'] = om['traits']['character']['clips']['sit']['seatHeight']
     chars[o['id']] = {'instance': o, 'body': body, 'fit': fit, 'walk': om['traits']['character']['clips'].get('walk', {}).get('speed')}
@@ -242,7 +284,8 @@ paths = {x['id']: x for x in m.get('paths', [])}
 seats = {x['id']: x for x in m.get('seats', [])}
 keep = [(np.array(k['min'], float), np.array(k['max'], float)) for k in m.get('keepClear', [])]
 default = m.get('defaultSpawn', m['spawns'][0]['id']); spawn = next(s['pose']['position'] for s in m['spawns'] if s['id'] == default)
-failures = []; report = {'package': f"{m['id']} {m['version']}", 'formatVersion': m['formatVersion'], 'characters': len(chars), 'routes': [], 'seats': [], 'guides': []}
+failures = []; report = {'package': f"{m['id']} {m['version']}", 'formatVersion': m['formatVersion'], 'characters': len(chars), 'routes': [], 'seats': [], 'benches': [], 'guides': []}
+benches_checked = set()
 def fail(kind, ident, **kw): failures.append({'kind': kind, 'id': ident, **kw})
 
 if len(chars) > 16: fail('limit', 'characters', count=len(chars))
@@ -292,11 +335,25 @@ for pid, (samples, dist, marks) in routes.items():
             seat = seats.get(st['seat'])
             if not seat: fail('seat', st['seat'], error='not a world seat'); stops.append(row); continue
             sp = np.array(seat['pose']['position'], float); fwd = qrot(seat['pose']['rotation'], [0, 0, 1]); ap = sp+fwd*seat.get('approach', .6)
-            legs = leg(feet, ap, body) + leg(ap, sp, body)
-            sitpt = sp - fwd*.45 + [0, seat['height']-.05, 0]; backed = floor_below(sitpt+[0, .1, 0], .2)
-            row.update(seat=st['seat'], legs=legs, seatSurface=None if backed is None else round(backed-sp[1], 3))
+            legs = leg(feet, ap, body) + leg(ap, sp, body, render=False)
+            row.update(seat=st['seat'], legs=legs)
             if legs: fail('seat-legs', f'{pid}#{st["point"]}', seat=st['seat'], problems=legs)
-            if backed is None or abs(backed-sp[1]-seat['height']) > .03: fail('seat-surface', st['seat'], found=row['seatSurface'], declared=seat['height'])
+            top = sp[1]+seat['height']; right = np.cross([0, 1., 0], fwd); right /= np.linalg.norm(right)
+            for cid in bound:
+                f = chars[cid]['fit']
+                if not f or f.get('travel') is None: continue
+                pelvis = sp - fwd*f['travel']
+                ins = {'front': march(pelvis, fwd, top), 'back': march(pelvis, -fwd, top), 'left': march(pelvis, -right, top), 'right': march(pelvis, right, top)}
+                row.setdefault('pelvis', {})[cid] = {'at': rnd(pelvis), 'inset': ins}
+                if min(ins['front'], ins['left'], ins['right']) < SEAT_MARGIN or ins['back'] < .05:
+                    fail('seat-pelvis', f'{cid}@{st["seat"]}', inset=ins, margin=SEAT_MARGIN)
+                if ins['front'] > 0:
+                    rect = (pelvis, fwd, right, (-ins['back'], ins['front']), (-ins['left'], ins['right']))
+                    key = tuple(rnd(pelvis+fwd*(ins['front']-ins['back'])/2+right*(ins['right']-ins['left'])/2, 1))
+                    if key not in benches_checked:
+                        benches_checked.add(key); near = bench_obstacles(rect, top, sp[1])
+                        report['benches'].append({'seat': st['seat'], 'depth': round(ins['front']+ins['back'], 2), 'length': round(ins['left']+ins['right'], 2), 'obstacles': len(near)})
+                        if near: fail('bench-clearance', st['seat'], clearance=BENCH_CLEARANCE, near=near[:6], count=len(near))
             for cid in bound:
                 f = chars[cid]['fit']
                 if f and f['seatHeight'] is not None:
@@ -321,8 +378,13 @@ for cid, c in chars.items():
         blocked, total = [], 0
         if own:
             samples, dist, marks = own
-            for s in np.arange(0, dist[-1], 1.0):
-                total += 1; q = at(samples, dist, s); fl = floor_at(q); q = np.array([q[0], q[1] if fl is None else fl, q[2]])
+            starts = [at(samples, dist, s) for s in np.arange(0, dist[-1], 1.0)]
+            # A seated resident steps off to its seat's approach point first (core), then joins.
+            for st in paths[c['instance']['path']].get('stops', []):
+                seat = seats.get(st.get('seat', ''))
+                if seat: starts.append(np.array(seat['pose']['position'])+qrot(seat['pose']['rotation'], [0, 0, 1])*seat.get('approach', .6))
+            for q in starts:
+                total += 1; fl = floor_at(q); q = np.array([q[0], q[1] if fl is None else fl, q[2]])
                 if leg(q, start, c['body']): blocked.append(rnd(q))
         report['guides'].append({'resident': cid, 'path': gid, 'length': round(float(routes[gid][1][-1]), 2), 'joinSamples': total, 'joinBlocked': len(blocked), 'blockedAt': blocked})
         if blocked: fail('guide-join', f'{cid}/{it["id"]}', blocked=len(blocked), samples=total, at=blocked[:4])

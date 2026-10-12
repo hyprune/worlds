@@ -137,21 +137,29 @@ PACKAGE --in-place` re-applies the data to a built package without a bake.
   installers do not install a world's library dependencies.
 - **Routes.** Each resident walks a calm route with three stops: a vista, a spot
   beside a tool screen (outside its approach zone) and a bench seat. Crimson
-  sets a waypoint to Rime Vault; Ember guides the player to Signal Rise's home
-  (`to-signal-rise`, from just north-east of the vault bench, which every point
-  of Ember's route reaches in a straight line).
-- **Seats.** 0.40 m benches (both Sun Court seats, and new ones in Array Hall's
-  west aisle, at Rime Vault's south edge and on Signal Rise's west terrace) with
-  two `seats[]` anchors each, 0.32 m in front of the seat edge so the walker's
-  body clears the bench. The residents' `sit` clip fits anchors up to 0.41 m
-  (Desert) to 0.52 m (Blue) by core's seat fit.
+  marks the way to Rime Vault (a waypoint); Ember walks the player to Signal
+  Rise's home (`to-signal-rise`, from just north-east of the vault bench, which
+  every point of Ember's route and its seat's approach point reach in a straight
+  line), also when asked while seated: core stands it up first and it sits down
+  again afterwards.
+- **Seats.** 0.40 m benches: both Sun Court seats, one between the second and
+  third desks in Array Hall facing the hanging wall, one at Rime Vault's south
+  edge facing the console and one in Signal Rise's south field facing the map
+  terminal and the fortress. Two `seats[]` anchors each, at the middle of each
+  half of the bench, 0.16 m in front of the seat's front edge. Core sits a
+  resident down by moving its root back from the anchor by the sit clip's
+  travel (0.36-0.42 m) with the hips over the root, so the pelvis lands 0.20-0.26
+  m inside the front edge. The seat's collision stops 0.16 m short of its front
+  (and the supports stand under that footprint), so the walker's body is clear
+  of collision at the anchor, which core requires of the last approach step. The
+  residents' `sit` clip fits anchors up to 0.41 m (Desert) to 0.52 m (Blue).
 - **keepClear.** In front of the four primary walls and at the doors between
   areas: no stop or seat approach lies in one.
 - **Lighting.** Residents take core's probe light. Blue carries an authored
   ambient (moonlit, like the Sun Court armillary's): at night the probe sees
   only the dark sky dome while the baked snow is lit by area lights.
-- **Stops facing an anchor** are written as positions: core 0.5.0 checks path
-  anchor references before it loads the anchors.
+- **Say lines** stay within 36 characters: core shows a line as a one-line
+  caption and cuts longer ones.
 
 Checks: `tools/check-residents.py` (in `make lumen-validate` and
 `lumen-release-check`; `NPC_CHECK` names core's `hyprune-npc-check` for the
@@ -159,10 +167,15 @@ seat fit) applies core's walkability rules every 0.25 m (floor, ledge, body
 clear of collision, playable volume, screen approach zones), keeps the body
 clear of render-only props too, and gates the navmesh island, 1.2 m clear
 width, stops outside keepClear and at least 0.5 m from approach zones, seat
-legs, seat surface and fit, and the guide's join leg from every route sample.
+legs, the seated pelvis at least 0.15 m inside the seat's front edge and ends,
+0.3 m of room around each bench (stairs and rails included) from the floor to
+1.3 m above the seat, seat fit, and the guide's join leg from every route
+sample and seat approach point.
 `make lumen-residents-session` runs the nested check: bound routes, walking
-speed, every seat taken, every stop reached, say, waypoint and guide, and
-frames with no resident in view.
+speed, every seat taken (stills from the front and from the bench's end),
+every stop reached, say, waypoint, guides from walking and from a seat, and
+frames with residents out of the frustum (residents in the frustum behind walls
+are recorded: core culls characters by frustum and visibility regions).
 
 ## Visibility
 

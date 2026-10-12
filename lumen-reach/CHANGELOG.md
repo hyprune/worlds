@@ -9,13 +9,16 @@ Residents (world format 0.9). Four starter-kit residents, one per area in its
 colour (Desert in Sun Court, Crimson in Array Hall, Ember in Rime Vault, Blue
 in Signal Rise), each walking an authored route with a vista, a spot beside a
 tool screen and a bench where it sits. Each says a few lines about its area;
-Crimson marks Rime Vault as a waypoint and Ember walks the player to Signal
-Rise. The characters ship in the package (`characters/<id>/`).
+Crimson marks the way to Rime Vault and Ember walks the player to Signal Rise,
+also from its seat. The characters ship in the package (`characters/<id>/`).
 
 - **Benches.** Both Sun Court seats are 0.40 m benches (they were 0.61 m,
-  higher than the residents' sit fits). New 0.40 m benches: Array Hall's west
-  aisle, Rime Vault's south edge (facing the console) and Signal Rise's west
-  terrace (facing the fortress). Seat anchors on all of them.
+  higher than the residents' sit fits). New 0.40 m benches: Array Hall between
+  the second and third desks (facing the hanging wall), Rime Vault's south edge
+  (facing the console) and Signal Rise's south field (facing the map terminal
+  and the fortress). Seat anchors sit mid-half and close to the seat, so the
+  seated pelvis lands well inside the seat; the seat collision stops short of
+  the front so the sit approach stays walkable.
 - **keepClear** volumes in front of the four primary walls and at the doors
   between areas.
 - Source in `residents.json`; checks in `tools/check-residents.py` and the
