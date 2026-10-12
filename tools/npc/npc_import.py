@@ -93,7 +93,9 @@ def load(path):
 
 
 def world_bounds(meshes):
-    pts = [ob.matrix_world @ Vector(c) for ob in meshes for c in ob.bound_box]
+    # Rest vertices, not bound_box: a skinned mesh's bound_box follows the evaluated pose
+    # (the current frame of the active clip), which needn't stand where the rest pose does.
+    pts = [ob.matrix_world @ v.co for ob in meshes for v in ob.data.vertices]
     lo = Vector((min(p.x for p in pts), min(p.y for p in pts), min(p.z for p in pts)))
     hi = Vector((max(p.x for p in pts), max(p.y for p in pts), max(p.z for p in pts)))
     return lo, hi
