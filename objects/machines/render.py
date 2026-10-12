@@ -161,10 +161,12 @@ class Machine:
     def palette(self, slot_id, state, emission=1.0):
         slot = next(s for s in self.slots.get('states', []) if s['id'] == slot_id)
         entry = next(e for e in slot['palette'] if e['id'] == state)
+        # A machine's render-only display colour (scenarios: the colour core shows on screen).
+        colour = scenarios.SHEETS.get(self.id, {}).get('display', {}).get(slot_id, {}).get(state, entry['colour'])
         for mname in slot.get('materials', []):
             m = self.materials[mname]; p = m.node_tree.nodes.get('Principled BSDF')
-            p.inputs['Base Color'].default_value = (*entry['colour'], 1)
-            p.inputs['Emission Color'].default_value = (*entry['colour'], 1)
+            p.inputs['Base Color'].default_value = (*colour, 1)
+            p.inputs['Emission Color'].default_value = (*colour, 1)
             p.inputs['Emission Strength'].default_value = entry['emission'] * emission
 
     def anim_pose(self, node, angle=None, value=None):

@@ -142,8 +142,14 @@ def gauge_states(mid):
             gauge(mid, 96, 88, 'fail', 'GPU'), gauge(mid, 50, 50, 'stale', 'Swap')]
 
 
+# The fill palette is set for core's ACES tone curve, which lifts green on bright warm
+# surfaces; these Standard-view renders show the fill in the colour core puts on screen
+# (measured in Lumen Reach daylight and Array Hall, linear), not the raw palette.
+GAUGE_DISPLAY = {'fill': {'ok': (.887, .356, .080), 'warn': (.871, .114, .028), 'fail': (.855, .014, .013)}}
+
 for _g in GAUGES:
-    SHEETS[_g] = {'tile': (900, 1150), 'hero': gauge(_g, 71, 58, 'warn', 'CPU'), 'states': gauge_states(_g),
+    SHEETS[_g] = {'tile': (900, 1150), 'hero': gauge(_g, 64, 52, 'ok', 'CPU'), 'states': gauge_states(_g),
+                  'display': GAUGE_DISPLAY,
                   'callout': gauge(_g, 37, 52, 'ok', 'RAM'), 'turntable': gauge_states(_g)[1:4],
                   'hero_view': (-28, 12), 'callout_view': (-22, 14), 'lens': 50}
 SHEETS['gauge-abacus'].update({'tile': (1100, 1000), 'hero_view': (-20, 10)})

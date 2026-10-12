@@ -74,9 +74,11 @@ PALETTES = {
     'beacon': [('off', SLATE, .15), ('active', AMBER, 2.0), ('live', MINT, 2.2), ('fail', RED, 2.4)],
     'face':   [('idle', (.16, .2, .24), .35), ('running', CYAN, 1.2), ('ok', MINT, 1.1), ('fail', RED, 1.4)],
     'token':  [('queued', IVORY, .3), ('running', CYAN, 1.2), ('ok', MINT, 1.1), ('fail', RED, 1.4)],
-    # A large lit fill: emission well below the lamps' so the hue survives tone mapping in
-    # daylight (amber, orange, red rather than pale lemon).
-    'gauge':  [('ok', (1.0, .55, .08), .45), ('warn', (1.0, .30, .04), .5), ('fail', (.85, .06, .03), .6),
+    # A large lit fill: tone mapping lifts green on bright warm surfaces, so the colours sit
+    # well to the red of their on-screen hue and the emission stays low. Measured in-engine
+    # (Lumen Reach daylight and Array Hall): ok 26-34 deg amber, warn ~14 deg orange,
+    # fail ~0 deg red.
+    'gauge':  [('ok', (1.0, .182, .075), .08), ('warn', (1.0, .07, .03), .12), ('fail', (.8, .015, .015), .3),
                ('stale', (.35, .33, .3), .05)],
 }
 
