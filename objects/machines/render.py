@@ -26,6 +26,7 @@ import scenarios
 DIST = ROOT / 'dist/objects/machines'
 FONT = os.environ.get('MACHINES_FONT', '/usr/share/fonts/TTF/JetBrainsMonoNLNerdFont-Regular.ttf')
 BASE = re.compile(r'\.\d{3}$')
+MACHINES = None
 
 
 def g2b(v):
@@ -155,7 +156,7 @@ class Machine:
         self.extra = []
         for n, o in self.nodes.items():
             o.hide_render = o.hide_viewport = n == 'proxy'
-            loc, rot = self.rest[n]; o.location = loc.copy(); o.rotation_quaternion = rot.copy()
+            loc, rot = self.rest[n]; o.location = loc.copy(); o.rotation_quaternion = rot.copy(); o.scale = (1, 1, 1)
 
     def palette(self, slot_id, state, emission=1.0):
         slot = next(s for s in self.slots.get('states', []) if s['id'] == slot_id)
@@ -186,18 +187,38 @@ class Machine:
         nx, ny, nz = st['layout']['grid']; sx, sy, sz = st['layout']['spacing']
         n = min(n, st['cap'])
         node.hide_render = n == 0
+        fill = st['layout'].get('fill', 'xzy')  # first letter varies fastest
+        n_of = {'x': nx, 'y': ny, 'z': nz}
         order = []
-        for iy in range(ny):
-            for iz in range(nz):
-                for ix in range(nx):
-                    order.append((ix, iy, iz))
-        if st['layout'].get('fill', 'xzy') != 'xzy':
-            raise ValueError('only xzy fill is rendered here')
+        for c in range(n_of[fill[2]]):
+            for b in range(n_of[fill[1]]):
+                for a in range(n_of[fill[0]]):
+                    idx = {fill[0]: a, fill[1]: b, fill[2]: c}
+                    order.append((idx['x'], idx['y'], idx['z']))
         for k in range(1, n):
             ix, iy, iz = order[k]
             c = node.copy(); bpy.context.scene.collection.objects.link(c)
             c.location = node.location + g2b((ix * sx, iy * sy, iz * sz))
             self.extra.append(c)
+
+    def level(self, lid, v):
+        """A levels slot at v (0..1): fill scales the node along the axis about its origin
+        (its surface rides the top), slide moves it by v x length."""
+        sl = next(s for s in self.slots.get('levels', []) if s['id'] == lid)
+        o = self.nodes[sl['node']]; loc, rot = self.rest[sl['node']]
+        axis = g2b(sl.get('axis', [0, 1, 0])).normalized(); L = sl['length']
+        v = max(0.0, min(1.0, v))
+        if sl['mode'] == 'slide':
+            o.location = loc + axis * v * L
+            return
+        for x in [o, *o.children_recursive]:
+            x.hide_render = v <= 0
+        sc = Matrix([[(1 if i == j else 0) + (v - 1) * axis[i] * axis[j] for j in range(3)] for i in range(3)])
+        o.matrix_basis = Matrix.Translation(loc) @ sc.to_4x4() @ rot.to_matrix().to_4x4()
+        if sl.get('surface'):
+            so = self.nodes[sl['surface']]; sloc, srot = self.rest[sl['surface']]
+            so.hide_render = v <= 0
+            so.location = sloc + axis * (v - 1) * L
 
     def toggle(self, tid, visible):
         t = next(s for s in self.slots.get('toggles', []) if s['id'] == tid)
@@ -296,8 +317,11 @@ class Machine:
                 self.count(st['id'], 0)
         for tid, vis in sc.get('toggles', {}).items():
             self.toggle(tid, vis)
+        for lid, v in sc.get('levels', {}).items():
+            self.level(lid, v)
         for lid, text in sc.get('labels', {}).items():
-            self.label(lid, text)
+            sl = next(s for s in self.slots.get('labels', []) if s['id'] == lid)
+            self.label(lid, text, **({'colour': tuple(sl['colour'])} if 'colour' in sl else {}))
         if token:
             for tid, f, state in sc.get('items', []):
                 self.item(tid, f, state, token)
@@ -418,6 +442,8 @@ def slot_points(m):
         out.append({'kind': 'tracks', 'id': s['id'], 'target': f"track:{s['id']}", 'p': pts[len(pts) // 2], 'path': pts})
     for s in m.slots.get('stacks', []):
         out.append({'kind': 'stacks', 'id': s['id'], 'target': f"count:{s['id']}", 'p': centre(m.nodes[s['node']])})
+    for s in m.slots.get('levels', []):
+        out.append({'kind': 'levels', 'id': s['id'], 'target': f"level:{s['id']}", 'p': centre(m.nodes[s['node']])})
     for s in m.slots.get('toggles', []):
         for n in s['nodes']:
             out.append({'kind': 'toggles', 'id': s['id'], 'target': f"visible:{s['id']}", 'p': centre(m.nodes[n])})
@@ -473,7 +499,7 @@ def mode_lineup(out):
     setup_scene(res=(3600, 1250), samples=96)
     token = Token()
     x = 0.0; machines = []
-    order = scenarios.LINEUP
+    order = MACHINES or scenarios.LINEUP
     widths = []
     for mid in order:
         b = json.loads((DIST / mid / 'object.json').read_text())['bounds']
@@ -522,10 +548,10 @@ def mode_turntable(out, fps=30, seconds=10.0):
     """Frames for every machine: one full orbit while its turntable scenarios cycle."""
     out.mkdir(parents=True, exist_ok=True)
     setup_scene(res=(1920, 1080), samples=32)
-    token = Token()
     cam = camera(lens=40)
     frame_no = 0
-    machines = scenarios.LINEUP
+    machines = MACHINES or scenarios.LINEUP
+    token = Token() if any(sc.get('items') for mid in machines for sc in scenarios.SHEETS[mid]['turntable']) else None
     only = os.environ.get('TURNTABLE_ONLY')
     for mid in machines:
         m = Machine(mid, location=(0, 0, 0))
@@ -556,7 +582,10 @@ def main():
     argv = sys.argv[sys.argv.index('--') + 1:] if '--' in sys.argv else []
     ap = argparse.ArgumentParser(); ap.add_argument('--mode', required=True); ap.add_argument('--machine'); ap.add_argument('--out', required=True)
     ap.add_argument('--seconds', type=float, default=10.0)
+    ap.add_argument('--machines', help='lineup/turntable: comma-separated ids (default: scenarios.LINEUP)')
     a = ap.parse_args(argv)
+    global MACHINES
+    MACHINES = a.machines.split(',') if a.machines else None
     out = Path(a.out)
     if a.mode == 'sheet':
         mode_sheet(a.machine, out)

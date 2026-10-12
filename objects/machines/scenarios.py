@@ -118,3 +118,32 @@ SHEETS.update({
 
 TOKEN = [{'states': {'band': s}, 'caption': f'band {s}'} for s in ('queued', 'running', 'ok', 'fail')]
 SHEETS['job-token'] = {'hero': TOKEN[1], 'states': TOKEN, 'callout': TOKEN[1], 'turntable': TOKEN, 'hero_view': (-35, 25), 'lens': 70, 'margin': 1.3}
+
+
+# Gauges: value 0-100, a running average, level ok/warn/fail (stale greys the fill).
+GAUGES = ['gauge-tube', 'gauge-abacus', 'gauge-cube']
+
+
+def gauge(mid, value, average, level, label, display=None):
+    import math
+    sc = {'states': {'fill': level}, 'labels': {'label': label, 'display': display or f'{value:g}%'},
+          'levels': {'average-ring': average / 100}, 'caption': f'value {value:g} · average {average:g} · level {level} · label {label}'}
+    if mid == 'gauge-tube':
+        sc['levels']['liquid'] = value / 100
+    elif mid == 'gauge-abacus':
+        sc['counts'] = {'pushed': math.floor(value), 'rest': math.ceil(100 - value)}
+    else:
+        sc['counts'] = {'voxels': round(value)}
+    return sc
+
+
+def gauge_states(mid):
+    return [gauge(mid, 8, 12, 'ok', 'Disk'), gauge(mid, 37, 52, 'ok', 'RAM'), gauge(mid, 71, 58, 'warn', 'CPU'),
+            gauge(mid, 96, 88, 'fail', 'GPU'), gauge(mid, 50, 50, 'stale', 'Swap')]
+
+
+for _g in GAUGES:
+    SHEETS[_g] = {'tile': (900, 1150), 'hero': gauge(_g, 71, 58, 'warn', 'CPU'), 'states': gauge_states(_g),
+                  'callout': gauge(_g, 37, 52, 'ok', 'RAM'), 'turntable': gauge_states(_g)[1:4],
+                  'hero_view': (-28, 12), 'callout_view': (-22, 14), 'lens': 50}
+SHEETS['gauge-abacus'].update({'tile': (1100, 1000), 'hero_view': (-20, 10)})

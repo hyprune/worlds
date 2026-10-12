@@ -18,7 +18,8 @@ SANS_B = '/usr/share/fonts/noto/NotoSans-Bold.ttf'
 MONO = '/usr/share/fonts/TTF/JetBrainsMonoNLNerdFont-Regular.ttf'
 BG, PANEL, INK, DIM = (16, 20, 24), (26, 31, 37), (232, 228, 216), (150, 156, 160)
 KIND = {'states': (64, 200, 150), 'animation': (90, 170, 230), 'labels': (230, 220, 190), 'spawns': (255, 160, 70),
-        'effects': (255, 120, 170), 'tracks': (255, 200, 80), 'stacks': (190, 150, 255), 'toggles': (140, 220, 240)}
+        'effects': (255, 120, 170), 'tracks': (255, 200, 80), 'stacks': (190, 150, 255), 'toggles': (140, 220, 240),
+        'levels': (250, 240, 120)}
 
 
 def font(path, size):
@@ -118,6 +119,8 @@ def main():
         for g in group_callouts([{'kind': '', 'target': t_} for t_ in mine]):
             targets.append(g['label'])
         targets = sorted(set(targets))
+        targets += [f"(overrides {dr['input']}'s average)" for dr in mach.get('drives', [])
+                    if dr.get('map', {}).get('average', {}).get('override') == i['id']]
         lines.append((f"{i['id']}: {t}", '→ ' + ', '.join(targets)))
     ROW_C = 70 + 34 * max(1, len(lines))
     H = HEAD + ROW_A + 30 + ROW_B + ROW_C + 40
