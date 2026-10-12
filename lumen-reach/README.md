@@ -131,7 +131,7 @@ their interactions. `build.py` builds the benches from the table and calls
 PACKAGE --in-place` re-applies the data to a built package without a bake.
 
 - **Characters.** The starter-kit residents (`characters/<id>/`, the same bytes
-  as `com.hyprune.starter@0.1.0`) ship inside the package as directory assets.
+  as `com.hyprune.starter@0.1.1`) ship inside the package as directory assets.
   Official worlds stay self-contained: core resolves a library asset only
   against an installed `id@version` and refuses activation otherwise, and
   installers do not install a world's library dependencies.

@@ -10,7 +10,8 @@ colour (Desert in Sun Court, Crimson in Array Hall, Ember in Rime Vault, Blue
 in Signal Rise), each walking an authored route with a vista, a spot beside a
 tool screen and a bench where it sits. Each says a few lines about its area;
 Crimson marks the way to Rime Vault and Ember walks the player to Signal Rise,
-also from its seat. The characters ship in the package (`characters/<id>/`).
+also from its seat. The characters ship in the package (`characters/<id>/`, byte-identical to
+the published `com.hyprune.starter@0.1.1`: UASTC base colour).
 
 - **Benches.** Both Sun Court seats are 0.40 m benches (they were 0.61 m,
   higher than the residents' sit fits). New 0.40 m benches: Array Hall between

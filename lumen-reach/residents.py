@@ -4,7 +4,7 @@
 
 The four starter-kit residents ship inside the package as RFC-0011 object
 directories (`characters/<id>/`, byte-identical to `characters/` in this
-repository and to `com.hyprune.starter@0.1.0`), referenced as directory assets.
+repository and to `com.hyprune.starter@0.1.1`), referenced as directory assets.
 Official worlds stay self-contained: core resolves a library asset only against
 an installed `id@version` and fails activation otherwise (RFC-0011 Libraries),
 and installers do not install world library dependencies yet.
