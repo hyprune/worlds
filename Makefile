@@ -94,7 +94,8 @@ lumen-validate:
 	python3 tools/check-frames-signs.py $(LUMEN_PACKAGE) --output $(LUMEN_REPORTS)/frames-signs.json
 	python3 tools/check-visibility.py $(LUMEN_PACKAGE) --spec $(LUMEN_PVS)/visibility.generated.json
 	cp $(LUMEN_PVS)/report.json $(LUMEN_REPORTS)/derived-visibility.json
-	node $(SCHEMA_DIR)/bin/validate.mjs world $(LUMEN_PACKAGE)/world.json - 0.8
+	node $(SCHEMA_DIR)/bin/validate.mjs world $(LUMEN_PACKAGE)/world.json - 0.9
+	python3 tools/check-residents.py $(LUMEN_PACKAGE) $(if $(NPC_CHECK),--npc-check $(NPC_CHECK)) --output $(LUMEN_REPORTS)/residents-check.json
 	python3 tools/check-package.py $(LUMEN_PACKAGE) > lumen-reach/reports/package-check.json
 	python3 tools/check-placement.py $(LUMEN_PACKAGE) --output lumen-reach/reports/placement-check.json
 	python3 tools/check-walking.py $(LUMEN_PACKAGE) > lumen-reach/reports/walking-check.json
@@ -113,9 +114,12 @@ lumen-tour:
 LUMEN_RELEASE_PACKAGE := dist-07/com.hyprune.lumen-reach
 OPTIMISE_CORE ?= ../core-optimise
 LUMEN_PERF_BASELINE ?=
-.PHONY: lumen-release-check lumen-perf-gate
+# Residents (world format 0.9): core's character checker measures each resident's seat fit.
+NPC_CHECK ?= $(wildcard $(OPTIMISE_CORE)/build/hyprune-npc-check)
+.PHONY: lumen-release-check lumen-perf-gate lumen-residents-session
 lumen-release-check:
-	node $(SCHEMA_DIR)/bin/validate.mjs world $(LUMEN_RELEASE_PACKAGE)/world.json - 0.8
+	node $(SCHEMA_DIR)/bin/validate.mjs world $(LUMEN_RELEASE_PACKAGE)/world.json - 0.9
+	python3 tools/check-residents.py $(LUMEN_RELEASE_PACKAGE) $(if $(NPC_CHECK),--npc-check $(NPC_CHECK)) --output $(LUMEN_REPORTS)/release-residents-check.json
 	python3 tools/check-blueprint.py $(LUMEN_RELEASE_PACKAGE) > $(LUMEN_REPORTS)/release-blueprint-check.json
 	$(OPTIMISE_CORE)/build/hyprune-world-check $(LUMEN_RELEASE_PACKAGE) > $(LUMEN_REPORTS)/release-core-world-check.json
 	cp $(LUMEN_RELEASE_PACKAGE).verify.json $(LUMEN_REPORTS)/release-verify.json
@@ -123,6 +127,9 @@ lumen-release-check:
 # Nested route capture vs the previous release (tools/check-perf-gate.py).
 lumen-perf-gate:
 	python3 tools/check-perf-gate.py $(LUMEN_RELEASE_PACKAGE) --core $(OPTIMISE_CORE) $(if $(LUMEN_PERF_BASELINE),--baseline-package $(LUMEN_PERF_BASELINE)) --output $(LUMEN_REPORTS)/perf-gate --record
+# Nested resident check (walk, sit, stops, say, waypoint, guide, frames out of view).
+lumen-residents-session:
+	$(OPTIMISE_CORE)/dev/nested/run.sh $(abspath tools/check-residents-session.py) --core $(abspath $(OPTIMISE_CORE)) --package $(abspath $(LUMEN_RELEASE_PACKAGE)) --output $(abspath $(LUMEN_REPORTS)/residents-session)
 lumen-release: lumen-validate lumen-optimize lumen-release-check lumen-perf-gate lumen-budgets
 	mkdir -p artifacts/releases
 	tar --sort=name --mtime='UTC 2026-10-09' --owner=0 --group=0 --numeric-owner -I zstd -cf artifacts/releases/com.hyprune.lumen-reach-$(LUMEN_VERSION).tar.zst -C dist-07 com.hyprune.lumen-reach
