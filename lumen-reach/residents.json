@@ -138,12 +138,12 @@
     {
      "id": "west",
      "offset": -0.7,
-     "facing": "+z"
+     "facing": "-z"
     },
     {
      "id": "east",
      "offset": 0.7,
-     "facing": "+z"
+     "facing": "-z"
     }
    ]
   },
@@ -578,19 +578,35 @@
    "points": [
     {
      "position": [
-      41.8,
+      39.4,
       -6,
-      -82.7
+      -89.5
      ],
      "type": "line"
     },
     {
      "position": [
-      43.6,
+      41.8,
       -6,
-      -78.4
+      -82.7
      ],
      "type": "curve"
+    },
+    {
+     "position": [
+      42.2,
+      -6,
+      -77.345
+     ],
+     "type": "curve"
+    },
+    {
+     "position": [
+      44.4,
+      -6,
+      -77.0
+     ],
+     "type": "line"
     },
     {
      "position": [
@@ -599,19 +615,11 @@
       -74.9
      ],
      "type": "curve"
-    },
-    {
-     "position": [
-      42.2,
-      -6,
-      -75.055
-     ],
-     "type": "line"
     }
    ],
    "stops": [
     {
-     "point": 0,
+     "point": 1,
      "seconds": 5,
      "face": {
       "anchor": "rime-vault-slot-03-operator-desk-02"
@@ -619,6 +627,11 @@
     },
     {
      "point": 2,
+     "seconds": 20,
+     "seat": "vault-south-bench-east"
+    },
+    {
+     "point": 4,
      "seconds": 6,
      "face": {
       "position": [
@@ -627,11 +640,6 @@
        -60
       ]
      }
-    },
-    {
-     "point": 3,
-     "seconds": 20,
-     "seat": "vault-south-bench-east"
     }
    ]
   },
@@ -642,9 +650,9 @@
    "points": [
     {
      "position": [
-      45.6,
+      43.0,
       -6,
-      -74.9
+      -78.5
      ],
      "type": "line"
     },
@@ -818,9 +826,9 @@
      "action": {
       "type": "say",
       "lines": [
-       "Morning light reaches the court first. The big wall wakes up before anyone else.",
-       "The terrace by the globe is the best place to watch it all.",
-       "Rest on the bench whenever you like. I keep the east end warm."
+       "Mornings start here, in the sun.",
+       "The globe terrace has the best view.",
+       "Sit a while. The bench is warm."
       ]
      }
     }
@@ -838,9 +846,9 @@
      "action": {
       "type": "say",
       "lines": [
-       "Sound carries in this hall. Even the racks seem to hum along.",
-       "From the north glass you can count every ridge out there.",
-       "The service passage on the east side goes down to Rime Vault."
+       "Sound carries far in this hall.",
+       "Count the ridges from the glass.",
+       "Rime Vault is down the east passage."
       ]
      }
     },
@@ -869,9 +877,9 @@
      "action": {
       "type": "say",
       "lines": [
-       "It stays cold down here, which the machines like more than I do.",
-       "The south side opens onto the valley. That bench is the best seat in the vault.",
-       "Signal Rise is up the snow ascent past the east door. I can walk you there."
+       "It stays cold down here.",
+       "The machines like it more than I do.",
+       "Signal Rise is up the snow ramp."
       ]
      }
     },
@@ -903,9 +911,9 @@
      "action": {
       "type": "say",
       "lines": [
-       "Snow again tonight. The dish keeps listening anyway.",
-       "Up on the dish deck the whole fortress wall fits in one look.",
-       "The terrace bench faces the gate. Good spot for watching the big screen."
+       "Snow again tonight.",
+       "The dish keeps listening anyway.",
+       "The dish deck sees the whole gate."
       ]
      }
     }

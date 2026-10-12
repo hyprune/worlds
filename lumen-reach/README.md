@@ -138,8 +138,8 @@ PACKAGE --in-place` re-applies the data to a built package without a bake.
 - **Routes.** Each resident walks a calm route with three stops: a vista, a spot
   beside a tool screen (outside its approach zone) and a bench seat. Crimson
   sets a waypoint to Rime Vault; Ember guides the player to Signal Rise's home
-  (`to-signal-rise`, from the vault's south edge, which every point of Ember's
-  route reaches in a straight line).
+  (`to-signal-rise`, from just north-east of the vault bench, which every point
+  of Ember's route reaches in a straight line).
 - **Seats.** 0.40 m benches (both Sun Court seats, and new ones in Array Hall's
   west aisle, at Rime Vault's south edge and on Signal Rise's west terrace) with
   two `seats[]` anchors each, 0.32 m in front of the seat edge so the walker's

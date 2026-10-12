@@ -27,7 +27,9 @@ rules offline and adds the release gates the tooling owns:
   core's seat fit; otherwise core turns the stop into a plain stop);
 - guides: the join leg from every route sample of the guiding resident to the
   guide path's start is walkable (core refuses a guide whose join is blocked);
-- limits: 16 characters, 8 per path, 1-8 say lines of 1-160 characters.
+- limits: 16 characters, 8 per path, 1-8 say lines of 1-160 characters, and at most
+  CAPTION characters per line: core draws the line as a one-line caption (440 px at
+  1080p) and cuts longer ones.
 
   check-residents.py PACKAGE [--npc-check BIN] [--output REPORT.json]
 """
@@ -39,7 +41,7 @@ from gltf_io import load
 from raycast import Triangles
 import navmesh_io
 
-STEP, MAX_STEP, NAV_SAMPLE, DOOR, STOP_MARGIN = .25, .35, .5, 1.2, .5
+STEP, MAX_STEP, NAV_SAMPLE, DOOR, STOP_MARGIN, CAPTION = .25, .35, .5, 1.2, .5, 38
 DESIGN_SLOPE = math.degrees(math.atan(.4))
 TOL = (.15, .5, .15)
 
@@ -252,6 +254,8 @@ for cid, c in chars.items():
         if it['action']['type'] == 'say':
             lines = it['action']['lines']
             if not 1 <= len(lines) <= 8 or any(not 1 <= len(x) <= 160 for x in lines): fail('say', f'{cid}/{it["id"]}', lines=len(lines))
+            long = [x for x in lines if len(x) > CAPTION]
+            if long: fail('say-caption', f'{cid}/{it["id"]}', limit=CAPTION, lines=long)
 
 # Route samples for the navmesh island and widths, collected first (one navmesh build).
 routes = {}

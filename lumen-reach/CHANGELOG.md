@@ -14,7 +14,7 @@ Rise. The characters ship in the package (`characters/<id>/`).
 
 - **Benches.** Both Sun Court seats are 0.40 m benches (they were 0.61 m,
   higher than the residents' sit fits). New 0.40 m benches: Array Hall's west
-  aisle, Rime Vault's south edge (facing the valley) and Signal Rise's west
+  aisle, Rime Vault's south edge (facing the console) and Signal Rise's west
   terrace (facing the fortress). Seat anchors on all of them.
 - **keepClear** volumes in front of the four primary walls and at the doors
   between areas.
