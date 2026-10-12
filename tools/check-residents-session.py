@@ -206,3 +206,4 @@ def acceptance(client, children, args, shell_token, socketpath):
 
 npcs.prepare = prepare; npcs.acceptance = acceptance
 s.run(SimpleNamespace(npcs=True, m3b=False, m3a=False, m2=False, m1=False, integration=False, live=False, serve=False, record=False, visible=False, authoring=False, climbing=False))
+sys.exit(0 if report.get('status') == 'PASS' else 1)
