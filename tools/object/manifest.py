@@ -12,23 +12,25 @@ MEASURED is `node tools/gltf/object.mjs measure SCENE`: the bounds always come f
 and for --character the clips (walk and run speeds from extras.speed), the height and the
 `sit` seat height, kept only when it lies in the 0.2-1 m range seats use. The base (for
 example traits.decorative, slots or traits.machine an author wrote) is merged under the
-flags: a flag wins over the base, measured values win over both.
+flags: a flag wins over the base, measured values win over both. A base `companion` block
+(object format 0.10, RFC-0010 companions amendment) is kept, and the idle variants it names
+are listed among the character's clips when the glTF has them.
 """
 import argparse, json, pathlib, sys
 
 # RFC-0010 clips core knows; other clips stay in the glTF but are not listed.
-CHARACTER_CLIPS = ['idle', 'walk', 'run', 'idle_fidget', 'turn_left', 'turn_right', 'look_around', 'wave', 'nod', 'sit', 'sit_idle', 'stand']
+CHARACTER_CLIPS = ['idle', 'walk', 'run', 'idle_fidget', 'turn_left', 'turn_right', 'look_around', 'wave', 'nod', 'sit', 'sit_idle', 'stand', 'talk']
 SPEED_CLIPS = {'walk', 'run'}
 
 
-def character_trait(measured, accent, radius, base):
+def character_trait(measured, accent, radius, base, idles=()):
     clips = measured.get('clips') or {}
     missing = [c for c in ('walk', 'idle') if c not in clips]
     if missing:
         raise SystemExit(f'MANIFEST: the character has no {" or ".join(missing)} clip')
     trait = dict(base or {})
     listed = {}
-    for name in CHARACTER_CLIPS:
+    for name in CHARACTER_CLIPS + [i for i in idles if i not in CHARACTER_CLIPS]:
         if name not in clips:
             continue
         entry = {}
@@ -96,7 +98,11 @@ def main():
         head['thumbnail'] = thumbnail
     head['lighting'] = doc.get('lighting') or {'mode': 'probe'}
     if a.character:
-        traits['character'] = character_trait(measured, a.accent, a.radius, traits.get('character'))
+        idles = (doc.get('companion') or {}).get('idles') or []
+        missing = [i for i in idles if i not in (measured.get('clips') or {})]
+        if missing:
+            raise SystemExit(f'MANIFEST: companion idle variants not in the glTF: {", ".join(missing)}')
+        traits['character'] = character_trait(measured, a.accent, a.radius, traits.get('character'), idles)
     else:
         if a.collision:
             traits['collidable'] = {'node': a.collision}
@@ -112,6 +118,10 @@ def main():
                 movable['scale'] = [float(v) for v in a.scale_range.split(',')]
             traits['movable'] = movable
     head['traits'] = traits
+    if doc.get('companion') is not None:
+        if not a.character:
+            raise SystemExit('MANIFEST: a companion block needs --character')
+        head['companion'] = doc['companion']
     if doc.get('slots'):
         head['slots'] = doc['slots']
     pathlib.Path(a.out).write_text(json.dumps(head, indent=1) + '\n')
