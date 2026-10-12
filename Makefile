@@ -21,7 +21,7 @@ objects-check:
 	SCHEMA_DIR=$(SCHEMA_DIR) ./tools/object-check objects/armillary objects/machines/*/ characters/resident-*/
 # Machine objects (RFC-0011/0013 drafts): build on the bake host into
 # dist/objects/machines/<id>/, then optimise (KTX2 + meshopt) into objects/machines/<id>/.
-MACHINES := job-token ci-conveyor queue-stack server-rack deploy-lift build-monitor
+MACHINES := job-token ci-conveyor queue-stack server-rack deploy-lift build-monitor gauge-tube gauge-abacus gauge-cube
 machines:
 	test -f lumen-reach/materials/tiles/wood-albedo.png || python3 lumen-reach/materials/prepare.py
 	for m in $(MACHINES); do HYPRUNE_BAKE_DIR=hyprune-bake/worlds-machines HYPRUNE_BAKE_PROJECT=objects ./tools/remote-blender.sh -b --python-exit-code 1 -P objects/machines/$$m/build.py || exit 1; done

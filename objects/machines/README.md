@@ -1,8 +1,8 @@
 # Machine objects
 
-Five starter **machines** and the item they move: world objects that show the
-state of real systems (CI pipelines, queues, hosts, deploys, builds) once data
-is bound to them. Each is an object directory in the shape of
+Five starter **machines**, the item they move and three **gauges**: world
+objects that show the state of real systems (CI pipelines, queues, hosts,
+deploys, builds, any value from 0 to 100) once data is bound to them. Each is an object directory in the shape of
 [RFC-0011](https://hyprune.com/rfcs/0011-objects/) (`object.json`, a glTF,
 thumbnail), with the `machine` trait and slots of
 [RFC-0013](https://hyprune.com/rfcs/0013-live-objects/). Both RFCs are drafts,
@@ -23,6 +23,9 @@ contributors; build scripts MIT.
 | `deploy-lift` | A deploy: the release crate rides a platform past queued, building and rolling stops to the live deck. | `status`, `progress`, `environment`, `finished` | 1,974 |
 | `build-monitor` | A build: a glowing face with a state glyph, a halo that turns while building, a burst on success. | `status`, `progress`, `succeeded` | 1,568 |
 | `job-token` | The item that rides the conveyor's tracks (`mover`, `item: true`), its band showing the job state. | (item state) | 116 |
+| `gauge-tube` | A value 0–100 as an amber liquid column in a glass tube (it sloshes as it settles); a white halo ring outside the glass rides at the running average. | `value` 0–100, `display`, `label`, `level` ok/warn/fail, `average` | 2,860 |
+| `gauge-abacus` | A value 0–100 as beads on ten rods: amber beads pushed right count it, ivory beads on the left make up the hundred; a halo collar on the side rail shows the average. | same | 2,168 (+ bead copies) |
+| `gauge-cube` | A value 0–100 as voxels filling a 5 × 5 × 4 glass case from the bottom; a halo ring around the case shows the average. | same | 2,174 (+ voxel copies) |
 
 ## Conventions
 
@@ -43,6 +46,18 @@ contributors; build scripts MIT.
   the same colour and emission.
 - **Stacks** (`waiting`, `progress`, `crates`) name one node drawn at its first
   grid cell; a runtime hides it at rest and draws copies by the layout.
+- **Levels** (gauges) move a node's subtree by a value 0–1: a `fill` scales it
+  along the axis about the node's origin, a `slide` moves it from its authored
+  (level 0) pose. A fill node is an empty at the bottom of the fill holding the
+  mesh (the optimiser's quantisation moves the origins of mesh nodes, never of
+  empties); its `surface` is a sibling node authored at the full level. Halo
+  rings are authored at level 0.
+- **Gauges** share one manifest shape (`kit.gauge_manifest`): inputs `value`,
+  `display`, `label`, `level` and `average`, a `fill` states slot, `label` and
+  `display` labels on a tilted plate, and `level:average-ring` driven by the
+  running average of `value` (or the source's own `average`). Glass is a
+  blended material (`alphaMode` `BLEND`). Stacks may use signed spacing (the
+  abacus's `rest` beads fill from the top rod down) and a `rate`.
 - **Toggles** are plain nodes (`alarm-flag`, `gate`, `glyph-ok` …).
 - **Tracks** are asset-space polylines in `slots.tracks`; the conveyor also
   carries them as nodes (`track`, `track-p00` …) for tools that read the glTF.
@@ -84,6 +99,7 @@ blender -b -P objects/machines/render.py -- --mode sheet --machine ci-conveyor -
 python3 objects/machines/sheet.py OUT sheet.png --thumbnail dist/objects/machines/ci-conveyor
 blender -b -P objects/machines/render.py -- --mode lineup --out OUT && python3 objects/machines/lineup.py OUT lineup.png
 blender -b -P objects/machines/render.py -- --mode turntable --seconds 10 --out FRAMES
+blender -b -P objects/machines/render.py -- --mode turntable --machines gauge-tube,gauge-abacus,gauge-cube --seconds 6 --out FRAMES
 ```
 
 `scenarios.py` holds the input values each render shows. Labels' text, items

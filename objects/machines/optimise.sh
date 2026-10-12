@@ -10,7 +10,7 @@
 # to objects/machines/<id>/.
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
-IDS=("$@"); [[ ${#IDS[@]} -gt 0 ]] || IDS=(job-token ci-conveyor queue-stack server-rack deploy-lift build-monitor)
+IDS=("$@"); [[ ${#IDS[@]} -gt 0 ]] || IDS=(job-token ci-conveyor queue-stack server-rack deploy-lift build-monitor gauge-tube gauge-abacus gauge-cube)
 for id in "${IDS[@]}"; do
   [[ "$id" =~ ^[a-z][a-z0-9-]*$ ]] || exit 2
   src="$ROOT/dist/objects/machines/$id"; stage="$ROOT/build/machines-stage/machine-$id"; opt="$ROOT/build/machines-opt/$id"
