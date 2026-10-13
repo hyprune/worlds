@@ -3,6 +3,29 @@
 Measured figures, gates and archive hashes for each release are in the
 release records (`reports/release*.json`).
 
+## 0.11.1
+
+Fixes from a live review of 0.11.0.
+
+- **Depth fighting.** Separate objects that met flush (pier tops under
+  landings, the rooftop deck over the facade lintel and the bridge run, the
+  Array Hall ribs against the service passage crown, the roof beams, duplicate
+  rail posts, screen bezels) shimmered as the camera moved. `coplanar.py` now
+  resolves every same-facing coplanar overlap before the objects are joined:
+  a face wholly covered by a level or nearer face is deleted, otherwise one
+  face steps 12 mm back (collision is unchanged). The rooftop bridge run and
+  the diagnostics platform no longer overlap their neighbours, and the
+  crags' snow shelves stand clear of the rock. `tools/check-coplanar-planes.py`
+  (any plane orientation) joins `make lumen-validate`.
+- **Rooftop drain pipes** end in the deck soffit; their elbows stood 0.17 m
+  out of the rooftop deck.
+- **Valley terrain** below the settlement is unlit like the sky and the
+  painted horizon, in daylight tints with a pale haze on the outer rings. As
+  fogged PBR it lay far under the height fog's base and read as a flat
+  near-black sheet below every edge.
+- **Residents at screens** stop on the screen's normal, 2.1-2.2 m in front
+  of the kiosk, lectern, desk and terminal bench (they stood beside them).
+
 ## 0.11.0
 
 Residents (world format 0.9). Four starter-kit residents, one per area in its
