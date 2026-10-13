@@ -376,11 +376,19 @@
     },
     {
      "position": [
+      17.0,
+      0,
+      -2.4
+     ],
+     "type": "line"
+    },
+    {
+     "position": [
       19.3,
       0,
       -2.7
      ],
-     "type": "curve"
+     "type": "line"
     },
     {
      "position": [
@@ -422,14 +430,14 @@
      "clip": "look_around"
     },
     {
-     "point": 6,
+     "point": 5,
      "seconds": 5,
      "face": {
       "anchor": "sun-court-slot-01-kiosk-pillar-01"
      }
     },
     {
-     "point": 9,
+     "point": 10,
      "seconds": 20,
      "seat": "court-plaza-bench-west"
     }
@@ -443,9 +451,25 @@
    "points": [
     {
      "position": [
-      20.0,
+      18.0,
       0,
-      -40.6
+      -37.6
+     ],
+     "type": "line"
+    },
+    {
+     "position": [
+      19.9,
+      0,
+      -38.2
+     ],
+     "type": "line"
+    },
+    {
+     "position": [
+      19.9,
+      0,
+      -41.0
      ],
      "type": "line"
     },
@@ -560,6 +584,22 @@
       -41.6
      ],
      "type": "line"
+    },
+    {
+     "position": [
+      16.2,
+      0,
+      -40.2
+     ],
+     "type": "line"
+    },
+    {
+     "position": [
+      16.3,
+      0,
+      -38.2
+     ],
+     "type": "line"
     }
    ],
    "stops": [
@@ -571,12 +611,12 @@
      }
     },
     {
-     "point": 5,
+     "point": 7,
      "seconds": 16,
      "seat": "hall-glass-bench-east"
     },
     {
-     "point": 7,
+     "point": 9,
      "seconds": 6,
      "face": {
       "position": [
@@ -603,11 +643,27 @@
     },
     {
      "position": [
-      41.8,
+      42.0,
       -6,
-      -82.7
+      -82.6
      ],
-     "type": "curve"
+     "type": "line"
+    },
+    {
+     "position": [
+      42.9,
+      -6,
+      -80.0
+     ],
+     "type": "line"
+    },
+    {
+     "position": [
+      45.0,
+      -6,
+      -79.6
+     ],
+     "type": "line"
     },
     {
      "position": [
@@ -636,19 +692,19 @@
    ],
    "stops": [
     {
-     "point": 1,
+     "point": 3,
      "seconds": 5,
      "face": {
       "anchor": "rime-vault-slot-03-operator-desk-02"
      }
     },
     {
-     "point": 2,
+     "point": 4,
      "seconds": 20,
      "seat": "vault-south-bench-east"
     },
     {
-     "point": 4,
+     "point": 6,
      "seconds": 6,
      "face": {
       "position": [
@@ -786,19 +842,19 @@
     },
     {
      "position": [
-      37.5,
+      37.6,
       0,
-      -122.6
+      -121.2
      ],
      "type": "curve"
     },
     {
      "position": [
-      37.6,
+      41.0,
       0,
-      -119.6
+      -120.6
      ],
-     "type": "curve"
+     "type": "line"
     },
     {
      "position": [
@@ -816,7 +872,7 @@
      "clip": "look_around"
     },
     {
-     "point": 7,
+     "point": 8,
      "seconds": 5,
      "face": {
       "anchor": "signal-rise-slot-04-terminal-bench-01"
