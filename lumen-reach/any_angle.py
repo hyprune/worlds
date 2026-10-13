@@ -6,7 +6,8 @@ from mathutils import Vector
 
 def image_material(B,name,filename):
  m=B.mat(name,(1,1,1),unlit=True);nt=m.node_tree
- t=nt.nodes.new('ShaderNodeTexImage');t.image=B.bpy.data.images.load(str(B.HERE/'materials/tiles'/filename));t.extension='REPEAT'
+ # check_existing: the valley's panorama band shares the sky's image (one texture).
+ t=nt.nodes.new('ShaderNodeTexImage');t.image=B.bpy.data.images.load(str(B.HERE/'materials/tiles'/filename),check_existing=True);t.extension='REPEAT'
  uv=nt.nodes.new('ShaderNodeUVMap');uv.uv_map='UV0';nt.links.new(uv.outputs['UV'],t.inputs['Vector'])
  em=next(n for n in nt.nodes if n.type=='EMISSION');nt.links.new(t.outputs['Color'],em.inputs['Color'])
  return m
@@ -57,10 +58,12 @@ def shade(B,o,names):
 
 
 def materials(B):
- # 0.11.1: daylight tints for unlit terrain (see finish_export), and a pale haze
- # for the outer valley rings so the floor fades into the painted horizon mist.
- for name,col in [('land-sun',(.84,.86,.80)),('land-mid',(.66,.73,.75)),('land-shade',(.50,.58,.62)),('land-haze',(.76,.82,.85))]:
+ # 0.11.1: daylight tints for unlit terrain (see finish_export). 0.11.1's pale haze for
+ # the outer rings is gone: the outer valley carries the panorama itself (terrain()).
+ for name,col in [('land-sun',(.84,.86,.80)),('land-mid',(.66,.73,.75)),('land-shade',(.50,.58,.62))]:
   B.mat(name,col,'rock',unlit=True,tint=True);B.P.TILE_METERS[name]=12
+ # 0.11.2: the valley carries the sky panorama itself (terrain()).
+ image_material(B,'land-panorama','sky-v7-albedo.png')
  for name,col in [('cascade-sun',(.65,.59,.45)),('cascade-mid',(.39,.41,.38)),('cascade-shade',(.20,.27,.29))]:
   B.mat(name,col,'concrete',unlit=True,tint=True);B.P.TILE_METERS[name]=2
  B.P.MATS['canvas']['lumenAlbedoTint']=[.55,.43,.31]
@@ -101,6 +104,78 @@ def night(B):
   if p.center.z>48 and p.normal.z>.4:p.material_index=3
 
 
+# Valley terrain profile (Blender z-up, around the sky's centre): the 0.7.0 rings
+# out to 174 m keep their heights; the outer rings are new in 0.11.2.
+SKY_CENTER=(20,65,0)
+INNER=[(28,-14,0),(56,-15,0),(82,-28,2),(108,-62,6),(140,-70,10),(174,-76,6)]
+OUTER=[(200,-79,5),(230,-83,3),(262,-87,1.5),(286,-90,0)]
+# The panorama on the valley is the sky as seen from VIEWPOINT (between the Sun Court and
+# the Array Hall, the two open areas): each terrain point shows the sky pixel behind it
+# from there. Seen from those areas it reads as the painting itself; at the rim, 10 m
+# inside the sphere, it is the pixel behind the rim from anywhere.
+VIEWPOINT=(4,24,3);SKY_RADIUS=310
+# Near the settlement the projection's origin rises (LIFT m inside LIFT_FROM, nothing from
+# LIFT_TO out, smooth between): rays meet the nearby ground steeply instead of grazing it,
+# so the painting doesn't smear there; the far valley and the rim keep the exact viewpoint.
+LIFT,LIFT_FROM,LIFT_TO=45,80,230
+CLIFF_FOOT=108  # rock inside this ring radius: the plinths' slopes and cliff (seen close, the painting would stretch)
+
+
+def terrain(B):
+ cx,cy,_=SKY_CENTER;segments=256;tau=math.tau
+ def squash(r):return .76 if r<=174 else .76+.24*min(1,(r-174)/(286-174))
+ def ring_z(k,a,rings):
+  r,h,amp=rings[k];wave=math.sin(a*7+k*.7)**2
+  return h+amp*wave+amp*.35*math.sin(a*13+k)
+ # Sub-rings: linear between the profile's rings (inner: the old surface), ~6 m apart
+ # inside, ~8 m through the mix band, coarser beyond.
+ profile=INNER+OUTER;rows=[]
+ for k in range(len(profile)-1):
+  r0,r1=profile[k][0],profile[k+1][0];step=6 if r1<=174 else 12
+  n=max(1,math.ceil((r1-r0)/step))
+  for i in range(n):rows.append((k,i/n))
+ rows.append((len(profile)-1,0))
+ verts=[(cx,cy,-14)]
+ for k,t in rows:
+  for j in range(segments):
+   a=j/segments*tau
+   if t==0:r=profile[k][0];z=ring_z(k,a,profile)
+   else:
+    r=profile[k][0]*(1-t)+profile[k+1][0]*t;z=ring_z(k,a,profile)*(1-t)+ring_z(k+1,a,profile)*t
+   verts.append((cx+r*math.sin(a),cy+r*squash(r)*math.cos(a),z))
+ faces=[(0,1+(j+1)%segments,1+j) for j in range(segments)]
+ for q in range(len(rows)-1):
+  for j in range(segments):
+   b=1+q*segments;n=(j+1)%segments;faces.extend([(b+j,b+n,b+segments+n),(b+j,b+segments+n,b+segments+j)])
+ o=B.mesh('Watershed solid valley shelves',verts,faces,'land-sun',group='vista')
+ names=['land-sun','land-mid','land-shade','land-panorama']
+ for name in names[1:]:o.data.materials.append(B.P.MATS[name])
+ sun=Vector((-.45,-.5,.74)).normalized();counts={}
+ for p in o.data.polygons:
+  c=p.center;r=math.hypot(c.x-cx,(c.y-cy)/.76)
+  for _ in range(3):r=math.hypot(c.x-cx,(c.y-cy)/squash(r))  # the ring radius under the varying squash
+  light=p.normal.dot(sun)
+  idx=(0 if light>.3 else 1 if light>-.25 else 2) if r<=CLIFF_FOOT else 3
+  p.material_index=idx;counts[names[idx]]=counts.get(names[idx],0)+1
+ # UV0: tiled covers keep B.add's physical projection. The panorama faces take the sky
+ # sphere's own latitude/longitude (as sphere(): u from +Y towards +X past DAY_SEAM, v
+ # from the bottom pole) at the point where the ray from VIEWPOINT through the vertex
+ # meets the sphere, unwrapped across the painting's seam.
+ uv=o.data.uv_layers[0];E=Vector(VIEWPOINT);C=Vector(SKY_CENTER)
+ def sky_uv(P):
+  u=min(1,max(0,(math.hypot(P.x-E.x,P.y-E.y)-LIFT_FROM)/(LIFT_TO-LIFT_FROM)));O=E+Vector((0,0,LIFT*(1-u*u*(3-2*u))))
+  d=P-O;oc=O-C;b=oc.dot(d);t=(-b+math.sqrt(b*b-d.dot(d)*(oc.dot(oc)-SKY_RADIUS**2)))/d.dot(d);q=O+d*t-C
+  return ((math.atan2(q.x,q.y)-DAY_SEAM)/tau)%1,(math.atan2(q.z,math.hypot(q.x,q.y))+math.pi/2)/math.pi
+ for p in o.data.polygons:
+  if p.material_index!=3:continue
+  vals=[sky_uv(o.data.vertices[vi].co) for vi in p.vertices]
+  cross=any(u<.1 for u,_ in vals) and any(u>.9 for u,_ in vals)
+  for li,(u,v) in zip(p.loop_indices,vals):uv.data[li].uv=(u+1 if cross and u<.1 else u,v)
+ B.TERRAIN_REPORT={'segments':segments,'rings':len(rows),'faces':len(o.data.polygons),'materials':counts,
+                   'rimDistanceFromSkyCentre':round(math.hypot(286,90),1),'panoramaViewpoint':list(VIEWPOINT),'originLift':[LIFT,LIFT_FROM,LIFT_TO],'cliffFoot':CLIFF_FOOT}
+ (B.ART/'terrain-report.json').write_text(json.dumps(B.TERRAIN_REPORT,indent=2)+'\n')
+
+
 # The panorama's only seam (the painting's left/right edges) faces the Signal
 # massif: from every walkable eye the massif hides its landscape band. 0.7.0
 # put it due south, centred in the Sun Court's main outward view.
@@ -114,23 +189,15 @@ def vista(B):
  # that keeps falling outward. 0.7.0's outer shelves (r>=174 m) crested near
  # eye level and banded flat grey across the painted valley; beyond the
  # settlement the terrain now stays >=6 degrees below every walkable eye.
- segments=128;verts=[(20,65,-14)];faces=[]
- radii=[28,56,82,108,140,174,215,258,292]
- for k,r in enumerate(radii):
-  for j in range(segments):
-   a=j/segments*math.tau;wave=math.sin(a*7+k*.7)**2
-   h=[-14,-15,-28,-62,-70,-76,-80,-84,-88][k]
-   amp=[0,0,2,6,10,6,4,2,0][k]
-   z=h+amp*wave+amp*.35*math.sin(a*13+k)
-   verts.append((20+r*math.sin(a),65+r*.76*math.cos(a),z))
- for j in range(segments):faces.append((0,1+(j+1)%segments,1+j))
- for k in range(len(radii)-1):
-  for j in range(segments):
-   q=1+k*segments;n=(j+1)%segments;faces.extend([(q+j,q+n,q+segments+n),(q+j,q+segments+n,q+segments+j)])
- o=B.mesh('Watershed solid valley shelves',verts,faces,'land-sun',group='vista');shade(B,o,['land-sun','land-mid','land-shade'])
- o.data.materials.append(B.P.MATS['land-haze'])
- for p in o.data.polygons:
-  if math.hypot(p.center.x-20,(p.center.y-65)/.76)>150:p.material_index=3
+ # 0.11.2: the same inner surface (r<=174 m), finer (256 segments, rings every
+ # 6-8 m). Outside it the rings widen to a circle whose rim lies 300 m from the
+ # sky's centre (10 m inside the sphere). The valley carries the panorama itself
+ # (see VIEWPOINT): its forests, cliffs and cloud sea continue the painting and
+ # the rim's silhouette shows the painting it covers, so there is no horizon seam.
+ # Only the slopes and cliff under the plinths keep rock (in three baked light levels):
+ # seen close and at a grazing angle the painting would stretch there. The rock ends on
+ # a ring at the cliff foot, so it meets the painting along a smooth curve.
+ terrain(B)
  # Settlement plinths end in rough sloping rock, not unsupported paper floors.
  for name,x0,x1,y0,y1,z in [('Court',-25,27,-17,27,-.38),('Hall',-14,28,31,63,-.38),('Vault',25,57,73,104,-6.4),('Rise',28,86,111,162,-.38)]:
   v=[(x0,y0,z),(x1,y0,z),(x1,y1,z),(x0,y1,z),(x0-4,y0-4,-17),(x1+5,y0-3,-19),(x1+3,y1+4,-18),(x0-5,y1+5,-16)]
@@ -231,14 +298,14 @@ def architecture(B):
 def finish_export(B,g,m):
  # Dome interiors and mountain exteriors are deliberately single sided.
  for mat in g['materials']:
-  if mat['name'].split('--')[-1] in ['sky-v7','night-sky-v7','land-sun','land-mid','land-shade','land-haze']:
+  if mat['name'].split('--')[-1] in ['sky-v7','night-sky-v7'] or mat['name'].split('--')[-1].startswith('land-'):
    mat['doubleSided']=False
  # 0.11.1: distant terrain stays KHR_materials_unlit like the skies, so core's fog
  # (excludeUnlit) leaves it alone. As emission-textured PBR (0.7.0-0.11.0) it lay
  # 14-88 m under the fog base and the dark blue height fog turned the valley floor
  # below every edge into a flat near-black sheet that read as dark glass.
  for mat in g['materials']:
-  if mat['name'].split('--')[-1] in ['land-sun','land-mid','land-shade','land-haze','land-snow']:mat['doubleSided']=False
+  if mat['name'].split('--')[-1].startswith('land-'):mat['doubleSided']=False
  for t in g.get('textures',[]):
   im=g['images'][t['source']].get('uri','')
   if 'sky-v7' in im:
