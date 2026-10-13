@@ -43,7 +43,9 @@ def apply(area,B):
     plate('Facade panel reveal',(x,23.13,z),(2.1,.20,.09))
    vent((x,22.98,4.8),1.6,.8)
   for x in [-5.8,22.5]:
-   cable('Facade rainwater pipe',[(x,23.08,.25),(x,23.08,15.6),(x,24,16.1)],.075)
+   # 0.11.1: straight up into the rooftop slab's soffit (15.68). The old elbow ended
+   # at (x,24,16.1), 0.17 m above the deck: a black stub on the rooftop.
+   cable('Facade rainwater pipe',[(x,23.08,.25),(x,23.08,15.72)],.075)
    for z in [2,5,8,11,14]:plate('Rainwater clamp',(x,23.11,z),(.26,.22,.085),'metal')
   # Grounded header plaques; the landing remains open beneath them.
   for x in [-5,21]:wall_light(x,22.95,3.8,1.4)
@@ -207,4 +209,6 @@ def snowbank(B,pos,scale,rock=False):
  B.mesh('Snow basin crag' if rock else 'Accumulated drift',verts,faces,'rock' if rock else 'snow')
  if rock:
   # Alternate snow shelves reveal dark rock beneath a broken upper snow line.
-  B.mesh('Crag upper snow',[(px,py,pz+.05) for px,py,pz in verts[:33]],faces[:32],'snow')
+  # 0.11.1: also out from the crag's axis. Lifted only, the shelf lay 8 mm off the
+  # crag's steep faces and depth-fought it.
+  B.mesh('Crag upper snow',[(x+(px-x)*1.02,y+(py-y)*1.02,pz+.05) for px,py,pz in verts[:33]],faces[:32],'snow')

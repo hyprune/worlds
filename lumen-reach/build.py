@@ -397,7 +397,7 @@ def court():
  # the 1.5 m bridge so the diagonal clears the open slot beside the ramp.
  slab('Roof upper landing',-20,-7.3,18.5,24,12,'concrete');ramp('Roof final approach',-13.2,-10.2,20,36,12,16,20)
  rail((-20,18.5,12),(-7.3,18.5,12));rail((-20,18.5,12),(-20,20,12));rail((-7.3,18.5,12),(-7.3,20,12))
- slab('Rooftop bridge',-13.2,-3,36,37.5,16,'concrete');slab('Rooftop bridge run',-7,-3,22,36,16,'concrete');rail((-7,22,16),(-7,35.5,16))
+ slab('Rooftop bridge',-13.2,-3,36,37.5,16,'concrete');slab('Rooftop bridge run',-7,-3,27,36,16,'concrete');rail((-7,22,16),(-7,35.5,16))
  # 0.9.1 (owner): guard every open edge of the raised walkways (check-navmesh
  # unguarded-drop). Same rail() as elsewhere; openings stay where ramps,
  # stairs and routes continue.
@@ -804,7 +804,8 @@ def rise():
  screen('kiosk-pillar',(45.3,122.9,2.25),(1.0,1.9),tilt=.14)
  screen('wall-inset-console',(76,146.9,4.9),(3.0,2.0))
  ramp('Diagnostics platform ascent',75,78,130,142,0,2.4,12,'concrete')
- slab('Diagnostics platform',72,80,142,148,2.4,'concrete')
+ # 0.11.1: ends at the operator room floor (y 146) instead of overlapping it to 148.
+ slab('Diagnostics platform',72,80,142,146,2.4,'concrete')
  rail((72,142,2.4),(72,148,2.4))
  box('Field operator bench',(38,136,1),(3.8,1,.17),'metal',solid=True)
  screen('operator-desk',(38,135.85,1.95),(2.5,1.4),tilt=.20)
