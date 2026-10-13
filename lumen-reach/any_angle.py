@@ -57,12 +57,14 @@ def shade(B,o,names):
 
 
 def materials(B):
- for name,col in [('land-sun',(.56,.60,.57)),('land-mid',(.38,.46,.48)),('land-shade',(.23,.31,.34))]:
+ # 0.11.1: daylight tints for unlit terrain (see finish_export), and a pale haze
+ # for the outer valley rings so the floor fades into the painted horizon mist.
+ for name,col in [('land-sun',(.84,.86,.80)),('land-mid',(.66,.73,.75)),('land-shade',(.50,.58,.62)),('land-haze',(.76,.82,.85))]:
   B.mat(name,col,'rock',unlit=True,tint=True);B.P.TILE_METERS[name]=12
  for name,col in [('cascade-sun',(.65,.59,.45)),('cascade-mid',(.39,.41,.38)),('cascade-shade',(.20,.27,.29))]:
   B.mat(name,col,'concrete',unlit=True,tint=True);B.P.TILE_METERS[name]=2
  B.P.MATS['canvas']['lumenAlbedoTint']=[.55,.43,.31]
- B.mat('land-snow',(.55,.65,.72),'snow',unlit=True,tint=True);B.P.TILE_METERS['land-snow']=8
+ B.mat('land-snow',(.80,.86,.90),'snow',unlit=True,tint=True);B.P.TILE_METERS['land-snow']=8
  B.mat('roofing',(.26,.30,.32),'paving',rough=.85,tint=True);B.P.TILE_METERS['roofing']=2
  B.mat('soffit',(.72,.76,.74),'concrete',rough=.85,tint=True);B.P.TILE_METERS['soffit']=2
 
@@ -126,6 +128,9 @@ def vista(B):
   for j in range(segments):
    q=1+k*segments;n=(j+1)%segments;faces.extend([(q+j,q+n,q+segments+n),(q+j,q+segments+n,q+segments+j)])
  o=B.mesh('Watershed solid valley shelves',verts,faces,'land-sun',group='vista');shade(B,o,['land-sun','land-mid','land-shade'])
+ o.data.materials.append(B.P.MATS['land-haze'])
+ for p in o.data.polygons:
+  if math.hypot(p.center.x-20,(p.center.y-65)/.76)>150:p.material_index=3
  # Settlement plinths end in rough sloping rock, not unsupported paper floors.
  for name,x0,x1,y0,y1,z in [('Court',-25,27,-17,27,-.38),('Hall',-14,28,31,63,-.38),('Vault',25,57,73,104,-6.4),('Rise',28,86,111,162,-.38)]:
   v=[(x0,y0,z),(x1,y0,z),(x1,y1,z),(x0,y1,z),(x0-4,y0-4,-17),(x1+5,y0-3,-19),(x1+3,y1+4,-18),(x0-5,y1+5,-16)]
@@ -226,18 +231,14 @@ def architecture(B):
 def finish_export(B,g,m):
  # Dome interiors and mountain exteriors are deliberately single sided.
  for mat in g['materials']:
-  if mat['name'].split('--')[-1] in ['sky-v7','night-sky-v7','land-sun','land-mid','land-shade']:
+  if mat['name'].split('--')[-1] in ['sky-v7','night-sky-v7','land-sun','land-mid','land-shade','land-haze']:
    mat['doubleSided']=False
- # Distant terrain is emission-textured PBR, so core's fog acts on it while
- # the actual skies retain KHR_materials_unlit and are excluded from fog.
+ # 0.11.1: distant terrain stays KHR_materials_unlit like the skies, so core's fog
+ # (excludeUnlit) leaves it alone. As emission-textured PBR (0.7.0-0.11.0) it lay
+ # 14-88 m under the fog base and the dark blue height fog turned the valley floor
+ # below every edge into a flat near-black sheet that read as dark glass.
  for mat in g['materials']:
-  if mat['name'].split('--')[-1] not in ['land-sun','land-mid','land-shade','land-snow']:continue
-  pbr=mat['pbrMetallicRoughness'];mat['emissiveTexture']=pbr.pop('baseColorTexture');mat['emissiveFactor']=pbr['baseColorFactor'][:3];pbr['baseColorFactor']=[0,0,0,1]
-  # 0.9.1: never roughness 1. Core's specular exponent 2/r^2-2 is then 0 and
-  # pow(0.,0.) where N.H<=0 is undefined (NaN on Intel): the shell's
-  # silhouette faces turned black (owner's 'black thing' by the globe).
-  pbr['roughnessFactor']=.95
-  mat.get('extensions',{}).pop('KHR_materials_unlit',None);mat['doubleSided']=False
+  if mat['name'].split('--')[-1] in ['land-sun','land-mid','land-shade','land-haze','land-snow']:mat['doubleSided']=False
  for t in g.get('textures',[]):
   im=g['images'][t['source']].get('uri','')
   if 'sky-v7' in im:
