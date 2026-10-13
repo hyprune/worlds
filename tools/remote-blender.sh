@@ -7,7 +7,7 @@ REMOTE="${HYPRUNE_BAKE_DIR:-hyprune-bake/worlds-switchyard}"
 [[ "$REMOTE" =~ ^[a-zA-Z0-9_./-]+$ && "$REMOTE" != /* && "$REMOTE" != *..* ]] || exit 2
 source "$ROOT/tools/bake-host.sh"
 on_host "mkdir -p '$REMOTE'"
-rsync -az --exclude '__pycache__' --exclude node_modules "$ROOT/lumen-reach" "$ROOT/switchyard" "$ROOT/objects" "$ROOT/machine-yard" "$ROOT/tools" "$ROOT/LICENSE" "$(host_path "$REMOTE")/"
+rsync -az --exclude '__pycache__' --exclude node_modules "$ROOT/lumen-reach" "$ROOT/switchyard" "$ROOT/objects" "$ROOT/characters" "$ROOT/machine-yard" "$ROOT/tools" "$ROOT/LICENSE" "$(host_path "$REMOTE")/"
 ARGS=""
 for arg in "$@"; do ARGS+=" $(printf '%q' "$arg")"; done
 status=0

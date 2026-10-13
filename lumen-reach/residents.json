@@ -1,0 +1,940 @@
+{
+ "comment": "Lumen Reach residents (world format 0.9, RFC-0010/0011). World metres, +Y up. Benches are built by build.py and give the seats[] anchors; residents.py writes the package side (character directories, objectAssets, objects, paths, seats, keepClear).",
+ "characters": [
+  "resident-desert",
+  "resident-crimson",
+  "resident-ember",
+  "resident-blue"
+ ],
+ "seatAnchor": {
+  "frontGap": 0.16,
+  "collisionSetback": 0.16,
+  "approach": 0.6
+ },
+ "benches": [
+  {
+   "id": "court-plaza-bench",
+   "area": "sun-court",
+   "name": "Court seat",
+   "supportName": "Seat support",
+   "centre": [
+    20,
+    0,
+    -12
+   ],
+   "along": "x",
+   "length": 3.4,
+   "depth": 0.8,
+   "height": 0.4,
+   "thickness": 0.16,
+   "top": "wood",
+   "legs": {
+    "material": "metal",
+    "width": 0.25,
+    "inset": 0.35
+   },
+   "anchors": [
+    {
+     "id": "west",
+     "offset": -0.85,
+     "facing": "-z"
+    },
+    {
+     "id": "east",
+     "offset": 0.85,
+     "facing": "-z"
+    }
+   ]
+  },
+  {
+   "id": "court-terrace-bench",
+   "area": "sun-court",
+   "name": "Court seat",
+   "supportName": "Seat support",
+   "centre": [
+    -16,
+    4,
+    -17
+   ],
+   "along": "x",
+   "length": 3.4,
+   "depth": 0.8,
+   "height": 0.4,
+   "thickness": 0.16,
+   "top": "wood",
+   "legs": {
+    "material": "metal",
+    "width": 0.25,
+    "inset": 0.35
+   },
+   "anchors": [
+    {
+     "id": "west",
+     "offset": -0.85,
+     "facing": "+z"
+    },
+    {
+     "id": "east",
+     "offset": 0.85,
+     "facing": "+z"
+    }
+   ]
+  },
+  {
+   "id": "hall-glass-bench",
+   "area": "array-hall",
+   "name": "Hall bench",
+   "supportName": "Hall bench support",
+   "centre": [
+    13,
+    0,
+    -56.4
+   ],
+   "along": "x",
+   "length": 2.4,
+   "depth": 0.45,
+   "height": 0.4,
+   "thickness": 0.08,
+   "top": "wood",
+   "legs": {
+    "material": "metal",
+    "width": 0.12,
+    "inset": 0.3
+   },
+   "anchors": [
+    {
+     "id": "west",
+     "offset": -0.6,
+     "facing": "+z"
+    },
+    {
+     "id": "east",
+     "offset": 0.6,
+     "facing": "+z"
+    }
+   ]
+  },
+  {
+   "id": "vault-south-bench",
+   "area": "rime-vault",
+   "name": "Vault vista bench",
+   "supportName": "Vault bench support",
+   "centre": [
+    41.5,
+    -6,
+    -76.2
+   ],
+   "along": "x",
+   "length": 2.8,
+   "depth": 0.45,
+   "height": 0.4,
+   "thickness": 0.08,
+   "top": "metal",
+   "legs": {
+    "material": "frost",
+    "width": 0.14,
+    "inset": 0.3
+   },
+   "anchors": [
+    {
+     "id": "west",
+     "offset": -0.7,
+     "facing": "-z"
+    },
+    {
+     "id": "east",
+     "offset": 0.7,
+     "facing": "-z"
+    }
+   ]
+  },
+  {
+   "id": "rise-field-bench",
+   "area": "signal-rise",
+   "name": "Terminal field bench",
+   "supportName": "Field bench pedestal",
+   "centre": [
+    40.5,
+    0,
+    -116.0
+   ],
+   "along": "x",
+   "length": 2.8,
+   "depth": 0.45,
+   "height": 0.4,
+   "thickness": 0.08,
+   "top": "metal",
+   "legs": {
+    "material": "frost",
+    "width": 0.16,
+    "inset": 0.3
+   },
+   "anchors": [
+    {
+     "id": "west",
+     "offset": -0.7,
+     "facing": "-z"
+    },
+    {
+     "id": "east",
+     "offset": 0.7,
+     "facing": "-z"
+    }
+   ]
+  }
+ ],
+ "keepClear": [
+  {
+   "id": "sun-court-wall-front",
+   "min": [
+    -1,
+    0,
+    -23.2
+   ],
+   "max": [
+    17,
+    3,
+    -14
+   ]
+  },
+  {
+   "id": "sun-court-hall-door",
+   "min": [
+    0.5,
+    0,
+    -26.5
+   ],
+   "max": [
+    15.5,
+    4.4,
+    -22.5
+   ]
+  },
+  {
+   "id": "array-hall-wall-front",
+   "min": [
+    -1,
+    0,
+    -48
+   ],
+   "max": [
+    17,
+    3,
+    -40.5
+   ]
+  },
+  {
+   "id": "array-hall-south-door",
+   "min": [
+    0,
+    0,
+    -33.5
+   ],
+   "max": [
+    16,
+    4.4,
+    -31
+   ]
+  },
+  {
+   "id": "array-hall-annex-door",
+   "min": [
+    -7.5,
+    0,
+    -40
+   ],
+   "max": [
+    -5,
+    4.6,
+    -34
+   ]
+  },
+  {
+   "id": "array-hall-service-door",
+   "min": [
+    22.5,
+    0,
+    -56
+   ],
+   "max": [
+    26.3,
+    5,
+    -48
+   ]
+  },
+  {
+   "id": "rime-vault-console-front",
+   "min": [
+    33,
+    -6,
+    -99.2
+   ],
+   "max": [
+    45,
+    -3,
+    -92
+   ]
+  },
+  {
+   "id": "rime-vault-descent-door",
+   "min": [
+    27,
+    -6,
+    -75.4
+   ],
+   "max": [
+    35,
+    -2,
+    -73
+   ]
+  },
+  {
+   "id": "rime-vault-exit-door",
+   "min": [
+    49.5,
+    -6,
+    -102
+   ],
+   "max": [
+    56,
+    -1,
+    -96
+   ]
+  },
+  {
+   "id": "signal-rise-wall-front",
+   "min": [
+    53,
+    0,
+    -147
+   ],
+   "max": [
+    73,
+    3,
+    -139
+   ]
+  },
+  {
+   "id": "signal-rise-ascent-mouth",
+   "min": [
+    51,
+    0,
+    -125.5
+   ],
+   "max": [
+    57,
+    3,
+    -122
+   ]
+  }
+ ],
+ "paths": [
+  {
+   "id": "sun-court-stroll",
+   "name": "Sun Court stroll",
+   "use": "route",
+   "points": [
+    {
+     "position": [
+      -3.6,
+      1.2,
+      -9.6
+     ],
+     "type": "line"
+    },
+    {
+     "position": [
+      -6.0,
+      1.2,
+      -6.6
+     ],
+     "type": "line"
+    },
+    {
+     "position": [
+      -6.0,
+      0,
+      0.4
+     ],
+     "type": "line"
+    },
+    {
+     "position": [
+      6.0,
+      0,
+      -1.0
+     ],
+     "type": "curve"
+    },
+    {
+     "position": [
+      14.5,
+      0,
+      -2.0
+     ],
+     "type": "curve"
+    },
+    {
+     "position": [
+      19.3,
+      0,
+      -2.7
+     ],
+     "type": "curve"
+    },
+    {
+     "position": [
+      19.4,
+      0,
+      -4.9
+     ],
+     "type": "line"
+    },
+    {
+     "position": [
+      17.4,
+      0,
+      -9.6
+     ],
+     "type": "line"
+    },
+    {
+     "position": [
+      17.4,
+      0,
+      -13.3
+     ],
+     "type": "line"
+    },
+    {
+     "position": [
+      19.15,
+      0,
+      -13.16
+     ],
+     "type": "line"
+    }
+   ],
+   "stops": [
+    {
+     "point": 0,
+     "seconds": 6,
+     "clip": "look_around"
+    },
+    {
+     "point": 6,
+     "seconds": 5,
+     "face": {
+      "anchor": "sun-court-slot-01-kiosk-pillar-01"
+     }
+    },
+    {
+     "point": 9,
+     "seconds": 20,
+     "seat": "court-plaza-bench-west"
+    }
+   ]
+  },
+  {
+   "id": "array-hall-round",
+   "name": "Array Hall round",
+   "use": "route",
+   "closed": true,
+   "points": [
+    {
+     "position": [
+      20.0,
+      0,
+      -40.6
+     ],
+     "type": "line"
+    },
+    {
+     "position": [
+      18.6,
+      0,
+      -42.5
+     ],
+     "type": "curve"
+    },
+    {
+     "position": [
+      18.6,
+      0,
+      -49.6
+     ],
+     "type": "line"
+    },
+    {
+     "position": [
+      15.2,
+      0,
+      -51.2
+     ],
+     "type": "curve"
+    },
+    {
+     "position": [
+      15.0,
+      0,
+      -54.9
+     ],
+     "type": "curve"
+    },
+    {
+     "position": [
+      13.6,
+      0,
+      -55.415
+     ],
+     "type": "line"
+    },
+    {
+     "position": [
+      10.9,
+      0,
+      -55.6
+     ],
+     "type": "curve"
+    },
+    {
+     "position": [
+      10.6,
+      0,
+      -58.6
+     ],
+     "type": "curve"
+    },
+    {
+     "position": [
+      3.0,
+      0,
+      -57.8
+     ],
+     "type": "line"
+    },
+    {
+     "position": [
+      3.0,
+      0,
+      -51.4
+     ],
+     "type": "curve"
+    },
+    {
+     "position": [
+      -3.0,
+      0,
+      -49.4
+     ],
+     "type": "curve"
+    },
+    {
+     "position": [
+      -4.5,
+      0,
+      -45.5
+     ],
+     "type": "curve"
+    },
+    {
+     "position": [
+      -4.5,
+      0,
+      -42.8
+     ],
+     "type": "line"
+    },
+    {
+     "position": [
+      -2.6,
+      0,
+      -41.6
+     ],
+     "type": "curve"
+    },
+    {
+     "position": [
+      17.0,
+      0,
+      -41.6
+     ],
+     "type": "line"
+    }
+   ],
+   "stops": [
+    {
+     "point": 0,
+     "seconds": 5,
+     "face": {
+      "anchor": "array-hall-slot-02-lectern-02"
+     }
+    },
+    {
+     "point": 5,
+     "seconds": 16,
+     "seat": "hall-glass-bench-east"
+    },
+    {
+     "point": 7,
+     "seconds": 6,
+     "face": {
+      "position": [
+       10.6,
+       1.6,
+       -72
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "rime-vault-watch",
+   "name": "Rime Vault watch",
+   "use": "route",
+   "points": [
+    {
+     "position": [
+      39.4,
+      -6,
+      -89.5
+     ],
+     "type": "line"
+    },
+    {
+     "position": [
+      41.8,
+      -6,
+      -82.7
+     ],
+     "type": "curve"
+    },
+    {
+     "position": [
+      42.2,
+      -6,
+      -77.185
+     ],
+     "type": "curve"
+    },
+    {
+     "position": [
+      44.4,
+      -6,
+      -77.0
+     ],
+     "type": "line"
+    },
+    {
+     "position": [
+      45.6,
+      -6,
+      -74.9
+     ],
+     "type": "curve"
+    }
+   ],
+   "stops": [
+    {
+     "point": 1,
+     "seconds": 5,
+     "face": {
+      "anchor": "rime-vault-slot-03-operator-desk-02"
+     }
+    },
+    {
+     "point": 2,
+     "seconds": 20,
+     "seat": "vault-south-bench-east"
+    },
+    {
+     "point": 4,
+     "seconds": 6,
+     "face": {
+      "position": [
+       45.6,
+       -4.6,
+       -60
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "to-signal-rise",
+   "name": "To Signal Rise",
+   "use": "route",
+   "points": [
+    {
+     "position": [
+      43.0,
+      -6,
+      -78.5
+     ],
+     "type": "line"
+    },
+    {
+     "position": [
+      41.0,
+      -6,
+      -84.0
+     ],
+     "type": "line"
+    },
+    {
+     "position": [
+      41.0,
+      -6,
+      -93.0
+     ],
+     "type": "line"
+    },
+    {
+     "position": [
+      45.6,
+      -6,
+      -96.8
+     ],
+     "type": "line"
+    },
+    {
+     "position": [
+      51.5,
+      -6,
+      -99.2
+     ],
+     "type": "line"
+    },
+    {
+     "position": [
+      54.0,
+      -6,
+      -101.0
+     ],
+     "type": "line"
+    },
+    {
+     "position": [
+      54.0,
+      0,
+      -124.2
+     ],
+     "type": "line"
+    }
+   ]
+  },
+  {
+   "id": "signal-rise-lookout",
+   "name": "Signal Rise lookout",
+   "use": "route",
+   "points": [
+    {
+     "position": [
+      40.2,
+      4,
+      -148.2
+     ],
+     "type": "line"
+    },
+    {
+     "position": [
+      39.6,
+      4,
+      -152.4
+     ],
+     "type": "curve"
+    },
+    {
+     "position": [
+      31.6,
+      4,
+      -152.4
+     ],
+     "type": "line"
+    },
+    {
+     "position": [
+      31.2,
+      4,
+      -147.0
+     ],
+     "type": "curve"
+    },
+    {
+     "position": [
+      31.5,
+      4,
+      -144.6
+     ],
+     "type": "line"
+    },
+    {
+     "position": [
+      31.5,
+      0,
+      -127.6
+     ],
+     "type": "line"
+    },
+    {
+     "position": [
+      35.2,
+      0,
+      -125.0
+     ],
+     "type": "curve"
+    },
+    {
+     "position": [
+      37.5,
+      0,
+      -122.6
+     ],
+     "type": "curve"
+    },
+    {
+     "position": [
+      37.6,
+      0,
+      -119.6
+     ],
+     "type": "curve"
+    },
+    {
+     "position": [
+      39.8,
+      0,
+      -116.985
+     ],
+     "type": "curve"
+    }
+   ],
+   "stops": [
+    {
+     "point": 0,
+     "seconds": 6,
+     "clip": "look_around"
+    },
+    {
+     "point": 7,
+     "seconds": 5,
+     "face": {
+      "anchor": "signal-rise-slot-04-terminal-bench-01"
+     }
+    },
+    {
+     "point": 9,
+     "seconds": 20,
+     "seat": "rise-field-bench-west"
+    }
+   ]
+  }
+ ],
+ "residents": [
+  {
+   "id": "sun-court-resident",
+   "asset": "resident-desert",
+   "path": "sun-court-stroll",
+   "phase": 0.55,
+   "interactions": [
+    {
+     "id": "talk",
+     "label": "Talk",
+     "action": {
+      "type": "say",
+      "lines": [
+       "Mornings start here, in the sun.",
+       "The globe terrace has the best view.",
+       "Sit a while. The bench is warm."
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "array-hall-resident",
+   "asset": "resident-crimson",
+   "path": "array-hall-round",
+   "phase": 0.1,
+   "interactions": [
+    {
+     "id": "talk",
+     "label": "Talk",
+     "action": {
+      "type": "say",
+      "lines": [
+       "Sound carries far in this hall.",
+       "Count the ridges from the glass.",
+       "Rime Vault is down the east passage."
+      ]
+     }
+    },
+    {
+     "id": "where-rime-vault",
+     "label": "Way to Rime Vault",
+     "prompt": "Mark the way",
+     "action": {
+      "type": "waypoint",
+      "target": {
+       "zoneId": "rime-vault"
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "rime-vault-resident",
+   "asset": "resident-ember",
+   "path": "rime-vault-watch",
+   "phase": 0.3,
+   "interactions": [
+    {
+     "id": "talk",
+     "label": "Talk",
+     "action": {
+      "type": "say",
+      "lines": [
+       "It stays cold down here.",
+       "The machines like it more than I do.",
+       "Signal Rise is up the snow ramp."
+      ]
+     }
+    },
+    {
+     "id": "show-signal-rise",
+     "label": "Show me Signal Rise",
+     "prompt": "Follow me",
+     "action": {
+      "type": "guide",
+      "path": "to-signal-rise"
+     }
+    }
+   ]
+  },
+  {
+   "id": "signal-rise-resident",
+   "asset": "resident-blue",
+   "path": "signal-rise-lookout",
+   "phase": 0.2,
+   "ambient": [
+    0.25,
+    0.3,
+    0.45
+   ],
+   "interactions": [
+    {
+     "id": "talk",
+     "label": "Talk",
+     "action": {
+      "type": "say",
+      "lines": [
+       "Snow again tonight.",
+       "The dish keeps listening anyway.",
+       "The dish deck sees the whole gate."
+      ]
+     }
+    }
+   ]
+  }
+ ]
+}

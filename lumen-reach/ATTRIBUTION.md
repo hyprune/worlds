@@ -15,3 +15,8 @@ original watershed painting. `materials/sky.py` makes longitude periodic and
 converges latitude to uniform pole colors. The cold basin derivative retains
 the original night panorama provenance. All terrain, arches, spires, roof
 details and walking bounds are procedural source geometry.
+
+Residents (0.11.0): the four characters in `characters/` are the Hyprune
+starter-kit residents (Hyprune contributors, CC-BY-4.0; provenance in the
+repository's `characters/ATTRIBUTION.md` and each `object.json`), copied
+unchanged. Their routes, benches and lines are original to this world.
