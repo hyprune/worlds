@@ -3,6 +3,23 @@
 Measured figures, gates and archive hashes for each release are in the
 release records (`reports/release*.json`).
 
+## 0.11.2
+
+The valley.
+
+- **The painted valley continues into the terrain.** Below the settlement the valley
+  floor was one tiled grey rock under a hard silhouette cutting across the panorama.
+  The terrain now carries the panorama itself: each point shows the sky pixel behind it
+  as seen from the Sun Court and Array Hall (from a raised point near the settlement, so
+  nearby ground isn't smeared). Its forests, cliffs, waterfalls and cloud sea run on
+  below the edges, and the rim, now a circle 10 m inside the sky sphere, shows the
+  painting it covers: there is no horizon seam.
+- **Rock under the settlement.** The slopes and cliff below the plinths stay rock (three
+  baked light levels) down to the cliff foot, where they meet the painted valley along a
+  smooth curve.
+- The terrain mesh is finer (256 segments, rings every 6-12 m; the old inner surface is
+  unchanged) and the outer rings widen from the 0.7.0 ellipse to that circle.
+
 ## 0.11.1
 
 Fixes from a live review of 0.11.0.
