@@ -5,7 +5,7 @@
  "routes": [
   {
    "id": "sun-court-stroll",
-   "length": 49.44,
+   "length": 49.3,
    "closed": false,
    "residents": [
     "sun-court-resident"
@@ -42,16 +42,30 @@
     {
      "point": 9,
      "at": [
-      19.2,
+      19.15,
       -0.0,
-      -13.32
+      -13.16
      ],
      "seconds": 20,
      "kind": "seat",
-     "approachGap": 8.45,
+     "approachGap": 8.28,
      "seat": "court-plaza-bench-west",
      "legs": [],
-     "seatSurface": 0.4,
+     "pelvis": {
+      "sun-court-resident": {
+       "at": [
+        19.15,
+        0.0,
+        -12.2
+       ],
+       "inset": {
+        "front": 0.19,
+        "back": 0.6,
+        "left": 2.55,
+        "right": 0.85
+       }
+      }
+     },
      "feetClearance": {
       "sun-court-resident": 0.442
      }
@@ -60,16 +74,16 @@
   },
   {
    "id": "array-hall-round",
-   "length": 79.43,
+   "length": 77.1,
    "closed": true,
    "residents": [
     "array-hall-resident"
    ],
    "walkable": true,
    "problems": [],
-   "navmeshSamples": 159,
+   "navmeshSamples": 155,
    "offMainIsland": 0,
-   "minClearWidth": 6.2,
+   "minClearWidth": 5.61,
    "narrow": [],
    "stops": [
     {
@@ -84,38 +98,52 @@
      "approachGap": 0.85
     },
     {
-     "point": 4,
+     "point": 5,
      "at": [
-      13.0,
+      13.6,
       -0.0,
-      -58.5
-     ],
-     "seconds": 6,
-     "kind": "face",
-     "approachGap": 4.99
-    },
-    {
-     "point": 8,
-     "at": [
-      -4.36,
-      -0.0,
-      -49.6
+      -55.41
      ],
      "seconds": 16,
      "kind": "seat",
-     "approachGap": 3.32,
-     "seat": "hall-west-bench-north",
+     "approachGap": 2.74,
+     "seat": "hall-glass-bench-east",
      "legs": [],
-     "seatSurface": 0.4,
+     "pelvis": {
+      "array-hall-resident": {
+       "at": [
+        13.6,
+        0.0,
+        -56.43
+       ],
+       "inset": {
+        "front": 0.25,
+        "back": 0.19,
+        "left": 1.8,
+        "right": 0.59
+       }
+      }
+     },
      "feetClearance": {
       "array-hall-resident": 0.372
      }
+    },
+    {
+     "point": 7,
+     "at": [
+      10.6,
+      -0.0,
+      -58.6
+     ],
+     "seconds": 6,
+     "kind": "face",
+     "approachGap": 3.98
     }
    ]
   },
   {
    "id": "rime-vault-watch",
-   "length": 17.26,
+   "length": 17.4,
    "closed": false,
    "residents": [
     "rime-vault-resident"
@@ -124,7 +152,7 @@
    "problems": [],
    "navmeshSamples": 35,
    "offMainIsland": 0,
-   "minClearWidth": 7.26,
+   "minClearWidth": 6.84,
    "narrow": [],
    "stops": [
     {
@@ -143,14 +171,28 @@
      "at": [
       42.2,
       -6.0,
-      -77.34
+      -77.19
      ],
      "seconds": 20,
      "kind": "seat",
-     "approachGap": 3.01,
+     "approachGap": 3.16,
      "seat": "vault-south-bench-east",
      "legs": [],
-     "seatSurface": 0.4,
+     "pelvis": {
+      "rime-vault-resident": {
+       "at": [
+        42.2,
+        -6.0,
+        -76.19
+       ],
+       "inset": {
+        "front": 0.23,
+        "back": 0.21,
+        "left": 0.69,
+        "right": 2.09
+       }
+      }
+     },
      "feetClearance": {
       "rime-vault-resident": 0.382
      }
@@ -183,14 +225,14 @@
   },
   {
    "id": "signal-rise-lookout",
-   "length": 51.22,
+   "length": 52.67,
    "closed": false,
    "residents": [
     "signal-rise-resident"
    ],
    "walkable": true,
    "problems": [],
-   "navmeshSamples": 103,
+   "navmeshSamples": 106,
    "offMainIsland": 0,
    "minClearWidth": 4.57,
    "narrow": [],
@@ -207,32 +249,46 @@
      "approachGap": 12.32
     },
     {
-     "point": 8,
+     "point": 7,
      "at": [
-      36.65,
+      37.5,
       -0.0,
-      -129.8
+      -122.6
      ],
-     "seconds": 20,
-     "kind": "seat",
-     "approachGap": 4.34,
-     "seat": "rise-terrace-bench-south",
-     "legs": [],
-     "seatSurface": 0.4,
-     "feetClearance": {
-      "signal-rise-resident": 0.334
-     }
+     "seconds": 5,
+     "kind": "face",
+     "approachGap": 1.18
     },
     {
      "point": 9,
      "at": [
-      40.5,
+      39.8,
       -0.0,
-      -134.9
+      -116.98
      ],
-     "seconds": 5,
-     "kind": "face",
-     "approachGap": 0.77
+     "seconds": 20,
+     "kind": "seat",
+     "approachGap": 4.2,
+     "seat": "rise-field-bench-west",
+     "legs": [],
+     "pelvis": {
+      "signal-rise-resident": {
+       "at": [
+        39.8,
+        0.0,
+        -116.01
+       ],
+       "inset": {
+        "front": 0.21,
+        "back": 0.23,
+        "left": 2.1,
+        "right": 0.69
+       }
+      }
+     },
+     "feetClearance": {
+      "signal-rise-resident": 0.334
+     }
     }
    ]
   }
@@ -244,7 +300,7 @@
    "legsWalkable": true
   },
   {
-   "seat": "hall-west-bench-north",
+   "seat": "hall-glass-bench-east",
    "route": "array-hall-round",
    "legsWalkable": true
   },
@@ -254,9 +310,35 @@
    "legsWalkable": true
   },
   {
-   "seat": "rise-terrace-bench-south",
+   "seat": "rise-field-bench-west",
    "route": "signal-rise-lookout",
    "legsWalkable": true
+  }
+ ],
+ "benches": [
+  {
+   "seat": "court-plaza-bench-west",
+   "depth": 0.79,
+   "length": 3.4,
+   "obstacles": 0
+  },
+  {
+   "seat": "hall-glass-bench-east",
+   "depth": 0.44,
+   "length": 2.39,
+   "obstacles": 0
+  },
+  {
+   "seat": "vault-south-bench-east",
+   "depth": 0.44,
+   "length": 2.78,
+   "obstacles": 0
+  },
+  {
+   "seat": "rise-field-bench-west",
+   "depth": 0.44,
+   "length": 2.79,
+   "obstacles": 0
   }
  ],
  "guides": [
@@ -264,7 +346,7 @@
    "resident": "rime-vault-resident",
    "path": "to-signal-rise",
    "length": 54.23,
-   "joinSamples": 18,
+   "joinSamples": 19,
    "joinBlocked": 0,
    "blockedAt": []
   }

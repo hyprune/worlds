@@ -1,6 +1,6 @@
 {
   "status": "PASS",
-  "packageBytes": 85931703,
+  "packageBytes": 89231756,
   "decodedTextureBytes": 192806912,
   "conservativeGpuBytes": 390863112,
   "mippedTextureViewsBytes": 361408152,
@@ -19,7 +19,7 @@
     {
       "node": "Visual-array-hall",
       "triangles": 32376,
-      "uv1Area": 0.09544,
+      "uv1Area": 0.09551,
       "overlapSamples": 0
     },
     {
@@ -43,19 +43,19 @@
     {
       "node": "Visual-rime-vault",
       "triangles": 44584,
-      "uv1Area": 0.19673,
+      "uv1Area": 0.19594,
       "overlapSamples": 0
     },
     {
       "node": "Visual-signal-rise",
       "triangles": 62800,
-      "uv1Area": 0.15851,
+      "uv1Area": 0.15852,
       "overlapSamples": 0
     },
     {
       "node": "Visual-sun-court",
       "triangles": 44472,
-      "uv1Area": 0.1995,
+      "uv1Area": 0.19816,
       "overlapSamples": 0
     },
     {

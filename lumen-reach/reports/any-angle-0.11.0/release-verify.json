@@ -19,8 +19,8 @@
  "maxCollisionErrorMeters": 0.002027,
  "maxWorldBoundsErrorMeters": 0.004721,
  "packageMiB": {
-  "src": 81.95,
-  "dst": 53.01
+  "src": 85.1,
+  "dst": 56.15
  },
  "failures": []
 }

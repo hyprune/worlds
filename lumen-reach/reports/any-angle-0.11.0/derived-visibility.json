@@ -1,14 +1,14 @@
 {
  "package": "com.hyprune.lumen-reach 0.11.0",
- "seconds": 117.6,
+ "seconds": 125.6,
  "kernel": {
   "triangles": 245458,
   "units": 8,
   "cells": 804,
   "forwardRays": 4096,
-  "rays": 493891052
+  "rays": 495336408
  },
- "navmeshPolygons": 1063,
+ "navmeshPolygons": 1066,
  "cells": 804,
  "regions": 168,
  "ownerAreas": 7,
@@ -48,7 +48,7 @@
    "node": 370,
    "name": "Visual-signal-rise",
    "primitives": 16,
-   "regions": 75
+   "regions": 74
   },
   {
    "node": 371,
@@ -63,13 +63,13 @@
    "regions": 168
   }
  ],
- "eyeSamples": 29988,
+ "eyeSamples": 30066,
  "submittedPrimitives": {
   "all": 98,
-  "generatedMean": 71.88,
+  "generatedMean": 71.61,
   "handWrittenMean": 98.0,
-  "sampledTruthMean": 65.5,
-  "generatedLessThanHand": 26298,
+  "sampledTruthMean": 65.45,
+  "generatedLessThanHand": 26892,
   "generatedMoreThanHand": 0
  },
  "eyesWhereGeneratedHidesASampledVisibleUnit": 0
