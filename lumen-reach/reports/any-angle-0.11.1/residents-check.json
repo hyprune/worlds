@@ -1,0 +1,356 @@
+{
+ "package": "com.hyprune.lumen-reach 0.11.1",
+ "formatVersion": "0.9",
+ "characters": 4,
+ "routes": [
+  {
+   "id": "sun-court-stroll",
+   "length": 49.3,
+   "closed": false,
+   "residents": [
+    "sun-court-resident"
+   ],
+   "walkable": true,
+   "problems": [],
+   "navmeshSamples": 99,
+   "offMainIsland": 0,
+   "minClearWidth": 5.0,
+   "narrow": [],
+   "stops": [
+    {
+     "point": 0,
+     "at": [
+      -3.6,
+      1.2,
+      -9.6
+     ],
+     "seconds": 6,
+     "kind": "look_around",
+     "approachGap": 12.45
+    },
+    {
+     "point": 5,
+     "at": [
+      17.0,
+      -0.0,
+      -2.4
+     ],
+     "seconds": 5,
+     "kind": "face",
+     "approachGap": 0.67
+    },
+    {
+     "point": 10,
+     "at": [
+      19.15,
+      -0.0,
+      -13.16
+     ],
+     "seconds": 20,
+     "kind": "seat",
+     "approachGap": 8.28,
+     "seat": "court-plaza-bench-west",
+     "legs": [],
+     "pelvis": {
+      "sun-court-resident": {
+       "at": [
+        19.15,
+        0.0,
+        -12.2
+       ],
+       "inset": {
+        "front": 0.19,
+        "back": 0.6,
+        "left": 2.55,
+        "right": 0.85
+       }
+      }
+     },
+     "feetClearance": {
+      "sun-court-resident": 0.442
+     }
+    }
+   ]
+  },
+  {
+   "id": "array-hall-round",
+   "length": 83.8,
+   "closed": true,
+   "residents": [
+    "array-hall-resident"
+   ],
+   "walkable": true,
+   "problems": [],
+   "navmeshSamples": 168,
+   "offMainIsland": 0,
+   "minClearWidth": 6.21,
+   "narrow": [],
+   "stops": [
+    {
+     "point": 0,
+     "at": [
+      18.0,
+      -0.0,
+      -37.6
+     ],
+     "seconds": 5,
+     "kind": "face",
+     "approachGap": 0.58
+    },
+    {
+     "point": 7,
+     "at": [
+      13.6,
+      -0.0,
+      -55.41
+     ],
+     "seconds": 16,
+     "kind": "seat",
+     "approachGap": 2.74,
+     "seat": "hall-glass-bench-east",
+     "legs": [],
+     "pelvis": {
+      "array-hall-resident": {
+       "at": [
+        13.6,
+        0.0,
+        -56.43
+       ],
+       "inset": {
+        "front": 0.25,
+        "back": 0.19,
+        "left": 1.8,
+        "right": 0.59
+       }
+      }
+     },
+     "feetClearance": {
+      "array-hall-resident": 0.372
+     }
+    },
+    {
+     "point": 9,
+     "at": [
+      10.6,
+      -0.0,
+      -58.6
+     ],
+     "seconds": 6,
+     "kind": "face",
+     "approachGap": 3.98
+    }
+   ]
+  },
+  {
+   "id": "rime-vault-watch",
+   "length": 20.63,
+   "closed": false,
+   "residents": [
+    "rime-vault-resident"
+   ],
+   "walkable": true,
+   "problems": [],
+   "navmeshSamples": 42,
+   "offMainIsland": 0,
+   "minClearWidth": 6.9,
+   "narrow": [],
+   "stops": [
+    {
+     "point": 3,
+     "at": [
+      45.0,
+      -6.0,
+      -79.6
+     ],
+     "seconds": 5,
+     "kind": "face",
+     "approachGap": 0.57
+    },
+    {
+     "point": 4,
+     "at": [
+      42.2,
+      -6.0,
+      -77.19
+     ],
+     "seconds": 20,
+     "kind": "seat",
+     "approachGap": 3.16,
+     "seat": "vault-south-bench-east",
+     "legs": [],
+     "pelvis": {
+      "rime-vault-resident": {
+       "at": [
+        42.2,
+        -6.0,
+        -76.19
+       ],
+       "inset": {
+        "front": 0.23,
+        "back": 0.21,
+        "left": 0.69,
+        "right": 2.09
+       }
+      }
+     },
+     "feetClearance": {
+      "rime-vault-resident": 0.382
+     }
+    },
+    {
+     "point": 6,
+     "at": [
+      45.6,
+      -6.0,
+      -74.9
+     ],
+     "seconds": 6,
+     "kind": "face",
+     "approachGap": 5.27
+    }
+   ]
+  },
+  {
+   "id": "to-signal-rise",
+   "length": 54.23,
+   "closed": false,
+   "residents": [],
+   "walkable": true,
+   "problems": [],
+   "navmeshSamples": 109,
+   "offMainIsland": 0,
+   "minClearWidth": 4.16,
+   "narrow": [],
+   "stops": []
+  },
+  {
+   "id": "signal-rise-lookout",
+   "length": 54.72,
+   "closed": false,
+   "residents": [
+    "signal-rise-resident"
+   ],
+   "walkable": true,
+   "problems": [],
+   "navmeshSamples": 110,
+   "offMainIsland": 0,
+   "minClearWidth": 4.57,
+   "narrow": [],
+   "stops": [
+    {
+     "point": 0,
+     "at": [
+      40.2,
+      4.0,
+      -148.2
+     ],
+     "seconds": 6,
+     "kind": "look_around",
+     "approachGap": 12.32
+    },
+    {
+     "point": 8,
+     "at": [
+      41.0,
+      -0.0,
+      -120.6
+     ],
+     "seconds": 5,
+     "kind": "face",
+     "approachGap": 0.59
+    },
+    {
+     "point": 9,
+     "at": [
+      39.8,
+      -0.0,
+      -116.98
+     ],
+     "seconds": 20,
+     "kind": "seat",
+     "approachGap": 4.2,
+     "seat": "rise-field-bench-west",
+     "legs": [],
+     "pelvis": {
+      "signal-rise-resident": {
+       "at": [
+        39.8,
+        0.0,
+        -116.01
+       ],
+       "inset": {
+        "front": 0.21,
+        "back": 0.23,
+        "left": 2.1,
+        "right": 0.69
+       }
+      }
+     },
+     "feetClearance": {
+      "signal-rise-resident": 0.334
+     }
+    }
+   ]
+  }
+ ],
+ "seats": [
+  {
+   "seat": "court-plaza-bench-west",
+   "route": "sun-court-stroll",
+   "legsWalkable": true
+  },
+  {
+   "seat": "hall-glass-bench-east",
+   "route": "array-hall-round",
+   "legsWalkable": true
+  },
+  {
+   "seat": "vault-south-bench-east",
+   "route": "rime-vault-watch",
+   "legsWalkable": true
+  },
+  {
+   "seat": "rise-field-bench-west",
+   "route": "signal-rise-lookout",
+   "legsWalkable": true
+  }
+ ],
+ "benches": [
+  {
+   "seat": "court-plaza-bench-west",
+   "depth": 0.79,
+   "length": 3.4,
+   "obstacles": 0
+  },
+  {
+   "seat": "hall-glass-bench-east",
+   "depth": 0.44,
+   "length": 2.39,
+   "obstacles": 0
+  },
+  {
+   "seat": "vault-south-bench-east",
+   "depth": 0.44,
+   "length": 2.78,
+   "obstacles": 0
+  },
+  {
+   "seat": "rise-field-bench-west",
+   "depth": 0.44,
+   "length": 2.79,
+   "obstacles": 0
+  }
+ ],
+ "guides": [
+  {
+   "resident": "rime-vault-resident",
+   "path": "to-signal-rise",
+   "length": 54.23,
+   "joinSamples": 22,
+   "joinBlocked": 0,
+   "blockedAt": []
+  }
+ ],
+ "status": "PASS",
+ "failures": []
+}

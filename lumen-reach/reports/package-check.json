@@ -1,15 +1,15 @@
 {
   "status": "PASS",
-  "packageBytes": 89231756,
+  "packageBytes": 89774329,
   "decodedTextureBytes": 192806912,
-  "conservativeGpuBytes": 390863112,
+  "conservativeGpuBytes": 390546552,
   "mippedTextureViewsBytes": 361408152,
-  "expandedGeometryBytes": 29454960,
+  "expandedGeometryBytes": 29138400,
   "colorTextureViews": 28,
   "textureObjects": 63,
   "textureProvenanceEntries": 63,
-  "visualTriangles": 245458,
-  "drawCallEstimate": 98,
+  "visualTriangles": 242820,
+  "drawCallEstimate": 99,
   "drawCallScope": "one draw per visible glTF primitive, world geometry only; excludes postprocessing, applications and HUD",
   "untexturedPhysicalMaterials": [],
   "anchors": 24,
@@ -18,20 +18,20 @@
   "UV1": [
     {
       "node": "Visual-array-hall",
-      "triangles": 32376,
-      "uv1Area": 0.09551,
+      "triangles": 31848,
+      "uv1Area": 0.09823,
       "overlapSamples": 0
     },
     {
       "node": "Visual-connector-ascent",
-      "triangles": 2666,
-      "uv1Area": 0.46958,
+      "triangles": 2646,
+      "uv1Area": 0.50605,
       "overlapSamples": 0
     },
     {
       "node": "Visual-connector-descent",
-      "triangles": 2798,
-      "uv1Area": 0.46608,
+      "triangles": 2796,
+      "uv1Area": 0.47228,
       "overlapSamples": 0
     },
     {
@@ -42,25 +42,25 @@
     },
     {
       "node": "Visual-rime-vault",
-      "triangles": 44584,
-      "uv1Area": 0.19594,
+      "triangles": 44512,
+      "uv1Area": 0.19844,
       "overlapSamples": 0
     },
     {
       "node": "Visual-signal-rise",
-      "triangles": 62800,
-      "uv1Area": 0.15852,
+      "triangles": 62448,
+      "uv1Area": 0.15824,
       "overlapSamples": 0
     },
     {
       "node": "Visual-sun-court",
-      "triangles": 44472,
-      "uv1Area": 0.19816,
+      "triangles": 43008,
+      "uv1Area": 0.20288,
       "overlapSamples": 0
     },
     {
       "node": "Visual-vista",
-      "triangles": 35026,
+      "triangles": 34826,
       "uv1Area": 0.0,
       "overlapSamples": 0
     }
