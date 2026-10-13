@@ -78,6 +78,12 @@ def acceptance(client, children, args, shell_token, socketpath):
         f0 = s.camera()['frames']; time.sleep(seconds); return (s.camera()['frames']-f0)/seconds
     def motion(value): client.call('graphics.set', {'patch': {'npc_motion': value}}); time.sleep(.4)
 
+    def noclip(on):
+        """Exact eye poses for the seated stills (with collision, movement resolves the eye)."""
+        for _ in range(3):
+            if s.camera()['noclip'] == on: return
+            keys('-k', 'v'); time.sleep(.2)
+
     def seated_shots(id_, x):
         """Two stills of a seated resident: front three-quarter, and from beyond the bench's
         outer end at seat height (the seat contact)."""
@@ -87,10 +93,11 @@ def acceptance(client, children, args, shell_token, socketpath):
         sib = next((v for k, v in SEATS.items() if k != name and k.rsplit('-', 1)[0] == name.rsplit('-', 1)[0]), None)
         sgn = 1.
         if sib: sgn = 1. if sum((sp[i]-sib['pose']['position'][i])*r[i] for i in (0, 2)) >= 0 else -1.
-        look([q[0]+f[0]*2.4-r[0]*sgn*.8, sp[1]+1.3, q[2]+f[2]*2.4-r[2]*sgn*.8], [q[0], sp[1]+.6, q[2]]); time.sleep(.6)
+        noclip(True); look([q[0]+f[0]*2.4-r[0]*sgn*.8, sp[1]+1.3, q[2]+f[2]*2.4-r[2]*sgn*.8], [q[0], sp[1]+.6, q[2]]); time.sleep(.4)
         shot(f'seated-{AREA[id_]}-front.png')
-        look([q[0]+r[0]*sgn*2.6+f[0]*.3, sp[1]+.8, q[2]+r[2]*sgn*2.6+f[2]*.3], [q[0], sp[1]+.55, q[2]]); time.sleep(.6)
+        look([q[0]+r[0]*sgn*2.6+f[0]*.3, sp[1]+.8, q[2]+r[2]*sgn*2.6+f[2]*.3], [q[0], sp[1]+.55, q[2]]); time.sleep(.4)
         shot(f'seated-{AREA[id_]}-side.png')
+        noclip(False)
 
     s.ctl('eval', 'hl.config({misc={disable_watchdog_warning=true},cursor={inactive_timeout=1}})')
     s.ctl('eval', 'hl.dispatch(hl.dsp.focus({ monitor = "HEADLESS-1" }))')
