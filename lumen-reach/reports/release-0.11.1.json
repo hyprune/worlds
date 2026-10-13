@@ -1,0 +1,188 @@
+{
+ "status": "PASS",
+ "worldId": "com.hyprune.lumen-reach",
+ "version": "0.11.1",
+ "formatVersion": "0.9",
+ "sourceFormatVersion": "0.9",
+ "sourceCommit": "f3f9d8b",
+ "sourceNote": "lumen-build (objects, bake, derived visibility, blueprint) on the bake host; residents applied from residents.json; release package = tools/remote-optimize.sh output.",
+ "sceneSHA256": "9a6bb45db493525dd65e83fbd3a46881fe08cf04ada3db8afde26a43c3b3fbbc",
+ "manifestSHA256": "e735d3c5de80760759b9ba68b32bc52f2c2629fbacf11203beb4b26b7b097442",
+ "archive": {
+  "status": "PASS",
+  "path": "artifacts/releases/com.hyprune.lumen-reach-0.11.1.tar.zst",
+  "sha256": "940c630b112a63cd3d816eee04e1c022b6108f4ac595521b56dd20cb8e58284d",
+  "bytes": 53447566,
+  "nixHash": "sha256-lAxjCxEqY809gW7uBOHAIrYQj0rFlVIbVt0gy45YKE0=",
+  "url": "https://github.com/hyprune/worlds/releases/download/lumen-reach-v0.11.1/com.hyprune.lumen-reach-0.11.1.tar.zst",
+  "identicalExtractedFiles": "95/95",
+  "reproducible": "second archive build byte-identical",
+  "extractedChecks": [
+   "schema 0.9 VALID (lumen-release-check)",
+   "core hyprune-world-check exit 0 (37b4928): 0 warnings, 5 routes walkable",
+   "check-residents PASS on the release package",
+   "blueprint check PASS",
+   "no build-machine paths in any file"
+  ]
+ },
+ "published": false,
+ "coreCommit": "37b49281fa38b61df2c4f22e2a8641462bcb22fb",
+ "baseline": {
+  "version": "0.11.0",
+  "releasePackage": "published lumen-reach-v0.11.0 archive (extracted; sha256 91a20320...7068)"
+ },
+ "changes": {
+  "coplanar": "lumen-reach/coplanar.py before the join: 887 covered faces deleted, 1545 faces stepped back (12 mm, clear of every face in their plane), 3 passes; collision unchanged. Package plane check: 3 pairs, 0.0748 m2 (0.11.0: 72 pairs, 952 m2).",
+  "sources": "Rooftop bridge run and diagnostics platform no longer overlap their neighbours; facade rainwater pipes end in the rooftop soffit (their elbows stood 0.17 m out of the deck); crag snow shelves stand clear of the rock.",
+  "terrain": "Valley terrain KHR_materials_unlit (out of the dark height fog), daylight tints, haze material beyond 150 m.",
+  "residents": "The four screen stops stand on the screen normal 2.1-2.2 m out (were 87-112 degrees off it); routes go round the approach zones."
+ },
+ "gates": {
+  "validate": "PASS (lumen-validate incl. the new check-coplanar-planes)",
+  "releaseVerify": "PASS (verify.mjs, schema 0.9, residents, blueprint, core world-check 37b4928: 5 routes walkable)",
+  "coplanar": {
+   "status": "PASS",
+   "gapMetres": 0.006,
+   "pairs": 3,
+   "totalM2": 0.0748,
+   "largestM2": 0.042,
+   "identicalPairs": 1,
+   "identicalM2": 1.232
+  },
+  "derivedVisibility": {
+   "regions": 168,
+   "eyesWhereGeneratedHidesASampledVisibleUnit": 0,
+   "submittedPrimitivesMean": 73.46,
+   "all": 99
+  },
+  "budgets": {
+   "visibleTriangles": 242820,
+   "drawCalls": 99,
+   "collisionTriangles": 6122,
+   "gpuMiB": 141.92,
+   "packageMiB": 56.8,
+   "delta": {
+    "visibleTriangles": -2638,
+    "drawCalls": 1,
+    "gpuMiB": -0.08,
+    "packageMiB": 0.65
+   }
+  },
+  "residents": {
+   "status": "PASS",
+   "routes": [
+    {
+     "id": "sun-court-stroll",
+     "length": 49.3,
+     "walkable": true,
+     "minClearWidth": 5.0,
+     "offMainIsland": 0
+    },
+    {
+     "id": "array-hall-round",
+     "length": 83.8,
+     "walkable": true,
+     "minClearWidth": 6.21,
+     "offMainIsland": 0
+    },
+    {
+     "id": "rime-vault-watch",
+     "length": 20.63,
+     "walkable": true,
+     "minClearWidth": 5.25,
+     "offMainIsland": 0
+    },
+    {
+     "id": "to-signal-rise",
+     "length": 54.23,
+     "walkable": true,
+     "minClearWidth": 4.16,
+     "offMainIsland": 0
+    },
+    {
+     "id": "signal-rise-lookout",
+     "length": 54.72,
+     "walkable": true,
+     "minClearWidth": 4.57,
+     "offMainIsland": 0
+    }
+   ]
+  },
+  "screenStops": "nested core main: all four residents stop 2.0 m out on the screen normal (0 degrees), facing it",
+  "perfGate": {
+   "status": "PASS",
+   "limits": {
+    "p50": 0.08,
+    "p95": 0.12,
+    "scaleDrop": 0.05,
+    "scaleDropP05": 0.08
+   },
+   "baseline": {
+    "gpuFrameMs": {
+     "p50": 2.7176959999999997,
+     "p95": 4.6614016,
+     "n": 3200
+    },
+    "settledScale": {
+     "p50": 0.5,
+     "p05": 0.5,
+     "n": 252
+    },
+    "rounds": 2,
+    "version": "0.11.0",
+    "source": "same session"
+   },
+   "candidate": {
+    "version": "0.11.1",
+    "coreCommit": "37b49281fa38b61df2c4f22e2a8641462bcb22fb",
+    "pluginSHA256": "fd5ec2832540031cc2a9ba3f5676ac064f0864578eb62438b008d782b5dbcfbb",
+    "scale": 0.5,
+    "quality": "medium",
+    "routePoses": 400,
+    "manifestSHA256": "e735d3c5de80760759b9ba68b32bc52f2c2629fbacf11203beb4b26b7b097442",
+    "gpuFrameMs": {
+     "p50": 2.6767359999999996,
+     "p95": 4.7750144,
+     "n": 3200
+    },
+    "settledScale": {
+     "p50": 0.5,
+     "p05": 0.5,
+     "n": 252
+    },
+    "rounds": 2
+   },
+   "checks": [
+    {
+     "metric": "gpuFrameMs.p50",
+     "candidate": 2.6767,
+     "limit": 2.9351,
+     "pass": true
+    },
+    {
+     "metric": "gpuFrameMs.p95",
+     "candidate": 4.775,
+     "limit": 5.2208,
+     "pass": true
+    },
+    {
+     "metric": "settledScale.p50",
+     "candidate": 0.5,
+     "limit": 0.45,
+     "pass": true
+    },
+    {
+     "metric": "settledScale.p05",
+     "candidate": 0.5,
+     "limit": 0.42,
+     "pass": true
+    }
+   ]
+  },
+  "residentsSession": {
+   "status": "PASS",
+   "checks": 29,
+   "failed": []
+  }
+ }
+}

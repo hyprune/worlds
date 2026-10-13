@@ -1,0 +1,52 @@
+{
+ "mode": "gate",
+ "status": "DONE",
+ "scale": 0.5,
+ "quality": "medium",
+ "rounds": 2,
+ "coreCommit": "8e3b39548b8c9cf8a2771b464f158fd849f6b2f3",
+ "packages": {
+  "A": {
+   "path": "published lumen-reach-v0.11.1 archive (extracted)",
+   "version": "0.11.1",
+   "formatVersion": "0.9",
+   "manifestSHA256": "e735d3c5de80760759b9ba68b32bc52f2c2629fbacf11203beb4b26b7b097442"
+  },
+  "B": {
+   "path": "dist-07/com.hyprune.lumen-reach",
+   "version": "0.11.2",
+   "formatVersion": "0.9",
+   "manifestSHA256": "19aa12eb73d84613378df17f0831f8e409f063b8ac94542aebcebef8cb74547d"
+  }
+ },
+ "pluginSHA256": "11cd411f7fac04d215cd105037bb07a87167a71031507831669abebaed816e90",
+ "routePoses": 400,
+ "runs": {
+  "A": {
+   "gpuFrameMs": {
+    "p50": 3.7611519999999996,
+    "p95": 6.5630207999999985,
+    "n": 3200
+   },
+   "settledScale": {
+    "p50": 0.5,
+    "p05": 0.5,
+    "n": 252
+   },
+   "rounds": 2
+  },
+  "B": {
+   "gpuFrameMs": {
+    "p50": 3.763712,
+    "p95": 6.584985599999996,
+    "n": 3200
+   },
+   "settledScale": {
+    "p50": 0.5,
+    "p05": 0.5,
+    "n": 252
+   },
+   "rounds": 2
+  }
+ }
+}

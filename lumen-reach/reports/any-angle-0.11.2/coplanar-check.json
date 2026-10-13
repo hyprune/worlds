@@ -1,0 +1,106 @@
+{
+ "status": "PASS",
+ "gapMetres": 0.006,
+ "stepMetres": 0.02,
+ "maxPairM2": 0.1,
+ "maxTotalM2": 2.0,
+ "pairs": 3,
+ "totalM2": 0.0748,
+ "largestM2": 0.042,
+ "identicalPairs": 1,
+ "identicalM2": 1.232,
+ "rows": [
+  {
+   "a": [
+    "Visual-vista",
+    "vista--cascade-mid"
+   ],
+   "b": [
+    "Visual-vista",
+    "vista--cascade-mid"
+   ],
+   "area": 1.232,
+   "gap": 0.0,
+   "normal": [
+    -0.0,
+    0.0,
+    1.0
+   ],
+   "at": [
+    -26.799,
+    8.545,
+    -64.4
+   ],
+   "identical": true
+  },
+  {
+   "a": [
+    "Visual-signal-rise",
+    "signal-rise--metal"
+   ],
+   "b": [
+    "Visual-signal-rise",
+    "signal-rise--stone"
+   ],
+   "area": 0.042,
+   "gap": 0.0055,
+   "normal": [
+    0.0,
+    -1.0,
+    -0.0
+   ],
+   "at": [
+    70.24,
+    0.0,
+    -139.59
+   ],
+   "identical": false
+  },
+  {
+   "a": [
+    "Visual-foliage",
+    "foliage--leaf"
+   ],
+   "b": [
+    "Visual-foliage",
+    "foliage--leaf"
+   ],
+   "area": 0.018,
+   "gap": 0.004,
+   "normal": [
+    0.161,
+    -0.94,
+    -0.302
+   ],
+   "at": [
+    22.954,
+    1.908,
+    -57.541
+   ],
+   "identical": false
+  },
+  {
+   "a": [
+    "Visual-signal-rise",
+    "signal-rise--frost"
+   ],
+   "b": [
+    "Visual-signal-rise",
+    "signal-rise--snow"
+   ],
+   "area": 0.0148,
+   "gap": 0.0015,
+   "normal": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "at": [
+    70.201,
+    0.91,
+    -139.474
+   ],
+   "identical": false
+  }
+ ]
+}

@@ -1,14 +1,14 @@
 {
   "status": "PASS",
-  "packageBytes": 89774329,
+  "packageBytes": 92198609,
   "decodedTextureBytes": 192806912,
-  "conservativeGpuBytes": 390546552,
+  "conservativeGpuBytes": 392650872,
   "mippedTextureViewsBytes": 361408152,
-  "expandedGeometryBytes": 29138400,
+  "expandedGeometryBytes": 31242720,
   "colorTextureViews": 28,
   "textureObjects": 63,
   "textureProvenanceEntries": 63,
-  "visualTriangles": 242820,
+  "visualTriangles": 260356,
   "drawCallEstimate": 99,
   "drawCallScope": "one draw per visible glTF primitive, world geometry only; excludes postprocessing, applications and HUD",
   "untexturedPhysicalMaterials": [],
@@ -60,7 +60,7 @@
     },
     {
       "node": "Visual-vista",
-      "triangles": 34826,
+      "triangles": 52362,
       "uv1Area": 0.0,
       "overlapSamples": 0
     }

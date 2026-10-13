@@ -1,0 +1,20 @@
+{
+ "version": "0.11.2",
+ "coreCommit": "8e3b39548b8c9cf8a2771b464f158fd849f6b2f3",
+ "pluginSHA256": "11cd411f7fac04d215cd105037bb07a87167a71031507831669abebaed816e90",
+ "scale": 0.5,
+ "quality": "medium",
+ "routePoses": 400,
+ "manifestSHA256": "19aa12eb73d84613378df17f0831f8e409f063b8ac94542aebcebef8cb74547d",
+ "gpuFrameMs": {
+  "p50": 3.763712,
+  "p95": 6.584985599999996,
+  "n": 3200
+ },
+ "settledScale": {
+  "p50": 0.5,
+  "p05": 0.5,
+  "n": 252
+ },
+ "rounds": 2
+}

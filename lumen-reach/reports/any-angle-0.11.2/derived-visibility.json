@@ -1,0 +1,76 @@
+{
+ "package": "com.hyprune.lumen-reach 0.11.2",
+ "seconds": 115.6,
+ "kernel": {
+  "triangles": 260356,
+  "units": 8,
+  "cells": 804,
+  "forwardRays": 4096,
+  "rays": 495099504
+ },
+ "navmeshPolygons": 1066,
+ "cells": 804,
+ "regions": 168,
+ "ownerAreas": 7,
+ "areas": 175,
+ "units": [
+  {
+   "node": 365,
+   "name": "Visual-array-hall",
+   "primitives": 17,
+   "regions": 128
+  },
+  {
+   "node": 366,
+   "name": "Visual-connector-ascent",
+   "primitives": 5,
+   "regions": 128
+  },
+  {
+   "node": 367,
+   "name": "Visual-connector-descent",
+   "primitives": 6,
+   "regions": 104
+  },
+  {
+   "node": 368,
+   "name": "Visual-foliage",
+   "primitives": 2,
+   "regions": 112
+  },
+  {
+   "node": 369,
+   "name": "Visual-rime-vault",
+   "primitives": 15,
+   "regions": 130
+  },
+  {
+   "node": 370,
+   "name": "Visual-signal-rise",
+   "primitives": 16,
+   "regions": 72
+  },
+  {
+   "node": 371,
+   "name": "Visual-sun-court",
+   "primitives": 16,
+   "regions": 122
+  },
+  {
+   "node": 372,
+   "name": "Visual-vista",
+   "primitives": 22,
+   "regions": 168
+  }
+ ],
+ "eyeSamples": 30066,
+ "submittedPrimitives": {
+  "all": 99,
+  "generatedMean": 73.46,
+  "handWrittenMean": 99.0,
+  "sampledTruthMean": 66.49,
+  "generatedLessThanHand": 25677,
+  "generatedMoreThanHand": 0
+ },
+ "eyesWhereGeneratedHidesASampledVisibleUnit": 0
+}
