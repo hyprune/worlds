@@ -102,6 +102,7 @@ lumen-validate:
 	python3 tools/check-navmesh.py $(LUMEN_PACKAGE) --allow lumen-reach/navmesh-allow.json --output $(LUMEN_REPORTS)/navmesh-check.json --svg $(LUMEN_REPORTS)/navmesh.svg
 	python3 tools/check-blueprint.py $(LUMEN_PACKAGE) --output $(LUMEN_REPORTS)/blueprint-check.json > /dev/null
 	python3 tools/check-coplanar.py $(LUMEN_PACKAGE) --emissive --fixtures $(LUMEN_PACKAGE)/fixture-audit.json > $(LUMEN_REPORTS)/emissive-check.json
+	python3 tools/check-coplanar-planes.py $(LUMEN_PACKAGE) --output $(LUMEN_REPORTS)/coplanar-check.json
 	python3 -c "import json; assert json.load(open('$(LUMEN_PACKAGE)/decal-audit.json'))['status']=='PASS'"
 lumen-nested:
 	python3 tools/check-lumen-session.py

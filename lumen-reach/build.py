@@ -970,7 +970,11 @@ if __name__=='__main__':
     selected=[o for o in objects if o.name.startswith(prefixes)]
     moved.extend(selected);P.GROUPS[group]=[o for o in objects if o not in selected]
    if moved:P.GROUPS[chunk]=moved;P.RESOLUTIONS[chunk]=768;P.MARGINS[chunk]=4
-  sign_audit();cols,nav=spatial();P.join_groups()
+  sign_audit();cols,nav=spatial()
+  # 0.11.1: flush faces between separate objects depth-fight; resolve them on the
+  # visual objects (collision was copied above) before they are joined.
+  import coplanar;r=coplanar.resolve(bpy,bmesh,P.GROUPS,ART/'coplanar-report.json');P.log(f"Coplanar faces: {r['counts']} in {r['passes']} passes")
+  P.join_groups()
   # A dense detail kit can exhaust pack margins and collapse all lightmap islands.
   # Geometry/overlap validity alone does not catch the resulting nearly black bake.
   density=[]
