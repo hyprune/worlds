@@ -536,6 +536,15 @@ in_place(arm, actions)
 limit_weights(meshes)
 tris = triangles(meshes)
 if tris > MAX_TRIS:
+    # The glTF importer splits vertices at UV seams; decimated apart, the two sides of a seam
+    # open hairline cracks. Weld coincident vertices first (UVs and normals are per corner).
+    import bmesh
+    welded = 0
+    for ob in meshes:
+        bm = bmesh.new(); bm.from_mesh(ob.data); before = len(bm.verts)
+        bmesh.ops.remove_doubles(bm, verts=bm.verts, dist=1e-5)
+        welded += before - len(bm.verts); bm.to_mesh(ob.data); bm.free(); ob.data.update()
+    step(f'welded {welded} seam vertices before decimating')
     for ob in meshes:
         mod = ob.modifiers.new('budget', 'DECIMATE'); mod.ratio = MAX_TRIS / tris
         bpy.context.view_layer.objects.active = ob
