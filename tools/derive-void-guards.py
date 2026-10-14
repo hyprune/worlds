@@ -32,7 +32,8 @@ merge. A failure off a surface that is no navmesh edge (a thin wall top)
 guards the floor edge along the capsule's heading. --merge keeps an earlier
 list (a package built with guards sees them as walls: only new ones derive).
 No guard stands where a walker can: each is trimmed to keep CLEAR from the
-walkable navmesh at its level. Output (world coordinates, Y
+walkable navmesh at its level and LANE past the half width of every authored
+route edge and stair lane. Output (world coordinates, Y
 up): {"guards": [{"a": [x,y,z], "b": [x,y,z], "floor": y}], ...}; the Lumen
 build turns each into a collision-only void_guard from floor-0.6 to
 floor+walkClearance. Review the list, keep it committed, re-derive when floors
@@ -54,6 +55,7 @@ BEYOND=(.35,1.,2.,3.)  # m past the true floor edge that need a floor below
 SWEEP_HALF=1.0   # m guarded either side of a sweep failure's exit point
 CORNER=1.6       # m a run may follow its floor past the end sample
 CLEAR=.15        # m every guard keeps from the walkable navmesh at its level
+LANE=.35         # m every guard keeps past a route edge's or stair lane's half width
 
 def rnd(v,n=3):return [round(float(x),n) for x in v]
 
@@ -65,7 +67,7 @@ def main():
  ap.add_argument('--clear',type=float,default=CLEAR,help='distance every guard keeps from the walkable navmesh (m)')
  ap.add_argument('--bottom',type=float,default=-20,help='backstopBottom (playable-volumes.json)')
  ap.add_argument('--exclude',type=float,nargs=6,action='append',default=[],metavar=('X0','X1','Y0','Y1','Z0','Z1'),
-                 help='skip edges inside this box (a floor fix is pending there)')
+                 help='skip edges and sweep failures inside this box (a floor fix is pending there)')
  a=ap.parse_args()
  s=gltf_io.load(a.package);m=s.manifest;navmesh_io.require_helper()
  tri=navmesh_io.collision_triangles(s)
@@ -150,6 +152,7 @@ def main():
   for cl in report['clusters']:
    if ':' in cl['kind']:continue
    x=np.array(cl['leftFloorAt'],float);best=None
+   if any(x0<=x[0]<=x1 and y0<=x[1]<=y1 and z0<=x[2]<=z1 for x0,x1,y0,y1,z0,z1 in a.exclude):continue
    for A,B,o in segs:
     e=B-A;t=float(np.clip(np.dot((x-A)[[0,2]],e[[0,2]])/max(np.dot(e[[0,2]],e[[0,2]]),1e-9),0,1));q=A+e*t
     dh=math.hypot(*(x-q)[[0,2]]);dy=abs(x[1]-q[1])
@@ -199,10 +202,21 @@ def main():
  # Never where a walker stands: trim every guard to stay CLEAR from the walkable
  # floor (navmesh polygons, any island) at its level; a sweep guard's span can
  # otherwise reach past its landing edge into a stair lane beside it.
+ # Nor on an authored walk: route edges (their width) and stair lanes keep a
+ # walker's clearance (RADIUS+LANE) round their centreline.
+ ext=m.get('extensions',{});ns=lambda suffix:next((v for k,v in ext.items() if k.endswith(suffix)),{})
+ routes=ns('.routes');nodes={n['id']:np.array(n['position'],float) for n in routes.get('nodes',[])}
+ lanes=[(nodes[e['from']],nodes[e['to']],e.get('width',.6)/2+LANE) for e in routes.get('edges',[])]
+ lanes+=[(np.array(f['from'],float),np.array(f['to'],float),f.get('width',1.2)/2+LANE) for f in ns('.stairs').get('paths',[])]
+ def on_lane(q):
+  for P,Q,w in lanes:
+   d=Q-P;t=float(np.clip(np.dot((q-P)[[0,2]],d[[0,2]])/max(np.dot(d[[0,2]],d[[0,2]]),1e-9),0,1));c=P+d*t
+   if math.hypot(*(q-c)[[0,2]])<w and -2.4<c[1]-q[1]<2.5:return True
+  return False
  floor=navmesh_io.Floor(nav['polys']);kept=[];trimmed=0
  for g in guards:
   A=np.array(g['a'],float);B=np.array(g['b'],float);L=math.hypot(*(B-A)[[0,2]]);n=max(2,int(math.ceil(L/.05))+1)
-  ok=[floor.find(A+(B-A)*k/(n-1)+[0,.9,0],a.clear,1.6) is None for k in range(n)]
+  ok=[floor.find(A+(B-A)*k/(n-1)+[0,.9,0],a.clear,1.6) is None and not on_lane(A+(B-A)*k/(n-1)) for k in range(n)]
   trimmed+=ok.count(False);k=0
   while k<n:
    if not ok[k]:k+=1;continue
