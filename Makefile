@@ -117,12 +117,15 @@ OPTIMISE_CORE ?= ../core-optimise
 LUMEN_PERF_BASELINE ?=
 # Residents (world format 0.9): core's character checker measures each resident's seat fit.
 NPC_CHECK ?= $(wildcard $(OPTIMISE_CORE)/build/hyprune-npc-check)
+# Fall-through sweep (tools/check-fall-through.py): core's walker on every floor edge.
+WALK_CHECK ?= $(OPTIMISE_CORE)/build/hyprune-walk-check
 .PHONY: lumen-release-check lumen-perf-gate lumen-residents-session
 lumen-release-check:
 	node $(SCHEMA_DIR)/bin/validate.mjs world $(LUMEN_RELEASE_PACKAGE)/world.json - 0.9
 	python3 tools/check-residents.py $(LUMEN_RELEASE_PACKAGE) $(if $(NPC_CHECK),--npc-check $(NPC_CHECK)) --output $(LUMEN_REPORTS)/release-residents-check.json
 	python3 tools/check-blueprint.py $(LUMEN_RELEASE_PACKAGE) > $(LUMEN_REPORTS)/release-blueprint-check.json
 	$(OPTIMISE_CORE)/build/hyprune-world-check $(LUMEN_RELEASE_PACKAGE) > $(LUMEN_REPORTS)/release-core-world-check.json
+	python3 tools/check-fall-through.py $(LUMEN_RELEASE_PACKAGE) --walk-check $(WALK_CHECK) --output $(LUMEN_REPORTS)/fall-through.json
 	cp $(LUMEN_RELEASE_PACKAGE).verify.json $(LUMEN_REPORTS)/release-verify.json
 	python3 -c "import json; assert json.load(open('$(LUMEN_REPORTS)/release-verify.json'))['status']=='PASS'"
 # Nested route capture vs the previous release (tools/check-perf-gate.py).
@@ -162,7 +165,7 @@ lumen-budgets:
 navmesh-deps:
 	npm ci --prefix tools/navmesh --no-audit --no-fund
 navmesh-test:
-	python3 -m unittest tests/test_navmesh_check.py tests/test_devenv.py
+	python3 -m unittest tests/test_navmesh_check.py tests/test_void_guards.py tests/test_devenv.py
 # derive-blueprint.py / check-blueprint.py on synthetic packages (navmesh-deps).
 blueprint-test:
 	python3 -m unittest tests/test_blueprint.py
