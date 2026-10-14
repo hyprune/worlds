@@ -17,7 +17,9 @@ wall into corners), then stands still until it has stood 0.2 s (SETTLE seconds a
 code players use).
 
 A probe fails when its capsule
-- ends outside the playable volumes or below backstopBottom ('fell-out');
+- ends below backstopBottom, or outside the playable volumes on a lower
+  level or still in the air ('fell-out'; standing outside on its own level,
+  a roof lip past the volume, is reported for review);
 - is still falling after the settle ('falling': no floor under it; a 60 m
   drop lands within it);
 - passes through a collision surface between two frames ('tunnelled': the
@@ -59,41 +61,6 @@ GATE_SPEED=10     # m/s: faster probes are reported, not gated
 MIN_ISLAND=4.0   # m2: smaller islands are furniture tops (not walked from)
 
 def rnd(v,n=2):return [round(float(x),n) for x in v]
-
-class Floor:
- """Point-on-navmesh test over convex Recast polygons (any island)."""
- def __init__(self,polys,cell=2.0):
-  self.polys=polys;self.cell=cell;self.grid={}
-  for i,q in enumerate(polys):
-   v=q['v'];lo=np.floor(v[:,[0,2]].min(0)/cell).astype(int);hi=np.floor(v[:,[0,2]].max(0)/cell).astype(int)
-   for gx in range(lo[0],hi[0]+1):
-    for gz in range(lo[1],hi[1]+1):self.grid.setdefault((gx,gz),[]).append(i)
- def find(self,p,reach=0.,dy=.4):
-  """Index of a polygon whose surface is within `reach` horizontally and `dy`
-  vertically of feet point p, else None."""
-  key=(int(math.floor(p[0]/self.cell)),int(math.floor(p[2]/self.cell)));best=None
-  for gx in range(key[0]-1,key[0]+2):
-   for gz in range(key[1]-1,key[1]+2):
-    for i in self.grid.get((gx,gz),()):
-     v=self.polys[i]['v'];d=self.distance(v,p)
-     if d<=reach and abs(self.height(v,p)-p[1])<=dy and (best is None or d<best[0]):best=(d,i)
-  return None if best is None else best[1]
- @staticmethod
- def distance(v,p):
-  # Horizontal distance from p to a convex polygon (0 inside).
-  q=np.array([p[0],p[2]]);xz=v[:,[0,2]];n=len(xz);inside=True;best=1e9
-  area=np.sum(xz[:,0]*np.roll(xz[:,1],-1)-np.roll(xz[:,0],-1)*xz[:,1])
-  for j in range(n):
-   a,b=xz[j],xz[(j+1)%n];e=b-a;cross=e[0]*(q[1]-a[1])-e[1]*(q[0]-a[0])
-   if cross*area<0:inside=False
-   t=np.clip(np.dot(q-a,e)/max(np.dot(e,e),1e-12),0,1);best=min(best,float(np.linalg.norm(a+e*t-q)))
-  return 0. if inside else best
- @staticmethod
- def height(v,p):
-  # Plane height of the polygon under p (Recast polygons are near planar).
-  a,b,c=v[0],v[1],v[2];n=np.cross(b-a,c-a)
-  if abs(n[1])<1e-9:return float(v[:,1].mean())
-  return float(a[1]-(n[0]*(p[0]-a[0])+n[2]*(p[2]-a[2]))/n[1])
 
 def samples(polys,islands):
  """Open-edge sample points with the outward horizontal normal, plus corners."""
@@ -137,7 +104,7 @@ def main():
  area={}
  for q in polys:area[q['island']]=area.get(q['island'],0)+q['area']
  islands={i for i,x in area.items() if x>=MIN_ISLAND}|({main_island}-{None})
- floor=Floor(polys)
+ floor=navmesh_io.Floor(polys)
  C=object.__new__(Triangles);C._set(tri,np.array(['collision']*len(tri)),np.ones(len(tri),bool))
  def ground(p):
   # The collision floor under a navmesh point (Recast polygon heights are coarse).
@@ -152,7 +119,7 @@ def main():
    r=math.radians(ang);o=e['o'];d=np.array([o[0]*math.cos(r)-o[2]*math.sin(r),0,o[0]*math.sin(r)+o[2]*math.cos(r)])
    start=e['p']-d*LEAD;fi=floor.find(start,.05,.6)
    if fi is None or polys[fi]['island'] not in islands:continue
-   start=ground(np.array([start[0],Floor.height(polys[fi]['v'],start),start[2]]))
+   start=ground(np.array([start[0],navmesh_io.Floor.height(polys[fi]['v'],start),start[2]]))
    if start is None:continue
    target=e['p']+d*OVERSHOOT
    for mode,speed,dt in MODES:
@@ -183,7 +150,8 @@ def main():
    continue
   end=np.array(r['end']);feet=end-[0,EYE,0];start_feet=np.array(r['start'])-[0,EYE,0]
   kind=None
-  if not r['playable'] or feet[1]<BACKSTOP_BOTTOM:kind='fell-out'
+  if feet[1]<BACKSTOP_BOTTOM or not r['playable'] and (not r['grounded'] or feet[1]<start_feet[1]-1):kind='fell-out'
+  elif not r['playable']:kind='review:standing-outside-playable'
   elif not r['grounded']:kind='falling'
   elif r.get('crossed'):kind='tunnelled'
   elif floor.find(feet,.45,.45) is None:kind='review:off-navmesh'
