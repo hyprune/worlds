@@ -24,6 +24,7 @@ MAP = arg('--map', os.path.join(os.path.dirname(__file__), 'clip-map.json'))
 CLIPS_FROM, MAX_TRIS = arg('--clips-from'), int(arg('--max-tris', '8000'))
 STRIP, KEEP_SWAY = '--strip-fingers' in argv, '--keep-sway' in argv
 KEEP_OWN = [n for n in (arg('--keep-own', '') or '').split(',') if n]  # with --clips-from: keep these own clips
+TAKE = [n for n in (arg('--take', '') or '').split(',') if n]  # with --clips-from: only these source clips (all when empty)
 MAX_TEXTURE = int(arg('--max-texture', '1024'))
 FPS = 30
 report = {'source': os.path.basename(SRC), 'steps': [], 'warnings': [], 'clips': {}}
@@ -514,7 +515,7 @@ if CLIPS_FROM:
     for a in actions:  # the target's own clips give way to the shared set (except --keep-own)
         if a not in own:
             bpy.data.actions.remove(a)
-    shared_set = transfer_clips(arm, sarm, [a for a in sactions if a.name not in KEEP_OWN or not own])
+    shared_set = transfer_clips(arm, sarm, [a for a in sactions if (a.name not in KEEP_OWN or not own) and (not TAKE or a.name in TAKE)])
     actions = own + shared_set
     if own:
         step('kept own clips: ' + ', '.join(a.name for a in own))

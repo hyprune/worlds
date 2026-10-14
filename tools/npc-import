@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # SPDX-License-Identifier: MIT
 # Normalise an auto-rigged NPC export (mixamorig: skeleton template) into the canonical NPC character (RFC-0010 draft).
-#   tools/npc-import SOURCE.glb|.fbx OUT.glb [--clips-from ANIMATED.glb] [--strip-fingers]
+#   tools/npc-import SOURCE.glb|.fbx OUT.glb [--clips-from ANIMATED.glb [--keep-own A,B] [--take A,B]] [--strip-fingers]
 #                    [--max-tris N] [--keep-sway] [--map clip-map.json] [--render DIR] [--no-compress]
 # Requires a PROVENANCE note beside SOURCE (tools/npc/provenance.py). Blender runs only on
 # the bake host (HYPRUNE_BAKE_HOST, tools/bake-host.sh), never here. Steps there:
@@ -22,6 +22,7 @@ while [[ $# -gt 0 ]]; do
     --no-compress) COMPRESS=0; shift ;;
     --map) PASS+=(--map "tools/npc/$(basename "$2")"); cp -n "$2" "$ROOT/tools/npc/" 2>/dev/null || true; shift 2 ;;
     --max-tris) PASS+=(--max-tris "$2"); shift 2 ;;
+    --keep-own|--take) PASS+=("$1" "$2"); shift 2 ;;
     --strip-fingers|--keep-sway) PASS+=("$1"); shift ;;
     *) echo "unknown option $1" >&2; exit 2 ;;
   esac
