@@ -1,72 +1,89 @@
 {
  "status": "PASS",
  "worldId": "com.hyprune.lumen-reach",
- "version": "0.11.2",
+ "version": "0.11.3",
  "formatVersion": "0.9",
  "sourceFormatVersion": "0.9",
- "sourceCommit": "f3f948f89d37e7d7e2ff2fc2cb207b81571f4f2c",
+ "sourceCommit": "4260d96",
  "sourceNote": "lumen-build (objects, bake, derived visibility, blueprint) on the bake host; release package = tools/remote-optimize.sh output.",
- "sceneSHA256": "6ef270aceb9f101c193a6b2da6fef73857290062343df6d5198c6b6d566a41f8",
- "manifestSHA256": "19aa12eb73d84613378df17f0831f8e409f063b8ac94542aebcebef8cb74547d",
+ "sceneSHA256": "95050f951f34416979d08e600d83dca7db211ea52379bd9cd436ebbaca09e858",
+ "manifestSHA256": "137338be6864df9feb0b9e7b22e93eaaa959cd504d8b5d4bacd086e33dcb2600",
  "archive": {
   "status": "PASS",
-  "path": "artifacts/releases/com.hyprune.lumen-reach-0.11.2.tar.zst",
-  "sha256": "e8aaba3fa9564e8b36e033f96df393538f70b275a4bbecc6e680fbc51dcf2b9b",
-  "bytes": 53905509,
-  "nixHash": "sha256-6Kq6P6lWTos24DP5bfOTU49wsnWku+zG5oD7xR3PK5s=",
-  "url": "https://github.com/hyprune/worlds/releases/download/lumen-reach-v0.11.2/com.hyprune.lumen-reach-0.11.2.tar.zst",
+  "path": "artifacts/releases/com.hyprune.lumen-reach-0.11.3.tar.zst",
+  "sha256": "30ee724f5b6029b022039f9fe512c0f4f19ca83f432eafee22c6d1895f8579a6",
+  "bytes": 53768087,
+  "nixHash": "sha256-MO5yT1tgKbAiA5+f5RLA9PGcqD9DLq/uIsbRiV+FeaY=",
+  "url": "https://github.com/hyprune/worlds/releases/download/lumen-reach-v0.11.3/com.hyprune.lumen-reach-0.11.3.tar.zst",
   "files": 95,
   "reproducible": "second archive build byte-identical",
   "extractedChecks": [
    "schema 0.9 VALID (lumen-release-check)",
-   "core hyprune-world-check exit 0 (8e3b395): 0 warnings",
+   "core hyprune-world-check exit 0 (65a00c3): 0 warnings, 5 routes walkable",
    "check-residents PASS on the release package",
    "blueprint check PASS",
+   "fall-through sweep PASS",
    "no build-machine paths in any file"
   ]
  },
  "published": false,
- "coreCommit": "8e3b39548b8c9cf8a2771b464f158fd849f6b2f3",
+ "coreCommit": "65a00c3",
  "baseline": {
-  "version": "0.11.1",
-  "releasePackage": "published lumen-reach-v0.11.1 archive (extracted; sha256 940c630b...284d)"
+  "version": "0.11.2",
+  "releasePackage": "published lumen-reach-v0.11.2 archive (extracted; sha256 e8aaba3f...2b9b)"
  },
  "changes": {
-  "terrain": "The valley terrain carries the sky panorama (UVs from the sky sphere along rays from a Court/Hall viewpoint, raised near the settlement); rim 299.8 m from the sky centre; rock (three light levels) inside the cliff foot (ring 108 m). 19712 faces (256 segments, 39 rings): {'land-sun': 6721, 'land-mid': 1215, 'land-panorama': 11776}."
+  "stairFoot": "Snow service ascent stair apron reaches under the lower passage east shell (x 56..59.3): the 0.8 x 0.6 m slot at the ramp foot is floored.",
+  "hallStairFoot": "Hall upper stair foot: a railed 1 m landing under the flight beside the Hall upper ascent, which ended over the void.",
+  "courtWestRail": "Sun Court west ground guardrail continues under the West lookout (past the pit beneath the Upper Cascade bridge).",
+  "voidGuards": "71 collision-only void guards (lumen-reach/void-guards.json, tools/derive-void-guards.py), floor-0.6 to floor+2.5 m, off walkable navmesh, route edges and stair lanes."
  },
  "gates": {
-  "validate": "PASS (lumen-validate: geometry, sky incl. terrain dip, route clearance, frames/signs, visibility, schema, residents, package, placement, walking, navmesh, blueprint, emissive, coplanar)",
-  "releaseVerify": "PASS (verify.mjs, schema 0.9, residents, blueprint, core world-check 8e3b395: 0 warnings)",
-  "skyTerrain": {
-   "farVertices": 24192,
-   "maxElevationDegrees": -13.69,
-   "eye": [
-    -21.15,
-    1.7,
-    15.62
+  "validate": "PASS (lumen-validate: geometry, sky, route clearance, frames/signs, visibility, schema, residents, package, placement, walking, navmesh, blueprint, emissive, coplanar)",
+  "releaseVerify": "PASS (verify.mjs, schema 0.9, residents, blueprint, core world-check 65a00c3: 0 warnings)",
+  "fallThrough": {
+   "status": "PASS",
+   "edgeSamples": 5404,
+   "probes": 91635,
+   "failedProbes": {
+    "review:off-navmesh": 3097,
+    "report:fell-out": 195,
+    "review:left-playable-in-air": 31,
+    "review:standing-outside-playable": 21
+   },
+   "findings": 0,
+   "modes": [
+    "walk 4 m/s @ 60 fps",
+    "walk 10 m/s @ 60 fps",
+    "walk 10 m/s @ 20 fps",
+    "walk 30 m/s @ 30 fps",
+    "autodrive 3.5 m/s @ 60 fps"
    ],
-   "vertex": [
-    148.59,
-    -90.0,
-    -320.46
+   "angles": [
+    0,
+    40,
+    -40,
+    70,
+    -70
    ]
   },
+  "fallThroughBaseline": "the same sweep on 0.11.2: 354 failing clusters (3,371 probes)",
   "derivedVisibility": {
-   "regions": 168,
+   "regions": 189,
    "eyesWhereGeneratedHidesASampledVisibleUnit": 0
   },
   "budgets": {
-   "visibleTriangles": 260356,
+   "visibleTriangles": 261060,
    "drawCalls": 99,
-   "collisionTriangles": 6122,
-   "gpuMiB": 142.99,
-   "packageMiB": 57.35,
+   "collisionTriangles": 7042,
+   "gpuMiB": 143.01,
+   "packageMiB": 57.31,
    "baseline": {
-    "version": "0.11.1",
-    "visibleTriangles": 242820,
+    "version": "0.11.2",
+    "visibleTriangles": 260356,
     "drawCalls": 99,
-    "gpuMiB": 141.92,
-    "packageMiB": 56.8
+    "gpuMiB": 142.99,
+    "packageMiB": 57.35
    }
   },
   "residents": {
@@ -82,8 +99,8 @@
    },
    "baseline": {
     "gpuFrameMs": {
-     "p50": 3.7611519999999996,
-     "p95": 6.5630207999999985,
+     "p50": 3.7693440000000002,
+     "p95": 6.537574399999998,
      "n": 3200
     },
     "settledScale": {
@@ -92,20 +109,20 @@
      "n": 252
     },
     "rounds": 2,
-    "version": "0.11.1",
+    "version": "0.11.2",
     "source": "same session"
    },
    "candidate": {
-    "version": "0.11.2",
-    "coreCommit": "8e3b39548b8c9cf8a2771b464f158fd849f6b2f3",
-    "pluginSHA256": "11cd411f7fac04d215cd105037bb07a87167a71031507831669abebaed816e90",
+    "version": "0.11.3",
+    "coreCommit": "65a00c3dbb1130da1bc2dd5ed64b0af9fdb076f1",
+    "pluginSHA256": "4d174d03cc68a6e8f6017e6e35ec56178be009872d1dc7e13c03445edf379ee4",
     "scale": 0.5,
     "quality": "medium",
     "routePoses": 400,
-    "manifestSHA256": "19aa12eb73d84613378df17f0831f8e409f063b8ac94542aebcebef8cb74547d",
+    "manifestSHA256": "137338be6864df9feb0b9e7b22e93eaaa959cd504d8b5d4bacd086e33dcb2600",
     "gpuFrameMs": {
-     "p50": 3.763712,
-     "p95": 6.584985599999996,
+     "p50": 3.7857279999999998,
+     "p95": 6.6244096,
      "n": 3200
     },
     "settledScale": {
@@ -118,14 +135,14 @@
    "checks": [
     {
      "metric": "gpuFrameMs.p50",
-     "candidate": 3.7637,
-     "limit": 4.062,
+     "candidate": 3.7857,
+     "limit": 4.0709,
      "pass": true
     },
     {
      "metric": "gpuFrameMs.p95",
-     "candidate": 6.585,
-     "limit": 7.3506,
+     "candidate": 6.6244,
+     "limit": 7.3221,
      "pass": true
     },
     {
@@ -147,6 +164,7 @@
    "checks": 29,
    "failed": []
   },
-  "demo": "videos/lumen-0.11.2-valley-1080p60 (gallery): cinema gate PASS, 0.0% repeated frames, step CV 0.027"
+  "nestedStairFoot": "real plugin, autodrive 1.3/3.5/7 m/s, walk, run from the stair foot towards the ramp foot: 0.11.2 28/60 fell, 0.11.3 0/60",
+  "demo": "videos/lumen-0.11.3-fixes-1080p60 (gallery): cinema gate PASS, 0.0% repeated frames, step CV 0.013"
  }
 }

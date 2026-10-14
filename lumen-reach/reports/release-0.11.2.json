@@ -1,0 +1,152 @@
+{
+ "status": "PASS",
+ "worldId": "com.hyprune.lumen-reach",
+ "version": "0.11.2",
+ "formatVersion": "0.9",
+ "sourceFormatVersion": "0.9",
+ "sourceCommit": "f3f948f89d37e7d7e2ff2fc2cb207b81571f4f2c",
+ "sourceNote": "lumen-build (objects, bake, derived visibility, blueprint) on the bake host; release package = tools/remote-optimize.sh output.",
+ "sceneSHA256": "6ef270aceb9f101c193a6b2da6fef73857290062343df6d5198c6b6d566a41f8",
+ "manifestSHA256": "19aa12eb73d84613378df17f0831f8e409f063b8ac94542aebcebef8cb74547d",
+ "archive": {
+  "status": "PASS",
+  "path": "artifacts/releases/com.hyprune.lumen-reach-0.11.2.tar.zst",
+  "sha256": "e8aaba3fa9564e8b36e033f96df393538f70b275a4bbecc6e680fbc51dcf2b9b",
+  "bytes": 53905509,
+  "nixHash": "sha256-6Kq6P6lWTos24DP5bfOTU49wsnWku+zG5oD7xR3PK5s=",
+  "url": "https://github.com/hyprune/worlds/releases/download/lumen-reach-v0.11.2/com.hyprune.lumen-reach-0.11.2.tar.zst",
+  "files": 95,
+  "reproducible": "second archive build byte-identical",
+  "extractedChecks": [
+   "schema 0.9 VALID (lumen-release-check)",
+   "core hyprune-world-check exit 0 (8e3b395): 0 warnings",
+   "check-residents PASS on the release package",
+   "blueprint check PASS",
+   "no build-machine paths in any file"
+  ]
+ },
+ "published": false,
+ "coreCommit": "8e3b39548b8c9cf8a2771b464f158fd849f6b2f3",
+ "baseline": {
+  "version": "0.11.1",
+  "releasePackage": "published lumen-reach-v0.11.1 archive (extracted; sha256 940c630b...284d)"
+ },
+ "changes": {
+  "terrain": "The valley terrain carries the sky panorama (UVs from the sky sphere along rays from a Court/Hall viewpoint, raised near the settlement); rim 299.8 m from the sky centre; rock (three light levels) inside the cliff foot (ring 108 m). 19712 faces (256 segments, 39 rings): {'land-sun': 6721, 'land-mid': 1215, 'land-panorama': 11776}."
+ },
+ "gates": {
+  "validate": "PASS (lumen-validate: geometry, sky incl. terrain dip, route clearance, frames/signs, visibility, schema, residents, package, placement, walking, navmesh, blueprint, emissive, coplanar)",
+  "releaseVerify": "PASS (verify.mjs, schema 0.9, residents, blueprint, core world-check 8e3b395: 0 warnings)",
+  "skyTerrain": {
+   "farVertices": 24192,
+   "maxElevationDegrees": -13.69,
+   "eye": [
+    -21.15,
+    1.7,
+    15.62
+   ],
+   "vertex": [
+    148.59,
+    -90.0,
+    -320.46
+   ]
+  },
+  "derivedVisibility": {
+   "regions": 168,
+   "eyesWhereGeneratedHidesASampledVisibleUnit": 0
+  },
+  "budgets": {
+   "visibleTriangles": 260356,
+   "drawCalls": 99,
+   "collisionTriangles": 6122,
+   "gpuMiB": 142.99,
+   "packageMiB": 57.35,
+   "baseline": {
+    "version": "0.11.1",
+    "visibleTriangles": 242820,
+    "drawCalls": 99,
+    "gpuMiB": 141.92,
+    "packageMiB": 56.8
+   }
+  },
+  "residents": {
+   "status": "PASS"
+  },
+  "perfGate": {
+   "status": "PASS",
+   "limits": {
+    "p50": 0.08,
+    "p95": 0.12,
+    "scaleDrop": 0.05,
+    "scaleDropP05": 0.08
+   },
+   "baseline": {
+    "gpuFrameMs": {
+     "p50": 3.7611519999999996,
+     "p95": 6.5630207999999985,
+     "n": 3200
+    },
+    "settledScale": {
+     "p50": 0.5,
+     "p05": 0.5,
+     "n": 252
+    },
+    "rounds": 2,
+    "version": "0.11.1",
+    "source": "same session"
+   },
+   "candidate": {
+    "version": "0.11.2",
+    "coreCommit": "8e3b39548b8c9cf8a2771b464f158fd849f6b2f3",
+    "pluginSHA256": "11cd411f7fac04d215cd105037bb07a87167a71031507831669abebaed816e90",
+    "scale": 0.5,
+    "quality": "medium",
+    "routePoses": 400,
+    "manifestSHA256": "19aa12eb73d84613378df17f0831f8e409f063b8ac94542aebcebef8cb74547d",
+    "gpuFrameMs": {
+     "p50": 3.763712,
+     "p95": 6.584985599999996,
+     "n": 3200
+    },
+    "settledScale": {
+     "p50": 0.5,
+     "p05": 0.5,
+     "n": 252
+    },
+    "rounds": 2
+   },
+   "checks": [
+    {
+     "metric": "gpuFrameMs.p50",
+     "candidate": 3.7637,
+     "limit": 4.062,
+     "pass": true
+    },
+    {
+     "metric": "gpuFrameMs.p95",
+     "candidate": 6.585,
+     "limit": 7.3506,
+     "pass": true
+    },
+    {
+     "metric": "settledScale.p50",
+     "candidate": 0.5,
+     "limit": 0.45,
+     "pass": true
+    },
+    {
+     "metric": "settledScale.p05",
+     "candidate": 0.5,
+     "limit": 0.42,
+     "pass": true
+    }
+   ]
+  },
+  "residentsSession": {
+   "status": "PASS",
+   "checks": 29,
+   "failed": []
+  },
+  "demo": "videos/lumen-0.11.2-valley-1080p60 (gallery): cinema gate PASS, 0.0% repeated frames, step CV 0.027"
+ }
+}

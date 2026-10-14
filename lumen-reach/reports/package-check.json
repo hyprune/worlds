@@ -1,31 +1,31 @@
 {
   "status": "PASS",
-  "packageBytes": 92198609,
+  "packageBytes": 92233820,
   "decodedTextureBytes": 192806912,
-  "conservativeGpuBytes": 392650872,
+  "conservativeGpuBytes": 392735352,
   "mippedTextureViewsBytes": 361408152,
-  "expandedGeometryBytes": 31242720,
+  "expandedGeometryBytes": 31327200,
   "colorTextureViews": 28,
   "textureObjects": 63,
   "textureProvenanceEntries": 63,
-  "visualTriangles": 260356,
+  "visualTriangles": 261060,
   "drawCallEstimate": 99,
   "drawCallScope": "one draw per visible glTF primitive, world geometry only; excludes postprocessing, applications and HUD",
   "untexturedPhysicalMaterials": [],
   "anchors": 24,
-  "collisionNodes": 364,
+  "collisionNodes": 438,
   "lightmapBindings": 77,
   "UV1": [
     {
       "node": "Visual-array-hall",
-      "triangles": 31848,
-      "uv1Area": 0.09823,
+      "triangles": 32156,
+      "uv1Area": 0.09805,
       "overlapSamples": 0
     },
     {
       "node": "Visual-connector-ascent",
       "triangles": 2646,
-      "uv1Area": 0.50605,
+      "uv1Area": 0.49618,
       "overlapSamples": 0
     },
     {
@@ -54,8 +54,8 @@
     },
     {
       "node": "Visual-sun-court",
-      "triangles": 43008,
-      "uv1Area": 0.20288,
+      "triangles": 43404,
+      "uv1Area": 0.20065,
       "overlapSamples": 0
     },
     {
