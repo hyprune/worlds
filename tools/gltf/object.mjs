@@ -188,11 +188,13 @@ export async function check(dir, {format, schemaDir} = {}) {
     bytes: files.reduce((n, f) => n + f.size, 0), triangles: result.triangles ?? measured?.triangles, measured, paths: files.map(f => f.path)};
 }
 
-// A library directory (library.json, LICENSE, ATTRIBUTION.md, objects/<id>/): every object
-// checked as above, then validate('library') with the objects' manifests and every file.
+// A library directory (library.json, LICENSE, ATTRIBUTION.md, objects/<id>/, motion/<id>/):
+// every object checked as above, then validate('library') with the objects' manifests and
+// every file; each motion pack (shared clip library) passes validateMotion, sits in a
+// directory named by its id and ships its rigs and nothing else.
 export async function checkLibrary(dir, {schemaDir} = {}) {
   dir = path.resolve(dir);
-  const {validate} = await import(pathToFileURL(path.resolve(schemaDir || process.env.SCHEMA_DIR || path.join(import.meta.dirname, '../../../schema'), 'lib/validate.mjs')));
+  const {validate, validateMotion} = await import(pathToFileURL(path.resolve(schemaDir || process.env.SCHEMA_DIR || path.join(import.meta.dirname, '../../../schema'), 'lib/validate.mjs')));
   const manifest = JSON.parse(fs.readFileSync(path.join(dir, 'library.json'), 'utf8'));
   const objectsDir = path.join(dir, 'objects'), reports = [], objects = {}, files = [];
   for (const id of fs.existsSync(objectsDir) ? fs.readdirSync(objectsDir).sort() : []) {
@@ -203,7 +205,20 @@ export async function checkLibrary(dir, {schemaDir} = {}) {
   const walk = d => { for (const e of fs.readdirSync(d).sort()) { const f = path.join(d, e), st = fs.lstatSync(f); if (st.isDirectory()) walk(f); else files.push({path: path.relative(dir, f), size: st.size}); } };
   walk(dir);
   const result = validate('library', manifest, undefined, undefined, {objects, files});
-  const errors = [...result.errors, ...reports.flatMap(r => r.errors.map(e => `objects/${r.object}: ${e}`)), ...reports.flatMap(r => r.ignored.map(i => `objects/${r.object}: source file ${i} must not ship`))];
+  const motionDir = path.join(dir, 'motion'), motion = [];
+  for (const id of fs.existsSync(motionDir) ? fs.readdirSync(motionDir).sort() : []) {
+    const packDir = path.join(motionDir, id), file = path.join(packDir, 'motion.json');
+    if (!fs.existsSync(file)) { motion.push(`motion/${id}: no motion.json`); continue; }
+    if (!validateMotion) { motion.push(`motion/${id}: this schema has no motion packs`); continue; }
+    const pack = JSON.parse(fs.readFileSync(file, 'utf8')), r = validateMotion(pack);
+    motion.push(...r.errors.map(e => `motion/${id}: ${e}`));
+    if (pack.id !== id) motion.push(`motion/${id}: motion.json has id ${pack.id}`);
+    const scenes = new Set((pack.rigs || []).map(rig => rig.scene));
+    for (const scene of scenes) if (!fs.existsSync(path.join(packDir, scene))) motion.push(`motion/${id}: missing rig ${scene}`);
+    for (const f of files.filter(f => f.path.startsWith(`motion/${id}/`)).map(f => f.path.slice(`motion/${id}/`.length)))
+      if (f !== 'motion.json' && !scenes.has(f)) motion.push(`motion/${id}: ${f} is not part of the pack`);
+  }
+  const errors = [...result.errors, ...motion, ...reports.flatMap(r => r.errors.map(e => `objects/${r.object}: ${e}`)), ...reports.flatMap(r => r.ignored.map(i => `objects/${r.object}: source file ${i} must not ship`))];
   return {library: manifest.id, version: manifest.version, formatVersion: manifest.formatVersion, status: errors.length ? 'FAIL' : 'PASS', errors,
     files: files.length, bytes: files.reduce((n, f) => n + f.size, 0), objects: reports.map(r => ({id: r.object, formatVersion: r.formatVersion, status: r.status, triangles: r.triangles, bytes: r.bytes}))};
 }

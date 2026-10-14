@@ -198,9 +198,12 @@ for (const rigId of used) {
       const pts = [...times].map((_, k) => apply(hipsParentWorld, channels.get(hips).translation(at(k))));
       const travel = [pts[frames - 1][0] - pts[0][0], 0, pts[frames - 1][2] - pts[0][2]];
       speed = hold > 0 ? 0 : Math.hypot(travel[0], travel[2]) / length;
+      // A trimmed clip starts wherever the source had walked to: back over the rest position.
+      const rest = apply(hipsParentWorld, hips.getTranslation());
+      const start = clip.trim ? [pts[0][0] - rest[0], pts[0][2] - rest[2]] : [0, 0];
       pts.forEach((p, k) => {
         const u = k / (frames - 1);
-        hipsLocal.push(apply(hipsParentInverse, [p[0] - travel[0] * u, p[1], p[2] - travel[2] * u]));
+        hipsLocal.push(apply(hipsParentInverse, [p[0] - start[0] - travel[0] * u, p[1], p[2] - start[1] - travel[2] * u]));
       });
     }
     // Speed: for walk and run the planted feet's backward speed (in place), so the feet don't

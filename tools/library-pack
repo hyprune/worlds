@@ -5,7 +5,8 @@
   tools/library-pack NAME [--version X.Y.Z] [--out build/libraries] [--dry-run]
 
 NAME is libraries/NAME.json: {"id", "name", "description", "license", "attribution", "tag",
-"objects": [{"dir": "objects/armillary"}, ...]} (catalog order). Steps:
+"objects": [{"dir": "objects/armillary"}, ...]} (catalog order), optionally "motion":
+[{"dir": "motion/starter-motion"}] (motion packs, staged as motion/<id>/). Steps:
 1. every object directory passes tools/object-check;
 2. the library is staged as <id>/{library.json, LICENSE, ATTRIBUTION.md, objects/<id>/...}:
    object files only (build sources stay behind), formatVersion = the newest object format;
@@ -40,16 +41,20 @@ def digest(tree):
     return h.hexdigest()
 
 
-def attribution_md(spec, manifests, shipped, notes):
+def attribution_md(spec, manifests, shipped, notes, packs=()):
     lines = [f'# {spec["name"]}: attribution', '',
              f'Library `{spec["id"]}`. Each object directory carries its own `object.json` with its licence and',
              'attribution; this file lists them together. Retain attribution and document changes when',
-             'redistributing modified content.', '', '| Object | Author | Licence | Source |', '| --- | --- | --- | --- |']
+             'redistributing modified content.', '', '| Object or motion pack | Author | Licence | Source |', '| --- | --- | --- | --- |']
     for m in manifests:
         for a in m['attribution']:
             if a['path'] != '.' and not any(p == a['path'] or p.startswith(a['path'] + '/') for p in shipped[m['id']]):
                 continue  # a build source that stays in the repository
             where = m['id'] if a['path'] == '.' else f'{m["id"]}/{a["path"]}'
+            lines.append(f'| `{where}` | {a["author"]} | {a["license"]} | {a.get("source", "")} |')
+    for pack in packs:
+        for a in pack['attribution']:
+            where = f'motion/{pack["id"]}' + ('' if a['path'] == '.' else f'/{a["path"]}')
             lines.append(f'| `{where}` | {a["author"]} | {a["license"]} | {a.get("source", "")} |')
     lines += ['', 'Library files (`library.json`, this file): ' + ', '.join(f'{a["author"]}, {a["license"]}' for a in spec['attribution']) + '.', '']
     # Provenance and modification notes kept beside the sources (for example characters/ATTRIBUTION.md).
@@ -95,13 +100,24 @@ def main():
         if note.exists() and note.relative_to(ROOT).as_posix() not in [n for n, _ in notes]:
             notes.append((note.relative_to(ROOT).as_posix(), note.read_text()))
     shipped = {m['id']: result['paths'] for (_, result), m in zip(checks, manifests)}
-    (stage / 'ATTRIBUTION.md').write_text(attribution_md(spec, manifests, shipped, notes))
+    packs = [json.loads((ROOT / e['dir'] / 'motion.json').read_text()) for e in spec.get('motion', [])]
+    (stage / 'ATTRIBUTION.md').write_text(attribution_md(spec, manifests, shipped, notes, packs))
     for (entry, result), m in zip(checks, manifests):
         for rel in result['paths']:
             dst = stage / 'objects' / m['id'] / rel; dst.parent.mkdir(parents=True, exist_ok=True)
             shutil.copyfile(ROOT / entry['dir'] / rel, dst)
         report['objects'].append({'id': m['id'], 'from': entry['dir'], 'formatVersion': m['formatVersion'], 'traits': sorted(m['traits']),
                                   'triangles': result['triangles'], 'bytes': result['bytes'], 'ignoredSources': result['ignored']})
+    # Motion packs: motion.json and its rigs.
+    report['motion'] = []
+    for entry in spec.get('motion', []):
+        src = ROOT / entry['dir']
+        pack = json.loads((src / 'motion.json').read_text())
+        dst = stage / 'motion' / pack['id']; dst.mkdir(parents=True)
+        for rel in ['motion.json', *[r['scene'] for r in pack['rigs']]]:
+            shutil.copyfile(src / rel, dst / rel)
+        report['motion'].append({'id': pack['id'], 'from': entry['dir'], 'clips': len(pack['clips']), 'rigs': len(pack['rigs']),
+                                 'bytes': sum(f.stat().st_size for f in dst.iterdir())})
     for p in stage.rglob('*'):
         os.chmod(p, 0o755 if p.is_dir() else 0o644)
     # 3. Library check.
