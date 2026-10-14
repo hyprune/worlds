@@ -3,6 +3,28 @@
 Measured figures, gates and archive hashes for each release are in the
 release records (`reports/release*.json`).
 
+## 0.11.3
+
+Nowhere to fall out of the world.
+
+- **The Signal Rise stair foot.** Walking, running or autodriving from the foot of the
+  snow-service stairs towards the ramp foot, along the passage wall, could drop you through a
+  0.8 x 0.6 m slot in the floor (one walker wide) into the valley. The stair apron now runs
+  under the wall; the slot is gone, and so is the glimpse of the valley through it.
+- **Floor edges over the void.** A sweep of every wall, divider, railing and floor edge with
+  the walker (walking, running and autodrive, five angles each) found more places a walker
+  left the world: the Sun Court floor ended over the open pit under the Upper Cascade bridge
+  and short of the wall behind the south paving, the hall's upper flight ended in mid-air at
+  the balcony landing, and a walk off a roof you can only fly to carried over the low
+  perimeter walls. The court's west guardrail now runs on under the West lookout, the upper
+  flight has a railed foot landing, and invisible guards (2.5 m above the floor; flying passes
+  over) close the other edges with nothing below them. They never stand on a floor, a route
+  or a stair.
+- **A release gate.** `tools/check-fall-through.py` repeats the sweep on every release
+  package with the engine's own walker (`hyprune-walk-check`) and fails when a walker falls
+  out, keeps falling or passes through a surface. `tools/derive-void-guards.py` lists the
+  edges to guard (`void-guards.json`).
+
 ## 0.11.2
 
 The valley.
