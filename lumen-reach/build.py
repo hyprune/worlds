@@ -593,6 +593,9 @@ def hall():
  slab('Hall balcony landing',-13,-2,56,60,4,'concrete')
  slab('Hall first balcony',-6,-2,48,60,4,'concrete')
  ramp('Hall upper ascent',-5,-2,56,40,4,8,20)
+ # 0.11.3: the flight beside it (x -2..-0.3) ended over the void at y 56; a railed
+ # foot landing continues the balcony landing under it.
+ slab('Hall upper stair foot',-2,-.3,56,57,4,'concrete');rail((-2,57,4),(-.3,57,4));rail((-.3,56,4),(-.3,57,4))
  slab('Hall upper balcony',-6,0,32,40,8,'concrete')
  # Upper landing stops at the ramp crest; no slab crosses its rising clearance.
  rail((-.2,32,8),(-.2,39,8));rail((-2,57,4),(-2,60,4))
