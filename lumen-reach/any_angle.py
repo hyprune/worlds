@@ -280,7 +280,10 @@ def architecture(B):
  # The alternate stair starts receive a short supported apron before the
  # perimeter backstop; its capsule must not straddle the outside boundary.
  B.slab('Service descent stair apron',33,35.4,51.4,52,0,'metal')
- B.slab('Snow service ascent stair apron',57,59.3,99.4,100,-6,'grating')
+ # 0.11.3: the apron reaches under the lower passage's east shell (x 56). From x 57
+ # it left a 0.8 x 0.6 m slot at the ramp foot, one capsule wide: a walker sliding
+ # along the shell dropped through it into the valley.
+ B.slab('Snow service ascent stair apron',56,59.3,99.4,100,-6,'grating')
  # Roof-mounted service pods stay outside the established walking route.
  for group,spots in [('sun-court',[(0,25.5,16),(9,25.5,16)]),('array-hall',[(23.9,40,21.6),(23.9,52,21.6)]),('signal-rise',[(56,154,20.45),(73,155,20.45)])]:
   for x,y,z in spots:
@@ -330,7 +333,9 @@ def boundaries(B):
    if (i+di,j+dj) not in cells:edges.append((a,b,(-di,-dj)))
  # Visible guards at the previously open ground-level external edges. Guard tops count as walkable below.
  old=B.G
- for group,runs in [('sun-court',[((-24,-16,0),(-24,6,0)),((26,22,0),(26,26,0))]),('array-hall',[((-13,32,0),(-13,60,0))]),('signal-rise',[((29,112,0),(50.4,112,0)),((59.3,112,0),(85,112,0)),((85,112,0),(85,160,0)),((29,112,0),(29,143,0))])]:
+ # 0.11.3: the west run continues under the West lookout to y 20: the court
+ # floor ended there over the open pit beneath the Upper Cascade bridge.
+ for group,runs in [('sun-court',[((-24,-16,0),(-24,20,0)),((26,22,0),(26,26,0))]),('array-hall',[((-13,32,0),(-13,60,0))]),('signal-rise',[((29,112,0),(50.4,112,0)),((59.3,112,0),(85,112,0)),((85,112,0),(85,160,0)),((29,112,0),(29,143,0))])]:
   B.G=group
   for a,b in runs:B.rail(a,b)
  B.G=old
@@ -373,6 +378,14 @@ def boundaries(B):
   q=len(vertices);vertices.extend([(p[0],p[1],lo),(r[0],r[1],lo),(r[0],r[1],hi),(p[0],p[1],hi)]);faces.append((q,q+1,q+2,q+3))
  pieces=[round(top+clear,3) for p,r,top in pieces]
  me=B.bpy.data.meshes.new('Playable perimeter');me.from_pydata(vertices,[],faces);o=B.bpy.data.objects.new('Playable perimeter',me);B.bpy.context.collection.objects.link(o);o.hide_render=True;B.WALK.append(o)
+ # 0.11.3: void guards (tools/derive-void-guards.py -> void-guards.json): floor
+ # edges with nothing to land on below, or where a walk off the edge (a fly-only
+ # roof) carries over the low perimeter backstop out of the world. Collision-only,
+ # from 0.6 m under the floor to walkClearance above it; ordinary fly passes over.
+ guards=json.loads((B.HERE/'void-guards.json').read_text())['guards']
+ for g in guards:
+  B.void_guard((g['a'][0],-g['a'][2],g['floor']-.6),(g['b'][0],-g['b'][2],g['floor']-.6),.6+clear)
+ spec['voidGuards']=len(guards)
  spec['collisionBoundarySegments']=len(edges);spec['collisionBackstopPieces']=len(pieces);spec['backstopTopRange']=[min(pieces),max(pieces)]
  spec['walkReachableTops']=[len(tops),all_tops];spec['piecesWithoutReachableSurface']=skipped
  spec['runtimeContract']='World format 0.6: per-area playable volumes (lumen-reach/contract.py) bound ordinary fly; these collision-only perimeter pieces stop walking only, rising walkClearance above the highest walk-reachable top within 3 m inside (route-seeded, jump/drop expanded).';(B.ART/'playable-boundary-report.json').write_text(json.dumps(spec,indent=2)+'\n')
