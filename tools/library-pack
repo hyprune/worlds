@@ -13,9 +13,17 @@ NAME is libraries/NAME.json: {"id", "name", "description", "license", "attributi
 3. the staged tree passes the library check (validate('library') with every object and file);
 4. <id>-<version>.tar.zst: one root directory named by the id, sorted entries, fixed time,
    numeric owner 0, ustar, zstd; extracted again and re-checked, with the same file digest;
-5. <id>-<version>.release.json: the record for the meta repository's libraries/releases.json
-   (url of the GitHub release <tag>-v<version> on hyprune/worlds, sha256, nixHash,
-   published: false), checked with validate('library-releases').
+5. <id>-<version>.pin.json: the pin for the meta repository's libraries/releases.json (or
+   libraries/optional.json): url of the GitHub release <tag>-v<version> on hyprune/worlds,
+   sha256, nixHash, published: false, checked with validate('library-releases');
+6. <id>-<version>.release.json: the RFC-0015 release record (recordVersion 0.1, the archive,
+   source repo/tag/commit, thumbnails), written by the SDK's `hyprune library pack --release`
+   from the staged library, whose archive must be byte-identical to step 4's. The CLI is
+   $HYPRUNE_CLI (a command line), else ../sdk/dist/src/cli.js; --commit (default: HEAD) is the
+   commit the tag will name; --thumbnail FILE (up to 4, PNG/JPEG <= 1280x720, <= 512 KiB) adds
+   <id>-<version>.thumb-N.png.
+Release assets: the .tar.zst, its .sha256, the .release.json and the thumbnails; the .pin.json
+goes into the meta repository.
 --dry-run is the only mode so far: nothing is tagged, uploaded or written outside --out.
 """
 import argparse, base64, hashlib, io, json, os, pathlib, shutil, subprocess, sys, tarfile, tempfile
@@ -67,6 +75,8 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__.split('\n')[0])
     ap.add_argument('name'); ap.add_argument('--version'); ap.add_argument('--out', default=str(ROOT / 'build/libraries'))
     ap.add_argument('--dry-run', action='store_true', required=True, help='required until publishing is a reviewed step')
+    ap.add_argument('--commit', help='the commit the release tag will name (default: HEAD)')
+    ap.add_argument('--thumbnail', action='append', default=[], help='card thumbnail for the release record (repeatable)')
     a = ap.parse_args()
     spec = json.loads((ROOT / 'libraries' / f'{a.name}.json').read_text())
     version = a.version or spec['version']
@@ -143,22 +153,41 @@ def main():
         again = json.loads(node('library', str(pathlib.Path(tmp) / spec['id'])).stdout)
         if again['status'] != 'PASS' or digest(pathlib.Path(tmp) / spec['id']) != digest(stage):
             sys.exit('LIBRARY: the extracted archive differs from the staged library')
-    # 5. Release record.
+    # 5. Meta pin.
     tag = f'{spec.get("tag", a.name)}-v{version}'
     record = {f'{spec["id"]}@{version}': {'id': spec['id'], 'version': version, 'formatVersion': fv,
               'url': f'https://github.com/hyprune/worlds/releases/download/{tag}/{archive.name}',
               'sha256': sha, 'nixHash': 'sha256-' + base64.b64encode(bytes.fromhex(sha)).decode(), 'published': False}}
-    record_path = out / f'{spec["id"]}-{version}.release.json'
+    record_path = out / f'{spec["id"]}-{version}.pin.json'
+    (out / f'{spec["id"]}-{version}.release.json').unlink(missing_ok=True)
     record_path.write_text(json.dumps(record, indent=2) + '\n')
     check = subprocess.run(['node', f'{SCHEMA_DIR}/bin/validate.mjs', 'library-releases', str(record_path)], capture_output=True, text=True)
     if check.returncode:
-        sys.exit('LIBRARY: release record invalid: ' + check.stderr)
+        sys.exit('LIBRARY: meta pin invalid: ' + check.stderr)
+    # 6. RFC-0015 release record by the SDK, from the same staged tree (same archive bytes).
+    commit = a.commit or subprocess.run(['git', '-C', str(ROOT), 'rev-parse', 'HEAD'], capture_output=True, text=True, check=True).stdout.strip()
+    cli = os.environ.get('HYPRUNE_CLI', f'node {ROOT.parent / "sdk/dist/src/cli.js"}').split()
+    with tempfile.TemporaryDirectory() as tmp:
+        cmd = [*cli, 'library', 'pack', str(stage), '--release', '--tag', tag, '--repo', 'https://github.com/hyprune/worlds',
+               '--commit', commit, '--output', tmp]
+        for th in a.thumbnail:
+            cmd += ['--thumbnail', th]
+        made = subprocess.run(cmd, capture_output=True, text=True)
+        if made.returncode:
+            sys.exit('LIBRARY: hyprune library pack --release failed: ' + (made.stderr.strip() or made.stdout.strip()))
+        sdk_archive = pathlib.Path(tmp) / archive.name
+        if hashlib.sha256(sdk_archive.read_bytes()).hexdigest() != sha:
+            sys.exit('LIBRARY: the SDK packs different archive bytes; the release record would not match the archive')
+        for f in pathlib.Path(tmp).iterdir():
+            if f.name.endswith('.release.json') or '.thumb-' in f.name:
+                shutil.copy2(f, out / f.name)
     report.update({'formatVersion': fv, 'tag': tag, 'archive': archive.name, 'archiveBytes': archive.stat().st_size, 'sha256': sha,
-                   'expandedBytes': lib['bytes'], 'files': lib['files'], 'packageDigest': digest(stage), 'record': record,
+                   'expandedBytes': lib['bytes'], 'files': lib['files'], 'packageDigest': digest(stage), 'pin': record,
+                   'releaseRecord': f'{spec["id"]}-{version}.release.json', 'commit': commit,
                    'published': False, 'dryRun': True})
     (out / f'{spec["id"]}-{version}.report.json').write_text(json.dumps(report, indent=1) + '\n')
     print(f'LIBRARY {spec["id"]}@{version} (format {fv}): {len(ids)} objects, {lib["files"]} files, {lib["bytes"]} bytes -> {archive} '
-          f'({archive.stat().st_size} bytes, sha256 {sha[:12]}…); record {record_path}; dry run, nothing published')
+          f'({archive.stat().st_size} bytes, sha256 {sha[:12]}…); pin {record_path.name}, release record {spec["id"]}-{version}.release.json; dry run, nothing published')
 
 
 if __name__ == '__main__':
