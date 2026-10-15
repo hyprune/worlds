@@ -1,0 +1,82 @@
+{
+ "formatVersion": "0.11",
+ "id": "workspace-screen-stand-21x9",
+ "version": "1.0.0",
+ "name": "Stand screen 21:9",
+ "description": "A screen on two legs that stands on the floor and shows a workspace.",
+ "category": "signage",
+ "tags": [
+  "screen",
+  "workspace",
+  "display",
+  "ultrawide"
+ ],
+ "scene": "object.glb",
+ "license": "CC-BY-4.0",
+ "attribution": [
+  {
+   "path": ".",
+   "author": "Hyprune contributors",
+   "license": "CC-BY-4.0",
+   "source": "https://github.com/hyprune/worlds"
+  }
+ ],
+ "bounds": {
+  "min": [
+   -2.18,
+   0,
+   -0.31
+  ],
+  "max": [
+   2.18,
+   2.78,
+   0.39
+  ]
+ },
+ "thumbnail": "thumbnail.png",
+ "lighting": {
+  "mode": "probe"
+ },
+ "traits": {
+  "mount": {
+   "anchors": [
+    {
+     "id": "screen",
+     "role": "mounted-workspace",
+     "mountType": "kiosk-pillar",
+     "pose": {
+      "position": [
+       0,
+       1.8,
+       0.06
+      ],
+      "rotation": [
+       0,
+       0,
+       0,
+       1
+      ]
+     },
+     "size": [
+      4.2,
+      1.8
+     ],
+     "screenType": "com.hyprune.window",
+     "frameNode": "bezel"
+    }
+   ]
+  },
+  "collidable": {
+   "node": "proxy"
+  },
+  "movable": {
+   "surfaces": [
+    "floor"
+   ],
+   "scale": [
+    0.5,
+    2
+   ]
+  }
+ }
+}
