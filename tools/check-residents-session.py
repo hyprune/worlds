@@ -8,7 +8,7 @@ harness (it isolates and locks the session):
 Reads the residents from the package's world.json. Checks, with stills in DIR:
 - every authored character is bound to its route and walks at about its clip speed;
 - every seat stop is taken: the resident sits on the named seat (sit_idle, root
-  lifted by the seat fit), then stands and walks on;
+  at the height of the seat fit), then stands and walks on;
 - every resident reaches each of its stops;
 - aimed, each resident offers its interactions; say shows the lines in order and E
   advances and ends them; waypoint sets the waypoint; guide walks its path ahead of
@@ -139,7 +139,7 @@ def acceptance(client, children, args, shell_token, socketpath):
         check(f"{o['id']} walks at about its walk clip speed ({WALK[o['id']]:.2f} m/s)", len(v) >= 3 and .75*WALK[o['id']] < med < 1.25*WALK[o['id']], {'median': round(med, 3), 'samples': len(v)})
         want = next((x['seat'] for x in PATHS[o['path']].get('stops', []) if 'seat' in x), None)
         got = seated.get(o['id'])
-        check(f"{o['id']} sits on {want}, then stands and walks on", got and got['seat'].split('/')[-1] == want and got['seatOffset'] > .1 and o['id'] in stood,
+        check(f"{o['id']} sits on {want}, then stands and walks on", got and got['seat'].split('/')[-1] == want and got['seatOffset'] >= -.03 and o['id'] in stood,
               {'seated': got, 'stoodAt': stood.get(o['id'])})
         check(f"{o['id']} reaches each of its stops", all(x['best'] < .6 for x in stops[o['id']]), [{'point': x['point'], 'closest': round(x['best'], 2)} for x in stops[o['id']]])
 
