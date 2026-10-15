@@ -8,8 +8,8 @@ __pycache__/
 
 /lumen-reach/materials/tiles/
 
-/tools/navmesh/node_modules/
-/tools/gltf/node_modules/
+/tools/navmesh/node_modules
+/tools/gltf/node_modules
 /dist-07/
 .nested-state/
 
