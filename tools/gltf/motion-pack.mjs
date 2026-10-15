@@ -192,12 +192,13 @@ for (const rigId of used) {
     const times = Float32Array.from({ length: frames }, (_, k) => (k * length) / (frames - 1));
     const at = (k) => (hold > 0 ? t1 : t0 + times[k]);
     // Hips: world path, straight-line horizontal travel removed (the speed), back to local.
-    let speed = 0;
+    let speed = 0, travelXZ = [0, 0];
     const hipsLocal = [];
     if (channels.get(hips)?.translation) {
       const pts = [...times].map((_, k) => apply(hipsParentWorld, channels.get(hips).translation(at(k))));
       const travel = [pts[frames - 1][0] - pts[0][0], 0, pts[frames - 1][2] - pts[0][2]];
       speed = hold > 0 ? 0 : Math.hypot(travel[0], travel[2]) / length;
+      travelXZ = [travel[0], travel[2]].map((v) => Math.round(v * 1000) / 1000);
       // A trimmed clip starts wherever the source had walked to: back over the rest position.
       const rest = apply(hipsParentWorld, hips.getTranslation());
       const start = clip.trim ? [pts[0][0] - rest[0], pts[0][2] - rest[2]] : [0, 0];
@@ -226,7 +227,7 @@ for (const rigId of used) {
     }
     manifest.clips.push({ name: clip.name, role: clip.role, ...(clip.style ? { style: clip.style } : {}), rig: rigId,
       loop: clip.loop ?? true });
-    report.clips.push({ name: clip.name, role: clip.role, style: clip.style ?? null, rig: rigId, seconds: Math.round(length * 1000) / 1000,
+    report.clips.push({ name: clip.name, role: clip.role, style: clip.style ?? null, rig: rigId, seconds: Math.round(length * 1000) / 1000, travel: travelXZ,
       speed: Math.round(speed * 1000) / 1000 });
   }
   await io.write(join(outDir, `${rigId}.glb`), doc);

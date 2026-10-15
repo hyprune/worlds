@@ -1,0 +1,246 @@
+{
+  "motionVersion": "0.1",
+  "id": "starter-motion",
+  "name": "Starter motions",
+  "skeleton": {
+    "id": "mixamo-v1"
+  },
+  "license": "CC-BY-4.0",
+  "attribution": [
+    {
+      "path": ".",
+      "author": "Hyprune contributors",
+      "license": "CC-BY-4.0",
+      "source": "https://github.com/hyprune/worlds"
+    },
+    {
+      "path": "ash.glb",
+      "author": "Rick",
+      "license": "CC-BY-4.0",
+      "source": "https://github.com/rick-the-alien/hyprune-companion-drunk-ash"
+    }
+  ],
+  "rigs": [
+    {
+      "id": "desert",
+      "scene": "desert.glb"
+    },
+    {
+      "id": "poise",
+      "scene": "poise.glb"
+    },
+    {
+      "id": "quirk",
+      "scene": "quirk.glb"
+    },
+    {
+      "id": "ash",
+      "scene": "ash.glb"
+    }
+  ],
+  "clips": [
+    {
+      "name": "idle",
+      "role": "idle",
+      "rig": "desert",
+      "loop": true
+    },
+    {
+      "name": "idle-fidget",
+      "role": "idle",
+      "style": "fidget",
+      "rig": "desert",
+      "loop": true
+    },
+    {
+      "name": "idle-calm",
+      "role": "idle",
+      "style": "calm",
+      "rig": "desert",
+      "loop": true
+    },
+    {
+      "name": "idle-calm-2",
+      "role": "idle",
+      "style": "calm-2",
+      "rig": "desert",
+      "loop": true
+    },
+    {
+      "name": "idle-calm-3",
+      "role": "idle",
+      "style": "calm-3",
+      "rig": "desert",
+      "loop": true
+    },
+    {
+      "name": "walk",
+      "role": "walk",
+      "rig": "desert",
+      "loop": true
+    },
+    {
+      "name": "walk-stroll",
+      "role": "walk",
+      "style": "stroll",
+      "rig": "desert",
+      "loop": true
+    },
+    {
+      "name": "run",
+      "role": "run",
+      "rig": "desert",
+      "loop": true
+    },
+    {
+      "name": "run-steady",
+      "role": "run",
+      "style": "steady",
+      "rig": "desert",
+      "loop": true
+    },
+    {
+      "name": "run-fast",
+      "role": "run",
+      "style": "fast",
+      "rig": "desert",
+      "loop": true
+    },
+    {
+      "name": "wave",
+      "role": "wave",
+      "rig": "desert",
+      "loop": false
+    },
+    {
+      "name": "wave-big",
+      "role": "wave",
+      "style": "big",
+      "rig": "desert",
+      "loop": false
+    },
+    {
+      "name": "seated-clap",
+      "role": "seated-idle",
+      "style": "clap",
+      "rig": "desert",
+      "loop": true
+    },
+    {
+      "name": "walk-confident",
+      "role": "walk",
+      "style": "confident",
+      "rig": "poise",
+      "loop": true
+    },
+    {
+      "name": "walk-groovy",
+      "role": "walk",
+      "style": "groovy",
+      "rig": "poise",
+      "loop": true
+    },
+    {
+      "name": "walk-stumble",
+      "role": "walk",
+      "style": "stumble",
+      "rig": "poise",
+      "loop": true
+    },
+    {
+      "name": "walk-stylish",
+      "role": "walk",
+      "style": "stylish",
+      "rig": "poise",
+      "loop": true
+    },
+    {
+      "name": "walk-swing",
+      "role": "walk",
+      "style": "swing",
+      "rig": "poise",
+      "loop": true
+    },
+    {
+      "name": "sit-down",
+      "role": "sit-down",
+      "rig": "poise",
+      "loop": false
+    },
+    {
+      "name": "seated",
+      "role": "seated-idle",
+      "rig": "poise",
+      "loop": true
+    },
+    {
+      "name": "stand-up",
+      "role": "stand-up",
+      "rig": "quirk",
+      "loop": false
+    },
+    {
+      "name": "stand-up-quick",
+      "role": "stand-up",
+      "style": "quick",
+      "rig": "quirk",
+      "loop": false
+    },
+    {
+      "name": "talk-shrug",
+      "role": "talk",
+      "style": "shrug",
+      "rig": "quirk",
+      "loop": false
+    },
+    {
+      "name": "talk-puzzled",
+      "role": "talk",
+      "style": "puzzled",
+      "rig": "quirk",
+      "loop": false
+    },
+    {
+      "name": "idle-preen",
+      "role": "idle",
+      "style": "preen",
+      "rig": "quirk",
+      "loop": true
+    },
+    {
+      "name": "idle-sway",
+      "role": "idle",
+      "style": "sway",
+      "rig": "ash",
+      "loop": true
+    },
+    {
+      "name": "idle-sway-2",
+      "role": "idle",
+      "style": "sway-2",
+      "rig": "ash",
+      "loop": true
+    },
+    {
+      "name": "idle-sway-3",
+      "role": "idle",
+      "style": "sway-3",
+      "rig": "ash",
+      "loop": true
+    },
+    {
+      "name": "walk-stagger",
+      "role": "walk",
+      "style": "stagger",
+      "rig": "ash",
+      "loop": true
+    },
+    {
+      "name": "run-loose",
+      "role": "run",
+      "style": "loose",
+      "rig": "ash",
+      "loop": true
+    }
+  ]
+}
