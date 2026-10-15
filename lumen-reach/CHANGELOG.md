@@ -3,6 +3,18 @@
 Measured figures, gates and archive hashes for each release are in the
 release records (`reports/release*.json`).
 
+## Unreleased
+
+- **No running off the world at any speed.** A run at the `run_speed` ceiling (30 m/s) off a
+  raised deck could carry over the backstops and void guards, which rose only a little above
+  the floor beside them. With core's air speed limit (a falling walker eases to 10 m/s
+  horizontally), the build now raises each backstop piece, void guard and open-edge rail
+  guard (collision only) to clear the fall arc from every higher walkable top nearby: 258
+  pieces, the tallest 24.1 m. One new void guard closes a pit corner off the Sun Court west
+  ramp. The fall-through sweep gates every speed up to 30 m/s: 0 findings (was 81 report-only
+  clusters at 30 m/s). Needs core with the air speed limit (unreleased; older cores keep the
+  0.12.0 behaviour at 30 m/s, walking speeds are unchanged).
+
 ## 0.12.0
 
 Residents who sit like people.

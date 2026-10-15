@@ -25,10 +25,11 @@ A probe fails when its capsule
 - passes through a collision surface between two frames ('tunnelled': the
   capsule axis at knee or chest height crossed a triangle; the walker keeps it
   0.3 m clear of every surface).
-Gated at walk, run and autodrive speeds up to GATE_SPEED (the default
-run_speed, 10 m/s); the 30 m/s probes are reported only: at the run_speed
-ceiling a run off a raised deck carries far over the low walking backstops,
-which rise walkClearance above walk-reachable floors only.
+Gated at every speed up to GATE_SPEED, the run_speed ceiling (30 m/s): core
+eases a falling walker's horizontal speed down to 10 m/s off a real drop, and
+the Lumen build raises backstops and guards to clear that fall arc from every
+higher reachable top, so a run off a raised deck stays in the world at any
+run speed.
 Also reported, not gated: probes that end on a lower floor (legitimate drops;
 check-navmesh gates unguarded drops) and probes that end standing more than
 0.45 m from the navmesh ('off-navmesh': usually a corner pocket Recast erodes,
@@ -57,7 +58,7 @@ SETTLE=3.5       # s at most standing still after the run (a 60 m fall lands)
 ANGLES=(0,40,-40,70,-70)  # degrees off square-on
 MODES=[('walk',4,1/60),('walk',10,1/60),('walk',10,.05),('walk',30,1/30),('autodrive',3.5,1/60)]
 BACKSTOP_BOTTOM=-20
-GATE_SPEED=10     # m/s: faster probes are reported, not gated
+GATE_SPEED=30     # m/s: every mode up to the run_speed ceiling is gated
 MIN_ISLAND=4.0   # m2: smaller islands are furniture tops (not walked from)
 
 def rnd(v,n=2):return [round(float(x),n) for x in v]

@@ -1,16 +1,16 @@
 {
  "method": "Void guards: every walkable floor edge with nothing under it.",
- "package": "com.hyprune.lumen-reach 0.11.3",
- "edgeSamples": 14337,
- "voidSamples": 1,
+ "package": "com.hyprune.lumen-reach 0.12.0",
+ "edgeSamples": 14477,
+ "voidSamples": 14,
  "excluded": [
   [
    55.5,
    57.5,
-   -7,
-   -5,
+   -7.0,
+   -5.0,
    -101.5,
-   -99
+   -99.0
   ],
   [
    -2.3,
@@ -21,8 +21,8 @@
    -55.5
   ]
  ],
- "sweepFailuresGuarded": 0,
- "trimmedSamples": 191,
+ "sweepFailuresGuarded": 1,
+ "trimmedSamples": 664,
  "guards": [
   {
    "a": [
@@ -60,7 +60,7 @@
     -0.0,
     1.0
    ],
-   "samples": 1
+   "samples": 4
   },
   {
    "a": [
@@ -451,6 +451,25 @@
     -1.0
    ],
    "samples": 2
+  },
+  {
+   "a": [
+    49.879,
+    0.0,
+    -121.333
+   ],
+   "b": [
+    50.063,
+    0.0,
+    -123.353
+   ],
+   "floor": -0.0,
+   "outward": [
+    0.995,
+    -0.0,
+    0.1
+   ],
+   "samples": 6
   },
   {
    "a": [
@@ -1195,6 +1214,32 @@
      31.8,
      5.0,
      -51.9
+    ]
+   ]
+  },
+  {
+   "a": [
+    -23.597,
+    5.6,
+    -27.521
+   ],
+   "b": [
+    -23.355,
+    5.6,
+    -26.83
+   ],
+   "floor": 5.6,
+   "outward": [
+    -0.944,
+    0.0,
+    0.331
+   ],
+   "samples": 0,
+   "sweeps": [
+    [
+     -23.2,
+     5.6,
+     -26.6
     ]
    ]
   },
@@ -2149,5 +2194,5 @@
    ]
   }
  ],
- "note": "0.11.3: derived from 0.11.2 and its fall-through sweep, merged with the 0.11.3 builds and their sweeps; floors fixed instead in the excluded boxes (Snow service ascent stair apron, Hall upper stair foot); trimmed off walkable navmesh, route edges and stair lanes."
+ "note": "0.12.x: the 0.11.3 list re-derived on 0.12.0 (two new voids), plus one sweep guard (a pit corner a 30 m/s run reaches off the Sun Court west ramp); the fall-through sweep gates every speed up to 30 m/s. Floors fixed instead in the excluded boxes (Snow service ascent stair apron, Hall upper stair foot); trimmed off walkable navmesh, route edges and stair lanes. The build raises each guard to clear the fall arc from higher walkable tops."
 }

@@ -335,7 +335,8 @@ def boundaries(B):
  old=B.G
  # 0.11.3: the west run continues under the West lookout to y 20: the court
  # floor ended there over the open pit beneath the Upper Cascade bridge.
- for group,runs in [('sun-court',[((-24,-16,0),(-24,20,0)),((26,22,0),(26,26,0))]),('array-hall',[((-13,32,0),(-13,60,0))]),('signal-rise',[((29,112,0),(50.4,112,0)),((59.3,112,0),(85,112,0)),((85,112,0),(85,160,0)),((29,112,0),(29,143,0))])]:
+ edge_runs=[('sun-court',[((-24,-16,0),(-24,20,0)),((26,22,0),(26,26,0))]),('array-hall',[((-13,32,0),(-13,60,0))]),('signal-rise',[((29,112,0),(50.4,112,0)),((59.3,112,0),(85,112,0)),((85,112,0),(85,160,0)),((29,112,0),(29,143,0))])]
+ for group,runs in edge_runs:
   B.G=group
   for a,b in runs:B.rail(a,b)
  B.G=old
@@ -357,17 +358,35 @@ def boundaries(B):
  feet=lambda p:(p[0],-p[2],p[1]);look={r['id']:r['position'] for r in B.ROUTES};seeds=[feet(p) for p in look.values()]
  for a,b in [(look[e['from']],look[e['to']]) for e in B.EDGES]+[(f['from'],f['to']) for f in B.STAIR_ROUTES]:
   n=max(1,math.ceil(math.dist(a,b)/.5));seeds+=[feet([a[i]+(b[i]-a[i])*k/n for i in range(3)]) for k in range(n+1)]
- reach=walk_reachable(tops,seeds);all_tops=len(tops);tops=[t for t,ok in zip(tops,reach) if ok]
+ reach=walk_reachable(tops,seeds);all_tops=len(tops);every_top=list(tops);tops=[t for t,ok in zip(tops,reach) if ok]
  def highest(a,b,inward,depth):
   c=[a,b,[a[0]+inward[0]*depth,a[1]+inward[1]*depth],[b[0]+inward[0]*depth,b[1]+inward[1]*depth]]
   x0=min(v[0] for v in c)-.3;x1=max(v[0] for v in c)+.3;y0=min(v[1] for v in c)-.3;y1=max(v[1] for v in c)+.3
   return max((t[5] for t in tops if t[0]<=x1 and t[1]>=x0 and t[2]<=y1 and t[3]>=y0),default=None)
  vertices=[];faces=[];lo=spec['backstopBottom'];clear=spec['walkClearance'];pieces=[]
+ # 0.12.x: a piece also clears the fall arc from every higher walkable top nearby: core
+ # caps a falling walker's horizontal speed at AIR_SPEED (10 m/s, eased in over about
+ # AIR_SLACK metres), so at d metres from a top the walker is at least
+ # g*(d-AIR_SLACK)^2/(2*AIR_SPEED^2) below it (a run off a raised deck at any run speed).
+ AIR_SPEED,AIR_SLACK,ARC_REACH=10.,2.,30.
+ def arc(p,r):
+  best=None
+  for t in every_top:  # every walkable top: a deck a route doesn't reach is still stood on
+   d=min(math.hypot(max(t[0]-x,0,x-t[1]),max(t[2]-y,0,y-t[3])) for x,y in ((p[0]+(r[0]-p[0])*u,p[1]+(r[1]-p[1])*u) for u in (0,.25,.5,.75,1)))
+   if d>ARC_REACH:continue
+   h=t[5]-9.81*max(0.,d-AIR_SLACK)**2/(2*AIR_SPEED**2)
+   best=h if best is None or h>best else best
+  return best
+ arc_raised=[]
  for a,b,inward in edges:
   k=max(1,math.ceil(math.dist(a,b)/2))
   for t in range(k):
    p=[a[i]+(b[i]-a[i])*t/k for i in [0,1]];r=[a[i]+(b[i]-a[i])*(t+1)/k for i in [0,1]]
-   top=highest(p,r,inward,3);top=highest(p,r,inward,8) if top is None else top;pieces.append([p,r,top])
+   top=highest(p,r,inward,3);top=highest(p,r,inward,8) if top is None else top
+   if top is not None:
+    raised=arc(p,r)
+    if raised is not None and raised>top:arc_raised.append(round(raised-top,2));top=raised
+   pieces.append([p,r,top])
  # A piece with no walkable surface inside follows pieces within 3m of it.
  for piece in pieces:
   if piece[2] is None:piece[2]=max((o[2] for o in pieces if o[2] is not None and min(math.dist(u,v) for u in piece[:2] for v in o[:2])<3),default=None)
@@ -382,10 +401,19 @@ def boundaries(B):
  # edges with nothing to land on below, or where a walk off the edge (a fly-only
  # roof) carries over the low perimeter backstop out of the world. Collision-only,
  # from 0.6 m under the floor to walkClearance above it; ordinary fly passes over.
+ # 0.12.x: a guard also clears the fall arc from higher walkable tops (as the perimeter
+ # pieces do): a run off a raised deck above a pit edge must not carry over it.
  guards=json.loads((B.HERE/'void-guards.json').read_text())['guards']
  for g in guards:
-  B.void_guard((g['a'][0],-g['a'][2],g['floor']-.6),(g['b'][0],-g['b'][2],g['floor']-.6),.6+clear)
+  a2,b2=(g['a'][0],-g['a'][2]),(g['b'][0],-g['b'][2]);top=max(g['floor'],arc(a2,b2) or g['floor'])
+  B.void_guard((a2[0],a2[1],g['floor']-.6),(b2[0],b2[1],g['floor']-.6),top-g['floor']+.6+clear)
+ # The rails along open area edges (void beyond) likewise: collision up to the fall arc.
+ for group,runs in edge_runs:
+  for a,b in runs:
+   top=arc(a[:2],b[:2])
+   if top is not None and top>a[2]+clear:
+    B.void_guard((a[0],a[1],a[2]-.6),(b[0],b[1],b[2]-.6),top-a[2]+.6+clear)
  spec['voidGuards']=len(guards)
  spec['collisionBoundarySegments']=len(edges);spec['collisionBackstopPieces']=len(pieces);spec['backstopTopRange']=[min(pieces),max(pieces)]
- spec['walkReachableTops']=[len(tops),all_tops];spec['piecesWithoutReachableSurface']=skipped
- spec['runtimeContract']='World format 0.6: per-area playable volumes (lumen-reach/contract.py) bound ordinary fly; these collision-only perimeter pieces stop walking only, rising walkClearance above the highest walk-reachable top within 3 m inside (route-seeded, jump/drop expanded).';(B.ART/'playable-boundary-report.json').write_text(json.dumps(spec,indent=2)+'\n')
+ spec['arcRaisedPieces']=[len(arc_raised),max(arc_raised,default=0)];spec['walkReachableTops']=[len(tops),all_tops];spec['piecesWithoutReachableSurface']=skipped
+ spec['runtimeContract']='World format 0.6: per-area playable volumes (lumen-reach/contract.py) bound ordinary fly; these collision-only perimeter pieces stop walking only, rising walkClearance above the highest walk-reachable top within 3 m inside (route-seeded, jump/drop expanded), and at least to the fall arc from every higher walkable top within 30 m (core caps falling walkers at 10 m/s horizontally).';(B.ART/'playable-boundary-report.json').write_text(json.dumps(spec,indent=2)+'\n')
