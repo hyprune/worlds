@@ -16,7 +16,8 @@ travel removed (in-place clips, speed kept as `extras.speed`); clips renamed to 
 spec; for `resident-blue`, `resident-crimson` and `resident-ember`, clips retargeted from
 `resident-desert`; weights limited to 4; decimated to 8,000 triangles; textures scaled to
 1024 px and compressed (KTX2); geometry quantised and meshopt-compressed; public names and
-licence metadata. `object.json` and `thumbnail.png` (a render of the character) are written
+licence metadata; in 1.1.0, `sit` and `sit_idle` removed (`tools/gltf/drop-clips.mjs`: the
+starter motion pack's sit replaces them). `object.json` and `thumbnail.png` (a render of the character) are written
 by `tools/object-import --adopt`. The raw exports are not part of this repository.
 
 Retain attribution and document changes when redistributing modified content. Scripts

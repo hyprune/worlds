@@ -16,10 +16,10 @@ through Switchyard.
 
 | Character | Size | Triangles | Bones | Walk / run | Clips |
 | --- | --- | --- | --- | --- | --- |
-| `resident-blue` | 3.79 MB | 8,000 | 38 | 0.87 / 3.05 m/s | shared (hips x1.049) |
-| `resident-crimson` | 3.80 MB | 8,000 | 37 | 1.01 / 3.59 m/s | shared (hips x1.157) |
-| `resident-desert` | 3.72 MB | 7,999 | 33 | 0.75 / 3.41 m/s | own |
-| `resident-ember` | 3.69 MB | 8,000 | 37 | 0.80 / 3.10 m/s | shared (hips x1.085) |
+| `resident-blue` | 3.67 MB | 8,000 | 38 | 0.87 / 3.05 m/s | shared (hips x1.049) |
+| `resident-crimson` | 3.67 MB | 8,000 | 37 | 1.01 / 3.59 m/s | shared (hips x1.157) |
+| `resident-desert` | 3.60 MB | 7,999 | 33 | 0.75 / 3.41 m/s | own |
+| `resident-ember` | 3.57 MB | 8,000 | 37 | 0.80 / 3.10 m/s | shared (hips x1.085) |
 
 All four share one skeleton template. `resident-desert` carries its authored clip set;
 the others take the same clips through `tools/npc-import --clips-from` (rest-relative
@@ -37,10 +37,12 @@ characters fell from 1.4-2.3 to 0.5-0.7 (95th percentile 5-8 to about 2), and th
 block edges on faces and scarves are gone. 512 px maps were measurably worse at 4 m, so
 the maps stay at 1024 px.
 
-The `sit` clips end with the thighs below the root plane (a seat height under 0 m by the
-RFC-0011 measure), so their manifests list `sit` and `sit_idle` without a `seatHeight`.
-Core seats them by lifting the root (anchor height minus the measured seat height) and
-accepts an anchor while the feet then hang at most 0.45 m: seats up to about 0.41 m
-(desert), 0.47 m (ember), 0.48 m (crimson) and 0.52 m (blue). Lumen Reach uses 0.40 m.
+Objects 1.1.0 (starter kit 0.3.0) have no `sit` or `sit_idle` of their own: their old sit
+ended hunched, with the thighs below the root plane. They take `sit`, `sit_idle` and `stand`
+from the starter kit's motion pack (`motion/starter-motion/`, shared clip library) instead: a
+sit from the end of a walk-to-sit take, its held end pose as the seated idle, and a stand-up,
+retargeted to each resident (hips and travel scaled by hip height). Core measures the seat on
+the retargeted pose: 0.36 m (blue, crimson), 0.28 m (ember) and 0.24 m (desert), no ankle sink.
+Without the pack (an older core, or a world that ships neither) a resident doesn't sit.
 
 Content: CC-BY-4.0, Hyprune contributors (see ATTRIBUTION.md and LICENSE). Scripts: MIT.

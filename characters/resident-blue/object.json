@@ -1,7 +1,7 @@
 {
  "formatVersion": "0.9",
  "id": "resident-blue",
- "version": "1.0.1",
+ "version": "1.1.0",
  "name": "Resident (blue)",
  "description": "An ambient resident with a white helmet with an antenna and a navy scarf: walks routes, idles and waves (RFC-0010 character).",
  "category": "characters",
@@ -48,9 +48,7 @@
     "idle_fidget": {},
     "turn_left": {},
     "turn_right": {},
-    "wave": {},
-    "sit": {},
-    "sit_idle": {}
+    "wave": {}
    },
    "height": 1.73
   }
