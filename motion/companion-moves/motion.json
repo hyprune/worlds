@@ -1,0 +1,123 @@
+{
+  "motionVersion": "0.1",
+  "id": "companion-moves",
+  "name": "Companion moves",
+  "skeleton": {
+    "id": "mixamo-v1"
+  },
+  "license": "CC-BY-4.0",
+  "attribution": [
+    {
+      "path": ".",
+      "author": "Hyprune contributors",
+      "license": "CC-BY-4.0",
+      "source": "https://github.com/hyprune/worlds"
+    }
+  ],
+  "rigs": [
+    {
+      "id": "starlit",
+      "scene": "starlit.glb"
+    }
+  ],
+  "clips": [
+    {
+      "name": "dance-bass",
+      "role": "dance",
+      "style": "bass",
+      "rig": "starlit",
+      "loop": true
+    },
+    {
+      "name": "dance-boom",
+      "role": "dance",
+      "style": "boom",
+      "rig": "starlit",
+      "loop": true
+    },
+    {
+      "name": "dance-breakdance",
+      "role": "dance",
+      "style": "breakdance",
+      "rig": "starlit",
+      "loop": true
+    },
+    {
+      "name": "dance-silly",
+      "role": "dance",
+      "style": "silly",
+      "rig": "starlit",
+      "loop": true
+    },
+    {
+      "name": "dance-silly-2",
+      "role": "dance",
+      "style": "silly-2",
+      "rig": "starlit",
+      "loop": true
+    },
+    {
+      "name": "dance-silly-3",
+      "role": "dance",
+      "style": "silly-3",
+      "rig": "starlit",
+      "loop": true
+    },
+    {
+      "name": "dance-hip-hop",
+      "role": "dance",
+      "style": "hip-hop",
+      "rig": "starlit",
+      "loop": true
+    },
+    {
+      "name": "dance-hip-hop-2",
+      "role": "dance",
+      "style": "hip-hop-2",
+      "rig": "starlit",
+      "loop": true
+    },
+    {
+      "name": "dance-hip-hop-3",
+      "role": "dance",
+      "style": "hip-hop-3",
+      "rig": "starlit",
+      "loop": true
+    },
+    {
+      "name": "dance-hip-hop-4",
+      "role": "dance",
+      "style": "hip-hop-4",
+      "rig": "starlit",
+      "loop": true
+    },
+    {
+      "name": "dance-hip-hop-5",
+      "role": "dance",
+      "style": "hip-hop-5",
+      "rig": "starlit",
+      "loop": true
+    },
+    {
+      "name": "dance-shimmy",
+      "role": "dance",
+      "style": "shimmy",
+      "rig": "starlit",
+      "loop": true
+    },
+    {
+      "name": "dance-step",
+      "role": "dance",
+      "style": "step",
+      "rig": "starlit",
+      "loop": true
+    },
+    {
+      "name": "dance-letters",
+      "role": "dance",
+      "style": "letters",
+      "rig": "starlit",
+      "loop": true
+    }
+  ]
+}

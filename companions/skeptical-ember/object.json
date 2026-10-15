@@ -1,0 +1,63 @@
+{
+ "formatVersion": "0.10",
+ "id": "skeptical-ember",
+ "version": "0.1.0",
+ "name": "Ember",
+ "description": "A red-haired woman in a navy T-shirt and jeans, quietly doubtful about everything. Follows you anyway.",
+ "category": "characters",
+ "tags": [
+  "companion",
+  "person"
+ ],
+ "scene": "object.glb",
+ "license": "CC-BY-4.0",
+ "attribution": [
+  {
+   "path": ".",
+   "author": "Hyprune contributors",
+   "license": "CC-BY-4.0",
+   "source": "https://github.com/hyprune/worlds"
+  }
+ ],
+ "bounds": {
+  "min": [
+   -0.7243,
+   0.0001,
+   -0.2
+  ],
+  "max": [
+   0.7176,
+   1.6991,
+   0.1801
+  ]
+ },
+ "thumbnail": "thumbnail.png",
+ "lighting": {
+  "mode": "probe"
+ },
+ "traits": {
+  "character": {
+   "clips": {
+    "idle": {},
+    "walk": {
+     "speed": 1.327
+    },
+    "run": {
+     "speed": 4.502
+    }
+   },
+   "height": 1.7
+  }
+ },
+ "companion": {
+  "name": "Ember",
+  "followDistance": 2.0,
+  "say": [
+   "Are you sure this is the way?",
+   "Hmm. I've seen tidier worlds.",
+   "Fine. I'll follow. For now.",
+   "That window just looked at me.",
+   "If we get lost, I said nothing."
+  ]
+ }
+}

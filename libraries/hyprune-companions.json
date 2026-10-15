@@ -1,0 +1,17 @@
+{
+  "id": "com.hyprune.companions",
+  "tag": "hyprune-companions",
+  "version": "0.1.0",
+  "name": "Hyprune companions",
+  "description": "Optional official companions: Muse, Ember and Starlit follow you through every world, talk, and dance when asked (fourteen dances in the companion-moves motion pack).",
+  "license": "CC-BY-4.0",
+  "attribution": [{"path": ".", "author": "Hyprune contributors", "license": "CC-BY-4.0", "source": "https://github.com/hyprune/worlds"}],
+  "objects": [
+    {"dir": "companions/neon-cyber-muse"},
+    {"dir": "companions/skeptical-ember"},
+    {"dir": "companions/starlit-stretch"}
+  ],
+  "motion": [
+    {"dir": "motion/companion-moves"}
+  ]
+}

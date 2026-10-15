@@ -10,6 +10,7 @@ win. Packs come from the world package, installed libraries and the user's motio
 | Pack | Library | Clips | Size |
 | --- | --- | --- | --- |
 | `starter-motion` | `com.hyprune.starter` | 30: idle and walk/run, styled walks (confident, groovy, stumble, stylish, swing, stroll, stagger), runs (steady, fast, loose), idles (fidget, calm x3, preen, sway x3), wave (+ big), sit, seated idle (+ clap), stand (+ quick), talk reactions (shrug, puzzled) | 3.1 MB |
+| `companion-moves` | `com.hyprune.companions` | 14 dances (role `dance`): bass, boom, breakdance, silly x3, hip-hop x5, shimmy, step, letters | 2.9 MB |
 
 Built by `tools/gltf/motion-pack.mjs` from the characters' source exports (30 fps, hips-only
 translation, travel removed; walk and run speeds from the planted feet; the sit from the end of

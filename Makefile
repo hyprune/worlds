@@ -16,9 +16,9 @@ objects:
 	HYPRUNE_BAKE_DIR=hyprune-bake/worlds-objects HYPRUNE_BAKE_PROJECT=objects ./tools/remote-blender.sh -b --factory-startup --python-exit-code 1 -P tools/object/thumbnail.py -- dist/objects/armillary/armillary.gltf dist/objects/armillary/thumbnail.png
 	SCHEMA_DIR=$(SCHEMA_DIR) ./tools/object-check dist/objects/armillary
 	cp dist/objects/armillary/armillary.gltf dist/objects/armillary/armillary.bin dist/objects/armillary/object.json dist/objects/armillary/thumbnail.png objects/armillary/
-# Every committed object directory (objects/, objects/machines/, characters/).
+# Every committed object directory (objects/, objects/machines/, characters/, companions/).
 objects-check:
-	SCHEMA_DIR=$(SCHEMA_DIR) ./tools/object-check objects/armillary objects/machines/*/ characters/resident-*/
+	SCHEMA_DIR=$(SCHEMA_DIR) ./tools/object-check objects/armillary objects/machines/*/ characters/resident-*/ companions/*/
 # Machine objects (RFC-0011/0013 drafts): build on the bake host into
 # dist/objects/machines/<id>/, then optimise (KTX2 + meshopt) into objects/machines/<id>/.
 MACHINES := job-token ci-conveyor queue-stack server-rack deploy-lift build-monitor gauge-tube gauge-abacus gauge-cube

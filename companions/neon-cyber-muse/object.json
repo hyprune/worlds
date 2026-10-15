@@ -1,0 +1,63 @@
+{
+ "formatVersion": "0.10",
+ "id": "neon-cyber-muse",
+ "version": "0.1.0",
+ "name": "Muse",
+ "description": "A white android with a screen for a face and long violet hair. Follows you, keeps your pace and dances when asked.",
+ "category": "characters",
+ "tags": [
+  "companion",
+  "person"
+ ],
+ "scene": "object.glb",
+ "license": "CC-BY-4.0",
+ "attribution": [
+  {
+   "path": ".",
+   "author": "Hyprune contributors",
+   "license": "CC-BY-4.0",
+   "source": "https://github.com/hyprune/worlds"
+  }
+ ],
+ "bounds": {
+  "min": [
+   -0.7406,
+   0.0001,
+   -0.1214
+  ],
+  "max": [
+   0.7335,
+   1.7005,
+   0.3415
+  ]
+ },
+ "thumbnail": "thumbnail.png",
+ "lighting": {
+  "mode": "probe"
+ },
+ "traits": {
+  "character": {
+   "clips": {
+    "idle": {},
+    "walk": {
+     "speed": 1.365
+    },
+    "run": {
+     "speed": 4.534
+    }
+   },
+   "height": 1.7
+  }
+ },
+ "companion": {
+  "name": "Muse",
+  "followDistance": 2.0,
+  "say": [
+   "Every screen here tells a story. I read them all.",
+   "Lead on. I'll keep up.",
+   "Bright place. I like the light.",
+   "Want to see me dance? Just ask.",
+   "I saved your spot. Twice."
+  ]
+ }
+}
