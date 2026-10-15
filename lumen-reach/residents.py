@@ -4,7 +4,8 @@
 
 The four starter-kit residents ship inside the package as RFC-0011 object
 directories (`characters/<id>/`, byte-identical to `characters/` in this
-repository and to `com.hyprune.starter@0.1.1`), referenced as directory assets.
+repository and to the starter kit), referenced as directory assets, with the
+starter motion pack (`motion/starter-motion/`) that gives them their sit.
 Official worlds stay self-contained: core resolves a library asset only against
 an installed `id@version` and fails activation otherwise (RFC-0011 Libraries),
 and installers do not install world library dependencies yet.
@@ -57,6 +58,11 @@ def apply(m, package, source=ROOT):
     for cid in DATA['characters']:
         dst = package/'characters'/cid; dst.mkdir(parents=True, exist_ok=True)
         for f in CHARACTER_FILES: shutil.copyfile(source/'characters'/cid/f, dst/f)
+    # The starter motion pack (shared clip library): the residents' sit, seated idle and
+    # stand-up, retargeted by core at load (a package-root pack).
+    for pack in DATA.get('motion', []):
+        dst = package/'motion'/pack; dst.mkdir(parents=True, exist_ok=True)
+        for f in sorted((source/'motion'/pack).iterdir()): shutil.copyfile(f, dst/f.name)
     assets = [a for a in m.get('objectAssets', []) if a['id'] not in DATA['characters']]
     m['objectAssets'] = assets + [{'id': cid, 'dir': f'characters/{cid}'} for cid in DATA['characters']]
     ids = {r['id'] for r in DATA['residents']}

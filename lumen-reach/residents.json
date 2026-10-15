@@ -6,6 +6,9 @@
   "resident-ember",
   "resident-blue"
  ],
+ "motion": [
+  "starter-motion"
+ ],
  "seatAnchor": {
   "frontGap": 0.16,
   "collisionSetback": 0.16,

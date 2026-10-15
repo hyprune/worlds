@@ -1,9 +1,9 @@
 {
   "id": "com.hyprune.starter",
   "tag": "hyprune-starter",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "name": "Hyprune starter kit",
-  "description": "Official starter objects: the armillary, four ambient residents, five live machines with the item they move, and three gauges (tube, abacus, voxel cube) for any value from 0 to 100.",
+  "description": "Official starter objects: the armillary, four ambient residents, five live machines with the item they move, and three gauges (tube, abacus, voxel cube) for any value from 0 to 100, and the starter motions every character on the shared skeleton can play (styled walks and runs, idles, sit and stand, talk reactions).",
   "license": "CC-BY-4.0",
   "attribution": [{"path": ".", "author": "Hyprune contributors", "license": "CC-BY-4.0", "source": "https://github.com/hyprune/worlds"}],
   "objects": [
@@ -21,5 +21,8 @@
     {"dir": "objects/machines/gauge-tube"},
     {"dir": "objects/machines/gauge-abacus"},
     {"dir": "objects/machines/gauge-cube"}
+  ],
+  "motion": [
+    {"dir": "motion/starter-motion"}
   ]
 }
