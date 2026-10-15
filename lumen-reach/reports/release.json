@@ -32,27 +32,104 @@
   "version": "0.11.3",
   "releasePackage": "published lumen-reach-v0.11.3 archive (extracted)"
  },
- "perfGate": {
-  "status": "PASS",
-  "baselineGpuMs": {
-   "p50": 3.794432,
-   "p95": 6.577510399999999,
-   "n": 3200
-  },
-  "candidateGpuMs": {
-   "p50": 3.776,
-   "p95": 6.632806399999999,
-   "n": 3200
-  }
- },
- "budgets": {
-  "visibleTriangles": 0,
-  "drawCalls": 0,
-  "gpuMiB": 0,
-  "packageMiB": 2.51
- },
  "changes": {
   "residents": "Starter kit residents 1.1.0: no own sit; sit, seated idle and stand come from motion/starter-motion (the starter kit 0.3.0 pack, packaged in the world), retargeted by core 0.10.0: they sit upright on the 0.40 m benches.",
   "motion": "motion/starter-motion/ in the package (2.5 MB). Needs core 0.10.0 to sit; older cores load the world and the residents walk and talk."
+ },
+ "gates": {
+  "validate": "PASS (lumen-validate: geometry, sky, route clearance, frames/signs, visibility, schema, residents, package, placement, walking, navmesh, blueprint, emissive, coplanar)",
+  "releaseVerify": "PASS (verify.mjs, schema 0.9, residents, blueprint, core world-check 0.10.0)",
+  "fallThrough": {
+   "status": "PASS",
+   "edgeSamples": 5404,
+   "probes": 91635,
+   "failedProbes": {
+    "review:off-navmesh": 3097,
+    "report:fell-out": 195,
+    "review:left-playable-in-air": 31,
+    "review:standing-outside-playable": 21
+   },
+   "findings": 0,
+   "modes": [
+    "walk 4 m/s @ 60 fps",
+    "walk 10 m/s @ 60 fps",
+    "walk 10 m/s @ 20 fps",
+    "walk 30 m/s @ 30 fps",
+    "autodrive 3.5 m/s @ 60 fps"
+   ],
+   "angles": [
+    0,
+    40,
+    -40,
+    70,
+    -70
+   ]
+  },
+  "derivedVisibility": {
+   "regions": 189,
+   "eyesWhereGeneratedHidesASampledVisibleUnit": 0
+  },
+  "budgets": {
+   "visibleTriangles": 261060,
+   "drawCalls": 99,
+   "collisionTriangles": 7042,
+   "gpuMiB": 143.01,
+   "packageMiB": 59.82,
+   "baseline": {
+    "version": "0.11.3",
+    "visibleTriangles": 261060,
+    "drawCalls": 99,
+    "gpuMiB": 143.01,
+    "packageMiB": 57.31
+   }
+  },
+  "residents": {
+   "status": "PASS",
+   "session": "29/29 on core 0.10.0 (sit, seated, stand with the starter motions)"
+  },
+  "perfGate": {
+   "status": "PASS",
+   "limits": {
+    "p50": 0.08,
+    "p95": 0.12,
+    "scaleDrop": 0.05,
+    "scaleDropP05": 0.08
+   },
+   "baseline": {
+    "gpuFrameMs": {
+     "p50": 3.794432,
+     "p95": 6.577510399999999,
+     "n": 3200
+    },
+    "settledScale": {
+     "p50": 0.5,
+     "p05": 0.5,
+     "n": 252
+    },
+    "rounds": 2,
+    "version": "0.11.3",
+    "source": "same session"
+   },
+   "candidate": {
+    "version": "0.12.0",
+    "coreCommit": "c198979bc4df30857064e3a002314ad808a9413f",
+    "pluginSHA256": "e0cd048ec48918f16234e666a3f5d6f34f79568935038207209e5a28088b8219",
+    "scale": 0.5,
+    "quality": "medium",
+    "routePoses": 400,
+    "manifestSHA256": "483603047988bf8ae453a340ca15b88fd91c5595021c46e6eca63469a784212a",
+    "gpuFrameMs": {
+     "p50": 3.776,
+     "p95": 6.632806399999999,
+     "n": 3200
+    },
+    "settledScale": {
+     "p50": 0.5,
+     "p05": 0.5,
+     "n": 252
+    },
+    "rounds": 2
+   }
+  }
  }
 }
