@@ -3,6 +3,21 @@
 Measured figures, gates and archive hashes for each release are in the
 release records (`reports/release*.json`).
 
+## 0.12.0
+
+Residents who sit like people.
+
+- **A new sit.** The four residents (starter kit residents 1.1.0) no longer bring their own
+  sit: they take the sit, seated idle and stand-up of the starter motions, the shared clips
+  the package now carries (`motion/starter-motion/`, the same pack as the starter kit
+  0.3.0). Core retargets them onto each resident at load. On the Sun Court and hall benches
+  they sit upright on the seat, legs crossed, where they used to hunch forward on the front
+  edge, and they stand up and walk off without a jump.
+- **Grounded walks.** With core 0.10.0 the residents' walks no longer float a few
+  centimetres above the floor.
+- **Needs core 0.10.0 to sit.** Older cores load the world unchanged and the residents walk,
+  stop and talk as before, but they don't sit (the sit now comes from the motion pack).
+
 ## 0.11.3
 
 Nowhere to fall out of the world.
