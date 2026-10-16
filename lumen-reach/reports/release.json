@@ -1,53 +1,31 @@
 {
  "status": "PASS",
  "worldId": "com.hyprune.lumen-reach",
- "version": "0.12.0",
+ "version": "0.12.1",
  "formatVersion": "0.9",
  "sourceFormatVersion": "0.9",
- "sourceCommit": "71b3bee",
- "sourceNote": "lumen-build (objects, bake, derived visibility, blueprint) on the bake host; release package = tools/remote-optimize.sh output; archive and RFC-0015 release record by hyprune world pack --release (SDK 0.12.0).",
- "manifestSHA256": "483603047988bf8ae453a340ca15b88fd91c5595021c46e6eca63469a784212a",
- "archive": {
-  "status": "PASS",
-  "path": "hyprune world pack --release output",
-  "sha256": "bf0f16e55190adfcc8ebc5605a224f879ee689901b638c7842deea26136e2547",
-  "bytes": 55436563,
-  "nixHash": "sha256-vw8W5VGQrfzI68VgWiJPh57miZAbY4x4Qt7qJhNuJUc=",
-  "url": "https://github.com/hyprune/worlds/releases/download/lumen-reach-v0.12.0/com.hyprune.lumen-reach-0.12.0.tar.zst",
-  "files": 100,
-  "reproducible": "contents identical to the release package (diff -r)",
-  "extractedChecks": [
-   "schema 0.9 VALID (lumen-release-check)",
-   "core hyprune-world-check (core 0.10.0)",
-   "check-residents PASS on the release package",
-   "blueprint check PASS",
-   "fall-through sweep PASS (91,635 probes, 0 findings)",
-   "residents session 29/29 on core 0.10.0",
-   "no build-machine paths in any file"
-  ]
- },
+ "sourceCommit": "2593090",
+ "sourceNote": "lumen-build (objects, bake, derived visibility, blueprint) on the bake host; release package = tools/remote-optimize.sh output; archive and RFC-0015 release record by hyprune world pack --release (SDK 0.13.0).",
+ "manifestSHA256": "285edfdddf00bd33aa51691a3545da460681735e5906e6c8e144bce1e247b020",
  "published": false,
- "coreCommit": "2b419a1 (v0.10.0)",
+ "coreCommit": "c8bcd84 (core 0.11.0 release prep)",
  "baseline": {
-  "version": "0.11.3",
-  "releasePackage": "published lumen-reach-v0.11.3 archive (extracted)"
+  "version": "0.12.0",
+  "releasePackage": "published lumen-reach-v0.12.0 archive (extracted)"
  },
  "changes": {
-  "residents": "Starter kit residents 1.1.0: no own sit; sit, seated idle and stand come from motion/starter-motion (the starter kit 0.3.0 pack, packaged in the world), retargeted by core 0.10.0: they sit upright on the 0.40 m benches.",
-  "motion": "motion/starter-motion/ in the package (2.5 MB). Needs core 0.10.0 to sit; older cores load the world and the residents walk and talk."
+  "guards": "Backstop pieces, void guards and open-edge rail guards (collision only) rise to the fall arc from every higher walkable top within 30 m (core 0.11.0 caps a falling walker at 10 m/s horizontally); a raised stretch stops just under a walkway crossing it and keeps its old height beside one. One new void guard (Sun Court west ramp pit corner)."
  },
  "gates": {
-  "validate": "PASS (lumen-validate: geometry, sky, route clearance, frames/signs, visibility, schema, residents, package, placement, walking, navmesh, blueprint, emissive, coplanar)",
-  "releaseVerify": "PASS (verify.mjs, schema 0.9, residents, blueprint, core world-check 0.10.0)",
+  "validate": "PASS (lumen-validate incl. walking and navmesh)",
+  "walking": "PASS (77 edges, 0 failures)",
+  "releaseVerify": "PASS",
   "fallThrough": {
    "status": "PASS",
-   "edgeSamples": 5404,
-   "probes": 91635,
+   "edgeSamples": 5465,
+   "probes": 92630,
    "failedProbes": {
-    "review:off-navmesh": 3097,
-    "report:fell-out": 195,
-    "review:left-playable-in-air": 31,
-    "review:standing-outside-playable": 21
+    "review:off-navmesh": 3097
    },
    "findings": 0,
    "modes": [
@@ -65,28 +43,17 @@
     -70
    ]
   },
-  "derivedVisibility": {
-   "regions": 189,
-   "eyesWhereGeneratedHidesASampledVisibleUnit": 0
-  },
   "budgets": {
    "visibleTriangles": 261060,
    "drawCalls": 99,
-   "collisionTriangles": 7042,
-   "gpuMiB": 143.01,
-   "packageMiB": 59.82,
-   "baseline": {
-    "version": "0.11.3",
-    "visibleTriangles": 261060,
-    "drawCalls": 99,
-    "gpuMiB": 143.01,
-    "packageMiB": 57.31
-   }
+   "collisionTriangles": 7294,
+   "packageMiB": 59.85
   },
   "residents": {
    "status": "PASS",
-   "session": "29/29 on core 0.10.0 (sit, seated, stand with the starter motions)"
+   "session": "29/29 on core 0.11.0 release prep"
   },
+  "playable": "PASS: nested --playable, 30 m/s runs off 22 raised deck edges stay in the world (real Shift+W)",
   "perfGate": {
    "status": "PASS",
    "limits": {
@@ -97,8 +64,8 @@
    },
    "baseline": {
     "gpuFrameMs": {
-     "p50": 3.794432,
-     "p95": 6.577510399999999,
+     "p50": 3.83232,
+     "p95": 6.475366399999996,
      "n": 3200
     },
     "settledScale": {
@@ -107,20 +74,20 @@
      "n": 252
     },
     "rounds": 2,
-    "version": "0.11.3",
+    "version": "0.12.0",
     "source": "same session"
    },
    "candidate": {
-    "version": "0.12.0",
-    "coreCommit": "c198979bc4df30857064e3a002314ad808a9413f",
-    "pluginSHA256": "e0cd048ec48918f16234e666a3f5d6f34f79568935038207209e5a28088b8219",
+    "version": "0.12.1",
+    "coreCommit": "c8bcd84ca80665669589316dd525ec1f3d6858b0",
+    "pluginSHA256": "89deece49d5eec0f70c3285f8f4e513780fbb4f917e4bd116a4e0c67ebb46767",
     "scale": 0.5,
     "quality": "medium",
     "routePoses": 400,
-    "manifestSHA256": "483603047988bf8ae453a340ca15b88fd91c5595021c46e6eca63469a784212a",
+    "manifestSHA256": "285edfdddf00bd33aa51691a3545da460681735e5906e6c8e144bce1e247b020",
     "gpuFrameMs": {
-     "p50": 3.776,
-     "p95": 6.632806399999999,
+     "p50": 3.8343679999999996,
+     "p95": 6.2833152,
      "n": 3200
     },
     "settledScale": {
@@ -129,7 +96,41 @@
      "n": 252
     },
     "rounds": 2
-   }
+   },
+   "checks": [
+    {
+     "metric": "gpuFrameMs.p50",
+     "candidate": 3.8344,
+     "limit": 4.1389,
+     "pass": true
+    },
+    {
+     "metric": "gpuFrameMs.p95",
+     "candidate": 6.2833,
+     "limit": 7.2524,
+     "pass": true
+    },
+    {
+     "metric": "settledScale.p50",
+     "candidate": 0.5,
+     "limit": 0.45,
+     "pass": true
+    },
+    {
+     "metric": "settledScale.p05",
+     "candidate": 0.5,
+     "limit": 0.42,
+     "pass": true
+    }
+   ]
   }
+ },
+ "archive": {
+  "status": "PASS",
+  "path": "hyprune world pack --release output",
+  "sha256": "ae861198b1ab2d620c6fe2350d8d3b5cbaed023302b7bcbfc5703a48b0083b1f",
+  "bytes": 55438981,
+  "nixHash": "sha256-roYRmLGrLWIMb+I1DY07XLrtAjMCt7y/xXA6SLAIOx8=",
+  "url": "https://github.com/hyprune/worlds/releases/download/lumen-reach-v0.12.1/com.hyprune.lumen-reach-0.12.1.tar.zst"
  }
 }
