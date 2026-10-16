@@ -377,25 +377,57 @@ def boundaries(B):
    h=t[5]-9.81*max(0.,d-AIR_SLACK)**2/(2*AIR_SPEED**2)
    best=h if best is None or h>best else best
   return best
+ # 0.12.1: a raised piece or guard never rises through a walkway. Where the walk graph (route
+ # edges and stair flights, feet sampled every 0.25 m) passes within WALKWAY_REACH of it above
+ # its pre-arc top, that stretch is capped: under the walkway (within WALKWAY_OVER of its centre
+ # line) just below the walkway's feet, the walkway being the barrier there; beside it (up to
+ # WALKWAY_REACH) back to its pre-arc height, so it neither narrows the walkway nor forms a
+ # ledge beside it. WALKWAY_REACH keeps a walker's full width on stairs and bridges (the navmesh
+ # probes stairs 0.32 m off centre with a 0.3 m agent; the guard is 0.13 m thick). Segments are
+ # split into <=0.5 m stretches so only the part under or beside a walkway is capped.
+ WALKWAY_REACH,WALKWAY_OVER,WALKWAY_GAP=1.0,.3,.03
+ walkway=[]
+ for a,b in [(look[e['from']],look[e['to']]) for e in B.EDGES]+[(f['from'],f['to']) for f in B.STAIR_ROUTES]:
+  n=max(1,math.ceil(math.dist(a,b)/.25));walkway+=[feet([a[i]+(b[i]-a[i])*k/n for i in range(3)]) for k in range(n+1)]
+ def seg_dist(q,p,r):
+  dx,dy=r[0]-p[0],r[1]-p[1];L=dx*dx+dy*dy;u=0 if L<1e-12 else max(0,min(1,((q[0]-p[0])*dx+(q[1]-p[1])*dy)/L))
+  return math.hypot(q[0]-p[0]-u*dx,q[1]-p[1]-u*dy)
+ walkway_capped=[]
+ def capped(p,r,base,top):
+  # [(p_i, r_i, top_i)]: the stretch p..r with its collision top, capped under walkways
+  # that pass above `base` (the top it had before the fall arc raised it).
+  if top<=base+1e-6:return [(p,r,top)]
+  k=max(1,math.ceil(math.dist(p,r)/.5));out=[]
+  for i in range(k):
+   a=[p[j]+(r[j]-p[j])*i/k for j in (0,1)];b=[p[j]+(r[j]-p[j])*(i+1)/k for j in (0,1)];t=top
+   near=[(w[2],seg_dist(w,a,b)) for w in walkway if w[2]>base+.025 and abs(w[0]-a[0])<2 and abs(w[1]-a[1])<2]
+   near=[(z,d) for z,d in near if d<WALKWAY_REACH]
+   if near:t=max(base,min([t]+[z-WALKWAY_GAP if d<WALKWAY_OVER else base for z,d in near]))
+   if t<top-1e-6:walkway_capped.append(round(top-t,2))
+   if out and abs(out[-1][2]-t)<1e-6:out[-1]=(out[-1][0],b,t)
+   else:out.append((a,b,t))
+  return out
  arc_raised=[]
  for a,b,inward in edges:
   k=max(1,math.ceil(math.dist(a,b)/2))
   for t in range(k):
    p=[a[i]+(b[i]-a[i])*t/k for i in [0,1]];r=[a[i]+(b[i]-a[i])*(t+1)/k for i in [0,1]]
    top=highest(p,r,inward,3);top=highest(p,r,inward,8) if top is None else top
+   base=top
    if top is not None:
     raised=arc(p,r)
     if raised is not None and raised>top:arc_raised.append(round(raised-top,2));top=raised
-   pieces.append([p,r,top])
+   pieces.append([p,r,top,base])
  # A piece with no walkable surface inside follows pieces within 3m of it.
  for piece in pieces:
-  if piece[2] is None:piece[2]=max((o[2] for o in pieces if o[2] is not None and min(math.dist(u,v) for u in piece[:2] for v in o[:2])<3),default=None)
+  if piece[2] is None:piece[2]=piece[3]=max((o[2] for o in pieces if o[2] is not None and min(math.dist(u,v) for u in piece[:2] for v in o[:2])<3),default=None)
  # No reachable surface near a piece: no walker gets there, so no wall.
- skipped=sum(top is None for p,r,top in pieces);pieces=[x for x in pieces if x[2] is not None]
- for p,r,top in pieces:
-  hi=top+clear
-  q=len(vertices);vertices.extend([(p[0],p[1],lo),(r[0],r[1],lo),(r[0],r[1],hi),(p[0],p[1],hi)]);faces.append((q,q+1,q+2,q+3))
- pieces=[round(top+clear,3) for p,r,top in pieces]
+ skipped=sum(x[2] is None for x in pieces);pieces=[x for x in pieces if x[2] is not None]
+ out=[]
+ for p,r,top,base in pieces:
+  for a,b,hi in capped(p,r,base+clear,top+clear):
+   q=len(vertices);vertices.extend([(a[0],a[1],lo),(b[0],b[1],lo),(b[0],b[1],hi),(a[0],a[1],hi)]);faces.append((q,q+1,q+2,q+3));out.append(round(hi,3))
+ pieces=out
  me=B.bpy.data.meshes.new('Playable perimeter');me.from_pydata(vertices,[],faces);o=B.bpy.data.objects.new('Playable perimeter',me);B.bpy.context.collection.objects.link(o);o.hide_render=True;B.WALK.append(o)
  # 0.11.3: void guards (tools/derive-void-guards.py -> void-guards.json): floor
  # edges with nothing to land on below, or where a walk off the edge (a fly-only
@@ -406,14 +438,16 @@ def boundaries(B):
  guards=json.loads((B.HERE/'void-guards.json').read_text())['guards']
  for g in guards:
   a2,b2=(g['a'][0],-g['a'][2]),(g['b'][0],-g['b'][2]);top=max(g['floor'],arc(a2,b2) or g['floor'])
-  B.void_guard((a2[0],a2[1],g['floor']-.6),(b2[0],b2[1],g['floor']-.6),top-g['floor']+.6+clear)
+  for a,b,hi in capped(a2,b2,g['floor']+clear,top+clear):
+   B.void_guard((a[0],a[1],g['floor']-.6),(b[0],b[1],g['floor']-.6),hi-g['floor']+.6)
  # The rails along open area edges (void beyond) likewise: collision up to the fall arc.
  for group,runs in edge_runs:
   for a,b in runs:
    top=arc(a[:2],b[:2])
    if top is not None and top>a[2]+clear:
-    B.void_guard((a[0],a[1],a[2]-.6),(b[0],b[1],b[2]-.6),top-a[2]+.6+clear)
+    for p,r,hi in capped(a[:2],b[:2],a[2]+clear,top+clear):
+     B.void_guard((p[0],p[1],a[2]-.6),(r[0],r[1],b[2]-.6),hi-a[2]+.6)
  spec['voidGuards']=len(guards)
  spec['collisionBoundarySegments']=len(edges);spec['collisionBackstopPieces']=len(pieces);spec['backstopTopRange']=[min(pieces),max(pieces)]
- spec['arcRaisedPieces']=[len(arc_raised),max(arc_raised,default=0)];spec['walkReachableTops']=[len(tops),all_tops];spec['piecesWithoutReachableSurface']=skipped
+ spec['arcRaisedPieces']=[len(arc_raised),max(arc_raised,default=0)];spec['walkwayCappedStretches']=[len(walkway_capped),max(walkway_capped,default=0)];spec['walkReachableTops']=[len(tops),all_tops];spec['piecesWithoutReachableSurface']=skipped
  spec['runtimeContract']='World format 0.6: per-area playable volumes (lumen-reach/contract.py) bound ordinary fly; these collision-only perimeter pieces stop walking only, rising walkClearance above the highest walk-reachable top within 3 m inside (route-seeded, jump/drop expanded), and at least to the fall arc from every higher walkable top within 30 m (core caps falling walkers at 10 m/s horizontally).';(B.ART/'playable-boundary-report.json').write_text(json.dumps(spec,indent=2)+'\n')
