@@ -1,0 +1,52 @@
+{
+ "mode": "gate",
+ "status": "DONE",
+ "scale": 0.5,
+ "quality": "medium",
+ "rounds": 2,
+ "coreCommit": "c8bcd84ca80665669589316dd525ec1f3d6858b0",
+ "packages": {
+  "A": {
+   "path": "/home/rick/rel011/lumen-0.12.0/com.hyprune.lumen-reach",
+   "version": "0.12.0",
+   "formatVersion": "0.9",
+   "manifestSHA256": "483603047988bf8ae453a340ca15b88fd91c5595021c46e6eca63469a784212a"
+  },
+  "B": {
+   "path": "/home/rick/rel011/wt/worlds/dist-07/com.hyprune.lumen-reach",
+   "version": "0.12.1",
+   "formatVersion": "0.9",
+   "manifestSHA256": "285edfdddf00bd33aa51691a3545da460681735e5906e6c8e144bce1e247b020"
+  }
+ },
+ "pluginSHA256": "89deece49d5eec0f70c3285f8f4e513780fbb4f917e4bd116a4e0c67ebb46767",
+ "routePoses": 400,
+ "runs": {
+  "A": {
+   "gpuFrameMs": {
+    "p50": 3.83232,
+    "p95": 6.475366399999996,
+    "n": 3200
+   },
+   "settledScale": {
+    "p50": 0.5,
+    "p05": 0.5,
+    "n": 252
+   },
+   "rounds": 2
+  },
+  "B": {
+   "gpuFrameMs": {
+    "p50": 3.8343679999999996,
+    "p95": 6.2833152,
+    "n": 3200
+   },
+   "settledScale": {
+    "p50": 0.5,
+    "p05": 0.5,
+    "n": 252
+   },
+   "rounds": 2
+  }
+ }
+}

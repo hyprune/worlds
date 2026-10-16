@@ -1,0 +1,259 @@
+{
+ "package": "com.hyprune.lumen-reach 0.12.1",
+ "formatVersion": "0.9",
+ "characters": 4,
+ "routes": [
+  {
+   "id": "sun-court-stroll",
+   "length": 49.3,
+   "closed": false,
+   "residents": [
+    "sun-court-resident"
+   ],
+   "walkable": true,
+   "problems": [],
+   "navmeshSamples": 99,
+   "offMainIsland": 0,
+   "minClearWidth": 5.0,
+   "narrow": [],
+   "stops": [
+    {
+     "point": 0,
+     "at": [
+      -3.6,
+      1.2,
+      -9.6
+     ],
+     "seconds": 6,
+     "kind": "look_around",
+     "approachGap": 12.45
+    },
+    {
+     "point": 5,
+     "at": [
+      17.0,
+      0.0,
+      -2.4
+     ],
+     "seconds": 5,
+     "kind": "face",
+     "approachGap": 0.67
+    },
+    {
+     "point": 10,
+     "at": [
+      19.15,
+      0.0,
+      -13.16
+     ],
+     "seconds": 20,
+     "kind": "seat",
+     "approachGap": 8.28,
+     "seat": "court-plaza-bench-west",
+     "legs": []
+    }
+   ]
+  },
+  {
+   "id": "array-hall-round",
+   "length": 83.8,
+   "closed": true,
+   "residents": [
+    "array-hall-resident"
+   ],
+   "walkable": true,
+   "problems": [],
+   "navmeshSamples": 168,
+   "offMainIsland": 0,
+   "minClearWidth": 6.21,
+   "narrow": [],
+   "stops": [
+    {
+     "point": 0,
+     "at": [
+      18.0,
+      0.0,
+      -37.6
+     ],
+     "seconds": 5,
+     "kind": "face",
+     "approachGap": 0.58
+    },
+    {
+     "point": 7,
+     "at": [
+      13.6,
+      0.0,
+      -55.41
+     ],
+     "seconds": 16,
+     "kind": "seat",
+     "approachGap": 2.74,
+     "seat": "hall-glass-bench-east",
+     "legs": []
+    },
+    {
+     "point": 9,
+     "at": [
+      10.6,
+      0.0,
+      -58.6
+     ],
+     "seconds": 6,
+     "kind": "face",
+     "approachGap": 3.98
+    }
+   ]
+  },
+  {
+   "id": "rime-vault-watch",
+   "length": 20.63,
+   "closed": false,
+   "residents": [
+    "rime-vault-resident"
+   ],
+   "walkable": true,
+   "problems": [],
+   "navmeshSamples": 42,
+   "offMainIsland": 0,
+   "minClearWidth": 5.25,
+   "narrow": [],
+   "stops": [
+    {
+     "point": 3,
+     "at": [
+      45.0,
+      -6.0,
+      -79.6
+     ],
+     "seconds": 5,
+     "kind": "face",
+     "approachGap": 0.57
+    },
+    {
+     "point": 4,
+     "at": [
+      42.2,
+      -6.0,
+      -77.19
+     ],
+     "seconds": 20,
+     "kind": "seat",
+     "approachGap": 3.16,
+     "seat": "vault-south-bench-east",
+     "legs": []
+    },
+    {
+     "point": 6,
+     "at": [
+      45.6,
+      -6.0,
+      -74.9
+     ],
+     "seconds": 6,
+     "kind": "face",
+     "approachGap": 5.27
+    }
+   ]
+  },
+  {
+   "id": "to-signal-rise",
+   "length": 54.23,
+   "closed": false,
+   "residents": [],
+   "walkable": true,
+   "problems": [],
+   "navmeshSamples": 109,
+   "offMainIsland": 0,
+   "minClearWidth": 4.16,
+   "narrow": [],
+   "stops": []
+  },
+  {
+   "id": "signal-rise-lookout",
+   "length": 54.72,
+   "closed": false,
+   "residents": [
+    "signal-rise-resident"
+   ],
+   "walkable": true,
+   "problems": [],
+   "navmeshSamples": 110,
+   "offMainIsland": 0,
+   "minClearWidth": 4.57,
+   "narrow": [],
+   "stops": [
+    {
+     "point": 0,
+     "at": [
+      40.2,
+      4.0,
+      -148.2
+     ],
+     "seconds": 6,
+     "kind": "look_around",
+     "approachGap": 12.32
+    },
+    {
+     "point": 8,
+     "at": [
+      41.0,
+      -0.0,
+      -120.6
+     ],
+     "seconds": 5,
+     "kind": "face",
+     "approachGap": 0.59
+    },
+    {
+     "point": 9,
+     "at": [
+      39.8,
+      -0.0,
+      -116.98
+     ],
+     "seconds": 20,
+     "kind": "seat",
+     "approachGap": 4.2,
+     "seat": "rise-field-bench-west",
+     "legs": []
+    }
+   ]
+  }
+ ],
+ "seats": [
+  {
+   "seat": "court-plaza-bench-west",
+   "route": "sun-court-stroll",
+   "legsWalkable": true
+  },
+  {
+   "seat": "hall-glass-bench-east",
+   "route": "array-hall-round",
+   "legsWalkable": true
+  },
+  {
+   "seat": "vault-south-bench-east",
+   "route": "rime-vault-watch",
+   "legsWalkable": true
+  },
+  {
+   "seat": "rise-field-bench-west",
+   "route": "signal-rise-lookout",
+   "legsWalkable": true
+  }
+ ],
+ "benches": [],
+ "guides": [
+  {
+   "resident": "rime-vault-resident",
+   "path": "to-signal-rise",
+   "length": 54.23,
+   "joinSamples": 22,
+   "joinBlocked": 0,
+   "blockedAt": []
+  }
+ ],
+ "status": "PASS",
+ "failures": []
+}

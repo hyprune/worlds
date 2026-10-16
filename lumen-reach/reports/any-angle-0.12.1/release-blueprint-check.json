@@ -1,0 +1,35 @@
+{
+ "status": "PASS",
+ "package": "dist-07/com.hyprune.lumen-reach",
+ "world": "com.hyprune.lumen-reach",
+ "version": "0.12.1",
+ "errors": [],
+ "frame": "com.hyprune.map",
+ "levels": [
+  {
+   "id": "lower-1",
+   "minY": -7,
+   "maxY": -3.9,
+   "bytes": 7626
+  },
+  {
+   "id": "ground",
+   "minY": -3.9,
+   "maxY": 3.2,
+   "bytes": 19413
+  },
+  {
+   "id": "level-1",
+   "minY": 3.2,
+   "maxY": 10.1,
+   "bytes": 11990
+  },
+  {
+   "id": "level-2",
+   "minY": 10.1,
+   "maxY": 18.9,
+   "bytes": 4983
+  }
+ ],
+ "totalBytes": 44012
+}

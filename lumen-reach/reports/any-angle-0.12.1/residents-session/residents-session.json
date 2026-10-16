@@ -1,0 +1,561 @@
+{
+ "package": "com.hyprune.lumen-reach 0.12.1",
+ "formatVersion": "0.9",
+ "checks": [
+  {
+   "name": "authored residents bound to their routes",
+   "ok": true,
+   "evidence": {
+    "sun-court-resident": {
+     "path": "package/sun-court-stroll",
+     "activity": "walking"
+    },
+    "array-hall-resident": {
+     "path": "package/array-hall-round",
+     "activity": "walking"
+    },
+    "rime-vault-resident": {
+     "path": "package/rime-vault-watch",
+     "activity": "walking"
+    },
+    "signal-rise-resident": {
+     "path": "package/signal-rise-lookout",
+     "activity": "walking"
+    }
+   }
+  },
+  {
+   "name": "paths.list: every route walkable",
+   "ok": true,
+   "evidence": {
+    "sun-court-stroll": [
+     true,
+     []
+    ],
+    "array-hall-round": [
+     true,
+     []
+    ],
+    "rime-vault-watch": [
+     true,
+     []
+    ],
+    "to-signal-rise": [
+     true,
+     []
+    ],
+    "signal-rise-lookout": [
+     true,
+     []
+    ]
+   }
+  },
+  {
+   "name": "sun-court-resident walks at about its walk clip speed (0.75 m/s)",
+   "ok": true,
+   "evidence": {
+    "median": 0.743,
+    "samples": 86
+   }
+  },
+  {
+   "name": "sun-court-resident sits on court-plaza-bench-west, then stands and walks on",
+   "ok": true,
+   "evidence": {
+    "seated": {
+     "seat": "court-plaza-bench-west",
+     "seatOffset": 0.1568160057067871,
+     "position": [
+      19.149999618530273,
+      0.0,
+      -12.233800888061523
+     ],
+     "heading": 3.1415927410125732,
+     "t": 38.5
+    },
+    "stoodAt": 61.0
+   }
+  },
+  {
+   "name": "sun-court-resident reaches each of its stops",
+   "ok": true,
+   "evidence": [
+    {
+     "point": 0,
+     "closest": 0.0
+    },
+    {
+     "point": 5,
+     "closest": 0.0
+    },
+    {
+     "point": 10,
+     "closest": 0.0
+    }
+   ]
+  },
+  {
+   "name": "array-hall-resident walks at about its walk clip speed (1.01 m/s)",
+   "ok": true,
+   "evidence": {
+    "median": 1.005,
+    "samples": 82
+   }
+  },
+  {
+   "name": "array-hall-resident sits on hall-glass-bench-east, then stands and walks on",
+   "ok": true,
+   "evidence": {
+    "seated": {
+     "seat": "hall-glass-bench-east",
+     "seatOffset": 0.03959110379219055,
+     "position": [
+      13.600000381469727,
+      0.0,
+      -56.3411979675293
+     ],
+     "heading": 0.0,
+     "t": 15.2
+    },
+    "stoodAt": 33.7
+   }
+  },
+  {
+   "name": "array-hall-resident reaches each of its stops",
+   "ok": true,
+   "evidence": [
+    {
+     "point": 0,
+     "closest": 0.0
+    },
+    {
+     "point": 7,
+     "closest": 0.0
+    },
+    {
+     "point": 9,
+     "closest": 0.0
+    }
+   ]
+  },
+  {
+   "name": "rime-vault-resident walks at about its walk clip speed (0.80 m/s)",
+   "ok": true,
+   "evidence": {
+    "median": 0.792,
+    "samples": 54
+   }
+  },
+  {
+   "name": "rime-vault-resident sits on vault-south-bench-east, then stands and walks on",
+   "ok": true,
+   "evidence": {
+    "seated": {
+     "seat": "vault-south-bench-east",
+     "seatOffset": 0.1177990734577179,
+     "position": [
+      42.20000076293945,
+      -6.0,
+      -76.25879669189453
+     ],
+     "heading": 3.1415927410125732,
+     "t": 19.4
+    },
+    "stoodAt": 42.8
+   }
+  },
+  {
+   "name": "rime-vault-resident reaches each of its stops",
+   "ok": true,
+   "evidence": [
+    {
+     "point": 3,
+     "closest": 0.0
+    },
+    {
+     "point": 4,
+     "closest": 0.0
+    },
+    {
+     "point": 6,
+     "closest": 0.0
+    }
+   ]
+  },
+  {
+   "name": "signal-rise-resident walks at about its walk clip speed (0.87 m/s)",
+   "ok": true,
+   "evidence": {
+    "median": 0.857,
+    "samples": 88
+   }
+  },
+  {
+   "name": "signal-rise-resident sits on rise-field-bench-west, then stands and walks on",
+   "ok": true,
+   "evidence": {
+    "seated": {
+     "seat": "rise-field-bench-west",
+     "seatOffset": 0.04367157816886902,
+     "position": [
+      39.79999923706055,
+      0.0,
+      -116.05879974365234
+     ],
+     "heading": 3.1415927410125732,
+     "t": 57.0
+    },
+    "stoodAt": 79.8
+   }
+  },
+  {
+   "name": "signal-rise-resident reaches each of its stops",
+   "ok": true,
+   "evidence": [
+    {
+     "point": 0,
+     "closest": 0.6
+    },
+    {
+     "point": 8,
+     "closest": 0.0
+    },
+    {
+     "point": 9,
+     "closest": 0.0
+    }
+   ]
+  },
+  {
+   "name": "out of the frustum: residents cost no frames (npc_motion always vs off)",
+   "ok": true,
+   "evidence": {
+    "sun-court-east": {
+     "alwaysFps": 0.0,
+     "offFps": 0.0,
+     "drawn": 0
+    },
+    "array-hall-ceiling": {
+     "alwaysFps": 0.0,
+     "offFps": 0.0,
+     "drawn": 0
+    },
+    "signal-rise-east": {
+     "alwaysFps": 0.0,
+     "offFps": 0.0,
+     "drawn": 0
+    }
+   }
+  },
+  {
+   "name": "in view: an animating resident renders frames",
+   "ok": true,
+   "evidence": {
+    "fps": 61.5,
+    "resident": "sun-court-resident"
+   }
+  },
+  {
+   "name": "sun-court-resident: aimed, offers its interactions",
+   "ok": true,
+   "evidence": {
+    "aimed": {
+     "interactions": [
+      {
+       "id": "talk",
+       "label": "Talk",
+       "type": "say"
+      }
+     ],
+     "name": "Resident (desert)",
+     "objectId": "sun-court-resident",
+     "prompt": "Talk"
+    }
+   }
+  },
+  {
+   "name": "sun-court-resident: say shows its 3 lines in order, E ends it",
+   "ok": true,
+   "evidence": [
+    "Mornings start here, in the sun.",
+    "The globe terrace has the best view.",
+    "Sit a while. The bench is warm."
+   ]
+  },
+  {
+   "name": "array-hall-resident: aimed, offers its interactions",
+   "ok": true,
+   "evidence": {
+    "aimed": {
+     "interactions": [
+      {
+       "id": "talk",
+       "label": "Talk",
+       "type": "say"
+      },
+      {
+       "id": "where-rime-vault",
+       "label": "Way to Rime Vault",
+       "type": "waypoint"
+      }
+     ],
+     "name": "Resident (crimson)",
+     "objectId": "array-hall-resident",
+     "prompt": "Talk to Resident (crimson)"
+    }
+   }
+  },
+  {
+   "name": "array-hall-resident: say shows its 3 lines in order, E ends it",
+   "ok": true,
+   "evidence": [
+    "Sound carries far in this hall.",
+    "Count the ridges from the glass.",
+    "Rime Vault is down the east passage."
+   ]
+  },
+  {
+   "name": "array-hall-resident: waypoint sets the waypoint",
+   "ok": true,
+   "evidence": {
+    "id": "npc-array-hall-resident-where-rime-vault",
+    "label": "Way to Rime Vault",
+    "position": [
+     40.5,
+     -4.699999809265137,
+     -77.5
+    ],
+    "target": {
+     "zoneId": "rime-vault"
+    }
+   }
+  },
+  {
+   "name": "rime-vault-resident: aimed, offers its interactions",
+   "ok": true,
+   "evidence": {
+    "aimed": {
+     "interactions": [
+      {
+       "id": "talk",
+       "label": "Talk",
+       "type": "say"
+      },
+      {
+       "id": "show-signal-rise",
+       "label": "Show me Signal Rise",
+       "type": "guide"
+      }
+     ],
+     "name": "Resident (ember)",
+     "objectId": "rime-vault-resident",
+     "prompt": "Talk to Resident (ember)"
+    }
+   }
+  },
+  {
+   "name": "rime-vault-resident: say shows its 3 lines in order, E ends it",
+   "ok": true,
+   "evidence": [
+    "It stays cold down here.",
+    "The machines like it more than I do.",
+    "Signal Rise is up the snow ramp."
+   ]
+  },
+  {
+   "name": "signal-rise-resident: aimed, offers its interactions",
+   "ok": true,
+   "evidence": {
+    "aimed": {
+     "interactions": [
+      {
+       "id": "talk",
+       "label": "Talk",
+       "type": "say"
+      }
+     ],
+     "name": "Resident (blue)",
+     "objectId": "signal-rise-resident",
+     "prompt": "Talk"
+    }
+   }
+  },
+  {
+   "name": "signal-rise-resident: say shows its 3 lines in order, E ends it",
+   "ok": true,
+   "evidence": [
+    "Snow again tonight.",
+    "The dish keeps listening anyway.",
+    "The dish deck sees the whole gate."
+   ]
+  },
+  {
+   "name": "rime-vault-resident: guide starts while walking",
+   "ok": true,
+   "evidence": {
+    "activity": "guiding",
+    "backingOff": false,
+    "blockedFor": 0.0,
+    "clip": "walk",
+    "detour": -1,
+    "detours": 0,
+    "gait": {
+     "clipTime": 0.5444900393486023,
+     "fade": 1.0,
+     "phase": 0.5269258618354797,
+     "previous": "idle",
+     "previousTime": 0.5444900393486023
+    },
+    "heading": -3.631376266479492,
+    "id": "rime-vault-resident",
+    "interactions": 2,
+    "lateral": 0.40157222747802734,
+    "look": [
+     0.7840929627418518,
+     0.08880011737346649
+    ],
+    "mode": 10,
+    "occluded": false,
+    "path": "package/rime-vault-watch",
+    "played": "walk",
+    "playedPrevious": "idle",
+    "position": [
+     42.32206344604492,
+     -6.0,
+     -77.22834014892578
+    ],
+    "radius": 0.3499999940395355,
+    "routeLength": 20.6328067779541,
+    "s": 15.960753440856934,
+    "seat": "",
+    "seatFit": {
+     "known": true,
+     "seatHeight": 0.2822009325027466,
+     "sink": 0.0
+    },
+    "seatOffset": 0.0,
+    "seats": 1,
+    "speed": 0.7950000166893005,
+    "state": "active",
+    "stop": 2,
+    "stopSpots": [
+     {
+      "face": [
+       45.0,
+       -4.009069919586182,
+       -81.82610321044922
+      ],
+      "point": 3,
+      "spot": [
+       45.0,
+       -6.000205039978027,
+       -79.82610321044922
+      ]
+     },
+     {
+      "face": null,
+      "point": 4,
+      "spot": null
+     },
+     {
+      "face": [
+       45.599998474121094,
+       -4.599999904632568,
+       -60.0
+      ],
+      "point": 6,
+      "spot": null
+     }
+    ],
+    "stops": 3,
+    "stride": 0.8215000033378601,
+    "style": {},
+    "user": false,
+    "yielding": false
+   }
+  },
+  {
+   "name": "rime-vault-resident: leads along to-signal-rise, and returns to its route when the player walks off",
+   "ok": true,
+   "evidence": {
+    "ledMetres": 16.7,
+    "after": {
+     "mode": 1,
+     "activity": "walking",
+     "position": [
+      41.95603942871094,
+      -6.0,
+      -77.50462341308594
+     ]
+    }
+   }
+  },
+  {
+   "name": "rime-vault-resident: seated, accepts the guide, stands and steps off",
+   "ok": true,
+   "evidence": {
+    "result": "accepted",
+    "seat": "vault-south-bench-east",
+    "after": [
+     42.20000076293945,
+     -6.0,
+     -76.56581115722656
+    ]
+   }
+  },
+  {
+   "name": "rime-vault-resident: guides from its seat to the end of to-signal-rise, then sits on vault-south-bench-east again",
+   "ok": true,
+   "evidence": {
+    "closest": 0.0,
+    "seconds": 149.8,
+    "again": {
+     "seat": "vault-south-bench-east",
+     "position": [
+      42.20000076293945,
+      -6.0,
+      -76.25879669189453
+     ]
+    }
+   }
+  }
+ ],
+ "stills": {
+  "seated-array-hall-front.png": "seated-array-hall-front.png",
+  "seated-array-hall-side.png": "seated-array-hall-side.png",
+  "seated-rime-vault-front.png": "seated-rime-vault-front.png",
+  "seated-rime-vault-side.png": "seated-rime-vault-side.png",
+  "seated-sun-court-front.png": "seated-sun-court-front.png",
+  "seated-sun-court-side.png": "seated-sun-court-side.png",
+  "seated-signal-rise-front.png": "seated-signal-rise-front.png",
+  "seated-signal-rise-side.png": "seated-signal-rise-side.png",
+  "away-sun-court-wall.png": "away-sun-court-wall.png",
+  "away-rime-vault-console.png": "away-rime-vault-console.png",
+  "away-sun-court-east.png": "away-sun-court-east.png",
+  "away-array-hall-ceiling.png": "away-array-hall-ceiling.png",
+  "away-signal-rise-east.png": "away-signal-rise-east.png",
+  "walking-sun-court.png": "walking-sun-court.png",
+  "walking-array-hall.png": "walking-array-hall.png",
+  "walking-rime-vault.png": "walking-rime-vault.png",
+  "walking-signal-rise.png": "walking-signal-rise.png",
+  "say-sun-court.png": "say-sun-court.png",
+  "say-array-hall.png": "say-array-hall.png",
+  "say-rime-vault.png": "say-rime-vault.png",
+  "say-signal-rise.png": "say-signal-rise.png",
+  "guide-rime-vault.png": "guide-rime-vault.png",
+  "final.png": "final.png"
+ },
+ "occludedInFrustum": {
+  "sun-court-wall": {
+   "alwaysFps": 61.0,
+   "offFps": 0.0,
+   "drawn": 1
+  },
+  "rime-vault-console": {
+   "alwaysFps": 0.0,
+   "offFps": 0.0,
+   "drawn": 0
+  }
+ },
+ "status": "PASS"
+}

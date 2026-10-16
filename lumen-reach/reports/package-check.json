@@ -1,6 +1,6 @@
 {
   "status": "PASS",
-  "packageBytes": 94866561,
+  "packageBytes": 94900240,
   "decodedTextureBytes": 192806912,
   "conservativeGpuBytes": 392735352,
   "mippedTextureViewsBytes": 361408152,
@@ -13,7 +13,7 @@
   "drawCallScope": "one draw per visible glTF primitive, world geometry only; excludes postprocessing, applications and HUD",
   "untexturedPhysicalMaterials": [],
   "anchors": 24,
-  "collisionNodes": 438,
+  "collisionNodes": 459,
   "lightmapBindings": 77,
   "UV1": [
     {
